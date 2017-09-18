@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="mrp_bom_version_tree_view">
+            <field name="name">mrp.bom.version.tree</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp_bom_version.mrp_bom_version_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="historical_date" position="after">
+                    <field name="bom_child_ids" invisible="1"/>
+                </field>
+                <button name="button_new_version" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('state','==','historical'), ('bom_child_ids', '!=', [])]}</attribute>
+                </button>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_bom_version_form_view">
+            <field name="name">mrp.bom.version.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp_bom_version.mrp_bom_version_form_view"/>
+            <field name="arch" type="xml">
+                <field name="historical_date" position="after">
+                    <field name="bom_child_ids" invisible="1"/>
+                </field>
+                <button name="button_new_version" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('state','==','historical'), ('bom_child_ids', '!=', [])]}</attribute>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>

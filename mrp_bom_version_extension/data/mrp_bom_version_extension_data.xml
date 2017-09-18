@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record forcecreate="True" id="config_parameter_bom_historicize" model="ir.config_parameter">
+            <field name="key">bom.historicize</field>
+            <field name="value" eval="True"/>
+        </record>
+    </data>
+</openerp>
