@@ -74,7 +74,7 @@ class MrpSupplierPriceTest(TransactionCase):
                 self.production.production_total,
                 self.production.scheduled_total +
                 self.production.routing_total)
-        except:
+        except Exception:
             self.assertEquals(
                 self.production.production_total,
                 self.production.scheduled_total)
