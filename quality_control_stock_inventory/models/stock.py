@@ -6,7 +6,7 @@ from openerp import api, fields, models
 try:
     from openerp.addons.quality_control.models.qc_trigger_line import\
         _filter_trigger_lines
-except:
+except Exception:
     _filter_trigger_lines = None
 
 

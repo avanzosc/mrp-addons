@@ -107,7 +107,7 @@ class MrpProduction(models.Model):
             total = prod.routing_total
             try:
                 total += prod.scheduled_total
-            except:
+            except Exception:
                 pass
             prod.production_total =\
                 total * (prod.product_qty if by_unit else 1)

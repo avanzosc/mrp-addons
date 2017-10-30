@@ -31,7 +31,7 @@ class MrpBom(models.Model):
             if not self.product_id and production_data.product_tmpl_id:
                 production_data.product_id = False
             production_data.onchange_product_tmpl_id()
-        except:
+        except Exception:
             pass
         data = production_data._convert_to_write(production_data._cache)
         data.update(update_data)

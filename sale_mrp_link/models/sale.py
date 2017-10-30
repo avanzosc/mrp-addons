@@ -36,7 +36,7 @@ class SaleOrderLine(models.Model):
             }
             try:
                 values['custom_value'] = attribute_line.custom_value
-            except:
+            except Exception:
                 pass
             attribute_list.append(values)
         mrp = self.env['mrp.production'].create({

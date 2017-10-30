@@ -17,7 +17,7 @@ class MrpBomLine(models.Model):
                 try:
                     line.manual_standard_cost =\
                         line.product_tmpl_id.manual_standard_cost
-                except:
+                except Exception:
                     line.manual_standard_cost = 0.0
 
     @api.depends('child_line_ids')
