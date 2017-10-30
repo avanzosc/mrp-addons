@@ -24,7 +24,7 @@ class QcInspection(models.Model):
         for inspection in self.filtered(lambda x: x.object_id):
             try:
                 inspection.ref_name = inspection.object_id.name
-            except:
+            except Exception:
                 inspection.ref_name = inspection.object_id.display_name
 
     ref_model_name = fields.Char(
