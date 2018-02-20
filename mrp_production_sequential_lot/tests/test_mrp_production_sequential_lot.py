@@ -101,4 +101,3 @@ class TestMrpProductionSequentialLot(
         code = (prefix + ('%%0%sd' % self.lot_sequence.padding %
                           self.lot_sequence.number_next_actual) + suffix)
         return code
-
