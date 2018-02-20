@@ -24,11 +24,14 @@ class MrpProductProduce(models.TransientModel):
                 self.product_id.track_production) and not self.lot_id:
             production_id = self.env.context.get('active_id', False)
             production = self.env['mrp.production'].browse(production_id)
+            sequence = self.env.ref(
+                'mrp_production_sequential_lot.lot_sequence')
+            lot_name = self.env['ir.sequence'].next_by_id(sequence.id)
             num = len(production.move_created_ids2.filtered(
                 lambda m: m.state == 'done' and
                 m.location_dest_id == production.location_dest_id)) + 1
             self.lot_id = self.lot_id.create({
-                'name': u"{}-{}".format(production.name, num),
+                'name': lot_name or u"{}-{}".format(production.name, num),
                 'product_id': self.product_id.id,
             })
         return super(MrpProductProduce, self).do_produce()
