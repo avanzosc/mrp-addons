@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+<data noupdate="1">
+    <record id="lot_sequence" model="ir.sequence">
+        <field name="name">Production lot sequence</field>
+        <field name="prefix">AA</field>
+        <field name="padding">4</field>
+    </record>
+
+</data>
+</openerp>

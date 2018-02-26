@@ -4,7 +4,7 @@
 
 {
     "name": "MRP Production Sequential Lot",
-    "version": "8.0.1.0.0",
+    "version": "8.0.2.0.0",
     "category": "Custom Module",
     "license": "AGPL-3",
     "author": "AvanzOSC",
@@ -17,6 +17,7 @@
         "mrp_unitary_production",
     ],
     "data": [
+        "data/mrp_production_sequential_lot_data.xml",
     ],
     "installable": True,
 }
