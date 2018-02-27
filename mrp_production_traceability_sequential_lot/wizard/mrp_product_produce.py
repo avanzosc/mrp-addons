@@ -2,7 +2,7 @@
 # Copyright 2018 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import fields, models
+from openerp import api, fields, models
 
 
 class MrpProductProduce(models.TransientModel):
@@ -21,3 +21,10 @@ class MrpProductProduce(models.TransientModel):
         return res
 
     lot_id = fields.Many2one(default=default_lot_id)
+
+    @api.onchange('unitary_production')
+    def _onchange_unitary_production(self):
+        self.ensure_one()
+        super(MrpProductProduce, self)._onchange_unitary_production()
+        self.lot_id = (
+            self.default_lot_id() if not self.unitary_production else False)
