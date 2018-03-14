@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
-# © 2016 Mikel Arregi Etxaniz - AvanzOSC
+# Copyright © 2016 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp import api, fields, models, _
 from openerp.exceptions import Warning as UserError
 from openerp.models import expression
-from openerp.addons import decimal_precision as dp
+from openerp.tools.safe_eval import safe_eval
 import logging
 import re
 
 _logger = logging.getLogger(__name__)
 
+
 class MrpBom(models.Model):
-
     _inherit = 'mrp.bom'
-
-
 
     @api.model
     def _factor(self, factor, product_efficiency, product_rounding,
@@ -61,16 +59,19 @@ class MrpBom(models.Model):
                     'attribute_id', '=', attribute_id.id),
                     ('min_range', '<=', value), ('max_range', '>=', value)
                 ])[:1]
-                #_logger.info(u"Range attribute values: value - {}, attribute "
-                #             u"- {} attribute-id - {} all_values - {}"
-                #             u"".format(value, attribute_id.name,
-                # attribute_id.id, value_obj.search([('attribute_id', '=', attribute_id.id)])))
+                # _logger.info(u"Range attribute values: value - {},"
+                #              u" attribute - {} attribute-id - {}"
+                #              u" all_values - {}"
+                #              u"".format(
+                #                 value, attribute_id.name, attribute_id.id,
+                #                 value_obj.search([('attribute_id', '=',
+                #                                    attribute_id.id)])))
                 custom_value = value
         else:
             value_id = eval_value
-        #_logger.info(u"value_id : {}, for attribute: {}. custom_value"
-        #             u": {}".format(value_id and value_id.name, \
-        #                            attribute_id.name, custom_value))
+        # _logger.info(u"value_id : {}, for attribute: {}. custom_value"
+        #              u": {}".format(value_id and value_id.name, \
+        #                             attribute_id.name, custom_value))
         return value_id, custom_value
 
     def _all_attributes_has_value(self, values):
@@ -88,13 +89,13 @@ class MrpBom(models.Model):
                                                         factor=factor)
         # if not quantity:
         #     return
-        #if not res.get('product_id'):
+        # if not res.get('product_id'):
         tmpl_id = bom_line.product_tmpl_id
         calculated_attrs = {}
         acts = bom_line._prepare_acts()
         for line in bom_line.attribute_selections_ids:
             if line.eval_rule(acts):
-                #_logger.info("Product attributes: {} - {}".format(
+                # _logger.info("Product attributes: {} - {}".format(
                 #    res['name'], line.attribute_id.name))
                 eval_value = line.eval_formula(acts)
                 value_id, custom_value = self._get_attribute_value(
@@ -112,8 +113,9 @@ class MrpBom(models.Model):
                 'product.configurator']._create_variant_from_vals(
                 res).get('product_id')
         res['product_id'] = comp_product
-        #_logger.info("product to consume: {}".format(unicode(res)))
+        # _logger.info("product to consume: {}".format(unicode(res)))
         return res
+
 
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
@@ -127,12 +129,12 @@ class MrpBomLine(models.Model):
         string='Attribute value selection'
     )
     possible_attribute_ids = fields.Many2many(
-         comodel_name='product.attribute', compute="_compute_attribute_ids")
+        comodel_name='product.attribute', compute="_compute_attribute_ids")
 
     @api.model
     def _compute_attribute_ids(self):
         self.possible_attribute_ids = self.product_tmpl_id.mapped(
-             'attribute_line_ids.attribute_id')
+            'attribute_line_ids.attribute_id')
 
     @api.multi
     def button_save_data(self):
@@ -213,25 +215,25 @@ class MrpBomLineRule(models.Model):
         if product_attr_value:
             attr_value = product_attr_value[0]
             if attr_value.attribute_id.attr_type == 'select':
-                return eval(u"{} {} {}".format(
+                return safe_eval(u"{} {} {}".format(
                     u"unicode(attr_value.value_id.attribute_code)", operator,
                     u"value"))
             elif attr_value.attribute_id.attr_type == 'numeric':
                 if isinstance(value, list):
-                    return eval("{} {} {}".format(
+                    return safe_eval("{} {} {}".format(
                         "attr_value.value_id.numeric_value", operator,
                         "map(lambda x: float(x), value)"))
                 else:
-                    return eval("{} {} {}".format(
+                    return safe_eval("{} {} {}".format(
                         "attr_value.value_id.numeric_value", operator,
                         "float(value)"))
             elif attr_value.attribute_id.attr_type == 'range':
                 if isinstance(value, list):
-                    return eval("{} {} {}".format(
+                    return safe_eval("{} {} {}".format(
                         "attr_value.custom_value", operator,
                         "map(lambda x: float(x), value)"))
                 else:
-                    return eval("{} {} {}".format(
+                    return safe_eval("{} {} {}".format(
                         "attr_value.custom_value", operator,
                         "float(value)"))
             else:
@@ -239,7 +241,7 @@ class MrpBomLineRule(models.Model):
         return
 
     def eval_rule(self, acts):
-        return self.eval_expression(expression.normalize_domain(eval(
+        return self.eval_expression(expression.normalize_domain(safe_eval(
             self.conditions)), acts)
 
     def eval_expression(self, arg, attr_values):
@@ -267,17 +269,18 @@ class MrpBomLineRule(models.Model):
                 op1 = stack.pop()
                 op2 = stack.pop()
                 try:
-                    result = eval('{} {} {}'.format(op2, val, op1))
+                    result = safe_eval('{} {} {}'.format(op2, val, op1))
                 except:
                     raise UserError(
                         _(u'Error evaluating formula: {}\non product: {}, '
-                          u'condition: {}'.format(self.formula_qty,
-                            self.bom_line_id.product_tmpl_id.name,
-                            self.conditions)))
+                          u'condition: {}'.format(
+                              self.formula_qty,
+                              self.bom_line_id.product_tmpl_id.name,
+                              self.conditions)))
                 stack.append(result)
             else:
                 value = self._get_val(val, established_values)
-                #_logger.info(u"get value of: {}, from formula: {}. returned "
+                # _logger.info(u"get value of: {}, from formula: {}. returned "
                 #             u"value: {}".format(val, self.get_formula(),
                 #                                 value))
                 stack.append(value)
@@ -289,19 +292,18 @@ class MrpBomLineRule(models.Model):
             if field_value[0] == 'const':
                 return self.env['mrp.constant'].search(
                     [('name', '=', field_value[1])]).value
-            else: # parent
+            else:  # parent
                 parent_products = self._context.get('parent_products')
                 product_template = filter(
                     lambda x: x.get('product_tmpl_id') ==
-                              self.bom_line_id.bom_id.product_tmpl_id.id,
+                    self.bom_line_id.bom_id.product_tmpl_id.id,
                     parent_products)
                 if product_template and len(product_template) == 1:
                     attribute_id = self.env['product.attribute'].search([(
-                        'attribute_code','=', field_value[1])])
-                    attribute_line = filter(lambda x: x[2]['attribute_id'] ==
-                                          attribute_id.id,
-                                   product_template[0][
-                        'product_attribute_ids'])
+                        'attribute_code', '=', field_value[1])])
+                    attribute_line = filter(
+                        lambda x: x[2]['attribute_id'] == attribute_id.id,
+                        product_template[0]['product_attribute_ids'])
                     if attribute_line and len(attribute_line) == 1:
                         attribute_value = attribute_line[0][2]['value_id']
                         value = self.env[
@@ -311,7 +313,7 @@ class MrpBomLineRule(models.Model):
                                 return float(value.name)
                             except ValueError:
                                 return value.name
-                        else: # numeric
+                        else:  # numeric
                             return value.numeric_value
                 else:
                     raise UserError(u'parent product not calculated yet')
@@ -330,21 +332,21 @@ class MrpBomLineRule(models.Model):
                                 return line.value_id
                         elif line.attribute_id.attr_type == 'numeric':
                             return line.value_id and \
-                                   line.value_id.numeric_value
+                                line.value_id.numeric_value
                         elif line.attribute_id.attr_type == 'range':
                             return line.value_id and line.custom_value
-                if re.compile('\s{2,}').search(field):
+                if re.compile(r'\s{2,}').search(field):
                     raise UserError(
                         _(u'check whitespaces on product line {} in '
                           u'conditions {}'.format(
-                            field, self.bom_line_id.product_tmpl_id.name,
-                            self.conditions)))
+                              field, self.bom_line_id.product_tmpl_id.name,
+                              self.conditions)))
                 else:
                     raise UserError(
                         _(u'no exist {} code on settled values on product '
                           u'line {} in conditions {}'.format(
-                            field, self.bom_line_id.product_tmpl_id.name,
-                            self.conditions)))
+                              field, self.bom_line_id.product_tmpl_id.name,
+                              self.conditions)))
 
 
 class MrpBomLineVariantSelector(models.Model):
@@ -352,8 +354,7 @@ class MrpBomLineVariantSelector(models.Model):
     _inherit = 'mrp.bom.line.rule'
 
     attribute_id = fields.Many2one(
-        comodel_name='product.attribute',
-    )
+        comodel_name='product.attribute', string="Attribute")
 
     def _get_val(self, field, values):
         value_obj = self.env['product.attribute.value']
@@ -374,25 +375,24 @@ class MrpBomLineVariantSelector(models.Model):
                         raise UserError(
                             u'Check attribute: {}, value: {}, numeric: {}'
                             u'\n'.format(val.attribute_id.name,
-                                          val.name, val.numeric_value))
+                                         val.name, val.numeric_value))
                 elif val.attribute_id.attr_type == 'numeric':
                     return val.numeric_value
             elif field_value[0] == 'const':
                 return self.env['mrp.constant'].search(
                     [('name', '=', field_value[1])]).value
-            else: #field_value[0] == 'parent':
+            else:  # field_value[0] == 'parent':
                 parent_products = self._context.get('parent_products')
                 product_template = filter(
                     lambda x: x.get('product_tmpl_id') ==
-                              self.bom_line_id.bom_id.product_tmpl_id.id,
+                    self.bom_line_id.bom_id.product_tmpl_id.id,
                     parent_products)
                 if product_template and len(product_template) == 1:
                     attribute_id = self.env['product.attribute'].search([(
-                        'attribute_code','=', field_value[1])])
-                    attribute_line = filter(lambda x: x[2]['attribute_id'] ==
-                                          attribute_id.id,
-                                   product_template[0][
-                        'product_attribute_ids'])
+                        'attribute_code', '=', field_value[1])])
+                    attribute_line = filter(
+                        lambda x: x[2]['attribute_id'] == attribute_id.id,
+                        product_template[0]['product_attribute_ids'])
                     if attribute_line and len(attribute_line) == 1:
                         attribute_value = attribute_line[0][2]['value_id']
                         value = self.env[
@@ -422,11 +422,11 @@ class MrpBomLineVariantSelector(models.Model):
                                     ('name', '=', line.value_id.name)])
                         elif line.attribute_id.attr_type == 'numeric':
                             return line.value_id and \
-                                   line.value_id.numeric_value
+                                line.value_id.numeric_value
                         elif line.attribute_id.attr_type == 'range':
                             return line.value_id and line.custom_value
                 raise UserError(
                     _(u'no exist {} code on settled values on product line {} '
                       u'attribute {} in conditions {}'.format(
-                        field, self.bom_line_id.product_tmpl_id.name,
-                        self.attribute_id.name, self.conditions)))
+                          field, self.bom_line_id.product_tmpl_id.name,
+                          self.attribute_id.name, self.conditions)))

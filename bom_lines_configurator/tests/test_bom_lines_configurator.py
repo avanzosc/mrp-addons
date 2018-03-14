@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2017 Mikel Arregi Etxaniz - AvanzOSC
+# Copyright © 2017 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from openerp.tests.common import TransactionCase
 
@@ -80,10 +80,12 @@ class TestMrpBomConfigurator(TransactionCase):
                 (0, 0, {'attribute_id': self.attribute.id,
                         'value_ids': [(6, 0, [self.value1.id,
                                               self.value2.id])]}),
-                (0, 0, {'attribute_id': self.attribute2.id, 'value_ids':
-                    [(6, 0, [self.value3.id, self.value4.id])]}),
-                (0, 0, {'attribute_id': self.attribute3.id, 'value_ids':
-                    [(6, 0, [self.value5.id, self.value6.id])]})
+                (0, 0, {'attribute_id': self.attribute2.id,
+                        'value_ids': [(6, 0, [self.value3.id,
+                                              self.value4.id])]}),
+                (0, 0, {'attribute_id': self.attribute3.id,
+                        'value_ids': [(6, 0, [self.value5.id,
+                                              self.value6.id])]})
             ],
         })
 
@@ -166,7 +168,7 @@ class TestMrpBomConfigurator(TransactionCase):
         qty_rule_line2 = {'formula_qty': 'attr2',
                           'conditions': '[True]'}
         rule_line3 = {'attribute_id': self.component_attribute2.id,
-                      'formula_qty': 'attr3 5 +', # custom value 6!!!!
+                      'formula_qty': 'attr3 5 +',  # custom value 6!!!!
                       'conditions': '[True]'}
         qty_rule_line3 = {'formula_qty': 'attr2',
                           'conditions': '[True]'}
@@ -214,16 +216,19 @@ class TestMrpBomConfigurator(TransactionCase):
         })
 
         production_product_attribute_ids = [
-            (0, 0, {'attribute_id': self.attribute.id, 'value_id':
-                self.value2.id, 'owner_model': 'mrp.production',
+            (0, 0, {'attribute_id': self.attribute.id,
+                    'value_id': self.value2.id,
+                    'owner_model': 'mrp.production',
                     'product_tmpl_id': self.template.id}),
-            (0, 0, {'attribute_id': self.attribute2.id, 'value_id':
-                self.value3.id, 'owner_model': 'mrp.production',
+            (0, 0, {'attribute_id': self.attribute2.id,
+                    'value_id': self.value3.id,
+                    'owner_model': 'mrp.production',
                     'product_tmpl_id': self.template.id}),
-            (0, 0, {'attribute_id': self.attribute3.id, 'value_id':
-                self.value5.id, 'custom_value': 6,
-                    'owner_model': 'mrp.production', 'product_tmpl_id':
-                        self.template.id}),
+            (0, 0, {'attribute_id': self.attribute3.id,
+                    'value_id': self.value5.id,
+                    'custom_value': 6,
+                    'owner_model': 'mrp.production',
+                    'product_tmpl_id': self.template.id}),
         ]
         self.production = self.production_model.create({
             'product_tmpl_id': self.template.id,
