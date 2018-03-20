@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="qc_test_form_view">
+        <field name="name">qc.test.form</field>
+        <field name="model">qc.test</field>
+        <field name="inherit_id" ref="quality_control.qc_test_form_view"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="test_type"/>
+            </field>
+            <field name="test_lines" position="before">
+                <group>
+                     <field name="external_laboratory_ids" domain="[('external_laboratory', '=', True)]" attrs="{'invisible': [('test_type', '!=', 'external')]}" nolabel="1"/>
+                 </group>
+            </field>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="quality_control.qc_test_filter_view">
+        <field name="name">qc.test.filter.view</field>
+        <field name="model">qc.test</field>
+        <field name="arch" type="xml">
+            <search string="Quality Control Test">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="qc_test_filter_view">
+        <field name="name">qc.test.form</field>
+        <field name="model">qc.test</field>
+        <field name="inherit_id" ref="quality_control.qc_test_filter_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <filter string="External" domain="[('test_type', '=', 'external')]"/>
+                <filter string="Internal" domain="[('test_type', '=', 'internal')]"/>
+            </field>
+        </field>
+    </record>
+
+</data>
+</openerp>

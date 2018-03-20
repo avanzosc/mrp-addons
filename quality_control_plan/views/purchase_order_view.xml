@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="purchase_order_form">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <field name="dest_address_id" position="after">
+                <field name="sample_order"/>
+                <field name="origin_qcp_purchase_id" readonly="1" attrs="{'invisible': [('sample_order', '=', False)]}"/>
+                <field name="qc_test_id" attrs="{'readonly': [('origin_qcp_purchase_id', '!=', False)], 'invisible': [('sample_order', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_order_filter">
+        <field name="name">view.purchase.order.filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="origin_qcp_purchase_id"/>
+            </field>
+            <filter name="not_invoiced" position="after">
+                <filter string="Sample Order" domain="[('sample_order', '=', True)]"/>
+                <filter string="No Sample Order" domain="[('sample_order', '=', False)]"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="purchase_sample_order_action" model="ir.actions.act_window">
+            <field name="name">Sample Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="src_model">purchase.order</field>
+            <field name="domain">[('origin_qcp_purchase_id','=', active_id)]</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <record id="purchase_order_sample_shortcut_form_view" model="ir.ui.view">
+        <field name="name">purchase.order.sample.shortcut.form.view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_2_stock_picking"/>
+        <field name="arch" type="xml">
+             <div name="buttons" position="inside">
+                <button type="action"
+                        name="%(purchase_sample_order_action)d"
+                        class="oe_stat_button"
+                        icon="fa-check-square"
+                        attrs="{'invisible': [('sample_count', '=', 0)]}">
+                <field name="sample_count" widget="statinfo" string="Sample Orders"/>
+                </button>
+             </div>
+         </field>
+     </record>
+
+</data>
+</openerp>
