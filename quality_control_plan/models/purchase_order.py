@@ -165,7 +165,7 @@ class PurchaseOrderLine(models.Model):
         return purchase
 
     @api.multi
-    def create_sample_line(self, default={}):
+    def create_sample_line(self, default=None):
         self.ensure_one()
         return self.copy(default=default)
 

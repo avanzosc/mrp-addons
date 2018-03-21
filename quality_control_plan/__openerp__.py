@@ -18,6 +18,7 @@
         "purchase",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "views/product_view.xml",
         "views/purchase_order_view.xml",
         "views/qc_test_view.xml",

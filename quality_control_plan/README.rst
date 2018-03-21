@@ -8,8 +8,9 @@ Quality Control Plan
 
 Module to manage samples to test externally.
 * A product can be subjected to a control plan or not.
-  - If a product is subjected to a control plan, we must define a sample qty
-    and scheduled external tests.
+- If a product is subjected to a control plan, we must define a sample qty
+  and scheduled external tests.
+
 * When a product subjected to a control plan is purchased to a supplier, the
   system will check if a Sample Purchase Order must be created for that
   product.
@@ -20,10 +21,11 @@ Module to manage samples to test externally.
   line.
 * New categorization field in tests, to categorize internal and external
   tests.
-  - If a test is defined as external, is necesary to define at least one
-    external laboratory.
-  - External laboratory is a partner which has checked the external
-    laboratory field.
+- If a test is defined as external, is necesary to define at least one
+  external laboratory.
+- External laboratory is a partner which has checked the external
+  laboratory field.
+
 * When a sample for a product is requested, the quantity requested will be
   produts sample qty multiplied by the number of external laboratories
   defined in the test.
