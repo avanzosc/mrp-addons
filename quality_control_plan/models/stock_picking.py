@@ -55,7 +55,7 @@ class StockMove(models.Model):
     @api.multi
     def action_done(self):
         res = super(StockMove, self).action_done()
-        for record in self:
+        for record in self.filtered(lambda x: x.picking_id):
             if record.picking_id.is_incoming_picking() and \
                     record.purchase_line_id.order_id.sample_order:
                 lots = record.mapped('quant_ids.lot_id')
