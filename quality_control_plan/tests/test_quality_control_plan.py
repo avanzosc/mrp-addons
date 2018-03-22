@@ -99,6 +99,13 @@ class TestQualityControlPlan(common.TransactionCase):
                                        (0, 0, purchase_line_vals2)]
         self.purchase = self.purchase_model.create(purchase_vals)
 
+    def test_plan_product_default_next_day(self):
+        jan1 = fields.Date.to_string(self.today.replace(month=1, day=1))
+        cron_line = self.plan_control_model.create(
+            {'qc_test_id': self.test.id, 'interval_number': 1,
+             'interval_type': 'months', 'product_id': self.plan_product.id})
+        self.assertEqual(cron_line.next_date, jan1)
+
     def test_external_test_validation_error(self):
         with self.assertRaises(ValidationError):
             self.test2.write({'external_laboratory_ids': [(6, 0, [])]})
