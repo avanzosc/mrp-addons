@@ -27,7 +27,7 @@ class QcTest(models.Model):
         string='External Laboratories')
 
     @api.multi
-    @api.constrains('test_type', 'external_laboratory')
+    @api.constrains('test_type', 'external_laboratory_ids')
     def _check_external_laboratories(self):
         for record in self:
             if (record.test_type == 'external' and not

@@ -172,10 +172,9 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     def get_purchase_order_header(self, cron_line):
         self.ensure_one()
-        warehouse = self.env['stock.warehouse'].search(
-            [('name', 'like', 'Muestra')], limit=1)
+        warehouse = self.company_id.sample_warehouse_id
         picking_type = self.env['stock.picking.type'].search(
-            [('warehouse_id', 'in', warehouse.ids), ('code', '=', 'incoming'),
+            [('warehouse_id', '=', warehouse.id), ('code', '=', 'incoming'),
              ('default_location_src_id.usage', '=', 'supplier')], limit=1)
         partner = self.order_id.partner_id
         onchange_vals = self.order_id.onchange_partner_id(partner.id)['value']

@@ -14,7 +14,7 @@
     ],
     "category": "Quality control",
     "depends": [
-        "quality_control",
+        "quality_control_stock",
         "purchase",
     ],
     "data": [
@@ -23,6 +23,7 @@
         "views/purchase_order_view.xml",
         "views/qc_test_view.xml",
         "views/res_partner_view.xml",
+        "views/res_company_view.xml",
     ],
     "installable": True,
 }
