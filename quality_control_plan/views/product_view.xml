@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+    <record id="product_quality_control_plan_cron_tree_view" model="ir.ui.view">
+        <field name="name">view.product.quality.control.plan.cron.tree</field>
+        <field name="model">product.quality.control.plan.cron</field>
+        <field name="arch" type="xml">
+            <tree string="Quality Control Plan Cron Lines" editable="1">
+                <field name="qc_test_id" domain="[('test_type', '=', 'external')]" required="1"/>
+                <field name="interval_number" required="1"/>
+                <field name="interval_type" required="1"/>
+                <field name="next_date" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="name">product_normal_form_view_qpc</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="inside">
+                <div>
+                    <field name="subject_to_qcp"/>
+                    <label for="subject_to_qcp"/>
+                </div>
+            </div>
+            <notebook position="inside">
+                 <page string="Quality Control Plan" attrs="{'invisible': [('subject_to_qcp', '=', False)]}">
+                     <group colspan="4">
+                         <group>
+                             <field name="sample_qty"/>
+                         </group>
+                         <br/>
+                         <group>
+                             <field name="plan_control_cron_ids" colspan="4" nolabel="1"/>
+                         </group>
+                     </group>
+                 </page>
+            </notebook>
+        </field>
+    </record>
+
+     <record id="product_search_form_view" model="ir.ui.view">
+        <field name="name">product_normal_search_view_qpc</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <filter string="Can be Sold" position="after">
+                <filter string="Subject To Quality Control Plan" domain="[('subject_to_qcp', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
+</data>
+</openerp>
