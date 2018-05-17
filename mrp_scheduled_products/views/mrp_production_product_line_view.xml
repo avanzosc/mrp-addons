@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="mrp_production_product_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.product.line.form</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="arch" type="xml">
+                <form string="Scheduled Products">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="product_id"/>
+                        <field name="product_qty"/>
+                        <field name="product_uom" groups="product.group_uom"/>
+                        <!--<field name="product_uos_qty" groups="product.group_uos"/>-->
+                        <!--<field name="product_uos" groups="product.group_uos"/>-->
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="mrp_production_product_tree_view" model="ir.ui.view">
+            <field name="name">mrp.production.product.line.tree</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="arch" type="xml">
+                <tree string="Scheduled Products">
+                    <field name="product_id"/>
+                    <field name="product_qty"/>
+                    <field name="product_uom" groups="product.group_uom"/>
+                    <!--<field name="product_uos_qty" groups="product.group_uos"/>-->
+                    <!--<field name="product_uos" groups="product.group_uos"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_production_product_lines">
+            <field name="name">mrp.production.product.lines
+                .form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id"
+                   ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <button name="button_mark_done" position="after">
+                    <button name="button_mark_done"
+                            attrs="{'invisible': ['|', ('state', 'not in', ('draft')), ('is_locked', '=', False)]}" string="Mark as Done" type="object" class="oe_highlight"/>
+                </button>
+                <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,confirmed,progress,done</attribute>
+                </field>
+                <xpath expr="//field[@name='finished_move_line_ids']/.."
+                       position="after">
+                    <page string="Scheduled Products">
+                        <button name="action_compute" states="confirmed"
+                                string="Compute Data" type="object"
+                                />
+                        <field name="product_lines"/>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>
