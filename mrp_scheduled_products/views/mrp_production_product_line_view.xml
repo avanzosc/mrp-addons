@@ -39,8 +39,8 @@
                    ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
                 <button name="button_mark_done" position="after">
-                    <button name="button_mark_done"
-                            attrs="{'invisible': ['|', ('state', 'not in', ('draft')), ('is_locked', '=', False)]}" string="Mark as Done" type="object" class="oe_highlight"/>
+                    <button name="button_confirm"
+                            attrs="{'invisible': ['|', ('state', 'not in', ('draft')), ('is_locked', '=', False)]}" string="Confirm" type="object" class="oe_highlight"/>
                 </button>
                 <field name="state" position="attributes">
                     <attribute name="statusbar_visible">draft,confirmed,progress,done</attribute>
@@ -48,7 +48,7 @@
                 <xpath expr="//field[@name='finished_move_line_ids']/.."
                        position="after">
                     <page string="Scheduled Products">
-                        <button name="action_compute" states="confirmed"
+                        <button name="action_compute" states="draft"
                                 string="Compute Data" type="object"
                                 />
                         <field name="product_lines"/>
