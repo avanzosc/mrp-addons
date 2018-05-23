@@ -43,9 +43,14 @@ class MrpProduction(models.Model):
 
     @api.multi
     def _generate_moves(self):
-        """Avoid draft state production moves generation"""
+        """Avoid draft moves generation of draft state mo"""
         return super(MrpProduction, self.filtered(lambda x: x.state != "draft")
             )._generate_moves()
+
+    @api.multi
+    def button_confirm(self):
+        self.write({'state': 'confirmed'})
+        return self._generate_moves()
 
     @api.multi
     def _action_compute_lines(self):
