@@ -79,7 +79,7 @@ class MrpProduction(models.Model):
                 bom_line = line[0]
                 product = bom_line.product_id
                 prod_line = {
-                    'name': product.name,
+                    'name': product.name or bom_line.product_tmpl_id.name,
                     'product_id': product.id,
                     'product_qty': line_data['qty'],
                     'bom_line_id': bom_line.id,
