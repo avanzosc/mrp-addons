@@ -41,16 +41,64 @@ class MrpProduction(models.Model):
         return orders_to_confirm.write({'state': 'confirmed'})
 
 
+    def _generate_raw_moves(self):
+        self.ensure_one()
+        moves = self.env['stock.move']
+        for line in self.product_lines:
+            bom_line = line.bom_line_id
+            quantity = line.product_qty
+            if self.routing_id:
+                routing = self.routing_id
+            else:
+                routing = self.bom_id.routing_id
+            if routing and routing.location_id:
+                source_location = routing.location_id
+            else:
+                source_location = self.location_src_id
+            original_quantity = self.product_qty - self.qty_produced
+            data ={
+                'sequence': bom_line.sequence,
+                'name': self.name,
+                'date': self.date_planned_start,
+                'date_expected': self.date_planned_start,
+                'bom_line_id': bom_line.id,
+                'product_id': line.product_id.id,
+                'product_uom_qty': quantity,
+                'product_uom': line.product_uom.id,
+                'location_id': source_location.id,
+                'location_dest_id': self.product_id.property_stock_production.id,
+                'raw_material_production_id': self.id,
+                'company_id': self.company_id.id,
+                'operation_id': bom_line.operation_id.id,
+                'price_unit': line.product_id.standard_price,
+                'procure_method': 'make_to_stock',
+                'origin': self.name,
+                'warehouse_id': source_location.get_warehouse().id,
+                'group_id': self.procurement_group_id.id,
+                'propagate': self.propagate,
+                'unit_factor': quantity / original_quantity,
+                'production_product_line_id': line.id,
+            }
+            moves += moves.create(data)
+        return moves
+
     @api.multi
     def _generate_moves(self):
         """Avoid draft moves generation of draft state mo"""
-        return super(MrpProduction, self.filtered(lambda x: x.state != "draft")
-            )._generate_moves()
+        productions = self if self.env.context.get('generate_moves') else \
+            self.filtered(lambda x: x.state != "draft")
+        for production in productions:
+            production._generate_finished_moves()
+            production._generate_raw_moves()
 
     @api.multi
     def button_confirm(self):
+        products = self.product_lines.mapped('product_id.id')
+        if not all(products):
+            raise exceptions.Warning(_('Not all scheduled products has a '
+                                     'product'))
         self.write({'state': 'confirmed'})
-        return self._generate_moves()
+        return self.with_context(generate_moves=True)._generate_moves()
 
     @api.multi
     def _action_compute_lines(self):
