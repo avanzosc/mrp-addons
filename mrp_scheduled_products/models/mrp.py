@@ -34,12 +34,7 @@ class MrpProduction(models.Model):
         inverse_name='production_id', string='Scheduled goods')
     state = fields.Selection(selection_add=[('draft', 'Draft')],
                              default='draft')
-
-    @api.multi
-    def button_confirm(self):
-        orders_to_confirm = self.filtered(lambda order: order.state == 'draft')
-        return orders_to_confirm.write({'state': 'confirmed'})
-
+    active = fields.Boolean(string='Active', default=False)
 
     def _generate_raw_moves(self):
         self.ensure_one()
@@ -97,7 +92,8 @@ class MrpProduction(models.Model):
         if not all(products):
             raise exceptions.Warning(_('Not all scheduled products has a '
                                      'product'))
-        self.write({'state': 'confirmed'})
+        orders_to_confirm = self.filtered(lambda order: order.state == 'draft')
+        orders_to_confirm.write({'state': 'confirmed', 'active': 'True'})
         return self.with_context(generate_moves=True)._generate_moves()
 
     @api.multi
