@@ -58,6 +58,17 @@
             </field>
         </record>
 
+        <record id="mrp_virtual_production_action" model="ir.actions.act_window">
+            <field name="name">Virtual Manufacturing Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,gantt</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="context">{'default_active': False}</field>
+            <field name="domain">[('active','=',False)]</field>
+        </record>
 
 
 
