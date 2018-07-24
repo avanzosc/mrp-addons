@@ -70,6 +70,11 @@
             <field name="domain">[('active','=',False)]</field>
         </record>
 
+        <menuitem action="mrp_virtual_production_action"
+                  id="menu_mrp_virtual_production_action"
+                  parent="mrp.menu_mrp_manufacturing" sequence="10"
+        />
+
 
 
     </data>
