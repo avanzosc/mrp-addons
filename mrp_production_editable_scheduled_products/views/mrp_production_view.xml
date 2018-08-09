@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="name">mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_lines" />
+        <field name="arch" type="xml">
+            <field name="product_lines" position="attributes">
+                <attribute name="readonly" eval="False" />
+                <attribute name="attrs">{'readonly':[('state', '!=', ('draft'))]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
