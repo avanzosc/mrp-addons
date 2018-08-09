@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-# (c) 2014 Daniel Campos - AvanzOSC
-# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# Copyright 2014 Daniel Campos - AvanzOSC
+# Copyright 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, models
+from odoo import api, models
 
 
 class MrpProductionProductLine(models.Model):
