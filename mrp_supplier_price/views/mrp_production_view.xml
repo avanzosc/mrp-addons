@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_supplier_price_form">
+        <field name="name">mrp.supplier.price.form</field>
+        <field name="model">mrp.production.product.line</field>
+        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_form_view" />
+        <field name="arch" type="xml">
+            <field name="product_uom" position="after">
+                <field name="standard_price" />
+                <field name="product_uop_qty" groups="product.group_uom" />
+                <field name="product_uop_id" groups="product.group_uom" />
+                <field name="subtotal" />
+                <field name="supplier_id"
+                       domain="[('id', 'in', supplier_id_domain)]"/>
+                <field name="supplier_id_domain" invisible="1" />
+                <field name="supplier_price" />
+                <field name="supplier_subtotal" />
+                <field name="unit_final_cost"
+                       groups="mrp_supplier_price.group_show_unitary_info"/>
+                <field name="unit_final_purchase"
+                       groups="mrp_supplier_price.group_show_unitary_info"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_supplier_price_tree">
+        <field name="name">mrp.supplier.price.tree</field>
+        <field name="model">mrp.production.product.line</field>
+        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_uom" position="after">
+                <field name="standard_price" />
+                <field name="subtotal" sum="Total"/>
+                <field name="product_uop_qty" />
+                <field name="product_uop_id" groups="product.group_uom" />
+                <field name="supplier_id"
+                       domain="[('id', 'in', supplier_id_domain)]"/>
+                <field name="supplier_id_domain" invisible="1" />
+                <field name="supplier_price"/>
+                <field name="supplier_subtotal" sum="Supplier Subtotal" />
+                <field name="unit_final_cost" sum="Unit cost"
+                       groups="mrp_supplier_price.group_show_unitary_info"/>
+                <field name="unit_final_purchase" sum="Unit purchase"
+                       groups="mrp_supplier_price.group_show_unitary_info"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_profit_form">
+        <field name="name">mrp.production.profit.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_lines" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="currency_id" groups="base.group_multi_currency" />
+            </field>
+            <field name="product_lines" position="after">
+                <group name="product_line_total_group" class="oe_subtotal_footer oe_right">
+                    <field name="scheduled_total" class="oe_subtotal_footer_separator"
+                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                        <label for="production_total" />
+                        <button name="button_recompute_total" states="draft"
+                                string="(update)" type="object" class="oe_edit_only oe_link"/>
+                    </div>
+                    <field name="production_total" nolabel="1"
+                           class="oe_subtotal_footer_separator"
+                           widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </group>
+                <div class="oe_clear"/>
+
+            </field>
+        </field>
+    </record>
+</odoo>
