@@ -16,7 +16,7 @@ class EditableScheduledProductTest(TransactionCase):
         line = self.product_line_model.new()
         line.product_id = self.product
         line._onchange_product_id()
-        self.assertEqual(self.product.uom_id, line.product_uom,
+        self.assertEqual(self.product.uom_id, line.product_uom_id,
                          'UoM should be equal.')
         self.assertEqual(self.product.name, line.name,
                          'Line name should be the product name.')

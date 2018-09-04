@@ -11,7 +11,7 @@ class MrpProductionProductLine(models.Model):
     @api.onchange('product_id')
     def _onchange_product_id(self):
         if self.product_id:
-            self.product_uom = self.product_id.uom_id.id
+            self.product_uom_id = self.product_id.uom_id.id
             self.name = self.product_id.name
             try:
                 self.product_tmpl_id = self.product_id.product_tmpl_id
