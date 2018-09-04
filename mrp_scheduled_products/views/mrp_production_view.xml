@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="mrp_production_product_form_view" model="ir.ui.view">
+        <field name="model">mrp.production.product.line</field>
+        <field name="arch" type="xml">
+            <form string="Scheduled Products">
+                <sheet>
+                     <div class="oe_title">
+                        <label class="oe_edit_only" for="name" />
+                        <h1><field name="name" /></h1>
+                    </div>
+                    <group name="body">
+                        <group name="product_info">
+                            <field name="product_id"/>
+                            <label for="product_qty"/>
+                            <div class="o_row">
+                                <field name="product_qty" />
+                                <field name="product_uom_id" options="{'no_open':True,'no_create':True}"
+                                       groups="product.group_uom" />
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mrp_production_product_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production.product.line</field>
+        <field name="arch" type="xml">
+            <tree string="Scheduled Products">
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="product_uom_id" groups="product.group_uom"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_production_product_search_view" model="ir.ui.view">
+        <field name="model">mrp.production.product.line</field>
+        <field name="arch" type="xml">
+            <search string="Scheduled Products">
+                <field name="production_id" />
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="product_uom_id" groups="product.group_uom"/>
+                <group expand="0" string="Group By" name="groupby">
+                    <filter string="Manufacturing Order" name="groupby_production"
+                            domain="[]" context="{'group_by':'production_id'}"/>
+                    <filter string="Product" name="groupby_product"
+                            domain="[]" context="{'group_by':'product_id'}"/>
+                    <filter string="Unit of Measure" name="groupby_uom"
+                            domain="[]" context="{'group_by':'product_uom_id'}"
+                            groups="product.group_uom"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_production_product_lines">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id"
+               ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <button name="button_mark_done" position="after">
+                <button name="button_confirm"
+                        attrs="{'invisible': ['|',('state','not in',('draft')),('is_locked','=',False)]}"
+                        string="Confirm" type="object" class="oe_highlight"/>
+            </button>
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,confirmed,progress,done</attribute>
+            </field>
+            <xpath expr="//field[@name='finished_move_line_ids']/.."
+                   position="after">
+                <page string="Scheduled Products">
+                    <button name="action_compute" states="draft"
+                            string="Compute Data" type="object"
+                            />
+                    <field name="product_line_ids"/>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="mrp_virtual_production_action" model="ir.actions.act_window">
+        <field name="name">Virtual Manufacturing Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.production</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,graph,gantt</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="context">{'default_active': False}</field>
+        <field name="domain">[('active','=',False)]</field>
+    </record>
+
+    <menuitem action="mrp_virtual_production_action"
+              id="menu_mrp_virtual_production_action"
+              parent="mrp.menu_mrp_manufacturing" sequence="5"
+    />
+
+    <record id="mrp_production_product_line_action" model="ir.actions.act_window">
+        <field name="name">Scheduled Goods</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.production.product.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <menuitem action="mrp_production_product_line_action"
+              id="mrp_production_product_line_menu"
+              parent="mrp.menu_mrp_manufacturing" sequence="30"
+    />
+
+</odoo>
