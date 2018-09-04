@@ -84,16 +84,17 @@ class MrpProductionProductLine(models.Model):
                     line.production_id.currency_id):
                 price_unit = line.product_id.currency_id.compute(
                     price_unit, line.production_id.currency_id)
-            if line.product_uom and line.product_id.uom_id != line.product_uom:
+            if (line.product_uom_id and
+                    line.product_id.uom_id != line.product_uom_id):
                 price_unit = line.product_id.uom_id._compute_price(
-                    price_unit, line.product_uom)
+                    price_unit, line.product_uom_id)
             line.standard_price = price_unit
 
     @api.depends('product_id', 'product_qty')
     def _compute_product_uop(self):
         for line in self.filtered('product_id'):
             line.product_uop_id = line.product_id.uom_po_id
-            line.product_uop_qty = line.product_uom._compute_quantity(
+            line.product_uop_qty = line.product_uom_id._compute_quantity(
                 line.product_qty, line.product_uop_id)
 
     @api.depends('standard_price', 'product_qty', 'production_id',
@@ -146,12 +147,13 @@ class MrpProduction(models.Model):
         comodel_name='res.currency', string='Currency', required=True,
         default=lambda self: self.env.user.company_id.currency_id.id)
 
-    @api.depends('product_lines', 'product_lines.subtotal')
+    @api.depends('product_line_ids', 'product_line_ids.subtotal')
     def _compute_scheduled_total(self):
         get_param = self.env['ir.config_parameter'].sudo().get_param
         by_unit = get_param('mrp.subtotal_by_unit') == 'True'
-        for mrp in self.filtered(lambda m: m.product_lines and m.product_qty):
-            subtotal = sum(mrp.mapped('product_lines.subtotal'))
+        for mrp in self.filtered(lambda m: m.product_line_ids and
+                                 m.product_qty):
+            subtotal = sum(mrp.mapped('product_line_ids.subtotal'))
             mrp.scheduled_total =\
                 subtotal / mrp.product_qty if by_unit else subtotal
 
@@ -178,6 +180,6 @@ class MrpProduction(models.Model):
     @api.multi
     def _action_compute_lines(self):
         res = super(MrpProduction, self)._action_compute_lines()
-        for line in self.product_lines:
+        for line in self.product_line_ids:
             line.onchange_product_product_qty()
         return res

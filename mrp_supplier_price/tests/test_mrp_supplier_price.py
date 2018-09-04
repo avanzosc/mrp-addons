@@ -64,12 +64,12 @@ class MrpSupplierPriceTest(TransactionCase):
     def test_mrp_production(self):
         self.production.action_compute()
         self.assertEqual(len(self.production.bom_id.bom_line_ids),
-                         len(self.production.product_lines))
+                         len(self.production.product_line_ids))
         self.assertEqual(len(self.mrp_bom.bom_line_ids),
-                         len(self.production.product_lines))
+                         len(self.production.product_line_ids))
         self.assertEqual(
             self.production.scheduled_total,
-            sum(self.production.mapped('product_lines.subtotal')))
+            sum(self.production.mapped('product_line_ids.subtotal')))
         try:
             self.assertEqual(
                 self.production.production_total,
@@ -79,13 +79,13 @@ class MrpSupplierPriceTest(TransactionCase):
             self.assertEqual(
                 self.production.production_total,
                 self.production.scheduled_total)
-        for line in self.production.product_lines:
+        for line in self.production.product_line_ids:
             bom_line = self.mrp_bom.bom_line_ids.filtered(
                 lambda l: l.product_id == line.product_id)
             self.assertEqual(
                 line.product_uop_qty,
-                line.product_uom._compute_quantity(line.product_qty,
-                                                   line.product_uop_id))
+                line.product_uom_id._compute_quantity(line.product_qty,
+                                                      line.product_uop_id))
             self.assertEqual(
                 line.product_uop_id, line.product_id.uom_po_id)
             line.onchange_product_product_qty()
