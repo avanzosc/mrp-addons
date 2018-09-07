@@ -9,6 +9,9 @@ Scheduled Production Lines
 With this module there is the possibility to make a plan of consumed products,
 without confirming the manufacturing order.
 
+Permission group to make editable scheduled goods, it can be also set in
+manufacturing configuration.
+
 Bug Tracker
 ===========
 
