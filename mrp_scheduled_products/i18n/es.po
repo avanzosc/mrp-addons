@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-05 12:35+0000\n"
-"PO-Revision-Date: 2018-09-05 12:35+0000\n"
+"POT-Creation-Date: 2018-09-07 08:30+0000\n"
+"PO-Revision-Date: 2018-09-07 08:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,7 @@ msgstr "Componente"
 
 #. module: mrp_scheduled_products
 #: code:addons/mrp_scheduled_products/models/mrp.py:140
+#: code:addons/mrp_scheduled_products/models/mrp.py:183
 #, python-format
 msgid "Cannot find a bill of material for this product."
 msgstr "No se encuentra ninguna lista de materiales para este producto."
@@ -57,6 +58,11 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_res_config_settings_group_editable_scheduled_products
+msgid "Editable Scheduled Products"
+msgstr "Lista de productos planificados editable"
+
+#. module: mrp_scheduled_products
 #: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_search_view
 msgid "Group By"
 msgstr "Agrupar por"
@@ -82,10 +88,20 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: mrp_scheduled_products
+#: model:res.groups,name:mrp_scheduled_products.group_editable_scheduled_products
+msgid "Make editable scheduled products on manufacturing orders"
+msgstr "Hacer editable el listado de planificados en ordenes de fabricación"
+
+#. module: mrp_scheduled_products
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_config_settings_scheduled
+msgid "Make editable scheduled products on manufacturing orders."
+msgstr "Hacer editable el listado de planificados en ordenes de fabricación."
+
+#. module: mrp_scheduled_products
 #: model:ir.model,name:mrp_scheduled_products.model_mrp_production
 #: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_search_view
 msgid "Manufacturing Order"
-msgstr "Orden de Producción"
+msgstr "Orden de producción"
 
 #. module: mrp_scheduled_products
 #: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_name
@@ -94,6 +110,7 @@ msgstr "Nombre"
 
 #. module: mrp_scheduled_products
 #: code:addons/mrp_scheduled_products/models/mrp.py:91
+#: code:addons/mrp_scheduled_products/models/mrp.py:134
 #, python-format
 msgid "Not all scheduled products has a product"
 msgstr "No todas las lineas planificadas tienen producto"
@@ -118,11 +135,6 @@ msgstr "Orden de producción"
 #: model:ir.model,name:mrp_scheduled_products.model_mrp_production_product_line
 msgid "Production Scheduled Product"
 msgstr "Fabricación planificada producto"
-
-#. module: mrp_scheduled_products
-#: model:ir.actions.act_window,help:mrp_scheduled_products.mrp_virtual_production_action
-msgid "Pulse aquí para añadir un nuevo documento"
-msgstr "Pulse aquí para añadir un nuevo documento"
 
 #. module: mrp_scheduled_products
 #: model:ir.actions.act_window,name:mrp_scheduled_products.mrp_production_product_line_action
@@ -164,4 +176,9 @@ msgstr "Unidad de medida"
 #: model:ir.ui.menu,name:mrp_scheduled_products.menu_mrp_virtual_production_action
 msgid "Virtual Manufacturing Orders"
 msgstr "Órdenes de producción virtuales"
+
+#. module: mrp_scheduled_products
+#: model:ir.model,name:mrp_scheduled_products.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"
 

@@ -61,3 +61,11 @@ class MrpScheduledProducts(SavepointCase):
         })
         with self.assertRaises(MissingError):
             self.production.action_compute()
+
+    def test_scheduled_good_onchange(self):
+        line = self.env['mrp.production.product.line'].new({
+            'product_id': self.component1,
+        })
+        self.assertFalse(line.product_uom_id)
+        line._onchange_product_id()
+        self.assertEquals(line.product_uom_id, line.product_id.uom_id)

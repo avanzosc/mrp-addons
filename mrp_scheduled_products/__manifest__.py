@@ -3,7 +3,7 @@
 
 {
     "name": "Scheduled Production Lines",
-    "version": "11.0.1.0.0",
+    "version": "11.0.2.0.0",
     "license": "AGPL-3",
     "depends": [
         "mrp",
@@ -13,7 +13,9 @@
     "category": "Manufacturing",
     "data": [
         "security/ir.model.access.csv",
+        "security/mrp_scheduled_group.xml",
         "views/mrp_production_view.xml",
+        "views/res_config_view.xml",
     ],
     "installable": True,
     "post_init_hook": "post_init_hook",
