@@ -21,6 +21,17 @@ class MrpProductionProductLine(models.Model):
     bom_line_id = fields.Many2one(
         comodel_name='mrp.bom.line', string='Bom Line')
 
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        if self.product_id:
+            self.product_uom_id = self.product_id.uom_id
+            self.name = self.product_id.name
+            try:
+                self.product_tmpl_id = self.product_id.product_tmpl_id
+            except Exception:
+                # This is in case mrp_product_variants module is not installed
+                pass
+
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
@@ -32,45 +43,42 @@ class MrpProduction(models.Model):
                              default='draft')
     active = fields.Boolean(string='Active', default=False)
 
+    def _get_raw_move_dict(self, product_line):
+        self.ensure_one()
+        routing = self.routing_id or self.bom_id.routing_id
+        source_location = (
+            routing and routing.location_id or self.location_src_id)
+        original_qty = self.product_qty - self.qty_produced
+        return {
+            'sequence': product_line.bom_line_id.sequence,
+            'name': self.name,
+            'date': self.date_planned_start,
+            'date_expected': self.date_planned_start,
+            'bom_line_id': product_line.bom_line_id.id,
+            'product_id': product_line.product_id.id,
+            'product_uom_qty': product_line.product_qty,
+            'product_uom': product_line.product_uom_id.id,
+            'location_id': source_location.id,
+            'location_dest_id':
+                self.product_id.property_stock_production.id,
+            'raw_material_production_id': self.id,
+            'company_id': self.company_id.id,
+            'operation_id': product_line.bom_line_id.operation_id.id,
+            'price_unit': product_line.product_id.standard_price,
+            'procure_method': 'make_to_stock',
+            'origin': self.name,
+            'warehouse_id': source_location.get_warehouse().id,
+            'group_id': self.procurement_group_id.id,
+            'propagate': self.propagate,
+            'unit_factor': product_line.product_qty / original_qty,
+            'production_product_line_id': product_line.id,
+        }
+
     def _generate_raw_moves(self):
         self.ensure_one()
         moves = self.env['stock.move']
         for line in self.product_line_ids:
-            bom_line = line.bom_line_id
-            quantity = line.product_qty
-            if self.routing_id:
-                routing = self.routing_id
-            else:
-                routing = self.bom_id.routing_id
-            if routing and routing.location_id:
-                source_location = routing.location_id
-            else:
-                source_location = self.location_src_id
-            original_quantity = self.product_qty - self.qty_produced
-            data = {
-                'sequence': bom_line.sequence,
-                'name': self.name,
-                'date': self.date_planned_start,
-                'date_expected': self.date_planned_start,
-                'bom_line_id': bom_line.id,
-                'product_id': line.product_id.id,
-                'product_uom_qty': quantity,
-                'product_uom': line.product_uom_id.id,
-                'location_id': source_location.id,
-                'location_dest_id':
-                    self.product_id.property_stock_production.id,
-                'raw_material_production_id': self.id,
-                'company_id': self.company_id.id,
-                'operation_id': bom_line.operation_id.id,
-                'price_unit': line.product_id.standard_price,
-                'procure_method': 'make_to_stock',
-                'origin': self.name,
-                'warehouse_id': source_location.get_warehouse().id,
-                'group_id': self.procurement_group_id.id,
-                'propagate': self.propagate,
-                'unit_factor': quantity / original_quantity,
-                'production_product_line_id': line.id,
-            }
+            data = self._get_raw_move_dict(line)
             moves += moves.create(data)
         return moves
 
@@ -129,10 +137,10 @@ class MrpProduction(models.Model):
         if not bom_point:
             bom_point = bom_obj._bom_find(product=self.product_id)
             if bom_point:
-                routing_id = bom_point.routing_id.id or False
+                routing = bom_point.routing_id
                 self.write({
                     'bom_id': bom_point.id,
-                    'routing_id': routing_id,
+                    'routing_id': routing.id,
                 })
 
         if not bom_point:
