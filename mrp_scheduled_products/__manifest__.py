@@ -3,7 +3,7 @@
 
 {
     "name": "Scheduled Production Lines",
-    "version": "11.0.2.0.0",
+    "version": "11.0.2.1.0",
     "license": "AGPL-3",
     "depends": [
         "mrp",
