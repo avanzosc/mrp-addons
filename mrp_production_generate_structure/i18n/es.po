@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_production_generate_structure
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-06 10:36+0000\n"
+"PO-Revision-Date: 2018-09-06 10:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines
+msgid "Create purchase orders"
+msgstr "Crear pedidos de compra"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_form_view_inh_simulated_plan
+msgid "Create purchase/manufacturing order"
+msgstr "Crear compra/orden de producción"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines
+msgid "Create structure"
+msgstr "Crear estructura"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_production_date_planned_start
+msgid "Deadline start"
+msgstr "Vigente desde"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,help:mrp_production_generate_structure.field_mrp_production_product_line_purchase_date_order
+msgid "Depicts the date where the Quotation should be validated and converted into a purchase order."
+msgstr "Representa la fecha en la que el presupuesto debe ser validado y convertido en un pedido de compra."
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_level
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_purchase_order_level
+msgid "Level"
+msgstr "Nivel"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_make_to_order
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+msgid "Make to order"
+msgstr "Bajo pedido"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model,name:mrp_production_generate_structure.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Orden de Producción"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_manufacture_count
+msgid "Manufacturing counting"
+msgstr "Contador facturación"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_new_production_id
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+msgid "Manufacturing order"
+msgstr "Orden de producción"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_form_view_inh_simulated_plan
+msgid "Manufacturing orders countings"
+msgstr "Contadores órdenes de fabricación"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_purchase_date_order
+msgid "Order date"
+msgstr "Fecha de pedido"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_origin_production_id
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_purchase_order_origin_production_id
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines_search_view
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.view_purchase_order_filter_inh_simulated_plan
+msgid "Origin manufacturing order"
+msgstr "Orden de producción origen"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model,name:mrp_production_generate_structure.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr "Fabricación planificada producto"
+
+#. module: mrp_production_generate_structure
+#: code:addons/mrp_production_generate_structure/models/mrp_production.py:44
+#, python-format
+msgid "Productions"
+msgstr "Producciones"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model,name:mrp_production_generate_structure.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model,name:mrp_production_generate_structure.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de pedido de compra"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_purchase_order_id
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+msgid "Purchase order"
+msgstr "Pedido de compra"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_purchase_order_line_id
+msgid "Purchase order line"
+msgstr "Línea de pedido de compra"
+
+#. module: mrp_production_generate_structure
+#: code:addons/mrp_production_generate_structure/models/mrp_production.py:66
+#, python-format
+msgid "Purchase orders"
+msgstr "Pedidos de compra"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_purchase_count
+msgid "Purchase orders counting"
+msgstr "Contador pedidos de compra"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_form_view_inh_simulated_plan
+msgid "Purchase orders countings"
+msgstr "Contadores pedidos de compra"
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line_route_id
+msgid "Route"
+msgstr "Ruta"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+msgid "Route"
+msgstr "Ruta"
+
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_tree_view_inh_simulated_plan
+msgid "Total"
+msgstr "Total"
+

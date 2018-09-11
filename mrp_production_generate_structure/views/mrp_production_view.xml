@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+         <record model="ir.ui.view" id="mrp_production_form_view_inh_simulated_plan">
+            <field name="name">mrp.production.form.view.inh.simulated.plan</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                   <button name="button_show_manufacturing_orders" type="object"
+                            class="oe_stat_button oe_inline"
+                            icon="fa-github" >
+                           <field name="manufacture_count" string="Manufacturing orders countings" widget="statinfo" />
+                       </button>
+                       <button name="button_show_purchase_orders" type="object"
+                            class="oe_stat_button oe_inline"
+                            icon="fa-github" >
+                           <field name="purchase_count" string="Purchase orders countings" widget="statinfo" />
+                       </button>
+                     </div>
+            </field>
+     </record>
+     <record model="ir.ui.view" id="mrp_production_product_lines">
+            <field name="name">mrp.production.product.lines.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_lines" />
+            <field name="arch" type="xml">
+                        <button name="action_compute" position="after">
+                              <button name="button_create_manufacturing_structure" string="Create structure" type="object"/>
+                              <button name="button_create_purchase_order" string="Create purchase orders" type="object"/>
+                        </button>
+
+            </field>
+     </record>
+     <record model="ir.ui.view" id="mrp_production_tree_view_inh_simulated_plan">
+            <field name="name">mrp.production.tree.view.inh.simulated.plan</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="origin_production_id" />
+                    <field name="level" />
+                </field>
+        </field>
+    </record>
+</odoo>
