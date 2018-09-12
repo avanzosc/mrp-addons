@@ -19,7 +19,7 @@ class MrpProduction(models.Model):
     def action_compute(self):
         res = super(MrpProduction, self).action_compute()
         for production in self:
-            for line in production.product_lines:
+            for line in production.product_line_ids:
                 line.onchange_product_id()
         return res
 
@@ -76,11 +76,11 @@ class MrpProduction(models.Model):
         productions = [self]
         while productions:
             for production in productions:
-                if not production.product_lines:
+                if not production.product_line_ids:
                     production.action_compute()
-                    for line in production.product_lines:
+                    for line in production.product_line_ids:
                         line.onchange_product_id()
-                lines = production.mapped('product_lines').filtered(
+                lines = production.mapped('product_line_ids').filtered(
                     lambda x: x.route_id.id == manufacture.id and not
                     x.new_production_id and x.make_to_order)
                 for line in lines:
@@ -103,11 +103,11 @@ class MrpProduction(models.Model):
         productions = [self]
         while productions:
             for production in productions:
-                if not production.product_lines:
+                if not production.product_line_ids:
                     production.action_compute()
-                    for line in production.product_lines:
+                    for line in production.product_line_ids:
                         line.onchange_product_id()
-                lines = production.mapped('product_lines').filtered(
+                lines = production.mapped('product_line_ids').filtered(
                     lambda x: x.route_id.id == buy.id and not
                     x.purchase_order_id and x.make_to_order)
                 for line in lines:
