@@ -8,7 +8,7 @@
     "website": "http://www.avanzosc.es",
     "category": "Manufacturing",
     "depends": [
-        "mrp_production_editable_scheduled_products",
+        "mrp_scheduled_products",
         "purchase",
     ],
     "data": [
