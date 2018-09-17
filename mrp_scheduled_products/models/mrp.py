@@ -17,7 +17,8 @@ class MrpProductionProductLine(models.Model):
     product_uom_id = fields.Many2one(
         comodel_name='product.uom', string='Unit of Measure', required=True)
     production_id = fields.Many2one(
-        comodel_name='mrp.production', string='Production Order')
+        comodel_name='mrp.production', string='Production Order',
+        required=True, ondelete='cascade')
     bom_line_id = fields.Many2one(
         comodel_name='mrp.bom.line', string='Bom Line')
 

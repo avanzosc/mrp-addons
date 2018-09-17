@@ -5,9 +5,12 @@
         <field name="arch" type="xml">
             <form string="Scheduled Products">
                 <sheet>
-                     <div class="oe_title">
+                    <div class="oe_title">
                         <label class="oe_edit_only" for="name" />
                         <h1><field name="name" /></h1>
+                        <label for="production_id" />
+                        <field name="production_id" invisible="context.get('hide_production_id',True)"
+                               domain="[('state','=','draft')]"/>
                     </div>
                     <group name="body">
                         <group name="product_info">
@@ -29,6 +32,7 @@
         <field name="model">mrp.production.product.line</field>
         <field name="arch" type="xml">
             <tree string="Scheduled Products">
+                <field name="production_id" invisible="context.get('hide_production_id',True)" />
                 <field name="product_id"/>
                 <field name="product_qty"/>
                 <field name="product_uom_id" groups="product.group_uom"/>
@@ -119,6 +123,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" eval="False"/>
+        <field name="context">{'hide_production_id': False}</field>
     </record>
 
     <menuitem action="mrp_production_product_line_action"
