@@ -91,6 +91,9 @@ class MrpProduction(models.Model):
         for production in productions:
             production._generate_finished_moves()
             production._generate_raw_moves()
+            # Check for all draft moves whether they are mto or not
+            production._adjust_procure_method()
+            production.move_raw_ids._action_confirm()
 
     @api.multi
     def button_confirm(self):
