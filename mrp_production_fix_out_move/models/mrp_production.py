@@ -25,6 +25,7 @@ class MrpProduction(models.Model):
         return res
 
     def _no_duplicate_move_in_out_picking(self, prev_moves, max_move):
+        quant_obj = self.env['stock.quant']
         prev_move = max(prev_moves, key=lambda x: x.id)
         prev_move.move_dest_id.sudo().write({
             'product_uom_qty': (
@@ -36,10 +37,9 @@ class MrpProduction(models.Model):
         for quant in max_move.move_dest_id.reserved_quant_ids:
             for previus_quant in prev_move.move_dest_id.reserved_quant_ids:
                 if quant.product_id == previus_quant.product_id:
-                    if quant.reservation_id:
-                        quant.reservation_id = prev_move.move_dest_id
-                    max_move.move_dest_id.quant_ids = [(3, quant.id)]
-                    prev_move.move_dest_id.quant_ids = [(4, quant.id)]
+                    max_move.move_dest_id.do_unreserve()
+                    quant_obj.quants_reserve(
+                        [(quant, quant.qty)], prev_move.move_dest_id)
                     max_move.move_dest_id.action_cancel()
                     max_move.move_dest_id.sudo().unlink()
                     break

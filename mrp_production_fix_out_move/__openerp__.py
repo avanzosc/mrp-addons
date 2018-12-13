@@ -4,7 +4,7 @@
 {
     "name": "MRP Production Fix Out Move",
     "summary": "Manufacturing",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.1.0",
     "category": "Manufacturing",
     "license": "AGPL-3",
     "author": "AvanzOSC",
