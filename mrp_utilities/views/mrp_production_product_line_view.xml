@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="mrp_production_product_line_tree_view_utilities" model="ir.ui.view">
+            <field name="name">mrp.production.product.line.tree.view.utilities</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="arch" type="xml">
+                <tree string="Scheduled Products">
+                    <field name="production_id" />
+                    <field name="product_id"/>
+                    <field name="product_qty"/>
+                    <field name="product_uom" groups="product.group_uom"/>
+                    <field name="product_uos_qty" groups="product.group_uos"/>
+                    <field name="product_uos" groups="product.group_uos"/>
+                    <field name="production_state" />
+                </tree>
+            </field>
+        </record>
+        <record id="mrp_production_product_line_search_view_utilities" model="ir.ui.view">
+            <field name="name">mrp.production.product.line.search.view.utilities</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="arch" type="xml">
+                <search string="Scheduled Products">
+                    <field name="production_id" />
+                    <field name="product_id" />
+                    <field name="production_state" />
+                    <group expand="0" string="Group By">
+                        <filter string="Production" name="by_production" icon="terp-accessories-archiver"
+                            domain="[]"  context="{'group_by':'production_id'}"/>
+                        <filter string="Product" name="by_product" icon="terp-go-month"
+                            domain="[]" context="{'group_by':'product_id'}"/>
+                        <filter string="Production state" name="by_productstate" icon="terp-go-month"
+                            domain="[]" context="{'group_by':'production_state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="mrp_production_product_line_action" model="ir.actions.act_window">
+            <field name="name">Scheduled Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production.product.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="mrp_production_product_line_search_view_utilities"/>
+            <field name="view_id" ref="mrp_production_product_line_tree_view_utilities"/>
+        </record>
+        <menuitem action="mrp_production_product_line_action" id="menu_mrp_production_product_line_action"
+            parent="mrp.menu_mrp_manufacturing" sequence="5"/>
+    </data>
+</openerp>

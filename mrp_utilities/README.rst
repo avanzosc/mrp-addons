@@ -6,7 +6,8 @@
 MRP Utilities
 =============
 
-New tree view for mrp bom model.
+* New tree view for mrp bom model.
+* In MRP, new menu option "Scheduled Products".
 
 Credits
 =======
