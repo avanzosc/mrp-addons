@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="wiz_mrp_product_produce_view_inh_lot" model="ir.ui.view">
+            <field name="name">wiz.mrp.product.produce.view.inh.lot</field>
+            <field name="model">mrp.product.produce</field>
+            <field name="inherit_id" ref="mrp.view_mrp_product_produce_wizard"/>
+            <field name="arch" type="xml">
+                <field name="lot_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

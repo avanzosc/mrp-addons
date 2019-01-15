@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="stock_production_lot_tree_view_inh_lot" model="ir.ui.view">
+            <field name="name">stock.production.lot.tree.view.inh.lot</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="product_expiry_ext.product_expiry_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="expiry_state" position="after">
+                    <field name="production_id" />
+                </field>
+            </field>
+        </record>
+        <record id="stock_production_lot_form_view_inh_lot" model="ir.ui.view">
+            <field name="name">stock.production.lot.form.view.inh.lot</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="product_expiry.view_move_form_expiry"/>
+            <field name="arch" type="xml">
+                <field name="mrp_date" position="before">
+                    <field name="production_id" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
