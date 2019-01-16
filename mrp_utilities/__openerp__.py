@@ -4,7 +4,7 @@
 
 {
     "name": "MRP Utilities",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.1.0",
     "author": "AvanzOSC",
     "license": "AGPL-3",
     "category": "Custom module",
@@ -18,6 +18,7 @@
         ],
     "data": [
         "views/mrp_view.xml",
+        "views/mrp_production_product_line_view.xml",
         ],
     "installable": True
 }
