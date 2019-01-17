@@ -21,8 +21,10 @@ env:
   - VERSION="8.0" TESTS="0" LINT_CHECK="0"
   matrix:
   - LINT_CHECK="1"
-  - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="bom_lines_configurator"
-  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="bom_lines_configurator"
+  - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="bom_lines_configurator, mrp_production_lot"
+  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="bom_lines_configurator, mrp_production_lot"
+  - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="mrp_production_lot"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="mrp_production_lot"
 
 virtualenv:
   system_site_packages: true
