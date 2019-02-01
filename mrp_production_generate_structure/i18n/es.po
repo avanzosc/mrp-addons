@@ -159,3 +159,8 @@ msgstr "Ruta"
 msgid "Total"
 msgstr "Total"
 
+#. module: mrp_production_generate_structure
+#: model:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_form_view_inh_simulated_plan
+msgid "Show all planned products"
+msgstr "Mostrar todos los productos planificados"
+

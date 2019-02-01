@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
-                   <button name="button_show_manufacturing_orders" type="object"
+                       <button name="button_show_manufacturing_orders" type="object"
                             class="oe_stat_button oe_inline"
                             icon="fa-github" >
                            <field name="manufacture_count" string="Manufacturing orders countings" widget="statinfo" />
@@ -17,6 +17,9 @@
                             icon="fa-github" >
                            <field name="purchase_count" string="Purchase orders countings" widget="statinfo" />
                        </button>
+                       <button name="button_with_child_structure" type="object"
+                            class="oe_stat_button oe_inline"
+                            icon="fa-github" string="Show all planned products" />
                      </div>
             </field>
      </record>

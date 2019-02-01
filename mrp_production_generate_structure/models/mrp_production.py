@@ -88,7 +88,8 @@ class MrpProduction(models.Model):
                         line.production_id.origin_production_id or
                         line.production_id)
                     line.create_automatic_manufacturing_order(
-                        origin_manufacture_order)
+                        origin_manufacture_order,
+                        production.analytic_account_id)
                 level = production.level
                 origin = production.origin_production_id.id or production.id
             level += 1
@@ -123,6 +124,29 @@ class MrpProduction(models.Model):
                     ('level', '=', level),
                     ('active', '=', False)]
             productions = self.search(cond)
+
+    def button_with_child_structure(self):
+        line_obj = self.env['mrp.production.product.line']
+        lines = self.env['mrp.production.product.line']
+        f = False
+        cond = [('production_id', '=', self.id)]
+        l = line_obj.search(cond)
+        if l:
+            lines += l
+            f = l.filtered(lambda c: c.new_production_id)
+        while f:
+            cond = [('production_id', '=', f.new_production_id.id)]
+            f = False
+            l = line_obj.search(cond)
+            if l:
+                lines += l
+                f = l.filtered(lambda c: c.new_production_id)
+        return {'name': _('Scheduled Goods'),
+                'type': 'ir.actions.act_window',
+                'view_mode': 'tree,form',
+                'view_type': 'form',
+                'res_model': 'mrp.production.product.line',
+                'domain': [('id', 'in', lines.ids)]}
 
 
 class MrpProductionProductLine(models.Model):
@@ -174,7 +198,9 @@ class MrpProductionProductLine(models.Model):
             self.create_automatic_purchase_order(origin_manufacture_order,
                                                  self.production_id.level)
         if self.route_id.id == manufacture.id:
-            self.create_automatic_manufacturing_order(origin_manufacture_order)
+            self.create_automatic_manufacturing_order(
+                origin_manufacture_order,
+                self.production_id.account_analytic_id)
 
     def create_automatic_purchase_order(self, origin_manufacture_order, level):
         if not self.product_id.seller_ids:
@@ -198,7 +224,8 @@ class MrpProductionProductLine(models.Model):
             self.product_id, self.product_qty, self.product_uom_id, location,
             self.product_id.name, self.production_id.name, values)
 
-    def create_automatic_manufacturing_order(self, origin_manufacture_order):
+    def create_automatic_manufacturing_order(self, origin_manufacture_order,
+                                             analytic_account):
         location = (self.product_id.location_id or
                     self.env.ref('stock.stock_location_stock'))
         rule = self.env['procurement.group']._get_rule(
@@ -219,9 +246,11 @@ class MrpProductionProductLine(models.Model):
                 ('origin_production_id', '=', False)]
         new_production = self.env['mrp.production'].search(cond, limit=1)
         if new_production:
-            new_production.write(
-                {'origin_production_id': origin_manufacture_order.id,
-                 'level': self.production_id.level + 1})
+            vals = {'origin_production_id': origin_manufacture_order.id,
+                    'level': self.production_id.level + 1}
+            if analytic_account:
+                vals['analytic_account_id'] = analytic_account.id
+            new_production.write(vals)
             self.new_production_id = new_production
             self.new_production_id.onchange_product_id()
             self.new_production_id.action_compute()
