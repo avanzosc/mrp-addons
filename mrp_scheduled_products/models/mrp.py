@@ -15,7 +15,7 @@ class MrpProductionProductLine(models.Model):
         string='Product Quantity',
         digits=dp.get_precision('Product Unit of Measure'), required=True)
     product_uom_id = fields.Many2one(
-        comodel_name='product.uom', string='Unit of Measure', required=True)
+        comodel_name='uom.uom', string='Unit of Measure', required=True)
     production_id = fields.Many2one(
         comodel_name='mrp.production', string='Production Order',
         required=True, ondelete='cascade')
@@ -98,7 +98,7 @@ class MrpProduction(models.Model):
     @api.multi
     def button_confirm(self):
         products = self.product_line_ids.mapped('product_id.id')
-        if not all(products):
+        if not all(products) or not products:
             raise exceptions.Warning(
                 _('Not all scheduled products has a product'))
         orders_to_confirm = self.filtered(lambda order: order.state == 'draft')

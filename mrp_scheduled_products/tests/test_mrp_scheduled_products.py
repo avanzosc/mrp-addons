@@ -12,8 +12,8 @@ class MrpScheduledProducts(SavepointCase):
         cls.mrp_production_model = cls.env['mrp.production']
         cls.bom_model = cls.env['mrp.bom']
         cls.product_model = cls.env['product.product']
-        unit_id = cls.ref('product.product_uom_unit')
-        dozen_id = cls.ref('product.product_uom_dozen')
+        unit_id = cls.ref('uom.product_uom_unit')
+        dozen_id = cls.ref('uom.product_uom_dozen')
         bom_product = cls.product_model.create({
             'name': 'BoM product',
             'uom_id': unit_id,
