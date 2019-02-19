@@ -11,8 +11,8 @@ class MrpSupplierPriceTest(TransactionCase):
         self.mrp_production_model = self.env['mrp.production']
         self.bom_model = self.env['mrp.bom']
         self.product_model = self.env['product.product']
-        unit_id = self.ref('product.product_uom_unit')
-        dozen_id = self.ref('product.product_uom_dozen')
+        unit_id = self.ref('uom.product_uom_unit')
+        dozen_id = self.ref('uom.product_uom_dozen')
         self.supplier = self.env['res.partner'].create({
             'name': 'Supplier Test',
             'supplier': True,

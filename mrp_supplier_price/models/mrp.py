@@ -34,7 +34,7 @@ class MrpProductionProductLine(models.Model):
         string='Purchase Subtotal', compute='_compute_supplier_subtotal',
         digits=dp.get_precision('Product Price'))
     product_uop_id = fields.Many2one(
-        string='Product UoP', comodel_name='product.uom',
+        string='Product UoP', comodel_name='uom.uom',
         compute='_compute_product_uop')
     product_uop_qty = fields.Float(
         string='Product UoP Quantity', compute='_compute_product_uop',
@@ -46,10 +46,12 @@ class MrpProductionProductLine(models.Model):
     def _select_best_cost_price(self, supplier_id=None):
         best_price = {}
         if supplier_id:
-            supplier_ids = self.product_id.seller_ids.filtered(
-                lambda x: x.name == supplier_id)
+            supplier_ids = \
+                self.product_id.product_tmpl_id.\
+                variant_seller_ids.filtered(
+                    lambda x: x.name == supplier_id)
         else:
-            supplier_ids = self.product_id.seller_ids
+            supplier_ids = self.product_id.product_tmpl_id.variant_seller_ids
         for line in supplier_ids.filtered(
                 lambda l: l.min_qty <= self.product_qty):
             price_unit = line.price
@@ -69,11 +71,12 @@ class MrpProductionProductLine(models.Model):
                 }
         return best_price
 
-    @api.depends('product_id', 'product_id.seller_ids',
-                 'product_id.seller_ids.name')
+    @api.depends('product_id', 'product_id.product_tmpl_id.variant_seller_ids',
+                 'product_id.product_tmpl_id.variant_seller_ids.name')
     def _compute_variant_suppliers(self):
         for line in self.filtered('product_id'):
-            line.supplier_id_domain = line.product_id.mapped('seller_ids.name')
+            line.supplier_id_domain = line.product_id.mapped(
+                'variant_seller_ids.name')
 
     @api.depends('product_id', 'product_id.standard_price')
     def _compute_standard_price(self):
@@ -93,7 +96,7 @@ class MrpProductionProductLine(models.Model):
     @api.depends('product_id', 'product_qty')
     def _compute_product_uop(self):
         for line in self.filtered('product_id'):
-            line.product_uop_id = line.product_id.uom_po_id
+            line.product_uop_id = line.product_id.uom_po_id.id
             line.product_uop_qty = line.product_uom_id._compute_quantity(
                 line.product_qty, line.product_uop_id)
 
