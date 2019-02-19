@@ -215,27 +215,28 @@ class MrpBomLineRule(models.Model):
         if product_attr_value:
             attr_value = product_attr_value[0]
             if attr_value.attribute_id.attr_type == 'select':
-                return safe_eval(u"{} {} {}".format(
-                    u"unicode(attr_value.value_id.attribute_code)", operator,
-                    u"value"))
+                code = unicode(attr_value.value_id.attribute_code)
+                return safe_eval(u"u'{}' {} u'{}'".format(
+                    code, operator,
+                    value))
             elif attr_value.attribute_id.attr_type == 'numeric':
                 if isinstance(value, list):
                     return safe_eval("{} {} {}".format(
-                        "attr_value.value_id.numeric_value", operator,
-                        "map(lambda x: float(x), value)"))
+                        attr_value.value_id.numeric_value, operator,
+                        map(lambda x: float(x), value)))
                 else:
                     return safe_eval("{} {} {}".format(
-                        "attr_value.value_id.numeric_value", operator,
-                        "float(value)"))
+                        attr_value.value_id.numeric_value, operator,
+                        float(value)))
             elif attr_value.attribute_id.attr_type == 'range':
                 if isinstance(value, list):
                     return safe_eval("{} {} {}".format(
-                        "attr_value.custom_value", operator,
-                        "map(lambda x: float(x), value)"))
+                        attr_value.custom_value, operator,
+                        map(lambda x: float(x), value)))
                 else:
                     return safe_eval("{} {} {}".format(
-                        "attr_value.custom_value", operator,
-                        "float(value)"))
+                        attr_value.custom_value, operator,
+                        float(value)))
             else:
                 return True
         return
