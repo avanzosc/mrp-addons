@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_editable_scheduled_products" model="res.groups">
+        <field name="name">Make editable scheduled products on manufacturing orders</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="implied_ids" eval="[(4, ref('mrp.group_mrp_user'))]" />
+    </record>
+</odoo>

@@ -1,0 +1,184 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_scheduled_products
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-07 08:30+0000\n"
+"PO-Revision-Date: 2018-09-07 08:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_active
+msgid "Active"
+msgstr "Activo"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_bom_line_id
+msgid "Bom Line"
+msgstr "Componente"
+
+#. module: mrp_scheduled_products
+#: code:addons/mrp_scheduled_products/models/mrp.py:140
+#: code:addons/mrp_scheduled_products/models/mrp.py:183
+#, python-format
+msgid "Cannot find a bill of material for this product."
+msgstr "No se encuentra ninguna lista de materiales para este producto."
+
+#. module: mrp_scheduled_products
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_lines
+msgid "Compute Data"
+msgstr "Calcular datos"
+
+#. module: mrp_scheduled_products
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_lines
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_res_config_settings_group_editable_scheduled_products
+msgid "Editable Scheduled Products"
+msgstr "Lista de productos planificados editable"
+
+#. module: mrp_scheduled_products
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: mrp_scheduled_products
+#: model:res.groups,name:mrp_scheduled_products.group_editable_scheduled_products
+msgid "Make editable scheduled products on manufacturing orders"
+msgstr "Hacer editable el listado de planificados en ordenes de fabricación"
+
+#. module: mrp_scheduled_products
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_config_settings_scheduled
+msgid "Make editable scheduled products on manufacturing orders."
+msgstr "Hacer editable el listado de planificados en ordenes de fabricación."
+
+#. module: mrp_scheduled_products
+#: model:ir.model,name:mrp_scheduled_products.model_mrp_production
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_search_view
+msgid "Manufacturing Order"
+msgstr "Orden de producción"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: mrp_scheduled_products
+#: code:addons/mrp_scheduled_products/models/mrp.py:91
+#: code:addons/mrp_scheduled_products/models/mrp.py:134
+#, python-format
+msgid "Not all scheduled products has a product"
+msgstr "No todas las lineas planificadas tienen producto"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_product_id
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_search_view
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_product_qty
+msgid "Product Quantity"
+msgstr "Cantidad producto"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_production_id
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_scheduled_products
+#: model:ir.model,name:mrp_scheduled_products.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr "Fabricación planificada producto"
+
+#. module: mrp_scheduled_products
+#: model:ir.actions.act_window,name:mrp_scheduled_products.mrp_production_product_line_action
+#: model:ir.ui.menu,name:mrp_scheduled_products.mrp_production_product_line_menu
+msgid "Scheduled Goods"
+msgstr "Productos planificados"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_stock_move_production_product_line_id
+msgid "Scheduled Product"
+msgstr "Producto planificado"
+
+#. module: mrp_scheduled_products
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_form_view
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_lines
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_search_view
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_tree_view
+msgid "Scheduled Products"
+msgstr "Productos planificados"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_ids
+msgid "Scheduled goods"
+msgstr "Productos planificados"
+
+#. module: mrp_scheduled_products
+#: model:ir.model,name:mrp_scheduled_products.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de stock"
+
+#. module: mrp_scheduled_products
+#: model:ir.model.fields,field_description:mrp_scheduled_products.field_mrp_production_product_line_product_uom_id
+#: model:ir.ui.view,arch_db:mrp_scheduled_products.mrp_production_product_search_view
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: mrp_scheduled_products
+#: model:ir.actions.act_window,name:mrp_scheduled_products.mrp_virtual_production_action
+#: model:ir.ui.menu,name:mrp_scheduled_products.menu_mrp_virtual_production_action
+msgid "Virtual Manufacturing Orders"
+msgstr "Órdenes de producción virtuales"
+
+#. module: mrp_scheduled_products
+#: model:ir.model,name:mrp_scheduled_products.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"
+
