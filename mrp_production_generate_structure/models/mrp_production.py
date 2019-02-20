@@ -2,6 +2,10 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from dateutil.relativedelta import relativedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class MrpProduction(models.Model):
@@ -124,23 +128,17 @@ class MrpProduction(models.Model):
                     ('level', '=', level),
                     ('active', '=', False)]
             productions = self.search(cond)
+    
+    def _get_lines(self, mos):
+        if not mos:
+            return self.env['mrp.production.product.line']
+        lines = mos.mapped('product_line_ids')
+        _logger.info('lines: ' + str(lines))
+        child_mos = lines.filtered(lambda x: x.new_production_id).mapped('new_production_id')
+        return lines + self._get_lines(child_mos)
 
     def button_with_child_structure(self):
-        line_obj = self.env['mrp.production.product.line']
-        lines = self.env['mrp.production.product.line']
-        f = False
-        cond = [('production_id', '=', self.id)]
-        l = line_obj.search(cond)
-        if l:
-            lines += l
-            f = l.filtered(lambda c: c.new_production_id)
-        while f:
-            cond = [('production_id', '=', f.new_production_id.id)]
-            f = False
-            l = line_obj.search(cond)
-            if l:
-                lines += l
-                f = l.filtered(lambda c: c.new_production_id)
+        lines = self._get_lines(self)
         return {'name': _('Scheduled Goods'),
                 'type': 'ir.actions.act_window',
                 'view_mode': 'tree,form',
@@ -168,23 +166,20 @@ class MrpProductionProductLine(models.Model):
         related="purchase_order_line_id.order_id", store=True)
     purchase_date_order = fields.Datetime(
         string="Order date", related="purchase_order_id.date_order")
+    analytic_account_id = fields.Many2one(
+        comodel_name="account.analytic.account", related="production_id.analytic_account_id")
 
     @api.onchange('product_id')
     def onchange_product_id(self):
         make_to_order = self.env.ref(
             'stock.route_warehouse0_mto', False)
         buy = self.env.ref(
-            'purchase.route_warehouse0_buy', False)
+            'purchase_stock.route_warehouse0_buy', False)
         manufacture = self.env.ref(
             'mrp.route_warehouse0_manufacture', False)
-        self.make_to_order = False
-        if make_to_order and self.product_id and make_to_order.id\
-                in self.product_id.route_ids.ids:
-            self.make_to_order = True
-            if buy and buy.id in self.product_id.route_ids.ids:
-                self.route_id = buy.id
-            if manufacture and manufacture.id in self.product_id.route_ids.ids:
-                self.route_id = manufacture.id
+        self.make_to_order = make_to_order in self.product_id.route_ids
+        self.route_id = (
+            manufacture if manufacture in self.product_id.route_ids else buy)
 
     @api.multi
     def button_create_purchase_manufacturing_order(self):
@@ -213,10 +208,11 @@ class MrpProductionProductLine(models.Model):
         rule = self.env['procurement.group']._get_rule(
             self.product_id, location, {})
         values = {'company_id': self.production_id.company_id,
-                  'date_planned': fields.Datetime.now(),
+                  'date_planned': self.production_id.date_planned_start,
                   'priority': 1,
                   'warehouse_id': (self.product_id.warehouse_id or
                                    rule.warehouse_id)}
+        _logger.info("produktu kopurua: " + str(self.product_qty) + " production_id: " + self.production_id.name)
         rule.with_context(
             mrp_production_product_line=self,
             origin_production_id=origin_manufacture_order.id,
@@ -232,11 +228,13 @@ class MrpProductionProductLine(models.Model):
             self.product_id, location, {})
         warehouse = self.env.ref('stock.warehouse0', False)
         values = {'company_id': self.production_id.company_id,
-                  'date_planned': fields.Datetime.now(),
+                  'date_planned_start': self.production_id.date_planned_start - relativedelta(days=self.product_id.produce_delay),# manufactured_lead
+                  'date_planned': self.production_id.date_planned_start - relativedelta(days=self.product_id.produce_delay),# manufactured_lead
                   'warehouse_id': (self.product_id.warehouse_id or
                                    rule.warehouse_id),
                   'picking_type_id': warehouse.manu_type_id,
                   'priority': 1}
+        _logger.info("produktu kopurua: " + str(self.product_qty)+ " production_id: " + self.production_id.name)
         rule._run_manufacture(
             self.product_id, self.product_qty, self.product_uom_id, location,
             self.product_id.name, self.production_id.name, values)
@@ -247,10 +245,11 @@ class MrpProductionProductLine(models.Model):
         new_production = self.env['mrp.production'].search(cond, limit=1)
         if new_production:
             vals = {'origin_production_id': origin_manufacture_order.id,
-                    'level': self.production_id.level + 1}
+                    'level': self.production_id.level + 1,
+                    'product_qty': self.product_qty,
+                   }
             if analytic_account:
                 vals['analytic_account_id'] = analytic_account.id
             new_production.write(vals)
             self.new_production_id = new_production
-            self.new_production_id.onchange_product_id()
             self.new_production_id.action_compute()
