@@ -3,9 +3,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class MrpProduction(models.Model):
@@ -128,13 +125,13 @@ class MrpProduction(models.Model):
                     ('level', '=', level),
                     ('active', '=', False)]
             productions = self.search(cond)
-    
+
     def _get_lines(self, mos):
         if not mos:
             return self.env['mrp.production.product.line']
         lines = mos.mapped('product_line_ids')
-        _logger.info('lines: ' + str(lines))
-        child_mos = lines.filtered(lambda x: x.new_production_id).mapped('new_production_id')
+        child_mos = lines.filtered(lambda x: x.new_production_id
+                                   ).mapped('new_production_id')
         return lines + self._get_lines(child_mos)
 
     def button_with_child_structure(self):
@@ -167,7 +164,8 @@ class MrpProductionProductLine(models.Model):
     purchase_date_order = fields.Datetime(
         string="Order date", related="purchase_order_id.date_order")
     analytic_account_id = fields.Many2one(
-        comodel_name="account.analytic.account", related="production_id.analytic_account_id")
+        comodel_name="account.analytic.account",
+        related="production_id.analytic_account_id")
 
     @api.onchange('product_id')
     def onchange_product_id(self):
@@ -212,7 +210,6 @@ class MrpProductionProductLine(models.Model):
                   'priority': 1,
                   'warehouse_id': (self.product_id.warehouse_id or
                                    rule.warehouse_id)}
-        _logger.info("produktu kopurua: " + str(self.product_qty) + " production_id: " + self.production_id.name)
         rule.with_context(
             mrp_production_product_line=self,
             origin_production_id=origin_manufacture_order.id,
@@ -228,13 +225,16 @@ class MrpProductionProductLine(models.Model):
             self.product_id, location, {})
         warehouse = self.env.ref('stock.warehouse0', False)
         values = {'company_id': self.production_id.company_id,
-                  'date_planned_start': self.production_id.date_planned_start - relativedelta(days=self.product_id.produce_delay),# manufactured_lead
-                  'date_planned': self.production_id.date_planned_start - relativedelta(days=self.product_id.produce_delay),# manufactured_lead
+                  'date_planned_start':
+                      self.production_id.date_planned_start - relativedelta(
+                          days=self.product_id.produce_delay),
+                  'date_planned':
+                      self.production_id.date_planned_start - relativedelta(
+                          days=self.product_id.produce_delay),
                   'warehouse_id': (self.product_id.warehouse_id or
                                    rule.warehouse_id),
                   'picking_type_id': warehouse.manu_type_id,
                   'priority': 1}
-        _logger.info("produktu kopurua: " + str(self.product_qty)+ " production_id: " + self.production_id.name)
         rule._run_manufacture(
             self.product_id, self.product_qty, self.product_uom_id, location,
             self.product_id.name, self.production_id.name, values)
@@ -246,8 +246,7 @@ class MrpProductionProductLine(models.Model):
         if new_production:
             vals = {'origin_production_id': origin_manufacture_order.id,
                     'level': self.production_id.level + 1,
-                    'product_qty': self.product_qty,
-                   }
+                    'product_qty': self.product_qty}
             if analytic_account:
                 vals['analytic_account_id'] = analytic_account.id
             new_production.write(vals)
