@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record model="ir.ui.view" id="view_purchase_order_filter_inh_simulated_plan">
+        <field name="name">view.purchase.order.filter.inh.simulated.plan</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+           <field name="product_id" position="after">
+             <field name="origin_production_id" />
+           </field>
+            <xpath expr="//group[1]" position="inside">
+                       <filter string="Origin manufacturing order" name="origin_production_id" domain="[]"
+                            context="{'group_by':'origin_production_id'}"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="purchase_order_tree_view_simulated_plan">
+            <field name="name">purchase.order.tree.view.simulated.plan</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree" />
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="origin_production_id" />
+                    <field name="level" />
+                </field>
+        </field>
+    </record>
+</odoo>
