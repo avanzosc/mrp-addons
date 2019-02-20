@@ -1,0 +1,147 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_supplier_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-08-30 15:48+0000\n"
+"PO-Revision-Date: 2018-08-30 15:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_supplier_price
+#: model:ir.ui.view,arch_db:mrp_supplier_price.mrp_profit_form
+msgid "(update)"
+msgstr "(actualizar)"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_res_config_settings_subtotal_by_unit
+msgid "Compute unitary total values"
+msgstr "Calcular valores totales por unidad"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_standard_price
+msgid "Cost"
+msgstr "Precio de coste"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,help:mrp_supplier_price.field_mrp_production_product_line_unit_final_cost
+#: model:ir.model.fields,help:mrp_supplier_price.field_mrp_production_product_line_unit_final_purchase
+msgid "Cost by final product unit."
+msgstr "Coste por unidad de producto final."
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_currency_id
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_unit_final_cost
+msgid "Final Unit Cost"
+msgstr "Coste por unidad producida"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_unit_final_purchase
+msgid "Final Unit Purchase Cost"
+msgstr "Coste de compra por unidad producida"
+
+#. module: mrp_supplier_price
+#: model:ir.model,name:mrp_supplier_price.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Orden de producción"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_product_uop_id
+msgid "Product UoP"
+msgstr "UdC de producto"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_product_uop_qty
+msgid "Product UoP Quantity"
+msgstr "Cantidad a comprar"
+
+#. module: mrp_supplier_price
+#: model:ir.model,name:mrp_supplier_price.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr "Fabricación planificada producto"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_production_total
+msgid "Production Total"
+msgstr "Total de la producción"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_supplier_subtotal
+msgid "Purchase Subtotal"
+msgstr "Subtotal de compra"
+
+#. module: mrp_supplier_price
+#: model:ir.ui.view,arch_db:mrp_supplier_price.mrp_config_settings_unitary
+msgid "See production cost and purchase cost by unit produced."
+msgstr "Mostrar el coste y coste de compra por unidad producida."
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_res_config_settings_group_show_unitary_info
+#: model:res.groups,name:mrp_supplier_price.group_show_unitary_info
+msgid "Show Unitary Info in Scheduled Lines"
+msgstr "Mostrar informacion unitaria en las líneas planificadas"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_subtotal
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_supplier_id
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_supplier_price
+msgid "Supplier Price"
+msgstr "Precio de compra"
+
+#. module: mrp_supplier_price
+#: model:ir.ui.view,arch_db:mrp_supplier_price.mrp_supplier_price_tree
+msgid "Supplier Subtotal"
+msgstr "Subtotal de compra"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_product_line_supplier_id_domain
+msgid "Suppliers Domain"
+msgstr "Dominio de proveedores"
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,help:mrp_supplier_price.field_res_config_settings_subtotal_by_unit
+#: model:ir.ui.view,arch_db:mrp_supplier_price.mrp_config_settings_unitary
+msgid "This will allow you to define if the total of the scheduled product list is computed by unit or not."
+msgstr "Marcando este campo los calculos de los totales se realizarán por unidad producida."
+
+#. module: mrp_supplier_price
+#: model:ir.model.fields,field_description:mrp_supplier_price.field_mrp_production_scheduled_total
+#: model:ir.ui.view,arch_db:mrp_supplier_price.mrp_supplier_price_tree
+msgid "Total"
+msgstr "Total"
+
+#. module: mrp_supplier_price
+#: model:ir.ui.view,arch_db:mrp_supplier_price.mrp_supplier_price_tree
+msgid "Unit cost"
+msgstr "Coste unitario"
+
+#. module: mrp_supplier_price
+#: model:ir.ui.view,arch_db:mrp_supplier_price.mrp_supplier_price_tree
+msgid "Unit purchase"
+msgstr "Unit purchase"
+
+#. module: mrp_supplier_price
+#: model:ir.model,name:mrp_supplier_price.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_config_settings_unitary">
+        <field name="name">mrp.config.settings.unitary</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mrp.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='mrp_byproduct']" position="before">
+                <div class="col-md-6 col-xs-12 o_setting_box" id="unitary_subtotal">
+                    <div class="o_setting_left_pane">
+                        <field name="subtotal_by_unit" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="subtotal_by_unit" />
+                        <div class="text-muted">
+                            This will allow you to define if the total of the scheduled product list is computed by unit or not.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 o_setting_box" id="unitary_scheduled">
+                    <div class="o_setting_left_pane">
+                        <field name="group_show_unitary_info"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="group_show_unitary_info"/>
+                        <div class="text-muted">
+                            See production cost and purchase cost by unit produced.
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
