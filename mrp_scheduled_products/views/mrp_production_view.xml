@@ -19,7 +19,7 @@
                             <div class="o_row">
                                 <field name="product_qty" />
                                 <field name="product_uom_id" options="{'no_open':True,'no_create':True}"
-                                       groups="product.group_uom" />
+                                       groups="uom.group_uom" />
                             </div>
                         </group>
                     </group>
@@ -35,7 +35,7 @@
                 <field name="production_id" invisible="context.get('hide_production_id',True)" />
                 <field name="product_id"/>
                 <field name="product_qty"/>
-                <field name="product_uom_id" groups="product.group_uom"/>
+                <field name="product_uom_id" groups="uom.group_uom"/>
             </tree>
         </field>
     </record>
@@ -47,7 +47,7 @@
                 <field name="production_id" />
                 <field name="product_id"/>
                 <field name="product_qty"/>
-                <field name="product_uom_id" groups="product.group_uom"/>
+                <field name="product_uom_id" groups="uom.group_uom"/>
                 <group expand="0" string="Group By" name="groupby">
                     <filter string="Manufacturing Order" name="groupby_production"
                             domain="[]" context="{'group_by':'production_id'}"/>
@@ -55,7 +55,7 @@
                             domain="[]" context="{'group_by':'product_id'}"/>
                     <filter string="Unit of Measure" name="groupby_uom"
                             domain="[]" context="{'group_by':'product_uom_id'}"
-                            groups="product.group_uom"/>
+                            groups="uom.group_uom"/>
                 </group>
             </search>
         </field>
