@@ -24,7 +24,7 @@
                     <div class="o_row">
                         <field name="product_uop_qty" />
                         <field name="product_uop_id" options="{'no_open':True,'no_create':True}"
-                               groups="product.group_uom" />
+                               groups="uom.group_uom" />
                     </div>
                     <field name="supplier_price"
                            widget="monetary" options="{'currency_field': 'currency_id'}" />
@@ -47,7 +47,7 @@
                 <field name="standard_price" />
                 <field name="subtotal" sum="Total"/>
                 <field name="product_uop_qty" />
-                <field name="product_uop_id" groups="product.group_uom" />
+                <field name="product_uop_id" groups="uom.group_uom" />
                 <field name="supplier_id"
                        domain="[('id', 'in', supplier_id_domain)]"/>
                 <field name="supplier_id_domain" invisible="1" />
