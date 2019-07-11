@@ -7,12 +7,12 @@ Generate production structure
 =============================
 
 * This module allows to generate automatically the structure of a production
-order, with a new button defined in the "scheduled products" tab, and also
-automatically generate the necessary purchase orders.
+  order, with a new button defined in the "scheduled products" tab, and also
+  automatically generate the necessary purchase orders.
 * To automatically generate the production order of the product defined in the
-bill of materials, it must be defined as "buy", and "make to order".
-*To automatically generate the purchase order for the product defined in the
-list of materials, this should be defined as "buy", and "make to order".
+  bill of materials, it must be defined as "buy", and "make to order".
+* To automatically generate the purchase order for the product defined in the
+  list of materials, this should be defined as "buy", and "make to order".
 
 Bug Tracker
 ===========
