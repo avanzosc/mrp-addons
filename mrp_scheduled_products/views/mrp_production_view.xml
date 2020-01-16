@@ -12,7 +12,6 @@
                         <field name="production_id" invisible="context.get('hide_production_id',True)"
                                domain="[('state','=','draft')]"/>
                     </div>
-                    <group name="body">
                         <group name="product_info">
                             <field name="product_id"/>
                             <label for="product_qty"/>
@@ -22,7 +21,6 @@
                                        groups="uom.group_uom" />
                             </div>
                         </group>
-                    </group>
                 </sheet>
             </form>
         </field>
