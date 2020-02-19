@@ -101,11 +101,20 @@ class MrpProductionProductLine(models.Model):
     bom_products = fields.Many2many(comodel_name="product.product",
                                     compute="_compute_bom_products")
     profit = fields.Float(
-        string='Profit', compute='_compute_profit_commercial',
+        string='Profit', compute='_compute_profit',
         digits=dp.get_precision('Product Price'))
     commercial = fields.Float(
-        string='Commercial', compute='_compute_profit_commercial',
+        string='Commercial', compute='_compute_profitl',
         digits=dp.get_precision('Product Price'))
+    external_commercial = fields.Float(
+        string='External', compute='_compute_profit',
+        digits=dp.get_precision('Product Price')
+    )
+    price = fields.Float(
+        string='Price', compute='_compute_profit',
+        digits=dp.get_precision('Product Price'))
+    service_type = fields.Many2one(comodel_name="service.type",
+                                   string="Service Type")
 
     @api.depends('sale_line_id')
     def _compute_bom_products(self):
@@ -115,10 +124,15 @@ class MrpProductionProductLine(models.Model):
 
     @api.depends('subtotal', 'production_id.commercial_percent',
                  'production_id.profit_percent')
-    def _compute_profit_commercial(self):
+    def _compute_profit(self):
         for mrp in self:
             mrp.profit = \
                 mrp.subtotal * (mrp.production_id.profit_percent / 100)
             mrp.commercial = \
                 (mrp.subtotal + mrp.profit) * \
                 (mrp.production_id.commercial_percent / 100)
+            mrp.external_commercial = \
+                (mrp.subtotal + mrp.profit) * \
+                (mrp.production_id.external_commercial_percent / 100)
+            mrp.price = mrp.subtotal + mrp.profit + mrp.commercial + \
+                        mrp.external_commercial

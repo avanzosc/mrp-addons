@@ -38,14 +38,31 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="tree_editable_shcduled_products_view">
+                    <field name="name">tree.editable.shcduled.products.view</field>
+                    <field name="model">mrp.production</field>
+                    <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_lines" />
+                    <field name="arch" type="xml">
+                        <field name="product_line_ids" position="attributes">
+                            <attribute name="editable" >bottom</attribute>
+                        </field>
+                    </field>
+                </record>
+
+
+
+
         <record id="mrp_profit_commercial_view_tree" model="ir.ui.view">
             <field name="name">mrp.profit.commercial.tree</field>
             <field name="model">mrp.production.product.line</field>
             <field name="inherit_id" ref="mrp_supplier_price.mrp_supplier_price_tree" />
             <field name="arch" type="xml">
                 <field name="unit_final_purchase" position="after">
-                    <field name="profit" />
-                    <field name="commercial" />
+                    <field name="profit" sum="Profit total"/>
+                    <field name="commercial" sum="Commercial total"/>
+                    <field name="external_commercial" sum="External commercial total"/>
+                    <field name="price" sum="Price total"/>
+                    <field name="service_type"/>
                 </field>
             </field>
         </record>
@@ -63,23 +80,23 @@
                             <field name="commercial_percent" />
                             <field name="external_commercial_percent" />
                         </group>
-                        <group name="product_line_total_group">
+                        <group name="product_line_total_group" invisible="1">
                             <label for="scheduled_total" />
                             <div>
                                 <field name="scheduled_total"
                                        class="oe_inline" widget="monetary"
-                                       options="{'currency_field': 'currency_id'}" />
+                                       options="{'currency_field': 'currency_id'}" invisible="1"/>
                             </div>
                             <label for="scheduled_profit" />
                             <div>
                                 <field name="scheduled_profit"
                                        class="oe_inline" widget="monetary"
-                                       options="{'currency_field': 'currency_id'}" />
+                                       options="{'currency_field': 'currency_id'}" invisible="1"/>
                             </div>
                             <field name="scheduled_cost_total" widget="monetary"
-                                   options="{'currency_field': 'currency_id'}" class="oe_subtotal_footer_separator" />
+                                   options="{'currency_field': 'currency_id'}" class="oe_subtotal_footer_separator" invisible="1"/>
                             <field name="scheduled_commercial" widget="monetary"
-                                   options="{'currency_field': 'currency_id'}"  />
+                                   options="{'currency_field': 'currency_id'}"  invisible="1"/>
                         </group>
 
                         <div class="oe_subtotal_footer_separator oe_inline">
@@ -94,13 +111,13 @@
                                     options="{'currency_field': 'currency_id'}"  />)
                         </div>
                         <field name="external_commercial_total" widget="monetary"
-                               options="{'currency_field': 'currency_id'}"  />
+                               options="{'currency_field': 'currency_id'}"  invisible="1"/>
                         <field name="external_total" widget="monetary"
                                options="{'currency_field': 'currency_id'}"
-                               class="oe_subtotal_footer_separator"/>
+                               class="oe_subtotal_footer_separator" invisible="1"/>
                         <field name="commercial_total" widget="monetary"
-                               options="{'currency_field': 'currency_id'}" />
-                        <field name="currency_id" groups="base.group_multi_currency" />
+                               options="{'currency_field': 'currency_id'}" invisible="1"/>
+                        <field name="currency_id" groups="base.group_multi_currency" invisible="1"/>
                     </group>
                     <div class="oe_clear"/>
                 </notebook>
