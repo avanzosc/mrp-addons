@@ -18,6 +18,10 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="action_show_scheduled_products"
+                            icon="fa-pencil-square-o">
+                        <div>Scheduled products</div>
+                    </button>
                     <button class="oe_stat_button" type="object" name="action_show_manufacturing_orders"
                             icon="fa-pencil-square-o">
                         <div>Manufacturing Orders</div>
@@ -33,5 +37,14 @@
                 </xpath>
             </field>
         </record>
+
+            <record id="create_mrp_scheduled_lines" model="ir.actions.server">
+                    <field name="name">Create Scheduled Lines</field>
+                    <field name="model_id" ref="model_sale_order"/>
+                    <field name="binding_model_id" ref="model_sale_order"/>
+                    <field name="state">code</field>
+                    <field name="condition">True</field>
+                    <field name="code">if records: records.action_create_mrp_from_lines()</field>
+                </record>
     </data>
 </openerp>

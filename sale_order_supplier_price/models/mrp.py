@@ -98,21 +98,26 @@ class MrpProductionProductLine(models.Model):
     sale_line_id = fields.Many2one(comodel_name="sale.order.line",
                                    string="Sale line",
                                    related="production_id.sale_line_id")
+    order_id = fields.Many2one(comodel_name="sale.order",
+                               related="sale_line_id.order_id")
     bom_products = fields.Many2many(comodel_name="product.product",
                                     compute="_compute_bom_products")
     profit = fields.Float(
         string='Profit', compute='_compute_profit',
-        digits=dp.get_precision('Product Price'))
+        digits=dp.get_precision('Product Price'),
+        store=True)
     commercial = fields.Float(
-        string='Commercial', compute='_compute_profitl',
-        digits=dp.get_precision('Product Price'))
+        string='Commercial', compute='_compute_profit',
+        digits=dp.get_precision('Product Price'),
+        store=True)
     external_commercial = fields.Float(
         string='External', compute='_compute_profit',
-        digits=dp.get_precision('Product Price')
-    )
+        digits=dp.get_precision('Product Price'),
+        store=True)
     price = fields.Float(
         string='Price', compute='_compute_profit',
-        digits=dp.get_precision('Product Price'))
+        digits=dp.get_precision('Product Price'),
+        store=True)
     service_type = fields.Many2one(comodel_name="service.type",
                                    string="Service Type")
 

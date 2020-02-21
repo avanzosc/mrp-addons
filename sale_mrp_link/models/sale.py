@@ -47,6 +47,16 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     @api.multi
+    def action_create_mrp_from_lines(self):
+        for sale in self:
+            for line in sale.order_line.filtered(lambda x: not
+                    x.mrp_production_id):
+                try:
+                    line.action_create_mrp()
+                except exceptions.MissingError as e:
+                    continue
+
+    @api.multi
     def action_confirm(self):
         res = super(SaleOrder, self).action_confirm()
         for mrp in self.mapped('order_line.mrp_production_id'):
@@ -67,5 +77,20 @@ class SaleOrder(models.Model):
                 'mrp.view_mrp_production_filter').id,
             'domain': "[('sale_order_id', '=', " + str(self.id) + "),\
                         '|', ('active', '=', True), ('active', '=', False)]",
+            'context': self.env.context
+            }
+
+    @api.multi
+    def action_show_scheduled_products(self):
+        return {
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'mrp.production.product.line',
+            'type': 'ir.actions.act_window',
+            'search_view_id': self.env.ref(
+                'mrp_scheduled_products.mrp_production_product_search_view'
+            ).id,
+            'domain': "[('sale_line_id', 'in', " + str(self.order_line.ids) +
+                      ")]",
             'context': self.env.context
             }
