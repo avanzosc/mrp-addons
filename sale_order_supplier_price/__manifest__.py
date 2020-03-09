@@ -11,6 +11,7 @@
     "website": "http://www.avanzosc.es",
     "category": "",
     "data": [
+        "security/ir.model.access.csv",
         "views/mrp_view.xml",
         "views/product_category_view.xml",
     ],
