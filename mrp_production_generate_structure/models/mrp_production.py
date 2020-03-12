@@ -213,7 +213,8 @@ class MrpProductionProductLine(models.Model):
         rule.with_context(
             mrp_production_product_line=self,
             origin_production_id=origin_manufacture_order.id,
-            level=self.production_id.level + 1)._run_buy(
+            level=self.production_id.level + 1,
+            analytic_account_id=self.analytic_account_id)._run_buy(
             self.product_id, self.product_qty, self.product_uom_id, location,
             self.product_id.name, self.production_id.name, values)
 
