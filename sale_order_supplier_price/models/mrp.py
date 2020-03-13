@@ -12,10 +12,12 @@ class MrpProduction(models.Model):
     # currency_id = fields.Many2one(
     #     comodel_name='res.currency', string='Currency',
     #     related='company_id.currency_id')
-    profit_percent = fields.Float(string='Profit percentage')
     commercial_percent = fields.Float(string='Commercial percentage')
     external_commercial_percent = fields.Float(
         string='External commercial percentage')
+    profit_percent_update = fields.Boolean(string='Update profit')
+    commercial_percent_update = fields.Boolean(string='Commercial profit')
+    external_percent_update = fields.Boolean(string='External profit')
     scheduled_profit = fields.Float(
         string='Profit', compute='_compute_scheduled_total',
         digits=dp.get_precision('Product Price'))
@@ -91,6 +93,21 @@ class MrpProduction(models.Model):
                 'price_unit': record.production_total_unit,
             })
 
+    def button_recompute_total(self):
+        for line in self.product_line_ids:
+            if self.profit_percent_update:
+                line.profit = \
+                    line.subtotal * (line.production_id.profit_percent / 100)
+            if self.commerctial_percent_update:
+                line.commercial = \
+                    (line.subtotal + line.profit) * \
+                    (line.production_id.commercial_percent / 100)
+            if self.external_percent_update:
+                line.external_commercial = \
+                    (line.subtotal + line.profit) * \
+                    (line.production_id.external_commercial_percent / 100)
+        return super().button_recompute_total()
+
 
 class MrpProductionProductLine(models.Model):
     _inherit = "mrp.production.product.line"
@@ -126,23 +143,13 @@ class MrpProductionProductLine(models.Model):
                                    related="product_id.categ_id.service_type",
                                    string="Service Type", store=True)
 
-    @api.depends('product_id', 'product_id.standard_price', 'supplier_price')
-    def _compute_standard_price(self):
-        for line in self.filtered('product_id'):
-            if line.supplier_price:
-                line.standard_price = line.supplier_price
-            else:
-                super(MrpProductionProductLine, line)._compute_standard_price()
-
     # @api.depends('sale_line_id')
     # def _compute_bom_products(self):
     #     for line in self:
     #         if line.sale_line_id:
     #             product = line.sale_line_id.product_id
 
-    @api.onchange('subtotal', 'production_id.commercial_percent',
-                  'production_id.profit_percent',
-                  'production_id.external_commercial_percent')
+    @api.onchange('subtotal')
     def _onchange_percents(self):
         for mrp in self:
             mrp.profit = \
