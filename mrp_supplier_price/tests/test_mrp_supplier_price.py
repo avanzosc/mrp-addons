@@ -69,7 +69,7 @@ class MrpSupplierPriceTest(TransactionCase):
                          len(self.production.product_line_ids))
         self.assertEqual(
             self.production.scheduled_total,
-            sum(self.production.mapped('product_line_ids.subtotal')))
+            sum(self.production.mapped('product_line_ids.supplier_subtotal')))
         try:
             self.assertEqual(
                 self.production.production_total,
