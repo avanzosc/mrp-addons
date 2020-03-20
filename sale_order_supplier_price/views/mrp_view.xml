@@ -1,144 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-
-
-
-        <record model="ir.ui.view" id="sale_mrp_production_product_line_tree">
-            <field name="name">mrp.production.product.line.tree</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view" />
-            <field name="arch" type="xml">
-                <field name="product_id" position="before">
-                    <field name="sale_line_id" />
-                    <field name="order_id" />
-                    <field name="name" invisible="1"/>
-                </field>
+<odoo>
+    <record model="ir.ui.view" id="mrp_production_profit_form_view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_supplier_price.mrp_profit_form" />
+        <field name="arch" type="xml">
+            <field name="scheduled_total" position="after">
+                <field name="profit_total" widget="monetary"
+                       options="{'currency_field': 'currency_id'}" />
+                <field name="commercial_total" widget="monetary"
+                       options="{'currency_field': 'currency_id'}" />
+                <field name="external_commercial_total" widget="monetary"
+                       options="{'currency_field': 'currency_id'}" />
             </field>
-        </record>
-
-        <record id="mrp_profit_commercial_view_tree" model="ir.ui.view">
-            <field name="name">mrp.profit.commercial.tree</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp_supplier_price.mrp_supplier_price_tree" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='unit_final_purchase']" position="after">
-                    <field name="profit" sum="Profit total"/>
-                    <field name="commercial" sum="Commercial total"/>
-                    <field name="external_commercial" sum="External commercial total"/>
-                    <field name="price" sum="Price total"/>
-                    <field name="service_type"/>
-                    <field name="categ_id"/>
-                </xpath>
-                <xpath expr="/tree" position="attributes">
-                    <attribute name="editable" >bottom</attribute>
-                </xpath>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="sale_mrp_production_product_line_form">
-            <field name="name">mrp.production.product.line.form</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_form_view" />
-            <field name="arch" type="xml">
-                <field name="product_id" position="before">
-                    <field name="sale_line_id" attrs="{'invisible':[('sale_line_id', '=', False)]}"/>
-                </field>
-            </field>
-        </record>
-
-        <record id="mrp_product_line_profit_form_view" model="ir.ui.view">
-            <field name="name">mrp.product.line.profit.form</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp_supplier_price.mrp_supplier_price_form" />
-            <field name="arch" type="xml">
-                <group name="purchase_info" position="after">
-                    <group>
-                        <field name="profit" />
-                        <field name="commercial" />
-                    </group>
+            <group name="product_line_total_group" position="before">
+                <group>
+                    <field name="profit_percent" />
+                    <field name="commercial_percent" />
+                    <field name="external_commercial_percent" />
                 </group>
-            </field>
-        </record>
-
-
-
-        <record model="ir.ui.view" id="schduled_products_group">
-            <field name="name">scheduled.products.group.form</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_search_view" />
-            <field name="arch" type="xml">
-                <filter name="groupby_product" position="after">
-                    <filter string="Sale Order" name="groupby_sale"
-                            domain="[]" context="{'group_by':'order_id'}"/>
-                    <filter string="Sale Order Line" name="groupby_sale_line"
-                            domain="[]" context="{'group_by':'sale_line_id'}"/>
-                    <filter string="Service Type" name="groupby_service_type"
-                            domain="[]" context="{'group_by':'service_type'}"/>
-                    <filter string="Category" name="groupby_categ_id"
-                            domain="[]" context="{'group_by':'categ_id'}"/>
-                </filter>
-            </field>
-        </record>
-
-
-
-        <record id="mrp_production_profit_form_view" model="ir.ui.view">
-            <field name="name">mrp.production.profit.form</field>
-            <field name="model">mrp.production</field>
-            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
-            <field name="arch" type="xml">
-                <notebook position="after">
-                    <group name="production_total_group"
-                           class="oe_subtotal_footer oe_right">
-                        <group colspan="4">
-                            <field name="profit_percent" />
-                            <field name="commercial_percent" />
-                            <field name="external_commercial_percent" />
-                        </group>
-                        <group name="product_line_total_group" invisible="1">
-                            <label for="scheduled_total" />
-                            <div>
-                                <field name="scheduled_total"
-                                       class="oe_inline" widget="monetary"
-                                       options="{'currency_field': 'currency_id'}" invisible="1"/>
-                            </div>
-                            <label for="scheduled_profit" />
-                            <div>
-                                <field name="scheduled_profit"
-                                       class="oe_inline" widget="monetary"
-                                       options="{'currency_field': 'currency_id'}" invisible="1"/>
-                            </div>
-                            <field name="scheduled_cost_total" widget="monetary"
-                                   options="{'currency_field': 'currency_id'}" class="oe_subtotal_footer_separator" invisible="1"/>
-                            <field name="scheduled_commercial" widget="monetary"
-                                   options="{'currency_field': 'currency_id'}"  invisible="1"/>
-                        </group>
-
-                        <div class="oe_subtotal_footer_separator oe_inline">
-                            <label for="production_total"/>
-                        </div>
-                        <div class="oe_subtotal_footer_separator oe_inline">
-                            <field name="production_total"
-                                   class="oe_inline" widget="monetary"
-                                   options="{'currency_field': 'currency_id'}"  />
-                            (<field name="production_total_unit"
-                                    class="oe_inline" widget="monetary"
-                                    options="{'currency_field': 'currency_id'}"  />)
-                        </div>
-                        <field name="external_commercial_total" widget="monetary"
-                               options="{'currency_field': 'currency_id'}"  invisible="1"/>
-                        <field name="external_total" widget="monetary"
-                               options="{'currency_field': 'currency_id'}"
-                               class="oe_subtotal_footer_separator" invisible="1"/>
-                        <field name="commercial_total" widget="monetary"
-                               options="{'currency_field': 'currency_id'}" invisible="1"/>
-                        <field name="currency_id" groups="base.group_multi_currency" invisible="1"/>
-                    </group>
-                    <div class="oe_clear"/>
-                </notebook>
-            </field>
-        </record>
-
-    </data>
-</openerp>
+            </group>
+        </field>
+    </record>
+</odoo>

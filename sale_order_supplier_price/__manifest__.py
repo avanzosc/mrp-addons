@@ -5,7 +5,9 @@
     "version": "12.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
-        "sale", "mrp_supplier_price", "sale_mrp_link",
+        "sale",
+        "mrp_supplier_price",
+        "sale_mrp_link",
     ],
     "author": "AvanzOSC",
     "website": "http://www.avanzosc.es",
@@ -13,6 +15,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/mrp_view.xml",
+        "views/mrp_production_product_line_view.xml",
         "views/product_category_view.xml",
     ],
     'demo': [],
