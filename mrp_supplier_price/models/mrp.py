@@ -46,10 +46,9 @@ class MrpProductionProductLine(models.Model):
     def _select_best_cost_price(self, supplier_id=None):
         best_price = {}
         if supplier_id:
-            supplier_ids = \
-                self.product_id.product_tmpl_id.\
-                variant_seller_ids.filtered(
-                    lambda x: x.name == supplier_id)
+            supplier_ids = (
+                self.product_id.product_tmpl_id.variant_seller_ids.filtered(
+                    lambda x: x.name == supplier_id))
         else:
             supplier_ids = self.product_id.product_tmpl_id.variant_seller_ids
         for line in supplier_ids.filtered(
@@ -133,7 +132,6 @@ class MrpProductionProductLine(models.Model):
             best_price = line._select_best_cost_price(
                 supplier_id=line.supplier_id)
             if best_price:
-                line.supplier_id = best_price['supplier_id']
                 line.supplier_price = best_price['cost']
 
 
@@ -150,15 +148,14 @@ class MrpProduction(models.Model):
         comodel_name='res.currency', string='Currency', required=True,
         default=lambda self: self.env.user.company_id.currency_id.id)
 
-    @api.depends('product_line_ids', 'product_line_ids.subtotal')
+    @api.depends('product_line_ids', 'product_line_ids.supplier_subtotal')
     def _compute_scheduled_total(self):
         get_param = self.env['ir.config_parameter'].sudo().get_param
         by_unit = get_param('mrp.subtotal_by_unit') == 'True'
-        for mrp in self.filtered(lambda m: m.product_line_ids and
-                                 m.product_qty):
-            subtotal = sum(mrp.mapped('product_line_ids.subtotal'))
-            mrp.scheduled_total =\
-                subtotal / mrp.product_qty if by_unit else subtotal
+        for mrp in self.filtered(lambda m: m.product_line_ids):
+            subtotal = sum(mrp.mapped('product_line_ids.supplier_subtotal'))
+            mrp.scheduled_total = (
+                subtotal / (mrp.product_qty or 1.0) if by_unit else subtotal)
 
     @api.depends('scheduled_total')
     def _compute_production_total(self):
@@ -175,7 +172,7 @@ class MrpProduction(models.Model):
 
     @api.multi
     def button_recompute_total(self):
-        fields_list = ['production_total']
+        fields_list = ["scheduled_total", 'production_total']
         for field in fields_list:
             self.env.add_todo(self._fields[field], self)
         self.recompute()
