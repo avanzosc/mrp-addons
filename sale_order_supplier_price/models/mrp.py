@@ -1,6 +1,6 @@
 # Copyright 2020 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models, _
+from odoo import api, exceptions, fields, models, _
 from odoo.addons import decimal_precision as dp
 
 
@@ -29,6 +29,19 @@ class MrpProduction(models.Model):
     def onchange_percentages(self):
         for line in self.mapped("product_line_ids"):
             line._onchange_percents()
+
+    def _check_confirmation_conditions(self):
+        for production in self:
+            if production.sale_line_id and production.sale_line_id.state != \
+                    'done':
+                exceptions.Warning(_('{} linked {} sale order is not '
+                                     'confirmed').format(
+                    production.name, production.sale_line_id.order_id.name))
+        return True
+
+    def button_confirm(self):
+        if self._check_confirmation_conditions():
+            super().button_confirm()
 
     @api.multi
     def action_confirm(self):

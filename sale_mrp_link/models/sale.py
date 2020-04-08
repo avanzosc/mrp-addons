@@ -13,34 +13,68 @@ class SaleOrderLine(models.Model):
         comodel_name='mrp.production.product.line',
         inverse_name='sale_line_id', string='Product line')
 
+    def _action_mrp_dict(self):
+        values = {
+            'product_tmpl_id': self.product_tmpl_id.id or False,
+            'product_id': self.product_id.id or False,
+            'product_qty': self.product_uom_qty,
+            'product_uom_id': self.product_uom.id,
+            'sale_line_id': self.id,
+            # 'product_attribute_ids': [(0, 0, x) for x in attribute_list],
+            'active': False,
+        }
+        return values
+
     @api.multi
     def action_create_mrp(self):
         if self.product_uom_qty <= 0:
             raise exceptions.Warning(_('The quantity must be positive.'))
         attribute_list = []
-        # for attribute_line in self.product_attribute_ids:
-        #     values = {
-        #         'attribute_id': attribute_line.attribute_id.id,
-        #         'value_id': attribute_line.value_id.id,
-        #         'product_tmpl_id': self.product_tmpl_id.id,
-        #         'owner_model': 'mrp.production',
-        #     }
-        #     try:
-        #         values['custom_value'] = attribute_line.custom_value
-        #     except Exception:
-        #         pass
-        #     attribute_list.append(values)
-        mrp = self.env['mrp.production'].create({
-            #'product_tmpl_id': self.product_tmpl_id.id or False,
-            'product_id': self.product_id.id or False,
-            'product_qty': self.product_uom_qty,
-            'product_uom_id': self.product_uom.id,
-            'sale_line_id': self.id,
-            #'product_attribute_ids': [(0, 0, x) for x in attribute_list],
-            'active': False,
-            })
-        mrp.with_context(sale_line_id=self.id).action_compute()
-        self.mrp_production_id = mrp
+        for attribute_line in self.product_attribute_ids:
+            values = {
+                'attribute_id': attribute_line.attribute_id.id,
+                'value_id': attribute_line.value_id.id,
+                'product_tmpl_id': self.product_tmpl_id.id,
+                'owner_model': 'mrp.production',
+            }
+            try:
+                values['custom_value'] = attribute_line.custom_value
+            except Exception:
+                pass
+            attribute_list.append(values)
+        # qty = self._get_qty_procurement()
+        # product_qty = self.product_uom_qty - qty
+        # quant_uom = self.product_id.uom_id
+        # product_qty = self.product_uom._compute_quantity(
+        #     product_qty, quant_uom, rounding_method='HALF-UP')
+        # procurement_uom = self.product_uom
+        # quant_uom = self.product_id.uom_id
+        # get_param = self.env['ir.config_parameter'].sudo().get_param
+        # if procurement_uom.id != quant_uom.id and get_param(
+        #         'stock.propagate_uom') != '1':
+        #     product_qty = self.product_uom._compute_quantity(
+        #         product_qty, quant_uom, rounding_method='HALF-UP')
+        #     procurement_uom = quant_uom
+        # values = self._prepare_procurement_values()
+        # bom = self._get_matching_bom(self.product_id, values)
+        # if not bom:
+        #     msg = _('There is no Bill of Material found for the product %s. Please define a Bill of Material for this product.') % (product_id.display_name,)
+        #     raise exceptions.UserError(msg)
+        # self.env['stock.rule']._prepare_mo_vals(
+        #     self.product_id, product_qty, procurement_uom,
+        #     self.order_id.partner_shipping_id.property_stock_customer,
+        #     self.name, self.order_id.name, values, bom)
+        # #values = self._action_mrp_dict()
+        # mrp = self.env['mrp.production'].create(values)
+        # mrp.with_context(sale_line_id=self.id).action_compute()
+        # self.mrp_production_id = mrp
+        #
+    @api.multi
+    def _action_launch_stock_rule(self):
+        for line in self:
+            if not line.mrp_production_id:
+                super(SaleOrderLine, line)._action_launch_stock_rule()
+        return True
 
 
 class SaleOrder(models.Model):
