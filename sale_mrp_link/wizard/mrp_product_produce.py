@@ -9,7 +9,9 @@ class MrpProductProduce(models.TransientModel):
 
     def do_produce(self):
         res = super().do_produce
-        for line in self.production_id.product_line_ids:
-            #TODO bajo pedido
+        make_to_order = self.env.ref(
+            'stock.route_warehouse0_mto', False)
+        for line in self.production_id.product_line_ids.filtered(
+                lambda x: make_to_order in x.product_id.route_ids):
             line._action_launch_stock_rule()
         return res
