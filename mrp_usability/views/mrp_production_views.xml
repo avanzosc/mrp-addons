@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <button name="action_view_mo_delivery" position="after">
+                 <button type="object" name="button_show_moves_to_consume"
+                        class="oe_stat_button" icon="fa-arrows-v" groups="base.group_user">
+                     <field name="moves_to_consume_count" widget="statinfo"
+                        string="Movements to consume"/>
+                 </button>
+            </button>
+        </field>
+    </record>
+        <record id="action_show_productions_moves_to_consume" model="ir.actions.act_window">
+            <field name="name">Productions movements to consume</field>
+            <field name="res_model">stock.move</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" ref="stock.view_move_tree"/>
+            <field name="search_view_id" ref="stock.view_move_search"/>
+        </record>
+</odoo>
