@@ -38,7 +38,21 @@ class SaleOrderLine(models.Model):
     def _action_launch_stock_rule(self):
         for line in self:
             if not line.mrp_production_id:
-                super(SaleOrderLine, line)._action_launch_stock_rule()
+                super(SaleOrderLine, line.with_context(extra_fields={
+                    'product_tmpl_id': self.product_tmpl_id.id or False,
+                    'sale_line_id': self.id,
+                }))._action_launch_stock_rule()
+                created_mo = self.env['mrp.production'].search(
+                    [('sale_line_id', '=', line.id)])
+                if created_mo:
+                    try:
+                        line.mrp_production_id == created_mo.id
+                        created_mo.with_context(sale_line_id=self.id
+                                                ).action_compute()
+                    except ValueError:
+                        raise exceptions.UserError(_("Multiple "
+                                                     "manufacture orders for "
+                                                     "same order line"))
         return True
 
 
