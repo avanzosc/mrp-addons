@@ -27,6 +27,12 @@
                 <field name="service_type" />
                 <field name="categ_id" />
             </field>
+            <field name="standard_price" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="subtotal" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
             <tree position="attributes">
                 <attribute name="editable">bottom</attribute>
             </tree>
