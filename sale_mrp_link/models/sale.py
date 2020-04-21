@@ -26,27 +26,20 @@ class SaleOrderLine(models.Model):
         return values
 
     @api.multi
-    def action_create_mrp(self):
-        if self.product_uom_qty <= 0:
-            raise exceptions.Warning(_('The quantity must be positive.'))
-        values = self._action_mrp_dict()
-        mrp = self.env['mrp.production'].create(values)
-        mrp.with_context(sale_line_id=self.id).action_compute()
-        self.mrp_production_id = mrp
-
-    @api.multi
     def _action_launch_stock_rule(self):
         for line in self:
             if not line.mrp_production_id:
-                super(SaleOrderLine, line.with_context(extra_fields={
-                    'product_tmpl_id': self.product_tmpl_id.id or False,
+                super(SaleOrderLine, line.with_context(sale_line_fields={
+                    'product_tmpl_id': self.product_id.product_tmpl_id.id or
+                                       False,
                     'sale_line_id': self.id,
+                    'active': True,
                 }))._action_launch_stock_rule()
                 created_mo = self.env['mrp.production'].search(
                     [('sale_line_id', '=', line.id)])
                 if created_mo:
                     try:
-                        line.mrp_production_id == created_mo.id
+                        line.mrp_production_id = created_mo.id
                         created_mo.with_context(sale_line_id=self.id
                                                 ).action_compute()
                     except ValueError:
@@ -54,6 +47,15 @@ class SaleOrderLine(models.Model):
                                                      "manufacture orders for "
                                                      "same order line"))
         return True
+
+    @api.multi
+    def action_create_mrp(self):
+        if self.product_uom_qty <= 0:
+            raise exceptions.Warning(_('The quantity must be positive.'))
+        values = self._action_mrp_dict()
+        mrp = self.env['mrp.production'].create(values)
+        mrp.with_context(sale_line_id=self.id).action_compute()
+        self.mrp_production_id = mrp
 
 
 class SaleOrder(models.Model):
