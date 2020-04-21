@@ -14,7 +14,7 @@
         "Ana Juaristi <anajuaristi@avanzosc.es>",
     ],
     "depends": [
-        "sale", "mrp_scheduled_products",
+        "sale", "sale_stock", "mrp_scheduled_products",
     ],
     "data": [
         "views/sale_view.xml",
