@@ -41,6 +41,7 @@
     <record model="ir.ui.view" id="mrp_supplier_price_tree">
         <field name="name">mrp.supplier.price.tree</field>
         <field name="model">mrp.production.product.line</field>
+        <field eval="21" name="priority"/>
         <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view" />
         <field name="arch" type="xml">
             <field name="product_uom_id" position="after">
