@@ -7,7 +7,7 @@
     "depends": [
         "sale",
         "mrp_supplier_price",
-        "sale_mrp_link",
+        "sale_line_mrp_link",
     ],
     "author": "AvanzOSC",
     "website": "http://www.avanzosc.es",
