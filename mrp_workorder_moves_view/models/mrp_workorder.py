@@ -1,6 +1,6 @@
 # Copyright 2020 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import api, models
 from odoo.tools.safe_eval import safe_eval
 from odoo.models import expression
 
@@ -53,7 +53,7 @@ class MrpWorkorder(models.Model):
             [('name', '=', 'Physical Locations')])
         virtual_location = location_obj.search(
                     [('name', '=', 'Virtual Locations')])
-        move_lines = self.active_move_lines | self.active_move_lines
+        move_lines = self.active_move_line_ids | self.move_line_ids
         produce_lines = move_lines.filtered(
             lambda x: x.location_id._has_parent(virtual_location) and
             x.location_dest_id._has_parent(physical_location))
@@ -66,7 +66,7 @@ class MrpWorkorder(models.Model):
         action_dict['context'].update({
             'default_workorder_id': self.id,
         })
-        action_dict.update['ids'] = produce_lots
+        action_dict['ids'] = produce_lots
         domain = expression.AND([
             [('id', 'in', produce_lots.ids)],
             safe_eval(action.domain or '[]')])

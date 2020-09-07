@@ -3,12 +3,14 @@
     <record model="ir.ui.view" id="stock_product_lot_moves_form">
         <field name="name">stock.production.lot.moves.form</field>
         <field name="model">stock.production.lot</field>
-        <field name="inherit_id" ref="	stock.view_production_lot_form" />
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='main_group']" position="after">
                 <group name="moves" >
                     <field name="produce_move_line_ids"/>
                     <field name="consume_move_line_ids"/>
+                    <field name="wo_produce_move_line_ids"/>
+                    <field name="wo_consume_move_line_ids"/>
                 </group>
             </xpath>
         </field>

@@ -25,7 +25,7 @@
                     <!--<field string="Survey Responses" name="user_input_count"
                            widget="statinfo" />-->
                 </button>
-                <button class="oe_stat_button" name="button_open_lots" type="object" string="Lots" icon="fa-arrows-v">
+                <button class="oe_stat_button" name="button_open_lots" type="object" string="Lots" icon="fa-arrows-v" context="{'moves_workorder_id': active_id}">
                     <!--<field string="Survey Responses" name="user_input_count"
                            widget="statinfo" />-->
                 </button>

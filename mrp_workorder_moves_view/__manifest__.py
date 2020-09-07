@@ -11,7 +11,9 @@
     "website": "http://www.avanzosc.es",
     "category": "Manufacturing",
     "data": [
-        "views/mrp_workorder_view.xml"
+        "views/mrp_workorder_view.xml",
+        "views/stock_production_lot_view.xml",
+        "views/mrp_production_view.xml",
     ],
     'demo': [],
     'installable': True,
