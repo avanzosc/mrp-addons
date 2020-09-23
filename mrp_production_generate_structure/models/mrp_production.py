@@ -182,7 +182,7 @@ class MrpProductionProductLine(models.Model):
     @api.multi
     def button_create_purchase_manufacturing_order(self):
         buy = self.env.ref(
-            'purchase.route_warehouse0_buy', False)
+            'purchase_stock.route_warehouse0_buy', False)
         manufacture = self.env.ref(
             'mrp.route_warehouse0_manufacture', False)
         origin_manufacture_order = (
