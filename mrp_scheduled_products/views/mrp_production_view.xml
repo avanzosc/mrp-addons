@@ -31,6 +31,7 @@
         <field name="arch" type="xml">
             <tree string="Scheduled Products">
                 <field name="production_id" invisible="context.get('hide_production_id',True)" />
+                <field name="date_planned_start"/>
                 <field name="product_id"/>
                 <field name="product_qty"/>
                 <field name="product_uom_id" groups="uom.group_uom"/>
@@ -54,6 +55,8 @@
                     <filter string="Unit of Measure" name="groupby_uom"
                             domain="[]" context="{'group_by':'product_uom_id'}"
                             groups="uom.group_uom"/>
+                    <filter string="Date Planned" name="date_planned_start"
+                            domain="[]" context="{'group_by':'date_planned_start'}"/>
                 </group>
             </search>
         </field>
