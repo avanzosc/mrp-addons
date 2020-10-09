@@ -12,7 +12,15 @@ class SaleOrderLine(models.Model):
     product_line_ids = fields.One2many(
         comodel_name='mrp.production.product.line',
         inverse_name='sale_line_id', string='Product line')
+    manufacturable_product = fields.Boolean(
+        compute="compute_manufacturable_product")
 
+    @api.depends("product_id.route_ids")
+    def compute_manufacturable_product(self):
+        manufacture = self.env.ref('mrp.route_warehouse0_manufacture')
+        for line in self:
+            line.manufacturable_product = manufacture in \
+                                          line.product_id.route_ids
     def _action_mrp_dict(self):
         values = {
             'product_tmpl_id': self.product_tmpl_id.id or False,
@@ -64,8 +72,11 @@ class SaleOrder(models.Model):
     @api.multi
     def action_create_mrp_from_lines(self):
         for sale in self:
-            for line in sale.order_line.filtered(lambda x: not
-                    x.mrp_production_id):
+            manufacture = self.env.ref(
+                'mrp.route_warehouse0_manufacture', False)
+            for line in sale.order_line.filtered(
+                    lambda x: not x.mrp_production_id
+                    and x.manufacturable_product):
                 try:
                     line.action_create_mrp()
                 except exceptions.MissingError as e:
