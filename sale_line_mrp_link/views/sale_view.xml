@@ -32,8 +32,10 @@
                        position="after">
                     <field name="mrp_production_id" readonly="1"
                            attrs="{'invisible':[('mrp_production_id', '=', False)]}" />
-                    <button name="action_create_mrp" string="Create Manufacturing Order"
-                            attrs="{'invisible':[('mrp_production_id', '!=', False)]}" type="object" />
+                    <field name="manufacturable_product" invisible="1"/>
+                    <button name="action_create_mrp" string="Create MO"
+                            attrs="{'invisible':['|', ('mrp_production_id', '!=', False), ('manufacturable_product','=', False)]}"
+                            type="object" />
                 </xpath>
             </field>
         </record>
