@@ -19,8 +19,9 @@ class SaleOrderLine(models.Model):
     def compute_manufacturable_product(self):
         manufacture = self.env.ref('mrp.route_warehouse0_manufacture')
         for line in self:
-            line.manufacturable_product = manufacture in \
-                                          line.product_id.route_ids
+            line.manufacturable_product = (manufacture in
+                                           line.product_id.route_ids)
+
     def _action_mrp_dict(self):
         values = {
             'product_tmpl_id': self.product_tmpl_id.id or False,
@@ -39,7 +40,7 @@ class SaleOrderLine(models.Model):
             if not line.mrp_production_id:
                 super(SaleOrderLine, line.with_context(sale_line_fields={
                     'product_tmpl_id': self.product_id.product_tmpl_id.id or
-                                       False,
+                    False,
                     'sale_line_id': self.id,
                     'active': True,
                 }))._action_launch_stock_rule()
@@ -72,14 +73,12 @@ class SaleOrder(models.Model):
     @api.multi
     def action_create_mrp_from_lines(self):
         for sale in self:
-            manufacture = self.env.ref(
-                'mrp.route_warehouse0_manufacture', False)
             for line in sale.order_line.filtered(
-                    lambda x: not x.mrp_production_id
-                    and x.manufacturable_product):
+                    lambda x: not x.mrp_production_id and
+                    x.manufacturable_product):
                 try:
                     line.action_create_mrp()
-                except exceptions.MissingError as e:
+                except exceptions.MissingError:
                     continue
 
     @api.multi
@@ -88,7 +87,6 @@ class SaleOrder(models.Model):
         for mrp in self.mapped('order_line.mrp_production_id'):
             mrp.write({
                 'active': True,
-                #'name': self.env['ir.sequence'].get('mrp.production') or '/',
             })
         return res
 
@@ -104,7 +102,7 @@ class SaleOrder(models.Model):
             'domain': "[('sale_order_id', '=', " + str(self.id) + "),\
                         '|', ('active', '=', True), ('active', '=', False)]",
             'context': self.env.context
-            }
+        }
 
     @api.multi
     def action_show_scheduled_products(self):
@@ -119,4 +117,4 @@ class SaleOrder(models.Model):
             'domain': "[('sale_line_id', 'in', " + str(self.order_line.ids) +
                       ")]",
             'context': self.env.context
-            }
+        }

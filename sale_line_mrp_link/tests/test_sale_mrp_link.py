@@ -24,7 +24,7 @@ class TestSaleMrpLink(common.TransactionCase):
             'product_uom': self.product2.uom_id.id,
             'price_unit': self.product2.list_price,
             'order_id': self.sale.id,
-            }
+        }
         sale_line2 = self.env['sale.order.line'].create(sale_line_vals2)
         sale_line = self.sale.order_line[0]
         res = sale_line.product_id_change(
