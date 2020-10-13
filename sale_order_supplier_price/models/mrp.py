@@ -46,10 +46,11 @@ class MrpProduction(models.Model):
     @api.multi
     def action_confirm(self):
         res = super().action_confirm()
-        self.mapped("product_line_ids.sale_line_id").sudo().with_context(
-                default_company_id=self.company_id.id,
-                force_company=self.company_id.id,
-            )._timesheet_service_generation()
+        self.mapped(
+            "product_line_ids.sale_line_id").sudo().with_context(
+            default_company_id=self.company_id.id,
+            force_company=self.company_id.id
+        )._timesheet_service_generation()
         return res
 
     @api.depends("product_line_ids", "product_line_ids.profit",
