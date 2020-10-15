@@ -21,6 +21,9 @@ class MrpProductionProductLine(models.Model):
         required=True, ondelete='cascade')
     bom_line_id = fields.Many2one(
         comodel_name='mrp.bom.line', string='Bom Line')
+    date_planned_start = fields.Datetime(
+        string='Deadline Start', store=True,
+        related="production_id.date_planned_start")
 
     @api.onchange('product_id')
     def _onchange_product_id(self):
