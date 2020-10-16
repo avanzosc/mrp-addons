@@ -193,7 +193,7 @@ class MrpProductionProductLine(models.Model):
         if self.route_id.id == manufacture.id:
             self.create_automatic_manufacturing_order(
                 origin_manufacture_order,
-                self.production_id.account_analytic_id)
+                self.production_id.analytic_account_id)
 
     def create_automatic_purchase_order(self, origin_manufacture_order, level):
         if not self.product_id.seller_ids:
