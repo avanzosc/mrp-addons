@@ -49,7 +49,7 @@ class SaleOrderLine(models.Model):
                 if created_mo:
                     try:
                         line.mrp_production_id = created_mo.id
-                        created_mo.with_context(sale_line_id=self.id
+                        created_mo.with_context(sale_line_id=line.id
                                                 ).action_compute()
                     except ValueError:
                         raise exceptions.UserError(_("Multiple "
