@@ -2,8 +2,8 @@
 # © 2015 Esther Martín - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import openerp.tests.common as common
-from openerp import exceptions
+import odoo.tests.common as common
+from odoo import exceptions
 
 
 class TestSaleMrpLink(common.TransactionCase):
@@ -17,7 +17,6 @@ class TestSaleMrpLink(common.TransactionCase):
 
     def test_add_mrp_production(self):
         sale_line_vals2 = {
-            'product_tmpl_id': self.product2.product_tmpl_id.id,
             'product_id': self.product2.id,
             'name': self.product2.name,
             'product_uom_qty': 7,
@@ -27,14 +26,7 @@ class TestSaleMrpLink(common.TransactionCase):
         }
         sale_line2 = self.env['sale.order.line'].create(sale_line_vals2)
         sale_line = self.sale.order_line[0]
-        res = sale_line.product_id_change(
-            self.pricelist.id, self.product.id,
-            partner_id=self.sale.partner_id.id,
-            fiscal_position=self.sale.fiscal_position.id)
-        self.assertTrue(res['value']['product_attribute_ids'])
-        sale_line.write(
-            {'product_attribute_ids': res['value']['product_attribute_ids']})
-        self.assertTrue(sale_line.product_attribute_ids)
+        sale_line.product_id_change()
         sale_line.action_create_mrp()
         self.assertTrue(sale_line.mrp_production_id)
         self.assertTrue(sale_line2.need_procurement())
