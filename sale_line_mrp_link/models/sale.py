@@ -24,7 +24,6 @@ class SaleOrderLine(models.Model):
 
     def _action_mrp_dict(self):
         values = {
-            'product_tmpl_id': self.product_tmpl_id.id or False,
             'product_id': self.product_id.id or False,
             'product_qty': self.product_uom_qty,
             'product_uom_id': self.product_uom.id,
@@ -39,8 +38,6 @@ class SaleOrderLine(models.Model):
         for line in self:
             if not line.mrp_production_id:
                 super(SaleOrderLine, line.with_context(sale_line_fields={
-                    'product_tmpl_id': self.product_id.product_tmpl_id.id or
-                    False,
                     'sale_line_id': self.id,
                     'active': True,
                 }))._action_launch_stock_rule()

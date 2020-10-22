@@ -12,7 +12,6 @@ class StockRule(models.Model):
                                        location_id, name, origin, values, bom)
         extra_fields = self.env.context.get('sale_line_fields')
         if extra_fields:
-            res['product_tmpl_id'] = extra_fields.get('product_tmpl_id')
             res['sale_line_id'] = extra_fields.get('sale_line_id')
             res['active'] = extra_fields.get('active')
         return res
