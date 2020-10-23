@@ -38,7 +38,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             if not line.mrp_production_id:
                 super(SaleOrderLine, line.with_context(sale_line_fields={
-                    'sale_line_id': self.id,
+                    'sale_line_id': line.id,
                     'active': True,
                 }))._action_launch_stock_rule()
                 created_mo = self.env['mrp.production'].search(
