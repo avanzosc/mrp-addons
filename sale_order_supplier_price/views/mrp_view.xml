@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_production_profit_form_view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_supplier_price.mrp_profit_form" />
+        <field name="arch" type="xml">
+            <field name="scheduled_total" position="after">
+                <field name="profit_total" widget="monetary"
+                       options="{'currency_field': 'currency_id'}" />
+                <field name="commercial_total" widget="monetary"
+                       options="{'currency_field': 'currency_id'}" />
+                <field name="external_commercial_total" widget="monetary"
+                       options="{'currency_field': 'currency_id'}" />
+            </field>
+            <group name="product_line_total_group" position="before">
+                <group>
+                    <field name="profit_percent" />
+                    <field name="commercial_percent" />
+                    <field name="external_commercial_percent" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
