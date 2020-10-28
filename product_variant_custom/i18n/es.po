@@ -1,0 +1,196 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_variant_custom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-14 13:39+0000\n"
+"PO-Revision-Date: 2019-10-14 13:39+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__attribute_id
+#: model:ir.model.fields,field_description:product_variant_custom.field_version_custom_line__attribute_id
+msgid "Attribute"
+msgstr "Atributo"
+
+#. module: product_variant_custom
+#: model:ir.model,name:product_variant_custom.model_product_attribute_value
+msgid "Attribute Value"
+msgstr "Valor del Atributo"
+
+#. module: product_variant_custom
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_version_view_search
+msgid "Can be Sold"
+msgstr "Puede ser vendido"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__create_uid
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__create_date
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__custom_value_ids
+msgid "Custom Values"
+msgstr "Valores Personalizados"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__custom_value
+#: model:ir.model.fields,field_description:product_variant_custom.field_version_custom_line__custom_value
+msgid "Custom value"
+msgstr "Valor personalizado"
+
+#. module: product_variant_custom
+#: code:addons/product_variant_custom/models/product_version.py:44
+#: code:addons/product_variant_custom/models/product_version.py:74
+#, python-format
+msgid "Custom value is greater than maximum allowed for this value"
+msgstr "El valor personalizado es mayor que el máximo permitido para este valor"
+
+#. module: product_variant_custom
+#: code:addons/product_variant_custom/models/product_version.py:40
+#: code:addons/product_variant_custom/models/product_version.py:70
+#, python-format
+msgid "Custom value is smaller than minimum allowed for this value"
+msgstr "El valor personalizado es menor que el máximo permitido para este valor"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__partner_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__display_name
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__display_name
+#: model:ir.model.fields,field_description:product_variant_custom.field_version_custom_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__id
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__id
+#: model:ir.model.fields,field_description:product_variant_custom.field_version_custom_line__id
+msgid "ID"
+msgstr ""
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version____last_update
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line____last_update
+#: model:ir.model.fields,field_description:product_variant_custom.field_version_custom_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__write_uid
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__write_date
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_attribute_value__max_tolerance
+msgid "Max Tolerance"
+msgstr "Maxima Tolerancia"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_attribute_value__max_value
+msgid "Max Value"
+msgstr "Valor Maximo"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_attribute_value__min_tolerance
+msgid "Min Tolerance"
+msgstr "Tolerancia Minima"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_attribute_value__min_value
+msgid "Min Value"
+msgstr "Valor Minimo"
+
+#. module: product_variant_custom
+#: code:addons/product_variant_custom/models/product_product.py:32
+#, python-format
+msgid "Multiple products or none in _find_version method"
+msgstr "Multiples productos o ninguno en la función _find_version"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: product_variant_custom
+#: model:ir.model,name:product_variant_custom.model_product_product
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_product__product_version_ids
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__product_version_id
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_version_view_form
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_version_view_search
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_version_view_tree
+msgid "Product Version"
+msgstr "Version de Producto"
+
+#. module: product_variant_custom
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_version_line_form
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_version_line_tree
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.version_custom_line_form
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.version_custom_line_tree
+msgid "Product Version Line"
+msgstr "Linea de Version de Producto"
+
+#. module: product_variant_custom
+#: model:ir.actions.act_window,name:product_variant_custom.product_version_action
+#: model:ir.actions.act_window,name:product_variant_custom.product_version_action_sell
+msgid "Product Versions"
+msgstr "Versiones de Producto"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_version_line__value_id
+#: model:ir.model.fields,field_description:product_variant_custom.field_version_custom_line__value_id
+msgid "Value"
+msgstr "Valor"
+
+#. module: product_variant_custom
+#: model:ir.model.fields,field_description:product_variant_custom.field_product_product__product_version_count
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_product_version_form_view
+#: model_terms:ir.ui.view,arch_db:product_variant_custom.product_product_version_normal_form_view
+msgid "Versions"
+msgstr "Versiones"
+
+#. module: product_variant_custom
+#: model:ir.model,name:product_variant_custom.model_product_version
+msgid "product.version"
+msgstr ""
+
+#. module: product_variant_custom
+#: model:ir.model,name:product_variant_custom.model_product_version_line
+msgid "product.version.line"
+msgstr ""
+
+#. module: product_variant_custom
+#: model:ir.model,name:product_variant_custom.model_version_custom_line
+msgid "version.custom.line"
+msgstr ""
+

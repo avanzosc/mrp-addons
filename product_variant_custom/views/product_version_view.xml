@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="product_version_view_search">
+            <field name="name">product.version.view.search</field>
+            <field name="model">product.version</field>
+            <field name="arch" type="xml">
+                <search string="Product Version">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="partner_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_version_view_tree">
+            <field name="name">product.version.view.tree</field>
+            <field name="model">product.version</field>
+            <field name="arch" type="xml">
+                <tree string="Product Version">
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="custom_value_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_version_view_form">
+            <field name="name">product.version.view.form</field>
+            <field name="model">product.version</field>
+            <field name="arch" type="xml">
+                <form string="Product Version">
+                    <group colspan="4">
+                        <field name="name" required="1" colspan="2"/>
+                        <field name="product_id" required="1" colspan="2"/>
+                        <field name="partner_id" colspan="2"/>
+                    </group>
+                    <group colspan="4">
+                        <field name="custom_value_ids" nolabel="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_version_line_tree">
+            <field name="name">product.version.line.tree</field>
+            <field name="model">product.version.line</field>
+            <field name="arch" type="xml">
+                <tree string="Product Version Line">
+                    <field name="attribute_id" />
+                    <field name="value_id" />
+                    <field name="custom_value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_version_line_form">
+            <field name="name">product.version.line.form</field>
+            <field name="model">product.version.line</field>
+            <field name="arch" type="xml">
+                <form string="Product Version Line">
+                    <group>
+                        <field name="attribute_id" />
+                        <field name="value_id" />
+                        <field name="custom_value"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="version_custom_line_tree">
+            <field name="name">version.custom.line.tree</field>
+            <field name="model">version.custom.line</field>
+            <field name="arch" type="xml">
+                <tree string="Product Version Line">
+                    <field name="attribute_id" />
+                    <field name="value_id" />
+                    <field name="custom_value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="version_custom_line_form">
+            <field name="name">version.custom.line.form</field>
+            <field name="model">version.custom.line</field>
+            <field name="arch" type="xml">
+                <form string="Product Version Line">
+                    <group>
+                        <field name="attribute_id" />
+                        <field name="value_id" />
+                        <field name="custom_value"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="product_version_action" model="ir.actions.act_window">
+            <field name="name">Product Versions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.version</field>
+            <field name="context">{'search_default_product_id': [active_id], 'default_product_id': active_id}</field>
+            <field name="search_view_id" ref="product_version_view_search"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('product_version_view_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('product_version_view_form')})]"/>
+        </record>
+
+        <record model="ir.ui.view" id="product_product_version_form_view">
+            <field name="name">product.product.version.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='id']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(product_version_action)d" type="action" icon="fa-sitemap" class="oe_stat_button" attrs="{'invisible': [('product_version_count', '&lt;=', 1)]}" groups="product.group_product_variant">
+                            <field string="Versions" name="product_version_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_product_version_normal_form_view">
+            <field name="name">product.product.version.normal.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <button name="toggle_active" position="before">
+                    <button name="%(product_version_action)d" type="action" icon="fa-sitemap" class="oe_stat_button" attrs="{'invisible': [('product_version_count', '&lt;=', 1)]}" groups="product.group_product_variant">
+                        <field string="Versions" name="product_version_count" widget="statinfo"/>
+                    </button>
+                </button>
+            </field>
+        </record>
+
+    </data>
+</openerp>

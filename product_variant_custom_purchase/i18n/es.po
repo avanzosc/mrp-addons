@@ -1,0 +1,103 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_variant_custom_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-14 13:53+0000\n"
+"PO-Revision-Date: 2019-10-14 13:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__attribute_id
+msgid "Attribute"
+msgstr "Atributo"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_order_line__custom_value_ids
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_order_line__version_value_ids
+msgid "Custom Values"
+msgstr ""
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__custom_value
+msgid "Custom value"
+msgstr "Valor personalizado"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__id
+msgid "ID"
+msgstr ""
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__line_id
+msgid "Line"
+msgstr "Linea"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_order_line__product_version_id
+msgid "Product Version"
+msgstr ""
+
+#. module: product_variant_custom_purchase
+#: model_terms:ir.ui.view,arch_db:product_variant_custom_purchase.purchase_order_line_product_version_form
+msgid "Product Version Line"
+msgstr ""
+
+#. module: product_variant_custom_purchase
+#: model:ir.model,name:product_variant_custom_purchase.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model,name:product_variant_custom_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea pedido de compra"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model.fields,field_description:product_variant_custom_purchase.field_purchase_version_custom_line__value_id
+msgid "Value"
+msgstr "Valor"
+
+#. module: product_variant_custom_purchase
+#: model:ir.model,name:product_variant_custom_purchase.model_purchase_version_custom_line
+msgid "purchase.version.custom.line"
+msgstr ""
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="product_attribute_min_max_form">
+            <field name="name">product.attribute.min.max.form</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.product_attribute_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='name']" position="after">
+                    <field name="min_value" />
+                    <field name="max_value" />
+                    <field name="min_tolerance" />
+                    <field name="max_tolerance" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_order_line_product_version_form">
+            <field name="name">sale.order.line.product.version.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
+                       position="before">
+                    <field name="product_tmpl_id"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                    <attribute name="editable"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']"
+                        position="after">
+                    <field name="product_version_id"/>
+                </xpath>
+                <xpath
+                        expr="//field[@name='order_line']/form//field[@name='product_id']"
+                        position="attributes">
+                        <attribute name="attrs">{
+                                                    'readonly': [('product_updatable', '=', False)],
+                                                    'required': False,
+                                                }</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
+                       position="after">
+<button name="create_product_product" string="Create Product" type="object" attrs="{'invisible': [('product_id', '=', 'false')]}"/>
+                    <!--attrs="{'invisible':[('product_attribute_ids','=',[])]}"-->
+
+                        <field name="product_attribute_ids"
+                               options="{'no_create': True, 'no_delete': True}">
+                            <tree create="0" delete="0" editable="1">
+                                <field name="attribute_id" />
+                                <field name="value_id" options="{'no_create': True}" />
+                                <field name="possible_value_ids" invisible="1" />
+                            </tree>
+                        </field>
+                    <field name="product_version_id" invisible="True"/>
+                    <field name="version_value_ids"
+                           attrs="{'invisible': [('product_version_id','=',False)], 'readonly': 1}"/>
+                    <!--<field name="possible_attribute_ids" invisible="1"/>-->
+                    <field name="custom_value_ids"
+                           attrs="{'invisible': [('product_version_id','!=',False)]}">
+                    <field name="product_version_id"
+                           domain="[('product_id','=',product_id)]"/>
+                    <tree string="Product Version Line" editable="bottom"
+                          create="false">
+                        <!--<field name="attribute_id" domain="[('id', 'in', parent.possible_attribute_ids[0][2])]"/>-->
+                        <field name="attribute_id"/>
+                        <field name="value_id"
+                               domain="[('attribute_id','=',attribute_id)]"/>
+                        <field name="custom_value"/>
+                    </tree>
+                    </field>
+                </xpath>
+
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="sale_search_product_version_view">
+        <field name="name">sale.search.product.version.form</field>
+        <field name="model">product.version</field>
+        <field name="inherit_id" ref="product_variant_custom.product_version_view_search" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <filter string="Can be Sold" name="filter_to_sell" domain="[('product_id.sale_ok','=',True)]"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_version_action_sell" model="ir.actions.act_window">
+        <field name="name">Product Versions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.version</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="context">{"search_default_filter_to_sell":1}</field>
+        <field name="view_id" ref="product_variant_custom.product_version_view_tree"/>
+        <field name="search_view_id" ref="sale_search_product_version_view"/>
+    </record>
+
+    <menuitem id="menu_product"
+              action="product_version_action_sell"
+              name="Product Versions" parent="sale.product_menu_catalog"
+              sequence="3" groups="base.group_no_one"/>
+
+    </data>
+</openerp>

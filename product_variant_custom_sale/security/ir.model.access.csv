@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_product_attribute_line_user,sale.product.attribute.line.user,model_sale_line_attribute,base.group_system,1,0,0,0
+access_sale_product_attribute_line_manager,sale.product.attribute.line.manager,model_sale_line_attribute,base.group_system,1,1,1,1
+access_sale_product_version_custom_line_user,sale.product.version.custom.line.user,model_sale_version_custom_line,base.group_system,1,0,0,0
+access_sale_product_version_custom_line_manager,sale.product.version.custom.line.manager,model_sale_version_custom_line,base.group_system,1,1,1,1

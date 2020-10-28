@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_product_attribute_line_user,purchase.product.attribute.line.user,model_purchase_line_attribute,base.group_system,1,0,0,0
+access_purchase_product_attribute_line_manager,purchase.product.attribute.line.manager,model_purchase_line_attribute,base.group_system,1,1,1,1
+access_purchase_version_custom_line_user,purchase.version.custom.line.user,model_purchase_version_custom_line,purchase.group_purchase_user,1,0,0,0
+access_purchase_version_custom_line_manager,purchase.version.custom.line.manager,model_purchase_version_custom_line,purchase.group_purchase_manager,1,1,1,1

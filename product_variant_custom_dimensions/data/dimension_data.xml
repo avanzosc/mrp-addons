@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record forcecreate="True" id="decimal_price" model="decimal.precision">
+            <field name="name">Dimension</field>
+            <field name="digits">5</field>
+        </record>
+    </data>
+</openerp>
