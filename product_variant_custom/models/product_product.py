@@ -19,7 +19,6 @@ class ProductProduct(models.Model):
             'active': tmpl_id.active,
         }
 
-
     @api.depends('product_version_ids')
     def compute_product_versions(self):
         for product in self:
@@ -89,7 +88,7 @@ class ProductAttributeLine(models.AbstractModel):
 
     product_tmpl_id = fields.Many2one(comodel_name="product.template")
     attribute_id = fields.Many2one(comodel_name='product.attribute',
-                                string='Attribute')
+                                   string='Attribute')
     value_id = fields.Many2one(comodel_name='product.attribute.value',
                                domain="[('attribute_id', '=', attribute_id),"
                                "('id', 'in', possible_value_ids)]",

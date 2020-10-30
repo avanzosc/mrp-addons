@@ -55,7 +55,7 @@ class ProductProduct(models.Model):
     def _compute_base_weight(self):
         for product in self:
             product.product_base_weight = product.dimension * \
-                                          product.product_tmpl_id.base_weight
+                product.product_tmpl_id.base_weight
 
 
 class ProductVersion(models.Model):
@@ -84,12 +84,12 @@ class ProductVersion(models.Model):
                             "Dimensionable attribute value cant be cast in "
                             "float value: %s" % value))
                 elif value.attribute_id in dimensions_attr:
-                        try:
-                            multiplication *= float(value.name)
-                        except ValueError:
-                            raise exceptions.UserError(_(
-                                "Dimensionable attribute value cant be cast in "
-                                "float value"))
+                    try:
+                        multiplication *= float(value.name)
+                    except ValueError:
+                        raise exceptions.UserError(_(
+                            "Dimensionable attribute value cant be cast in "
+                            "float value"))
             product.dimension = multiplication
 
     @api.depends("dimension", "product_id.product_tmpl_id.base_weight")

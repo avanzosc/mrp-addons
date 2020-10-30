@@ -12,8 +12,8 @@
     "website": "http://www.avanzosc.es",
     "category": "",
     "data": [
-         "views/purchase_order_view.xml",
-         "views/account_invoice_line_view.xml",
+        "views/purchase_order_view.xml",
+        "views/account_invoice_line_view.xml",
     ],
     'demo': [],
     'installable': True,

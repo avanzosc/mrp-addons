@@ -126,7 +126,3 @@ class VersionCustomLine(models.AbstractModel):
                 'custom_value': attribute_line.custom_value,
             }))
         instance[field] = copy_fields
-
-
-
-

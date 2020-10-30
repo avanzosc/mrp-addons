@@ -88,9 +88,7 @@ class SaleOrderLine(models.Model):
         product_id = values.get('product_id')
         if product_id and not values.get('product_tmpl_id'):
             product = self.env['product.product'].browse(product_id)
-            #attribute_ids = product._get_product_attributes_values_dict()
             values.update({'product_tmpl_id': product.product_tmpl_id.id})
-            
         return super().create(values)
 
     def _delete_product_attribute_ids(self):
@@ -111,14 +109,13 @@ class SaleOrderLine(models.Model):
         elif self.product_id:
             return self.product_id.get_custom_value_lines()
 
-
     @api.multi
     @api.onchange('product_tmpl_id')
     def onchange_product_template(self):
         if self.product_tmpl_id and self.product_id.product_tmpl_id == self.product_tmpl_id:
             return {'domain': {'product_id':
-                              [('product_tmpl_id', '=',
-                                     self.product_tmpl_id.id)]}}
+                               [('product_tmpl_id', '=',
+                                 self.product_tmpl_id.id)]}}
 
         self.ensure_one()
         self.product_attribute_ids = \
@@ -129,29 +126,27 @@ class SaleOrderLine(models.Model):
             if (not self.product_tmpl_id.attribute_line_ids and
                     not self.product_id):
                 self.product_id = (
-                        self.product_tmpl_id.product_variant_ids and
-                        self.product_tmpl_id.product_variant_ids[0])
+                    self.product_tmpl_id.product_variant_ids and
+                    self.product_tmpl_id.product_variant_ids[0])
                 self.product_attribute_ids = (
                     self.product_id._get_product_attributes_values_dict())
             self.product_attribute_ids = (
                 self.product_tmpl_id._get_product_attributes_dict())
             return {'domain': {'product_id':
-                                   [('product_tmpl_id', '=',
-                                     self.product_tmpl_id.id)]}}
+                               [('product_tmpl_id', '=',
+                                 self.product_tmpl_id.id)]}}
         return {'domain': {}}
 
     @api.onchange("product_id")
     def product_id_change(self):
         p1 = self.product_id
         result = super().product_id_change()
-        #p1 = self.product_id
         if not self.product_tmpl_id and self.product_id:
             self.product_tmpl_id = self.product_id.product_tmpl_id
             self.product_id = p1
         if self.product_id:
             self.custom_value_ids = self._delete_custom_lines()
             self.product_attribute_ids = self._delete_product_attribute_ids()
-        #if self.product_id:
             product = p1
 
             self.product_attribute_ids = \
@@ -161,22 +156,6 @@ class SaleOrderLine(models.Model):
             version = self.product_id._find_version(self.custom_value_ids)
             self.product_version_id = version
         return result
-
-
-#    @api.onchange('product_id')
-#    def onchange_product_id(self):
-#        result = super().product_id_change()
-#        self.custom_value_ids = self._delete_custom_lines()
-##        self.product_attribute_ids = self._delete_product_attribute_ids()
-#        if self.product_id:
-#            product = self.product_id
-#            self.product_attribute_ids = \
-#                product._get_product_attributes_values_dict()
-
-#            self.custom_value_ids = self._set_custom_lines()
-#            version = self.product_id._find_version(self.custom_value_ids)
-#            self.product_version_id = version
-#        return result
 
     @api.onchange('product_attribute_ids')
     def onchange_product_attributes(self):

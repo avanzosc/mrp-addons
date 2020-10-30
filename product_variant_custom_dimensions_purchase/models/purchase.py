@@ -3,6 +3,7 @@
 from odoo import api, exceptions, fields, models, _
 from odoo.addons import decimal_precision as dp
 
+
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
@@ -14,18 +15,12 @@ class PurchaseOrderLine(models.Model):
                           digits=dp.get_precision('Dimension'))
     version_dimension = fields.Float(string="Product Dimension",
                                      digits=dp.get_precision('Dimension'))
-                                 #
-                                     #    compute="_compute_total_dimension_weight")
     version_weight = fields.Float(string="Product Weight",
                                   digits=dp.get_precision('Dimension'))
-        #compute="_compute_total_dimension_weight")
     total_dimension = fields.Float(string="Total Dimension",
                                    digits=dp.get_precision('Dimension'))
-          #                         compute="_compute_total_dimension_weight")
     total_weight = fields.Float(string="Total Weight",
                                 digits=dp.get_precision('Dimension'))
-         #                       compute="_compute_total_dimension_weight")
-
 
     @api.onchange("product_qty", "custom_value_ids")
     def _compute_total_dimension_weight(self):
@@ -64,7 +59,7 @@ class PurchaseOrderLine(models.Model):
                 line.total_weight = multiplication * weight * line.product_qty
 
     @api.depends('product_qty', 'price_unit', 'taxes_id', 'version_dimension',
-                  'version_weight', 'custom_value_ids')
+                 'version_weight', 'custom_value_ids')
     def _compute_amount(self):
         super()._compute_amount()
         for line in self:

@@ -2,7 +2,8 @@
 # Copyright 2019 Oihane Crucelaegui - AvanzOSC
 # Copyright 2019 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import api, models
+
 
 class ProductProduct(models.Model):
     _inherit = "product.product"

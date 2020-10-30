@@ -69,7 +69,6 @@ class MrpProduction(models.Model):
                 self.product_tmpl_id, self.product_attribute_ids)
             self.product_id = product_obj.create(product_dict)
 
-
     def create_product_version(self):
         if self.product_id and not self.product_version_id and \
                 self._all_custom_lines_filled():
@@ -90,7 +89,6 @@ class MrpProduction(models.Model):
         if self.product_id:
             self.custom_value_ids = self._delete_custom_lines()
             self.product_attribute_ids = self._delete_product_attribute_ids()
-        #if self.product_id:
             bom_obj = self.env['mrp.bom']
             product = self.product_id
             if not self.bom_id:
@@ -254,16 +252,16 @@ class MrpProduction(models.Model):
             # product_lines, workcenter_lines
             results, results2 = bom_id.with_context(
                 production=production).explode(production.product_id,
-                factor / bom_id.product_qty)
+                                               factor / bom_id.product_qty)
 
             #  reset product_lines in production order
             for done_line, line in results2:
-                product_id = done_line.product_id or \
-                             product_obj._product_find(
-                                 done_line.product_tmpl_id,
-                                 list(map(lambda x: x[2],
-                                          line['product_attribute_ids']))) \
-                             or product_obj
+                attributes = list(map(lambda x: x[2],
+                                      line['product_attribute_ids']))
+                product_id = (done_line.product_id or
+                              product_obj._product_find(
+                                  done_line.product_tmpl_id, attributes) or
+                              product_obj)
                 product_tmpl_id = \
                     product_id.product_tmpl_id or done_line.product_tmpl_id
                 production_product_line = {
@@ -356,7 +354,6 @@ class MrpProductionProductLineAttribute(models.Model):
         string='Product line')
     product_tmpl_id = fields.Many2one(related='product_line.product_tmpl_id')
 
-
     @api.one
     def _get_parent_value(self):
         if self.attribute_id.parent_inherited:
@@ -405,7 +402,7 @@ class MrpProductionProductLine(models.Model):
 
     product_id = fields.Many2one(required=False)
     product_tmpl_id = fields.Many2one(comodel_name='product.template',
-                                       string='Product')
+                                      string='Product')
     product_attribute_ids = fields.One2many(
         comodel_name='mrp.production.product.line.attribute',
         inverse_name='product_line', string='Product attributes',
@@ -452,7 +449,6 @@ class MrpProductionProductLine(models.Model):
                 self.product_tmpl_id, self.product_attribute_ids)
             self.product_id = product_obj.create(product_dict)
 
-
     def _delete_product_attribute_ids(self):
         delete_values = []
         for value in self.product_attribute_ids:
@@ -465,7 +461,6 @@ class MrpProductionProductLine(models.Model):
         if self.product_id:
             self.custom_value_ids = self._delete_custom_lines()
             self.product_attribute_ids = self._delete_product_attribute_ids()
-        #if self.product_id:
             product = self.product_id
 
             self.product_attribute_ids = \
@@ -481,15 +476,6 @@ class MrpProductionProductLine(models.Model):
         for value in self.custom_value_ids:
             delete_values.append((2, value.id))
         return delete_values
-
-
-#    @api.onchange('product_id')
-#    def product_id_change(self):
-#        res = super()._onchange_product_id()
-#        self.custom_value_ids = self._set_custom_lines()
-#        version = self.product_id._find_version(self.custom_value_ids)
-#        self.product_version_id = version
-#        return res
 
     def _set_custom_lines(self):
         if self.product_version_id:

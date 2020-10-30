@@ -11,8 +11,8 @@
     "website": "http://www.avanzosc.es",
     "category": "Tools",
     "data": [
-         "security/ir.model.access.csv",
-         "views/sale_order_view.xml",
+        "security/ir.model.access.csv",
+        "views/sale_order_view.xml",
     ],
     'demo': [],
     'installable': True,

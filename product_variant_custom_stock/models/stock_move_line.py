@@ -20,7 +20,7 @@ class StockMoveLine(models.Model):
                                compute="_compute_move_in_out_qty",
                                store="True")
 
-    api.depends("location_id", "location_dest_id", "product_qty")
+    @api.depends("location_id", "location_dest_id", "product_qty")
     def _compute_move_in_out_qty(self):
         for move in self:
             move.real_in = 1

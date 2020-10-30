@@ -16,6 +16,7 @@
         "views/stock_picking_view.xml",
         "views/stock_inventory_product_version_graph.xml",
         "views/product_view.xml",
+        "views/stock_view.xml",
     ],
     'demo': [],
     'installable': True,

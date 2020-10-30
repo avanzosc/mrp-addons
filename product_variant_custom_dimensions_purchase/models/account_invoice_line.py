@@ -41,7 +41,7 @@ class AccountInvoiceLine(models.Model):
                     'price_total': line['price_total'] * dimension,
                     'price_subtotal': line['price_subtotal'] * dimension,
                     'price_subtotal_signed': line['price_subtotal_signed'] *
-                                             dimension,
+                    dimension,
                 })
             else:
                 weight = line.version_weight
@@ -49,5 +49,5 @@ class AccountInvoiceLine(models.Model):
                     'price_total': line['price_total'] * weight,
                     'price_subtotal': line['price_subtotal'] * weight,
                     'price_subtotal_signed': line['price_subtotal_signed'] *
-                                             weight,
+                    weight,
                 })

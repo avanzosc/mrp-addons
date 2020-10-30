@@ -39,7 +39,7 @@ class PurchaseOrder(models.Model):
         return super().button_approve()
 
 
-class PurchaseOrder(models.Model):
+class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
     product_tmpl_id = fields.Many2one(comodel_name="product.template")
@@ -87,15 +87,15 @@ class PurchaseOrder(models.Model):
             if (not self.product_tmpl_id.attribute_line_ids and
                     not self.product_id):
                 self.product_id = (
-                        self.product_tmpl_id.product_variant_ids and
-                        self.product_tmpl_id.product_variant_ids[0])
+                    self.product_tmpl_id.product_variant_ids and
+                    self.product_tmpl_id.product_variant_ids[0])
                 self.product_attribute_ids = (
                     self.product_id._get_product_attributes_values_dict())
             self.product_attribute_ids = (
                 self.product_tmpl_id._get_product_attributes_dict())
             return {'domain': {'product_id':
-                                   [('product_tmpl_id', '=',
-                                     self.product_tmpl_id.id)]}}
+                               [('product_tmpl_id', '=',
+                                 self.product_tmpl_id.id)]}}
         return {'domain': {}}
 
     @api.onchange('product_id')
