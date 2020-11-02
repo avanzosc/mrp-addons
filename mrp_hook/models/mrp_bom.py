@@ -40,47 +40,70 @@ class MrpBom(models.Model):
             visited[v] = True
             recStack[v] = True
             for neighbour in graph[v]:
-                if visited[neighbour] == False:
-                    if check_cycle(neighbour, visited, recStack, graph) == True:
+                if visited[neighbour] is False:
+                    if check_cycle(neighbour, visited, recStack, graph) is \
+                            True:
                         return True
-                elif recStack[neighbour] == True:
+                elif recStack[neighbour] is True:
                     return True
             recStack[v] = False
             return False
 
-        boms_done = [(self, {'qty': quantity, 'product': product, 'original_qty': quantity, 'parent_line': False})]
+        boms_done = [(self, {'qty': quantity, 'product': product,
+                             'original_qty': quantity, 'parent_line': False})]
         lines_done = []
         V |= set([product.product_tmpl_id.id])
 
-        bom_lines = [(bom_line, product, quantity, False) for bom_line in self.bom_line_ids]
+        bom_lines = [(bom_line, product, quantity, False) for bom_line in
+                     self.bom_line_ids]
         for bom_line in self.bom_line_ids:
             V |= set([bom_line.product_id.product_tmpl_id.id])
-            graph[product.product_tmpl_id.id].append(bom_line.product_id.product_tmpl_id.id)
+            graph[product.product_tmpl_id.id].append(
+                bom_line.product_id.product_tmpl_id.id)
         while bom_lines:
-            current_line, current_product, current_qty, parent_line = bom_lines[0]
+            current_line, current_product, current_qty, parent_line = \
+                bom_lines[0]
             bom_lines = bom_lines[1:]
 
             if current_line._skip_bom_line(current_product):
                 continue
 
             line_quantity = current_qty * current_line.product_qty
-            bom = self._bom_find_prepare(product=current_line.product_id, picking_type=picking_type or self.picking_type_id, company_id=self.company_id.id)
+            bom = self._bom_find_prepare(
+                product=current_line.product_id,
+                picking_type=picking_type or self.picking_type_id,
+                company_id=self.company_id.id)
             if bom.type == 'phantom':
-                converted_line_quantity = current_line.product_uom_id._compute_quantity(line_quantity / bom.product_qty, bom.product_uom_id)
-                bom_lines = [(line, current_line.product_id, converted_line_quantity, current_line) for line in bom.bom_line_ids] + bom_lines
+                converted_line_quantity = \
+                    current_line.product_uom_id._compute_quantity(
+                        line_quantity / bom.product_qty, bom.product_uom_id)
+                bom_lines = [(line, current_line.product_id,
+                              converted_line_quantity, current_line) for
+                             line in bom.bom_line_ids] + bom_lines
                 for bom_line in bom.bom_line_ids:
-                    graph[current_line.product_id.product_tmpl_id.id].append(bom_line.product_id.product_tmpl_id.id)
-                    if bom_line.product_id.product_tmpl_id.id in V and check_cycle(bom_line.product_id.product_tmpl_id.id, {key: False for  key in V}, {key: False for  key in V}, graph):
-                        raise UserError(_('Recursion error!  A product with a Bill of Material should not have itself in its BoM or child BoMs!'))
+                    graph[current_line.product_id.product_tmpl_id.id].append(
+                        bom_line.product_id.product_tmpl_id.id)
+                    if bom_line.product_id.product_tmpl_id.id in V and \
+                            check_cycle(bom_line.product_id.product_tmpl_id.id,
+                                        {key: False for key in V},
+                                        {key: False for key in V}, graph):
+                        raise UserError(_('Recursion error!  A product with '
+                                          'a Bill of Material should not '
+                                          'have itself in its BoM or child '
+                                          'BoMs!'))
                     V |= set([bom_line.product_id.product_tmpl_id.id])
                 boms_done.append(self._prepare_consume_line(
                     bom, converted_line_quantity, current_product, quantity,
                     current_line))
             else:
-                # We round up here because the user expects that if he has to consume a little more, the whole UOM unit
+                # We round up here because the user expects that if he has
+                # to consume a little more, the whole UOM unit
                 # should be consumed.
                 rounding = current_line.product_uom_id.rounding
-                line_quantity = float_round(line_quantity, precision_rounding=rounding, rounding_method='UP')
+                line_quantity = float_round(
+                    line_quantity,
+                    precision_rounding=rounding,
+                    rounding_method='UP')
                 lines_done.append(self._prepare_consume_line(
                     current_line, line_quantity, current_product, quantity,
                     parent_line))
