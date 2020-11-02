@@ -23,6 +23,8 @@ class ProductVersion(models.Model):
             if initial_date:
                 domain.append(('date', '>=', initial_date))
             moves = move_obj.search(domain)
-            real_stock = sum(moves.mapped('real_stock')) + product.initial_stock
+            real_stock = sum(
+                moves.mapped('real_stock')) + product.initial_stock
             product.real_stock = real_stock
-            product.virtual_stock = real_stock + sum(moves.mapped('virtual_stock'))
+            product.virtual_stock = real_stock + sum(moves.mapped(
+                'virtual_stock'))

@@ -28,13 +28,18 @@ class StockMove(models.Model):
                                  compute="_compute_move_in_out_qty",
                                  store=True)
 
-    def _calculate_qty_available(self, domain_move_in_loc, domain_move_out_loc):
+    def _calculate_qty_available(self, domain_move_in_loc,
+                                 domain_move_out_loc):
         domain_move_in = [('product_id', 'in', self.ids)] + domain_move_in_loc
-        domain_move_out = [('product_id', 'in', self.ids)] + domain_move_out_loc
+        domain_move_out = [(
+            'product_id', 'in', self.ids)] + domain_move_out_loc
         domain_move_in_todo = [('state', '=', 'done')] + domain_move_in
         domain_move_out_todo = [('state', '=', 'done')] + domain_move_out
         Move = self.env['stock.move']
-        moves_in_res = dict((item['product_id'][0], item['product_qty']) for item in Move.read_group(domain_move_in_todo, ['product_id', 'product_qty'], ['product_id'], orderby='id'))
+        moves_in_res = dict((item['product_id'][0], item['product_qty']) for
+                            item in Move.read_group(
+            domain_move_in_todo, ['product_id', 'product_qty'],
+            ['product_id'], orderby='id'))
         moves_res = dict(
             (item['product_id'][0],
              moves_in_res[item['product_id'][0]] - item['product_qty'])

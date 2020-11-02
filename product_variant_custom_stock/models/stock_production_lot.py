@@ -33,15 +33,6 @@ class StockMove(models.Model):
         else:
             self.custom_value_ids = self._set_custom_lines()
 
-    # @api.model_create_multi
-    # def create(self, vals_list):
-    #     active_picking_id = self.env.context.get('active_picking_id', False)
-    #     if active_picking_id:
-    #         picking_id = self.env['stock.picking'].browse(active_picking_id)
-    #         if picking_id and not picking_id.picking_type_id.use_create_lots:
-    #             raise UserError(_('You are not allowed to create a lot or serial number with this operation type. To change this, go on the operation type and tick the box "Create New Lots/Serial Numbers".'))
-    #     return super(ProductionLot, self).create(vals_list)
-
 
 class LotVersionCustomLine(models.Model):
     _inherit = "version.custom.line"
