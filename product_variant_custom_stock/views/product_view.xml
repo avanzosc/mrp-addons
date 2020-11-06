@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+
+        <record model="ir.ui.view" id="stock_product_version_form">
+            <field name="name">stock.product.version.form</field>
+            <field name="model">product.version</field>
+            <field name="inherit_id" ref="product_variant_custom.product_version_view_form" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="initial_stock"/>
+                    <field name="initial_stock_date"/>
+                    <field name="real_stock"/>
+                    <field name="virtual_stock"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_product_version_view_tree">
+            <field name="name">stock.product.version.view.tree</field>
+            <field name="model">product.version</field>
+            <field name="inherit_id" ref="product_variant_custom.product_version_view_tree" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="initial_stock" />
+                    <field name="initial_stock_date" />
+                    <field name="real_stock" />
+                    <field name="virtual_stock" />
+                </field>
+            </field>
+        </record>
+</openerp>

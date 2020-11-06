@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_variant_custom_dimensions
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-14 13:51+0000\n"
+"PO-Revision-Date: 2019-10-14 13:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_product__base_weight
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_product__product_base_weight
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_template__base_weight
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_version__product_base_weight
+msgid "Base Weight"
+msgstr "Peso Base"
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_product__dimension
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_version__dimension
+#: selection:product.template,price_by:0
+msgid "Dimension"
+msgstr "Dimensión"
+
+#. module: product_variant_custom_dimensions
+#: code:addons/product_variant_custom_dimensions/models/product.py:85
+#, python-format
+msgid "Dimensionable attribute value cant be cast in float value"
+msgstr "El valor del atributo dimensional no se puede convertir a un valor numerico"
+
+#. module: product_variant_custom_dimensions
+#: code:addons/product_variant_custom_dimensions/models/product.py:43
+#: code:addons/product_variant_custom_dimensions/models/product.py:78
+#, python-format
+msgid "Dimensionable attribute value cant be cast in float value: %s"
+msgstr "El valor del atributo dimensional no se puede convertir a un valor numerico: %s"
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_product__attribute_dimensions
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_template__attribute_dimensions
+msgid "Dimensions"
+msgstr "Dimensiones"
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_product__price_by
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_template__price_by
+msgid "Price by"
+msgstr "Precio por"
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model,name:product_variant_custom_dimensions.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model,name:product_variant_custom_dimensions.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: product_variant_custom_dimensions
+#: selection:product.template,price_by:0
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: product_variant_custom_dimensions
+#: selection:product.template,price_by:0
+msgid "Weight"
+msgstr "Peso"
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_product__invisible_dimension
+msgid "invisible_dimension"
+msgstr ""
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model,name:product_variant_custom_dimensions.model_product_version
+msgid "product.version"
+msgstr ""
+
+#. module: product_variant_custom_dimensions
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_product__weight_uom
+#: model:ir.model.fields,field_description:product_variant_custom_dimensions.field_product_template__weight_uom
+msgid "uom"
+msgstr "udm"
+

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+
+        <record model="ir.ui.view" id="mrp_bom_extended_form_view">
+            <field name="name">mrp.bom.extended.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bom_line_ids']//field[@name='product_id']"
+                       position="before">
+                    <field name="product_tmpl_id"/>
+                    <field name="possible_value_ids" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='bom_line_ids']//field[@name='product_id']"
+                       position="attributes">
+                    <attribute name="string">Variant</attribute>
+                </xpath>
+                <xpath expr="//field[@name='bom_line_ids']/tree"
+                       position="attributes">
+                    <attribute name="edit">False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='bom_line_ids']//field[@name='attribute_value_ids']"
+                       position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_bom_line_form_view">
+            <field name="name">mrp.bom.line.form</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_line_view_form"/>
+            <field name="arch" type="xml">
+                    <field name="product_id" position="before">
+                        <field name="product_tmpl_id"/>
+                    </field>
+                    <field name="product_id" position="after">
+                        <field name="possible_value_ids" invisible="1"/>
+<!--                        <label for="attribute_value_ids"/>-->
+                        <field name="attribute_value_ids" widget="many2many_tags"/>
+                        <field name="routing_id"/>
+                    </field>
+
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="sequence" widget="handle"/>-->
+<!--                            <field name="type"/>-->
+<!--                            <field name="product_template"/>-->
+<!--                            <field name="product_id" string="Variant"/>-->
+<!--                            <field name="product_rounding"/>-->
+<!--                            <field name="product_efficiency"/>-->
+<!--                            <label for="product_qty"/>-->
+<!--                            <div>-->
+<!--                                <field name="product_qty" class="oe_inline"/>-->
+<!--                                <field name="product_uom"-->
+<!--                                       groups="product.group_uom"-->
+<!--                                       class="oe_inline"/>-->
+<!--                            </div>-->
+<!--                            <label for="product_uos_qty"-->
+<!--                                   groups="product.group_uos"/>-->
+<!--                            <div>-->
+<!--                                <field name="product_uos_qty"-->
+<!--                                       groups="product.group_uos"-->
+<!--                                       class="oe_inline"/>-->
+<!--                                <field name="product_uos"-->
+<!--                                       groups="product.group_uos"-->
+<!--                                       class="oe_inline"/>-->
+<!--                            </div>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="date_start"/>-->
+<!--                            <field name="date_stop"/>-->
+<!--                            -->
+<!--                        </group>-->
+<!--                    </group>-->
+
+<!--                    <label for="property_ids"/>-->
+<!--                    <field name="property_ids" widget="many2many_tags"/>-->
+            </field>
+        </record>
+
+<!--        <record model="ir.ui.view" id="mrp_bom_line_extended_tree_form">-->
+<!--            <field name="name">mrp.bom.line.tree</field>-->
+<!--            <field name="model">mrp.bom.line</field>-->
+<!--            <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="product_id" position="attributes">-->
+<!--                    <attribute name="string">Variant</attribute>-->
+<!--                </field>-->
+<!--                <field name="product_id" position="before">-->
+<!--                    <field name="product_template"/>-->
+<!--                    <field name="possible_value_ids" invisible="1"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+
+    </data>
+</openerp>

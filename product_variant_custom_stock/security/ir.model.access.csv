@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lot_version_custom_line_user,lot.version.custom.line.user,model_lot_version_custom_line,stock.group_stock_user,1,0,0,0
+access_lot_version_custom_line_manager,lot.version.custom.line.manager,model_lot_version_custom_line,stock.group_stock_manager,1,1,1,1
+access_inventory_report_user,inverntory.pivot.line.user,model_stock_inventory_product_version_report,stock.group_stock_user,1,0,0,0
+access_inventory_report_manager,inventory.pivot.manager,model_stock_inventory_product_version_report,stock.group_stock_manager,1,1,1,1

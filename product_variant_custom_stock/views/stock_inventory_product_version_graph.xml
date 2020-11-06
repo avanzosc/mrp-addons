@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+        <record model="ir.ui.view" id="stock_inventory_product_version_report_pivot">
+            <field name="name">stock.inventory.product.version.report.pivot</field>
+            <field name="model">stock.inventory.product.version.report</field>
+            <field name="arch" type="xml">
+                <graph type="pivot" string="Inventory pivot">
+                    <field name="product_version_id" type="row"/>
+                    <field name="product_id" type="row"/>
+                    <field name="real_product_qty" type="measure"/>
+                    <field name="virtual_product_qty" type="measure"/>
+                    <field name="product_qty" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+       <record id="action_project_task_user_graph" model="ir.actions.act_window">
+            <field name="name">Inventory Pivot</field>
+            <field name="res_model">stock.inventory.product.version.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="stock_inventory_product_version_report_pivot" />
+            <field name="context">{'group_by_no_leaf':1,'group_by':[]}</field>
+        </record>
+
+        <menuitem action="action_project_task_user_graph" id="menu_inventory_pivot" parent="stock.menu_warehouse_report"/>
+</openerp>

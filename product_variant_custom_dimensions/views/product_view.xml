@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="dimension_template_form_view">
+            <field name="name">dimension.product.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                    <field name="price_by"/>
+                        <div>
+                            <field name="base_weight" class="oe_inline" string="Base Weight"/>
+                            <field name="weight_uom" groups="uom.group_uom" nolabel="1" class="oe_inline"/>
+                        </div>
+                    <field name="attribute_dimensions"
+                           widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_product_dimension_form">
+            <field name="name">product.product.dimension.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="attribute_value_ids"
+                       position="after">
+                    <field name="invisible_dimension" invisible="1"/>
+                    <field name="dimension" attrs="{'invisible':[('invisible_dimension', '=', True)]}"/>
+                    <field name="product_base_weight" attrs="{'invisible':[('invisible_dimension', '=', True)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_version_dimension_form">
+            <field name="name">product.version.dimension.form</field>
+            <field name="model">product.version</field>
+            <field name="inherit_id" ref="product_variant_custom.product_version_view_form"/>
+            <field name="arch" type="xml">
+                <field name="custom_value_ids"
+                       position="after">
+                    <group>
+                        <field name="dimension"/>
+                        <field name="product_base_weight" />
+                    </group>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

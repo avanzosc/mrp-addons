@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+    <record id="mo_2_sale_order_line_copy_view_form" model="ir.ui.view">
+            <field name="name">mo.to.sale.order.line.product.copy</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_production_custom_variants_inherited_attributes.mrp_production_extended_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_version_id']"
+                       position="after">
+                    <button name="button_copy_product_to_sale_line" string="Copy product to Sale Line"
+                            attrs="{'invisible':[('sale_line_id', '=', False)]}" type="object" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
