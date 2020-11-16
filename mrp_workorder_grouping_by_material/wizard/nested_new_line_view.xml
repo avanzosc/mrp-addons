@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="nested_new_line_form">
+        <field name="name">nested.new.line</field>
+        <field name="model">nested.new.line</field>
+        <field name="arch" type="xml">
+            <form string="Nested New Line">
+                <field name="nested_id" domain="[('state', '!=', 'done')]" required="1"/>
+                <field name="main_product_id" readonly="1"/>
+                <footer>
+                    <button string="Done" name="action_done" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="wizard_nested_new_line">
+    	<field name="name">Add to Nest</field>
+        <field name="src_model">mrp.workorder</field>
+    	<field name="res_model">nested.new.line</field>
+    	<field name="view_type">form</field>
+    	<field name="view_mode">form</field>
+    	<field name="target">new</field>
+        <field name="key2" eval="'client_action_multi'"/>
+    </record>
+</odoo>

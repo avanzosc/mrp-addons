@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_workorder_nest_tree">
+        <field name="name">mrp.workorder.nest.tree</field>
+        <field name="model">mrp.workorder.nest</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="main_product_id"/>
+                <field name="lot_id"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mrp_workorder_nest_form">
+        <field name="name">mrp.workorder.nest.form</field>
+        <field name="model">mrp.workorder.nest</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="nest_start" type="object" string="Start"
+                            class="btn-info" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="nest_draft" type="object" string="Draft"
+                            class="btn-info" attrs="{'invisible': [('state', '!=', 'ready')]}"/>
+                    <button name="button_finish" type="object" string="Finish Order"
+                            class="btn-info"/><!--attrs="{'invisible': ['|', ('state', '!=', 'progress'), ('is_produced', '=', False)]}" />-->
+                    <button name="button_start" type="object"
+                            string="Start Working"/><!--attrs="{'invisible': ['|', ('state', '=', 'blocked'), ('state', '!=', 'draft')]}"/>-->
+                    <button name="button_start" type="object" string="Start Working"
+                            class="btn-success"/><!--attrs="{'invisible': ['|', ('state', '=', 'blocked'), ('state', '!=', 'ready')]}" />-->
+                    <button name="record_production" type="object" string="Done"
+                            class="btn-success"/><!--attrs="{'invisible': ['|', '|', '|', ('is_produced', '=', True), ('state', '=', 'blocked'), ('state', '!=', 'progress'), ('is_user_working', '=', False)]}"/>-->
+                    <button name="button_pending" type="object" string="Pause"
+                            class="btn-warning"/><!-- attrs="{'invisible': ['|', '|', ('working_state', '=', 'blocked'), ('state', 'in', ('done', 'pending', 'ready', 'cancel')), ('is_user_working', '=', False)]}"/>-->
+                    <button name="button_unblock" type="object" string="Unblock"
+                            class="btn-danger"/><!-- attrs="{'invisible': [('state', '!=', 'blocked')]}"/>-->
+                    <button name="button_start" type="object" string="Continue Production"
+                            class="btn-warning"/> <!--attrs="{'invisible': ['|', '|', ('state', '=', 'blocked'), ('is_user_working', '=', True), ('state', 'in', ('done', 'draft', 'ready'))]}"/>-->
+                    <button name="button_start" type="object"
+                            string="Continue Production"/><!--attrs="{'invisible': ['|', '|', ('production_state', '=', 'done'), ('state', '=', 'blocked'), ('state', '!=', 'done')]}"/>-->
+                    <button name="button_scrap" type="object"
+                            string="Scrap"/><!--attrs="{'invisible': [('state', 'in', ('confirmed', 'cancel'))]}"/>-->
+                    <field name="state" widget="statusbar" statusbar_visible="blocked,draft,ready,progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" nolabel="1"/>/
+                            <field name="code"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="main_product_id"/>
+                            <field name="lot_id" domain="[('product_id', '=', main_product_id.id)]"/>
+                        </group>
+                    </group>
+                    <div>
+                        <field name="nested_line_ids">
+                            <tree ><!--editable="top" > create="false">-->
+                                <field name="workorder_id"/>
+                                <field name="name" readonly="1"/>
+                                <field name="product_id" readonly="1"/>
+                                <field name="qty_producing"/>
+                                <field name="final_lot_id"/>
+                                <field name="qty_produced" readonly="1"/>
+                                <field name="qty_production" readonly="1"/>
+                                <field name="product_uom_id" readonly="1"/>
+                                <field name="workcenter_id" readonly="1"/>
+                                <field name="production_id" readonly="1"/>
+                                <field name="date_planned_start" readonly="1"/>
+                                <field name="state" readonly="1"/>
+                                <field name="working_state" invisible="1"/>
+                                <field name="is_user_working" invisible="1"/>
+                                <field name="is_produced" invisible="1"/>
+                                <button name="%(mrp.act_mrp_block_workcenter_wo)d" type="action" context="{'default_workcenter_id': workcenter_id}" string="Block" class="btn-danger" attrs="{'invisible': ['|', '|', ('working_state', '=', 'blocked'), ('state', 'in', ('done', 'pending', 'ready', 'cancel')), ('is_user_working', '=', False)]}"/>
+                            </tree>
+                        </field>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mrp_workorder_nest_action">
+        <field name="name">Nested Work Orders</field>
+        <field name="res_model">mrp.workorder.nest</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="mrp_workorder_nest_action"
+              id="menu_nested_workorder_action"
+              parent="mrp.menu_mrp_manufacturing"/>
+</odoo>
