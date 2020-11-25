@@ -72,6 +72,30 @@ class SaleOrderLine(models.Model):
             "Missing required fields on accountable sale order line."),
     ]
 
+    def _get_sale_line_description(self):
+        product_lang = self.product_id.with_context(
+            lang=self.partner_id.lang,
+            partner_id=self.partner_id.id,
+        )
+        product_name = product_lang.display_name or ""
+        version_description = product_name and "\n" or ""
+        attribute_value = {}
+        for attribute_line in self.product_attribute_ids:
+            attribute_value.update({
+                attribute_line.attribute_id.id: "[{}: {}]\n".format(
+                    attribute_line.attribute_id.name,
+                    attribute_line.value_id.name)})
+        for value_line in self.custom_value_ids:
+            if value_line.custom_value:
+                attribute_value.update({
+                    value_line.attribute_id.id: "[{}: {}({})]\n".format(
+                        value_line.attribute_id.name, value_line.value_id.name,
+                        value_line.custom_value)})
+        for key, value in attribute_value.items():
+            version_description += value
+        return "{}{}{}".format(product_name + version_description +
+                               product_lang.description_sale)
+
     def get_product_dict(self, tmpl_id, attributes):
         values = attributes.mapped("value_id.id")
         return {
@@ -133,9 +157,11 @@ class SaleOrderLine(models.Model):
                     self.product_id._get_product_attributes_values_dict())
             self.product_attribute_ids = (
                 self.product_tmpl_id._get_product_attributes_dict())
+            self.name = self._get_sale_line_description()
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
                                  self.product_tmpl_id.id)]}}
+        self.name = self._get_sale_line_description()
         return {'domain': {}}
 
     @api.onchange("product_id")
@@ -156,6 +182,7 @@ class SaleOrderLine(models.Model):
             self.custom_value_ids = self._set_custom_lines()
             version = self.product_id._find_version(self.custom_value_ids)
             self.product_version_id = version
+        self.name = self._get_sale_line_description()
         return result
 
     @api.onchange('product_attribute_ids')
@@ -165,6 +192,7 @@ class SaleOrderLine(models.Model):
         self.product_id = product_obj._product_find(self.product_tmpl_id,
                                                     self.product_attribute_ids)
         self.product_tmpl_id = product_tmpl_id
+        self.name = self._get_sale_line_description()
 
     @api.onchange('product_version_id')
     def product_version_id_change(self):
@@ -172,6 +200,7 @@ class SaleOrderLine(models.Model):
             self.product_id = self.product_version_id.product_id
         self.custom_value_ids = self._delete_custom_lines()
         self.custom_value_ids = self._set_custom_lines()
+        self.name = self._get_sale_line_description()
 
 
 class SaleLineAttribute(models.Model):
