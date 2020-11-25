@@ -8,22 +8,42 @@ class MrpProductionProductLine(models.Model):
     _name = 'mrp.production.product.line'
     _description = 'Production Scheduled Product'
 
-    name = fields.Char(string='Name', required=True)
+    name = fields.Char(string='Name', required=True, readonly=True,
+                       states={'draft': [('readonly', False)]})
     product_id = fields.Many2one(
-        comodel_name='product.product', string='Product', required=True)
+        comodel_name='product.product', string='Product', required=True,
+        readonly=True, states={'draft': [('readonly', False)]})
     product_qty = fields.Float(
         string='Product Quantity',
-        digits=dp.get_precision('Product Unit of Measure'), required=True)
+        digits=dp.get_precision('Product Unit of Measure'), required=True,
+        readonly=True, states={'draft': [('readonly', False)]})
     product_uom_id = fields.Many2one(
-        comodel_name='uom.uom', string='Unit of Measure', required=True)
+        comodel_name='uom.uom', string='Unit of Measure', required=True,
+        readonly=True, states={'draft': [('readonly', False)]})
     production_id = fields.Many2one(
         comodel_name='mrp.production', string='Production Order',
-        required=True, ondelete='cascade')
+        required=True, ondelete='cascade', readonly=True,
+        states={'draft': [('readonly', False)]})
     bom_line_id = fields.Many2one(
-        comodel_name='mrp.bom.line', string='Bom Line')
+        comodel_name='mrp.bom.line', string='Bom Line', readonly=True,
+        states={'draft': [('readonly', False)]})
     date_planned_start = fields.Datetime(
         string='Deadline Start', store=True,
         related="production_id.date_planned_start")
+    state = fields.Selection(selection=[
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed'),
+        ('planned', 'Planned'),
+        ('progress', 'In Progress'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled')], compute="_compute_state", store=True)
+    production_product_id = fields.Many2one(related="production_id.product_id",
+                                            store=True)
+
+    @api.depends("production_id.state")
+    def _compute_state(self):
+        for line in self:
+            line.state = line.production_id.state
 
     @api.onchange('product_id')
     def _onchange_product_id(self):
