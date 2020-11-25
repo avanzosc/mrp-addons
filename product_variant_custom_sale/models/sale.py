@@ -49,7 +49,8 @@ class SaleOrderLine(models.Model):
     product_attribute_ids = fields.One2many(
         comodel_name='sale.line.attribute', inverse_name='sale_line_id',
         string='Product attributes', copy=True, readonly=True,
-        states={'draft': [('readonly', False)]},)
+        states={'draft': [('readonly', False)],
+                'sent': [('readonly', False)]},)
     version_value_ids = fields.One2many(
         comodel_name="product.version.line",
         related="product_version_id.custom_value_ids")
