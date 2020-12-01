@@ -1,11 +1,13 @@
 # Copyright 2020 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, models
+from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
 from odoo.models import expression
 
+
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
+
 
     @api.multi
     def button_open_lots(self):

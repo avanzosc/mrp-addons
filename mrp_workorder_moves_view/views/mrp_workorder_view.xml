@@ -18,6 +18,7 @@
         <field name="arch" type="xml">
             <button name="record_production" position="after">
                 <button name="button_execute_all_moves" type="object" string="Do All" class="btn-success" attrs="{'invisible': ['|', '|', '|', ('is_produced', '=', True), ('working_state', '=', 'blocked'), ('state', '!=', 'progress'), ('is_user_working', '=', False)]}"/>
+                <button name="button_create_all_moves" type="object" string="Create all moves" class="btn-success" attrs="{'invisible': ['|', '|', '|', ('is_produced', '=', True), ('working_state', '=', 'blocked'), ('state', '!=', 'progress'), ('is_user_working', '=', False)]}"/>
             </button>
             <button name="action_see_move_scrap"
                     position="after">
