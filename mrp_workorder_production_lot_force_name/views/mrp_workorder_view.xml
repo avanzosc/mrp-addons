@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='final_lot_id']" position="before">
                 <field name="display_force_name" invisible="1"/>
-                <field name="force_lot_name" attrs="{'invisible':[('display_force_name', '=', False)]}"/>
+                <field name="force_lot_name" attrs="{'invisible':[('display_force_name', '=', False)], 'required':[('display_force_name', '=', True), ('state', '=', 'progress')]}"/>
             </xpath>
         </field>
     </record>
