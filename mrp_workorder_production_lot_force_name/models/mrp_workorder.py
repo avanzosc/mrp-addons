@@ -18,7 +18,7 @@ class MrpWorkorder(models.Model):
 
     def record_production(self):
         for order in self:
-            if order.display_force_name:
+            if order.display_force_name and order.final_lot_id:
                 order.final_lot_id.name = order.force_lot_name
                 order.force_lot_name = ""
         return super().record_production()
