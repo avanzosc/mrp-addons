@@ -24,7 +24,7 @@ class MrpWorkorder(models.Model):
     @api.multi
     def button_start(self):
         res = super().button_start()
-        if self.move_raw_ids:
+        if self.move_raw_ids and self.product_id.tracking != 'none':
             self.final_lot_id = self.generate_lot(self.qty_produced)
         return res
 
@@ -33,6 +33,7 @@ class MrpWorkorder(models.Model):
         if not self.move_raw_ids:
             self.qty_produced = self.production_id.product_qty
             self.button_finish()
+            return True
         super().record_production()
         if self.state == 'progress' and self.product_id.tracking != 'none':
             self.final_lot_id = self.generate_lot(self.qty_produced)
