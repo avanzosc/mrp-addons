@@ -14,7 +14,7 @@ class MrpWorkorder(models.Model):
         for order in self:
             product = order.product_id
             order.display_force_name = product.categ_id.force_lot_name \
-                and product.tracking != 'none'
+                and product.tracking != 'none' and self.move_raw_ids
 
     def record_production(self):
         for order in self:
