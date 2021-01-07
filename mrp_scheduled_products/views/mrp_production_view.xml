@@ -5,6 +5,7 @@
         <field name="arch" type="xml">
             <form string="Scheduled Products">
                 <sheet>
+                    <field name="state" invisible="1"/>
                     <div class="oe_title">
                         <label class="oe_edit_only" for="name" />
                         <h1><field name="name" /></h1>
@@ -35,6 +36,7 @@
                 <field name="product_id"/>
                 <field name="product_qty"/>
                 <field name="product_uom_id" groups="uom.group_uom"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -57,6 +59,10 @@
                             groups="uom.group_uom"/>
                     <filter string="Date Planned" name="date_planned_start"
                             domain="[]" context="{'group_by':'date_planned_start'}"/>
+                    <filter string="Production Product" name="production_product_id"
+                            domain="[]" context="{'group_by':'production_product_id'}"/>
+                    <filter string="State" name="state"
+                            domain="[]" context="{'group_by':'state'}"/>
                 </group>
             </search>
         </field>

@@ -18,7 +18,7 @@ msgstr ""
 #. module: sale_line_mrp_link
 #: model_terms:ir.ui.view,arch_db:sale_line_mrp_link.sale_order_production_view_form
 msgid "Create MO"
-msgstr "Crear OF"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.actions.server,name:sale_line_mrp_link.create_mrp_scheduled_lines
@@ -28,17 +28,17 @@ msgstr ""
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__partner_id
 msgid "Customer"
-msgstr "Cliente"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line__manufacturable_product
 msgid "Manufacturable Product"
-msgstr "Producto fabricable"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model_terms:ir.ui.view,arch_db:sale_line_mrp_link.sale_order_production_view_form
 msgid "Manufacturing Orders"
-msgstr "Órdenes de producción"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: code:addons/sale_line_mrp_link/models/sale.py:52
@@ -49,63 +49,63 @@ msgstr ""
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line__product_line_ids
 msgid "Product line"
-msgstr "Línea de productos"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line__mrp_production_id
 msgid "Production"
-msgstr "Producción"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model,name:sale_line_mrp_link.model_mrp_production
 msgid "Production Order"
-msgstr "Orden de producción"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model,name:sale_line_mrp_link.model_mrp_production_product_line
 msgid "Production Scheduled Product"
-msgstr "Fabricación planificada producto"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__sale_line_id
 msgid "Sale Line"
-msgstr "Línea de venta"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model,name:sale_line_mrp_link.model_sale_order
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__sale_order_id
 msgid "Sale Order"
-msgstr "Pedido de venta"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production_product_line__sale_line_id
 msgid "Sale lines"
-msgstr "Líneas de venta"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model,name:sale_line_mrp_link.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Línea de pedido de venta"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model_terms:ir.ui.view,arch_db:sale_line_mrp_link.sale_order_production_view_form
 msgid "Scheduled Products"
-msgstr "Productos planificados"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model,name:sale_line_mrp_link.model_stock_rule
 msgid "Stock Rule"
-msgstr "Regla de Inventario"
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: code:addons/sale_line_mrp_link/models/sale.py:60
 #: code:addons/sale_line_mrp_link/models/sale.py:66
 #, python-format
 msgid "The quantity must be positive."
-msgstr "La cantidad debe ser positiva."
+msgstr ""
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,help:sale_line_mrp_link.field_mrp_production__partner_id
 msgid "You can find a customer by its Name, TIN, Email or Internal Reference."
-msgstr "Puedes encontrar un cliente por su nombre, CIF, email o referencia interna"
+msgstr ""
 
