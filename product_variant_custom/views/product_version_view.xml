@@ -37,7 +37,7 @@
                         <field name="partner_id" colspan="2"/>
                     </group>
                     <group colspan="4">
-                        <field name="custom_value_ids" nolabel="1"/>
+                        <field name="custom_value_ids" context="{'show_attribute': False}" nolabel="1"/>
                     </group>
                 </form>
             </field>
