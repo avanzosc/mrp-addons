@@ -49,7 +49,7 @@ class SaleOrderLine(models.Model):
     product_attribute_ids = fields.One2many(
         comodel_name='sale.line.attribute', inverse_name='sale_line_id',
         string='Product attributes', copy=True, readonly=True,
-        states={'draft': [('readonly', False)]},)
+        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
     version_value_ids = fields.One2many(
         comodel_name="product.version.line",
         related="product_version_id.custom_value_ids")
@@ -71,6 +71,24 @@ class SaleOrderLine(models.Model):
             "Missing required fields on accountable sale order line."),
     ]
 
+    def _get_sale_line_description(self):
+        if not self.product_id:
+            return
+        product_lang = self.product_id.with_context(
+            lang=self.order_id.partner_id.lang,
+            partner_id=self.order_id.partner_id.id,
+        )
+        self.name = product_lang.display_name or ""
+        version_description = " "
+        for value_line in self.custom_value_ids:
+            if value_line.custom_value:
+                version_description += "[{}: {}({})]".format(
+                    value_line.attribute_id.name, value_line.value_id.name,
+                    value_line.custom_value)
+        if product_lang.description_sale:
+            self.name += '\n' + product_lang.description_sale
+        return self.name + version_description
+
     def get_product_dict(self, tmpl_id, attributes):
         values = attributes.mapped("value_id.id")
         return {
@@ -79,9 +97,20 @@ class SaleOrderLine(models.Model):
             'active': tmpl_id.active,
         }
 
-    def create_product_product(self, template=None, attributes=None):
-        product_dict = self.get_product_dict(self.product_tmpl_id, self.product_attribute_ids)
-        self.product_id = self.env['product.product'].create(product_dict)
+    def _all_attribute_lines_filled(self):
+        for value in self.product_attribute_ids:
+            if not value.value_id.id:
+                return False
+        return True
+
+    def create_product_product_line(self):
+        product_obj = self.env['product.product']
+        product_id = product_obj._product_find(self.product_tmpl_id,
+                                               self.product_attribute_ids)
+        if not product_id and self._all_attribute_lines_filled():
+            product_dict = product_obj.get_product_dict(
+                self.product_tmpl_id, self.product_attribute_ids)
+            self.product_id = product_obj.create(product_dict)
 
     @api.model
     def create(self, values):
@@ -112,11 +141,11 @@ class SaleOrderLine(models.Model):
     @api.multi
     @api.onchange('product_tmpl_id')
     def onchange_product_template(self):
-        if self.product_tmpl_id and self.product_id.product_tmpl_id == self.product_tmpl_id:
+        if self.product_tmpl_id and \
+                self.product_id.product_tmpl_id == self.product_tmpl_id:
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
                                  self.product_tmpl_id.id)]}}
-
         self.ensure_one()
         self.product_attribute_ids = \
             self._delete_product_attribute_ids()
@@ -169,8 +198,16 @@ class SaleOrderLine(models.Model):
     def product_version_id_change(self):
         if self.product_version_id:
             self.product_id = self.product_version_id.product_id
+            self.name = self._get_sale_line_description()
         self.custom_value_ids = self._delete_custom_lines()
         self.custom_value_ids = self._set_custom_lines()
+
+    @api.onchange('custom_value_ids')
+    def onchange_version_lines(self):
+        product_version = self.product_id._find_version(
+            self.custom_value_ids)
+        self.product_version_id = product_version
+        self.name = self._get_sale_line_description()
 
 
 class SaleLineAttribute(models.Model):
