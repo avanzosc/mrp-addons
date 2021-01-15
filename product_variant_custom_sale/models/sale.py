@@ -151,7 +151,6 @@ class SaleOrderLine(models.Model):
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
                                  self.product_tmpl_id.id)]}}
-
         self.ensure_one()
         self.product_attribute_ids = \
             self._delete_product_attribute_ids()
