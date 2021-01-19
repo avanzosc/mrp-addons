@@ -49,8 +49,7 @@ class SaleOrderLine(models.Model):
     product_attribute_ids = fields.One2many(
         comodel_name='sale.line.attribute', inverse_name='sale_line_id',
         string='Product attributes', copy=True, readonly=True,
-        states={'draft': [('readonly', False)],
-                'sent': [('readonly', False)]},)
+        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
     version_value_ids = fields.One2many(
         comodel_name="product.version.line",
         related="product_version_id.custom_value_ids")
@@ -74,8 +73,8 @@ class SaleOrderLine(models.Model):
 
     def _get_sale_line_description(self):
         product_lang = self.product_id.with_context(
-            lang=self.partner_id.lang,
-            partner_id=self.partner_id.id,
+            lang=self.order_id.partner_id.lang,
+            partner_id=self.order_id.partner_id.id,
         )
         product_name = product_lang.display_name or ""
         version_description = product_name and "\n" or ""
@@ -103,6 +102,7 @@ class SaleOrderLine(models.Model):
             'attribute_value_ids': [(6, 0, values)],
             'active': tmpl_id.active,
         }
+
     def _all_attribute_lines_filled(self):
         for value in self.product_attribute_ids:
             if not value.value_id.id:
@@ -147,7 +147,8 @@ class SaleOrderLine(models.Model):
     @api.multi
     @api.onchange('product_tmpl_id')
     def onchange_product_template(self):
-        if self.product_tmpl_id and self.product_id.product_tmpl_id == self.product_tmpl_id:
+        if self.product_tmpl_id and \
+                self.product_id.product_tmpl_id == self.product_tmpl_id:
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
                                  self.product_tmpl_id.id)]}}
@@ -209,6 +210,13 @@ class SaleOrderLine(models.Model):
             self.product_id = self.product_version_id.product_id
         self.custom_value_ids = self._delete_custom_lines()
         self.custom_value_ids = self._set_custom_lines()
+        self.name = self._get_sale_line_description()
+
+    @api.onchange('custom_value_ids')
+    def onchange_version_lines(self):
+        product_version = self.product_id._find_version(
+            self.custom_value_ids)
+        self.product_version_id = product_version
         self.name = self._get_sale_line_description()
 
 

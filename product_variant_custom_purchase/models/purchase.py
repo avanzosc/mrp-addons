@@ -78,11 +78,12 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     @api.onchange('product_tmpl_id')
     def onchange_product_template(self):
-        if self.product_tmpl_id and self.product_id.product_tmpl_id == self.product_tmpl_id:
+        self.ensure_one()
+        if self.product_tmpl_id and \
+                self.product_id.product_tmpl_id == self.product_tmpl_id:
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
                                  self.product_tmpl_id.id)]}}
-        self.ensure_one()
         self.product_attribute_ids = \
             self._delete_product_attribute_ids()
         self.custom_value_ids = self._delete_custom_lines()
