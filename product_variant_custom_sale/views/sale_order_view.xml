@@ -27,22 +27,22 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/form//field[@name='product_id']"
                        position="after">
-<button name="create_product_product" string="Create Product" type="object" attrs="{'invisible': [('product_id', '=', 'false')]}"/>
+<button name="create_product_product_line" string="Create Product" type="object" attrs="{'invisible': [('product_id', '!=', False)]}"/>
                     <!--attrs="{'invisible':[('product_attribute_ids','=',[])]}"-->
 
-                        <field name="product_attribute_ids"
+                        <field name="product_attribute_ids" context="{'show_attribute': False}"
                                options="{'no_create': True, 'no_delete': True}">
                             <tree create="0" delete="0" editable="1">
                                 <field name="attribute_id" />
-                                <field name="value_id" options="{'no_create': True}" />
+                                <field name="value_id" options="{'no_create': True}" context="{'show_attribute': False}"/>
                                 <field name="possible_value_ids" invisible="1" />
                             </tree>
                         </field>
                     <field name="product_version_id" invisible="True"/>
-                    <field name="version_value_ids"
+                    <field name="version_value_ids" context="{'show_attribute': False}"
                            attrs="{'invisible': [('product_version_id','=',False)], 'readonly': 1}"/>
                     <!--<field name="possible_attribute_ids" invisible="1"/>-->
-                    <field name="custom_value_ids"
+                    <field name="custom_value_ids" context="{'show_attribute': False}"
                            attrs="{'invisible': [('product_version_id','!=',False)]}">
                     <field name="product_version_id"
                            domain="[('product_id','=',product_id)]"/>
