@@ -22,6 +22,8 @@ class StockMove(models.Model):
                                          name="Product Version",
                                          compute="_compute_product_version",
                                          store=True)
+    manual_product_version_id = fields.Many2one(
+        comodel_name="product.version", name="Manual Product Version")
     real_stock = fields.Float(string="Real In",
                               compute="_compute_move_in_out_qty", store=True)
     virtual_stock = fields.Float(string="Virtual In",
@@ -78,7 +80,7 @@ class StockMove(models.Model):
     @api.depends('product_id')
     def _compute_product_version(self):
         for move in self:
-            product_version = False
+            product_version = move.manual_product_version_id
             try:
                 product_version = move.sale_line_id.product_version_id
             except AttributeError:

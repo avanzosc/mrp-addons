@@ -57,7 +57,7 @@
         <field name="search_view_id" ref="product_variant_custom.product_version_view_search"/>
     </record>
 
-    <menuitem id="purchase_product_version_menu" name="Product Versions" parent="purchase.menu_procurement_partner_contact_form" action="product_version_action_purchase" />
+    <menuitem id="purchase_product_version_menu" name="Product Versions" parent="purchase.menu_procurement_management" action="product_version_action_purchase" />
 
     </data>
 </openerp>
