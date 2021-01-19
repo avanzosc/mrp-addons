@@ -12,6 +12,8 @@ class MrpWorkorderNest(models.Model):
                        copy=False, default='New')
     code = fields.Char(string="Code")
     main_product_id = fields.Many2one(comodel_name="product.product")
+    workcenter_id = fields.Many2one(comodel_name="mrp.workcenter",
+                                    compute="_compute_workcenter")
     lot_id = fields.Many2one(comodel_name="stock.production.lot")
     nested_line_ids = fields.One2many(comodel_name="mrp.workorder.nest.line",
                                       inverse_name="nest_id",
@@ -23,6 +25,32 @@ class MrpWorkorderNest(models.Model):
         ('blocked', 'Blocked'),
         ('done', 'Done'),
     ], string="State")
+    line_state = fields.Selection(selection=[
+        ('draft', 'Draft'),
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('ready', 'Ready'),
+        ('progress', 'Progress'),
+        ('blocked', 'Blocked'),
+        ('done', 'Done'),
+        ('cancel', 'Cancel'),
+    ], compute="_compute_line_states")
+    line_working_state = fields.Selection(selection=[
+        ('unblocked', 'Unblocked'),
+        ('blocked', 'Blocked'),
+    ], compute="_compute_line_states")
+    line_production_state = fields.Selection(selection=[
+        ('undone', 'Undone'),
+        ('done', 'Done'),
+    ], compute="_compute_line_states")
+    line_is_produced = fields.Boolean(compute="_compute_line_states")
+    line_is_user_working = fields.Boolean(compute="_compute_line_states")
+
+    @api.depends('nested_line_ids')
+    def _compute_workcenter(self):
+        for nest in self:
+            if nest.nested_line_ids:
+                nest.workcenter_id = nest.nested_line_ids[0].workcenter_id.id
 
     @api.multi
     def name_get(self):
@@ -45,8 +73,10 @@ class MrpWorkorderNest(models.Model):
     @api.multi
     def nest_start(self):
         for nest in self:
-            if nest.state == 'draft':
+            if nest.state == 'draft' and nest.nested_line_ids:
                 nest.state = 'ready'
+            elif not nest.nested_line_ids:
+                raise UserError(_("The nesting has no lines"))
 
     def nest_draft(self):
         for nest in self:
@@ -78,8 +108,10 @@ class MrpWorkorderNest(models.Model):
     def record_production(self):
         for nest in self:
             for nl in nest.nested_line_ids:
-                if nl.is_user_working and nl.state == 'progress' and not \
-                        nl.is_produced:
+                is_user_working = nl.workorder_id.is_user_working
+                is_produced = nl.workorder_id.is_produced
+                if is_user_working and nl.state == 'progress' and not \
+                        is_produced:
                     nl._write_lot_producing_qty()
                     wo = nl.workorder_id
                     try:
@@ -95,7 +127,8 @@ class MrpWorkorderNest(models.Model):
     def button_pending(self):
         for nest in self:
             for nl in nest.nested_line_ids:
-                if nl.working_state != 'blocked' and nl.is_user_working and \
+                is_user_working = nl.workorder_id.is_user_working
+                if nl.working_state != 'blocked' and is_user_working and \
                         nl.state not in ('done', 'pending', 'ready', 'cancel'):
                     nl.workorder_id.button_pending()
 
@@ -112,6 +145,32 @@ class MrpWorkorderNest(models.Model):
             for nest_line in nest.nested_line_ids:
                 if nest_line.state not in ('confirmed', 'cancel'):
                     nest_line.workorder_id.button_scrap()
+
+    @api.depends('nested_line_ids')
+    def _compute_line_states(self):
+        for nest in self:
+            state = 'done'
+            working_state = 'blocked'
+            production_state = 'done'
+            is_produced = True
+            is_user_working = True
+            for wl in nest.nested_line_ids:
+                if wl.state != 'done':
+                    state = wl.state
+                if wl.working_state != 'blocked':
+                    working_state = 'unblocked'
+                if wl.production_state != 'done':
+                    production_state = 'undone'
+                if not wl.workorder_id.is_produced:
+                    is_produced = False
+                if not wl.workorder_id.is_user_working:
+                    is_user_working = False
+            nest.line_state = state
+            nest.line_working_state = working_state
+            nest.line_production_state = production_state
+            nest.line_is_user_working = is_user_working
+            nest.line_is_produced = is_produced
+
 
 
 class MrpWorkorderNestLine(models.Model):
@@ -159,9 +218,7 @@ class MrpWorkorderNestLine(models.Model):
                                      readonly=1)
     production_state = fields.Selection(
         related="workorder_id.production_state", readonly=1)
-    is_user_working = fields.Boolean(related="workorder_id.is_user_working",
-                                     readonly=1)
-    is_produced = fields.Boolean(related="workorder_id.is_produced")
+
 
     def _write_lot_producing_qty(self):
         for line in self:

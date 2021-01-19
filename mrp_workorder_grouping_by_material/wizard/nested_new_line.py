@@ -16,10 +16,12 @@ class NestedNewLine(models.TransientModel):
     @api.multi
     def action_done(self):
         added_wo = self.nested_id.nested_line_ids.mapped('workorder_id')
+        line_states = self.nested_id.nested_line_ids.mapped('state')
         workorders = self.env['mrp.workorder'].search([
             ('id', 'in', self._context.get('active_ids')),
             ('id', 'not in', added_wo),
             ('main_product_id', '=', self.nested_id.main_product_id.id)
+            ('state', 'in', line_states),
             ('state', '!=', 'done'),
         ])
         new_lines = []

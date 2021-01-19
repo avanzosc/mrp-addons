@@ -9,14 +9,15 @@ class MrpWorkorder(models.Model):
     main_product_id = fields.Many2one(comodel_name="product.product",
                                    string="Main Product",
                                    computed="_compute_main_product_id")
-    nested_ids = fields.Many2many(comodel_name="nested", string="In Nests",
+    nested_ids = fields.Many2many(comodel_name="mrp.workorder.nest",
+                                  string="In Nests",
                                   compute="_compute_nested_ids")
 
     def _compute_nested_ids(self):
         for order in self:
             nest_ids = self.env['mrp.workorder.nest.line'].search([
                 ('workorder_id', '=', order.id)]).mapped('nest_id')
-            order.nested_ids = [(6, 0, nest_ids)]
+            order.nested_ids = [(6, 0, nest_ids.ids)]
 
     def _check_final_product_lots(self):
         if (self.production_id.product_id.tracking != 'none') and not \

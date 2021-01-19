@@ -16,13 +16,13 @@
         </field>
     </record>
     
-    <record model="ir.actions.act_window" id="wizard_nested_new_line">
-    	<field name="name">Add to Nest</field>
-        <field name="src_model">mrp.workorder</field>
-    	<field name="res_model">nested.new.line</field>
-    	<field name="view_type">form</field>
-    	<field name="view_mode">form</field>
-    	<field name="target">new</field>
-        <field name="key2" eval="'client_action_multi'"/>
-    </record>
+    <act_window id="wizard_nested_new_line"
+                name="Add to Nest"
+                src_model="mrp.workorder"
+                res_model="nested.new.line"
+                view_type="form"
+                view_mode="form"
+                key2="client_action_multi"
+                multi="True"
+                target="new" />
 </odoo>
