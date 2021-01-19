@@ -133,7 +133,10 @@ class MrpBom(models.Model):
         res_line, res = super(MrpBom, self)._prepare_consume_line(
             bom_line, quantity, product, original_qty, parent_line)
         production = self.env.context.get('production')
-        active_model = self.env.context.get('params').get('model')
+        try:
+            active_model = self.env.context.get('params').get('model')
+        except AttributeError:
+            active_model = False
         if not production and active_model == 'mrp.production':
             production = self.env['mrp.production'].browse(
                 self.env.context.get('params').get('id'))
