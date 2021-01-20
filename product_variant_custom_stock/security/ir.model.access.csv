@@ -3,9 +3,9 @@ access_lot_version_custom_line_user,lot.version.custom.line.user,model_lot_versi
 access_lot_version_custom_line_manager,lot.version.custom.line.manager,model_lot_version_custom_line,stock.group_stock_manager,1,1,1,1
 access_inventory_report_user,inverntory.pivot.line.user,model_stock_inventory_product_version_report,stock.group_stock_user,1,0,0,0
 access_inventory_report_manager,inventory.pivot.manager,model_stock_inventory_product_version_report,stock.group_stock_manager,1,1,1,1
-access_product_version_user_stock,product.version.user.sale,model_product_version,stock.group_stock_user,1,0,0,0
-access_product_version_line_user_stock,product.version.line.user.purchase,model_product_version_line,stock.group_stock_user,1,0,0,0
-access_product_version_custom_line_user_stock, version.custom.line.user.purchase,model_version_custom_line,stock.group_stock_user,1,0,0,0
-access_product_template_manager_stock,product.version.manager.purchase,model_product_version,stock.group_stock_manager,1,1,1,1
-access_product_product_manager_stock,product.version.line.manager.purchase,model_product_version_line,stock.group_stock_manager,1,1,1,1
-access_product_version_custom_line_manager_stock,version.custom.line.manager.purchase,model_version_custom_line,stock.group_stock_manager,1,1,1,1
+access_product_version_user_stock,product.version.user.sale,product_variant_custom.model_product_version,stock.group_stock_user,1,0,0,0
+access_product_version_line_user_stock,product.version.line.user.purchase,product_variant_custom.model_product_version_line,stock.group_stock_user,1,0,0,0
+access_product_version_custom_line_user_stock, version.custom.line.user.purchase,product_variant_custom.model_version_custom_line,stock.group_stock_user,1,0,0,0
+access_product_template_manager_stock,product.version.manager.purchase,product_variant_custom.model_product_version,stock.group_stock_manager,1,1,1,1
+access_product_product_manager_stock,product.version.line.manager.purchase,product_variant_custom.model_product_version_line,stock.group_stock_manager,1,1,1,1
+access_product_version_custom_line_manager_stock,version.custom.line.manager.purchase,product_variant_custom.model_version_custom_line,stock.group_stock_manager,1,1,1,1
