@@ -3,10 +3,17 @@
    :alt: License: AGPL-3
 
 =============
-Mrp usability
+MRP Usability
 =============
 
-* On new shortcut in manufacturing orders form, to movements to consume.
+This modules improves the usability of Manufacturing by:
+
+* Adding a smartbutton to access directly to consumed product lines.
+* Making visible quantity fields, in production orders and workorders:
+
+  * To Produce
+  * Produced
+  * Remaining
 
 
 Bug Tracker

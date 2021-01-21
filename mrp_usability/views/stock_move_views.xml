@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_show_productions_moves_to_consume" model="ir.actions.act_window">
+        <field name="name">Productions movements to consume</field>
+        <field name="res_model">stock.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="stock.view_move_tree"/>
+        <field name="search_view_id" ref="stock.view_move_search"/>
+        <field name="domain">[('raw_material_production_id', '=', active_id)]</field>
+    </record>
+</odoo>

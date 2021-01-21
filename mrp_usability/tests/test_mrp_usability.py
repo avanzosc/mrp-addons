@@ -18,6 +18,3 @@ class TestMrpUsability(common.SavepointCase):
             self.assertEquals(
                 production.moves_to_consume_count,
                 len(production.move_raw_ids))
-            res = production.button_show_moves_to_consume()
-            domain = [('id', 'in', production.move_raw_ids.ids)]
-            self.assertEquals(domain, res.get('domain', False))
