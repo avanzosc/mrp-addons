@@ -5,17 +5,15 @@
     "version": "12.0.1.0.0",
     "author": "AvanzOSC",
     "license": "AGPL-3",
-    "category": "Custom module",
+    "category": "Manufacturing",
     "website": "http://www.avanzosc.es",
-    "contributors": [
-        "Ana Juaristi <ajuaristio@gmail.com>",
-        "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>"
-    ],
     "depends": [
         "mrp",
-        ],
+    ],
     "data": [
+        "views/stock_move_views.xml",
         "views/mrp_production_views.xml",
-        ],
+        "views/mrp_workorder_views.xml",
+    ],
     "installable": True
 }

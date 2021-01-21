@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-17 08:02+0000\n"
-"PO-Revision-Date: 2020-04-17 08:02+0000\n"
+"POT-Creation-Date: 2021-01-21 14:54+0000\n"
+"PO-Revision-Date: 2021-01-21 14:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,13 +17,20 @@ msgstr ""
 
 #. module: mrp_usability
 #: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__moves_to_consume_count
-msgid "Counter movements to consume"
-msgstr "Contador de mvtos. a consumir"
+msgid "# Consume Moves"
+msgstr "Nº de mvtos. a consumir"
 
 #. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
-msgid "Movements to consume"
-msgstr "Mvtos. a consumir"
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_workorder_view_tree
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_workorder_view_tree
+msgid "Produced"
+msgstr "Producido"
 
 #. module: mrp_usability
 #: model:ir.model,name:mrp_usability.model_mrp_production
@@ -34,4 +41,41 @@ msgstr "Órden de producción"
 #: model:ir.actions.act_window,name:mrp_usability.action_show_productions_moves_to_consume
 msgid "Productions movements to consume"
 msgstr "Mvtos. a consumir de producción"
+
+#. module: mrp_usability
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__qty_remaining
+msgid "Quantity To Be Produced"
+msgstr "Cantidad a producir"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+msgid "To Consume"
+msgstr "A consumir"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_workorder_view_tree
+msgid "To Produce"
+msgstr "Fabricar"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+msgid "Total Done"
+msgstr "Total realizado"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_workorder_view_tree
+msgid "Total Produced"
+msgstr "Total producido"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_workorder_view_tree
+msgid "Total Qty"
+msgstr "Cant. total"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_workorder_view_tree
+msgid "Total Remaining"
+msgstr "Total restante"
 

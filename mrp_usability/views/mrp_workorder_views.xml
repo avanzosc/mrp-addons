@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_workorder_view_tree" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view_inherit" />
+        <field name="arch" type="xml">
+            <field name="qty_production" position="attributes">
+                <attribute name="sum">Total Qty</attribute>
+                <attribute name="string">To Produce</attribute>
+            </field>
+            <field name="product_uom_id" position="before">
+                <field name="qty_produced" sum="Total Produced" string="Produced" />
+                <field name="qty_remaining" sum="Total Remaining" string="Pending" />
+            </field>
+        </field>
+    </record>
+</odoo>
