@@ -9,3 +9,4 @@ access_product_version_custom_line_user_purchase, version.custom.line.user.purch
 access_product_template_manager_purchase,product.version.manager.purchase,product_variant_custom.model_product_version,purchase.group_purchase_manager,1,1,1,1
 access_product_product_manager_purchase,product.version.line.manager.purchase,product_variant_custom.model_product_version_line,purchase.group_purchase_manager,1,1,1,1
 access_product_version_custom_line_manager_purchase,version.custom.line.manager.purchase,product_variant_custom.model_version_custom_line,purchase.group_purchase_manager,1,1,1,1
+
