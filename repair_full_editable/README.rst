@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-========================
-MRP Repair full editable
-========================
+===========================
+Repair Order Fully Editable
+===========================
 
 This module allows to add operations and fees in not invoiced or done repair
 operations.
