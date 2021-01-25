@@ -94,8 +94,8 @@ class SaleOrderLine(models.Model):
                         value_line.custom_value)})
         for key, value in attribute_value.items():
             version_description += value
-        return "{}{}{}".format(product_name + version_description +
-                               product_lang.description_sale)
+        return "{}{}{}".format(product_lang.description_sale, product_name,
+                               version_description)
 
     def get_product_dict(self, tmpl_id, attributes):
         values = attributes.mapped("value_id.id")
@@ -215,12 +215,12 @@ class SaleOrderLine(models.Model):
         self.custom_value_ids = self._set_custom_lines()
         self.name = self._get_sale_line_description()
 
-    @api.onchange('custom_value_ids')
-    def onchange_version_lines(self):
-        product_version = self.product_id._find_version(
-            self.custom_value_ids)
-        self.product_version_id = product_version
-        self.name = self._get_sale_line_description()
+#    @api.onchange('custom_value_ids')
+#    def onchange_version_lines(self):
+#        product_version = self.product_id._find_version(
+#            self.custom_value_ids)
+#        self.product_version_id = product_version
+#        self.name = self._get_sale_line_description()
 
     @api.onchange('custom_value_ids')
     def onchange_version_lines(self):
