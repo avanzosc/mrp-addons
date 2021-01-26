@@ -213,12 +213,12 @@ class SaleOrderLine(models.Model):
         self.custom_value_ids = self._set_custom_lines()
         self.name = self._get_sale_line_description()
 
-    @api.onchange('custom_value_ids')
-    def onchange_version_lines(self):
-        product_version = self.product_id._find_version(
-            self.custom_value_ids)
-        self.product_version_id = product_version
-        self.name = self._get_sale_line_description()
+#    @api.onchange('custom_value_ids')
+#    def onchange_version_lines(self):
+#        product_version = self.product_id._find_version(
+#            self.custom_value_ids)
+#        self.product_version_id = product_version
+#        self.name = self._get_sale_line_description()
 
 
 class SaleLineAttribute(models.Model):
