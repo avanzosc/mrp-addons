@@ -8,14 +8,6 @@ from odoo import models, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    @api.multi
-    def _get_product_attributes_dict(self):
-        if not self:
-            return []
-        self.ensure_one()
-        return self.attribute_line_ids.mapped(
-            lambda x: {'attribute_id': x.attribute_id.id})
-
     def _get_product_attribute_ids_inherit_dict(self, product_attribute_list):
         product_attribute_ids = self._get_product_attributes_dict()
         for attr in product_attribute_ids:

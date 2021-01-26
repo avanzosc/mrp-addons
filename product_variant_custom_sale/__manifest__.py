@@ -2,7 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 {
     "name": "Sale Product Version",
-    "version": "12.0.1.0.3",
+    "version": "12.0.1.0.4",
     "license": "AGPL-3",
     "depends": [
         "sale",
