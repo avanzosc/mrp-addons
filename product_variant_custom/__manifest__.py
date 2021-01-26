@@ -7,6 +7,9 @@
     "depends": [
         "product",
     ],
+    "excludes": [
+        "product_variant_configurator",
+    ],
     "author": "AvanzOSC",
     "website": "http://www.avanzosc.es",
     "category": "Tools",

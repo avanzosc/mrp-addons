@@ -19,6 +19,16 @@ class ProductProduct(models.Model):
             'active': tmpl_id.active,
         }
 
+    @api.multi
+    def _get_product_attributes_values_dict(self):
+        # Retrieve first the attributes from template to preserve order
+        res = self.product_tmpl_id._get_product_attributes_dict()
+        for val in res:
+            value = self.attribute_value_ids.filtered(
+                lambda x: x.attribute_id.id == val['attribute_id'])
+            val['value_id'] = value.id
+        return res
+
     @api.depends('product_version_ids')
     def compute_product_versions(self):
         for product in self:
@@ -67,6 +77,18 @@ class ProductProduct(models.Model):
                                custom_value.custom_value)])
                 cont += 1
         return domain, cont
+
+    @api.model
+    def _product_find(self, product_template, product_attributes):
+        if product_template:
+            domain, cont = self._build_attributes_domain(
+                product_template, product_attributes)
+            products = self.search(domain)
+            # Filter the product with the exact number of attributes values
+            for product in products:
+                if len(product.attribute_value_ids) == cont:
+                    return product
+        return False
 
     @api.model
     def _find_version(self, custom_values):
