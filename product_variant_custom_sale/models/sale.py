@@ -72,8 +72,6 @@ class SaleOrderLine(models.Model):
     ]
 
     def _get_sale_line_description(self):
-        if not self.product_id:
-            return
         product_lang = self.product_id.with_context(
             lang=self.order_id.partner_id.lang,
             partner_id=self.order_id.partner_id.id,
@@ -85,17 +83,18 @@ class SaleOrderLine(models.Model):
             attribute_value.update({
                 attribute_line.attribute_id.id: "[{}: {}]\n".format(
                     attribute_line.attribute_id.name,
-                    attribute_line.value_id.name)})
+                    attribute_line.value_id.name or "")})
         for value_line in self.custom_value_ids:
             if value_line.custom_value:
                 attribute_value.update({
                     value_line.attribute_id.id: "[{}: {}({})]\n".format(
-                        value_line.attribute_id.name, value_line.value_id.name,
-                        value_line.custom_value)})
+                        value_line.attribute_id.name,
+                        value_line.value_id.name or "",
+                        value_line.custom_value or "")})
         for key, value in attribute_value.items():
             version_description += value
-        return "{}{}{}".format(product_lang.description_sale, product_name,
-                               version_description)
+        return "{}{}{}".format(product_lang.description_sale or "",
+                               product_name, version_description)
 
     def get_product_dict(self, tmpl_id, attributes):
         values = attributes.mapped("value_id.id")

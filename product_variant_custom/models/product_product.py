@@ -79,6 +79,22 @@ class ProductProduct(models.Model):
         return domain, cont
 
     @api.model
+    def _build_attributes_domain(self, product_template, product_attributes):
+        domain = []
+        cont = 0
+        if product_template:
+            domain.append(('product_tmpl_id', '=', product_template.id))
+            for attr_line in product_attributes:
+                if isinstance(attr_line, dict):
+                    value_id = attr_line.get('value_id')
+                else:
+                    value_id = attr_line.value_id.id
+                if value_id:
+                    domain.append(('attribute_value_ids', '=', value_id))
+                    cont += 1
+        return domain, cont
+
+    @api.model
     def _product_find(self, product_template, product_attributes):
         if product_template:
             domain, cont = self._build_attributes_domain(
