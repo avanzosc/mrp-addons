@@ -36,6 +36,7 @@
                                 <field name="attribute_id" />
                                 <field name="value_id" options="{'no_create': True}" context="{'show_attribute': False}"/>
                                 <field name="possible_value_ids" invisible="1" />
+                                <field name="print_description" />
                             </tree>
                         </field>
                     <field name="product_version_id" invisible="True"/>

@@ -79,7 +79,8 @@ class SaleOrderLine(models.Model):
         product_name = product_lang.display_name or ""
         version_description = product_name and "\n" or ""
         attribute_value = {}
-        for attribute_line in self.product_attribute_ids:
+        for attribute_line in self.product_attribute_ids.filtered(
+                lambda x: x.print_description):
             attribute_value.update({
                 attribute_line.attribute_id.id: "[{}: {}]\n".format(
                     attribute_line.attribute_id.name,
@@ -118,6 +119,7 @@ class SaleOrderLine(models.Model):
             product_dict = product_obj.get_product_dict(
                 self.product_tmpl_id, self.product_attribute_ids)
             self.product_id = product_obj.create(product_dict)
+            self.product_id_change()
 
     @api.model
     def create(self, values):
@@ -229,6 +231,7 @@ class SaleLineAttribute(models.Model):
     product_tmpl_id = fields.Many2one(related='sale_line_id.product_tmpl_id')
     sale_line_id = fields.Many2one(comodel_name='sale.order.line',
                                    string='Sale Order Line')
+    print_description = fields.Boolean(string="Print Description")
 
 
 class SaleVersionCustomLine(models.Model):
