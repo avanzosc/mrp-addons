@@ -5,6 +5,7 @@ from odoo import api, fields, models, tools
 
 class StockInventoryProductVersionReport(models.Model):
     _name = "stock.inventory.product.version.report"
+    _description = "Inventory Report with Product Version"
     _auto = False
 
     name = fields.Many2one(comodel_name='stock.move',
@@ -29,7 +30,8 @@ class StockInventoryProductVersionReport(models.Model):
         """ Event Question main report """
         tools.drop_view_if_exists(self._cr,
                                   'stock_inventory_product_version_report')
-        self._cr.execute("""CREATE VIEW stock_inventory_product_version_report
+        self._cr.execute("""
+            CREATE VIEW stock_inventory_product_version_report
                 AS (
                     SELECT
                         min(ml.id) as id,

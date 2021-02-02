@@ -1,7 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_product_version_user,product.version.user,model_product_version,base.group_user,1,0,0,0
-access_product_version_line_user,product.version.line.user,model_product_version_line,base.group_user,1,0,0,0
-access_product_version_custom_line_user, version.custom.line.user,model_version_custom_line,base.group_user,1,0,0,0
-access_product_template_manager,product.version.manager,model_product_version,base.group_system,1,1,1,1
-access_product_product_manager,product.version.line.manager,model_product_version_line,base.group_system,1,1,1,1
-access_product_version_custom_line_manager,version.custom.line.manager,model_version_custom_line,base.group_system,1,1,1,1
+access_product_version_all,product.version all,model_product_version,,1,0,0,0
+access_product_version_user,product.version user,model_product_version,base.group_user,1,0,0,0
+access_product_version_manager,product.version manager,model_product_version,base.group_system,1,1,1,1
+access_product_version_line_all,product.version.line all,model_product_version_line,,1,0,0,0
+access_product_version_line_user,product.version.line user,model_product_version_line,base.group_user,1,0,0,0
+access_product_version_line_manager,product.version.line manager,model_product_version_line,base.group_system,1,1,1,1
+access_product_version_custom_line_all,version.custom.line all,model_version_custom_line,,1,0,0,0
+access_product_version_custom_line_user,version.custom.line user,model_version_custom_line,base.group_user,1,0,0,0
+access_product_version_custom_line_manager,version.custom.line manager,model_version_custom_line,base.group_system,1,1,1,1
+access_product_attribute_line_all,product.attribute.line all,model_product_attribute_line,,1,0,0,0
+access_product_attribute_line_user,product.attribute.line user,model_product_attribute_line,base.group_user,1,0,0,0
+access_product_attribute_line_manager,product.attribute.line manager,model_product_attribute_line,base.group_system,1,1,1,1

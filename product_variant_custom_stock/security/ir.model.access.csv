@@ -1,12 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_lot_version_custom_line_user,lot.version.custom.line.user,model_lot_version_custom_line,stock.group_stock_user,1,0,0,0
-access_lot_version_custom_line_manager,lot.version.custom.line.manager,model_lot_version_custom_line,stock.group_stock_manager,1,1,1,1
-access_inventory_report_user,inverntory.pivot.line.user,model_stock_inventory_product_version_report,stock.group_stock_user,1,0,0,0
-access_inventory_report_manager,inventory.pivot.manager,model_stock_inventory_product_version_report,stock.group_stock_manager,1,1,1,1
-access_product_version_user_stock,product.version.user.sale,product_variant_custom.model_product_version,stock.group_stock_user,1,0,0,0
-access_product_version_line_user_stock,product.version.line.user.stock,product_variant_custom.model_product_version_line,stock.group_stock_user,1,0,0,0
-access_product_version_custom_line_user_stock, version.custom.line.user.stock,product_variant_custom.model_version_custom_line,stock.group_stock_user,1,0,0,0
-access_product_template_manager_stock,product.version.manager.stock,product_variant_custom.model_product_version,stock.group_stock_manager,1,1,1,1
-access_product_product_manager_stock,product.version.line.manager.stock,product_variant_custom.model_product_version_line,stock.group_stock_manager,1,1,1,1
-access_product_version_custom_line_manager_stock,version.custom.line.manager.stock,product_variant_custom.model_version_custom_line,stock.group_stock_manager,1,1,1,1
-
+access_lot_version_custom_line_user,lot.version.custom.line all,model_lot_version_custom_line,,1,0,0,0
+access_lot_version_custom_line_user,lot.version.custom.line user,model_lot_version_custom_line,stock.group_stock_user,1,0,0,0
+access_lot_version_custom_line_manager,lot.version.custom.line manager,model_lot_version_custom_line,stock.group_stock_manager,1,1,1,1
+access_inventory_report_all,stock.inventory.product.version all,model_stock_inventory_product_version_report,,1,0,0,0
+access_inventory_report_user,stock.inventory.product.version user,model_stock_inventory_product_version_report,stock.group_stock_user,1,0,0,0
+access_inventory_report_manager,stock.inventory.product.version manager,model_stock_inventory_product_version_report,stock.group_stock_manager,1,1,1,1
+access_product_version_user_stock,product.version stock user,product_variant_custom.model_product_version,stock.group_stock_user,1,0,0,0
+access_product_version_manager_stock,product.version stock manager,product_variant_custom.model_product_version,stock.group_stock_manager,1,1,1,1
+access_product_version_line_user_stock,product.version.line stock user,product_variant_custom.model_product_version_line,stock.group_stock_user,1,0,0,0
+access_product_version_line_manager_stock,product.version.line stock manager,product_variant_custom.model_product_version_line,stock.group_stock_manager,1,1,1,1
+access_product_version_custom_line_user_stock,version.custom.line stock user,product_variant_custom.model_version_custom_line,stock.group_stock_user,1,0,0,0
+access_product_version_custom_line_manager_stock,version.custom.line stock manager,product_variant_custom.model_version_custom_line,stock.group_stock_manager,1,1,1,1
