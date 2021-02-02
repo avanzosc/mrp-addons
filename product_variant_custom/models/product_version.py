@@ -5,6 +5,7 @@ from odoo import api, exceptions, fields, models, _
 
 class ProductVersion(models.Model):
     _name = "product.version"
+    _description = "Product Version"
 
     name = fields.Char(string="Name")
     product_tmpl_id = fields.Many2one(related="product_id.product_tmpl_id")
@@ -56,6 +57,7 @@ class ProductVersion(models.Model):
 
 class ProductVersionLine(models.Model):
     _name = "product.version.line"
+    _description = "Product Version Line"
 
     product_version_id = fields.Many2one(comodel_name="product.version")
     attribute_id = fields.Many2one(comodel_name="product.attribute",
@@ -87,6 +89,7 @@ class ProductVersionLine(models.Model):
 
 class VersionCustomLine(models.AbstractModel):
     _name = "version.custom.line"
+    _description = "Version Custom Line"
 
     attribute_id = fields.Many2one(comodel_name="product.attribute",
                                    string="Attribute")

@@ -123,14 +123,16 @@ class ProductProduct(models.Model):
 
 class ProductAttributeLine(models.AbstractModel):
     _name = 'product.attribute.line'
+    _description = 'Product Attribute Line'
 
     product_tmpl_id = fields.Many2one(comodel_name="product.template")
     attribute_id = fields.Many2one(comodel_name='product.attribute',
                                    string='Attribute')
-    value_id = fields.Many2one(comodel_name='product.attribute.value',
-                               domain="[('attribute_id', '=', attribute_id),"
-                               "('id', 'in', possible_value_ids)]",
-                               string='Value')
+    value_id = fields.Many2one(
+        comodel_name='product.attribute.value',
+        domain="[('attribute_id', '=', attribute_id),"
+               "('id', 'in', possible_value_ids)]",
+        string='Value')
     possible_value_ids = fields.Many2many(
         comodel_name='product.attribute.value',
         compute='_get_possible_attribute_values')
