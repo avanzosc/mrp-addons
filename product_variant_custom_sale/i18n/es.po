@@ -19,46 +19,46 @@ msgstr ""
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__attribute_id
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__attribute_id
 msgid "Attribute"
-msgstr ""
+msgstr "Atributo"
 
 #. module: product_variant_custom_sale
 #: model_terms:ir.ui.view,arch_db:product_variant_custom_sale.sale_search_product_version_view
 msgid "Can be Sold"
-msgstr ""
+msgstr "Puede ser vendido"
 
 #. module: product_variant_custom_sale
 #: model_terms:ir.ui.view,arch_db:product_variant_custom_sale.sale_order_line_product_version_form
 msgid "Create Product"
-msgstr ""
+msgstr "Crear producto"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__create_uid
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__create_date
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_order_line__custom_value_ids
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_order_line__version_value_ids
 msgid "Custom Values"
-msgstr ""
+msgstr "Valores Personalizados"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__custom_value
 msgid "Custom value"
-msgstr ""
+msgstr "Valor personalizado"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__display_name
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__id
@@ -70,86 +70,86 @@ msgstr ""
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute____last_update
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__write_uid
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__write_date
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__line_id
 msgid "Line"
-msgstr ""
+msgstr "Linea"
 
 #. module: product_variant_custom_sale
 #: sql_constraint:sale.order.line:0
 msgid "Missing required fields on accountable sale order line."
-msgstr ""
+msgstr "Faltan campos obligatorios en la línea completa de pedido de venta."
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__possible_value_ids
 msgid "Possible Value"
-msgstr ""
+msgstr "Valor posible"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_order_line__product_tmpl_id
 msgid "Product Template"
-msgstr ""
+msgstr "Plantilla de producto"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__product_tmpl_id
 msgid "Product Tmpl"
-msgstr ""
+msgstr "Plantilla del Producto"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_order_line__product_version_id
 msgid "Product Version"
-msgstr ""
+msgstr "Version de Producto"
 
 #. module: product_variant_custom_sale
 #: model_terms:ir.ui.view,arch_db:product_variant_custom_sale.sale_order_line_product_version_form
 msgid "Product Version Line"
-msgstr ""
+msgstr "Linea de Version de Producto"
 
 #. module: product_variant_custom_sale
 #: model:ir.actions.act_window,name:product_variant_custom_sale.product_version_action_sell
 #: model:ir.ui.menu,name:product_variant_custom_sale.menu_product
 msgid "Product Versions"
-msgstr ""
+msgstr "Versiones de Producto"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_order_line__product_attribute_ids
 msgid "Product attributes"
-msgstr ""
+msgstr "Atributos de producto"
 
 #. module: product_variant_custom_sale
 #: model:ir.model,name:product_variant_custom_sale.model_sale_order
 msgid "Sale Order"
-msgstr ""
+msgstr "Pedido de venta"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__sale_line_id
 msgid "Sale Order Line"
-msgstr ""
+msgstr "Linea de pedido de venta"
 
 #. module: product_variant_custom_sale
 #: model:ir.model,name:product_variant_custom_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Línea de pedido de venta"
 
 #. module: product_variant_custom_sale
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_line_attribute__value_id
 #: model:ir.model.fields,field_description:product_variant_custom_sale.field_sale_version_custom_line__value_id
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #. module: product_variant_custom_sale
 #: model:ir.model,name:product_variant_custom_sale.model_sale_line_attribute
