@@ -33,6 +33,7 @@ class SaleOrderLine(models.Model):
         for line in self:
             line.mrp_production_id = production_obj.with_context(
                 active_test=False).search([
+                    ("product_id", "=", line.product_id.id),
                     ("sale_line_id", "=", line.id),
                     ("state", "!=", "cancel"),
                 ], limit=1)
@@ -53,9 +54,9 @@ class SaleOrderLine(models.Model):
     def _action_launch_stock_rule(self):
         for line in self:
             super(SaleOrderLine, line.with_context(
-                    sale_line_id=line.id,
-                    active=True,
-                    production_id=line.mrp_production_id.id)
+                sale_line_id=line.id,
+                active=True,
+                production_id=line.mrp_production_id.id)
             )._action_launch_stock_rule()
         return True
 
@@ -65,7 +66,9 @@ class SaleOrderLine(models.Model):
         if self.product_uom_qty <= 0:
             raise exceptions.Warning(_('The quantity must be positive.'))
         values = self._action_mrp_dict()
-        mrp = self.env['mrp.production'].create(values)
+        mrp = self.env['mrp.production'].with_context(
+            default_picking_type_id=self.order_id.warehouse_id.manu_type_id.id
+        ).create(values)
         mrp.with_context(sale_line_id=self.id).action_compute()
 
 
@@ -100,11 +103,10 @@ class SaleOrder(models.Model):
         self.ensure_one()
         action = self.env.ref("mrp.mrp_production_action")
         action_dict = action.read()[0] if action else {}
-        action_dict['context'] = safe_eval(
-                action_dict.get('context', '{}'))
+        action_dict['context'] = safe_eval(action_dict.get('context', '{}'))
         action_dict['context'].update({
             'active_test': False,
-            'default_sale_line_id': self.id,
+            'default_sale_order_id': self.id,
         })
         domain = expression.AND([
             [("sale_line_id", "in", self.order_line.ids)],
