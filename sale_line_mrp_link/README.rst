@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
    
-=============
-Sale Mrp Link
-=============
+==================
+Sale Line Mrp Link
+==================
 
 * This module adds a field to create a manufacturing order from sale order line.
 
