@@ -2,6 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from odoo import api, fields, models, exceptions, _
 from odoo.addons import decimal_precision as dp
+from odoo.tools.safe_eval import safe_eval
 
 
 class MrpProductionProductLine(models.Model):
@@ -188,3 +189,11 @@ class MrpProduction(models.Model):
         @return: No. of products.
         """
         return len(self._action_compute_lines())
+
+    def open_table_location(self):
+        res = self.env['stock.quantity.history'].create(
+            {'compute_at_date': 0}).open_table()
+        product_ids = self.product_line_ids.mapped('product_id').ids
+        res['domain'] = [('product_id', 'in', product_ids)]
+
+        return res
