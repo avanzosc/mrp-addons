@@ -73,7 +73,8 @@ class SaleOrderLine(models.Model):
     ]
 
     def _get_sale_line_description(self):
-        product_lang = self.product_id.with_context(
+        product = self.product_id or self.product_tmpl_id
+        product_lang = product.with_context(
             lang=self.order_id.partner_id.lang,
             partner_id=self.order_id.partner_id.id,
         )
@@ -121,7 +122,6 @@ class SaleOrderLine(models.Model):
             product_dict = product_obj.get_product_dict(
                 self.product_tmpl_id, self.product_attribute_ids)
             self.product_id = product_obj.create(product_dict)
-            self.product_id_change()
 
     @api.model
     def create(self, values):
