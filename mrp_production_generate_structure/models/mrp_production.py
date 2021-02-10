@@ -245,9 +245,12 @@ class MrpProductionProductLine(models.Model):
                 ('origin_production_id', '=', False)]
         new_production = self.env['mrp.production'].search(cond, limit=1)
         if new_production:
-            vals = {'origin_production_id': origin_manufacture_order.id,
-                    'level': self.production_id.level + 1,
-                    'product_qty': self.product_qty}
+            vals = {
+                'origin_production_id': origin_manufacture_order.id,
+                'level': self.production_id.level + 1,
+                'product_qty': self.product_qty,
+                'user_id': self.production_id.user_id.id,
+            }
             if analytic_account:
                 vals['analytic_account_id'] = analytic_account.id
             new_production.write(vals)

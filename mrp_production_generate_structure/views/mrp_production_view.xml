@@ -9,17 +9,17 @@
                 <div name="button_box" position="inside">
                        <button name="button_show_manufacturing_orders" type="object"
                             class="oe_stat_button oe_inline"
-                            icon="fa-github" >
-                           <field name="manufacture_count" string="Manufacturing orders countings" widget="statinfo" />
+                            icon="fa-gears" >
+                           <field name="manufacture_count" string="Manufacturing Orders" widget="statinfo" />
                        </button>
                        <button name="button_show_purchase_orders" type="object"
                             class="oe_stat_button oe_inline"
-                            icon="fa-github" >
-                           <field name="purchase_count" string="Purchase orders countings" widget="statinfo" />
+                            icon="fa-shopping-cart" >
+                           <field name="purchase_count" string="Purchase Orders" widget="statinfo" />
                        </button>
                        <button name="button_with_child_structure" type="object"
                             class="oe_stat_button oe_inline"
-                            icon="fa-github" string="Show all planned products" />
+                            icon="fa-list-alt" string="Planned Products" />
                      </div>
             </field>
      </record>
