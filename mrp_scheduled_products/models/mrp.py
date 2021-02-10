@@ -188,3 +188,11 @@ class MrpProduction(models.Model):
         @return: No. of products.
         """
         return len(self._action_compute_lines())
+
+    def open_table_location(self):
+        res = self.env['stock.quantity.history'].create(
+            {'compute_at_date': 0}).open_table()
+        product_ids = self.product_line_ids.mapped('product_id').ids
+        res['domain'] = [('product_id', 'in', product_ids)]
+
+        return res
