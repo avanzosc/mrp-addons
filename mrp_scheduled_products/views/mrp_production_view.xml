@@ -73,6 +73,9 @@
         <field name="inherit_id"
                ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="open_table_location" icon="fa-arrow-up" class="oe_stat_button" string="Stock Report" type="object"/>
+            </div>
             <button name="button_mark_done" position="after">
                 <button name="button_confirm"
                         attrs="{'invisible': ['|',('state','not in',('draft')),('is_locked','=',False)]}"
