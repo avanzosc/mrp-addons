@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="nest_workorder_fields_tree">
+        <field name="name">nest.workorder.fields.tree</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="before">
+                <field name="nested_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
