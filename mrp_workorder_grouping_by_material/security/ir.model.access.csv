@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_workorder_nest_user,mrp.workorder.nest.user,model_mrp_workorder_nest,mrp.group_mrp_user,1,0,0,0
+access_mrp_workorder_nest_manager,mrp.workorder.nest.manager,model_mrp_workorder_nest,mrp.group_mrp_manager,1,1,1,1
+access_mrp_workorder_nest_line_user,mrp.workorder.nest.line.user,model_mrp_workorder_nest_line,mrp.group_mrp_user,1,0,0,0
+access_mrp_workorder_nest_line_manager,mrp.workorder.nest.line.manager,model_mrp_workorder_nest_line,mrp.group_mrp_manager,1,1,1,1
