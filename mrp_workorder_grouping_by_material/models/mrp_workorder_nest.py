@@ -80,7 +80,7 @@ class MrpWorkorderNest(models.Model):
     @api.onchange('lot_id')
     def onchange_lot_id(self):
         for line in self.nested_line_ids:
-            line.finished_lot_id = self.lot_id
+            line.lot_id = self.lot_id.id
 
     @api.model
     def create(self, vals):
@@ -198,6 +198,9 @@ class MrpWorkorderNestLine(models.Model):
         digits=dp.get_precision('Product Unit of Measure'))
     finished_lot_id = fields.Many2one('stock.production.lot', 'Lot/Serial Number',
         domain="[('product_id', '=', product_id)]")
+    lot_id = fields.Many2one(comodel_name="stock.production.lot",
+                             domain="[('product_id', '=', "
+                                    "nest_id.main_product_id.id)]")
     workorder_id = fields.Many2one(comodel_name="mrp.workorder")
     qty_produced = fields.Float(string="Produce Quantity",
                                 related="workorder_id.qty_produced")
@@ -241,9 +244,13 @@ class MrpWorkorderNestLine(models.Model):
                 res.update({
                     'qty_producing': line.qty_producing,
                 })
-            if line.finished_lot_id != line.related_finished_lot_id:
+            if line.finished_lot_id:
                 res.update({
                     'finished_lot_id': line.finished_lot_id.id,
                 })
+            if line.lot_id:
+                move_line = line.res_id.raw_workorder_line_ids.filtered(
+                    lambda x: x.product_id == line.nest_id.main_product_id)
+                move_line.lot_id = line.lot_id
             if res:
                 line.workorder_id.write(res)
