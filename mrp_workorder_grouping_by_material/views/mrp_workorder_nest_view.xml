@@ -69,7 +69,8 @@
                     </group>
                     <div>
                         <field name="nested_line_ids">
-                            <tree editable="top" > <!--create="false">-->
+                            <tree editable="top" ><!--create="false">-->
+                                <field name="nest_id" invisible="1"/>
                                 <field name="workorder_id" domain="[('main_product_id', '=', parent.main_product_id), ('workcenter_id', '=', parent.workcenter_id), ('state', 'not in', ['done', 'cancel'])]"/>
                                 <field name="name" readonly="1"/>
                                 <field name="product_id" readonly="1"/>
