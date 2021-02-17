@@ -130,10 +130,6 @@ class MrpWorkorderNest(models.Model):
                     nl._write_lot_producing_qty()
                     wo = nl.workorder_id
                     try:
-                        if nest.lot_id:
-                            main_prod_line = wo.active_move_line_ids.filtered(
-                                lambda x: x.product_id == nest.main_product_id)
-                            main_prod_line.lot_id = nest.lot_id
                         wo.with_context(from_nest=True).record_production()
                     except UserError as e:
                         raise UserError("{}: {}".format(wo.name, str(e)))
@@ -249,7 +245,7 @@ class MrpWorkorderNestLine(models.Model):
                     'finished_lot_id': line.finished_lot_id.id,
                 })
             if line.lot_id:
-                move_line = line.res_id.raw_workorder_line_ids.filtered(
+                move_line = line.workorder_id.raw_workorder_line_ids.filtered(
                     lambda x: x.product_id == line.nest_id.main_product_id)
                 move_line.lot_id = line.lot_id
             if res:
