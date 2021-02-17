@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="nested_workorder_code_seq" model="ir.sequence">
+        <field name="code">mrp.workorder.nest</field>
+        <field name="name">Nested Workorder Sequence</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>
