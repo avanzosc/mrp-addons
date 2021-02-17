@@ -75,8 +75,8 @@
                                 <field name="product_id" readonly="1"/>
                                 <field name="qty_producing"/>
                                 <field name="company_id" invisible="1"/>
-                                <field name="finished_lot_id" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
-                                <field name="lot_id"/>
+                                <field name="finished_lot_id" string="Product to Produce Lot" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                                <field name="lot_id" string="Main Material Lot"/>
                                 <field name="qty_produced" readonly="1"/>
                                 <field name="qty_production" readonly="1"/>
                                 <field name="product_uom_id" readonly="1"/>
