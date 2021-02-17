@@ -5,8 +5,7 @@
         <field name="model">nested.new.line</field>
         <field name="arch" type="xml">
             <form string="Nested New Line">
-                <field name="nested_id" domain="[('state', '!=', 'done')]" required="1"/>
-                <field name="main_product_id" readonly="1"/>
+                <field name="nest_code" required="1"/>
                 <footer>
                     <button string="Done" name="action_done" type="object"
                             class="btn-primary"/>
