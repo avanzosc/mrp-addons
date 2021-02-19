@@ -49,13 +49,14 @@ class PurchaseOrderLine(models.Model):
         comodel_name='purchase.line.attribute',
         inverse_name='purchase_line_id',
         string='Product attributes', copy=True, readonly=True,
-        states={'draft': [('readonly', False)]},)
+        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
     version_value_ids = fields.One2many(
         comodel_name="product.version.line",
         related="product_version_id.custom_value_ids")
     custom_value_ids = fields.One2many(
         comodel_name="purchase.version.custom.line", string="Custom Values",
         inverse_name="line_id", copy=True)
+    state = fields.Selection(default='draft')
 
     def _delete_product_attribute_ids(self):
         delete_values = []
