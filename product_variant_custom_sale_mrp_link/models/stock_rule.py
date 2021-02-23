@@ -12,6 +12,7 @@ class StockRule(models.Model):
                                        location_id, name, origin, values, bom)
         extra_fields = self.env.context.get('extra_fields')
         if extra_fields:
+            res['product_tmpl_id'] = extra_fields.get('product_tmpl_id')
             res['product_version_id'] = extra_fields.get('product_version_id')
             res['product_attribute_ids'] = extra_fields.get(
                 'product_attribute_ids')

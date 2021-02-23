@@ -14,6 +14,7 @@ class SaleOrderLine(models.Model):
         #     raise exceptions.Warning(_("select a version before create a "
         #                                "manufaturing order"))
         res = super()._action_mrp_dict()
+        res['product_tmpl_id'] = self.product_tmpl_id.id
         res['product_attribute_ids'] = [(0, 0, {
             'attribute_id': x.attribute_id.id,
             'value_id': x.value_id.id
@@ -63,9 +64,12 @@ class SaleOrderLine(models.Model):
                 if not line.product_id:
                     line.product_id = line.create_product_product(line.product_tmpl_id, line.product_attribute_ids)
                 super(SaleOrderLine, line.with_context(extra_fields={
+                    'product_tmpl_id': line.product_tmpl_id.id,
                     'product_version_id': line.product_version_id.id,
-                    'product_attribute_ids':
-                        line.product_id.get_custom_value_lines(),
+                    'product_attribute_ids': [(0, 0, {
+                        'attribute_id': x.attribute_id.id,
+                        'value_id': x.value_id.id
+                    }) for x in line.product_attribute_ids],
                     'custom_value_ids': custom_value_ids,
                 }))._action_launch_stock_rule()
         return True

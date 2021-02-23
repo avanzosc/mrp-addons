@@ -73,19 +73,33 @@ class SaleOrderLine(models.Model):
     ]
 
     def _get_sale_line_description(self):
-        product_lang = self.product_id.with_context(
+        if self.product_id and not self.custom_value_ids:
+            product = self.product_id.with_context(
+                lang=self.order_id.partner_id.lang,
+                partner=self.order_id.partner_id,
+                quantity=self.product_uom_qty or 1.0,
+                date=self.order_id.date_order,
+                pricelist=self.order_id.pricelist_id.id,
+                uom=self.product_uom.id
+            )
+            return self.get_sale_order_line_multiline_description_sale(product)
+        product = self.product_tmpl_id
+        product_lang = product.with_context(
             lang=self.order_id.partner_id.lang,
             partner_id=self.order_id.partner_id.id,
         )
-        product_name = product_lang.display_name or ""
+        product_name = product_lang.name
         version_description = product_name and "\n" or ""
         attribute_value = {}
-        for attribute_line in self.product_attribute_ids:
+        for attribute_line in self.product_attribute_ids.filtered(
+                lambda x: x.print_description):
             attribute_value.update({
                 attribute_line.attribute_id.id: "[{}: {}]\n".format(
                     attribute_line.attribute_id.name,
                     attribute_line.value_id.name or "")})
-        for value_line in self.custom_value_ids:
+        description_attributes = list(attribute_value.keys())
+        for value_line in self.custom_value_ids.filtered(
+                lambda x: x.attribute_id.id in description_attributes):
             if value_line.custom_value:
                 attribute_value.update({
                     value_line.attribute_id.id: "[{}: {}({})]\n".format(
@@ -94,8 +108,10 @@ class SaleOrderLine(models.Model):
                         value_line.custom_value or "")})
         for key, value in attribute_value.items():
             version_description += value
-        return "{}{}{}".format(product_lang.description_sale or "",
-                               product_name, version_description)
+        sale_description = product_lang.description_sale
+        sale_description = sale_description and "\n" + sale_description or ""
+        return "{}{}{}".format(product_name, sale_description,
+                               version_description)
 
     def get_product_dict(self, tmpl_id, attributes):
         values = attributes.mapped("value_id.id")
@@ -186,7 +202,6 @@ class SaleOrderLine(models.Model):
             return {'domain': {'product_id':
                                [('product_tmpl_id', '=',
                                  self.product_tmpl_id.id)]}}
-        self._set_custom_lines()
         self.name = self._get_sale_line_description()
         return {'domain': {}}
 
@@ -253,6 +268,7 @@ class SaleLineAttribute(models.Model):
     sale_line_id = fields.Many2one(
         comodel_name='sale.order.line', string='Sale Order Line',
         required=True, ondelete="cascade")
+    print_description = fields.Boolean(string="Print Description")
 
 
 class SaleVersionCustomLine(models.Model):
