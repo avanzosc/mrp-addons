@@ -233,20 +233,32 @@ class MrpWorkorderNestLine(models.Model):
         related="workorder_id.production_state", readonly=1)
     company_id = fields.Many2one(related="workorder_id.company_id")
 
+    def update_workorder_lines(self, line_values):
+        for values in line_values['to_create']:
+            values.pop('raw_workorder_id')
+            values.update({'workorder_id': self.workorder_id.id})
+            self.env['mrp.workorder.line'].create(values)
+        for line in line_values['to_delete']:
+            if line in self.raw_workorder_line_ids:
+                line.unlink()
+            else:
+                self.finished_workorder_line_ids -= line
+        for line, vals in line_values['to_update'].items():
+            line.write(vals)
+
     def _write_lot_producing_qty(self):
-        for line in self:
+        for n_line in self:
             res = {}
-            if line.qty_producing != line.related_qty_producing:
+            n_line.workorder_id.qty_producing = n_line.qty_producing
+            line_values = self.workorder_id._update_workorder_lines()
+            n_line.update_workorder_lines(line_values)
+            if n_line.finished_lot_id:
                 res.update({
-                    'qty_producing': line.qty_producing,
+                    'finished_lot_id': n_line.finished_lot_id.id,
                 })
-            if line.finished_lot_id:
-                res.update({
-                    'finished_lot_id': line.finished_lot_id.id,
-                })
-            if line.lot_id:
-                move_line = line.workorder_id.raw_workorder_line_ids.filtered(
-                    lambda x: x.product_id == line.nest_id.main_product_id)
-                move_line.lot_id = line.lot_id
+            if n_line.lot_id:
+                move_line = n_line.workorder_id.raw_workorder_line_ids.filtered(
+                    lambda x: x.product_id == n_line.nest_id.main_product_id)
+                move_line.lot_id = n_line.lot_id
             if res:
-                line.workorder_id.write(res)
+                n_line.workorder_id.write(res)
