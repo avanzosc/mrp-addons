@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="hide_duplicated_is_custom_view">
+            <field name="name">hide.duplicated.is.custom.view</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product_variant_custom.product_attribute_min_max_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_custom'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
