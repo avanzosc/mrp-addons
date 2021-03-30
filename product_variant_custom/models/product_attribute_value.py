@@ -6,6 +6,10 @@ from odoo import fields, models
 class ProductAttributeValue(models.Model):
     _inherit = "product.attribute.value"
 
+    is_custom = fields.Boolean(
+        'Is custom value',
+        help="Allow users to input custom values for this attribute value"
+    )
     min_value = fields.Float(string="Min Value", default="-1")
     max_value = fields.Float(string="Max Value", default="-1")
     min_tolerance = fields.Float(string="Min Tolerance")
