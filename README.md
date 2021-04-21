@@ -1,6 +1,9 @@
-[![pre-commit](https://github.com/avanzosc/odoo-addons/actions/workflows/pre-commit.yml/badge.svg?branch=14.0)](https://github.com/avanzosc/odoo-addons/actions/workflows/pre-commit.yml)
+[![Build Status](https://travis-ci.org/avanzosc/mrp-addons.svg?branch=14.0)](https://travis-ci.org/avanzosc/mrp-addons)
+[![Coverage Status](https://coveralls.io/repos/github/avanzosc/mrp-addons/badge.svg?branch=14.0)](https://coveralls.io/github/avanzosc/mrp-addons?branch=14.0)
 
-Odoo addons
-===========
+MRP Odoo addons
+===============
 
-Modules for Odoo / OpenERP
+MRP modules for Odoo
+
+
