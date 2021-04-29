@@ -14,6 +14,7 @@ class MrpBom(models.Model):
                 raise exceptions.ValidationError(
                     "There can only be one main material")
 
+
 class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
@@ -25,4 +26,3 @@ class MrpBomLine(models.Model):
             if record.main_material and not record.operation_id:
                 raise exceptions.ValidationError(
                     "Main material must have an operation")
-

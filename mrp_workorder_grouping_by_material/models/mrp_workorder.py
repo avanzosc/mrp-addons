@@ -7,8 +7,8 @@ class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
 
     main_product_id = fields.Many2one(comodel_name="product.product",
-                                   string="Main Product",
-                                   computed="_compute_main_product_id")
+                                      string="Main Product",
+                                      computed="_compute_main_product_id")
     nested_ids = fields.Many2many(comodel_name="mrp.workorder.nest",
                                   string="In Nests",
                                   compute="_compute_nested_ids")
@@ -24,8 +24,6 @@ class MrpWorkorder(models.Model):
                 self.final_lot_id and self.move_raw_ids:
             return False
 
-    #BOMak ezpauke product_id?
-    #Ezinda productu bea operaziyo bat baiño geyotan ibili?
     @api.depends("operation_id", "production_id")
     def _compute_main_product_id(self):
         for record in self:
@@ -64,12 +62,6 @@ class MrpWorkorder(models.Model):
         for wo in self:
             if not wo.workcenter_id.nesting_required:
                 return super(MrpWorkorder, wo).button_unblock()
-
-    @api.multi
-    def button_start(self):
-        for wo in self:
-            if not wo.workcenter_id.nesting_required:
-                return super(MrpWorkorder, wo).button_start()
 
     @api.multi
     def button_scrap(self):

@@ -20,7 +20,7 @@ class NestedNewLine(models.TransientModel):
         workorders = self.env['mrp.workorder'].search([
             ('id', 'in', self._context.get('active_ids')),
             ('id', 'not in', added_wo),
-            ('main_product_id', '=', self.nested_id.main_product_id.id)
+            ('main_product_id', '=', self.nested_id.main_product_id.id),
             ('state', 'in', line_states),
             ('state', '!=', 'done'),
         ])

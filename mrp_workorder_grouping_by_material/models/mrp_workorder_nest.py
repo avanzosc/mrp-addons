@@ -12,8 +12,14 @@ class MrpWorkorderNest(models.Model):
                        copy=False, default='New')
     code = fields.Char(string="Code")
     main_product_id = fields.Many2one(comodel_name="product.product")
-    workcenter_id = fields.Many2one(comodel_name="mrp.workcenter",
-                                    compute="_compute_workcenter")
+    possible_main_product_ids = fields.Many2many(
+        comodel_name="product.product",
+        compute="_compute_possible_main_products")
+    workcenter_id = fields.Many2one(comodel_name="mrp.workcenter")
+    possible_workcenter_ids = fields.Many2many(
+        comodel_name="mrp.workcenter", compute="_compute_possible_workcenter")
+    main_product_tracking = fields.Selection(
+        related="main_product_id.tracking")
     lot_id = fields.Many2one(comodel_name="stock.production.lot")
     nested_line_ids = fields.One2many(comodel_name="mrp.workorder.nest.line",
                                       inverse_name="nest_id",
@@ -46,11 +52,21 @@ class MrpWorkorderNest(models.Model):
     line_is_produced = fields.Boolean(compute="_compute_line_states")
     line_is_user_working = fields.Boolean(compute="_compute_line_states")
 
-    @api.depends('nested_line_ids')
-    def _compute_workcenter(self):
+    @api.multi
+    def _compute_possible_main_products(self):
         for nest in self:
-            if nest.nested_line_ids:
-                nest.workcenter_id = nest.nested_line_ids[0].workcenter_id.id
+            product_ids = nest.env['mrp.bom.line'].search(
+                [('main_material', '=', True)]).mapped('product_id').ids
+            if product_ids:
+                nest.possible_main_product_ids = [(6, 0, product_ids)]
+
+    @api.multi
+    def _compute_possible_workcenter(self):
+        for nest in self:
+            workcenter_ids = nest.env['mrp.workcenter'].search(
+                [('nesting_required', '=', True)]).ids
+            if workcenter_ids:
+                nest.possible_workcenter_ids = [(6, 0, workcenter_ids)]
 
     @api.multi
     def name_get(self):
@@ -172,7 +188,6 @@ class MrpWorkorderNest(models.Model):
             nest.line_is_produced = is_produced
 
 
-
 class MrpWorkorderNestLine(models.Model):
     _name = "mrp.workorder.nest.line"
 
@@ -180,10 +195,11 @@ class MrpWorkorderNestLine(models.Model):
     related_qty_producing = fields.Float(related="workorder_id.qty_producing")
     related_final_lot_id = fields.Many2one(comodel_name="stock.production.lot",
                                            related="workorder_id.final_lot_id")
-    qty_producing = fields.Float('Currently Produced Quantity', default=1.0,
+    qty_producing = fields.Float(
+        'Currently Produced Quantity', default=1.0,
         digits=dp.get_precision('Product Unit of Measure'))
     final_lot_id = fields.Many2one('stock.production.lot', 'Lot/Serial Number',
-        domain="[('product_id', '=', product_id)]")
+                                   domain="[('product_id', '=', product_id)]")
     workorder_id = fields.Many2one(comodel_name="mrp.workorder")
     qty_produced = fields.Float(string="Produce Quantity",
                                 related="workorder_id.qty_produced")
@@ -218,7 +234,6 @@ class MrpWorkorderNestLine(models.Model):
                                      readonly=1)
     production_state = fields.Selection(
         related="workorder_id.production_state", readonly=1)
-
 
     def _write_lot_producing_qty(self):
         for line in self:
