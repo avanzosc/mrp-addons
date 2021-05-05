@@ -67,14 +67,14 @@ class AccountInvoiceLine(models.Model):
         currency = company_id.currency_id
         prec = currency.decimal_places
 
-        # In some cases, it is necessary to force/prevent the rounding of the tax and the total
-        # amounts. For example, in SO/PO line, we don't want to round the price unit at the
-        # precision of the currency.
+        # In some cases, it is necessary to force/prevent the rounding of the
+        # tax and the total amounts. For example, in SO/PO line, we don't
+        # want to round the price unit at the precision of the currency.
         # The context key 'round' allows to force the standard behavior.
-        round_tax = False if company_id.tax_calculation_rounding_method == 'round_globally' else True
+        round_tax = False if company_id.tax_calculation_rounding_method == \
+            'round_globally' else True
         if 'round' in self.env.context:
             round_tax = bool(self.env.context['round'])
-
         if not round_tax:
             prec += 5
         price_unit = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
@@ -90,60 +90,31 @@ class AccountInvoiceLine(models.Model):
 
     @api.depends('version_dimension', 'version_weight')
     def _compute_price(self):
-        price_by = self.product_id.product_tmpl_id.price_by
-        currency = self.invoice_id and self.invoice_id.currency_id or None
-        price = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
-        taxes = False
-        if self.invoice_line_tax_ids:
-            taxes = self.invoice_line_tax_ids.with_context(
-                base_values=self._calculate_base_values(
-                    price_by)).compute_all(
-                price, currency, self.quantity,
-                product=self.product_id,
-                partner=self.invoice_id.partner_id)
-        self.price_subtotal = price_subtotal_signed = taxes[
-            'total_excluded'] if taxes else self.quantity * price
-        self.price_total = taxes[
-            'total_included'] if taxes else self.price_subtotal
-        if self.invoice_id.currency_id and self.invoice_id.currency_id != \
-                self.invoice_id.company_id.currency_id:
-            currency = self.invoice_id.currency_id
-            date = self.invoice_id._get_currency_rate_date()
-            price_subtotal_signed = currency._convert(
-                price_subtotal_signed,
-                self.invoice_id.company_id.currency_id,
-                self.company_id or self.env.user.company_id,
-                date or fields.Date.today())
-        sign = self.invoice_id.type in ['in_refund',
-                                        'out_refund'] and -1 or 1
-        self.price_subtotal_signed = price_subtotal_signed * sign
-        # super()._compute_price()
-        # for line in self:
-        #     price_by = line.product_id.product_tmpl_id.price_by
-        #     price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
-        #     currency = line.invoice_id and line.invoice_id.currency_id or None
-        #     if line.invoice_line_tax_ids:
-        #         line.invoice_line_tax_ids.with_context(
-        #             base_values=line._calculate_base_values(
-        #                 price_by)).compute_all(
-        #             price, currency, line.quantity,
-        #             product=line.product_id,
-        #             partner=line.invoice_id.partner_id)
-        #     # if price_by == 'qty':
-        #     #     continue
-        #     # if price_by == 'dimension':
-        #     #     dimension = line.version_dimension
-        #     #     line.update({
-        #     #         'price_total': line['price_total'] * dimension,
-        #     #         'price_subtotal': line['price_subtotal'] * dimension,
-        #     #         'price_subtotal_signed': line['price_subtotal_signed'] *
-        #     #         dimension,
-        #     #     })
-        #     # else:
-        #     #     weight = line.version_weight
-        #     #     line.update({
-        #     #         'price_total': line['price_total'] * weight,
-        #     #         'price_subtotal': line['price_subtotal'] * weight,
-        #     #         'price_subtotal_signed': line['price_subtotal_signed'] *
-        #     #         weight,
-        #     #     })
+        for line in self:
+            price_by = line.product_id.product_tmpl_id.price_by
+            currency = line.invoice_id and line.invoice_id.currency_id or None
+            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            taxes = False
+            if line.invoice_line_tax_ids:
+                taxes = line.invoice_line_tax_ids.with_context(
+                    base_values=line._calculate_base_values(
+                        price_by)).compute_all(
+                    price, currency, line.quantity,
+                    product=line.product_id,
+                    partner=line.invoice_id.partner_id)
+            line.price_subtotal = price_subtotal_signed = taxes[
+                'total_excluded'] if taxes else line.quantity * price
+            line.price_total = taxes[
+                'total_included'] if taxes else line.price_subtotal
+            if line.invoice_id.currency_id and line.invoice_id.currency_id != \
+                    line.invoice_id.company_id.currency_id:
+                currency = line.invoice_id.currency_id
+                date = line.invoice_id._get_currency_rate_date()
+                price_subtotal_signed = currency._convert(
+                    price_subtotal_signed,
+                    line.invoice_id.company_id.currency_id,
+                    line.company_id or self.env.user.company_id,
+                    date or fields.Date.today())
+            sign = line.invoice_id.type in ['in_refund',
+                                            'out_refund'] and -1 or 1
+            line.price_subtotal_signed = price_subtotal_signed * sign
