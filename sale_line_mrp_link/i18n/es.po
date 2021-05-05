@@ -6,14 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 14:17+0000\n"
-"PO-Revision-Date: 2020-12-16 14:17+0000\n"
+"POT-Creation-Date: 2021-05-05 13:17+0000\n"
+"PO-Revision-Date: 2021-05-05 13:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_workorder__partner_id
+msgid "Client"
+msgstr "Cliente"
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__commitment_date
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_workorder__commitment_date
+msgid "Commitment Date"
+msgstr "Fecha de compromiso"
 
 #. module: sale_line_mrp_link
 #: model_terms:ir.ui.view,arch_db:sale_line_mrp_link.sale_order_production_view_form
@@ -23,7 +34,7 @@ msgstr "Crear OF"
 #. module: sale_line_mrp_link
 #: model:ir.actions.server,name:sale_line_mrp_link.create_mrp_scheduled_lines
 msgid "Create Scheduled Lines"
-msgstr ""
+msgstr "Crear Lineas Planificadas"
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__partner_id
@@ -44,7 +55,7 @@ msgstr "Órdenes de producción"
 #: code:addons/sale_line_mrp_link/models/sale.py:52
 #, python-format
 msgid "Multiple manufacture orders for same order line"
-msgstr ""
+msgstr "Multiples ordenes de fabricación para la misma linea de venta"
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line__product_line_ids
@@ -68,19 +79,19 @@ msgstr "Fabricación planificada producto"
 
 #. module: sale_line_mrp_link
 #: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__sale_line_id
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production_product_line__sale_line_id
 msgid "Sale Line"
 msgstr "Línea de venta"
 
 #. module: sale_line_mrp_link
 #: model:ir.model,name:sale_line_mrp_link.model_sale_order
-#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__sale_order_id
 msgid "Sale Order"
 msgstr "Pedido de venta"
 
 #. module: sale_line_mrp_link
-#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production_product_line__sale_line_id
-msgid "Sale lines"
-msgstr "Líneas de venta"
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_workorder__sale_line_id
+msgid "Sale order"
+msgstr "Pedido de venta"
 
 #. module: sale_line_mrp_link
 #: model:ir.model,name:sale_line_mrp_link.model_sale_order_line
@@ -100,12 +111,19 @@ msgstr "Regla de Inventario"
 #. module: sale_line_mrp_link
 #: code:addons/sale_line_mrp_link/models/sale.py:60
 #: code:addons/sale_line_mrp_link/models/sale.py:66
+#: code:addons/sale_line_mrp_link/models/sale.py:67
 #, python-format
 msgid "The quantity must be positive."
 msgstr "La cantidad debe ser positiva."
 
 #. module: sale_line_mrp_link
-#: model:ir.model.fields,help:sale_line_mrp_link.field_mrp_production__partner_id
-msgid "You can find a customer by its Name, TIN, Email or Internal Reference."
-msgstr "Puedes encontrar un cliente por su nombre, CIF, email o referencia interna"
+#: model:ir.model.fields,help:sale_line_mrp_link.field_mrp_production__commitment_date
+#: model:ir.model.fields,help:sale_line_mrp_link.field_mrp_workorder__commitment_date
+msgid "This is the delivery date promised to the customer. If set, the delivery order will be scheduled based on this date rather than product lead times."
+msgstr "Ésta es la fecha de entrega prometida al cliente. Si se establece, la orden de entrega se programará en función de esta fecha en lugar de los plazos de entrega del producto."
+
+#. module: sale_line_mrp_link
+#: model:ir.model,name:sale_line_mrp_link.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
 

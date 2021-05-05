@@ -2,6 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import odoo.tests.common as common
+from odoo import fields
 
 
 @common.at_install(False)
@@ -15,6 +16,8 @@ class TestSaleMrpLink(common.TransactionCase):
         product_obj = self.env["product.product"]
         bom_obj = self.env["mrp.bom"]
         sale_obj = self.env["sale.order"]
+        route_model = self.env['mrp.routing']
+        workcenter_model = self.env['mrp.workcenter']
         partner = self.env["res.partner"].create({
             "name": "Test Partner",
         })
@@ -22,19 +25,39 @@ class TestSaleMrpLink(common.TransactionCase):
             "name": "Manufacturing Product",
             "route_ids": [(4, manufacture_route.id), (4, mto_route.id)],
         })
+        self.workcenter = workcenter_model.create({
+            'name': 'wc1',
+            'resource_calendar_id': self.env.ref(
+                'resource.resource_calendar_std').id,
+        })
+        self.route = route_model.create({
+            'name': 'route',
+            'resource_calendar_id': self.env.ref(
+                'resource.resource_calendar_std').id,
+            'operation_ids':
+                [(0, 0, {'name': 'op1',
+                         'workcenter_id': self.workcenter.id,
+                         })]
+        })
         self.component = product_obj.create({
             "name": "Component",
         })
+
         self.bom = bom_obj.create({
             "product_tmpl_id": self.man_product.product_tmpl_id.id,
             "type": "normal",
+            "routing_id": self.route.id,
             "bom_line_ids": [(0, 0, {
                 "product_id": self.component.id,
                 "product_qty": 2.0,
+                "operation_id": self.route.operation_ids[0].id
             })],
         })
+        today = fields.Datetime.now()
+        self.today = today
         self.sale = sale_obj.create({
             "partner_id": partner.id,
+            "commitment_date": today,
             "order_line": [(0, 0, {
                 "product_id": self.man_product.id,
             })]
@@ -64,9 +87,24 @@ class TestSaleMrpLink(common.TransactionCase):
         for line in self.sale.order_line:
             line.invalidate_cache()
             self.assertTrue(line.mrp_production_id)
+            self.assertTrue(line.order_id.commitment_date)
             self.assertEqual(line, line.mrp_production_id.sale_line_id)
             self.assertEqual(self.sale, line.mrp_production_id.sale_order_id)
+            self.assertEqual(line.order_id.partner_id,
+                             line.mrp_production_id.partner_id)
+            self.assertEqual(line.order_id.commitment_date,
+                             line.mrp_production_id.commitment_date)
             self.assertTrue(line.mrp_production_id.active)
+            line.mrp_production_id.action_compute()
+            line.mrp_production_id.button_confirm()
+            line.mrp_production_id.button_plan()
+            workorder = self.env['mrp.workorder'].search([])[0]
+            self.assertTrue(workorder.sale_line_id)
+            self.assertEqual(line, workorder.sale_line_id)
+            self.assertEqual(line.order_id.partner_id,
+                             workorder.partner_id)
+            self.assertEqual(line.order_id.commitment_date,
+                             workorder.commitment_date)
 
     def test_phantom_bom(self):
         self.man_product.bom_ids.write({

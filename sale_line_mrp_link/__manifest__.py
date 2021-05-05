@@ -3,7 +3,7 @@
 
 {
     "name": "Sale Line MRP Link",
-    "version": "12.0.2.0.0",
+    "version": "12.0.2.1.0",
     "category": "Sales Management",
     "license": "AGPL-3",
     "author": "AvanzOSC",
@@ -18,6 +18,7 @@
     "data": [
         "views/sale_view.xml",
         "views/mrp_production_view.xml",
+        "views/mrp_workorder.xml",
     ],
     "installable": True,
 }
