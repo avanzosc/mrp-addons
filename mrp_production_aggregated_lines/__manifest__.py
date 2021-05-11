@@ -18,7 +18,6 @@
         "views/sale_view.xml"
     ],
     'demo': [],
-    'pre_init_hook': "pre_init_hook",
     'installable': True,
     'auto_install': False,
 }
