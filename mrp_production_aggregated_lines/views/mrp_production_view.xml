@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="mrp_production_sale_info_tree_view" model="ir.ui.view">-->
+<!--        <field name="name">mrp.production.sale.info.tree</field>-->
+<!--        <field name="model">mrp.production</field>-->
+<!--        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="name" position="after">-->
+<!--                <field name="partner_ids" widget="many2many_tags"/>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="mrp_production_sale_info_form_view" model="ir.ui.view">
+        <field name="name">mrp.production.sale.info.form.view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <field name="availability" position="after">
+                <field name="sale_line_ids" readonly="1">
+                <tree decoration-info="invoice_status=='to invoice'" decoration-warning="state=='draft'"
+                      decoration-muted="state=='cancel'" decoration-success="state=='done'">
+                    <field name="order_id" string="Order"/>
+                    <!--<field name="team_id"/>-->
+                    <field name="order_partner_id"/>
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="product_uom_qty" sum="Ordered"/>
+                    <field name="product_uom" invisible="1"/>
+                    <field name="mrp_production_id"/>
+                    <field name="product_updatable" invisible="1"/>
+                    <field name="qty_delivered_method" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="invoice_status" invisible="1"/>
+                    <field name="customer_lead" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                </tree>
+                </field>
+                <!--<field name="partner_ids" widget="many2many_tags" readonly="1"/>-->
+            </field>
+            <field name="product_qty" position="attributes">
+                <attribute name="attrs">{'readonly': [('has_moves', '=', True)]}</attribute>
+            </field>
+            <xpath expr="//field[@name='product_qty']/following-sibling::button" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state', 'in', ('done','cancel','draft')), ('id', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="mrp_production_sale_info_search_view" model="ir.ui.view">-->
+<!--        <field name="name">mrp.production.sale.info.search</field>-->
+<!--        <field name="model">mrp.production</field>-->
+<!--        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="product_id" position="after">-->
+<!--                <field name="partner_ids" />-->
+<!--            </field>-->
+
+
+<!--        </field>-->
+<!--    </record>-->
+
+        <record model="ir.ui.view" id="aggregated_shceduled_lines_form">
+            <field name="name">aggregated.scheduled.lines.form</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="name" invisible="1"/>
+                    <field name="bom_line_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+</odoo>

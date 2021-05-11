@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sale_order_production_view_form" model="ir.ui.view">
+        <field name="name">sale.order.production.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="action_show_scheduled_products"
+                        icon="fa-pencil-square-o" string="Scheduled Products"/>
+                <button class="oe_stat_button" type="object" name="action_show_manufacturing_orders"
+                        icon="fa-pencil-square-o" string="Manufacturing Orders"/>
+            </div>
+            <xpath expr="//field[@name='order_line']/tree//field[@name='price_tax']"
+                   position="after">
+                <field name="mrp_production_id" readonly="1"
+                       attrs="{'invisible':[('mrp_production_id', '=', False)]}"/>
+                <field name="manufacturable_product" invisible="1"/>
+                <button name="action_create_mrp" string="Aggregate to MO"
+                        attrs="{'invisible':['|', ('mrp_production_id', '!=', False), ('manufacturable_product','=', False)]}"
+                        type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="create_mrp_scheduled_lines" model="ir.actions.server">
+        <field name="name">Create Scheduled Lines</field>
+        <field name="model_id" ref="model_sale_order"/>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">if records: records.action_create_mrp_from_lines()</field>
+    </record>
+
+    <record id="view_sales_order_line_mrp_tree" model="ir.ui.view">
+        <field name="name">sale.order.line.input.tree.</field>
+        <field name="model">sale.order.line</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="invoice_status=='to invoice'" decoration-warning="state=='draft'"
+                  decoration-muted="state=='cancel'" decoration-success="state=='done'"
+                  editable="top" create="true">
+                <field name="order_id" string="Order"
+                       required="0" placeholder="New"
+                       domain="[('state', 'not in', ('done', 'cancel'))]"
+                       attrs="{'readonly': [('order_id', '!=', False)]}"
+                       force_save="1"
+                       options='{"no_open": True, "no_create": True}'/>
+                <button name="action_sale_order_form" string="Open Sale Order" type="object" icon="fa-external-link"
+                        class="oe_stat_button"/>
+                <field name="order_partner_id" domain="[('customer','=',True)]"
+                       context="{'search_default_customer':1, 'show_address': 1}"
+                       options='{"always_reload": True}'
+                       required="1"
+                       attrs="{'readonly': [('order_partner_id', '!=', False), ('order_id', '!=', False)]}"/>
+                <field name="product_uom" invisible="1"/>
+                <field name="product_id"
+                       attrs="{'readonly': [('product_updatable', '=', False)]}"
+                       force_save="1"
+                       context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'uom':product_uom, 'company_id': company_id}"
+                />
+                <field name="name"
+                       attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}"/>
+                <field name="product_uom" invisible="1"/>
+                <field name="product_uom_qty" sum="Ordered"
+                       string="Ordered Qty"
+                       context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'uom':product_uom, 'company_id': company_id}"
+                       attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}"/>
+                <field name="mrp_production_id" readonly="1"
+                       attrs="{'invisible':[('mrp_production_id', '=', False)]}"/>
+                <field name="manufacturable_product" invisible="1"/>
+                <button name="action_create_mrp" string="Aggregate to MO"
+                        attrs="{'invisible':['|', ('mrp_production_id', '!=', False), ('manufacturable_product','=', False)]}"
+                        type="object"/>
+                <field name="product_updatable" invisible="1"/>
+                <field name="qty_delivered_method" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <field name="invoice_status" invisible="1"/>
+                <field name="customer_lead" invisible="1"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="company_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sales_order_line_summary_mrp_tree" model="ir.ui.view">
+        <field name="name">sale.order.line.input.tree.</field>
+        <field name="model">sale.order.line</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="invoice_status=='to invoice'" decoration-warning="state=='draft'"
+                  decoration-muted="state=='cancel'" decoration-success="state=='done'"
+                  editable="top" create="true">
+                <field name="order_id" string="Order"
+                       required="0" placeholder="New"
+                       domain="[('state', 'not in', ('done', 'cancel'))]"
+                       attrs="{'readonly': [('order_id', '!=', False)]}"
+                       force_save="1"
+                       options='{"no_open": True, "no_create": True}'/>
+                <!--<field name="team_id"
+                       options='{"no_create": True}' />-->
+                <field name="order_partner_id" domain="[('customer','=',True)]"
+                       context="{'search_default_customer':1, 'show_address': 1}"
+                       options='{"always_reload": True}'
+                       required="1"
+                       attrs="{'readonly': [('order_partner_id', '!=', False), ('order_id', '!=', False)]}"/>
+                <field name="product_id"
+                       attrs="{'readonly': [('product_updatable', '=', False)]}"
+                       force_save="1"
+                       context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'uom':product_uom, 'company_id': company_id}"/>
+                <field name="name"
+                       attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}"/>
+                <field name="product_uom_qty" sum="Ordered"
+                       string="Ordered Qty"
+                       context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'uom':product_uom, 'company_id': company_id}"
+                       attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}"/>
+                <button name="action_create_mrp" string="Aggregate to MO"
+                        attrs="{'invisible':['|', ('mrp_production_id', '!=', False), ('manufacturable_product','=', False)]}"
+                        type="object"/>
+                <field name="mrp_production_id" readonly="1"
+                       attrs="{'invisible':[('mrp_production_id', '=', False)]}"/>
+                <field name="product_uom" invisible="1"/>
+                <field name="product_uom" invisible="1"/>
+                <field name="manufacturable_product" invisible="1"/>
+                <field name="product_updatable" invisible="1"/>
+                <field name="qty_delivered_method" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <field name="invoice_status" invisible="1"/>
+                <field name="customer_lead" invisible="1"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="company_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sales_order_line_mrp_filter" model="ir.ui.view">
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='salesman_id']" position="after">
+                <field name="name"/>
+            </xpath>
+            <xpath expr="//filter[@name='product']/.." position="inside">
+                <filter name="order_state" string="Order State" context="{'group_by': 'state'}"/>
+                <filter name="invoice_status" string="Invoice Status" context="{'group_by': 'invoice_status'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_sales_order_line_mrp" model="ir.actions.act_window">
+        <field name="name">Sales Orders Lines to Manufacture</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_id" ref="view_sales_order_line_mrp_tree"/>
+    </record>
+
+    <record id="action_summary_sales_order_line_mrp" model="ir.actions.act_window">
+        <field name="name">Sales Orders Lines Summary</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_id" ref="view_sales_order_line_summary_mrp_tree"/>
+    </record>
+
+    <record id="create_mrp_scheduled_lines_from_sale_lines" model="ir.actions.server">
+        <field name="name">Create Scheduled Lines</field>
+        <field name="model_id" ref="model_sale_order_line"/>
+        <field name="binding_model_id" ref="model_sale_order_line"/>
+        <field name="state">code</field>
+        <field name="code">if records: [record.action_create_mrp() for record in records]</field>
+    </record>
+
+    <record id="unlink_mo_from_sale_line" model="ir.actions.server">
+        <field name="name">Unlink MO</field>
+        <field name="model_id" ref="model_sale_order_line"/>
+        <field name="binding_model_id" ref="model_sale_order_line"/>
+        <field name="state">code</field>
+        <field name="code">if records: records.action_detach_mo()</field>
+    </record>
+
+    <menuitem id="menu_sales_order_line_mrp"
+              action="action_sales_order_line_mrp"
+              parent="sale.sale_order_menu"
+              groups="sales_team.group_sale_salesman"
+              sequence="30"/>
+
+    <menuitem id="menu_sales_order_line_summary_mrp"
+              action="action_summary_sales_order_line_mrp"
+              parent="sale.sale_order_menu"
+              groups="sales_team.group_sale_salesman"
+              sequence="30"/>
+</odoo>
