@@ -132,16 +132,29 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="sale_order_line_mrp_form">
+        <field name="name">sale.order.line.mrp.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.sale_order_line_view_form_readonly"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="mrp_production_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
     <record id="view_sales_order_line_mrp_filter" model="ir.ui.view">
         <field name="model">sale.order.line</field>
         <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='salesman_id']" position="after">
                 <field name="name"/>
+                <field name="mrp_production_id"/>
             </xpath>
             <xpath expr="//filter[@name='product']/.." position="inside">
                 <filter name="order_state" string="Order State" context="{'group_by': 'state'}"/>
                 <filter name="invoice_status" string="Invoice Status" context="{'group_by': 'invoice_status'}"/>
+                <filter name="mrp_production_id" string="Invoice Status" context="{'group_by': 'mrp_production_id'}"/>
             </xpath>
         </field>
     </record>

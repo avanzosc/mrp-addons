@@ -13,6 +13,10 @@ class SaleOrderLine(models.Model):
         copy=False)
     manufacturable_product = fields.Boolean(
         compute="_compute_manufacturable_product")
+    stock_qty = fields.Float(string="Stock qty",
+                             related="mrp_production_id.stock_qty")
+    sale_line_qty = fields.Float(string="Prod Lines Qty",
+                                 related="mrp_production_id.sale_line_qty")
 
     @api.depends("product_id", "product_id.route_ids", "product_id.bom_ids",
                  "product_id.bom_ids.type")
@@ -65,22 +69,20 @@ class SaleOrderLine(models.Model):
         mo_domain = self._get_aggregable_mo_domain()
         mo = self.env['mrp.production'].search(mo_domain, limit=1)
         if mo:
+            self.mrp_production_id = mo.id
+            mo.origin = mo._recalculate_origin()
             mo.with_context(sale_line_id=self.id)._update_mo_qty(
                 self.product_uom_qty + mo.product_qty)
-            add_origin = self.order_id.name
-            origin = mo.origin and ", ".join([mo.origin or "", add_origin]) \
-                or add_origin
-            mo.origin = origin
-            self.mrp_production_id = mo.id
         return mo
 
     @api.multi
     def _action_launch_stock_rule(self):
         for line in self:
-            super(SaleOrderLine, line.with_context(
-                sale_line_id=line.id,
-                active=True,
-                production_id=line.mrp_production_id.id)
+            super(SaleOrderLine,
+                  line.with_context(
+                      sale_line_id=line.id,
+                      active=True,
+                      production_id=line.mrp_production_id.id)
                   )._action_launch_stock_rule()
         return True
 
@@ -130,13 +132,6 @@ class SaleOrder(models.Model):
                     continue
 
     @api.multi
-    def action_confirm(self):
-        self.action_create_mrp_from_lines()
-        res = super(SaleOrder, self).action_confirm()
-        self.mapped('order_line.mrp_production_id').toggle_active()
-        return res
-
-    @api.multi
     def action_cancel(self):
         res = super(SaleOrder, self).action_cancel()
         for line in self.order_line:
@@ -150,7 +145,6 @@ class SaleOrder(models.Model):
                     production.sale_line_ids = [(3, line.id)]
         return res
 
-
     @api.multi
     def action_show_manufacturing_orders(self):
         self.ensure_one()
@@ -159,7 +153,7 @@ class SaleOrder(models.Model):
         action_dict['context'] = safe_eval(action_dict.get('context', '{}'))
         action_dict['context'].update({
             'active_test': False,
-            #'default_sale_order_id': self.id,
+            # 'default_sale_order_id': self.id,
         })
         domain = expression.AND([
             [("sale_line_ids", "in", self.order_line.ids)],
