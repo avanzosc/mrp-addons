@@ -8,9 +8,17 @@ from odoo.tools.safe_eval import safe_eval
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    @api.model
+    def _get_selection_production_state(self):
+        return self.env["mrp.production"].fields_get(
+            allfields=["state"])["state"]["selection"]
+
     mrp_production_id = fields.Many2one(
         comodel_name='mrp.production', string='Production',
         copy=False)
+    production_state = fields.Selection(
+        string="Production State", selection="_get_selection_production_state",
+        related="mrp_production_id.state", store=True)
     manufacturable_product = fields.Boolean(
         compute="_compute_manufacturable_product")
     stock_qty = fields.Float(string="Stock qty",

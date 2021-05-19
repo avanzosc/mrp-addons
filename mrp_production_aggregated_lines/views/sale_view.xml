@@ -148,13 +148,11 @@
         <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='salesman_id']" position="after">
-                <field name="name"/>
                 <field name="mrp_production_id"/>
             </xpath>
             <xpath expr="//filter[@name='product']/.." position="inside">
-                <filter name="order_state" string="Order State" context="{'group_by': 'state'}"/>
-                <filter name="invoice_status" string="Invoice Status" context="{'group_by': 'invoice_status'}"/>
-                <filter name="mrp_production_id" string="Invoice Status" context="{'group_by': 'mrp_production_id'}"/>
+                <filter name="mrp_production_id" string="Production Order" context="{'group_by': 'mrp_production_id'}"/>
+                <filter name="production_state" string="Production State" context="{'group_by': 'production_state'}" />
             </xpath>
         </field>
     </record>
