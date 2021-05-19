@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    <record id="mrp_production_sale_info_tree_view" model="ir.ui.view">-->
-<!--        <field name="name">mrp.production.sale.info.tree</field>-->
-<!--        <field name="model">mrp.production</field>-->
-<!--        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />-->
-<!--        <field name="arch" type="xml">-->
-<!--            <field name="name" position="after">-->
-<!--                <field name="partner_ids" widget="many2many_tags"/>-->
-<!--            </field>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="mrp_production_qty_info_tree_view" model="ir.ui.view">
+        <field name="name">mrp.production.sale.info.tree</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_qty" position="before">
+                <field name="has_moves" invisible="1"/>
+                <field name="stock_qty" />
+                <field name="sale_line_qty" />
+            </field>
+            <field name="product_qty" position="attributes">
+                <attribute name="attrs">{'readonly': [('has_moves', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
 
     <record id="mrp_production_sale_info_form_view" model="ir.ui.view">
         <field name="name">mrp.production.sale.info.form.view</field>
@@ -39,11 +44,12 @@
                 </field>
                 <!--<field name="partner_ids" widget="many2many_tags" readonly="1"/>-->
             </field>
-            <field name="product_qty" position="attributes">
-                <attribute name="attrs">{'readonly': [('has_moves', '=', True)]}</attribute>
+            <field name="product_qty" position="before">
+                <field name="stock_qty"/><span class="o_field_widget o_readonly_modifier">+ </span>
+                <field name="sale_line_qty" readonly="1"/><span class="o_field_widget o_readonly_modifier">= </span>
             </field>
             <xpath expr="//field[@name='product_qty']/following-sibling::button" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('state', 'in', ('done','cancel','draft')), ('id', '=', False)]}</attribute>
+                <attribute name="invisible">True</attribute>
             </xpath>
         </field>
     </record>
