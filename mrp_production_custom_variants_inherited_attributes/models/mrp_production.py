@@ -23,13 +23,11 @@ class MrpProduction(models.Model):
         related=False, states={'draft': [('readonly', False)]})
     product_version_id = fields.Many2one(comodel_name="product.version",
                                          name="Product Version")
-    version_value_ids = fields.One2many(
-        comodel_name="product.version.line",
-        related="product_version_id.custom_value_ids")
     custom_value_ids = fields.One2many(
         comodel_name="production.product.version.custom.line",
         string="Custom Values",
-        inverse_name="line_id", copy=True)
+        inverse_name="line_id", copy=True, readonly=True,
+        states={'draft': [('readonly', False)]},)
     product_attribute_ids = fields.One2many(
         comodel_name='mrp.production.attribute', inverse_name='mrp_production',
         string='Product attributes', copy=True, readonly=True,
@@ -120,8 +118,8 @@ class MrpProduction(models.Model):
     def product_version_id_change(self):
         if self.product_version_id:
             self.product_id = self.product_version_id.product_id
-        self.custom_value_ids = self._delete_custom_lines()
-        self.custom_value_ids = self._set_custom_lines()
+            self.custom_value_ids = self._delete_custom_lines()
+            self.custom_value_ids = self._set_custom_lines()
 
     @api.multi
     def _onchange_bom_id(self):
@@ -409,9 +407,6 @@ class MrpProductionProductLine(models.Model):
         copy=True)
     product_version_id = fields.Many2one(comodel_name="product.version",
                                          name="Product Version")
-    version_value_ids = fields.One2many(
-        comodel_name="product.version.line",
-        related="product_version_id.custom_value_ids")
     custom_value_ids = fields.One2many(
         comodel_name="mrp.production.product.version.custom.line",
         string="Custom Values",

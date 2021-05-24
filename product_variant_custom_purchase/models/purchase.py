@@ -50,12 +50,10 @@ class PurchaseOrderLine(models.Model):
         inverse_name='purchase_line_id',
         string='Product attributes', copy=True, readonly=True,
         states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
-    version_value_ids = fields.One2many(
-        comodel_name="product.version.line",
-        related="product_version_id.custom_value_ids")
     custom_value_ids = fields.One2many(
         comodel_name="purchase.version.custom.line", string="Custom Values",
-        inverse_name="line_id", copy=True)
+        inverse_name="line_id", copy=True, readonly=True,
+        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
     state = fields.Selection(default='draft')
 
     def _delete_product_attribute_ids(self):
@@ -154,9 +152,9 @@ class PurchaseOrderLine(models.Model):
     def product_version_id_change(self):
         if self.product_version_id:
             self.product_id = self.product_version_id.product_id
-            self.name = self._get_purchase_line_description()
-        self.custom_value_ids = self._delete_custom_lines()
-        self.custom_value_ids = self._set_custom_lines()
+            self.custom_value_ids = self._delete_custom_lines()
+            self.custom_value_ids = self._set_custom_lines()
+        self.name = self._get_purchase_line_description()
 
     @api.onchange('custom_value_ids')
     def onchange_version_lines(self):
