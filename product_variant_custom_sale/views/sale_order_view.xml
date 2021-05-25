@@ -44,14 +44,9 @@
                     </field>
                     <field name="product_version_id"
                                domain="[('product_id','=',product_id)]"/>
-                    <label for="version_value_ids" attrs="{'invisible': [('product_version_id','=',False)]}" colspan="2" />
-                    <field name="version_value_ids" context="{'show_attribute': False}"
-                           attrs="{'invisible': [('product_version_id','=',False)], 'readonly': 1}"
-                           nolabel="1" colspan="2"/>
                     <!--<field name="possible_attribute_ids" invisible="1"/>-->
-                    <label for="custom_value_ids" attrs="{'invisible': [('product_version_id','!=',False)]}" colspan="2" />
-                    <field name="custom_value_ids" context="{'show_attribute': False}"
-                           attrs="{'invisible': [('product_version_id','!=',False)]}" nolabel="1" colspan="2">
+                    <label for="custom_value_ids" colspan="2" />
+                    <field name="custom_value_ids" context="{'show_attribute': False}" nolabel="1" colspan="2">
                         <tree string="Product Version Line" editable="bottom"
                               create="false">
                             <!--<field name="attribute_id" domain="[('id', 'in', parent.possible_attribute_ids[0][2])]"/>-->

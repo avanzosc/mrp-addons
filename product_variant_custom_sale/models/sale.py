@@ -51,12 +51,10 @@ class SaleOrderLine(models.Model):
         comodel_name='sale.line.attribute', inverse_name='sale_line_id',
         string='Product attributes', copy=True, readonly=True,
         states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
-    version_value_ids = fields.One2many(
-        comodel_name="product.version.line",
-        related="product_version_id.custom_value_ids")
     custom_value_ids = fields.One2many(
         comodel_name="sale.version.custom.line", string="Custom Values",
-        inverse_name="line_id", copy=True)
+        inverse_name="line_id", copy=True, readonly=True,
+        states={'draft': [('readonly', False)], 'sent': [('readonly', False)]})
     # possible_attribute_ids = fields.Many2many(
     #     comodel_name="product.attribute",
     #     compute="_compute_possible_attribute_ids")
@@ -247,8 +245,8 @@ class SaleOrderLine(models.Model):
         if self.product_version_id:
             self.product_id = self.product_version_id.product_id
             self.name = self._get_sale_line_description()
-        self.custom_value_ids = self._delete_custom_lines()
-        self.custom_value_ids = self._set_custom_lines()
+            self.custom_value_ids = self._delete_custom_lines()
+            self.custom_value_ids = self._set_custom_lines()
         self.name = self._get_sale_line_description()
 
     @api.onchange('custom_value_ids')

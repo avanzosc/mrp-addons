@@ -66,7 +66,7 @@ msgstr "El valor personalizado es mayor que el máximo permitido para este valor
 #: code:addons/product_variant_custom/models/product_version.py:70
 #, python-format
 msgid "Custom value is smaller than minimum allowed for this value"
-msgstr "El valor personalizado es menor que el máximo permitido para este valor"
+msgstr "El valor personalizado es menor que el mínimo permitido para este valor"
 
 #. module: product_variant_custom
 #: model:ir.model.fields,field_description:product_variant_custom.field_product_version__partner_id

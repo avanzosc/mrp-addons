@@ -9,11 +9,8 @@
                 <xpath expr="//field[@name='product_id']"
                        position="after">
                     <field name="product_version_id" domain="[('product_id','=',product_id)]"/>
-                    <field name="version_value_ids"
-                           attrs="{'invisible': [('product_version_id','=',False)], 'readonly': 1}"/>
                     <!--<field name="possible_attribute_ids" invisible="1"/>-->
-                    <field name="custom_value_ids"
-                           attrs="{'invisible': [('product_version_id','!=',False)]}">
+                    <field name="custom_value_ids">
                         <tree string="Product Version Line" editable="bottom" create="false">
                             <!--<field name="attribute_id" domain="[('id', 'in', parent.possible_attribute_ids[0][2])]"/>-->
                             <field name="attribute_id"/>

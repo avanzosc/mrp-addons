@@ -8,9 +8,6 @@ class StockMove(models.Model):
 
     product_version_id = fields.Many2one(comodel_name="product.version",
                                          name="Product Version")
-    version_value_ids = fields.One2many(
-        comodel_name="product.version.line",
-        related="product_version_id.custom_value_ids")
     custom_value_ids = fields.One2many(
         comodel_name="lot.version.custom.line", string="Custom Values",
         inverse_name="line_id", copy=True)
