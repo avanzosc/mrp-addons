@@ -54,6 +54,24 @@ class ProductVersion(models.Model):
             'custom_value_ids': custom_value_ids,
         }
 
+    def _create_version(self, product_id, custom_values):
+        product_version = False
+        if product_id and custom_values.filtered(lambda x: x.custom_value):
+            version_values = self.get_version_dict(product_id, custom_values)
+            product_version = self.env["product.version"].create(
+                version_values)
+        return product_version
+
+    def _find_version(self, product_id, custom_values):
+        product = self.env['product.product'].browse(product_id)
+        return product._find_version(custom_values)
+
+    def _find_create_version(self, product_id, custom_values):
+        version = self._find_version(product_id, custom_values)
+        if not version:
+            version = self._create_version(product_id, custom_values)
+        return version
+
 
 class ProductVersionLine(models.Model):
     _name = "product.version.line"
