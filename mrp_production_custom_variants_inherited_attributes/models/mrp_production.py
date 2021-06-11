@@ -329,6 +329,9 @@ class MrpProduction(models.Model):
     @api.multi
     def button_confirm(self):
         self._check_create_production_product()
+        version_obj = self.env['product.version']
+        self.product_version_id = version_obj._find_create_version(
+            self.product_id.id, self.custom_value_ids)
         for line in self.product_line_ids:
             if not self._check_create_scheduled_product_lines_product(line):
                 raise exceptions.UserError(_("Scheduled lines checking error"))
