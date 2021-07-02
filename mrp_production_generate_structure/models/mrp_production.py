@@ -143,6 +143,11 @@ class MrpProduction(models.Model):
                 'res_model': 'mrp.production.product.line',
                 'domain': [('id', 'in', lines.ids)]}
 
+    @api.multi
+    def button_confirm(self):
+        return super(MrpProduction, self.with_context(
+            procurement_production_id=self.id)).button_confirm()
+
 
 class MrpProductionProductLine(models.Model):
     _inherit = 'mrp.production.product.line'
@@ -218,6 +223,17 @@ class MrpProductionProductLine(models.Model):
             self.product_id, self.product_qty, self.product_uom_id, location,
             self.product_id.name, self.production_id.name, values)
 
+    def _get_new_mo_values(self, origin_manufacture_order, analytic_account):
+        values = {
+            'origin_production_id': origin_manufacture_order.id,
+            'level': self.production_id.level + 1,
+            'product_qty': self.product_qty,
+            'user_id': self.production_id.user_id.id,
+        }
+        if analytic_account:
+            values['analytic_account_id'] = analytic_account.id
+        return values
+
     def create_automatic_manufacturing_order(self, origin_manufacture_order,
                                              analytic_account):
         location = (self.product_id.location_id or
@@ -236,7 +252,7 @@ class MrpProductionProductLine(models.Model):
                                    rule.warehouse_id),
                   'picking_type_id': warehouse.manu_type_id,
                   'priority': 1}
-        rule._run_manufacture(
+        rule.with_context(force_execution=True)._run_manufacture(
             self.product_id, self.product_qty, self.product_uom_id, location,
             self.product_id.name, self.production_id.name, values)
         cond = [('origin', '=', self.production_id.name),
@@ -245,14 +261,8 @@ class MrpProductionProductLine(models.Model):
                 ('origin_production_id', '=', False)]
         new_production = self.env['mrp.production'].search(cond, limit=1)
         if new_production:
-            vals = {
-                'origin_production_id': origin_manufacture_order.id,
-                'level': self.production_id.level + 1,
-                'product_qty': self.product_qty,
-                'user_id': self.production_id.user_id.id,
-            }
-            if analytic_account:
-                vals['analytic_account_id'] = analytic_account.id
+            vals = self._get_new_mo_values(origin_manufacture_order,
+                                           analytic_account)
             new_production.write(vals)
             self.new_production_id = new_production
             self.new_production_id.action_compute()
