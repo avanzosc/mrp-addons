@@ -2,7 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 {
     "name": "MRP Production Generate Structure",
-    "version": "12.0.1.3.0",
+    "version": "12.0.1.3.2",
     "license": "AGPL-3",
     "author": "AvanzOSC, ",
     "website": "http://www.avanzosc.es",
