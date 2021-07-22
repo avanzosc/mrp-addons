@@ -8,10 +8,20 @@ class MrpWorkorder(models.Model):
 
     main_product_id = fields.Many2one(comodel_name="product.product",
                                       string="Main Product",
-                                      compute="_compute_main_product_id")
+                                      compute="_compute_main_product_id",
+                                      store=True)
     nested_ids = fields.Many2many(comodel_name="mrp.workorder.nest",
                                   string="In Nests",
                                   compute="_compute_nested_ids")
+    qty_nested = fields.Float(string="Nested Quantity",
+                              compute="_compute_qty_nested")
+
+    @api.depends('nested_ids')
+    def _compute_qty_nested(self):
+        self.qty_nested = sum(self.nested_ids.mapped("qty_producing"))
+
+    def _link_to_quality_check(self, old_move_line, new_move_line):
+        return True
 
     def _compute_nested_ids(self):
         for order in self:
@@ -24,8 +34,6 @@ class MrpWorkorder(models.Model):
                 self.finished_lot_id and self.move_raw_ids:
             return False
 
-    # BOMak ezpauke product_id?
-    # Ezinda productu bea operaziyo bat baiño geyotan ibili?
     @api.depends("operation_id", "production_id")
     def _compute_main_product_id(self):
         for record in self:
