@@ -52,8 +52,7 @@ class MrpWorkorder(models.Model):
             if not from_nest and wo.workcenter_id.nesting_required:
                 raise exceptions.UserError("The workcenter is "
                                            "'nesting_required'")
-            else:
-                return super(MrpWorkorder, wo).button_finish()
+            return super(MrpWorkorder, wo).button_finish()
 
     def button_start(self):
         from_nest = self.env.context.get('from_nest')
@@ -61,8 +60,7 @@ class MrpWorkorder(models.Model):
             if not from_nest and wo.workcenter_id.nesting_required:
                 raise exceptions.UserError("The workcenter is "
                                            "'nesting_required'")
-            else:
-                return super(MrpWorkorder, wo).button_start()
+            return super(MrpWorkorder, wo).button_start()
 
     def record_production(self):
         from_nest = self.env.context.get('from_nest')
@@ -70,8 +68,7 @@ class MrpWorkorder(models.Model):
             if not from_nest and wo.workcenter_id.nesting_required:
                 raise exceptions.UserError("The workcenter is "
                                            "'nesting_required'")
-            else:
-                return super(MrpWorkorder, wo).record_production()
+            return super(MrpWorkorder, wo).record_production()
 
     def button_pending(self):
         from_nest = self.env.context.get('from_nest')
@@ -79,8 +76,7 @@ class MrpWorkorder(models.Model):
             if not from_nest and wo.workcenter_id.nesting_required:
                 raise exceptions.UserError("The workcenter is "
                                            "'nesting_required'")
-            else:
-                return super(MrpWorkorder, wo).button_pending()
+            return super(MrpWorkorder, wo).button_pending()
 
     def button_unblock(self):
         from_nest = self.env.context.get('from_nest')
@@ -88,8 +84,7 @@ class MrpWorkorder(models.Model):
             if not from_nest and wo.workcenter_id.nesting_required:
                 raise exceptions.UserError("The workcenter is "
                                            "'nesting_required'")
-            else:
-                return super(MrpWorkorder, wo).button_unblock()
+            return super(MrpWorkorder, wo).button_unblock()
 
     def button_scrap(self):
         from_nest = self.env.context.get('from_nest')
@@ -97,5 +92,4 @@ class MrpWorkorder(models.Model):
             if not from_nest and wo.workcenter_id.nesting_required:
                 raise exceptions.UserError("The workcenter is "
                                            "'nesting_required'")
-            else:
-                return super(MrpWorkorder, wo).button_scrap()
+            return super(MrpWorkorder, wo).button_scrap()

@@ -33,4 +33,3 @@ class MrpBomLine(models.Model):
             if record.main_material and not record.operation_id:
                 raise exceptions.ValidationError(
                     "Main material must have an operation")
-

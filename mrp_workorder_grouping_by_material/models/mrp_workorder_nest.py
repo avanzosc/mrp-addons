@@ -64,8 +64,8 @@ class MrpWorkorderNest(models.Model):
         ('cancel', 'Cancel'),
     ], compute="_compute_line_states")
     line_working_state = fields.Selection(
-        'Workcenter Status', related='workcenter_id.working_state', readonly=False,
-        help='Technical: used in views only')
+        'Workcenter Status', related='workcenter_id.working_state',
+        readonly=False, help='Technical: used in views only')
     line_production_state = fields.Selection(selection=[
         ('undone', 'Undone'),
         ('done', 'Done'),
@@ -73,8 +73,8 @@ class MrpWorkorderNest(models.Model):
     line_is_produced = fields.Boolean(compute="_compute_line_states")
     line_is_user_working = fields.Boolean(compute="_compute_line_states")
     worksheets = fields.Binary('PDF', help="Upload your PDF file.")
-    qty_producing = fields.Float('Quantity Producing',
-                                 compute="_compute_qty_producing",
+    qty_producing = fields.Float(
+        'Quantity Producing', compute="_compute_qty_producing",
         digits=dp.get_precision('Product Unit of Measure'))
     done_cancel_lines = fields.Boolean(string="No Active Lines",
                                        compute="_compute_active_lines",
@@ -130,8 +130,7 @@ class MrpWorkorderNest(models.Model):
 
     def nest_start(self):
         for nest in self:
-            set_lot = True if nest.main_product_id.tracking == 'none' or  \
-                              nest.lot_id else False
+            set_lot = bool(nest.main_product_id.tracking == 'none')
             if nest.state == 'draft' and set_lot:
                 nest.state = 'ready'
             else:
@@ -263,10 +262,12 @@ class MrpWorkorderNestLine(models.Model):
     related_finished_lot_id = fields.Many2one(
         comodel_name="stock.production.lot",
         related="workorder_id.finished_lot_id")
-    qty_producing = fields.Float('Quantity Producing', default=1.0,
+    qty_producing = fields.Float(
+        'Quantity Producing', default=1.0,
         digits=dp.get_precision('Product Unit of Measure'), copy=True)
-    finished_lot_id = fields.Many2one('stock.production.lot',
-        'Lot/Serial Number', domain="[('product_id', '=', product_id)]")
+    finished_lot_id = fields.Many2one(
+        'stock.production.lot', 'Lot/Serial Number',
+        domain="[('product_id', '=', product_id)]")
     lot_id = fields.Many2one(comodel_name="stock.production.lot",
                              domain="[('product_id', '=', "
                                     "nest_id.main_product_id.id)]")
@@ -359,7 +360,6 @@ class MrpWorkorderNestLine(models.Model):
         res_id = nest_lines[line_index].id if line_index >= 0 else self.id
         return self.nest_line_form_view(res_id)
 
-
     def button_get_next_line(self):
         self.ensure_one()
         nest_lines = self.nest_id.nested_line_ids
@@ -425,7 +425,6 @@ class MrpWorkorderNestLine(models.Model):
                 workorder_id).product_id
             vals['finished_lot_id'] = self._create_assign_lot(code, product_id)
         return super().create(vals)
-
 
     def update_workorder_lines(self, line_values):
         for values in line_values['to_create']:
