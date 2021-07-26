@@ -98,7 +98,8 @@ class NestedLinesInfo(models.TransientModel):
     workorder_id = fields.Many2one(comodel_name="mrp.workorder",
                                    string="Workorder")
     product_id = fields.Many2one(comodel_name='product.product')
-    qty_producing = fields.Float("Currently Produced Quantity", default=1.)
+    qty_producing = fields.Float(string="Currently Produced Quantity",
+                                 default=1.)
     qty_production = fields.Float(string="Produce Quantity")
     qty_produced = fields.Float(string="Produce Quantity")
     qty_nested = fields.Float(string="Nested Quantity")

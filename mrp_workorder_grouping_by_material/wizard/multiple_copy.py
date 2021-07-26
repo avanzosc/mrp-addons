@@ -1,12 +1,12 @@
 # Copyright 2021 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class MultipleCopy(models.TransientModel):
     _name = "multiple.copy"
 
-    copy_number = fields.Integer("Number of Copies", default="1")
+    copy_number = fields.Integer(string="Number of Copies", default="1")
 
     def action_make_copies(self):
         nest_ids = self._context.get('active_ids')

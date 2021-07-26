@@ -1,6 +1,6 @@
 # Copyright 2020 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, exceptions, fields, models
+from odoo import api, exceptions, fields, models, _
 
 
 class MrpWorkorder(models.Model):
@@ -34,7 +34,10 @@ class MrpWorkorder(models.Model):
                 self.finished_lot_id and self.move_raw_ids:
             return False
 
-    @api.depends("operation_id", "production_id")
+    @api.depends("operation_id", "production_id", "production_id.bom_id",
+                 "production_id.bom_id.bom_line_ids",
+                 "production_id.bom_id.bom_line_ids.product_id",
+                 "production_id.bom_id.bom_line_ids.main_material")
     def _compute_main_product_id(self):
         for record in self:
             bom_id = record.production_id.bom_id
@@ -50,46 +53,46 @@ class MrpWorkorder(models.Model):
         from_nest = self.env.context.get('from_nest')
         for wo in self:
             if not from_nest and wo.workcenter_id.nesting_required:
-                raise exceptions.UserError("The workcenter is "
-                                           "'nesting_required'")
+                raise exceptions.UserError(_("The workcenter is "
+                                             "'nesting_required'"))
             return super(MrpWorkorder, wo).button_finish()
 
     def button_start(self):
         from_nest = self.env.context.get('from_nest')
         for wo in self:
             if not from_nest and wo.workcenter_id.nesting_required:
-                raise exceptions.UserError("The workcenter is "
-                                           "'nesting_required'")
+                raise exceptions.UserError(_("The workcenter is "
+                                             "'nesting_required'"))
             return super(MrpWorkorder, wo).button_start()
 
     def record_production(self):
         from_nest = self.env.context.get('from_nest')
         for wo in self:
             if not from_nest and wo.workcenter_id.nesting_required:
-                raise exceptions.UserError("The workcenter is "
-                                           "'nesting_required'")
+                raise exceptions.UserError(_("The workcenter is "
+                                             "'nesting_required'"))
             return super(MrpWorkorder, wo).record_production()
 
     def button_pending(self):
         from_nest = self.env.context.get('from_nest')
         for wo in self:
             if not from_nest and wo.workcenter_id.nesting_required:
-                raise exceptions.UserError("The workcenter is "
-                                           "'nesting_required'")
+                raise exceptions.UserError(_("The workcenter is "
+                                             "'nesting_required'"))
             return super(MrpWorkorder, wo).button_pending()
 
     def button_unblock(self):
         from_nest = self.env.context.get('from_nest')
         for wo in self:
             if not from_nest and wo.workcenter_id.nesting_required:
-                raise exceptions.UserError("The workcenter is "
-                                           "'nesting_required'")
+                raise exceptions.UserError(_("The workcenter is "
+                                             "'nesting_required'"))
             return super(MrpWorkorder, wo).button_unblock()
 
     def button_scrap(self):
         from_nest = self.env.context.get('from_nest')
         for wo in self:
             if not from_nest and wo.workcenter_id.nesting_required:
-                raise exceptions.UserError("The workcenter is "
-                                           "'nesting_required'")
+                raise exceptions.UserError(_("The workcenter is "
+                                             "'nesting_required'"))
             return super(MrpWorkorder, wo).button_scrap()

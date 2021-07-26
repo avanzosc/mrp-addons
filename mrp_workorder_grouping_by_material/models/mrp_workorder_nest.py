@@ -3,7 +3,7 @@
 import base64
 import tempfile
 
-from PyPDF2 import PdfFileMerger, PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfFileMerger
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
@@ -31,7 +31,7 @@ class MrpWorkorderNest(models.Model):
         related="main_product_id.tracking")
     lot_id = fields.Many2one(comodel_name="stock.production.lot")
     company_id = fields.Many2one(
-        'res.company', 'Company',
+        comodel_name='res.company', string='Company',
         default=lambda self: self.env['res.company']._company_default_get(
             'mrp.workorder.nest'),
         required=True)
@@ -64,7 +64,7 @@ class MrpWorkorderNest(models.Model):
         ('cancel', 'Cancel'),
     ], compute="_compute_line_states")
     line_working_state = fields.Selection(
-        'Workcenter Status', related='workcenter_id.working_state',
+        string='Workcenter Status', related='workcenter_id.working_state',
         readonly=False, help='Technical: used in views only')
     line_production_state = fields.Selection(selection=[
         ('undone', 'Undone'),
@@ -72,9 +72,9 @@ class MrpWorkorderNest(models.Model):
     ], compute="_compute_line_states")
     line_is_produced = fields.Boolean(compute="_compute_line_states")
     line_is_user_working = fields.Boolean(compute="_compute_line_states")
-    worksheets = fields.Binary('PDF', help="Upload your PDF file.")
+    worksheets = fields.Binary(string='PDF', help="Upload your PDF file.")
     qty_producing = fields.Float(
-        'Quantity Producing', compute="_compute_qty_producing",
+        string='Quantity Producing', compute="_compute_qty_producing",
         digits=dp.get_precision('Product Unit of Measure'))
     done_cancel_lines = fields.Boolean(string="No Active Lines",
                                        compute="_compute_active_lines",
@@ -263,10 +263,10 @@ class MrpWorkorderNestLine(models.Model):
         comodel_name="stock.production.lot",
         related="workorder_id.finished_lot_id")
     qty_producing = fields.Float(
-        'Quantity Producing', default=1.0,
+        string='Quantity Producing', default=1.0,
         digits=dp.get_precision('Product Unit of Measure'), copy=True)
     finished_lot_id = fields.Many2one(
-        'stock.production.lot', 'Lot/Serial Number',
+        comodel_name='stock.production.lot', string='Lot/Serial Number',
         domain="[('product_id', '=', product_id)]")
     lot_id = fields.Many2one(comodel_name="stock.production.lot",
                              domain="[('product_id', '=', "
@@ -318,7 +318,7 @@ class MrpWorkorderNestLine(models.Model):
         compute="_compute_possible_workorder_ids",
         string="Possible Workorders")
     worksheet = fields.Binary(
-        'Worksheet', related='workorder_id.worksheet', readonly=True)
+        string='Worksheet', related='workorder_id.worksheet', readonly=True)
 
     @api.depends('nest_id')
     def _compute_possible_workorder_ids(self):
@@ -469,7 +469,7 @@ class MrpWorkorderNestLine(models.Model):
             if not wo._check_final_product_lots():
                 UserError(_(
                     '{}: You should provide a lot/serial number for the '
-                    'final product.'.format(wo.name)))
+                    'final product.').format(wo.name))
 
     def button_start(self):
         for nl in self:
@@ -489,7 +489,7 @@ class MrpWorkorderNestLine(models.Model):
                         wo.current_quality_check_id.do_pass()
                     wo.with_context(from_nest=True).record_production()
                 except UserError as e:
-                    raise UserError("{}: {}".format(wo.name, str(e)))
+                    raise UserError(_("{}: {}").format(wo.name, str(e)))
 
     def button_pending(self):
         for nl in self:
