@@ -5,7 +5,21 @@
         <field name="model">nested.new.line</field>
         <field name="arch" type="xml">
             <form string="Nested New Line">
-                <field name="nest_code" required="1"/>
+                <group col="4" colspan="4">
+                    <field name="nest_code" required="1"/>
+                    <field name="product_id" domain="[('id', 'in', possible_product_ids)]"/>
+                    <field name="possible_product_ids" invisible="1"/>
+                </group>
+                <field name="line_ids">
+                    <tree editable="top">
+                        <field name="workorder_id"/>
+                        <field name="product_id"/>
+                        <field name="qty_producing"/>
+                        <field name="qty_produced" readonly="1"/>
+                        <field name="qty_nested" readonly="1"/>
+                        <field name="qty_production" readonly="1"/>
+                    </tree>
+                </field>
                 <footer>
                     <button string="Done" name="action_done" type="object"
                             class="btn-primary"/>
