@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="multiple_copy_form">
+        <field name="name">multiple.copy.form</field>
+        <field name="model">multiple.copy</field>
+        <field name="arch" type="xml">
+            <form string="Multiple Copies">
+                <group>
+                    <field name="copy_number" required="1"/>
+                </group>
+                <footer>
+                    <button string="Done" name="action_make_copies" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+<act_window id="wizard_multiple_nest_copy"
+            name="Multiple Copy"
+            res_model="multiple.copy"
+            binding_model="mrp.workorder.nest"
+            binding_views="list,form"
+            view_mode="form"
+            view_id="mrp_workorder_grouping_by_material.multiple_copy_form"
+            target="new"/>
+</odoo>
