@@ -1,6 +1,6 @@
 # Copyright 2020 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models, exceptions
+from odoo import api, fields, models, exceptions, _
 
 
 class MrpBom(models.Model):
@@ -16,9 +16,9 @@ class MrpBom(models.Model):
                 if operation_id not in operations:
                     operations.append(operation_id)
                 else:
-                    raise exceptions.ValidationError(
+                    raise exceptions.ValidationError(_(
                         "There can only be one main material per operation. "
-                        "Check lines that contains operation: {}".format(
+                        "Check lines that contains operation: {}").format(
                             line.operation_id.name))
 
 
@@ -31,6 +31,5 @@ class MrpBomLine(models.Model):
     def _check_main_material_operation(self):
         for record in self:
             if record.main_material and not record.operation_id:
-                raise exceptions.ValidationError(
-                    "Main material must have an operation")
-
+                raise exceptions.ValidationError(_(
+                    "Main material must have an operation"))
