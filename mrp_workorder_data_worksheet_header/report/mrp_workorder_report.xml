@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report
+            id="mrp_workorder_data_worksheet_header_report"
+            model="mrp.workorder"
+            string="Workorder Data in Worksheet Header"
+            report_type="qweb-pdf"
+            name="mrp_workorder_data_worksheet_header.mrp_workorder_data_worksheet_header_report_qweb"
+            file="mrp_workorder_data_worksheet_header.mrp_workorder_data_worksheet_header_report_qweb"
+    />
+
+    <template id="mrp_workorder_data_worksheet_header_report_qweb">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="mrp_workorder_data_worksheet_header.mrp_workorder_data_worksheet_header_report_qweb2"
+                   t-lang="doc.company_id.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="mrp_workorder_data_worksheet_header_report_qweb2">
+        <t t-set="doc" t-value="doc.with_context(lang=doc.company_id.partner_id.lang)"/>
+        <div class="header" style="font-size:12px;">
+            <div class="row mb32" id="informations">
+                <div class="col-4">
+                    <strong>origin:</strong>
+                    <span t-field="doc.production_id.origin"/>
+                    <br/>
+                    <strong>production:</strong>
+                    <span t-field="doc.production_id.display_name"/>
+                    <br/>
+                    <strong>next order:</strong>
+                    <span t-field="doc.next_work_order_id.name"/>
+                    <br/>
+                    <strong>workcenter:</strong>
+                    <span t-field="doc.next_work_order_id.workcenter_id.name"/>
+                    <br/>
+                </div>
+                <div class="col-4">
+                    <span t-field="doc.product_id.name"/>
+                    <br/>
+                    <span t-field="doc.qty_produced"/>&#32;&#47;
+                    <span t-field="doc.qty_production"/>
+                    <span t-field="doc.product_uom_id"/>
+                    <br/>
+
+                    <span t-field="doc.date_planned_start"/>&#32;to
+                    <span t-field="doc.date_planned_finished"/>
+                </div>
+                <div class="col-4">
+                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('Codabar', doc.production_id.display_name, 250, 50)"/>
+                    <br/>
+                    <div style="text-align: center;">
+                        <strong t-esc="doc.production_id.display_name"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="page"/>
+    </template>
+</odoo>
