@@ -79,6 +79,16 @@ class MrpWorkorderNest(models.Model):
     done_cancel_lines = fields.Boolean(string="No Active Lines",
                                        compute="_compute_active_lines",
                                        store=True)
+    date_planned_start = fields.Datetime(
+        compute="_compute_lines_oldest_date_planned_start", store=True)
+
+    @api.depends("nested_line_ids.date_planned_start")
+    def _compute_lines_oldest_date_planned_start(self):
+        for nest in self:
+            dates = list(filter(lambda x: x, nest.mapped(
+                'nested_line_ids.date_planned_start')))
+            if dates:
+                nest.date_planned_start = min(filter(lambda x: x, dates))
 
     @api.depends("nested_line_ids.qty_producing")
     def _compute_qty_producing(self):
@@ -130,7 +140,8 @@ class MrpWorkorderNest(models.Model):
 
     def nest_start(self):
         for nest in self:
-            set_lot = bool(nest.main_product_id.tracking == 'none')
+            set_lot = bool(nest.main_product_id.tracking == 'none' or
+                           nest.lot_id)
             if nest.state == 'draft' and set_lot:
                 nest.state = 'ready'
             else:
@@ -168,7 +179,7 @@ class MrpWorkorderNest(models.Model):
     def record_production(self):
         for nest in self:
             nest.nested_line_ids.record_production()
-            nest.state = 'blocked'
+            nest.nest_blocked()
 
     def button_pending(self):
         for nest in self:
@@ -490,6 +501,10 @@ class MrpWorkorderNestLine(models.Model):
                     wo.with_context(from_nest=True).record_production()
                 except UserError as e:
                     raise UserError(_("{}: {}").format(wo.name, str(e)))
+                except AttributeError:
+                    # If enterprise module mrp_workorder module
+                    # is not installed quality check is not necessary
+                    pass
 
     def button_pending(self):
         for nl in self:

@@ -21,8 +21,8 @@ class NestedNewLine(models.TransientModel):
         ]
 
     def _prepare_lines(self):
+        lines = []
         if self.env.context.get('active_model') == "mrp.workorder":
-            lines = []
             domain = self._workorders_domain()
             workorders = self.env['mrp.workorder'].search(domain)
             for wo in workorders.filtered(lambda x: x.main_product_id):

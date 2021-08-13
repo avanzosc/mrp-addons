@@ -10,6 +10,7 @@
                 <filter name="actives" string="Actives" domain="[('done_cancel_lines', '=', False)]"/>
                 <group expand="1" string="Group By">
                     <filter name="group_main_product_id" string="Main Material" domain="[]" context="{'group_by': 'main_product_id'}"/>
+                    <filter name="group_date_planned_start" string="Planned Start Date" domain="[]" context="{'group_by': 'date_planned_start'}"/>
                 </group>
             </search>
         </field>
@@ -24,6 +25,7 @@
                 <field name="code"/>
                 <field name="main_product_id"/>
                 <field name="lot_id"/>
+                <field name="date_planned_start"/>
                 <field name="done_cancel_lines" invisible="1"/>
             </tree>
         </field>
@@ -84,6 +86,7 @@
                             <field name="main_product_tracking" invisible="1"/>
                             <field name="company_id" invisible="1"/>
                             <field name="lot_id" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('main_product_tracking', '=', 'none')]}" domain="[('product_id', '=', main_product_id),('product_life_alert', '=', False)]" context="{'default_product_id': main_product_id, 'default_company_id': company_id}"/>
+                            <field name="date_planned_start"/>
                         </group>
                     </group>
                     <div>
@@ -94,6 +97,7 @@
                                 <field name="ok_line" />
                                 <field name="possible_workorder_ids" invisible="1"/>
                                 <field name="workorder_id" create="0" domain="[('id', 'in', possible_workorder_ids)]"/>
+                                <field name="date_planned_start"/>
                                 <field name="name" readonly="1"/>
                                 <button name="show_worksheet" type="object" icon="fa-archive"/>
                                 <field name="product_id" readonly="1"/>
