@@ -1,5 +1,6 @@
-# Copyright 2021 Mikel Arregi Etxaniz - AvanzOSC
+# Copyright 2021 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
 from odoo import models
 from base64 import b64decode, b64encode
 from io import BytesIO
@@ -19,23 +20,23 @@ except ImportError:
     logger.debug("Can not import PyPDF2")
 
 
-class MrpWorkorderLine(models.Model):
-    _inherit = "mrp.workorder.line"
+class MrpWorkorderNestLine(models.Model):
+    _inherit = "mrp.workorder.nest.line"
 
     def print_report(self):
-        records = self.filtered(lambda r: r.finished_workorder_id.worksheet)
+        records = self.filtered(lambda r: r.workorder_id.worksheet)
         if not records:
             return
         pdf = PdfFileWriter()
         for record in records:
             content, content_type = self.env.ref(
                 "mrp_workorder_data_worksheet_header."
-                "mrp_workorder_line_worksheet_report"
+                "mrp_workorder_nest_line_worksheet_report"
             ).render_qweb_pdf(res_ids=record.id)
 
             content_pdf = PdfFileReader(BytesIO(content))
             pdf_worksheet = PdfFileReader(
-                BytesIO(b64decode(record.finished_workorder_id.worksheet)),
+                BytesIO(b64decode(record.workorder_id.worksheet)),
                 strict=False)
 
             for page in pdf_worksheet.pages:

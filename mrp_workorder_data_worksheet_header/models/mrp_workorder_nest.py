@@ -9,8 +9,7 @@ class MrpWorkorderNest(models.Model):
 
     def show_worksheets(self):
         self.ensure_one()
-        pdf = self.mapped("nested_line_ids.workorder_id."
-                          "finished_workorder_line_ids").print_report()
+        pdf = self.mapped("nested_line_ids").print_report()
         if not pdf and self.worksheets:
             return super().show_worksheets()
         wizard = self.env["binary.container"].create({
