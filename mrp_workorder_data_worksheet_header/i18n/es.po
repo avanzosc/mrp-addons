@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 10:07+0000\n"
-"PO-Revision-Date: 2021-09-16 10:07+0000\n"
+"POT-Creation-Date: 2021-09-22 10:43+0000\n"
+"PO-Revision-Date: 2021-09-22 10:43+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,27 +17,37 @@ msgstr ""
 
 #. module: mrp_workorder_data_worksheet_header
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
 msgid ""
 "<br/>\n"
 "                    <strong>next order:</strong>"
 msgstr ""
+"<br/>\n"
+"                    <strong>siguiente orden:</strong>"
 
 #. module: mrp_workorder_data_worksheet_header
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
 msgid ""
 "<br/>\n"
 "                    <strong>production:</strong>"
 msgstr ""
+"<br/>\n"
+"                    <strong>producción:</strong>"
 
 #. module: mrp_workorder_data_worksheet_header
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
 msgid ""
 "<br/>\n"
 "                    <strong>workcenter:</strong>"
 msgstr ""
+"<br/>\n"
+"                    <strong>centro de trabajo:</strong>"
 
 #. module: mrp_workorder_data_worksheet_header
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
 msgid "<strong>origin:</strong>"
 msgstr "<strong>origen:</strong>"
 
@@ -102,6 +112,7 @@ msgid "PDF viewer for workorders"
 msgstr "Visor PDF para ordenes de trabajo"
 
 #. module: mrp_workorder_data_worksheet_header
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.workorder_data_worksheet_form
 msgid "Print"
 msgstr "Imprimir"
@@ -123,6 +134,7 @@ msgstr "Línea de movimiento de orden de trabajo"
 
 #. module: mrp_workorder_data_worksheet_header
 #: model:ir.actions.report,name:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report
+#: model:ir.actions.report,name:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report
 msgid "Workorder with header"
 msgstr "Orden de trabajo con cabecera"
 
@@ -138,6 +150,12 @@ msgid "mrp.workorder.nest"
 msgstr ""
 
 #. module: mrp_workorder_data_worksheet_header
+#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest_line
+msgid "mrp.workorder.nest.line"
+msgstr ""
+
+#. module: mrp_workorder_data_worksheet_header
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
 msgid "to"
 msgstr "a"
