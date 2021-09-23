@@ -14,7 +14,9 @@
     "category": "Manufacturing",
     "data": [
         "views/mrp_workorder_view.xml",
+        "views/mrp_workorder_nest_view.xml",
         "report/mrp_workorder_line_report.xml",
+        "report/mrp_workorder_nest_line_report.xml",
         "wizard/binary_container_view.xml",
     ],
     "installable": True,
