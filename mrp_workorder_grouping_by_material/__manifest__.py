@@ -5,7 +5,9 @@
     "version": "13.0.1.0.4",
     "license": "AGPL-3",
     "depends": [
-        "mrp", "product_expiry"
+        "mrp",
+        "product_expiry",
+        "pdf_previewer",
     ],
     "author": "AvanzOSC",
     "website": "http://www.avanzosc.es",
@@ -18,11 +20,11 @@
         "views/mrp_workorder_nest_view.xml",
         "views/mrp_workorder_view.xml",
         "wizard/nested_new_line_view.xml",
-        "wizard/nested_new_line_action_menu.xml",
-        "wizard/binary_container_view.xml",
+        # "wizard/nested_new_line_action_menu.xml",
         "wizard/multiple_copy_view.xml",
     ],
-    'demo': [],
-    'installable': True,
-    'auto_install': False,
+    "external_dependencies": {
+        "python": ["PyPDF2"]
+    },
+    "installable": True,
 }

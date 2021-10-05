@@ -103,3 +103,11 @@ class NestedLinesInfo(models.TransientModel):
     qty_production = fields.Float(string="Produce Quantity")
     qty_produced = fields.Float(string="Produce Quantity")
     qty_nested = fields.Float(string="Nested Quantity")
+
+    @api.onchange("workorder_id")
+    def _onchange_workorder_id(self):
+        for record in self:
+            record.product_id = record.workorder_id.product_id
+            record.qty_production = record.workorder_id.qty_production
+            record.qty_produced = record.workorder_id.qty_produced
+            record.qty_nested = record.workorder_id.qty_nested

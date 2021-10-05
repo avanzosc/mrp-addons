@@ -7,15 +7,23 @@ from PyPDF2 import PdfFileMerger
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
-from odoo.addons import decimal_precision as dp
+
+NEST_STATE = [
+    ("draft", "Draft"),
+    ("ready", "Ready"),
+    ("progress", "In Progress"),
+    ("blocked", "Blocked"),
+    ("done", "Done"),
+]
 
 
 class MrpWorkorderNest(models.Model):
     _name = "mrp.workorder.nest"
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _description = "Nested Work Orders"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(string="Name", readonly=True, required=True,
-                       copy=False, default='New')
+                       copy=False, default="New")
     code = fields.Char(string="Code")
     main_product_id = fields.Many2one(comodel_name="product.product")
     possible_main_product_ids = fields.Many2many(
@@ -31,62 +39,64 @@ class MrpWorkorderNest(models.Model):
         related="main_product_id.tracking")
     lot_id = fields.Many2one(comodel_name="stock.production.lot")
     company_id = fields.Many2one(
-        comodel_name='res.company', string='Company',
-        default=lambda self: self.env['res.company']._company_default_get(
-            'mrp.workorder.nest'),
+        comodel_name="res.company",
+        string="Company",
+        default=lambda self: self.env.company,
         required=True)
-    nested_line_ids = fields.One2many(comodel_name="mrp.workorder.nest.line",
-                                      inverse_name="nest_id",
-                                      string="Nested Lines",
-                                      copy=True)
-    state = fields.Selection(selection=[
-        ('draft', 'Draft'),
-        ('ready', 'Ready'),
-        ('progress', 'In Progress'),
-        ('blocked', 'Blocked'),
-        ('done', 'Done'),
-    ], string="State", default='draft', tracking=True)
-    pre_block_state = fields.Selection(selection=[
-        ('draft', 'Draft'),
-        ('ready', 'Ready'),
-        ('progress', 'In Progress'),
-        ('blocked', 'Blocked'),
-        ('done', 'Done'),
-    ], string="Pre Block State")
-    line_state = fields.Selection(selection=[
-        ('draft', 'Draft'),
-        ('pending', 'Pending'),
-        ('confirmed', 'Confirmed'),
-        ('ready', 'Ready'),
-        ('progress', 'Progress'),
-        ('blocked', 'Blocked'),
-        ('done', 'Done'),
-        ('cancel', 'Cancel'),
-    ], compute="_compute_line_states")
+    nested_line_ids = fields.One2many(
+        comodel_name="mrp.workorder.nest.line",
+        inverse_name="nest_id",
+        string="Nested Lines",
+        copy=True)
+    state = fields.Selection(
+        selection=NEST_STATE,
+        string="State",
+        default="draft",
+        tracking=True)
+    pre_block_state = fields.Selection(
+        selection=NEST_STATE, string="Pre Block State")
+    line_state = fields.Selection(
+        selection=[
+            ("draft", "Draft"),
+            ("pending", "Pending"),
+            ("confirmed", "Confirmed"),
+            ("ready", "Ready"),
+            ("progress", "Progress"),
+            ("blocked", "Blocked"),
+            ("done", "Done"),
+            ("cancel", "Cancel"),
+        ], compute="_compute_line_states")
     line_working_state = fields.Selection(
-        string='Workcenter Status', related='workcenter_id.working_state',
-        readonly=False, help='Technical: used in views only')
-    line_production_state = fields.Selection(selection=[
-        ('undone', 'Undone'),
-        ('done', 'Done'),
-    ], compute="_compute_line_states")
+        string="Workcenter Status",
+        related="workcenter_id.working_state",
+        readonly=False,
+        help="Technical: used in views only")
+    line_production_state = fields.Selection(
+        selection=[
+            ("undone", "Undone"),
+            ("done", "Done"),
+        ], compute="_compute_line_states")
     line_is_produced = fields.Boolean(compute="_compute_line_states")
     line_is_user_working = fields.Boolean(compute="_compute_line_states")
-    worksheets = fields.Binary(string='PDF', help="Upload your PDF file.")
+    worksheets = fields.Binary(string="PDF", help="Upload your PDF file.")
     qty_producing = fields.Float(
-        string='Quantity Producing', compute="_compute_qty_producing",
-        digits=dp.get_precision('Product Unit of Measure'))
-    done_cancel_lines = fields.Boolean(string="No Active Lines",
-                                       compute="_compute_active_lines",
-                                       store=True)
+        string="Quantity Producing",
+        compute="_compute_qty_producing",
+        digits="Product Unit of Measure")
+    done_cancel_lines = fields.Boolean(
+        string="No Active Lines",
+        compute="_compute_active_lines",
+        store=True)
     date_planned_start = fields.Datetime(
-        compute="_compute_lines_oldest_date_planned_start", store=True)
+        compute="_compute_date_planned_start",
+        string="Scheduled Date Start",
+        store=True)
 
-    @api.depends("nested_line_ids.date_planned_start")
-    def _compute_lines_oldest_date_planned_start(self):
+    @api.depends("nested_line_ids", "nested_line_ids.date_planned_start")
+    def _compute_date_planned_start(self):
         for nest in self:
             dates = list(filter(lambda x: x, nest.mapped(
-                'nested_line_ids.date_planned_start')))
+                "nested_line_ids.date_planned_start")))
             if dates:
                 nest.date_planned_start = min(filter(lambda x: x, dates))
 
@@ -94,26 +104,24 @@ class MrpWorkorderNest(models.Model):
     def _compute_qty_producing(self):
         for nest in self:
             nest.qty_producing = sum(nest.nested_line_ids.filtered(
-                lambda x: x.state == 'progress').mapped("qty_producing"))
+                lambda x: x.state == "progress").mapped("qty_producing"))
 
-    @api.depends('main_product_id')
     def _compute_possible_main_products(self):
+        product_ids = self.env["mrp.bom.line"].search(
+            [("main_material", "=", True)]).mapped("product_id").ids
         for nest in self:
-            product_ids = self.env['mrp.bom.line'].search(
-                [('main_material', '=', True)]).mapped('product_id').ids
             nest.possible_main_product_ids = [(6, 0, product_ids or [])]
 
-    @api.depends('workcenter_id')
     def _compute_possible_workcenter(self):
+        workcenter_ids = self.env["mrp.workcenter"].search(
+            [("nesting_required", "=", True)]).ids
         for nest in self:
-            workcenter_ids = self.env['mrp.workcenter'].search(
-                [('nesting_required', '=', True)]).ids
             nest.possible_workcenter_ids = [(6, 0, workcenter_ids or [])]
 
-    @api.depends('nested_line_ids')
+    @api.depends("nested_line_ids")
     def _compute_workorders(self):
         for nest in self:
-            assigned_wo = nest.nested_line_ids.mapped('workorder_id').ids
+            assigned_wo = nest.mapped("nested_line_ids.workorder_id").ids
             nest.workorder_ids = [(6, 0, assigned_wo)]
 
     def name_get(self):
@@ -125,44 +133,43 @@ class MrpWorkorderNest(models.Model):
             result.append((record.id, name))
         return result
 
-    @api.onchange('lot_id')
+    @api.onchange("lot_id")
     def onchange_lot_id(self):
         for line in self.nested_line_ids:
             line.lot_id = self.lot_id.id
 
     @api.model
     def create(self, vals):
-        if vals.get('name', 'New') == 'New':
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'mrp.workorder.nest') or 'New'
+        if vals.get("name", "New") == "New":
+            vals["name"] = self.env["ir.sequence"].next_by_code(
+                "mrp.workorder.nest") or "New"
         result = super().create(vals)
         return result
 
     def nest_start(self):
         for nest in self:
-            set_lot = bool(nest.main_product_id.tracking == 'none' or
+            set_lot = bool(nest.main_product_id.tracking == "none" or
                            nest.lot_id)
-            if nest.state == 'draft' and set_lot:
-                nest.state = 'ready'
+            if nest.state == "draft" and set_lot:
+                nest.state = "ready"
             else:
                 raise UserError(_("Main product lot is not selected"))
 
     def nest_draft(self):
-        for nest in self:
-            if nest.state == 'ready':
-                nest.state = 'draft'
+        for nest in self.filtered(lambda n: n.state == "ready"):
+            nest.state = "draft"
 
     def nest_blocked(self):
         for nest in self:
-            if nest.state != 'blocked':
+            if nest.state != "blocked":
                 nest.pre_block_state = nest.state
-                nest.state = 'blocked'
+                nest.state = "blocked"
 
     def nest_unblocked(self):
         for nest in self:
-            if nest.state == 'blocked':
+            if nest.state == "blocked":
                 nest.state = nest.pre_block_state
-                if nest.line_working_state == 'blocked':
+                if nest.line_working_state == "blocked":
                     nest.button_unblock()
 
     def button_finish(self):
@@ -174,7 +181,7 @@ class MrpWorkorderNest(models.Model):
             nest_lines = nest.nested_line_ids
             nest_lines._check_final_product_lot()
             nest_lines.button_start()
-            nest.state = 'progress'
+            nest.state = "progress"
 
     def record_production(self):
         for nest in self:
@@ -193,7 +200,7 @@ class MrpWorkorderNest(models.Model):
         for nest in self:
             nest.nested_line_ids.button_scrap()
 
-    @api.depends('nested_line_ids')
+    @api.depends("nested_line_ids")
     def _compute_active_lines(self):
         for nest in self:
             for wl in nest.nested_line_ids:
@@ -202,122 +209,139 @@ class MrpWorkorderNest(models.Model):
                 else:
                     nest.done_cancel_lines = False
 
-    @api.depends('nested_line_ids', 'workcenter_id')
+    @api.depends("nested_line_ids", "workcenter_id")
     def _compute_line_states(self):
         for nest in self:
-            state = 'done'
-            production_state = 'done'
+            state = "done"
+            production_state = "done"
             is_produced = True
             is_user_working = True
             for wl in nest.nested_line_ids:
-                if wl.state != 'done':
+                if wl.state != "done":
                     state = wl.state
-                if wl.production_state != 'done':
-                    production_state = 'undone'
+                if wl.production_state != "done":
+                    production_state = "undone"
                 if not wl.workorder_id.is_produced:
                     is_produced = False
                 if not wl.workorder_id.is_user_working:
                     is_user_working = False
 
-            if nest.line_working_state == 'blocked' and \
-                    nest.state not in ['done', 'blocked']:
+            if nest.line_working_state == "blocked" and \
+                    nest.state not in ["done", "blocked"]:
                 nest.pre_block_state = nest.state
-                nest.state = 'blocked'
+                nest.state = "blocked"
             nest.line_state = state
             nest.line_production_state = production_state
             nest.line_is_user_working = is_user_working
             nest.line_is_produced = is_produced
 
-    def show_worksheets(self):
-        for nest in self:
-            worksheets = nest.nested_line_ids.mapped('workorder_id.worksheet')
-            merger = PdfFileMerger(strict=False)
-            for worksheet in worksheets:
-                temp = tempfile.NamedTemporaryFile(suffix='.pdf')
-                with open(temp.name, 'wb') as temp_pdf:
-                    pdf = base64.b64decode(worksheet)
-                    temp_pdf.write(pdf)
-                merger.append(temp.name, import_bookmarks=False)
-            temp = tempfile.NamedTemporaryFile(suffix='.pdf')
-            merger.write(temp.name)
-            merger.close()
+    def get_worksheets(self):
+        self.ensure_one()
+        worksheets = self.mapped("nested_line_ids.workorder_id.worksheet")
+        merger = PdfFileMerger(strict=False)
+        for worksheet in worksheets:
+            temp = tempfile.NamedTemporaryFile(suffix=".pdf")
+            with open(temp.name, "wb") as temp_pdf:
+                pdf = base64.b64decode(worksheet)
+                temp_pdf.write(pdf)
+            merger.append(temp.name, import_bookmarks=False)
+        temp = tempfile.NamedTemporaryFile(suffix=".pdf")
+        merger.write(temp.name)
+        merger.close()
 
-            with open(temp.name, 'rb') as merged_pdf:
-                content_merged_pdf = merged_pdf.read()
-            nest.worksheets = base64.b64encode(content_merged_pdf)
-            wizard = self.env['binary.container'].create(
-                {'binary_field': nest.worksheets})
-            view_ref = self.env['ir.model.data'].get_object_reference(
-                'mrp_workorder_grouping_by_material',
-                'binary_container_view')
-            view_id = view_ref and view_ref[1] or False,
-            return {
-                'name': 'Worksheet',
-                'domain': [],
-                'res_model': 'binary.container',
-                'res_id': wizard.id,
-                'type': 'ir.actions.act_window',
-                'view_mode': 'form',
-                'view_type': 'form',
-                'view_id': view_id,
-                'context': {},
-                'target': 'new',
-            }
+        with open(temp.name, "rb") as merged_pdf:
+            content_merged_pdf = merged_pdf.read()
+        return base64.b64encode(content_merged_pdf)
+
+    def show_worksheets(self):
+        self.ensure_one()
+        wizard = self.env["binary.container"].create({
+            "binary_field": self.get_worksheets(),
+        })
+        action = self.env.ref("pdf_previewer.binary_container_action")
+        action_dict = action and action.read()[0] or {}
+        action_dict.update({
+            "name": _("Worksheets"),
+            "res_id": wizard.id,
+        })
+        return action_dict
 
 
 class MrpWorkorderNestLine(models.Model):
     _name = "mrp.workorder.nest.line"
 
-    nest_id = fields.Many2one(comodel_name="mrp.workorder.nest")
-    related_qty_producing = fields.Float(related="workorder_id.qty_producing")
+    def _get_selection_workorder_state(self):
+        return self.env["mrp.workorder"].fields_get(
+            allfields=["state"])["state"]["selection"]
+
+    nest_id = fields.Many2one(
+        comodel_name="mrp.workorder.nest",
+        required=True)
+    related_qty_producing = fields.Float(
+        related="workorder_id.qty_producing")
     related_finished_lot_id = fields.Many2one(
         comodel_name="stock.production.lot",
         related="workorder_id.finished_lot_id")
     qty_producing = fields.Float(
-        string='Quantity Producing', default=1.0,
-        digits=dp.get_precision('Product Unit of Measure'), copy=True)
+        string="Quantity Producing", default=1.0,
+        digits="Product Unit of Measure", copy=True)
     finished_lot_id = fields.Many2one(
-        comodel_name='stock.production.lot', string='Lot/Serial Number',
+        comodel_name="stock.production.lot", string="Lot/Serial Number",
         domain="[('product_id', '=', product_id)]")
-    lot_id = fields.Many2one(comodel_name="stock.production.lot",
-                             domain="[('product_id', '=', "
-                                    "nest_id.main_product_id.id)]")
-    workorder_id = fields.Many2one(comodel_name="mrp.workorder")
-    qty_produced = fields.Float(string="Quantity Produced",
-                                related="workorder_id.qty_produced")
-    qty_nested = fields.Float(string="Nested Quantity",
-                              related="workorder_id.qty_nested")
+    lot_id = fields.Many2one(
+        comodel_name="stock.production.lot",
+        domain="[('product_id', '=', nest_id.main_product_id.id)]")
+    workorder_id = fields.Many2one(
+        comodel_name="mrp.workorder")
+    qty_produced = fields.Float(
+        string="Quantity Produced",
+        related="workorder_id.qty_produced")
+    qty_nested = fields.Float(
+        string="Nested Quantity",
+        related="workorder_id.qty_nested")
     name = fields.Char(related="workorder_id.name", string="Name")
-    workcenter_id = fields.Many2one(comodel_name="mrp.workcenter",
-                                    related="workorder_id.workcenter_id",
-                                    string="Workcenter",
-                                    readonly=1)
+    workcenter_id = fields.Many2one(
+        comodel_name="mrp.workcenter",
+        related="workorder_id.workcenter_id",
+        string="Workcenter",
+        readonly=True)
     date_planned_start = fields.Datetime(
         related="workorder_id.date_planned_start",
-        string="Scheduled Date Date",
-        readonly=1
-    )
-    production_id = fields.Many2one(comodel_name="mrp.production",
-                                    related="workorder_id.production_id",
-                                    string="Production",
-                                    readonly=1)
-    product_id = fields.Many2one(comodel_name="product.product",
-                                 related="workorder_id.product_id",
-                                 string="Product",
-                                 readonly=1)
-    qty_production = fields.Float(string="Original Production Quantity",
-                                  related="workorder_id.qty_production",
-                                  readonly=1)
-    qty_remaining = fields.Float(related="workorder_id.qty_remaining",
-                                 string="Quantity Remaining")
-    product_uom_id = fields.Many2one(comodel_name="uom.uom",
-                                     related="workorder_id.product_uom_id",
-                                     string="Unit of Measure",
-                                     readonly=1)
-    state = fields.Selection(string="State", related="workorder_id.state",
-                             readonly=1)
-    working_state = fields.Selection(related="workorder_id.working_state",
-                                     readonly=1)
+        string="Scheduled Date Start",
+        readonly=True)
+    production_id = fields.Many2one(
+        comodel_name="mrp.production",
+        related="workorder_id.production_id",
+        string="Production",
+        readonly=1)
+    product_id = fields.Many2one(
+        comodel_name="product.product",
+        related="workorder_id.product_id",
+        string="Product",
+        readonly=1)
+    product_tracking = fields.Selection(related="product_id.tracking")
+    qty_production = fields.Float(
+        string="Original Production Quantity",
+        related="workorder_id.qty_production",
+        readonly=1)
+    qty_remaining = fields.Float(
+        related="workorder_id.qty_remaining",
+        string="Quantity To Be Produced",
+        digits="Product Unit of Measure")
+    product_uom_id = fields.Many2one(
+        comodel_name="uom.uom",
+        related="workorder_id.product_uom_id",
+        string="Unit of Measure",
+        readonly=1)
+    state = fields.Selection(
+        string="State",
+        related="workorder_id.state",
+        selection=_get_selection_workorder_state,
+        readonly=True)
+    working_state = fields.Selection(
+        string="Workcenter Status",
+        related="workorder_id.working_state",
+        readonly=True)
     is_produced = fields.Boolean(related="workorder_id.is_produced")
     is_user_working = fields.Boolean(related="workorder_id.is_user_working")
     production_state = fields.Selection(
@@ -329,36 +353,40 @@ class MrpWorkorderNestLine(models.Model):
         compute="_compute_possible_workorder_ids",
         string="Possible Workorders")
     worksheet = fields.Binary(
-        string='Worksheet', related='workorder_id.worksheet', readonly=True)
+        string="Worksheet",
+        related="workorder_id.worksheet",
+        readonly=True)
 
-    @api.depends('nest_id')
+    @api.depends("nest_id", "nest_id.main_product_id",
+                 "nest_id.workcenter_id", "nest_id.workorder_ids")
     def _compute_possible_workorder_ids(self):
+        workorder_obj = self.env["mrp.workorder"]
         for nest_line in self:
             nest = nest_line.nest_id
             assigned_wo = nest.workorder_ids.ids
-            workorder_ids = self.env['mrp.workorder'].search(
-                [('main_product_id', '=', nest.main_product_id.id),
-                 ('workcenter_id', '=', nest.workcenter_id.id),
-                 ('id', 'not in', assigned_wo),
-                 ('state', 'not in', ['done', 'cancel'])]).ids
-            nest_line.possible_workorder_ids = [(6, 0, workorder_ids or [])]
+            workorders = workorder_obj.search(
+                [("main_product_id", "=", nest.main_product_id.id),
+                 ("workcenter_id", "=", nest.workcenter_id.id),
+                 ("id", "not in", assigned_wo),
+                 ("state", "not in", ["done", "cancel"])])
+            nest_line.possible_workorder_ids = [(6, 0, workorders.ids or [])]
 
     def nest_line_form_view(self, res_id):
-        view_ref = self.env['ir.model.data'].get_object_reference(
-            'mrp_workorder_grouping_by_material',
-            'mrp_workorder_nest_line_form')
+        view_ref = self.env["ir.model.data"].get_object_reference(
+            "mrp_workorder_grouping_by_material",
+            "mrp_workorder_nest_line_form")
         view_id = view_ref and view_ref[1] or False,
         return {
-            'name': 'Workorder nest line',
-            'domain': [],
-            'res_model': 'mrp.workorder.nest.line',
-            'res_id': res_id,
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'view_id': view_id,
-            'context': {},
-            'target': 'new',
+            "name": "Workorder nest line",
+            "domain": [],
+            "res_model": "mrp.workorder.nest.line",
+            "res_id": res_id,
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "view_type": "form",
+            "view_id": view_id,
+            "context": {},
+            "target": "new",
         }
 
     def button_get_previous_line(self):
@@ -384,25 +412,22 @@ class MrpWorkorderNestLine(models.Model):
             res_id = self.id
         return self.nest_line_form_view(res_id)
 
+    def get_worksheet(self):
+        self.ensure_one()
+        return self.workorder_id.worksheet
+
     def show_worksheet(self):
-        wizard = self.env['binary.container'].create(
-            {'binary_field': self.workorder_id.worksheet})
-        view_ref = self.env['ir.model.data'].get_object_reference(
-            'mrp_workorder_grouping_by_material',
-            'binary_container_view')
-        view_id = view_ref and view_ref[1] or False,
-        return {
-            'name': 'Worksheet',
-            'domain': [],
-            'res_model': 'binary.container',
-            'res_id': wizard.id,
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'view_id': view_id,
-            'context': {},
-            'target': 'new',
-        }
+        self.ensure_one()
+        wizard = self.env["binary.container"].create({
+            "binary_field": self.get_worksheet(),
+        })
+        action = self.env.ref("pdf_previewer.binary_container_action")
+        action_dict = action and action.read()[0] or {}
+        action_dict.update({
+            "name": _("Worksheet"),
+            "res_id": wizard.id,
+        })
+        return action_dict
 
     def _create_assign_lot(self, code, product_id):
         if code:
@@ -452,51 +477,50 @@ class MrpWorkorderNestLine(models.Model):
 
     def _write_lot_producing_qty(self):
         for n_line in self:
-            res = {}
-            n_line.workorder_id.qty_producing = n_line.qty_producing
-            line_values = self.workorder_id._update_workorder_lines()
-            n_line.update_workorder_lines(line_values)
-            if n_line.finished_lot_id:
-                res.update({
-                    'finished_lot_id': n_line.finished_lot_id.id,
-                })
-            if n_line.lot_id:
-                workorder_lines = n_line.workorder_id.raw_workorder_line_ids
-                move_line = workorder_lines.filtered(
-                    lambda x: x.product_id == n_line.nest_id.main_product_id)
-                move_line.lot_id = n_line.lot_id
-            if res:
-                n_line.workorder_id.write(res)
+            if n_line.workorder_id.state not in ("done", "cancel"):
+                res = {
+                    "qty_producing": n_line.qty_producing,
+                }
+                line_values = n_line.workorder_id._update_workorder_lines()
+                n_line.update_workorder_lines(line_values)
+                if n_line.finished_lot_id:
+                    res.update({
+                        'finished_lot_id': n_line.finished_lot_id.id,
+                    })
+                if n_line.lot_id:
+                    workorder_lines = n_line.workorder_id.raw_workorder_line_ids
+                    move_line = workorder_lines.filtered(
+                        lambda x: x.product_id == n_line.nest_id.main_product_id)
+                    move_line.lot_id = n_line.lot_id
+                if res:
+                    n_line.workorder_id.write(res)
 
     def button_finish(self):
-        for nl in self:
-            if nl.is_produced and nl.state == 'progress':
-                nl.workorder_id.with_context(
-                    from_nest=True).button_finish()
+        for nl in self.filtered(
+                lambda n: n.is_produced and n.state == "progress"):
+            nl.workorder_id.with_context(from_nest=True).button_finish()
 
     def _check_final_product_lot(self):
-        for nest_line in self:
-            wo = nest_line.workorder_id
+        for wo in self.mapped("workorder_id"):
             if not wo._check_final_product_lots():
                 UserError(_(
                     '{}: You should provide a lot/serial number for the '
                     'final product.').format(wo.name))
 
     def button_start(self):
-        for nl in self:
-            if nl.state != 'blocked':
-                nl.workorder_id.with_context(from_nest=True).button_start()
+        for nl in self.filtered(lambda n: n.state != "blocked"):
+            nl.workorder_id.with_context(from_nest=True).button_start()
 
     def record_production(self):
         for nl in self:
             is_user_working = nl.workorder_id.is_user_working
             is_produced = nl.workorder_id.is_produced
-            if is_user_working and nl.state == 'progress' and not \
+            if is_user_working and nl.state == "progress" and not \
                     is_produced:
                 nl._write_lot_producing_qty()
                 wo = nl.workorder_id
                 try:
-                    if wo.current_quality_check_id.quality_state == 'none':
+                    if wo.current_quality_check_id.quality_state == "none":
                         wo.current_quality_check_id.do_pass()
                     wo.with_context(from_nest=True).record_production()
                 except UserError as e:
@@ -509,14 +533,14 @@ class MrpWorkorderNestLine(models.Model):
     def button_pending(self):
         for nl in self:
             is_user_working = nl.workorder_id.is_user_working
-            if nl.working_state != 'blocked' and is_user_working and \
-                    nl.state not in ('done', 'pending', 'ready', 'cancel'):
+            if nl.working_state != "blocked" and is_user_working and \
+                    nl.state not in ("done", "pending", "ready", "cancel"):
                 nl.workorder_id.with_context(
                     from_nest=True).button_pending()
 
     def button_scrap(self):
         for nest_line in self:
-            if nest_line.state not in ('confirmed', 'cancel'):
+            if nest_line.state not in ("confirmed", "cancel"):
                 nest_line.workorder_id.with_context(
                     from_nest=True).button_scrap()
 
@@ -533,20 +557,20 @@ class MrpWorkorderNestLine(models.Model):
     def open_line(self):
         self.ensure_one()
         if self.nest_id.nested_line_ids:
-            view_ref = self.env['ir.model.data'].get_object_reference(
-                'mrp_workorder_grouping_by_material',
-                'mrp_workorder_nest_line_form')
+            view_ref = self.env["ir.model.data"].get_object_reference(
+                "mrp_workorder_grouping_by_material",
+                "mrp_workorder_nest_line_form")
             view_id = view_ref and view_ref[1] or False,
 
         return {
-            'name': 'Workorder nest line',
-            'domain': [],
-            'res_model': 'mrp.workorder.nest.line',
-            'res_id': self.id,
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'view_id': view_id,
-            'context': {},
-            'target': 'new',
+            "name": "Workorder nest line",
+            "domain": [],
+            "res_model": "mrp.workorder.nest.line",
+            "res_id": self.id,
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "view_type": "form",
+            "view_id": view_id,
+            "context": {},
+            "target": "new",
         }

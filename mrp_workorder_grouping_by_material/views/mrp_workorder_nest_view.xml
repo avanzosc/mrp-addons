@@ -62,6 +62,8 @@
                     <button name="button_scrap" type="object"
                             string="Scrap" attrs="{'invisible': ['|', '|', ('state', '=', 'blocked'), ('line_state', 'in', ('done', 'cancel')), ('state', '=', 'draft')]}"/>
                     <!--<button name="%(mrp.act_mrp_block_workcenter_wo)d" type="action" context="{'default_workcenter_id': workcenter_id}" string="Block" class="btn-danger" attrs="{'invisible': ['|', ('line_working_state', '=', 'blocked'), ('line_state', 'in', ('done', 'pending', 'ready', 'cancel')), ('state', '!=', 'draft')]}"/>-->
+                    <button name="show_worksheets" type="object"
+                            string="Show Worksheets" />
                     <field name="state" widget="statusbar" statusbar_visible="blocked,draft,ready,progress,done"/>
                     <field name="line_state" invisible="1"/>
                     <field name="line_working_state" invisible="1"/>
@@ -77,44 +79,61 @@
                     </div>
                     <group>
                         <group>
-                            <field name="worksheets"/>
-                            <button name="show_worksheets" type="object" string="merge pdfs"/>
+<!--                            <field name="worksheets"/>-->
+<!--                            <button name="show_worksheets" type="object" string="merge pdfs"/>-->
                             <field name="possible_main_product_ids" invisible="1"/>
                             <field name="main_product_id" domain="[('id', 'in', possible_main_product_ids)]"/>
                             <field name="possible_workcenter_ids" invisible="1"/>
                             <field name="workcenter_id" domain="[('id', 'in', possible_workcenter_ids)]"/>
                             <field name="main_product_tracking" invisible="1"/>
                             <field name="company_id" invisible="1"/>
-                            <field name="lot_id" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('main_product_tracking', '=', 'none')]}" domain="[('product_id', '=', main_product_id),('product_life_alert', '=', False)]" context="{'default_product_id': main_product_id, 'default_company_id': company_id}"/>
-                            <field name="date_planned_start"/>
+                            <field name="lot_id"
+                                   attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('main_product_tracking', '=', 'none')]}"
+                                   domain="[('product_id', '=', main_product_id),('product_life_alert', '=', False)]"
+                                   context="{'default_product_id': main_product_id, 'default_company_id': company_id}"/>
+                            <field name="date_planned_start" />
                         </group>
                     </group>
                     <div>
                         <field name="nested_line_ids">
-                            <tree editable="top" attrs="{'readonly': [('state', '=', 'blocked')]}" decoration-success="ok_line" decoration-danger="working_state == 'blocked'">
+                            <tree editable="top" attrs="{'readonly': [('state', '=', 'blocked')]}"
+                                  decoration-success="ok_line"
+                                  decoration-danger="working_state == 'blocked'">
                                 <button name="open_line" type="object" string="Open Line" icon="fa-bars"/>
                                 <field name="nest_id" invisible="1"/>
-                                <field name="ok_line" />
+                                <field name="ok_line" invisible="1"/>
                                 <field name="possible_workorder_ids" invisible="1"/>
-                                <field name="workorder_id" create="0" domain="[('id', 'in', possible_workorder_ids)]"/>
-                                <field name="date_planned_start"/>
-                                <field name="name" readonly="1"/>
-                                <button name="show_worksheet" type="object" icon="fa-archive"/>
+                                <field name="workorder_id"
+                                       options="{'no_create': True}"
+                                       domain="[('id', 'in', possible_workorder_ids)]"/>
+                                <field name="date_planned_start"
+                                       widget="date"/>
+                                <field name="worksheet" invisible="True" />
+                                <button name="show_worksheet" type="object"
+                                        icon="fa-archive"
+                                        attrs="{'invisible': [('worksheet','=',False)]}"/>
+                                <field name="state" readonly="1"/>
                                 <field name="product_id" readonly="1"/>
-                                <field name="qty_producing"/>
-                                <field name="company_id" invisible="1"/>
-                                <field name="finished_lot_id" string="Product to Produce Lot" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
-                                <field name="lot_id" invisible="1" string="Main Material Lot"/>
-                                <field name="qty_produced" readonly="1"/>
+                                <field name="product_tracking"
+                                       invisible="True" />
+                                <field name="qty_producing"
+                                       attrs="{'readonly': ['|', ('product_tracking', '=', 'serial'), ('state', 'in', ('done', 'cancel'))]}"/>
                                 <field name="qty_remaining" readonly="1"/>
                                 <field name="qty_nested" readonly="1"/>
+                                <field name="qty_produced" readonly="1"/>
                                 <field name="qty_production" readonly="1"/>
-                                <field name="product_uom_id" readonly="1"/>
-                                <field name="workcenter_id" readonly="1"/>
-                                <field name="production_id" readonly="1"/>
-                                <field name="date_planned_start" readonly="1"/>
-                                <field name="state" readonly="1"/>
+                                <field name="finished_lot_id" string="Product to Produce Lot"
+                                       context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                                <field name="lot_id" invisible="1" string="Main Material Lot"/>
+                                <field name="product_uom_id" invisible="1"/>
+                                <field name="workcenter_id" invisible="1"/>
+                                <field name="production_id" invisible="1"/>
                                 <field name="working_state" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+<!--                                <button name="show_worksheet"-->
+<!--                                        type="object"-->
+<!--                                        string="Print"-->
+<!--                                        icon="fa-print" />-->
                             </tree>
                             <form>
                                 <header>
@@ -142,16 +161,14 @@
 
                                     <button name="button_quality_alert" type="object" string="Quality Alert"
                                             attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
-                                    <field name="state" widget="statusbar"
-                                           statusbar_visible="pending,ready,progress,done"/>
+                                    <field name="state" widget="statusbar" statusbar_visible="pending,ready,progress,done"/>
                                 </header>
                                 <sheet>
-                                    <group colspan="4" col="4">
-                                        <group colspan="2">
+                                    <group>
+                                        <group>
                                             <field name="nest_id" invisible="1"/>
-                                            <group invisible="1">
-                                                <field name="possible_workorder_ids" string="Possible Workorders"/>
-                                            </group>
+                                            <field name="possible_workorder_ids" string="Possible Workorders"
+                                                   invisible="1"/>
                                             <field name="workorder_id" no_create="1" domain="[('id', 'in', possible_workorder_ids)]"/>
                                             <field name="name" readonly="1"/>
                                             <field name="product_id" readonly="1"/>
@@ -165,12 +182,11 @@
                                             <field name="qty_nested" readonly="1"/>
                                             <field name="qty_production" readonly="1"/>
                                         </group>
-                                        <group colspan="2">
+                                        <group>
                                             <field name="product_uom_id" readonly="1"/>
                                             <field name="workcenter_id" readonly="1"/>
                                             <field name="production_id" readonly="1"/>
                                             <field name="date_planned_start" readonly="1"/>
-                                            <field name="state" readonly="1"/>
                                             <field name="working_state" invisible="1"/>
                                             <field name="production_state" invisible="1"/>
                                             <field name="is_user_working" invisible="1"/>
@@ -214,8 +230,8 @@
                 <sheet>
                     <notebook>
                         <page string="Data">
-                            <group colspan="4" col="4">
-                                <group colspan="2">
+                            <group>
+                                <group>
                                     <field name="nest_id" invisible="1"/>
                                     <field name="possible_workorder_ids" string="Possible Workorders" invisible="1"/>
                                     <field name="workorder_id" options="{'no_create': True}"
@@ -232,12 +248,11 @@
                                     <field name="qty_nested" readonly="1"/>
                                     <field name="qty_production" readonly="1"/>
                                 </group>
-                                <group colspan="2">
+                                <group>
                                     <field name="product_uom_id" readonly="1"/>
                                     <field name="workcenter_id" readonly="1"/>
                                     <field name="production_id" readonly="1"/>
                                     <field name="date_planned_start" readonly="1"/>
-                                    <field name="state" readonly="1"/>
                                     <field name="working_state" invisible="1"/>
                                     <field name="production_state" invisible="1"/>
                                     <field name="is_user_working" invisible="1"/>
@@ -269,6 +284,8 @@
               id="menu_nested_workorder_action"
               parent="mrp.menu_mrp_manufacturing"/>
     <menuitem name="Nest App"
-        id="nest_app_menu" action="mrp_workorder_nest_action" sequence="35"
-        web_icon="mrp_workorder_grouping_by_material,static/src/img/icon.png"/>
+              id="nest_app_menu"
+              action="mrp_workorder_nest_action"
+              sequence="35"
+              web_icon="mrp_workorder_grouping_by_material,static/src/img/icon.png"/>
 </odoo>

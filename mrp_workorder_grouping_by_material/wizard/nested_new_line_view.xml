@@ -12,8 +12,8 @@
                 </group>
                 <field name="line_ids">
                     <tree editable="top">
-                        <field name="workorder_id"/>
-                        <field name="product_id"/>
+                        <field name="workorder_id" options="{'no_create': True}"/>
+                        <field name="product_id" options="{'no_create': True}"/>
                         <field name="qty_producing"/>
                         <field name="qty_produced" readonly="1"/>
                         <field name="qty_nested" readonly="1"/>
@@ -27,5 +27,16 @@
                 </footer>
             </form>
         </field>
+    </record>
+
+    <record id="nested_new_line_wizard_action" model="ir.actions.act_window">
+        <field name="name">Add to Nest</field>
+        <field name="res_model">nested.new.line</field>
+<!--        <field name="binding_model">mrp.workorder</field>-->
+        <field name="binding_model_id" ref="mrp.model_mrp_workorder" />
+        <field name="binding_view_types">list</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="nested_new_line_form" />
+        <field name="target">new</field>
     </record>
 </odoo>

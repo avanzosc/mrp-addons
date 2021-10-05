@@ -17,12 +17,12 @@
         </field>
     </record>
 
-<act_window id="wizard_multiple_nest_copy"
-            name="Multiple Copy"
-            res_model="multiple.copy"
-            binding_model="mrp.workorder.nest"
-            binding_views="list,form"
-            view_mode="form"
-            view_id="mrp_workorder_grouping_by_material.multiple_copy_form"
-            target="new"/>
+    <act_window id="wizard_multiple_nest_copy"
+                name="Multiple Copy"
+                res_model="multiple.copy"
+                binding_model="mrp.workorder.nest"
+                binding_views="list,form"
+                view_mode="form"
+                view_id="mrp_workorder_grouping_by_material.multiple_copy_form"
+                target="new"/>
 </odoo>

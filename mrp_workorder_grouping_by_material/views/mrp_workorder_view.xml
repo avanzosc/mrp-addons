@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record model="ir.ui.view" id="nest_workorder_fields_tree">
-        <field name="name">nest.workorder.fields.tree</field>
+    <record model="ir.ui.view" id="nest_workorder_view_tree">
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view_inherit" />
         <field name="arch" type="xml">
@@ -11,8 +10,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="main_product_workorder_search_view">
-        <field name="name">main.product.workorder.search.view</field>
+    <record model="ir.ui.view" id="main_product_workorder_view_search">
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.view_mrp_production_workorder_form_view_filter" />
         <field name="arch" type="xml">
@@ -20,18 +18,47 @@
                 <field name="main_product_id" />
             </xpath>
             <xpath expr="//filter[@name='scheduled_month']" position="after">
-                <filter string="Main Product" name="main_product_id" domain="[]" context="{'group_by':'main_product_id'}"/>
+                <filter string="Main Product" name="main_product_id"
+                        domain="[]" context="{'group_by':'main_product_id'}"/>
             </xpath>
         </field>
     </record>
 
-    <record model="ir.ui.view" id="operation_worksheet_view">
-        <field name="name">operation_worksheet_view</field>
+    <record model="ir.ui.view" id="mrp_workorder_view_search">
         <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_work_order_search" />
         <field name="arch" type="xml">
-            <form >
-                <field name="worksheet" widget="pdf_viewer"/>
-            </form>
+            <xpath expr="//field[@name='production_id']" position="after">
+                <field name="main_product_id" />
+            </xpath>
+            <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
+                <filter string="Main Product" name="main_product_id"
+                        domain="[]" context="{'group_by':'main_product_id'}"/>
+            </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="mrp_workorder_view_form">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='workorder_page_misc']//field[@name='workcenter_id']" position="after">
+                <field name="nesting_required" invisible="True" />
+                <field name="nested_ids"
+                       widget="many2many_tags"
+                       attrs="{'invisible': [('nesting_required', '!=', True)]}" />
+                <field name="qty_nested"
+                       attrs="{'invisible': [('nesting_required', '!=', True)]}" />
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record model="ir.ui.view" id="operation_worksheet_view">-->
+<!--        <field name="model">mrp.workorder</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <field name="worksheet" widget="pdf_viewer"/>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
 </odoo>
