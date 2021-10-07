@@ -81,7 +81,8 @@ class NestedNewLine(models.TransientModel):
         for main_id, workcenters in main_product_workcenter.items():
             for workcenter, lines in workcenters.items():
                 new_lines = [(0, 0, {'workorder_id': line.workorder_id.id,
-                                     'qty_producing': line.qty_producing})
+                                     'qty_producing': line.qty_producing,
+                                     'state': line.workorder_id.state})
                              for line in lines]
                 self.env['mrp.workorder.nest'].create({
                     'code': self.nest_code,

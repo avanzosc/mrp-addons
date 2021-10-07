@@ -6,6 +6,7 @@
     "license": "AGPL-3",
     "depends": [
         "mrp",
+        "mrp_workorder_consume",
         "product_expiry",
         "pdf_previewer",
     ],
@@ -16,11 +17,12 @@
         "data/mrp_workorder_nest_data.xml",
         "security/ir.model.access.csv",
         "views/mrp_bom_view.xml",
+        "views/mrp_production_view.xml",
         "views/mrp_workcenter_view.xml",
         "views/mrp_workorder_nest_view.xml",
+        "views/mrp_workorder_nest_line_view.xml",
         "views/mrp_workorder_view.xml",
         "wizard/nested_new_line_view.xml",
-        # "wizard/nested_new_line_action_menu.xml",
         "wizard/multiple_copy_view.xml",
     ],
     "external_dependencies": {

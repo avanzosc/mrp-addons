@@ -14,13 +14,17 @@
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.view_mrp_production_workorder_form_view_filter" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='production_id']" position="after">
+            <field name="production_id" position="after">
                 <field name="main_product_id" />
-            </xpath>
-            <xpath expr="//filter[@name='scheduled_month']" position="after">
+            </field>
+            <filter name="late" position="after">
+                <filter string="Nesting Required" name="nesting_required"
+                        domain="[('nesting_required', '=', True)]" />
+            </filter>
+            <filter name="scheduled_month" position="after">
                 <filter string="Main Product" name="main_product_id"
                         domain="[]" context="{'group_by':'main_product_id'}"/>
-            </xpath>
+            </filter>
         </field>
     </record>
 
@@ -28,13 +32,17 @@
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.view_mrp_production_work_order_search" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='production_id']" position="after">
+            <field name="workcenter_id" position="after">
                 <field name="main_product_id" />
-            </xpath>
-            <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
+            </field>
+            <filter name="late" position="after">
+                <filter string="Nesting Required" name="nesting_required"
+                        domain="[('nesting_required', '=', True)]" />
+            </filter>
+            <filter name="date_start_filter" position="after">
                 <filter string="Main Product" name="main_product_id"
                         domain="[]" context="{'group_by':'main_product_id'}"/>
-            </xpath>
+            </filter>
         </field>
     </record>
 
@@ -42,6 +50,14 @@
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
         <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="open_nest" type="object" icon="fa-archive" attrs="{'invisible': [('nested_count', '=', 0)]}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="nested_count"/></span>
+                        <span class="o_stat_text">Nested In</span>
+                    </div>
+                </button>
+            </div>
             <xpath expr="//page[@name='workorder_page_misc']//field[@name='workcenter_id']" position="after">
                 <field name="nesting_required" invisible="True" />
                 <field name="nested_ids"
@@ -52,13 +68,4 @@
             </xpath>
         </field>
     </record>
-
-<!--    <record model="ir.ui.view" id="operation_worksheet_view">-->
-<!--        <field name="model">mrp.workorder</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <form>-->
-<!--                <field name="worksheet" widget="pdf_viewer"/>-->
-<!--            </form>-->
-<!--        </field>-->
-<!--    </record>-->
 </odoo>

@@ -1,6 +1,11 @@
 # Copyright 2020 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import api, exceptions, fields, models, _
+from odoo.models import expression
+from odoo.tools import safe_eval
+
+from odoo.exceptions import AccessError, UserError
+from odoo.tools import date_utils, float_compare, float_round, float_is_zero
 
 
 class MrpWorkorder(models.Model):
@@ -15,6 +20,8 @@ class MrpWorkorder(models.Model):
         comodel_name="mrp.workorder.nest",
         string="In Nests",
         compute="_compute_nested")
+    nested_count = fields.Integer(
+        compute="_compute_nested")
     qty_nested = fields.Float(
         string="Nested Quantity",
         compute="_compute_nested")
@@ -23,12 +30,17 @@ class MrpWorkorder(models.Model):
         related="workcenter_id.nesting_required",
         store=True)
 
+    def _get_related_nested(self):
+        self.ensure_one()
+        return self.env["mrp.workorder.nest.line"].search([
+            ("workorder_id", "=", self.id)]).mapped("nest_id")
+
     def _compute_nested(self):
         for order in self:
-            nest_ids = self.env["mrp.workorder.nest.line"].search([
-                ("workorder_id", "=", order.id)]).mapped("nest_id")
-            order.nested_ids = [(6, 0, nest_ids.ids)]
-            order.qty_nested = sum(nest_ids.mapped("qty_producing"))
+            nested = order._get_related_nested()
+            order.nested_ids = [(6, 0, nested.ids)]
+            order.nested_count = len(nested)
+            order.qty_nested = sum(nested.mapped("qty_producing"))
 
     def _link_to_quality_check(self, old_move_line, new_move_line):
         return True
@@ -101,3 +113,14 @@ class MrpWorkorder(models.Model):
             raise exceptions.UserError(
                 _("The workcenter is 'nesting_required'"))
         return super().button_scrap()
+
+    def open_nest(self):
+        self.ensure_one()
+        nested = self._get_related_nested()
+        action = self.env.ref(
+            "mrp_workorder_grouping_by_material.mrp_workorder_nest_action")
+        action_dict = action and action.read()[0] or {}
+        domain = expression.AND([
+            [("id", "in", nested.ids)], safe_eval(action.domain or "[]")])
+        action_dict.update({"domain": domain})
+        return action_dict
