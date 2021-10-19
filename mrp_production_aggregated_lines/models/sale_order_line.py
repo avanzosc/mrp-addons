@@ -6,7 +6,7 @@ from odoo.tools.safe_eval import safe_eval
 
 
 class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
+    _inherit = "sale.order.line"
 
     @api.model
     def _get_selection_production_state(self):
@@ -14,7 +14,7 @@ class SaleOrderLine(models.Model):
             allfields=["state"])["state"]["selection"]
 
     mrp_production_id = fields.Many2one(
-        comodel_name='mrp.production', string='Production',
+        comodel_name="mrp.production", string="Production",
         copy=False)
     production_state = fields.Selection(
         string="Production State", selection="_get_selection_production_state",
@@ -29,7 +29,7 @@ class SaleOrderLine(models.Model):
     @api.depends("product_id", "product_id.route_ids", "product_id.bom_ids",
                  "product_id.bom_ids.type")
     def _compute_manufacturable_product(self):
-        manufacture = self.env.ref('mrp.route_warehouse0_manufacture')
+        manufacture = self.env.ref("mrp.route_warehouse0_manufacture")
         for line in self:
             manufacture_route = (manufacture in line.product_id.route_ids)
             manufacture_bom = any(
@@ -49,33 +49,33 @@ class SaleOrderLine(models.Model):
     def _action_mrp_dict(self):
         self.ensure_one()
         values = {
-            'date_planned_start': self.order_id.date_order,
-            'product_id': self.product_id.id or False,
-            'product_qty': self.product_uom_qty,
-            'product_uom_id': self.product_uom.id,
-            'location_dest_id': self.order_id.warehouse_id.lot_stock_id.id,
-            'active': False,
-            'origin': self.order_id.name,
+            "date_planned_start": self.order_id.date_order,
+            "product_id": self.product_id.id or False,
+            "product_qty": self.product_uom_qty,
+            "product_uom_id": self.product_uom.id,
+            "location_dest_id": self.order_id.warehouse_id.lot_stock_id.id,
+            "active": False,
+            "origin": self.order_id.name,
         }
         return values
 
     def _get_aggregable_mo_domain(self):
         return [
-            ('product_id', '=', self.product_id.id or False),
-            ('product_uom_id', '=', self.product_uom.id),
-            ('location_dest_id', '=',
+            ("product_id", "=", self.product_id.id or False),
+            ("product_uom_id", "=", self.product_uom.id),
+            ("location_dest_id", "=",
              self.order_id.warehouse_id.lot_stock_id.id),
-            ('state', '=', 'draft'),
-            ('active', '=', False)
+            ("state", "=", "draft"),
+            ("active", "=", False)
         ]
-        # week = values.get('date_planned_start').isocalendar()[:2]
+        # week = values.get("date_planned_start").isocalendar()[:2]
         # mo = mos.filtered(
         #     lambda x: week == x.date_planned_start.isocalendar()[:2])
 
     @api.multi
     def _aggregate_to_mo(self):
         mo_domain = self._get_aggregable_mo_domain()
-        mo = self.env['mrp.production'].search(mo_domain, limit=1)
+        mo = self.env["mrp.production"].search(mo_domain, limit=1)
         if mo:
             self.mrp_production_id = mo.id
             mo.origin = mo._recalculate_origin()
@@ -98,12 +98,12 @@ class SaleOrderLine(models.Model):
     def action_create_mrp(self):
         self.ensure_one()
         if self.product_uom_qty <= 0:
-            raise exceptions.Warning(_('The quantity must be positive.'))
+            raise exceptions.Warning(_("The quantity must be positive."))
         aggregated_mo = self._aggregate_to_mo()
         if not aggregated_mo:
             picking_type_id = self.order_id.warehouse_id.manu_type_id.id
             values = self._action_mrp_dict()
-            mrp = self.env['mrp.production'].with_context(
+            mrp = self.env["mrp.production"].with_context(
                 default_picking_type_id=picking_type_id
             ).create(values)
             self.mrp_production_id = mrp.id
@@ -113,11 +113,12 @@ class SaleOrderLine(models.Model):
     def action_detach_mo(self):
         for line in self:
             production = line.mrp_production_id
-            if production.state == 'draft':
+            if production.state == "draft":
                 new_qty = production.product_qty - line.product_uom_qty
                 if new_qty > 0:
                     production._update_mo_qty(new_qty)
                     production.sale_line_ids = [(3, line.id)]
+                    production.origin = production._recalculate_origin()
                     line.mrp_production_id = False
                 else:
                     line.mrp_production_id.action_cancel()
@@ -126,7 +127,7 @@ class SaleOrderLine(models.Model):
 
 
 class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+    _inherit = "sale.order"
 
     @api.multi
     def action_create_mrp_from_lines(self):
@@ -158,10 +159,10 @@ class SaleOrder(models.Model):
         self.ensure_one()
         action = self.env.ref("mrp.mrp_production_action")
         action_dict = action.read()[0] if action else {}
-        action_dict['context'] = safe_eval(action_dict.get('context', '{}'))
-        action_dict['context'].update({
-            'active_test': False,
-            # 'default_sale_order_id': self.id,
+        action_dict["context"] = safe_eval(action_dict.get("context", "{}"))
+        action_dict["context"].update({
+            "active_test": False,
+            # "default_sale_order_id": self.id,
         })
         domain = expression.AND([
             [("sale_line_ids", "in", self.order_line.ids)],

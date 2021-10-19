@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-19 09:22+0000\n"
-"PO-Revision-Date: 2021-05-19 09:22+0000\n"
+"POT-Creation-Date: 2021-10-19 15:13+0000\n"
+"PO-Revision-Date: 2021-10-19 15:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -107,9 +107,14 @@ msgid "Sale Order"
 msgstr "Pedido de venta"
 
 #. module: mrp_production_aggregated_lines
+#: model_terms:ir.ui.view,arch_db:mrp_production_aggregated_lines.mrp_production_sale_info_form_view
+msgid "Sale Order Info"
+msgstr "Información de ventas"
+
+#. module: mrp_production_aggregated_lines
 #: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_mrp_production__sale_line_qty
 msgid "Sale qty"
-msgstr ""
+msgstr "Ctd. de venta"
 
 #. module: mrp_production_aggregated_lines
 #: model:ir.model,name:mrp_production_aggregated_lines.model_sale_order_line
@@ -144,11 +149,10 @@ msgid "Stock qty"
 msgstr "Cantidad de stock"
 
 #. module: mrp_production_aggregated_lines
-#: code:addons/mrp_production_aggregated_lines/models/sale_order_line.py:91
 #: code:addons/mrp_production_aggregated_lines/models/sale_order_line.py:101
 #, python-format
 msgid "The quantity must be positive."
-msgstr ""
+msgstr "La cantidad debe ser positiva"
 
 #. module: mrp_production_aggregated_lines
 #: model:ir.actions.server,name:mrp_production_aggregated_lines.unlink_mo_from_sale_line
