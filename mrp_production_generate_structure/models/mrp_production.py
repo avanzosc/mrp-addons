@@ -2,19 +2,26 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from odoo.models import expression
+from odoo.tools.safe_eval import safe_eval
 from dateutil.relativedelta import relativedelta
 
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
 
-    origin_production_id = fields.Many2one(comodel_name="mrp.production",
-                                           string="Origin manufacturing order")
-    level = fields.Integer(string='Level', default=0)
+    origin_production_id = fields.Many2one(
+        comodel_name="mrp.production",
+        string="Origin manufacturing order",
+        copy=False)
+    level = fields.Integer(
+        string="Level", default=0, copy=False)
     manufacture_count = fields.Integer(
-        string="Manufacturing counting", compute='_compute_manufacture_count')
+        string="Manufacturing counting",
+        compute='_compute_manufacture_count')
     purchase_count = fields.Integer(
-        string="Purchase orders counting", compute='_compute_purchase_count')
+        string="Purchase orders counting",
+        compute='_compute_purchase_count')
 
     @api.multi
     def action_compute(self):
@@ -24,52 +31,65 @@ class MrpProduction(models.Model):
                 line.onchange_product_id()
         return res
 
+    def _get_manufacturing_orders(self):
+        self.ensure_one()
+        origin = self.origin_production_id.id or self.id
+        cond = [('origin_production_id', '=', origin),
+                ('level', '>', self.level)]
+        productions = self.with_context(active_test=False).search(cond)
+        return productions
+
     @api.multi
     def _compute_manufacture_count(self):
         for production in self:
-            origin = production.origin_production_id.id or production.id
-            cond = [('origin_production_id', '=', origin),
-                    ('level', '>', production.level),
-                    '|', ('active', '=', True), ('active', '=', False)]
-            productions = self.search(cond)
+            productions = production._get_manufacturing_orders()
             production.manufacture_count = len(productions)
 
     @api.multi
     def button_show_manufacturing_orders(self):
         self.ensure_one()
-        origin = self.origin_production_id.id or self.id
-        cond = [('origin_production_id', '=', origin),
-                ('level', '>', self.level),
-                '|', ('active', '=', True), ('active', '=', False)]
-        productions = self.search(cond)
-        return {'name': _('Productions'),
-                'type': 'ir.actions.act_window',
-                'view_mode': 'tree,kanban,form,calendar,pivot,graph',
-                'view_type': 'form',
-                'res_model': 'mrp.production',
-                'domain': [('id', 'in', productions.ids),
-                           '|', ('active', '=', True), ('active', '=', False)]}
+        productions = self._get_manufacturing_orders()
+        action = self.env.ref("mrp.mrp_production_action")
+        action_dict = action.read()[0] if action else {}
+        action_dict["context"] = safe_eval(action_dict.get("context", "{}"))
+        action_dict["context"].update({
+            "active_test": False,
+        })
+        domain = expression.AND([
+            [("id", "in", productions.ids)],
+            safe_eval(action.domain or "[]")])
+        action_dict.update({
+            "domain": domain,
+        })
+        return action_dict
+
+    def _get_purchase_orders(self):
+        self.ensure_one()
+        purchases = self.mapped("product_line_ids.purchase_order_id")
+        child_productions = self._get_manufacturing_orders()
+        purchases |= child_productions.mapped(
+            "product_line_ids.purchase_order_id")
+        return purchases
 
     @api.multi
     def _compute_purchase_count(self):
         for production in self:
-            origin = production.origin_production_id.id or production.id
-            cond = [('origin_production_id', '=', origin)]
-            purchases = self.env['purchase.order'].search(cond)
+            purchases = production._get_purchase_orders()
             production.purchase_count = len(purchases)
 
     @api.multi
     def button_show_purchase_orders(self):
         self.ensure_one()
-        origin = self.origin_production_id.id or self.id
-        cond = [('origin_production_id', '=', origin)]
-        purchases = self.env['purchase.order'].search(cond)
-        return {'name': _('Purchase orders'),
-                'type': 'ir.actions.act_window',
-                'view_mode': 'tree,kanban,form,pivot,graph,calendar',
-                'view_type': 'form',
-                'res_model': 'purchase.order',
-                'domain': [('id', 'in', purchases.ids)]}
+        purchases = self._get_purchase_orders()
+        action = self.env.ref("purchase.purchase_rfq")
+        action_dict = action.read()[0] if action else {}
+        domain = expression.AND([
+            [("id", "in", purchases.ids)],
+            safe_eval(action.domain or "[]")])
+        action_dict.update({
+            "domain": domain,
+        })
+        return action_dict
 
     @api.multi
     def button_create_manufacturing_structure(self):
@@ -136,12 +156,14 @@ class MrpProduction(models.Model):
 
     def button_with_child_structure(self):
         lines = self._get_lines(self)
-        return {'name': _('Scheduled Goods'),
-                'type': 'ir.actions.act_window',
-                'view_mode': 'tree,form',
-                'view_type': 'form',
-                'res_model': 'mrp.production.product.line',
-                'domain': [('id', 'in', lines.ids)]}
+        return {
+            "name": _("Scheduled Goods"),
+            "type": "ir.actions.act_window",
+            "view_mode": "tree,form",
+            "view_type": "form",
+            "res_model": "mrp.production.product.line",
+            "domain": [("id", "in", lines.ids)]
+        }
 
     @api.multi
     def button_confirm(self):
@@ -201,11 +223,13 @@ class MrpProductionProductLine(models.Model):
                 self.production_id.analytic_account_id)
 
     def _get_po_values(self, rule):
-        return {'company_id': self.production_id.company_id,
-                'date_planned': self.production_id.date_planned_start,
-                'priority': 1,
-                'warehouse_id': (self.product_id.warehouse_id or
-                                 rule.warehouse_id)}
+        return {
+            "company_id": self.production_id.company_id,
+            "date_planned": self.production_id.date_planned_start,
+            "priority": 1,
+            "warehouse_id": (
+                self.product_id.warehouse_id or rule.warehouse_id),
+        }
 
     def create_automatic_purchase_order(self, origin_manufacture_order, level):
         if not self.product_id.seller_ids:
@@ -237,8 +261,8 @@ class MrpProductionProductLine(models.Model):
             values['analytic_account_id'] = analytic_account.id
         return values
 
-    def create_automatic_manufacturing_order(self, origin_manufacture_order,
-                                             analytic_account):
+    def create_automatic_manufacturing_order(
+            self, origin_manufacture_order,  analytic_account):
         location = (self.product_id.location_id or
                     self.env.ref('stock.stock_location_stock'))
         rule = self.env['procurement.group']._get_rule(
