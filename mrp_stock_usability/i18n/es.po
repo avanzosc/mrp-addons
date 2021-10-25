@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_stock_usability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-25 09:04+0000\n"
+"PO-Revision-Date: 2021-10-25 09:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__unreserve_visible
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move__unreserve_visible
+msgid "Allowed to Unreserve Inventory"
+msgstr "Se permite cancelar el inventario"
+
+#. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_view_tree
+msgid "Check availability"
+msgstr "Comprobar la disponibilidad"
+
+#. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
+msgid "Components"
+msgstr "Componentes"
+
+#. module: mrp_stock_usability
+#: model:ir.model,name:mrp_stock_usability.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
+msgid "Finished Products"
+msgstr "Productos finalizados"
+
+#. module: mrp_stock_usability
+#: model:res.groups,name:mrp_stock_usability.group_mrp_stock_usability
+msgid "Manage Stock Usability on Manufacturing"
+msgstr "Gestionar usabilidad de inventario en fabricación"
+
+#. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
+msgid "Produced"
+msgstr "Producido"
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__show_check_availability
+msgid "Show Check Availability"
+msgstr "Mostrar verificar disponibilidad"
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__show_final_lots
+msgid "Show Final Lots"
+msgstr "Mostrar lotes finales"
+
+#. module: mrp_stock_usability
+#: model:ir.model,name:mrp_stock_usability.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings__group_mrp_stock_usability
+msgid "Stock Usability in Manufacturing"
+msgstr "Usabilidad de inventario en Fabricación"
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,help:mrp_stock_usability.field_mrp_workorder__unreserve_visible
+#: model:ir.model.fields,help:mrp_stock_usability.field_stock_move__unreserve_visible
+msgid "Technical field to check when we can unreserve"
+msgstr "Campo técnico para verificar cuándo podemos cancelar la reserva"
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,help:mrp_stock_usability.field_mrp_workorder__show_check_availability
+msgid ""
+"Technical field used to compute whether the check availability button should"
+" be shown."
+msgstr ""
+"Campo técnico utilizado para calcular si se debe mostrar el botón Comprobar "
+"disponibilidad."
+
+#. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_view_tree
+msgid "Unreserve"
+msgstr "Anular reserva"
+
+#. module: mrp_stock_usability
+#: model:ir.model,name:mrp_stock_usability.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
