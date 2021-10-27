@@ -9,4 +9,5 @@ class ResConfigSettings(models.TransientModel):
 
     group_mrp_stock_usability = fields.Boolean(
         string="Stock Usability in Manufacturing",
-        implied_group="mrp_stock_usability.group_mrp_stock_usability")
+        implied_group="mrp_stock_usability.group_mrp_stock_usability",
+    )
