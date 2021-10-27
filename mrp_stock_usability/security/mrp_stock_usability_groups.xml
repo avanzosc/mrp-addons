@@ -2,6 +2,6 @@
 <odoo noupdate="0">
     <record id="group_mrp_stock_usability" model="res.groups">
         <field name="name">Manage Stock Usability on Manufacturing</field>
-        <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="category_id" ref="base.module_category_hidden" />
     </record>
 </odoo>
