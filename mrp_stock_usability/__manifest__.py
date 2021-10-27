@@ -10,6 +10,7 @@
     "website": "http://www.avanzosc.es",
     "depends": [
         "mrp",
+        "base_view_inheritance_extension",
     ],
     "excludes": [],
     "data": [
