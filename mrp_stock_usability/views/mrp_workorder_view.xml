@@ -2,42 +2,61 @@
 <odoo>
     <record id="mrp_workorder_view_form" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_form_view_inherit"
+    />
         <field name="arch" type="xml">
             <sheet position="inside">
                 <field name="show_final_lots" invisible="True" />
             </sheet>
             <page name="workorder_page_misc" position="before">
-                <page string="Components"
-                      attrs="{'invisible': [('move_raw_ids', '=', [])]}">
-                    <field name="move_raw_ids"
-                           context="{'final_lots': show_final_lots, 'tree_view_ref': 'mrp.view_stock_move_raw_tree', 'form_view_ref': 'mrp.view_stock_move_lots'}" />
+                <page
+          string="Components"
+          attrs="{'invisible': [('move_raw_ids', '=', [])]}"
+        >
+                    <field
+            name="move_raw_ids"
+            context="{'final_lots': show_final_lots, 'tree_view_ref': 'mrp.view_stock_move_raw_tree', 'form_view_ref': 'mrp.view_stock_move_lots'}"
+          />
                 </page>
-                <page string="Finished Products"
-                      attrs="{'invisible': [('move_finished_ids', '=', [])]}">
-                    <field name="move_finished_ids"
-                           context="{'final_lots': show_final_lots, 'tree_view_ref': 'mrp.view_stock_move_raw_tree', 'form_view_ref': 'mrp.view_stock_move_lots'}">
+                <page
+          string="Finished Products"
+          attrs="{'invisible': [('move_finished_ids', '=', [])]}"
+        >
+                    <field
+            name="move_finished_ids"
+            context="{'final_lots': show_final_lots, 'tree_view_ref': 'mrp.view_stock_move_raw_tree', 'form_view_ref': 'mrp.view_stock_move_lots'}"
+          >
                     </field>
                 </page>
             </page>
             <page name="workorder_page_misc" position="inside">
-                <field name="move_line_ids"
-                       attrs="{'invisible': [('move_line_ids', '=', [])], 'readonly': [('state', 'in', ('cancel', 'done'))]}"
-                       context="{'form_view_ref': 'mrp.view_finisehd_move_line'}">
-                    <tree default_order="done_move"
-                          editable="bottom" create="0" delete="0"
-                          decoration-muted="state in ('done', 'cancel')">
-                        <field name="product_id" readonly="1"/>
-                        <field name="company_id" invisible="1"/>
-                        <field name="lot_id"
-                               groups="stock.group_production_lot"
-                               context="{'default_product_id': product_id, 'default_company_id': company_id}"
-                               attrs="{'invisible': [('lots_visible', '=', False)]}"/>
-                        <field name="product_uom_id" groups="uom.group_uom"/>
-                        <field name="qty_done" string="Produced"/>
-                        <field name="lots_visible" invisible="1"/>
-                        <field name="done_move" invisible="1"/>
-                        <field name="state" invisible="1"/>
+                <field
+          name="move_line_ids"
+          attrs="{'invisible': [('move_line_ids', '=', [])], 'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          context="{'form_view_ref': 'mrp.view_finisehd_move_line'}"
+        >
+                    <tree
+            default_order="done_move"
+            editable="bottom"
+            create="0"
+            delete="0"
+            decoration-muted="state in ('done', 'cancel')"
+          >
+                        <field name="product_id" readonly="1" />
+                        <field name="company_id" invisible="1" />
+                        <field
+              name="lot_id"
+              groups="stock.group_production_lot"
+              context="{'default_product_id': product_id, 'default_company_id': company_id}"
+              attrs="{'invisible': [('lots_visible', '=', False)]}"
+            />
+                        <field name="product_uom_id" groups="uom.group_uom" />
+                        <field name="qty_done" string="Produced" />
+                        <field name="lots_visible" invisible="1" />
+                        <field name="done_move" invisible="1" />
+                        <field name="state" invisible="1" />
                     </tree>
                 </field>
             </page>
@@ -47,22 +66,28 @@
     <record id="mrp_workorder_usability_view_form" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp_workorder_view_form" />
-        <field name="groups_id"
-               eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]" />
+        <field
+      name="groups_id"
+      eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]"
+    />
         <field name="arch" type="xml">
             <header position="inside">
-                <button name="action_assign"
-                        string="Check availability"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible':[('show_check_availability','=',False)]}"/>
-                <button name="button_unreserve"
-                        type="object"
-                        string="Unreserve"
-                        attrs="{'invisible':[('unreserve_visible','=',False)]}" />
+                <button
+          name="action_assign"
+          string="Check availability"
+          type="object"
+          class="oe_highlight"
+          attrs="{'invisible':[('show_check_availability','=',False)]}"
+        />
+                <button
+          name="button_unreserve"
+          type="object"
+          string="Unreserve"
+          attrs="{'invisible':[('unreserve_visible','=',False)]}"
+        />
             </header>
             <sheet position="inside">
-                <field name="unreserve_visible" invisible="True"/>
+                <field name="unreserve_visible" invisible="True" />
                 <field name="show_check_availability" invisible="True" />
             </sheet>
         </field>
