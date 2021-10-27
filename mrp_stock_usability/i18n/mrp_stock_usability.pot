@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 09:53+0000\n"
-"PO-Revision-Date: 2021-10-26 09:53+0000\n"
+"POT-Creation-Date: 2023-08-30 07:20+0000\n"
+"PO-Revision-Date: 2023-08-30 07:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,14 +17,14 @@ msgstr ""
 
 #. module: mrp_stock_usability
 #: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__unreserve_visible
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move__unreserve_visible
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move__mrp_unreserve_visible
 msgid "Allowed to Unreserve Inventory"
 msgstr ""
 
 #. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_production_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_usability_view_form
-#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_usability_view_form
-#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_usability_view_tree
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_usability_view_tree
 msgid "Check availability"
 msgstr ""
 
@@ -40,7 +40,28 @@ msgstr ""
 
 #. module: mrp_stock_usability
 #: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
-msgid "Finished Products"
+msgid "Consumed"
+msgstr ""
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__display_name
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__id
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings__id
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder____last_update
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: mrp_stock_usability
@@ -50,7 +71,7 @@ msgstr ""
 
 #. module: mrp_stock_usability
 #: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
-msgid "Produced"
+msgid "Reserved"
 msgstr ""
 
 #. module: mrp_stock_usability
@@ -75,7 +96,7 @@ msgstr ""
 
 #. module: mrp_stock_usability
 #: model:ir.model.fields,help:mrp_stock_usability.field_mrp_workorder__unreserve_visible
-#: model:ir.model.fields,help:mrp_stock_usability.field_stock_move__unreserve_visible
+#: model:ir.model.fields,help:mrp_stock_usability.field_stock_move__mrp_unreserve_visible
 msgid "Technical field to check when we can unreserve"
 msgstr ""
 
@@ -87,9 +108,14 @@ msgid ""
 msgstr ""
 
 #. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
+msgid "To Consume"
+msgstr ""
+
+#. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_production_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_usability_view_form
-#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_usability_view_form
-#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.stock_move_usability_view_tree
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_usability_view_tree
 msgid "Unreserve"
 msgstr ""
 

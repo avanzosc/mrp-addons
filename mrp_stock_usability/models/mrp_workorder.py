@@ -27,14 +27,14 @@ class MrpWorkorder(models.Model):
         for order in self:
             order.show_final_lots = order.product_id.tracking != "none"
 
-    @api.depends("move_raw_ids", "move_raw_ids.unreserve_visible")
+    @api.depends("move_raw_ids", "move_raw_ids.mrp_unreserve_visible")
     def _compute_unreserve_visible(self):
         for order in self:
             pending_raw_moves = order.move_raw_ids.filtered(
                 lambda m: m.state not in ("done", "cancel")
             )
             order.unreserve_visible = any(
-                [m.unreserve_visible for m in pending_raw_moves]
+                [m.mrp_unreserve_visible for m in pending_raw_moves]
             )
 
     def _compute_show_check_availability(self):
@@ -59,7 +59,6 @@ class MrpWorkorder(models.Model):
     def action_assign(self):
         for order in self:
             order.move_raw_ids._action_assign()
-            order._refresh_wo_lines()
         return True
 
     def do_unreserve(self):
@@ -67,7 +66,6 @@ class MrpWorkorder(models.Model):
             order.move_raw_ids.filtered(
                 lambda x: x.state not in ("done", "cancel")
             )._do_unreserve()
-            order._refresh_wo_lines()
         return True
 
     def button_unreserve(self):
