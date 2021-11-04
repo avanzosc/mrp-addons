@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workorder_finish_button
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 13:21+0000\n"
+"PO-Revision-Date: 2021-11-04 13:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workorder_finish_button
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_finish_button.mrp_workorder_finish_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_finish_button.mrp_workorder_finish_view_form
+msgid "Check Availability"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder__display_name
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: code:addons/mrp_workorder_finish_button/models/mrp_workorder.py:0
+#, python-format
+msgid "Finish Work Order"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder__id
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder____last_update
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model.fields,field_description:mrp_workorder_finish_button.field_mrp_workorder_finish_wizard__text
+msgid "Text"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: code:addons/mrp_workorder_finish_button/wizard/mrp_workorder_finish_wizard.py:0
+#, python-format
+msgid "This work order has outstanding inventory movements. You want to:"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_finish_button.mrp_workorder_finish_view_form
+msgid "Unreserve"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model,name:mrp_workorder_finish_button.model_mrp_workorder_finish_wizard
+msgid "Wizard to finish a work order"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model:ir.model,name:mrp_workorder_finish_button.model_mrp_workorder
+msgid "Work Order"
+msgstr ""
+
+#. module: mrp_workorder_finish_button
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_finish_button.mrp_workorder_finish_view_form
+msgid "or"
+msgstr ""
