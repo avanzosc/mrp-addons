@@ -32,7 +32,7 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
             "name": "wc1",
         })
         cls.workcenter2 = workcenter_model.create({
-            "name": "wc1",
+            "name": "wc2",
             "nesting_required": True,
         })
         cls.route = route_model.create({
@@ -53,7 +53,6 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
         cls.main_component = product_obj.create({
             "name": "Main Component",
         })
-
         cls.bom = bom_obj.create({
             "product_tmpl_id": cls.man_product.product_tmpl_id.id,
             "type": "normal",
@@ -79,3 +78,8 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
             "bom_id": cls.bom.id,
             "date_planned_start": today,
         })
+        cls.production_id.onchange_product_id()
+        cls.production_id._onchange_bom_id()
+        cls.production_id._onchange_move_raw()
+        cls.production_id.action_confirm()
+        cls.production_id.button_plan()

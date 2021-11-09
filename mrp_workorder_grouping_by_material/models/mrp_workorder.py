@@ -4,9 +4,6 @@ from odoo import api, exceptions, fields, models, _
 from odoo.models import expression
 from odoo.tools import safe_eval
 
-from odoo.exceptions import AccessError, UserError
-from odoo.tools import date_utils, float_compare, float_round, float_is_zero
-
 
 class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
@@ -16,31 +13,42 @@ class MrpWorkorder(models.Model):
         string="Main Product",
         compute="_compute_main_product_id",
         store=True)
+    nested_line_ids = fields.One2many(
+        comodel_name="mrp.workorder.nest.line",
+        string="Nest Lines",
+        inverse_name="workorder_id")
     nested_ids = fields.Many2many(
         comodel_name="mrp.workorder.nest",
         string="In Nests",
-        compute="_compute_nested")
+        compute="_compute_nested",
+        store=True)
     nested_count = fields.Integer(
-        compute="_compute_nested")
+        compute="_compute_nested",
+        store=True)
     qty_nested = fields.Float(
         string="Nested Quantity",
-        compute="_compute_nested")
+        compute="_compute_nested",
+        store=True)
+    # finished_qty_nested = fields.Float(
+    #     string="Finished Nested Quantity",
+    #     compute="_compute_nested",)
+        # store=True)
     nesting_required = fields.Boolean(
         string="Nesting Required",
         related="workcenter_id.nesting_required",
         store=True)
 
-    def _get_related_nested(self):
-        self.ensure_one()
-        return self.env["mrp.workorder.nest.line"].search([
-            ("workorder_id", "=", self.id)]).mapped("nest_id")
-
+    @api.depends("nested_line_ids", "nested_line_ids.nest_id",
+                 "nested_line_ids.nest_id", "nested_line_ids.qty_producing")
     def _compute_nested(self):
         for order in self:
-            nested = order._get_related_nested()
-            order.nested_ids = [(6, 0, nested.ids)]
-            order.nested_count = len(nested)
-            order.qty_nested = sum(nested.mapped("qty_producing"))
+            order.nested_ids = [
+                (6, 0, order.mapped("nested_line_ids.nest_id").ids)]
+            order.nested_count = len(order.mapped("nested_line_ids.nest_id"))
+            order.qty_nested = sum(
+                order.mapped("nested_line_ids.qty_producing"))
+            # order.finished_qty_nested = sum(
+            #     order.mapped("nested_line_ids.finished_qty"))
 
     def _link_to_quality_check(self, old_move_line, new_move_line):
         return True
@@ -116,11 +124,11 @@ class MrpWorkorder(models.Model):
 
     def open_nest(self):
         self.ensure_one()
-        nested = self._get_related_nested()
         action = self.env.ref(
             "mrp_workorder_grouping_by_material.mrp_workorder_nest_action")
         action_dict = action and action.read()[0] or {}
         domain = expression.AND([
-            [("id", "in", nested.ids)], safe_eval(action.domain or "[]")])
+            [("id", "in", self.nested_ids.ids)],
+            safe_eval(action.domain or "[]")])
         action_dict.update({"domain": domain})
         return action_dict

@@ -1,7 +1,7 @@
 # Copyright 2021 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.models import expression
 from odoo.tools import safe_eval
 
@@ -12,21 +12,15 @@ class MrpProduction(models.Model):
     nested_count = fields.Integer(
         compute="_compute_nested")
 
-    def _get_related_nested(self):
-        self.ensure_one()
-        nested = self.env["mrp.workorder.nest"]
-        for workorder in self.workorder_ids:
-            nested |= workorder._get_related_nested()
-        return nested
-
+    @api.depends("workorder_ids.nested_ids")
     def _compute_nested(self):
         for order in self:
-            nested = order._get_related_nested()
+            nested = order.mapped("workorder_ids.nested_ids")
             order.nested_count = len(nested)
 
     def open_nest(self):
         self.ensure_one()
-        nested = self._get_related_nested()
+        nested = self.mapped("workorder_ids.nested_ids")
         action = self.env.ref(
             "mrp_workorder_grouping_by_material.mrp_workorder_nest_action")
         action_dict = action and action.read()[0] or {}

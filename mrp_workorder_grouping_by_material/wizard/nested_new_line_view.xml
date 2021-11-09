@@ -1,27 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <record model="ir.ui.view" id="nested_new_line_form">
-        <field name="name">nested.new.line</field>
         <field name="model">nested.new.line</field>
         <field name="arch" type="xml">
             <form string="Nested New Line">
                 <group col="4" colspan="4">
-                    <field name="nest_code" required="1"/>
-                    <field name="product_id" domain="[('id', 'in', possible_product_ids)]"/>
-                    <field name="possible_product_ids" invisible="1"/>
+                    <field name="nest_code" required="True"/>
+                    <field name="product_id"
+                           domain="[('id', 'in', possible_product_ids)]"
+                           options="{'no_create': True}"/>
+                    <field name="possible_product_ids" invisible="True"/>
                 </group>
-                <field name="line_ids">
-                    <tree editable="top">
-                        <field name="workorder_id"
-                               domain="[('state', 'not in', ['done', 'cancel'])]"
-                               options="{'no_create': True}"/>
-                        <field name="product_id" options="{'no_create': True}"/>
-                        <field name="qty_producing"/>
-                        <field name="qty_produced" readonly="1"/>
-                        <field name="qty_nested" readonly="1"/>
-                        <field name="qty_production" readonly="1"/>
-                    </tree>
-                </field>
+                <div attrs="{'invisible': [('product_id', '!=', False)]}">
+                    <field name="line_ids">
+                        <tree editable="top"
+                              decoration-muted="not qty_producing"
+                              decoration-danger="qty_producing > qty_remaining"
+                              create="False">
+                            <field name="workorder_id"
+                                   domain="[('state', 'not in', ['done', 'cancel'])]"
+                                   options="{'no_create': True}"/>
+                            <field name="product_id" readonly="True"/>
+                            <field name="qty_producing" />
+                            <field name="qty_nested" readonly="True"/>
+<!--                            <field name="finished_qty_nested" readonly="True" />-->
+                            <field name="qty_nested_remaining" readonly="True" />
+                            <field name="qty_produced" readonly="True" />
+                            <field name="qty_production" readonly="True" />
+                            <field name="qty_remaining" readonly="True" />
+                        </tree>
+                    </field>
+                </div>
+                <div attrs="{'invisible': [('product_id', '=', False)]}">
+                    <field name="filtered_line_ids">
+                        <tree editable="top"
+                              decoration-muted="not qty_producing"
+                              decoration-danger="qty_producing > qty_remaining"
+                              create="False">
+                            <field name="workorder_id"
+                                   domain="[('state', 'not in', ['done', 'cancel'])]"
+                                   options="{'no_create': True}"/>
+                            <field name="product_id" readonly="True"/>
+                            <field name="qty_producing" />
+                            <field name="qty_nested" readonly="True"/>
+<!--                            <field name="finished_qty_nested" readonly="True" />-->
+                            <field name="qty_nested_remaining" readonly="True" />
+                            <field name="qty_produced" readonly="True" />
+                            <field name="qty_production" readonly="True" />
+                            <field name="qty_remaining" readonly="True" />
+                        </tree>
+                    </field>
+                </div>
                 <footer>
                     <button string="Done" name="action_done" type="object"
                             class="btn-primary"/>

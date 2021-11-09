@@ -30,15 +30,19 @@ class MrpWorkorderNest(models.Model):
     possible_main_product_ids = fields.Many2many(
         comodel_name="product.product",
         compute="_compute_possible_main_products")
-    workcenter_id = fields.Many2one(comodel_name="mrp.workcenter")
+    workcenter_id = fields.Many2one(
+        comodel_name="mrp.workcenter")
     workorder_ids = fields.Many2many(
         comodel_name="mrp.workorder",
-        compute="_compute_workorders", store=True)
+        compute="_compute_workorders",
+        store=True)
     possible_workcenter_ids = fields.Many2many(
-        comodel_name="mrp.workcenter", compute="_compute_possible_workcenter")
+        comodel_name="mrp.workcenter",
+        compute="_compute_possible_workcenter")
     main_product_tracking = fields.Selection(
         related="main_product_id.tracking")
-    lot_id = fields.Many2one(comodel_name="stock.production.lot")
+    lot_id = fields.Many2one(
+        comodel_name="stock.production.lot")
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
@@ -92,6 +96,8 @@ class MrpWorkorderNest(models.Model):
         compute="_compute_date_planned_start",
         string="Scheduled Date Start",
         store=True)
+    show_worksheet = fields.Boolean(
+        compute="_compute_show_worksheet")
 
     @api.depends("nested_line_ids", "nested_line_ids.date_planned_start")
     def _compute_date_planned_start(self):
@@ -119,11 +125,16 @@ class MrpWorkorderNest(models.Model):
         for nest in self:
             nest.possible_workcenter_ids = [(6, 0, workcenter_ids or [])]
 
-    @api.depends("nested_line_ids")
+    @api.depends("nested_line_ids", "nested_line_ids.workorder_id")
     def _compute_workorders(self):
         for nest in self:
             assigned_wo = nest.mapped("nested_line_ids.workorder_id").ids
             nest.workorder_ids = [(6, 0, assigned_wo)]
+
+    def _compute_show_worksheet(self):
+        for nest in self:
+            nest.show_worksheet = any(
+                nest.mapped("nested_line_ids.workorder_id.worksheet"))
 
     def name_get(self):
         result = []
@@ -179,9 +190,7 @@ class MrpWorkorderNest(models.Model):
 
     def button_start(self):
         for nest in self:
-            nest_lines = nest.nested_line_ids
-            nest_lines._check_final_product_lot()
-            nest_lines.button_start()
+            nest.nested_line_ids.button_start()
             nest.state = "progress"
 
     def record_production(self):
@@ -237,7 +246,7 @@ class MrpWorkorderNest(models.Model):
             nest.line_is_produced = is_produced
 
     def get_worksheets(self):
-        worksheets = self.mapped("nested_line_ids").get_worksheet()
+        worksheets = self.mapped("nested_line_ids").get_worksheets()
         if not worksheets:
             return
         merger = PdfFileMerger(strict=False)
@@ -250,7 +259,6 @@ class MrpWorkorderNest(models.Model):
         temp = tempfile.NamedTemporaryFile(suffix=".pdf")
         merger.write(temp.name)
         merger.close()
-
         with open(temp.name, "rb") as merged_pdf:
             content_merged_pdf = merged_pdf.read()
         return base64.b64encode(content_merged_pdf)
