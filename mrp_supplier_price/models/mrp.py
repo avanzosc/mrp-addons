@@ -56,8 +56,9 @@ class MrpProductionProductLine(models.Model):
             price_unit = line.price
             if (price_unit and self.production_id.currency_id and
                     line.currency_id != self.production_id.currency_id):
-                price_unit = line.currency_id.compute(
-                    price_unit, self.production_id.currency_id)
+                price_unit = line.currency_id._convert(
+                    price_unit, self.production_id.currency_id,
+                    self.production_id.company_id, fields.Date.today())
             if self.product_uop_id and line.product_uom != self.product_uop_id:
                 price_unit = line.product_uom._compute_price(
                     price_unit, self.product_uop_id)
@@ -84,8 +85,9 @@ class MrpProductionProductLine(models.Model):
             if (price_unit and line.production_id.currency_id and
                     line.product_id.currency_id !=
                     line.production_id.currency_id):
-                price_unit = line.product_id.currency_id.compute(
-                    price_unit, line.production_id.currency_id)
+                price_unit = line.product_id.currency_id._convert(
+                    price_unit, line.production_id.currency_id,
+                    line.production_id.company_id, fields.Date.today())
             if (line.product_uom_id and
                     line.product_id.uom_id != line.product_uom_id):
                 price_unit = line.product_id.uom_id._compute_price(
