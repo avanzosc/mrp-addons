@@ -7,11 +7,16 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     sale_line_ids = fields.One2many(
-        comodel_name="sale.order.line", inverse_name="mrp_production_id")
-    stock_qty = fields.Float(string="Qty to Stock", readonly=True,
-                             states={"draft": [("readonly", False)]})
-    sale_line_qty = fields.Float(string="Sale qty",
-                                 compute="_compute_sale_qty")
+        comodel_name="sale.order.line",
+        inverse_name="mrp_production_id")
+    stock_qty = fields.Float(
+        string="Qty to Stock",
+        readonly=True,
+        states={"draft": [("readonly", False)]})
+    sale_line_qty = fields.Float(
+        string="Sale qty",
+        compute="_compute_sale_qty",
+        store=True)
     # partner_ids = fields.Many2many(
     #     comodel_name="res.partner",
     #     relation="mrp_production_res_partner_rel",
@@ -26,7 +31,7 @@ class MrpProduction(models.Model):
     #         production.partner_ids = [(6, 0, production.sale_line_ids.mapped(
     #             "order_id.partner_id").ids)]
 
-    @api.depends("sale_line_ids")
+    @api.depends("sale_line_ids", "sale_line_ids.product_uom_qty")
     def _compute_sale_qty(self):
         for production in self:
             production.sale_line_qty = sum(production.sale_line_ids.mapped(
@@ -35,19 +40,19 @@ class MrpProduction(models.Model):
     @api.onchange("stock_qty", "sale_line_qty")
     def _onchange_stock_qty(self):
         for production in self:
-            production.product_qty = (production.stock_qty +
-                                      production.sale_line_qty)
+            production.product_qty = (
+                production.stock_qty + production.sale_line_qty)
 
     @api.onchange("product_qty")
     def _onchange_product_qty(self):
         for production in self:
-            production.stock_qty = (production.product_qty -
-                                    production.sale_line_qty)
+            production.stock_qty = (
+                production.product_qty - production.sale_line_qty)
 
     def _update_mo_qty(self, qty):
         self.ensure_one()
         self.product_qty = qty
-        self.action_compute()
+        # self.action_compute()
 
     def action_cancel(self):
         res = super().action_cancel()

@@ -24,7 +24,7 @@
     </record>
 
     <record id="create_mrp_scheduled_lines" model="ir.actions.server">
-        <field name="name">Create Scheduled Lines</field>
+        <field name="name">Create / Aggregate Manufacturing Orders</field>
         <field name="model_id" ref="model_sale_order"/>
         <field name="binding_model_id" ref="model_sale_order"/>
         <field name="state">code</field>
@@ -164,6 +164,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,pivot,graph</field>
         <field name="view_id" ref="view_sales_order_line_mrp_tree"/>
+        <field name="domain">[('state','!=','cancel'),('product_id.is_manufacturable','=',True)]</field>
     </record>
 
     <record id="action_summary_sales_order_line_mrp" model="ir.actions.act_window">
@@ -176,7 +177,7 @@
     </record>
 
     <record id="create_mrp_scheduled_lines_from_sale_lines" model="ir.actions.server">
-        <field name="name">Create Scheduled Lines</field>
+        <field name="name">Create / Aggregate Manufacturing Orders</field>
         <field name="model_id" ref="model_sale_order_line"/>
         <field name="binding_model_id" ref="model_sale_order_line"/>
         <field name="state">code</field>
