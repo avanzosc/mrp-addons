@@ -8,6 +8,7 @@
     "depends": [
         "mrp",
         "mrp_workorder_grouping_by_material",
+        "pdf_previewer",
     ],
     "author": "AvanzOSC",
     "website": "http://www.avanzosc.es",
@@ -15,9 +16,9 @@
     "data": [
         "views/mrp_workorder_view.xml",
         "views/mrp_workorder_nest_view.xml",
+        "views/mrp_workorder_nest_line_view.xml",
         "report/mrp_workorder_line_report.xml",
         "report/mrp_workorder_nest_line_report.xml",
-        "wizard/binary_container_view.xml",
     ],
     "installable": True,
     "external_dependencies": {

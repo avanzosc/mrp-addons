@@ -5,16 +5,18 @@
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='worksheet_type']" position="before">
-                <button name="show_worksheet"
+                <button name="show_worksheets"
                         type="object"
                         string="Print with header"
-                        attrs="{'invisible': [('finished_workorder_line_ids', '=', [])]}" />
+                        attrs="{'invisible': [('finished_workorder_line_ids', '=', [])]}"
+                        context="{'print': True}" />
             </xpath>
             <xpath expr="//field[@name='finished_workorder_line_ids']/tree//field[@name='move_id']" position="after">
-                <button name="show_worksheet"
+                <button name="show_worksheets"
                         type="object"
                         string="Print"
-                        icon="fa-print" />
+                        icon="fa-print"
+                        context="{'print': True}" />
             </xpath>
         </field>
     </record>

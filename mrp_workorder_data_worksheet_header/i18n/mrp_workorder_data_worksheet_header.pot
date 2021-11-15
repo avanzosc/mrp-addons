@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 10:43+0000\n"
-"PO-Revision-Date: 2021-09-22 10:43+0000\n"
+"POT-Creation-Date: 2021-10-25 13:56+0000\n"
+"PO-Revision-Date: 2021-10-25 13:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,66 +46,17 @@ msgid "<strong>origin:</strong>"
 msgstr ""
 
 #. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.binary_container_view
-msgid "Binary Container"
+#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest_line
+msgid "Nested Lines"
 msgstr ""
 
 #. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__binary_field
-msgid "Binary File"
+#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest
+msgid "Nested Work Orders"
 msgstr ""
 
 #. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__name
-msgid "Binary Name"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.binary_container_view
-msgid "Cancel"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__create_uid
-msgid "Created by"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__create_date
-msgid "Created on"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__id
-msgid "ID"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__write_uid
-msgid "Last Updated by"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__write_date
-msgid "Last Updated on"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_binary_container
-msgid "PDF viewer for workorders"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.workorder_data_worksheet_form
 msgid "Print"
@@ -139,13 +90,10 @@ msgid "Worksheet"
 msgstr ""
 
 #. module: mrp_workorder_data_worksheet_header
-#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest
-msgid "mrp.workorder.nest"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest_line
-msgid "mrp.workorder.nest.line"
+#: code:addons/mrp_workorder_data_worksheet_header/models/mrp_workorder.py:0
+#: code:addons/mrp_workorder_data_worksheet_header/models/mrp_workorder_line.py:0
+#, python-format
+msgid "Worksheets"
 msgstr ""
 
 #. module: mrp_workorder_data_worksheet_header

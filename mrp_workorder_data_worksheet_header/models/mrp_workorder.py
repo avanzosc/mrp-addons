@@ -6,27 +6,20 @@ from odoo import _, models
 class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
 
-    def show_worksheet(self):
+    def show_worksheets(self):
         self.ensure_one()
-        pdf = self.mapped("finished_workorder_line_ids").print_report()
-        if not pdf:
+        worksheets = self.mapped(
+            "finished_workorder_line_ids").get_worksheets()
+        if not worksheets:
             return
         wizard = self.env["binary.container"].create({
-            "binary_field": pdf,
+            "binary_field": (
+                worksheets[0] if isinstance(worksheets, list) else worksheets),
         })
-        view_ref = self.env["ir.model.data"].get_object_reference(
-            "mrp_workorder_data_worksheet_header",
-            "binary_container_view")
-        view_id = view_ref and view_ref[1] or False,
-        return {
-            "name": _("Worksheet"),
-            "domain": [],
-            "res_model": "binary.container",
+        action = self.env.ref("pdf_previewer.binary_container_action")
+        action_dict = action and action.read()[0] or {}
+        action_dict.update({
+            "name": _("Worksheets"),
             "res_id": wizard.id,
-            "type": "ir.actions.act_window",
-            "view_mode": "form",
-            "view_type": "form",
-            "view_id": view_id,
-            "context": {},
-            "target": "new",
-        }
+        })
+        return action_dict
