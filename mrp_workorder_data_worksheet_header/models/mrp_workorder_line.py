@@ -1,6 +1,6 @@
 # Copyright 2021 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import models
+from odoo import _, models
 from base64 import b64decode, b64encode
 from io import BytesIO
 from logging import getLogger
@@ -14,7 +14,6 @@ except ImportError:
     pass
 try:
     from PyPDF2 import PdfFileWriter, PdfFileReader  # pylint: disable=W0404
-    from PyPDF2.utils import PdfReadError  # pylint: disable=W0404
 except ImportError:
     logger.debug("Can not import PyPDF2")
 
@@ -52,26 +51,26 @@ class MrpWorkorderLine(models.Model):
         pdf_encoded = b64encode(pdf_data)
         return pdf_encoded
 
-    def show_worksheet(self):
+    def get_worksheets(self):
         pdf = self.print_report()
-        if not pdf:
+        if not pdf or not self.env.context.get("print", False):
+            return self.filtered("finished_workorder_id.worksheet").mapped(
+                "finished_workorder_id.worksheet")
+        return pdf
+
+    def show_worksheets(self):
+        self.ensure_one()
+        worksheets = self.get_worksheets()
+        if not worksheets:
             return
         wizard = self.env["binary.container"].create({
-            "binary_field": pdf,
+            "binary_field": (
+                worksheets[0] if isinstance(worksheets, list) else worksheets),
         })
-        view_ref = self.env["ir.model.data"].get_object_reference(
-            "mrp_workorder_data_worksheet_header",
-            "binary_container_view")
-        view_id = view_ref and view_ref[1] or False,
-        return {
-            "name": "Worksheet",
-            "domain": [],
-            "res_model": "binary.container",
+        action = self.env.ref("pdf_previewer.binary_container_action")
+        action_dict = action and action.read()[0] or {}
+        action_dict.update({
+            "name": _("Worksheets"),
             "res_id": wizard.id,
-            "type": "ir.actions.act_window",
-            "view_mode": "form",
-            "view_type": "form",
-            "view_id": view_id,
-            "context": {},
-            "target": "new",
-        }
+        })
+        return action_dict
