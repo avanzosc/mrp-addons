@@ -6,7 +6,7 @@ from odoo import api, fields, models, exceptions, _
 class MrpBom(models.Model):
     _inherit = "mrp.bom"
 
-    @api.constrains('bom_line_ids')
+    @api.constrains("bom_line_ids")
     def _check_one_main_material(self):
         for record in self:
             operations = []

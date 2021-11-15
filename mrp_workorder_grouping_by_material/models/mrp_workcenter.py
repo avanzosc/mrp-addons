@@ -7,3 +7,4 @@ class MrpWorkcenter(models.Model):
     _inherit = "mrp.workcenter"
 
     nesting_required = fields.Boolean(string="Nesting Required")
+    copy_production_qty = fields.Boolean(string="Copy Nest Quantity")
