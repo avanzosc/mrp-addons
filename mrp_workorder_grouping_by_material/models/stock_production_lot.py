@@ -11,9 +11,9 @@ class StockProductionLot(models.Model):
         compute="_compute_product_life_alert"
     )
 
-    @api.depends('life_date')
+    @api.depends("alert_date")
     def _compute_product_life_alert(self):
         current_date = fields.Datetime.now()
         for lot in self:
-            lot.product_life_alert = lot.alert_date and lot.alert_date <= \
-                current_date or False
+            lot.product_life_alert = (
+                lot.alert_date and lot.alert_date <= current_date or False)
