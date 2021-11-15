@@ -4,11 +4,21 @@
         <field name="model">mrp.workorder.nest</field>
         <field name="inherit_id" ref="mrp_workorder_grouping_by_material.mrp_workorder_nest_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='nested_line_ids']/tree//field[@name='working_state']" position="after">
-                <button name="show_worksheet"
+            <button name="show_worksheets" position="after">
+                <button name="show_worksheets"
                         type="object"
                         string="Print"
-                        icon="fa-print" />
+                        icon="fa-print"
+                        context="{'print': True}"
+                        attrs="{'invisible': [('show_worksheet','=',False)]}" />
+            </button>
+            <xpath expr="//field[@name='nested_line_ids']/tree//field[@name='working_state']" position="after">
+                <button name="show_worksheets"
+                        type="object"
+                        string="Print"
+                        icon="fa-print"
+                        context="{'print': True}"
+                        attrs="{'invisible': [('worksheet','=',False)]}" />
             </xpath>
         </field>
     </record>

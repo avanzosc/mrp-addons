@@ -38,7 +38,7 @@
                     <br/>
                 </div>
                 <div class="col-4">
-                    <span t-field="doc.product_id.name"/>
+                    <span t-field="doc.product_id.display_name"/>
                     <br/>
                     <span t-field="doc.qty_done"/>&#32;&#47;
                     <span t-field="doc.finished_workorder_id.qty_production"/>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 10:43+0000\n"
-"PO-Revision-Date: 2021-09-22 10:43+0000\n"
+"POT-Creation-Date: 2021-10-25 13:57+0000\n"
+"PO-Revision-Date: 2021-10-25 13:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -52,66 +52,17 @@ msgid "<strong>origin:</strong>"
 msgstr "<strong>origen:</strong>"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.binary_container_view
-msgid "Binary Container"
-msgstr "Contenedor Binario"
+#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest_line
+msgid "Nested Lines"
+msgstr "Lineas Anidadas"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__binary_field
-msgid "Binary File"
-msgstr "Archivo Binario"
+#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest
+msgid "Nested Work Orders"
+msgstr "Ordenes de trabajo anidadas"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__name
-msgid "Binary Name"
-msgstr "Nombre del Binario"
-
-#. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.binary_container_view
-msgid "Cancel"
-msgstr "Cancelar"
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__create_uid
-msgid "Created by"
-msgstr "Creado por"
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__create_date
-msgid "Created on"
-msgstr "Creado en"
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__display_name
-msgid "Display Name"
-msgstr "Nombre"
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__id
-msgid "ID"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__write_uid
-msgid "Last Updated by"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model.fields,field_description:mrp_workorder_data_worksheet_header.field_binary_container__write_date
-msgid "Last Updated on"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_binary_container
-msgid "PDF viewer for workorders"
-msgstr "Visor PDF para ordenes de trabajo"
-
-#. module: mrp_workorder_data_worksheet_header
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.workorder_data_worksheet_form
 msgid "Print"
@@ -145,14 +96,11 @@ msgid "Worksheet"
 msgstr "Hoja de trabajo"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest
-msgid "mrp.workorder.nest"
-msgstr ""
-
-#. module: mrp_workorder_data_worksheet_header
-#: model:ir.model,name:mrp_workorder_data_worksheet_header.model_mrp_workorder_nest_line
-msgid "mrp.workorder.nest.line"
-msgstr ""
+#: code:addons/mrp_workorder_data_worksheet_header/models/mrp_workorder.py:0
+#: code:addons/mrp_workorder_data_worksheet_header/models/mrp_workorder_line.py:0
+#, python-format
+msgid "Worksheets"
+msgstr "Hojas de trabajo"
 
 #. module: mrp_workorder_data_worksheet_header
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
