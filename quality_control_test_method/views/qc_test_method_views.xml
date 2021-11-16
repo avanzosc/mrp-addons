@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="view_test_method_tree" model="ir.ui.view">
+        <field name="name">qc.test.method.tree</field>
+        <field name="model">qc.test.method</field>
+        <field name="arch" type="xml">
+            <tree string="Test Method" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_test_method" model="ir.actions.act_window">
+         <field name="name">Test Method</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="view_mode">tree</field>
+         <field name="res_model">qc.test.method</field>
+         <field name="domain">[]</field>
+         <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_test_method"
+        action="action_test_method"
+        name="Test Method" parent="quality_control_oca.menu_qc_config"
+        sequence="2"/>
+
+</odoo>
