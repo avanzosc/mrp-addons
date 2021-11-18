@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+"access_qc_test_method_group_user","qc_test_method group_user","model_qc_test_method","quality_control_oca.group_quality_control_user",1,0,0,0
+"access_qc_test_method_group_manager","qc_test_method group_manager","model_qc_test_method","quality_control_oca.group_quality_control_manager",1,1,1,1
+"access_qc_test_proof_group_user","qc_test_proof group_user","model_qc_test_proof","quality_control_oca.group_quality_control_user",1,0,0,0
+"access_qc_test_proof_group_manager","qc_test_proof group_manager","model_qc_test_proof","quality_control_oca.group_quality_control_manager",1,1,1,1
