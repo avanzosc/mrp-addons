@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-19 15:13+0000\n"
-"PO-Revision-Date: 2021-10-19 15:13+0000\n"
+"POT-Creation-Date: 2021-11-18 10:55+0000\n"
+"PO-Revision-Date: 2021-11-18 10:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,13 +25,18 @@ msgstr "Añadir a OF"
 #. module: mrp_production_aggregated_lines
 #: model:ir.actions.server,name:mrp_production_aggregated_lines.create_mrp_scheduled_lines
 #: model:ir.actions.server,name:mrp_production_aggregated_lines.create_mrp_scheduled_lines_from_sale_lines
-msgid "Create Scheduled Lines"
-msgstr "Create / aggregate manufacturing order"
+msgid "Create / Aggregate Manufacturing Orders"
+msgstr "Crear / Añadir a orden de fabricación"
+
+#. module: mrp_production_aggregated_lines
+#: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_product_product__is_manufacturable
+msgid "Is Manufacturable"
+msgstr "Es fabricable"
 
 #. module: mrp_production_aggregated_lines
 #: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_sale_order_line__manufacturable_product
-msgid "Manufacturable Product"
-msgstr "Producto fabricable"
+msgid "Is Product Manufacturable?"
+msgstr "¿Es el producto fabricable?"
 
 #. module: mrp_production_aggregated_lines
 #: model_terms:ir.ui.view,arch_db:mrp_production_aggregated_lines.sale_order_production_view_form
@@ -47,7 +52,7 @@ msgstr "Nuevo"
 #. module: mrp_production_aggregated_lines
 #: model_terms:ir.ui.view,arch_db:mrp_production_aggregated_lines.view_sales_order_line_mrp_tree
 msgid "Open Sale Order"
-msgstr ""
+msgstr "Abrir pedido de venta"
 
 #. module: mrp_production_aggregated_lines
 #: model_terms:ir.ui.view,arch_db:mrp_production_aggregated_lines.mrp_production_sale_info_form_view
@@ -70,9 +75,9 @@ msgid "Ordered Qty"
 msgstr "Ctdad pedida"
 
 #. module: mrp_production_aggregated_lines
-#: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_sale_order_line__sale_line_qty
-msgid "Prod Lines Qty"
-msgstr ""
+#: model:ir.model,name:mrp_production_aggregated_lines.model_product_product
+msgid "Product"
+msgstr "Producto"
 
 #. module: mrp_production_aggregated_lines
 #: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_sale_order_line__mrp_production_id
@@ -92,9 +97,14 @@ msgid "Production State"
 msgstr "Estado de la producción"
 
 #. module: mrp_production_aggregated_lines
+#: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_sale_order_line__stock_qty
+msgid "Qty to Manufacture for Stock"
+msgstr "Ctd. a fabricar para stock"
+
+#. module: mrp_production_aggregated_lines
 #: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_mrp_production__stock_qty
 msgid "Qty to Stock"
-msgstr ""
+msgstr "Ctd. para stock"
 
 #. module: mrp_production_aggregated_lines
 #: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_mrp_production__sale_line_ids
@@ -139,16 +149,17 @@ msgid "Scheduled Products"
 msgstr "Productos planificados"
 
 #. module: mrp_production_aggregated_lines
+#: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_sale_order_line__sale_line_qty
+msgid "Sold Qty to Manufacture"
+msgstr "Ctd. vendida a fabricar"
+
+#. module: mrp_production_aggregated_lines
 #: model:ir.model,name:mrp_production_aggregated_lines.model_stock_rule
 msgid "Stock Rule"
 msgstr "Regla de Inventario"
 
 #. module: mrp_production_aggregated_lines
-#: model:ir.model.fields,field_description:mrp_production_aggregated_lines.field_sale_order_line__stock_qty
-msgid "Stock qty"
-msgstr "Cantidad de stock"
-
-#. module: mrp_production_aggregated_lines
+#: code:addons/mrp_production_aggregated_lines/models/sale_order_line.py:90
 #: code:addons/mrp_production_aggregated_lines/models/sale_order_line.py:101
 #, python-format
 msgid "The quantity must be positive."

@@ -17,34 +17,23 @@ class SaleOrderLine(models.Model):
         comodel_name="mrp.production", string="Production",
         copy=False)
     production_state = fields.Selection(
-        string="Production State", selection="_get_selection_production_state",
-        related="mrp_production_id.state", store=True)
+        string="Production State",
+        selection="_get_selection_production_state",
+        related="mrp_production_id.state",
+        store=True)
     manufacturable_product = fields.Boolean(
-        compute="_compute_manufacturable_product")
-    stock_qty = fields.Float(string="Stock qty",
-                             related="mrp_production_id.stock_qty")
-    sale_line_qty = fields.Float(string="Prod Lines Qty",
-                                 related="mrp_production_id.sale_line_qty")
-
-    @api.depends("product_id", "product_id.route_ids", "product_id.bom_ids",
-                 "product_id.bom_ids.type")
-    def _compute_manufacturable_product(self):
-        manufacture = self.env.ref("mrp.route_warehouse0_manufacture")
-        for line in self:
-            manufacture_route = (manufacture in line.product_id.route_ids)
-            manufacture_bom = any(
-                line.product_id.bom_ids.filtered(lambda l: l.type == "normal"))
-            line.manufacturable_product = manufacture_route and manufacture_bom
-
-    def _compute_production(self):
-        production_obj = self.sudo().env["mrp.production"]
-        for line in self:
-            line.mrp_production_id = production_obj.with_context(
-                active_test=False).search([
-                    ("product_id", "=", line.product_id.id),
-                    ("sale_line_ids", "=", line.id),
-                    ("state", "!=", "cancel"),
-                ], limit=1)
+        string="Is Product Manufacturable?",
+        related="product_id.is_manufacturable",
+        store=True,
+        index=True)
+    stock_qty = fields.Float(
+        string="Qty to Manufacture for Stock",
+        related="mrp_production_id.stock_qty",
+        store=True)
+    sale_line_qty = fields.Float(
+        string="Sold Qty to Manufacture",
+        related="mrp_production_id.sale_line_qty",
+        store=True)
 
     def _action_mrp_dict(self):
         self.ensure_one()
@@ -66,7 +55,7 @@ class SaleOrderLine(models.Model):
             ("location_dest_id", "=",
              self.order_id.warehouse_id.lot_stock_id.id),
             ("state", "=", "draft"),
-            ("active", "=", False)
+            ("active", "=", False),
         ]
         # week = values.get("date_planned_start").isocalendar()[:2]
         # mo = mos.filtered(
@@ -74,6 +63,7 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def _aggregate_to_mo(self):
+        self.ensure_one()
         mo_domain = self._get_aggregable_mo_domain()
         mo = self.env["mrp.production"].search(mo_domain, limit=1)
         if mo:
@@ -96,18 +86,26 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def action_create_mrp(self):
-        self.ensure_one()
-        if self.product_uom_qty <= 0:
+        if any(self.filtered(lambda l: l.product_uom_qty <= 0)):
             raise exceptions.Warning(_("The quantity must be positive."))
-        aggregated_mo = self._aggregate_to_mo()
-        if not aggregated_mo:
-            picking_type_id = self.order_id.warehouse_id.manu_type_id.id
-            values = self._action_mrp_dict()
-            mrp = self.env["mrp.production"].with_context(
-                default_picking_type_id=picking_type_id
-            ).create(values)
-            self.mrp_production_id = mrp.id
-            mrp.with_context(sale_line_id=self.id).action_compute()
+        mrp_orders = self.env["mrp.production"]
+        for line in self:
+            aggregated_mo = line._aggregate_to_mo()
+            if not aggregated_mo:
+                picking_type_id = line.order_id.warehouse_id.manu_type_id.id
+                values = line._action_mrp_dict()
+                aggregated_mo = self.env["mrp.production"].with_context(
+                    default_picking_type_id=picking_type_id
+                ).create(values)
+                line.mrp_production_id = aggregated_mo.id
+            mrp_orders |= aggregated_mo
+        mrp_orders.action_compute()
+            # mrp.with_context(sale_line_id=self.id).action_compute()
+
+    @api.multi
+    def button_create_mrp(self):
+        self.ensure_one()
+        self.action_create_mrp()
 
     @api.multi
     def action_detach_mo(self):
@@ -119,6 +117,7 @@ class SaleOrderLine(models.Model):
                     production._update_mo_qty(new_qty)
                     production.sale_line_ids = [(3, line.id)]
                     production.origin = production._recalculate_origin()
+                    production.action_compute()
                     line.mrp_production_id = False
                 else:
                     line.mrp_production_id.action_cancel()
@@ -162,7 +161,6 @@ class SaleOrder(models.Model):
         action_dict["context"] = safe_eval(action_dict.get("context", "{}"))
         action_dict["context"].update({
             "active_test": False,
-            # "default_sale_order_id": self.id,
         })
         domain = expression.AND([
             [("sale_line_ids", "in", self.order_line.ids)],
