@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button name="action_assign" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}" string="Check Availability" type="object"/>
+                <button name="action_unreserve" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}" string="Unreserve" type="object"/>
+                <button name="action_done" attrs="{'invisible': [('state', 'not in', 'progress')]}" string="Validate" type="object"/>
+                <button name="action_cancel" string="Cancel Pending Moves" attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}" type="object"/>
+            </header>
+            <div class="oe_button_box" name="button_box">
+                <button class="oe_stat_button" icon="fa-cubes" type="object" name="action_view_stock_move">
+                    <field string="Stock Moves" name="count_stock_move" widget="statinfo"/>
+                </button>
+                <button class="oe_stat_button" icon="fa-list-ul" type="object" name="action_view_stock_move_line">
+                    <field string="Move Lines" name="count_move_line" widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="editable"/>
+            </xpath>
+            <button name="button_finish" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', '|', ('production_state', 'in', ('draft')), ('working_state', '=', 'blocked'), ('is_user_working', '=', False)]}</attribute>
+            </button>
+            <field name="json_popover" position="after">
+                <button name="action_assign" type="object" string="Check Availability" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
+                <button name="action_unreserve" type="object" string="Unreserve" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
+                <button name="action_done" type="object" string="Validate" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ('progress'))]}"/>
+                <button name="action_cancel" type="object" string="Cancel Pending Moves" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
