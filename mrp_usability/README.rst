@@ -7,6 +7,7 @@ MRP Usability
 =============
 
 * The buttons that are in the tree view of the work order, put them also in the form view.
+* Link from Production to Work Orders.
 
 Bug Tracker
 ===========
