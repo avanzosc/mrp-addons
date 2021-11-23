@@ -236,26 +236,11 @@ class MrpWorkorderNestLine(models.Model):
     def button_get_previous_line(self):
         self.ensure_one()
         res_id = self._get_line(direction="previous")
-        # nest_lines = self.nest_id.nested_line_ids
-        # line_index = -1
-        # for index, line in enumerate(nest_lines):
-        #     if self.id == line.id:
-        #         line_index = index - 1
-        # res_id = nest_lines[line_index].id if line_index >= 0 else self.id
         return self.nest_line_form_view(res_id)
 
     def button_get_next_line(self):
         self.ensure_one()
         res_id = self._get_line(direction="next")
-        # nest_lines = self.nest_id.nested_line_ids
-        # line_index = -1
-        # for index, line in enumerate(nest_lines):
-        #     if self.id == line.id:
-        #         line_index = index + 1
-        # if -1 < line_index < len(nest_lines):
-        #     res_id = nest_lines[line_index].id
-        # else:
-        #     res_id = self.id
         return self.nest_line_form_view(res_id)
 
     def get_worksheets(self):
@@ -312,6 +297,12 @@ class MrpWorkorderNestLine(models.Model):
             vals['finished_lot_id'] = self._create_assign_lot(code, product_id)
         return super().create(vals)
 
+    def unlink(self):
+        if any(self.filtered(lambda l: l.state != "draft")):
+            raise UserError(
+                _("You cannot delete nested lines that are not in draft state."))
+        return super().unlink()
+
     def _write_lot_producing_qty(self):
         for n_line in self:
             wo = n_line.workorder_id
@@ -330,12 +321,13 @@ class MrpWorkorderNestLine(models.Model):
                     wo._apply_update_workorder_lines()
                 if n_line.nest_id.lot_id:
                     workorder_lines = n_line.workorder_id.raw_workorder_line_ids
-                    move_line = workorder_lines.filtered(
+                    move_lines = workorder_lines.filtered(
                         lambda x: x.product_id == n_line.nest_id.main_product_id)
-                    move_line.write({
-                        "lot_id": n_line.nest_id.lot_id.id,
-                        "qty_done": move_line.qty_to_consume,
-                    })
+                    for move_line in move_lines:
+                        move_line.write({
+                            "lot_id": n_line.nest_id.lot_id.id,
+                            "qty_done": move_line.qty_to_consume,
+                        })
                 # if res:
                 #     n_line.workorder_id.write(res)
 
@@ -347,24 +339,35 @@ class MrpWorkorderNestLine(models.Model):
     def _check_final_product_lot(self):
         for wo in self.mapped("workorder_id"):
             if not wo._check_final_product_lots():
-                UserError(_(
+                raise UserError(_(
                     '{}: You should provide a lot/serial number for the '
-                    'final product.').format(wo.name))
+                    'final product.').format(wo.display_name))
+
+    def action_back2draft(self):
+        for nl in self.filtered(lambda l: l.state == "ready"):
+            nl.state = "draft"
+
+    def action_check_ready(self):
+        for nl in self.filtered(lambda n: n.state == "draft"):
+            if nl.workorder_id.state in ("ready", "progress"):
+                nl.state = "ready"
+
+    def action_cancel(self):
+        if not any(self.filtered(lambda l: l.state == "ready")):
+            raise UserError(_(""))
+        return self.write({'state': 'cancel'})
 
     def button_start(self):
-        for nl in self.filtered(lambda n: n.state != "blocked"):
+        for nl in self.filtered(lambda n: n.state == "ready"):
             nl._write_lot_producing_qty()
             nl._check_final_product_lot()
             nl.workorder_id.with_context(from_nest=True).button_start()
-            nl.state = nl.workorder_id.state
+            nl.state = "progress"
 
     def record_production(self):
-        for nl in self:
+        for nl in self.filtered(lambda n: n.state == "progress"):
             wo = nl.workorder_id
-            is_user_working = wo.is_user_working
-            is_produced = wo.is_produced
-            if (is_user_working and wo.state == "progress" and
-                    not is_produced):
+            if wo.state == "progress" and not wo.is_produced:
                 nl._write_lot_producing_qty()
                 nl._check_final_product_lot()
                 try:

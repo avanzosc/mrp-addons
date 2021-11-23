@@ -21,14 +21,29 @@ class MrpWorkorder(models.Model):
         comodel_name="mrp.workorder.nest",
         string="In Nests",
         compute="_compute_nested",
+        compute_sudo=True,
         store=True)
     nested_count = fields.Integer(
         compute="_compute_nested",
+        compute_sudo=True,
         store=True)
     qty_nested = fields.Float(
         string="Nested Quantity",
         compute="_compute_nested",
+        compute_sudo=True,
         store=True)
+    nested_status = fields.Selection(
+        selection=[
+            ("less", "Nested Less Quantity"),
+            ("equal", "Nested All Quantity"),
+            ("plus", "Nested More Quantity"),
+            ("not_nest", "Not Nested"),
+        ],
+        string="Nested Quantity Status",
+        compute="_compute_nested",
+        compute_sudo=True,
+        store=True,
+        default="not_nest")
     # finished_qty_nested = fields.Float(
     #     string="Finished Nested Quantity",
     #     compute="_compute_nested",)
@@ -39,7 +54,8 @@ class MrpWorkorder(models.Model):
         store=True)
 
     @api.depends("nested_line_ids", "nested_line_ids.nest_id",
-                 "nested_line_ids.nest_id", "nested_line_ids.qty_producing")
+                 "nested_line_ids.qty_producing", "qty_production", "workcenter_id",
+                 "workcenter_id.nesting_required")
     def _compute_nested(self):
         for order in self:
             order.nested_ids = [
@@ -47,6 +63,16 @@ class MrpWorkorder(models.Model):
             order.nested_count = len(order.mapped("nested_line_ids.nest_id"))
             order.qty_nested = sum(
                 order.mapped("nested_line_ids.qty_producing"))
+            if order.nested_ids or order.workcenter_id.nesting_required:
+                if order.qty_nested > order.qty_production:
+                    status = "plus"
+                elif order.qty_nested < order.qty_production:
+                    status = "less"
+                else:
+                    status = "equal"
+            else:
+                status = "not_nest"
+            order.nested_status = status
             # order.finished_qty_nested = sum(
             #     order.mapped("nested_line_ids.finished_qty"))
 
@@ -55,9 +81,9 @@ class MrpWorkorder(models.Model):
 
     def _check_final_product_lots(self):
         self.ensure_one()
-        if ((self.production_id.product_id.tracking != 'none') and
-                not self.finished_lot_id and self.move_raw_ids):
+        if (self.product_id.tracking != 'none' and not self.finished_lot_id):
             return False
+        return True
 
     @api.depends("operation_id", "production_id", "production_id.bom_id",
                  "production_id.bom_id.bom_line_ids",
