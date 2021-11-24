@@ -8,8 +8,14 @@
                 <button name="show_worksheets"
                         type="object"
                         string="Print with header"
-                        attrs="{'invisible': [('finished_workorder_line_ids', '=', [])]}"
                         context="{'print': True}" />
+            </xpath>
+            <xpath expr="//field[@name='finished_workorder_line_ids']" position="before">
+                <button name="show_worksheets"
+                        type="object"
+                        string="Print with header"
+                        attrs="{'invisible': ['|',('finished_workorder_line_ids', '=', []),'&amp;',('worksheet', '=', False),('worksheet_google_slide', '=', False)]}"
+                        context="{'print': True, 'print_nest': True}" />
             </xpath>
             <xpath expr="//field[@name='finished_workorder_line_ids']/tree//field[@name='move_id']" position="after">
                 <button name="show_worksheets"
