@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_cut
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-09 11:53+0000\n"
+"PO-Revision-Date: 2021-12-09 11:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_cut
+#: model:ir.model,name:mrp_cut.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Línea de Lista de Materiales"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__display_name
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:mrp_cut.field_stock_move__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__id
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_production__id
+#: model:ir.model.fields,field_description:mrp_cut.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line____last_update
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:mrp_cut.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__long_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_stock_move__long_cut
+msgid "Long Cut (mm)"
+msgstr "Corte (mm)"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__pieces_second_uom
+msgid "Pieces second UOM"
+msgstr "Piezas segunda UdM"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_stock_move__qty_pieces_cut
+msgid "Pieces to Cut"
+msgstr "Piezas a cortar"
+
+#. module: mrp_cut
+#: model:ir.model,name:mrp_cut.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__qty_second_uom
+msgid "Quantity in Second UOM"
+msgstr "Cantidad en segunda UdM"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__qty_pieces_set
+#: model:ir.model.fields,field_description:mrp_cut.field_stock_move__qty_pieces_set
+msgid "Quantity of Pieces in Set"
+msgstr "Cantidad piezas conjunto"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__second_uom_id
+msgid "Second UOM"
+msgstr "Segunda UdM"
+
+#. module: mrp_cut
+#: model:ir.model,name:mrp_cut.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: mrp_cut
+#: code:addons/mrp_cut/models/mrp_bom_line.py:0
+#, python-format
+msgid "The long cut can't be longer than the length of the product"
+msgstr "El corte no puede ser más largo que la longitud del producto"
+
+#. module: mrp_cut
+#: model:ir.model.fields,field_description:mrp_cut.field_mrp_bom_line__waste_rate
+msgid "Waste Rate"
+msgstr "Coeficiente de desperdicio"
