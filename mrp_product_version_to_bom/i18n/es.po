@@ -1,0 +1,69 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_product_version_to_bom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-01 08:34+0000\n"
+"PO-Revision-Date: 2021-12-01 08:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model,name:mrp_product_version_to_bom.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Línea de Lista de Materiales"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_mrp_bom_line__display_name
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_product_template__display_name
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_stock_move__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_mrp_bom_line__id
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_product_template__id
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_mrp_bom_line____last_update
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_product_template____last_update
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_product_product__last_version
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_product_template__last_version
+msgid "Last Version"
+msgstr "Última versión"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_mrp_bom_line__outdate
+msgid "Out Date"
+msgstr "Obsoleto"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model,name:mrp_product_version_to_bom.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model,name:mrp_product_version_to_bom.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: mrp_product_version_to_bom
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_mrp_bom_line__version
+#: model:ir.model.fields,field_description:mrp_product_version_to_bom.field_stock_move__version
+msgid "Version"
+msgstr "Versión"
