@@ -182,6 +182,6 @@ class MrpProduction(models.Model):
     @api.multi
     def _action_compute_lines(self):
         res = super(MrpProduction, self)._action_compute_lines()
-        for line in self.product_line_ids:
+        for line in self.mapped("product_line_ids"):
             line.onchange_product_product_qty()
         return res
