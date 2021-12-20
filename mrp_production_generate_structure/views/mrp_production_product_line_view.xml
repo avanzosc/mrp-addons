@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
-    <record id="mrp_production_product_line_form_view_inh_simulated_plan" model="ir.ui.view">
-        <field name="name">mrp.production.product.line.form.inh.simulated.plan</field>
+    <record id="mrp_production_product_line_view_form" model="ir.ui.view">
         <field name="model">mrp.production.product.line</field>
         <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_form_view" />
         <field name="arch" type="xml">
@@ -23,13 +21,16 @@
                    <group colspan="2" />
                 </group>
                 <bottom>
-                    <button name="button_create_purchase_manufacturing_order" string="Create purchase/manufacturing order" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('new_production_id', '!=', False), ('purchase_order_id', '!=', False)]}"/>
+                    <button name="button_create_purchase_manufacturing_order"
+                            string="Create purchase/manufacturing order"
+                            type="object" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('new_production_id', '!=', False), ('purchase_order_id', '!=', False)]}"/>
                 </bottom>
             </xpath>
         </field>
     </record>
-    <record id="mrp_production_product_line_tree_view_inh_simulated_plan" model="ir.ui.view">
-        <field name="name">mrp.production.product.line.tree.inh.simulated.plan</field>
+
+    <record id="mrp_production_product_line_view_tree" model="ir.ui.view">
         <field name="model">mrp.production.product.line</field>
         <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view"/>
         <field name="arch" type="xml">
@@ -43,10 +44,13 @@
                 <field name="purchase_order_id"/>
                 <field name="purchase_date_order"/>
             </field>
+            <field name="product_qty" position="attributes">
+                <attribute name="sum">Total</attribute>
+            </field>
         </field>
     </record>
-    <record model="ir.ui.view" id="mrp_production_product_line_search_view_simulated_plan">
-        <field name="name">mrp.production.product.line.search.view.simulated.plan</field>
+
+    <record model="ir.ui.view" id="mrp_production_product_line_view_search">
         <field name="model">mrp.production.product.line</field>
         <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_search_view"/>
         <field name="arch" type="xml">
@@ -56,38 +60,14 @@
                 <field name="make_to_order"/>
                 <field name="product_id"/>
                 <field name="purchase_order_id"/>
-                <filter name="product_qty" position="after">
-                    <filter name="new_production_id" string="Manufacturing order" context="{'group_by':'new_production_id'}"/>
-                    <filter name="route_id" string="Route" context="{'group_by':'route_id'}"/>
-                    <filter name="make_to_order" string="Make to order" context="{'group_by':'make_to_order'}"/>
-                    <filter name="product_id" string="Product" context="{'group_by':'product_id'}"/>
-                    <filter name="purchase_order_id" string="Purchase order" context="{'group_by':'purchase_order_id'}"/>
-               </filter>
             </field>
+            <filter name="production_product_id" position="after">
+                <filter name="new_production_id" string="Manufacturing order" context="{'group_by':'new_production_id'}"/>
+                <filter name="route_id" string="Route" context="{'group_by':'route_id'}"/>
+                <filter name="make_to_order" string="Make to order" context="{'group_by':'make_to_order'}"/>
+                <filter name="purchase_order_id" string="Purchase order" context="{'group_by':'purchase_order_id'}"/>
+            </filter>
         </field>
     </record>
-    <record model="ir.ui.view" id="mrp_production_product_tree_view_inh_simulated_plan">
-        <field name="name">mrp.production.product.tree.view.inh.simulated.plan</field>
-        <field name="model">mrp.production.product.line</field>
-        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view" />
-        <field name="arch" type="xml">
-            <field name="product_qty" position="attributes">
-                <attribute name="sum">Total</attribute>
-            </field>
-        </field>
-     </record>
-     <record model="ir.ui.view" id="mrp_production_product_lines_search_view">
-            <field name="name">mrp.production.product.lines.search.view</field>
-            <field name="model">mrp.production</field>
-            <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
-            <field name="arch" type="xml">
-                <field name="routing_id" position="after">
-                    <field name="origin_production_id" />
-                </field>
-                <xpath expr="//group[1]" position="inside">
-                    <filter string="Origin manufacturing order" name="origin_production_id" domain="[]"
-                            context="{'group_by':'origin_production_id'}"/>
-                </xpath>
-        </field>
-     </record>
+
 </odoo>

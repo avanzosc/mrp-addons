@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-10 15:09+0000\n"
-"PO-Revision-Date: 2021-02-10 15:09+0000\n"
+"POT-Creation-Date: 2021-12-20 10:57+0000\n"
+"PO-Revision-Date: 2021-12-20 10:57+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,17 +21,17 @@ msgid "Analytic Account"
 msgstr "Cuenta analítica"
 
 #. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines_view_form
 msgid "Create purchase orders"
 msgstr "Crear pedidos de compra"
 
 #. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_form_view_inh_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_form
 msgid "Create purchase/manufacturing order"
 msgstr "Crear compra/orden de producción"
 
 #. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines_view_form
 msgid "Create structure"
 msgstr "Crear estructura"
 
@@ -58,12 +58,12 @@ msgstr "Nivel"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__make_to_order
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
 msgid "Make to order"
 msgstr "Bajo pedido"
 
 #. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_form_view_inh_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_view_form
 msgid "Manufacturing Orders"
 msgstr "Órdenes de producción"
 
@@ -74,7 +74,7 @@ msgstr "Contador facturación"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__new_production_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
 msgid "Manufacturing order"
 msgstr "Orden de producción"
 
@@ -92,14 +92,9 @@ msgid "Origin manufacturing order"
 msgstr "Orden de producción origen"
 
 #. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_form_view_inh_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_view_form
 msgid "Planned Products"
 msgstr "Productos planificados"
-
-#. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
-msgid "Product"
-msgstr "Producto"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_mrp_production
@@ -112,12 +107,6 @@ msgid "Production Scheduled Product"
 msgstr "Fabricación planificada producto"
 
 #. module: mrp_production_generate_structure
-#: code:addons/mrp_production_generate_structure/models/mrp_production.py:45
-#, python-format
-msgid "Productions"
-msgstr "Producciones"
-
-#. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_purchase_order
 msgid "Purchase Order"
 msgstr "Pedido de compra"
@@ -128,13 +117,13 @@ msgid "Purchase Order Line"
 msgstr "Línea de pedido de compra"
 
 #. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_form_view_inh_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_view_form
 msgid "Purchase Orders"
 msgstr "Pedidos de compra"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__purchase_order_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
 msgid "Purchase order"
 msgstr "Pedido de compra"
 
@@ -144,24 +133,18 @@ msgid "Purchase order line"
 msgstr "Línea de pedido de compra"
 
 #. module: mrp_production_generate_structure
-#: code:addons/mrp_production_generate_structure/models/mrp_production.py:67
-#, python-format
-msgid "Purchase orders"
-msgstr "Pedidos de compra"
-
-#. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production__purchase_count
 msgid "Purchase orders counting"
 msgstr "Contador pedidos de compra"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__route_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_search_view_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
 msgid "Route"
 msgstr "Ruta"
 
 #. module: mrp_production_generate_structure
-#: code:addons/mrp_production_generate_structure/models/mrp_production.py:139
+#: code:addons/mrp_production_generate_structure/models/mrp_production.py:160
 #, python-format
 msgid "Scheduled Goods"
 msgstr "Materia planificado"
@@ -172,13 +155,13 @@ msgid "Stock Rule"
 msgstr "Regla de Inventario"
 
 #. module: mrp_production_generate_structure
-#: code:addons/mrp_production_generate_structure/models/mrp_production.py:200
+#: code:addons/mrp_production_generate_structure/models/mrp_production.py:236
 #, python-format
 msgid "There is no vendor associated to the product {}. Please define a vendor for this product."
 msgstr "No hay un proveedor asociado al producto {}. Por favor, defina un proveedor para este producto."
 
 #. module: mrp_production_generate_structure
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_tree_view_inh_simulated_plan
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_tree
 msgid "Total"
 msgstr ""
 
