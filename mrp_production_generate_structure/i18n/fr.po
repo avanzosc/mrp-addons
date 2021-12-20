@@ -18,7 +18,7 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__analytic_account_id
 msgid "Analytic Account"
-msgstr ""
+msgstr "Compte analytique"
 
 #. module: mrp_production_generate_structure
 #: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines_view_form
@@ -38,7 +38,7 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__date
 msgid "Date"
-msgstr ""
+msgstr "Date "
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__production_date_planned_start
@@ -48,13 +48,13 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,help:mrp_production_generate_structure.field_mrp_production_product_line__purchase_date_order
 msgid "Depicts the date where the Quotation should be validated and converted into a purchase order."
-msgstr ""
+msgstr "Représente la date où le devis devrait être validé et le converti en bon d'achat."
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production__level
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_purchase_order__level
 msgid "Level"
-msgstr ""
+msgstr "Niveau"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__make_to_order
@@ -65,7 +65,7 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_view_form
 msgid "Manufacturing Orders"
-msgstr ""
+msgstr "Ordres de fabrication"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production__manufacture_count
@@ -99,7 +99,7 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_mrp_production
 msgid "Production Order"
-msgstr ""
+msgstr "Ordre de fabrication"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_mrp_production_product_line
@@ -109,17 +109,17 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_purchase_order
 msgid "Purchase Order"
-msgstr ""
+msgstr "Commande fournisseur"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_purchase_order_line
 msgid "Purchase Order Line"
-msgstr ""
+msgstr "Ligne de commande d'achat"
 
 #. module: mrp_production_generate_structure
 #: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_view_form
 msgid "Purchase Orders"
-msgstr ""
+msgstr "Bons de commande"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__purchase_order_id
@@ -152,7 +152,7 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Règle de stock minimum"
 
 #. module: mrp_production_generate_structure
 #: code:addons/mrp_production_generate_structure/models/mrp_production.py:236
