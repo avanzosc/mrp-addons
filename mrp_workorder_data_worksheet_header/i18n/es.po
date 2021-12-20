@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 13:57+0000\n"
-"PO-Revision-Date: 2021-10-25 13:57+0000\n"
+"POT-Creation-Date: 2021-11-24 11:37+0000\n"
+"PO-Revision-Date: 2021-11-24 11:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document
 msgid ""
 "<br/>\n"
 "                    <strong>next order:</strong>"
@@ -26,8 +25,7 @@ msgstr ""
 "                    <strong>siguiente orden:</strong>"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document
 msgid ""
 "<br/>\n"
 "                    <strong>production:</strong>"
@@ -36,8 +34,7 @@ msgstr ""
 "                    <strong>producción:</strong>"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document
 msgid ""
 "<br/>\n"
 "                    <strong>workcenter:</strong>"
@@ -46,8 +43,7 @@ msgstr ""
 "                    <strong>centro de trabajo:</strong>"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document
 msgid "<strong>origin:</strong>"
 msgstr "<strong>origen:</strong>"
 
@@ -86,14 +82,9 @@ msgstr "Línea de movimiento de orden de trabajo"
 #. module: mrp_workorder_data_worksheet_header
 #: model:ir.actions.report,name:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report
 #: model:ir.actions.report,name:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report
+#: model:ir.actions.report,name:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report
 msgid "Workorder with header"
 msgstr "Orden de trabajo con cabecera"
-
-#. module: mrp_workorder_data_worksheet_header
-#: code:addons/mrp_workorder_data_worksheet_header/models/mrp_workorder.py:0
-#, python-format
-msgid "Worksheet"
-msgstr "Hoja de trabajo"
 
 #. module: mrp_workorder_data_worksheet_header
 #: code:addons/mrp_workorder_data_worksheet_header/models/mrp_workorder.py:0
@@ -103,7 +94,16 @@ msgid "Worksheets"
 msgstr "Hojas de trabajo"
 
 #. module: mrp_workorder_data_worksheet_header
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_line_worksheet_report_qweb_document
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb_document
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document
+msgid "origin:<br/>"
+msgstr "origen:<br/>"
+
+#. module: mrp_workorder_data_worksheet_header
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document
+msgid "production:<br/>"
+msgstr "producción:<br/>"
+
+#. module: mrp_workorder_data_worksheet_header
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document
 msgid "to"
 msgstr "a"
