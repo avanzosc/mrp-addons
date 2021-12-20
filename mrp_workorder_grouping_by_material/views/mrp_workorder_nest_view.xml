@@ -38,25 +38,23 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-<!--                    <button name="nest_start" type="object" string="Start"-->
-<!--                            class="btn-info" attrs="{'invisible': [('state', '!=', 'draft')]}"/>-->
-<!--                    <button name="nest_draft" type="object" string="Draft"-->
-<!--                            class="btn-info" attrs="{'invisible': [('state', '!=', 'ready')]}"/>-->
+                    <button name="nest_draft" type="object"
+                            string="Back to Draft" class="btn-info"
+                            attrs="{'invisible': [('state', '!=', 'ready')]}"/>
 <!--                    <button name="nest_blocked" type="object" string="Block"-->
 <!--                            class="btn-danger" attrs="{'invisible': [('state', '=', 'blocked')]}"/>-->
 <!--                    <button name="nest_unblocked" type="object" string="Unblock"-->
 <!--                            class="btn-info" attrs="{'invisible': [('state', '!=', 'blocked')]}"/>-->
 <!--                    <button name="button_finish" type="object" string="Finish Order"-->
 <!--                            class="btn-info" attrs="{'invisible': ['|', '|', '|', ('state', '=', 'blocked'), ('line_state', '!=', 'progress'), ('line_is_produced', '=', False), ('state', '=', 'draft')]}" />-->
-                    <button name="button_start" type="object" string="Start Working" />
-<!--                            attrs="{'invisible': ['|', '|', '|', ('state', '=', 'blocked'), ('line_state', '=', 'blocked'), ('line_state', '!=', 'draft'), ('state', '=', 'draft')]}"/>-->
-<!--                    <button name="button_start" type="object" string="Start Working"-->
-<!--                            class="btn-success" attrs="{'invisible': ['|', '|', '|', ('state', '=', 'blocked'), ('line_state', '=', 'blocked'), ('line_state', '!=', 'ready'), ('state', '=', 'draft')]}" />-->
+                    <button name="button_start" type="object"
+                            string="Start Working"
+                            attrs="{'invisible': [('state','!=','draft')]}"/>
                     <button name="record_production" type="object"
-                            string="Done"/>
-<!--                            class="btn-success" attrs="{'invisible': ['|', '|', '|', '|', '|', ('state', '=', 'blocked'), ('line_is_produced', '=', True), ('line_state', '=', 'blocked'), ('line_state', '!=', 'progress'), ('line_is_user_working', '=', False), ('state', '=', 'draft')]}"/>-->
-                    <button name="button_pending" type="object"
-                            string="Pause"/>
+                            string="Done"
+                            attrs="{'invisible': [('state','not in',('ready','progress'))]}"/>
+<!--                    <button name="button_pending" type="object"-->
+<!--                            string="Pause"/>-->
 <!--                            class="btn-warning" attrs="{'invisible': ['|', '|', '|', '|', ('state', '=', 'blocked'), ('line_working_state', '=', 'blocked'), ('line_state', 'in', ('done', 'pending', 'ready', 'cancel')), ('line_is_user_working', '=', False), ('state', '=', 'draft')]}"/>-->
 <!--                    <button name="button_unblock" type="object" string="Unblock"-->
 <!--                            class="btn-danger"-->
@@ -68,10 +66,13 @@
 <!--                            string="Scrap"-->
 <!--                            attrs="{'invisible': ['|', '|', ('state', '=', 'blocked'), ('line_state', 'in', ('done', 'cancel')), ('state', '=', 'draft')]}"/>-->
                     <!--<button name="%(mrp.act_mrp_block_workcenter_wo)d" type="action" context="{'default_workcenter_id': workcenter_id}" string="Block" class="btn-danger" attrs="{'invisible': ['|', ('line_working_state', '=', 'blocked'), ('line_state', 'in', ('done', 'pending', 'ready', 'cancel')), ('state', '!=', 'draft')]}"/>-->
+                    <button name="check_status" type="object"
+                            string="Check Status"
+                            attrs="{'invisible': [('state','in',('done', 'cancel'))]}" />
                     <button name="show_worksheets" type="object"
                             string="Show Worksheets"
                             attrs="{'invisible': [('show_worksheet','=',False)]}"/>
-                    <field name="state" widget="statusbar" invisible="True"
+                    <field name="state" widget="statusbar"
                            statusbar_visible="blocked,draft,ready,progress,done"/>
                     <field name="line_state" invisible="1"/>
                     <field name="line_working_state" invisible="1"/>
@@ -95,7 +96,7 @@
                             <field name="main_product_tracking" invisible="1"/>
                             <field name="company_id" invisible="1"/>
                             <field name="lot_id"
-                                   attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('main_product_tracking', '=', 'none')], 'required': [('main_product_tracking', '!=', 'none')]}"
+                                   attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('main_product_tracking', '=', 'none')]}"
                                    domain="[('product_id', '=', main_product_id),('product_life_alert', '=', False)]"
                                    context="{'default_product_id': main_product_id, 'default_company_id': company_id}"/>
                             <field name="date_planned_start" />
@@ -140,8 +141,6 @@
 <!--                                <field name="qty_nested" readonly="1"/>-->
                                 <field name="qty_produced" readonly="1"/>
                                 <field name="qty_production" readonly="1"/>
-<!--                                <field name="lot_id" invisible="1" string="Main Material Lot"/>-->
-                                <field name="workcenter_id" invisible="1"/>
                                 <field name="production_id" invisible="1"/>
                                 <field name="working_state" invisible="1"/>
                                 <field name="is_produced" invisible="1" />
@@ -149,48 +148,6 @@
                                 <field name="production_state" invisible="1" />
                                 <field name="company_id" invisible="1"/>
                                 <field name="workorder_state" optional="hide" />
-<!--                                <button name="button_finish"-->
-<!--                                        type="object"-->
-<!--                                        string="Finish Order"-->
-<!--                                        icon="fa-stop"-->
-<!--                                        attrs="{'invisible': ['|', ('workorder_state', '!=', 'progress'), ('is_produced', '=', False)]}"-->
-<!--                                        class="btn-outline-info"/>-->
-<!--                                <button name="button_start"-->
-<!--                                        type="object"-->
-<!--                                        string="Start Working"-->
-<!--                                        icon="fa-play"-->
-<!--                                        attrs="{'invisible': ['|', ('working_state', '=', 'blocked'), ('workorder_state', '!=', 'pending')]}"/>-->
-<!--                                <button name="button_start"-->
-<!--                                        type="object"-->
-<!--                                        string="Start Working"-->
-<!--                                        icon="fa-play"-->
-<!--                                        attrs="{'invisible': ['|', ('working_state', '=', 'blocked'), ('workorder_state', '!=', 'ready')]}"-->
-<!--                                        class="btn-outline-success"/>-->
-<!--                                <button name="record_production"-->
-<!--                                        type="object"-->
-<!--                                        string="Done"-->
-<!--                                        icon="fa-check"-->
-<!--                                        class="btn-outline-success"-->
-<!--                                        attrs="{'invisible': ['|', '|', '|', ('is_produced', '=', True), ('working_state', '=', 'blocked'), ('workorder_state', '!=', 'progress'), ('is_user_working', '=', False)]}"/>-->
-<!--                                <button name="button_pending"-->
-<!--                                        type="object"-->
-<!--                                        string="Pause"-->
-<!--                                        icon="fa-pause"-->
-<!--                                        class="btn-outline-warning"-->
-<!--                                        attrs="{'invisible': ['|', '|', ('working_state', '=', 'blocked'), ('workorder_state', 'in', ('done', 'pending', 'ready', 'cancel')), ('is_user_working', '=', False)]}"/>-->
-<!--                                <button name="button_unblock"-->
-<!--                                        type="object"-->
-<!--                                        string="Unblock"-->
-<!--                                        class="btn-danger"-->
-<!--                                        attrs="{'invisible': [('working_state', '!=', 'blocked')]}"/>-->
-<!--                                <button name="button_start"-->
-<!--                                        type="object"-->
-<!--                                        string="Continue Production"-->
-<!--                                        attrs="{'invisible': ['|', '|', '|', ('production_state', '=', 'done'), ('working_state', '=', 'blocked'), ('is_user_working', '=', True), ('workorder_state', '!=', 'progress')]}"/>-->
-<!--                                <button name="button_scrap"-->
-<!--                                        type="object"-->
-<!--                                        string="Scrap"-->
-<!--                                        attrs="{'invisible': [('workorder_state', 'in', ('done', 'cancel'))]}"/>-->
                             </tree>
                         </field>
                     </div>

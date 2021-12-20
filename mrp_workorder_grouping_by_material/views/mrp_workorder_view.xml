@@ -40,8 +40,11 @@
                         domain="[('nesting_required', '=', True)]" />
             </filter>
             <filter name="date_start_filter" position="after">
+                <separator />
                 <filter string="Main Product" name="main_product_id"
                         domain="[]" context="{'group_by':'main_product_id'}"/>
+                <filter string="Nest Status" name="nested_status"
+                        domain="[]" context="{'group_by':'nested_status'}" />
             </filter>
         </field>
     </record>

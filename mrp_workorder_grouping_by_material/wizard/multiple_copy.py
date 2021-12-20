@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class MultipleCopy(models.TransientModel):
     _name = "multiple.copy"
+    _description = "Wizard to Duplicate Nests"
 
     copy_number = fields.Integer(string="Number of Copies", default="1")
 
