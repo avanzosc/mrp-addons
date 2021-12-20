@@ -3,7 +3,7 @@
 
 {
     "name": "Workorder data in worksheet header",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.1.0",
     "license": "AGPL-3",
     "depends": [
         "mrp",
@@ -17,6 +17,7 @@
         "views/mrp_workorder_view.xml",
         "views/mrp_workorder_nest_view.xml",
         "views/mrp_workorder_nest_line_view.xml",
+        "report/mrp_workorder_report.xml",
         "report/mrp_workorder_line_report.xml",
         "report/mrp_workorder_nest_line_report.xml",
     ],

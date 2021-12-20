@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+            id="mrp_workorder_worksheet_report"
+            model="mrp.workorder"
+            string="Workorder with header"
+            report_type="qweb-pdf"
+            name="mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb"
+            file="mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb"
+            menu="False"
+    />
+
+    <template id="mrp_workorder_worksheet_report_qweb">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="production" t-value="doc.production_id" />
+                <t t-set="workorder" t-value="doc" />
+                <t t-set="next_workorder"
+                   t-value="doc.next_work_order_id" />
+                <t t-set="product_qty"
+                   t-value="doc.qty_produced" />
+                <t t-set="qty_production"
+                   t-value="doc.qty_production" />
+                <t t-set="product_uom"
+                   t-value="doc.product_uom_id" />
+                <t t-set="lot"
+                   t-value="False" />
+                <t t-call="mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report_qweb_document"
+                   t-lang="doc.company_id.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="mrp_workorder_worksheet_report_qweb_document">
+        <t t-set="doc" t-value="doc.with_context(lang=doc.company_id.partner_id.lang)"/>
+        <div class="header" style="font-size:12px;">
+            <div class="row mb32" id="informations">
+                <div class="col-4">
+                    <strong>origin:</strong>
+                    <span t-field="production.origin"/>
+                    <br/>
+                    <strong>production:</strong>
+                    <span t-field="production.display_name"/>
+                    <br/>
+                    <strong>next order:</strong>
+                    <span t-field="next_workorder.name"/>
+                    <br/>
+                    <strong>workcenter:</strong>
+                    <span t-field="next_workorder.workcenter_id.name"/>
+                    <br/>
+                </div>
+                <div class="col-4">
+                    <span t-field="doc.product_id.display_name"/>
+                    <br/>
+                    <span t-esc="product_qty"/>&#32;&#47;
+                    <span t-esc="qty_production"/>
+                    <span t-field="product_uom.display_name"/>
+                    <br/>
+                    <span t-field="workorder.date_planned_start"/>&#32;to
+                    <span t-field="workorder.date_planned_finished"/>
+                    <br/>
+                    <span t-if="lot" t-field="lot.name" />
+                </div>
+
+                <div class="col-2" style="font-size:8px;">
+                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', production.display_name, 50, 50)"/>
+                    <br/>
+                    <div style="text-align: left;">
+                    <strong>production:<br/>
+                    <span t-esc="production.display_name"/></strong>
+                    </div>
+                </div>
+
+                <div class="col-2" style="font-size:8px;">
+                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', production.origin, 50, 50)"/>
+                    <br/>
+                    <div style="text-align: left;">
+                    <strong>origin:<br/>
+                    <span t-esc="production.origin"/></strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="page" />
+
+    </template>
+</odoo>
