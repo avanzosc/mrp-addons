@@ -83,7 +83,7 @@ class NestedNewLine(models.TransientModel):
     def action_done(self):
         main_product_workcenter = {}
         lines = self.line_ids | self.filtered_line_ids
-        for line in lines:
+        for line in lines.filtered("qty_producing"):
             wo = line.workorder_id
             if line.qty_producing + wo.qty_produced > wo.qty_production:
                 raise exceptions.ValidationError(
@@ -109,7 +109,7 @@ class NestedNewLine(models.TransientModel):
                     (0, 0, {
                         "workorder_id": line.workorder_id.id,
                         "qty_producing": line.qty_producing,
-                        "state": line.workorder_id.state})
+                        })
                     for line in lines]
                 self.env["mrp.workorder.nest"].create({
                     "code": self.nest_code,
