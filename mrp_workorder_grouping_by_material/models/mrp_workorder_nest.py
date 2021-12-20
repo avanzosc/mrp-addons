@@ -158,17 +158,30 @@ class MrpWorkorderNest(models.Model):
         result = super().create(vals)
         return result
 
-    def nest_start(self):
-        for nest in self:
-            set_lot = bool(nest.main_product_id.tracking == "none" or
-                           nest.lot_id)
-            if nest.state == "draft" and set_lot:
+    def unlink(self):
+        self.nested_line_ids.unlink()
+        return super().unlink()
+
+    def _check_lot(self):
+        self.ensure_one()
+        if not bool(self.main_product_id.tracking == "none" or self.lot_id):
+            raise UserError(_("Main product lot is not selected"))
+
+    def action_check_ready(self):
+        for nest in self.filtered(lambda n: n.state == "draft"):
+            nest.nested_line_ids.action_check_ready()
+            if not any(nest.nested_line_ids.filtered(
+                    lambda l: l.state not in ("ready", "progress"))):
                 nest.state = "ready"
-            else:
-                raise UserError(_("Main product lot is not selected"))
+
+    def nest_start(self):
+        for nest in self.filtered(lambda n: n.state == "ready"):
+            nest._check_lot()
+            nest.state = "progress"
 
     def nest_draft(self):
         for nest in self.filtered(lambda n: n.state == "ready"):
+            nest.nested_line_ids.action_back2draft()
             nest.state = "draft"
 
     def nest_blocked(self):
@@ -189,12 +202,15 @@ class MrpWorkorderNest(models.Model):
             nest.nested_line_ids.button_finish()
 
     def button_start(self):
+        self.action_check_ready()
         for nest in self:
+            nest.nest_start()
             nest.nested_line_ids.button_start()
-            nest.state = "progress"
+            # nest.state = "progress"
 
     def record_production(self):
         for nest in self:
+            nest._check_lot()
             nest.nested_line_ids.record_production()
             nest.nest_blocked()
 
@@ -209,6 +225,12 @@ class MrpWorkorderNest(models.Model):
     def button_scrap(self):
         for nest in self:
             nest.nested_line_ids.button_scrap()
+
+    # def check_status(self):
+    #     for nest in self:
+    #         if not any(nest.nested_line_ids.filtered(
+    #                 lambda l: l.state == "done" and l.workorder_state == "done")):
+    #             nest.state == "done"
 
     @api.depends("nested_line_ids")
     def _compute_active_lines(self):
