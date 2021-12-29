@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-20 10:57+0000\n"
-"PO-Revision-Date: 2021-12-20 10:57+0000\n"
+"POT-Creation-Date: 2021-12-30 14:01+0000\n"
+"PO-Revision-Date: 2021-12-30 14:01+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,17 @@ msgstr ""
 #. module: mrp_production_generate_structure
 #: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines_view_form
 msgid "Create structure"
+msgstr ""
+
+#. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__new_production_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
+msgid "Created Production Order"
+msgstr "Ordre de fabrication créé"
+
+#. module: mrp_production_generate_structure
+#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
+msgid "Created Purchase Order"
 msgstr ""
 
 #. module: mrp_production_generate_structure
@@ -73,17 +84,6 @@ msgid "Manufacturing counting"
 msgstr ""
 
 #. module: mrp_production_generate_structure
-#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__new_production_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
-msgid "Manufacturing order"
-msgstr ""
-
-#. module: mrp_production_generate_structure
-#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__purchase_date_order
-msgid "Order date"
-msgstr ""
-
-#. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production__origin_production_id
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_purchase_order__origin_production_id
 #: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_lines_search_view
@@ -107,6 +107,11 @@ msgid "Production Scheduled Product"
 msgstr ""
 
 #. module: mrp_production_generate_structure
+#: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__purchase_date_order
+msgid "Purchase Date"
+msgstr ""
+
+#. module: mrp_production_generate_structure
 #: model:ir.model,name:mrp_production_generate_structure.model_purchase_order
 msgid "Purchase Order"
 msgstr "Commande fournisseur"
@@ -119,11 +124,10 @@ msgstr "Ligne de commande d'achat"
 #. module: mrp_production_generate_structure
 #: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_view_form
 msgid "Purchase Orders"
-msgstr "Bons de commande"
+msgstr "Bon de commande"
 
 #. module: mrp_production_generate_structure
 #: model:ir.model.fields,field_description:mrp_production_generate_structure.field_mrp_production_product_line__purchase_order_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_generate_structure.mrp_production_product_line_view_search
 msgid "Purchase order"
 msgstr ""
 
@@ -156,6 +160,7 @@ msgstr "Règle de stock minimum"
 
 #. module: mrp_production_generate_structure
 #: code:addons/mrp_production_generate_structure/models/mrp_production.py:236
+#: code:addons/mrp_production_generate_structure/models/mrp_production.py:241
 #, python-format
 msgid "There is no vendor associated to the product {}. Please define a vendor for this product."
 msgstr ""
