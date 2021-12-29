@@ -1,34 +1,36 @@
 # Copyright 2018 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo.tests.common import SavepointCase
+from odoo.tests import common
 from odoo.exceptions import MissingError
 
 
-class MrpScheduledProducts(SavepointCase):
-
-    def setUp(cls):
-        super(MrpScheduledProducts, cls).setUp()
+@common.at_install(False)
+@common.post_install(True)
+class MrpScheduledProducts(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super(MrpScheduledProducts, cls).setUpClass()
         cls.mrp_production_model = cls.env['mrp.production']
         cls.bom_model = cls.env['mrp.bom']
         cls.product_model = cls.env['product.product']
-        unit_id = cls.ref('uom.product_uom_unit')
-        dozen_id = cls.ref('uom.product_uom_dozen')
+        unit = cls.env.ref('uom.product_uom_unit')
+        dozen = cls.env.ref('uom.product_uom_dozen')
         bom_product = cls.product_model.create({
             'name': 'BoM product',
-            'uom_id': unit_id,
+            'uom_id': unit.id,
         })
         cls.component1 = cls.product_model.create({
             'name': 'Component1',
             'standard_price': 10.0,
-            'uom_id': dozen_id,
-            'uom_po_id': unit_id,
+            'uom_id': dozen.id,
+            'uom_po_id': unit.id,
         })
         cls.component2 = cls.product_model.create({
             'name': 'Component2',
             'standard_price': 15.0,
-            'uom_id': unit_id,
-            'uom_po_id': unit_id,
+            'uom_id': unit.id,
+            'uom_po_id': unit.id,
         })
         vals = {
             'product_tmpl_id': bom_product.product_tmpl_id.id,

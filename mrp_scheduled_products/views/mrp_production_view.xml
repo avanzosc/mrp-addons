@@ -30,13 +30,14 @@
     <record id="mrp_production_product_tree_view" model="ir.ui.view">
         <field name="model">mrp.production.product.line</field>
         <field name="arch" type="xml">
-            <tree string="Scheduled Products">
+            <tree string="Scheduled Products"
+                  decoration-muted="state == 'cancel'">
                 <field name="production_id" invisible="context.get('hide_production_id',True)" />
-                <field name="date_planned_start"/>
+                <field name="date_planned_start" invisible="context.get('hide_production_id',True)" />
                 <field name="product_id"/>
                 <field name="product_qty"/>
                 <field name="product_uom_id" groups="uom.group_uom"/>
-                <field name="state"/>
+                <field name="state" invisible="context.get('hide_production_id',True)" />
             </tree>
         </field>
     </record>
@@ -59,9 +60,9 @@
                             groups="uom.group_uom"/>
                     <filter string="Date Planned" name="date_planned_start"
                             domain="[]" context="{'group_by':'date_planned_start'}"/>
-                    <filter string="Production Product" name="production_product_id"
+                    <filter string="Product to Produce" name="production_product_id"
                             domain="[]" context="{'group_by':'production_product_id'}"/>
-                    <filter string="State" name="state"
+                    <filter string="State" name="groupby_state"
                             domain="[]" context="{'group_by':'state'}"/>
                 </group>
             </search>
