@@ -1,51 +1,14 @@
 # Copyright 2018 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
+from .common import MrpProductionCommon
 from odoo.tests import common
 from odoo.exceptions import MissingError
 
 
 @common.at_install(False)
 @common.post_install(True)
-class MrpScheduledProducts(common.SavepointCase):
-    @classmethod
-    def setUpClass(cls):
-        super(MrpScheduledProducts, cls).setUpClass()
-        cls.mrp_production_model = cls.env['mrp.production']
-        cls.bom_model = cls.env['mrp.bom']
-        cls.product_model = cls.env['product.product']
-        unit = cls.env.ref('uom.product_uom_unit')
-        dozen = cls.env.ref('uom.product_uom_dozen')
-        bom_product = cls.product_model.create({
-            'name': 'BoM product',
-            'uom_id': unit.id,
-        })
-        cls.component1 = cls.product_model.create({
-            'name': 'Component1',
-            'standard_price': 10.0,
-            'uom_id': dozen.id,
-            'uom_po_id': unit.id,
-        })
-        cls.component2 = cls.product_model.create({
-            'name': 'Component2',
-            'standard_price': 15.0,
-            'uom_id': unit.id,
-            'uom_po_id': unit.id,
-        })
-        vals = {
-            'product_tmpl_id': bom_product.product_tmpl_id.id,
-            'product_id': bom_product.id,
-            'bom_line_ids':
-                [(0, 0, {'product_id': cls.component1.id,
-                         'product_qty': 2.0}),
-                 (0, 0, {'product_id': cls.component2.id,
-                         'product_qty': 12.0})],
-        }
-        cls.mrp_bom = cls.bom_model.create(vals)
-        cls.production = cls.mrp_production_model.create({
-            'product_id': bom_product.id,
-            'product_uom_id': bom_product.uom_id.id,
-        })
+class TestMrpScheduledProducts(MrpProductionCommon):
 
     def test_mrp_production(self):
         self.production.action_compute()
@@ -59,14 +22,14 @@ class MrpScheduledProducts(common.SavepointCase):
 
     def test_mrp_production_error(self):
         self.production.write({
-            'product_id': self.component1.id,
+            "product_id": self.buy_component.id,
         })
         with self.assertRaises(MissingError):
             self.production.action_compute()
 
-    def test_scheduled_good_onchange(self):
-        line = self.env['mrp.production.product.line'].new({
-            'product_id': self.component1,
+    def test_scheduled_line_onchange(self):
+        line = self.env["mrp.production.product.line"].new({
+            "product_id": self.buy_component.id,
         })
         self.assertFalse(line.product_uom_id)
         line._onchange_product_id()

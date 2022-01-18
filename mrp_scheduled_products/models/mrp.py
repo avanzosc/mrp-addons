@@ -103,26 +103,29 @@ class MrpProduction(models.Model):
             "production_product_line_id": product_line.id,
         }
 
-    def _generate_raw_moves(self):
+    def _generate_raw_moves(self, exploded_lines):
         self.ensure_one()
         moves = self.env["stock.move"]
+        if not self.product_line_ids:
+            return super(MrpProduction,
+                         self.filtered(
+                             lambda x: x.state != "draft")
+                         )._generate_raw_moves(exploded_lines)
         for line in self.product_line_ids:
             data = self._get_raw_move_dict(line)
             moves += moves.create(data)
         return moves
 
+    def _generate_finished_moves(self):
+        """Avoid draft moves generation of draft state mo"""
+        super(MrpProduction,
+              self.filtered(lambda x: x.state != "draft"))._generate_finished_moves()
+
     @api.multi
     def _generate_moves(self):
         """Avoid draft moves generation of draft state mo"""
-        productions = (
-            self if self.env.context.get("generate_moves") else
-            self.filtered(lambda x: x.state != "draft"))
-        for production in productions:
-            production._generate_finished_moves()
-            production._generate_raw_moves()
-            # Check for all draft moves whether they are mto or not
-            production._adjust_procure_method()
-            production.move_raw_ids._action_confirm()
+        super(MrpProduction,
+              self.filtered(lambda x: x.state != "draft"))._generate_moves()
 
     @api.multi
     def button_confirm(self):
@@ -135,7 +138,7 @@ class MrpProduction(models.Model):
             "state": "confirmed",
             "active": "True",
         })
-        return self.with_context(generate_moves=True)._generate_moves()
+        return self._generate_moves()
 
     @api.multi
     def _action_compute_lines(self):
