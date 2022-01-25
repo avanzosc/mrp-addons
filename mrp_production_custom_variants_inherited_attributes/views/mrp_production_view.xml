@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        <record model="ir.ui.view" id="mrp_production_extended_form_view">
-            <field name="name">mrp.production.extended.form</field>
-            <field name="model">mrp.production</field>
-            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
-            <field name="arch" type="xml">
-                <field name="product_id" position="before">
-                    <field name="product_tmpl_id" />
-                </field>
-                <field name="product_id" position="after">
-
-                    <div >
-                        <field name="product_attribute_ids"
-                               context="{'show_attribute': False}"
-                               attrs="{'invisible':[('product_attribute_ids','=',[])]}"
-                               options="{'no_create': True, 'no_delete': True}">
-                            <tree create="0" delete="0" editable="1">
-                                <field name="attribute_id" />
-                                <field name="value_id" options="{'no_create': True}" />
-                                <field name="possible_value_ids" invisible="1" />
-                            </tree>
-                        </field>
+<odoo>
+    <record model="ir.ui.view" id="mrp_production_extended_form_view">
+        <field name="name">mrp.production.extended.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="product_tmpl_id" string="Product" />
+            </field>
+            <field name="product_id" position="after">
+                <div colspan="4">
+                    <field name="product_attribute_ids"
+                           context="{'show_attribute': False}"
+                           attrs="{'invisible':[('product_attribute_ids','=',[])]}"
+                           options="{'no_create': True, 'no_delete': True}">
+                        <tree create="0" delete="0" editable="1">
+                            <field name="attribute_id" />
+                            <field name="value_id" options="{'no_create': True}" />
+                            <field name="possible_value_ids" invisible="1" />
+                        </tree>
+                    </field>
                     <!--<field name="possible_attribute_ids" invisible="1"/>-->
                     <field name="custom_value_ids" context="{'show_attribute': False}">
                         <tree string="Product Version Line" editable="bottom" create="false">
@@ -32,97 +30,97 @@
                         </tree>
                     </field>
                     <field name="product_version_id" />
-
-                    </div>
-                </field>
-                <field name="product_id" position="attributes">
-                    <attribute name="string">Product Variants</attribute>
-                </field>
+                </div>
             </field>
-        </record>
-
-        <record model="ir.ui.view" id="mrp_production_variants_tree_view">
-            <field name="name">mrp.production.variants.tree</field>
-            <field name="model">mrp.production</field>
-            <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
-            <field name="arch" type="xml">
-                <field name="product_id" position="before">
-                    <field name="product_tmpl_id" />
-                </field>
-                <field name="product_id" position="attributes">
-                    <attribute name="string">Product Variants</attribute>
-                </field>
-                <field name="product_id" position="after">
-                    <field name="product_version_id" />
-                </field>
+            <field name="product_id" position="attributes">
+                <attribute name="string">Product Variant</attribute>
             </field>
-        </record>
+        </field>
+    </record>
 
-<!--        <record model="ir.ui.view" id="mrp_production_variants_search_view">-->
-<!--            <field name="name">mrp.production.variants.search</field>-->
-<!--            <field name="model">mrp.production</field>-->
-<!--            <field name="inherit_id" ref="mrp.view_mrp_production_filter" />-->
-<!--            <field name="arch" type="xml">-->
-<!--                <filter string="Product" position="attributes">-->
-<!--                    <attribute name="string">Product Variants</attribute>-->
-<!--                </filter>-->
-<!--                <filter string="Product Variants" position="before">-->
-<!--                    <filter string="Product" domain="[]" context="{'group_by':'product_tmpl_id'}"/>-->
-<!--                </filter>-->
+<!--    <record model="ir.ui.view" id="mrp_production_variants_tree_view">-->
+<!--        <field name="name">mrp.production.variants.tree</field>-->
+<!--        <field name="model">mrp.production</field>-->
+<!--        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="product_id" position="before">-->
+<!--                <field name="product_tmpl_id" />-->
 <!--            </field>-->
-<!--        </record>-->
-
-<!--        <record model="ir.ui.view" id="mrp.mrp_production_product_form_view">-->
-<!--            <field name="name">mrp.production.product.line.form</field>-->
-<!--            <field name="model">mrp.production.product.line</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <form string="Scheduled Products">-->
-<!--                    <group col="4">-->
-<!--                        <field name="name" />-->
-<!--                        <field name="product_id" />-->
-<!--                        <label for="product_qty" />-->
-<!--                        <div>-->
-<!--                            <field name="product_qty" class="oe_inline" />-->
-<!--                            <field name="product_uom"-->
-<!--                                   groups="product.group_uom"-->
-<!--                                   class="oe_inline" />-->
-<!--                        </div>-->
-<!--                        <label for="product_uos_qty" groups="product.group_uos" />-->
-<!--                        <div groups="product.group_uos">-->
-<!--                            <field name="product_uos_qty" class="oe_inline" />-->
-<!--                            <label string="-"-->
-<!--                                   attrs="{'invisible':[('product_uos','=',False)]}"-->
-<!--                                   class="oe_inline" />-->
-<!--                            <field name="product_uos" class="oe_inline" />-->
-<!--                        </div>-->
-<!--                    </group>-->
-<!--                </form>-->
+<!--            <field name="product_id" position="attributes">-->
+<!--                <attribute name="string">Product Variants</attribute>-->
 <!--            </field>-->
-<!--        </record>-->
+<!--            <field name="product_id" position="after">-->
+<!--                <field name="product_version_id" />-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
 
-        <record model="ir.ui.view"
-            id="mrp_production_product_line_extended_form_view">
-            <field name="name">mrp.production.product.line.extended.form</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_form_view" />
-            <field name="arch" type="xml">
-                <field name="product_id" position="before">
-                    <field name="product_tmpl_id" />
-                </field>
-                <field name="product_id" position="after" domain="[('product_tmpl_id','=',product_tmpl_id)]">
-                                   <button name="create_product_product" string="Create button" type="object" attrs="{'invisible': [('product_id', '=', 'false')]}"/>
+<!--    <record model="ir.ui.view" id="mrp_production_variants_search_view">-->
+<!--        <field name="name">mrp.production.variants.search</field>-->
+<!--        <field name="model">mrp.production</field>-->
+<!--        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <filter string="Product" position="attributes">-->
+<!--                <attribute name="string">Product Variants</attribute>-->
+<!--            </filter>-->
+<!--            <filter string="Product Variants" position="before">-->
+<!--                <filter string="Product" domain="[]" context="{'group_by':'product_tmpl_id'}"/>-->
+<!--            </filter>-->
+<!--        </field>-->
+<!--    </record>-->
 
-                    <div colspan="4">
-                        <field name="product_attribute_ids"
-                               nolabel="True"
-                               context="{'show_attribute': False}"
-                               options="{'no_create': True, 'no_delete': True}">
-                            <tree create="0" delete="0" editable="1">
-                                <field name="attribute_id" />
-                                <field name="value_id" options="{'no_create': True}" />
-                                <field name="possible_value_ids" invisible="1" />
-                            </tree>
-                        </field>
+<!--    <record model="ir.ui.view" id="mrp.mrp_production_product_form_view">-->
+<!--        <field name="name">mrp.production.product.line.form</field>-->
+<!--        <field name="model">mrp.production.product.line</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Scheduled Products">-->
+<!--                <group col="4">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="product_id" />-->
+<!--                    <label for="product_qty" />-->
+<!--                    <div>-->
+<!--                        <field name="product_qty" class="oe_inline" />-->
+<!--                        <field name="product_uom"-->
+<!--                               groups="product.group_uom"-->
+<!--                               class="oe_inline" />-->
+<!--                    </div>-->
+<!--                    <label for="product_uos_qty" groups="product.group_uos" />-->
+<!--                    <div groups="product.group_uos">-->
+<!--                        <field name="product_uos_qty" class="oe_inline" />-->
+<!--                        <label string="-"-->
+<!--                               attrs="{'invisible':[('product_uos','=',False)]}"-->
+<!--                               class="oe_inline" />-->
+<!--                        <field name="product_uos" class="oe_inline" />-->
+<!--                    </div>-->
+<!--                </group>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record model="ir.ui.view" id="mrp_production_product_line_extended_form_view">
+        <field name="name">mrp.production.product.line.extended.form</field>
+        <field name="model">mrp.production.product.line</field>
+        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_form_view" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="product_tmpl_id" string="Product" />
+            </field>
+            <field name="product_id" position="after">
+                <button name="create_product_product"
+                        string="Create Product"
+                        type="object"
+                        attrs="{'invisible': [('product_id', '!=', False)]}"/>
+                <div colspan="4">
+                    <field name="product_attribute_ids"
+                           nolabel="True"
+                           context="{'show_attribute': False}"
+                           options="{'no_create': True, 'no_delete': True}">
+                        <tree create="0" delete="0" editable="1">
+                            <field name="attribute_id" />
+                            <field name="value_id" options="{'no_create': True}" />
+                            <field name="possible_value_ids" invisible="1" />
+                        </tree>
+                    </field>
                     <!--<field name="possible_attribute_ids" invisible="1"/>-->
                     <field name="custom_value_ids" context="{'show_attribute': False}">
                         <tree string="Product Version Line" editable="bottom" create="false">
@@ -133,30 +131,28 @@
                         </tree>
                     </field>
                     <field name="product_version_id" />
-                    </div>
-                </field>
-                <field name="product_id" position="attributes">
-                    <attribute name="string">Product Variants</attribute>
-                </field>
+                </div>
             </field>
-        </record>
-
-        <record model="ir.ui.view"
-            id="mrp_production_product_line_extended_tree_view">
-            <field name="name">mrp.production.product.line.extended.tree</field>
-            <field name="model">mrp.production.product.line</field>
-            <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view" />
-            <field name="arch" type="xml">
-                <field name="product_id" position="before">
-                    <field name="product_tmpl_id" />
-                </field>
-                <field name="product_id" position="attributes">
-                    <attribute name="string">Product Variants</attribute>
-                    <attribute name="domain">[('product_tmpl_id', '=', product_tmpl_id)]</attribute>
-                </field>
+            <field name="product_id" position="attributes">
+                <attribute name="string">Product Variant</attribute>
+                <attribute name="domain">[('product_tmpl_id', '=', product_tmpl_id)]</attribute>
             </field>
-        </record>
+        </field>
+    </record>
 
-    </data>
-</openerp>
+    <record model="ir.ui.view" id="mrp_production_product_line_extended_tree_view">
+        <field name="name">mrp.production.product.line.extended.tree</field>
+        <field name="model">mrp.production.product.line</field>
+        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="product_tmpl_id" string="Product" />
+            </field>
+            <field name="product_id" position="attributes">
+                <attribute name="string">Product Variant</attribute>
+                <attribute name="domain">[('product_tmpl_id', '=', product_tmpl_id)]</attribute>
+            </field>
+        </field>
+    </record>
 
+</odoo>

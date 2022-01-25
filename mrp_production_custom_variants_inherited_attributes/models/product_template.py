@@ -17,8 +17,7 @@ class ProductTemplate(models.Model):
                     if attr_line.attribute_id.id == attr['attribute_id']:
                         attr.update({'value_id': attr_line.value_id.id})
                         try:
-                            attr.update({'custom_value':
-                                         attr_line.custom_value})
+                            attr.update({'custom_value': attr_line.custom_value})
                         except Exception:
                             pass
         return product_attribute_ids

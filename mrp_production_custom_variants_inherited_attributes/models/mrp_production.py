@@ -6,23 +6,30 @@ from odoo import models, fields, api, exceptions, _
 
 
 class MrpProductionAttribute(models.Model):
-    _name = 'mrp.production.attribute'
+    _name = "mrp.production.attribute"
     _inherit = "product.attribute.line"
 
-    mrp_production = fields.Many2one(comodel_name='mrp.production',
-                                     string='Manufacturing Order')
-    product_tmpl_id = fields.Many2one(related="mrp_production.product_tmpl_id")
+    mrp_production = fields.Many2one(
+        comodel_name="mrp.production",
+        string="Manufacturing Order")
+    product_tmpl_id = fields.Many2one(
+        related="mrp_production.product_tmpl_id")
 
 
 class MrpProduction(models.Model):
-    _inherit = 'mrp.production'
+    _inherit = "mrp.production"
 
     product_id = fields.Many2one(required=False)
     product_tmpl_id = fields.Many2one(
-        comodel_name='product.template', string='Product', readonly=True,
-        related=False, states={'draft': [('readonly', False)]})
-    product_version_id = fields.Many2one(comodel_name="product.version",
-                                         name="Product Version")
+        comodel_name="product.template",
+        string="Product Template",
+        readonly=True,
+        related=False,
+        states={"draft": [("readonly", False)]},
+    )
+    product_version_id = fields.Many2one(
+        comodel_name="product.version",
+        name="Product Version")
     custom_value_ids = fields.One2many(
         comodel_name="production.product.version.custom.line",
         string="Custom Values",
@@ -32,19 +39,6 @@ class MrpProduction(models.Model):
         comodel_name='mrp.production.attribute', inverse_name='mrp_production',
         string='Product attributes', copy=True, readonly=True,
         states={'draft': [('readonly', False)]},)
-
-    def write(self, values):
-        res = super().write(values)
-        return res
-
-    def _generate_raw_moves(self):
-        self.ensure_one()
-        moves = self.env['stock.move']
-        for line in self.product_line_ids:
-            if line.product_id.type in ('consu', 'product'):
-                data = self._get_raw_move_dict(line)
-                moves += moves.create(data)
-        return moves
 
     def _all_custom_lines_filled(self):
         for custom in self.custom_value_ids:
@@ -136,7 +130,7 @@ class MrpProduction(models.Model):
         return res
 
     @api.multi
-    @api.onchange('product_tmpl_id')
+    @api.onchange("product_tmpl_id")
     def onchange_product_template(self):
         self.ensure_one()
         self.product_attribute_ids = \
@@ -164,20 +158,20 @@ class MrpProduction(models.Model):
                                  self.product_tmpl_id.id)]}}
         return {'domain': {}}
 
-    @api.onchange('product_attribute_ids')
+    @api.onchange("product_attribute_ids")
     def onchange_product_attributes(self):
         product_obj = self.env['product.product']
         product_tmpl_id = self.product_tmpl_id
-        self.product_id = product_obj._product_find(self.product_tmpl_id,
-                                                    self.product_attribute_ids)
+        self.product_id = product_obj._product_find(
+            self.product_tmpl_id, self.product_attribute_ids)
         self.product_tmpl_id = product_tmpl_id
 
     def get_production_model_id(self):
-        params = self.env.context.get('params', {})
-        if not (params and params.get('model') and params.get('id')):
+        params = self.env.context.get("params", {})
+        if not (params and params.get("model") and params.get('id')):
             params.update({
-                'model': 'mrp.production',
-                'id': self.id,
+                "model": 'mrp.production',
+                "id": self.id,
             })
         return params
 
@@ -328,6 +322,7 @@ class MrpProduction(models.Model):
 
     @api.multi
     def button_confirm(self):
+        params = self.get_production_model_id()
         self._check_create_production_product()
         version_obj = self.env['product.version']
         self.product_version_id = version_obj._find_create_version(
@@ -336,7 +331,7 @@ class MrpProduction(models.Model):
             if not self._check_create_scheduled_product_lines_product(line):
                 raise exceptions.UserError(_("Scheduled lines checking error"))
         return super(MrpProduction,
-                     self).button_confirm()
+                     self.with_context(params=params)).button_confirm()
 
     def _compute_product_uom_qty(self):
         for production in self:
@@ -399,21 +394,30 @@ class MrpProductionProductLineAttribute(models.Model):
 
 
 class MrpProductionProductLine(models.Model):
-    _inherit = 'mrp.production.product.line'
+    _inherit = "mrp.production.product.line"
 
+    name = fields.Char(required=False)
     product_id = fields.Many2one(required=False)
-    product_tmpl_id = fields.Many2one(comodel_name='product.template',
-                                      string='Product')
+    product_tmpl_id = fields.Many2one(
+        comodel_name="product.template",
+        string="Product Template",
+    )
     product_attribute_ids = fields.One2many(
-        comodel_name='mrp.production.product.line.attribute',
-        inverse_name='product_line', string='Product attributes',
-        copy=True)
-    product_version_id = fields.Many2one(comodel_name="product.version",
-                                         name="Product Version")
+        comodel_name="mrp.production.product.line.attribute",
+        inverse_name="product_line",
+        string="Product attributes",
+        copy=True,
+    )
+    product_version_id = fields.Many2one(
+        comodel_name="product.version",
+        name="Product Version",
+    )
     custom_value_ids = fields.One2many(
         comodel_name="mrp.production.product.version.custom.line",
         string="Custom Values",
-        inverse_name="line_id", copy=True)
+        inverse_name="line_id",
+        copy=True,
+    )
 
     # possible_attribute_ids = fields.Many2many(
     #     comodel_name="product.attribute",
@@ -424,6 +428,7 @@ class MrpProductionProductLine(models.Model):
     #     for line in self:
     #         attribute_ids = line.product_id.get_custom_attributes()
     #         line.possible_attribute_ids = [(6, 0, attribute_ids)]
+
     def _all_attribute_lines_filled(self):
         for value in self.product_attribute_ids:
             if not str(value.value_id):
@@ -440,8 +445,8 @@ class MrpProductionProductLine(models.Model):
 
     def create_product_product(self):
         product_obj = self.env['product.product']
-        product_id = product_obj._product_find(self.product_tmpl_id,
-                                               self.product_attribute_ids)
+        product_id = product_obj._product_find(
+            self.product_tmpl_id, self.product_attribute_ids)
         if not product_id and self._all_attribute_lines_filled():
             product_dict = product_obj.get_product_dict(
                 self.product_tmpl_id, self.product_attribute_ids)
