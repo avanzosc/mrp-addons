@@ -10,21 +10,19 @@
                      <field name="make_to_order"/>
 <!--                    <field name="date"/>-->
                 </group>
-                <group colspan="4" col="6">
-                     <field name="new_production_id" colspan="2"/>
-                     <field name="production_date_planned_start" colspan="2"/>
-                     <group colspan="2" />
+                <group attrs="{'invisible': [('new_production_id','=',False)]}">
+                     <field name="new_production_id" readonly="True" />
+                     <field name="production_date_planned_start" />
                 </group>
-                <group colspan="4" col="6">
-                    <field name="purchase_order_id" colspan="2"/>
-                    <field name="purchase_date_order" colspan="2"/>
-                    <group colspan="2" />
+                <group attrs="{'invisible': [('purchase_order_id','=',False)]}">
+                    <field name="purchase_order_id" readonly="True" />
+                    <field name="purchase_date_order" />
                 </group>
                 <bottom>
                     <button name="button_create_purchase_manufacturing_order"
                             string="Create purchase/manufacturing order"
                             type="object" class="oe_highlight"
-                            attrs="{'invisible': ['|', ('new_production_id', '!=', False), ('purchase_order_id', '!=', False)]}"
+                            attrs="{'invisible': ['|','|',('new_production_id','!=',False),('purchase_order_id','!=',False),('state','not in',['draft'])]}"
                             context="{'hide_production_id': False}"/>
                 </bottom>
             </xpath>

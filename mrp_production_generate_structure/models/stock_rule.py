@@ -4,33 +4,31 @@ from odoo import models, api
 
 
 class StockRule(models.Model):
-    _inherit = 'stock.rule'
+    _inherit = "stock.rule"
 
     @api.multi
-    def _prepare_purchase_order_line(self, product_id, product_qty,
-                                     product_uom, values, po, partner):
+    def _prepare_purchase_order_line(
+            self, product_id, product_qty, product_uom, values, po, partner):
         values = super(StockRule, self)._prepare_purchase_order_line(
             product_id, product_qty, product_uom, values, po, partner)
-        if 'analytic_account_id' in self.env.context and self.env.context.get(
-                'analytic_account_id', False):
-            values['account_analytic_id'] = self.env.context.get(
-                'analytic_account_id').id
+        if self.env.context.get("analytic_account_id", False):
+            values["account_analytic_id"] = self.env.context.get(
+                "analytic_account_id")
         return values
 
     @api.multi
     def _run_manufacture(
             self, product_id, product_qty, product_uom, location_id, name,
             origin, values):
-        production = self.env['mrp.production']
+        production = self.env["mrp.production"]
         production_sudo = production.sudo().with_context(
-            force_company=values['company_id'].id)
+            force_company=values["company_id"].id)
         production = production_sudo.browse(
             self.env.context.get("procurement_production_id"))
         if not production or not production.product_line_ids.mapped(
-                'new_production_id') or self._context.get('force_execution'):
+                "new_production_id") or self._context.get("force_execution"):
             super(StockRule, self)._run_manufacture(
                 product_id, product_qty, product_uom, location_id, name,
                 origin, values)
-        elif production.product_line_ids.mapped(
-                'new_production_id'):
+        elif production.product_line_ids.mapped("new_production_id"):
             return True

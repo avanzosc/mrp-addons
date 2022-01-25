@@ -10,7 +10,7 @@
     "depends": [
         "mrp_scheduled_products",
         "purchase_stock",
-        "mrp_analytic"
+        "mrp_analytic",
     ],
     "data": [
         "views/mrp_production_product_line_view.xml",
