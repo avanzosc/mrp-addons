@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_workorder_view_tree" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id"
+               ref="mrp.mrp_production_workorder_tree_editable_view" />
+        <field name="arch" type="xml">
+            <field name="date_planned_start" position="after">
+                <field name="manual_sale_id" optional="hide" />
+                <field name="manual_partner_id" optional="hide" />
+                <field name="manual_commitment_date" optional="hide" />
+                <field name="manual_client_order_ref" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_workorder_view_form" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+        <field name="arch" type="xml">
+            <page name="time_tracking" position="after">
+                <page string="Manual Sale Information"
+                      name="manual_sale_info"
+                      groups="mrp.group_mrp_manager"
+                      attrs="{'invisible': [('manual_sale_id','=',False)]}">
+                    <group>
+                        <field name="manual_sale_id" />
+                        <field name="manual_partner_id" />
+                        <field name="manual_commitment_date" />
+                        <field name="manual_client_order_ref" />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+</odoo>
