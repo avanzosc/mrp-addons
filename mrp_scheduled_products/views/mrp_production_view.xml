@@ -91,7 +91,8 @@
                     <button name="action_compute" states="draft"
                             string="Compute Data" type="object"
                             />
-                    <field name="product_line_ids"/>
+                    <field name="product_line_ids"
+                           context="{'default_production_id': active_id}" />
                 </page>
             </xpath>
         </field>

@@ -23,7 +23,7 @@ class MrpProductionProductLine(models.Model):
     production_id = fields.Many2one(
         comodel_name="mrp.production", string="Production Order",
         required=True, ondelete="cascade", readonly=True,
-        states={"draft": [("readonly", False)]})
+        states={"draft": [("readonly", False)]}, auto_join=True)
     bom_line_id = fields.Many2one(
         comodel_name="mrp.bom.line", string="Bom Line", readonly=True,
         states={"draft": [("readonly", False)]})
