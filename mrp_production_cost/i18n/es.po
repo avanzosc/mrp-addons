@@ -1,0 +1,90 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mrp_production_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-18 12:16+0000\n"
+"PO-Revision-Date: 2022-02-18 12:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_real_unit
+msgid "Cost Real Unit"
+msgstr "Coste real unitario"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,help:mrp_production_cost.field_stock_move__standard_price
+msgid "Cost used for stock valuation in standard price and as a first price to set in average/fifo. Also used as a base price for pricelists. Expressed in the default unit of measure of the product."
+msgstr "Costo utilizado para la valuación de acciones en precio estándar y como primer precio para establecer en promedio / fifo. También se utiliza como precio base para las listas de precios. Expresado en la unidad de medida predeterminada del producto."
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__estimate_subcost
+msgid "Estimate Sub Cost"
+msgstr "Subcoste estimado"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_product_product__last_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_product_template__last_production_cost
+msgid "Last Production Cost"
+msgstr "Último coste de fabricación"
+
+#. module: mrp_production_cost
+#: model:ir.model,name:mrp_production_cost.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_product_product__production_ids
+#: model:ir.model.fields,field_description:mrp_production_cost.field_product_template__production_ids
+msgid "Production"
+msgstr "Producción"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_product_product__production_cost_average
+#: model:ir.model.fields,field_description:mrp_production_cost.field_product_template__production_cost_average
+msgid "Production Cost Average"
+msgstr "Media del coste de fabricación"
+
+#. module: mrp_production_cost
+#: model:ir.model,name:mrp_production_cost.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de fabricación"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__real_subcost
+msgid "Real Sub Cost"
+msgstr "Subcoste real"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__standard_price
+msgid "Standard cost"
+msgstr "Coste estandar"
+
+#. module: mrp_production_cost
+#: model:ir.model,name:mrp_production_cost.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: mrp_production_cost
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
+msgid "Total Estimated Sub Cost"
+msgstr "Total subcoste estimado"
+
+#. module: mrp_production_cost
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
+msgid "Total Real Sub Cost"
+msgstr "Total subcoste real"
+
+#. module: mrp_production_cost
+#: model:ir.actions.server,name:mrp_production_cost.action_update_manufactured_product_price
+msgid "Update manufactured product price"
+msgstr "Actualizar precio de producto fabricado"
+

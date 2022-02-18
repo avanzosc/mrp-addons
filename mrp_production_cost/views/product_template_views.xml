@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <group name="group_standard_price" position="inside">
+                <field name="last_production_cost" widget="monetary"/>
+                <field name="production_cost_average" widget="monetary"/>
+            </group>
+        </field>
+    </record>
+
+    <record id="action_update_manufactured_product_price" model="ir.actions.server">
+        <field name="name">Update manufactured product price</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.action_update_manufactured_product_price()
+        </field>
+    </record>
+
+</odoo>
