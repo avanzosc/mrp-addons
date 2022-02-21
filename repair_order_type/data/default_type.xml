@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="normal_repair_type" model="repair.order.type">
+        <field name="name">Normal Order</field>
+        <field name="sequence_id" ref="repair.seq_repair"/>
+    </record>
+</odoo>
