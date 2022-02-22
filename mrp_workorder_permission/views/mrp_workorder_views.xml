@@ -29,4 +29,14 @@
         </field>
     </record>
 
+    <record id="workcenter_line_calendar" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.workcenter_line_calendar"/>
+        <field name="arch" type="xml">
+            <field name="workcenter_id" position="after">
+                <field name="user_id" filters="1"/>
+            </field>
+        </field>
+    </record>
+
 </odoo>
