@@ -11,7 +11,7 @@
     ],
     "data": [
         "views/qc_inspection_views.xml",
-
+        "views/qc_test_view.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
