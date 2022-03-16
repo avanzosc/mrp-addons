@@ -23,7 +23,9 @@ class MrpProduction(models.Model):
     @api.multi
     def write(self, values):
         result = super(MrpProduction, self).write(values)
-        if "state" in values and values['state'] == 'done':
+        if "state" in values and (
+            values['state'] == 'done') and (
+                self.product_id.qty_available != 0):
             self.product_id.production_cost_average = (
                 (self.product_id.qty_available - self.product_qty) * (
                     self.product_id.standard_price) + (
