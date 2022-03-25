@@ -21,6 +21,8 @@ class MrpBomLine(models.Model):
     pieces_second_uom = fields.Float(
         string='Pieces second UOM', compute='_compute_pieces_second_uom',
         store=True)
+    read_only = fields.Boolean(
+        string='Read Only', compute='_compute_read_only')
 
     @api.onchange('long_cut')
     def onchange_waste_rate(self):
@@ -47,10 +49,24 @@ class MrpBomLine(models.Model):
                 line.pieces_second_uom = line.product_id.factor / (
                     line.long_cut / 1000) * line.qty_pieces_set
 
+    @api.depends('product_id', 'product_uom_id', 'second_uom_id', 'product_id.dimensional_uom_id')
+    def _compute_read_only(self):
+        for line in self:
+            read_only = False
+            dim_uom = line.product_id.dimensional_uom_id
+            if dim_uom != line.product_uom_id and dim_uom != line.second_uom_id:
+                read_only = True
+            line.read_only = read_only
+
     @api.onchange('long_cut', 'qty_pieces_set', 'waste_rate')
     def onchange_product_qty(self):
-        self.product_qty = self.long_cut / 1000 * self.qty_pieces_set * (
-            self.waste_rate)
+        dim_uom = self.product_id.dimensional_uom_id
+        if dim_uom == self.product_uom_id:
+            self.product_qty = self.long_cut / 1000 * self.qty_pieces_set * (
+                self.waste_rate)
+        if dim_uom == self.second_uom_id:
+            self.product_qty = self.long_cut / 1000 * self.qty_pieces_set * (
+                self.waste_rate) * self.product_id.factor_inverse
 
     @api.onchange('long_cut', 'product_id.product_length')
     def onchange_long_cut(self):
