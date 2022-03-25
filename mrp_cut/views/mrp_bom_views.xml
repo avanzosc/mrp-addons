@@ -6,10 +6,11 @@
         <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet/notebook/page[@name='components']/field[@name='bom_line_ids']/tree/field[@name='product_id']" position="after">
-                <field name="long_cut" optional="show"/>
-                <field name="qty_pieces_set" optional="show"/>
+                <field name="read_only" invisible="1"/>
+                <field name="long_cut" optional="show" attrs="{'readonly': [('read_only', '=', True)]}"/>
+                <field name="qty_pieces_set" optional="show" attrs="{'readonly': [('read_only', '=', True)]}"/>
                 <field name="pieces_second_uom" optional="hide"/>
-                <field name="waste_rate" optional="show"/>
+                <field name="waste_rate" optional="show" attrs="{'readonly': [('read_only', '=', True)]}"/>
             </xpath>
             <xpath expr="//sheet/notebook/page[@name='components']/field[@name='bom_line_ids']/tree/field[@name='product_uom_id']" position="after">
                 <field name="qty_second_uom" optional="hide"/>
