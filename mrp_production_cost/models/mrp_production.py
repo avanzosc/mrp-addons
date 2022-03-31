@@ -34,3 +34,9 @@ class MrpProduction(models.Model):
             self.product_id.standard_price = (
                 self.product_id.production_cost_average)
         return result
+
+    def _get_raw_move_data(self, bom_line, line_data):
+        vals = super(MrpProduction, self)._get_raw_move_data(bom_line, line_data)
+        if vals:
+            vals.update({'standard_price': bom_line.product_id.standard_price})
+        return vals

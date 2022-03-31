@@ -7,9 +7,7 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     standard_price = fields.Float(
-        string='Standard cost',
-        related='product_id.standard_price',
-        store=True)
+        string='Standard cost')
     estimate_subcost = fields.Float(
         string='Estimate Sub Cost',
         compute='_compute_estimate_subcost')
@@ -29,3 +27,9 @@ class StockMove(models.Model):
         for record in self:
             record.real_subcost = (
                 record.quantity_done * record.standard_price)
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        result = super(StockMove, self).onchange_product_id()
+        self.standard_price = self.product_id.standard_price
+        return result
