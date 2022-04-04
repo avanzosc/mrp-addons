@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    <record id="view_mrp_bom_import_tree" model="ir.ui.view">
+        <field name="name">mrp.bom.import.tree.view</field>
+        <field name="model">mrp.bom.import</field>
+        <field name="arch" type="xml">
+            <tree string="BoM Import">
+                <field name="filename"/>
+                <field name="data" filename="filename"/>
+                <field name="file_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_mrp_bom_import_form" model="ir.ui.view">
+        <field name="name">mrp.bom.import.form.view</field>
+        <field name="model">mrp.bom.import</field>
+        <field name="arch" type="xml">
+            <form string="BoM Import">
+            <header>
+             <button name="action_import_bom" string="Import" type="object"/>
+             <button name="action_validate_lines" string="Validate" type="object"/>
+             <button name="action_process_lines" string="Process" type="object"/>
+            </header>
+            <sheet>
+            <div class="oe_button_box" name="button_box">
+                <button class="oe_stat_button" type="object"
+                    name="action_bom_import_products" icon="fa-table">
+                         <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="products_count" widget="statinfo" nolabel="1" class="mr4"/>
+                            </span>
+                            <span class="o_stat_text">Products</span>
+                        </div>
+                </button>
+                <button class="oe_stat_button" type="object"
+                    name="action_bom_import_boms" icon="fa-flask">
+                         <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="bom_count" widget="statinfo" nolabel="1" class="mr4"/>
+                            </span>
+                            <span class="o_stat_text">BoMs</span>
+                        </div>
+                </button>
+            </div>
+                <group>
+                    <field name="filename" colspan="4"/>
+                    <field name="data" filename="filename"/>
+                    <field name="file_date"/>
+                </group>
+                 <field name="bom_import_lines"/>
+            </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_mrp_bom_line_tree" model="ir.ui.view">
+        <field name="name">mrp.bom.line.tree</field>
+        <field name="model">mrp.bom.line.import</field>
+        <field name="arch" type="xml">
+            <tree string="BoM Import" decoration-success="state=='pass'"
+            decoration-danger="state=='error'" decoration-muted="state=='done'"
+            decoration-info="state=='2validate'" editable="bottom">
+                <field name="product_name" />
+                <field name="product_ref" />
+                <field name="product_id" />
+                <field name="quantity" />
+                <field name="weight" />
+                <field name="origin" />
+                <field name="map" />
+                <field name="bom_code" />
+                <field name="bom_id" />
+                <field name="categ_name" />
+                <field name="category_id" />
+                <field name="log_info" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="mrp_bom_import_act" model="ir.actions.act_window">
+        <field name="name">MRP BoM Import</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.bom.import</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_mrp_bom_import_tree"/>
+    </record>
+    <menuitem id="menu_bom_import" name="BoM Import"
+        parent="mrp.menu_mrp_configuration"
+        groups="mrp.group_mrp_manager"
+        sequence="120"/>
+    <menuitem id="mrp_bom_import" name="File BoM Import"
+        parent="menu_bom_import"
+        groups="mrp.group_mrp_manager"
+        action="mrp_bom_import_act"
+        sequence="10"/>
+    </data>
+</odoo>
