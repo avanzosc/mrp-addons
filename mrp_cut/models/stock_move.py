@@ -1,7 +1,7 @@
 # Copyright 2021 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class StockMove(models.Model):
@@ -46,7 +46,8 @@ class StockMove(models.Model):
             self.waste_rate = 1.2
 
     @api.depends(
-        "product_id", "product_uom", "second_uom_id", "product_id.dimensional_uom_id")
+        "product_id", "product_uom", "second_uom_id", "product_id.dimensional_uom_id"
+    )
     def _compute_read_only(self):
         for line in self:
             read_only = False
@@ -60,11 +61,16 @@ class StockMove(models.Model):
         dim_uom = self.product_id.dimensional_uom_id
         if dim_uom == self.product_uom:
             self.product_uom_qty = (
-                self.long_cut / 1000 * self.qty_pieces_set * self.waste_rate)
+                self.long_cut / 1000 * self.qty_pieces_set * self.waste_rate
+            )
         elif dim_uom == self.second_uom_id:
             self.product_uom_qty = (
-                self.long_cut / 1000 * self.qty_pieces_set *
-                self.waste_rate * self.product_id.factor_inverse)
+                self.long_cut
+                / 1000
+                * self.qty_pieces_set
+                * self.waste_rate
+                * self.product_id.factor_inverse
+            )
 
     @api.constrains("long_cut")
     def _check_check_long(self):
@@ -73,7 +79,8 @@ class StockMove(models.Model):
 
     @api.constrains("long_cut", "product_id", "product_id.product_length")
     def _check_long_cut_length(self):
-        for line in self.filtered(lambda l: l.long_cut and l.product_id.product_lenght):
+        for line in self.filtered(lambda l: l.long_cut and l.product_id.product_length):
             if line.long_cut / 1000 > line.product_id.product_length:
                 raise ValidationError(
-                    _("The long cut can't be longer than the length of the product"))
+                    _("The long cut can't be longer than the length of the product")
+                )
