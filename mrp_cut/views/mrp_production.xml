@@ -1,16 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//sheet/notebook/page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='product_id']" position="after">
-                <field name="read_only" invisible="1"/>
-                <field name="long_cut" optional="show" attrs="{'readonly': [('read_only', '=', True)]}"/>
-                <field name="qty_pieces_set" optional="show" attrs="{'readonly': [('read_only', '=', True)]}"/>
-                <field name="waste_rate" optional="show" attrs="{'readonly': [('read_only', '=', True)]}"/>
-                <field name="qty_pieces_cut" optional="show" attrs="{'readonly': [('read_only', '=', True)]}"/>
+            <xpath
+        expr="//sheet/notebook/page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='product_id']"
+        position="after"
+      >
+                <field name="read_only" invisible="1" />
+                <field
+          name="long_cut"
+          optional="show"
+          attrs="{'readonly': [('read_only', '=', True)]}"
+        />
+                <field
+          name="qty_pieces_set"
+          optional="show"
+          attrs="{'readonly': [('read_only', '=', True)]}"
+        />
+                <field
+          name="waste_rate"
+          optional="show"
+          attrs="{'readonly': [('read_only', '=', True)]}"
+        />
+                <field
+          name="qty_pieces_cut"
+          optional="show"
+          attrs="{'readonly': [('read_only', '=', True)]}"
+        />
             </xpath>
         </field>
     </record>
