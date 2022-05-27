@@ -1,7 +1,7 @@
 # Copyright 2021 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class MrpBomLine(models.Model):
@@ -56,16 +56,19 @@ class MrpBomLine(models.Model):
         for line in self:
             line.qty_second_uom = line.product_qty * line.product_id.factor
 
-    @api.depends("product_id", "product_id.factor", "long_cut",
-                 "qty_pieces_set")
+    @api.depends("product_id", "product_id.factor", "long_cut", "qty_pieces_set")
     def _compute_pieces_second_uom(self):
         for line in self:
             if line.long_cut and line.qty_pieces_set:
-                line.pieces_second_uom = line.product_id.factor / (
-                    line.long_cut / 1000) * line.qty_pieces_set
+                line.pieces_second_uom = (
+                    line.product_id.factor
+                    / (line.long_cut / 1000)
+                    * line.qty_pieces_set
+                )
 
-    @api.depends("product_id", "product_uom_id", "second_uom_id",
-                 "product_id.dimensional_uom_id")
+    @api.depends(
+        "product_id", "product_uom_id", "second_uom_id", "product_id.dimensional_uom_id"
+    )
     def _compute_read_only(self):
         for line in self:
             read_only = False
@@ -79,11 +82,16 @@ class MrpBomLine(models.Model):
         dim_uom = self.product_id.dimensional_uom_id
         if dim_uom == self.product_uom_id:
             self.product_qty = (
-                self.long_cut / 1000 * self.qty_pieces_set * self.waste_rate)
+                self.long_cut / 1000 * self.qty_pieces_set * self.waste_rate
+            )
         elif dim_uom == self.second_uom_id:
             self.product_qty = (
-                self.long_cut / 1000 * self.qty_pieces_set *
-                self.waste_rate * self.product_id.factor_inverse)
+                self.long_cut
+                / 1000
+                * self.qty_pieces_set
+                * self.waste_rate
+                * self.product_id.factor_inverse
+            )
 
     @api.constrains("long_cut")
     def _check_check_long(self):
@@ -92,7 +100,8 @@ class MrpBomLine(models.Model):
 
     @api.constrains("long_cut", "product_id")
     def _check_long_cut_length(self):
-        for line in self.filtered(lambda l: l.long_cut and l.product_id.product_lenght):
+        for line in self.filtered(lambda l: l.long_cut and l.product_id.product_length):
             if line.long_cut / 1000 > line.product_id.product_length:
                 raise ValidationError(
-                    _("The long cut can't be longer than the length of the product"))
+                    _("The long cut can't be longer than the length of the product")
+                )
