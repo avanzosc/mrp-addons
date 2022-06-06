@@ -1,45 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_form_view_inherit"
+    />
         <field name="arch" type="xml">
             <header position="inside">
-                <button name="button_start" type="object" string="Start" class="btn-success" attrs="{'invisible': ['|', '|', '|', ('production_state','in', ('draft', 'done')), ('working_state', '=', 'blocked'), ('state', '=', 'done'), ('is_user_working', '!=', False)]}"/>
-                <button name="button_pending" type="object" string="Pause" class="btn-warning" attrs="{'invisible': ['|', '|', ('production_state', 'in', ('draft', 'done')), ('working_state', '=', 'blocked'), ('is_user_working', '=', False)]}"/>
-                <button name="button_finish" type="object" string="Done" class="btn-success" attrs="{'invisible': ['|', '|', ('production_state', 'in', ('draft', 'done')), ('working_state', '=', 'blocked'), ('is_user_working', '=', False)]}"/>
-                <button name="273" type="action" string="Block" context="{'default_workcenter_id': workcenter_id}" class="btn-danger" attrs="{'invisible': ['|', ('production_state', 'in', ('draft', 'done')), ('working_state', '=', 'blocked')]}"/>
-                <button name="button_unblock" type="object" string="Unblock" context="{'default_workcenter_id': workcenter_id}" class="btn-danger" attrs="{'invisible': ['|', ('production_state', 'in', ('draft', 'done')), ('working_state', '!=', 'blocked')]}"/>
-                <button name="action_open_wizard" type="object" icon="fa-external-link" class="oe_edit_only" context="{'default_workcenter_id': workcenter_id}"/>
+                <button
+          name="button_start"
+          type="object"
+          string="Start"
+          class="btn-success"
+          attrs="{'invisible': ['|', '|', '|', ('production_state','in', ('draft', 'done')), ('working_state', '=', 'blocked'), ('state', '=', 'done'), ('is_user_working', '!=', False)]}"
+        />
+                <button
+          name="button_pending"
+          type="object"
+          string="Pause"
+          class="btn-warning"
+          attrs="{'invisible': ['|', '|', ('production_state', 'in', ('draft', 'done')), ('working_state', '=', 'blocked'), ('is_user_working', '=', False)]}"
+        />
+                <button
+          name="button_finish"
+          type="object"
+          string="Done"
+          class="btn-success"
+          attrs="{'invisible': ['|', '|', ('production_state', 'in', ('draft', 'done')), ('working_state', '=', 'blocked'), ('is_user_working', '=', False)]}"
+        />
+                <button
+          name="%(mrp.act_mrp_block_workcenter_wo)d"
+          type="action"
+          string="Block"
+          context="{'default_workcenter_id': workcenter_id}"
+          class="btn-danger"
+          attrs="{'invisible': ['|', ('production_state', 'in', ('draft', 'done')), ('working_state', '=', 'blocked')]}"
+        />
+                <button
+          name="button_unblock"
+          type="object"
+          string="Unblock"
+          context="{'default_workcenter_id': workcenter_id}"
+          class="btn-danger"
+          attrs="{'invisible': ['|', ('production_state', 'in', ('draft', 'done')), ('working_state', '!=', 'blocked')]}"
+        />
+                <button
+          name="action_open_wizard"
+          type="object"
+          icon="fa-external-link"
+          class="oe_edit_only"
+          context="{'default_workcenter_id': workcenter_id}"
+        />
             </header>
             <xpath expr="//form/sheet/group" position="after">
                 <group>
-                    <field name="production_id"/>
-                    <field name="workcenter_id"/>
+                    <field name="production_id" />
+                    <field name="workcenter_id" />
                 </group>
             </xpath>
         </field>
     </record>
 
-    <record id="mrp_production_workorder_tree_editable_view2" model="ir.ui.view">
-        <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp_workorder_permission.mrp_production_workorder_tree_editable_view"/>
-        <field name="arch" type="xml">
-            <field name="user_id" position="attributes">
-                <attribute name="attrs"></attribute>
-                <attribute name="invisible">1</attribute>
-            </field>
-        </field>
-    </record>
-
-    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
-        <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
-        <field name="arch" type="xml">
-            <field name="state" position="before">
-                <field name="user_id"/>
-            </field>
-        </field>
-    </record>
 </odoo>
