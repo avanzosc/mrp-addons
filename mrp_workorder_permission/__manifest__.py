@@ -2,17 +2,17 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "MRP Workorder Permission",
-    'version': '14.0.1.0.0',
+    "version": "14.0.1.0.0",
     "author": "Avanzosc",
-    "website": "https://www.avanzosc.es",
-    "category": "MRP",
+    "website": "https://github.com/avanzosc/mrp-addons",
+    "category": "Manufacturing/Manufacturing",
     "depends": [
         "mrp",
     ],
     "data": [
+        "data/mrp_workorder_permission.xml",
         "views/mrp_workorder_views.xml",
-        "data/mrp_workorder_permission.xml"
     ],
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
 }
