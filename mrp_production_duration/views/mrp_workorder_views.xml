@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="mrp_production_workorder_tree_editable_view">
+      <field name="model">mrp.workorder</field>
+      <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+      <field name="arch" type="xml">
+        <field name="duration_expected" position="attributes">
+          <attribute name="sum">sum_duration_expected</attribute>
+        </field>
+        <field name="duration" position="attributes">
+          <attribute name="sum">sum_duration</attribute>
+        </field>
+      </field>
+    </record>
+</odoo>

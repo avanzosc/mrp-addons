@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_duration
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-08 08:24+0000\n"
+"PO-Revision-Date: 2022-06-08 08:24+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_duration
+#: model:ir.model.fields,field_description:mrp_production_duration.field_mrp_production__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mrp_production_duration
+#: model:ir.model.fields,field_description:mrp_production_duration.field_mrp_production__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_production_duration
+#: model:ir.model.fields,field_description:mrp_production_duration.field_mrp_production____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mrp_production_duration
+#: model:ir.model,name:mrp_production_duration.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_production_duration
+#: model:ir.model.fields,field_description:mrp_production_duration.field_mrp_production__total_duration
+msgid "Total duration"
+msgstr ""
+
+#. module: mrp_production_duration
+#: model:ir.model.fields,field_description:mrp_production_duration.field_mrp_production__total_duration_estimated
+msgid "Total duration estimated"
+msgstr ""
+
+#. module: mrp_production_duration
+#: model_terms:ir.ui.view,arch_db:mrp_production_duration.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_duration.mrp_production_workorder_tree_editable_view
+msgid "sum_duration"
+msgstr ""
+
+#. module: mrp_production_duration
+#: model_terms:ir.ui.view,arch_db:mrp_production_duration.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_duration.mrp_production_workorder_tree_editable_view
+msgid "sum_duration_expected"
+msgstr ""
