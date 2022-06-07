@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_production_tree_view">
+      <field name="model">mrp.production</field>
+      <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+      <field name="arch" type="xml">
+          <field name='reservation_state' position='after'>
+            <field name='total_duration_estimated' sum='sum_duration_expected'/>
+            <field name='total_duration' sum='sum_duration'/>
+        </field>
+      </field>
+    </record>
+</odoo>
