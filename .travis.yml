@@ -19,14 +19,15 @@ addons:
 
 env:
   global:
-    - VERSION="14.0" TESTS="0" LINT_CHECK="0" EXCLUDE="mrp_hook,mrp_production_custom_variants_inherited_attributes,product_variant_custom,product_variant_custom_dimensions,product_variant_custom_dimensions_purchase,product_variant_custom_purchase,product_variant_custom_sale,product_variant_custom_sale_mrp_link"
+    - VERSION="14.0" TESTS="0" LINT_CHECK="0"
   matrix:
     - LINT_CHECK="1"
     - TESTS="1" ODOO_REPO="OCA/OCB"
     - TESTS="1" ODOO_REPO="odoo/odoo"
 
 install:
-  - git clone --depth=1 https://github.com/avanzosc/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone --depth=1 https://github.com/avanzosc/maintainer-quality-tools.git
+    ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 

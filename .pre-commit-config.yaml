@@ -12,12 +12,6 @@ exclude: |
   /static/(src/)?lib/|
   # Repos using Sphinx to generate docs don't need prettying
   ^docs/_templates/.*\.html$|
-  # Don't bother non-technical authors with formatting issues in docs
-  readme/.*\.(rst|md)$|
-  # Ignore build and dist directories in addons
-  /build/|/dist/|
-  # Ignore test files in addons
-  /tests/samples/.*|
   # You don't usually want a bot to modify your legal texts
   (LICENSE.*|COPYING.*)
 default_language_version:
@@ -33,23 +27,13 @@ repos:
         entry: found forbidden files; remove them
         language: fail
         files: "\\.rej$"
-      - id: en-po-files
-        name: en.po files cannot exist
-        entry: found a en.po file
-        language: fail
-        files: '[a-zA-Z0-9_]*/i18n/en\.po$'
   - repo: https://github.com/oca/maintainer-tools
-    rev: 9a170331575a265c092ee6b24b845ec508e8ef75
+    rev: ab1d7f6
     hooks:
       # update the NOT INSTALLABLE ADDONS section above
       - id: oca-update-pre-commit-excluded-addons
       - id: oca-fix-manifest-website
-        args: ["https://github.com/avanzosc/odoo-addons"]
-  - repo: https://github.com/OCA/odoo-pre-commit-hooks
-    rev: v0.0.25
-    hooks:
-      - id: oca-checks-odoo-module
-      - id: oca-checks-po
+        args: ["https://github.com/avanzosc/mrp-addons"]
   - repo: https://github.com/myint/autoflake
     rev: v1.4
     hooks:
@@ -76,14 +60,14 @@ repos:
         args:
           - --plugin=@prettier/plugin-xml
         files: \.(css|htm|html|js|json|jsx|less|md|scss|toml|ts|xml|yaml|yml)$
-  #  - repo: https://github.com/pre-commit/mirrors-eslint
-  #    rev: v7.8.1
-  #    hooks:
-  #      - id: eslint
-  #        verbose: true
-  #        args:
-  #          - --color
-  #          - --fix
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v7.8.1
+    hooks:
+      - id: eslint
+        verbose: true
+        args:
+          - --color
+          - --fix
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
@@ -112,7 +96,7 @@ repos:
       - id: pyupgrade
         args: ["--keep-percent-format"]
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 5.5.1
     hooks:
       - id: isort
         name: isort except __init__.py
@@ -120,7 +104,7 @@ repos:
           - --settings=.
         exclude: /__init__\.py$
   - repo: https://github.com/acsone/setuptools-odoo
-    rev: 3.1.8
+    rev: 2.6.0
     hooks:
       - id: setuptools-odoo-make-default
       - id: setuptools-odoo-get-requirements
@@ -129,21 +113,25 @@ repos:
           - requirements.txt
           - --header
           - "# generated from manifests external_dependencies"
-  - repo: https://github.com/PyCQA/flake8
+  - repo: https://gitlab.com/PyCQA/flake8
     rev: 3.8.3
     hooks:
       - id: flake8
         name: flake8
         additional_dependencies: ["flake8-bugbear==20.1.4"]
-  - repo: https://github.com/OCA/pylint-odoo
-    rev: 7.0.2
+  - repo: https://github.com/PyCQA/pylint
+    rev: v2.11.1
     hooks:
-      - id: pylint_odoo
+      - id: pylint
         name: pylint with optional checks
         args:
           - --rcfile=.pylintrc
           - --exit-zero
         verbose: true
-      - id: pylint_odoo
+        additional_dependencies: &pylint_deps
+          - pylint-odoo==5.0.5
+      - id: pylint
+        name: pylint with mandatory checks
         args:
           - --rcfile=.pylintrc-mandatory
+        additional_dependencies: *pylint_deps
