@@ -3,11 +3,13 @@
     :alt: License: AGPL-3
 
 =======================
-MRP production duration
+MRP Production Duration
 =======================
 
-* Create total in productions for fields: Estimated duration, and duration
-  fields.
+Duration related fields in manufacturing orders:
+
+* Estimated duration
+* Real duration
 
 Bug Tracker
 ===========
@@ -25,5 +27,5 @@ Credits
 Contributors
 ------------
 
-* Ana Juaristi <anajuaristi@avanzosc.es>
 * Patxi Lersundi <practicas@avanzosc.es>
+* Ana Juaristi <anajuaristi@avanzosc.es>
