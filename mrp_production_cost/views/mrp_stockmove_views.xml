@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_move_tree">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="material_cost_to_consume"/>
+                <field name="material_cost_consumed"/>
+            </xpath>
+            <field name="material_cost_to_consume" position="attributes">
+                <attribute name="sum">Material cost to consume</attribute>
+            </field>
+            <field name="material_cost_consumed" position="attributes">
+                <attribute name="sum">Material cost consumed</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
