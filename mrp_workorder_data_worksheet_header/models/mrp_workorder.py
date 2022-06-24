@@ -70,7 +70,6 @@ class MrpWorkorder(models.Model):
         return pdf
 
     def show_worksheets(self):
-        self.ensure_one()
         if self.env.context.get("print_nest", False):
             worksheets = self.mapped(
                 "finished_workorder_line_ids").get_worksheets()
