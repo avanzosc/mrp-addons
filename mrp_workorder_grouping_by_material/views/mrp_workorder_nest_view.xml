@@ -82,6 +82,17 @@
                     <field name="show_worksheet" invisible="1" />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="show_nested_lines" type="object"
+                                class="oe_stat_button" icon="fa-bars">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Nested Lines</span>
+                            </div>
+                        </button>
+<!--                        <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('invoice_count', '=', 0)]}">-->
+<!--                            <field name="invoice_count" widget="statinfo" string="Invoices"/>-->
+<!--                        </button>-->
+                    </div>
                     <div class="oe_title">
                         <h1><field name="name" nolabel="1"/>/
                             <field name="code"/>
@@ -172,9 +183,14 @@
     <menuitem action="mrp_workorder_nest_action"
               id="menu_nested_workorder_action"
               parent="mrp.menu_mrp_manufacturing"/>
+
     <menuitem name="Nest App"
               id="nest_app_menu"
-              action="mrp_workorder_nest_action"
-              sequence="35"
+              sequence="0"
               web_icon="mrp_workorder_grouping_by_material,static/src/img/icon.png"/>
+
+    <menuitem action="mrp_workorder_nest_action"
+              id="menu_mrp_workorder_nest"
+              parent="nest_app_menu"/>
+
 </odoo>
