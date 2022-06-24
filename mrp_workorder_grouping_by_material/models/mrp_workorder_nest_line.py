@@ -248,7 +248,6 @@ class MrpWorkorderNestLine(models.Model):
         return lines.mapped("workorder_id.worksheet")
 
     def show_worksheets(self):
-        self.ensure_one()
         worksheets = self.get_worksheets()
         if not worksheets:
             return
