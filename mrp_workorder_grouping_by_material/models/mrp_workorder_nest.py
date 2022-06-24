@@ -7,6 +7,8 @@ from PyPDF2 import PdfFileMerger
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.models import expression
+from odoo.tools import safe_eval
 
 NEST_STATE = [
     ("draft", "Draft"),
@@ -286,7 +288,6 @@ class MrpWorkorderNest(models.Model):
         return base64.b64encode(content_merged_pdf)
 
     def show_worksheets(self):
-        self.ensure_one()
         binary = self.get_worksheets()
         if not binary:
             return
@@ -298,5 +299,17 @@ class MrpWorkorderNest(models.Model):
         action_dict.update({
             "name": _("Worksheets"),
             "res_id": wizard.id,
+        })
+        return action_dict
+
+    def show_nested_lines(self):
+        action = self.env.ref(
+            "mrp_workorder_grouping_by_material.mrp_workorder_nest_line_action")
+        action_dict = action and action.read()[0] or {}
+        domain = expression.AND([
+            [("nest_id", "in", self.ids)], safe_eval(action.domain or "[]")])
+        action_dict.update({
+            "domain": domain,
+            "limit": 10,
         })
         return action_dict
