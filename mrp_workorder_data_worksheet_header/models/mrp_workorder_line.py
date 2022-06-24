@@ -22,7 +22,6 @@ class MrpWorkorderLine(models.Model):
         return pdf
 
     def show_worksheets(self):
-        self.ensure_one()
         worksheets = self.get_worksheets()
         if not worksheets:
             return
