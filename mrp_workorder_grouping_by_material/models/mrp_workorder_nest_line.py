@@ -26,7 +26,9 @@ class MrpWorkorderNestLine(models.Model):
     nest_id = fields.Many2one(
         string="Nested Work Orders",
         comodel_name="mrp.workorder.nest",
-        required=True)
+        required=True,
+        ondelete="cascade",
+    )
     # related_qty_producing = fields.Float(
     #     related="workorder_id.qty_producing")
     # related_finished_lot_id = fields.Many2one(
@@ -295,12 +297,6 @@ class MrpWorkorderNestLine(models.Model):
                 workorder_id).product_id
             vals['finished_lot_id'] = self._create_assign_lot(code, product_id)
         return super().create(vals)
-
-    def unlink(self):
-        if any(self.filtered(lambda l: l.state != "draft")):
-            raise UserError(
-                _("You cannot delete nested lines that are not in draft state."))
-        return super().unlink()
 
     def _write_lot_producing_qty(self):
         for n_line in self:

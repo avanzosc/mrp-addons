@@ -160,10 +160,6 @@ class MrpWorkorderNest(models.Model):
         result = super().create(vals)
         return result
 
-    def unlink(self):
-        self.nested_line_ids.unlink()
-        return super().unlink()
-
     def _check_lot(self):
         self.ensure_one()
         if not bool(self.main_product_id.tracking == "none" or self.lot_id):
