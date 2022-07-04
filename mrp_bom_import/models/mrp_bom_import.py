@@ -102,6 +102,9 @@ class MrpBomImport(models.Model):
         compute="_compute_log_info",
     )
 
+    def _get_import_lines(self):
+        return self.mapped("bom_import_ids") | self.mapped("bom_line_import_ids")
+
     @api.depends("filename", "file_date")
     def _compute_import_name(self):
         for file_import in self:
@@ -119,7 +122,7 @@ class MrpBomImport(models.Model):
     )
     def _compute_products_count(self):
         for bom_import in self:
-            lines = bom_import.bom_import_ids | bom_import.bom_line_import_ids
+            lines = bom_import._get_import_lines()
             bom_import.products_count = len(lines.mapped("product_id"))
             bom_import.bom_count = len(lines.mapped("bom_id"))
 
@@ -131,7 +134,7 @@ class MrpBomImport(models.Model):
     )
     def _compute_state(self):
         for bom_import in self:
-            lines = bom_import.bom_import_ids | bom_import.bom_line_import_ids
+            lines = bom_import._get_import_lines()
             line_states = lines.mapped("state")
             if line_states and any([state == "error" for state in line_states]):
                 bom_import.state = "error"
@@ -150,7 +153,7 @@ class MrpBomImport(models.Model):
     )
     def _compute_log_info(self):
         for bom_import in self:
-            lines = bom_import.bom_import_ids | bom_import.bom_line_import_ids
+            lines = bom_import._get_import_lines()
             logged_lines = lines.filtered("log_info")
             if logged_lines:
                 bom_import.log_info = "\n".join(logged_lines.mapped("log_info"))
@@ -160,10 +163,10 @@ class MrpBomImport(models.Model):
     def action_bom_import_products(self):
         action = self.env.ref("product.product_normal_action")
         action_dict = action and action.read()[0]
-        lines = self.mapped("bom_import_ids") | self.mapped("bom_line_import_ids")
+        lines = self._get_import_lines()
         domain = expression.AND(
             [
-                [("id", "in", lines.mapepd("product_id").ids)],
+                [("id", "in", lines.mapped("product_id").ids)],
                 safe_eval(action.domain or "[]"),
             ]
         )
@@ -173,7 +176,7 @@ class MrpBomImport(models.Model):
     def action_bom_import_boms(self):
         action = self.env.ref("mrp.mrp_bom_form_action")
         action_dict = action and action.read()[0]
-        lines = self.mapped("bom_import_ids") | self.mapped("bom_line_import_ids")
+        lines = self._get_import_lines()
         domain = expression.AND(
             [
                 [("id", "in", lines.mapped("bom_id").ids)],
@@ -185,7 +188,7 @@ class MrpBomImport(models.Model):
 
     def action_import_bom(self):
         self.ensure_one()
-        (self.mapped("bom_import_ids") | self.mapped("bom_line_import_ids")).unlink()
+        (self._get_import_lines()).unlink()
         book = base64.decodebytes(self.data)
         reader = xlrd.open_workbook(file_contents=book)
         try:
@@ -233,18 +236,44 @@ class MrpBomImport(models.Model):
         return values
 
     def action_validate_lines(self):
-        lines = (
-            self.mapped("bom_import_ids") | self.mapped("bom_line_import_ids")
-        ).filtered(lambda x: x.state not in ("done", "pass"))
+        lines = (self._get_import_lines()).filtered(
+            lambda x: x.state not in ("done", "pass")
+        )
         lines.filtered(lambda l: not l.bom_code).action_validate_lines()
         lines.filtered("bom_code").action_validate_lines()
 
     def action_process_lines(self):
-        lines = (
-            self.mapped("bom_import_ids") | self.mapped("bom_line_import_ids")
-        ).filtered(lambda x: x.state == "pass")
+        lines = (self._get_import_lines()).filtered(lambda x: x.state == "pass")
         lines.filtered(lambda l: not l.bom_code).action_process_lines()
         lines.filtered("bom_code").action_process_lines()
+
+    def button_open_bom_import_line(self):
+        self.ensure_one()
+        return {
+            "name": _("BoM Import Lines"),
+            "type": "ir.actions.act_window",
+            "res_model": self.bom_import_ids._name,
+            "view_mode": "tree,form",
+            "target": "current",
+            "domain": [("id", "in", self.bom_import_ids.ids)],
+            "context": {
+                "default_bom_import_id": self.id,
+            }
+        }
+
+    def button_open_bom_component_import_line(self):
+        self.ensure_one()
+        return {
+            "name": _("Component Import Lines"),
+            "type": "ir.actions.act_window",
+            "res_model": self.bom_line_import_ids._name,
+            "view_mode": "tree,form",
+            "target": "current",
+            "domain": [("id", "in", self.bom_line_import_ids.ids)],
+            "context": {
+                "default_bom_line_import_id": self.id,
+            }
+        }
 
 
 class MrpBomLineImport(models.Model):
