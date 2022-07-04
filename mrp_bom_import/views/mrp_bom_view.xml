@@ -41,6 +41,20 @@
             </header>
             <sheet>
                 <div class="oe_button_box" name="button_box">
+                        <button
+              string="BoM Import Lines"
+              type="object"
+              name="button_open_bom_import_line"
+              class="oe_stat_button"
+              icon="fa-bars"
+            />
+                        <button
+              string="Component Import Lines"
+              type="object"
+              name="button_open_bom_component_import_line"
+              class="oe_stat_button"
+              icon="fa-bars"
+            />
                     <button
               class="oe_stat_button"
               type="object"
@@ -90,10 +104,7 @@
                         <field name="bom_import_ids" />
                         <field name="bom_line_import_ids" />
                     </page>
-                    <page
-              string="Log"
-              attrs="{'invisible': [('log_info','=','')]}"
-            >
+                    <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
                     </page>
                 </notebook>
