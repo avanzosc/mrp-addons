@@ -7,7 +7,6 @@
     "depends": [
         "mrp",
         "mrp_stock_usability",
-        "mrp_workorder_consume",
         "product_expiry",
         "pdf_previewer",
     ],

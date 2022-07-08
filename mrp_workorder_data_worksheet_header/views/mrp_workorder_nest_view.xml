@@ -17,19 +17,6 @@
           attrs="{'invisible': [('show_worksheet','=',False)]}"
         />
             </button>
-            <xpath
-        expr="//field[@name='nested_line_ids']/tree//field[@name='working_state']"
-        position="after"
-      >
-                <button
-          name="show_worksheets"
-          type="object"
-          string="Print"
-          icon="fa-print"
-          context="{'print': True}"
-          attrs="{'invisible': [('worksheet','=',False)]}"
-        />
-            </xpath>
         </field>
     </record>
 

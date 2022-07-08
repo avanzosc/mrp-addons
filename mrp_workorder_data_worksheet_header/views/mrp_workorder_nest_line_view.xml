@@ -19,4 +19,42 @@
             </button>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="mrp_workorder_nest_line_field_view_tree">
+        <field name="model">mrp.workorder.nest.line</field>
+        <field
+      name="inherit_id"
+      ref="mrp_workorder_grouping_by_material.mrp_workorder_nest_line_field_view_tree"
+    />
+        <field name="arch" type="xml">
+            <button name="show_worksheets" position="after">
+                <button
+          name="show_worksheets"
+          type="object"
+          string="Print"
+          icon="fa-print"
+          context="{'print': True}"
+          attrs="{'invisible': [('worksheet','=',False)]}"
+        />
+            </button>
+        </field>
+    </record>
+
+    <record id="print_nest_line_worksheet_server_action" model="ir.actions.server">
+        <field name="name">Print Worksheet</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field
+      name="model_id"
+      ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line"
+    />
+        <field
+      name="binding_model_id"
+      ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line"
+    />
+        <field name="binding_view_types">list</field>
+        <field name="code">
+            action = records.with_context(print=True).show_worksheets()
+        </field>
+    </record>
 </odoo>

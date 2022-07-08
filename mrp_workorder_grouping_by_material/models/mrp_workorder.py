@@ -51,7 +51,7 @@ class MrpWorkorder(models.Model):
     # finished_qty_nested = fields.Float(
     #     string="Finished Nested Quantity",
     #     compute="_compute_nested",)
-    # store=True)
+    #     store=True)
     nesting_required = fields.Boolean(
         string="Nesting Required", related="workcenter_id.nesting_required", store=True
     )
@@ -130,6 +130,12 @@ class MrpWorkorder(models.Model):
         if not from_nest and self.workcenter_id.nesting_required:
             raise exceptions.UserError(_("The workcenter is 'nesting_required'"))
         return super().record_production()
+
+    def post_inventory(self):
+        from_nest = self.env.context.get("from_nest")
+        if not from_nest and any(self.mapped("workcenter_id.nesting_required")):
+            raise exceptions.UserError(_("The workcenter is 'nesting_required'"))
+        return super().post_inventory()
 
     def button_pending(self):
         from_nest = self.env.context.get("from_nest")

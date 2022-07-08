@@ -15,11 +15,6 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
         route_model = cls.env["mrp.routing"]
         workcenter_model = cls.env["mrp.workcenter"]
         production_model = cls.env["mrp.production"]
-        partner = cls.env["res.partner"].create(
-            {
-                "name": "Test Partner",
-            }
-        )
         unit_id = cls.env.ref("uom.product_uom_unit")
         cls.man_product = product_obj.create(
             {
