@@ -4,10 +4,14 @@
         <field name="model">mrp.workorder.nest.line</field>
         <field name="arch" type="xml">
             <search>
-                <field name="nest_id"/>
+                <field name="nest_id" />
                 <group expand="1" string="Group By">
-                    <filter name="nest_id" string="Nested Work Order" domain="[]"
-                            context="{'group_by': 'nest_id'}"/>
+                    <filter
+            name="nest_id"
+            string="Nested Work Order"
+            domain="[]"
+            context="{'group_by': 'nest_id'}"
+          />
                 </group>
             </search>
         </field>
@@ -16,48 +20,54 @@
     <record id="mrp_workorder_nest_line_view_tree" model="ir.ui.view">
         <field name="model">mrp.workorder.nest.line</field>
         <field name="arch" type="xml">
-            <tree editable="top"
-                  decoration-success="ok_line"
-                  decoration-danger="working_state == 'blocked'"
-                  decoration-muted="state == 'cancel'">
+            <tree
+        editable="top"
+        decoration-success="ok_line"
+        decoration-danger="working_state == 'blocked'"
+        decoration-muted="state == 'cancel'"
+      >
 <!--                <button name="open_line" type="object" string="Open Line" icon="fa-bars"/>-->
                 <field name="nest_id" />
                 <field name="ok_line" invisible="True" />
-                <field name="possible_workorder_ids" invisible="1"/>
-                <field name="workorder_id"
-                       options="{'no_create': True}"
-                       domain="[('id', 'in', possible_workorder_ids)]"/>
+                <field name="possible_workorder_ids" invisible="1" />
+                <field
+          name="workorder_id"
+          options="{'no_create': True}"
+          domain="[('id', 'in', possible_workorder_ids)]"
+        />
 <!--                <button name="open_workorder_view"-->
 <!--                        type="object"-->
 <!--                        string="Open Workorder"-->
 <!--                        icon="fa-external-link" />-->
-                <field name="date_planned_start"
-                       widget="date"/>
+                <field name="date_planned_start" widget="date" />
                 <field name="worksheet" invisible="True" />
 <!--                <button name="show_worksheets" type="object"-->
 <!--                        string="Show Worksheets"-->
 <!--                        icon="fa-archive"-->
 <!--                        attrs="{'invisible': [('worksheet','=',False)]}"/>-->
-                <field name="state" readonly="1"/>
-                <field name="product_id" readonly="1"/>
+                <field name="state" readonly="1" />
+                <field name="product_id" readonly="1" />
                 <field name="product_uom_id" optional="hide" />
-                <field name="product_tracking"
-                       invisible="True" />
-                <field name="qty_producing"
-                       attrs="{'readonly': ['|', ('product_tracking', '=', 'serial'), ('state', 'in', ('done', 'cancel'))]}"/>
-                <field name="finished_lot_id"
-                       string="Product to Produce Lot"
-                       context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
-                <field name="qty_remaining" readonly="1"/>
-                <field name="qty_produced" readonly="1"/>
-                <field name="qty_production" readonly="1"/>
-                <field name="workcenter_id" invisible="1"/>
-                <field name="production_id" invisible="1"/>
-                <field name="working_state" invisible="1"/>
+                <field name="product_tracking" invisible="True" />
+                <field
+          name="qty_producing"
+          attrs="{'readonly': ['|', ('product_tracking', '=', 'serial'), ('state', 'in', ('done', 'cancel'))]}"
+        />
+                <field
+          name="finished_lot_id"
+          string="Product to Produce Lot"
+          context="{'default_product_id': product_id, 'default_company_id': company_id}"
+        />
+                <field name="qty_remaining" readonly="1" />
+                <field name="qty_produced" readonly="1" />
+                <field name="qty_production" readonly="1" />
+                <field name="workcenter_id" invisible="1" />
+                <field name="production_id" invisible="1" />
+                <field name="working_state" invisible="1" />
                 <field name="is_produced" invisible="1" />
                 <field name="is_user_working" invisible="1" />
                 <field name="production_state" invisible="1" />
-                <field name="company_id" invisible="1"/>
+                <field name="company_id" invisible="1" />
                 <field name="workorder_state" optional="hide" />
 <!--                                <button name="button_finish"-->
 <!--                                        type="object"-->
@@ -126,58 +136,86 @@
 <!--                                            attrs="{'invisible': ['|', '|', '|', ('production_state', '=', 'done'), ('working_state', '=', 'blocked'), ('is_user_working', '=', True), ('state', '!=', 'progress')]}"/>-->
 <!--                                    <button name="button_scrap" type="object" string="Scrap"-->
 <!--                                            attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>-->
-                    <button name="mrp.act_mrp_block_workcenter_wo" type="action"
-                            context="{'default_workcenter_id': workcenter_id}" string="Block"
-                            class="btn-danger"
-                            attrs="{'invisible': ['|', '|', ('working_state', '=', 'blocked'), ('state', 'in', ('done', 'pending', 'ready', 'cancel')), ('is_user_working', '=', False)]}"/>
-                    <button name="button_unblock" type="object"
-                            string="Unblock" class="btn-danger"
-                            attrs="{'invisible': [('working_state', '!=', 'blocked')]}"/>
-                    <button name="button_quality_alert" type="object" string="Quality Alert"
-                            attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"/>
-                    <field name="state" widget="statusbar"
-                           statusbar_visible="pending,ready,progress,done"/>
+                    <button
+            name="mrp.act_mrp_block_workcenter_wo"
+            type="action"
+            context="{'default_workcenter_id': workcenter_id}"
+            string="Block"
+            class="btn-danger"
+            attrs="{'invisible': ['|', '|', ('working_state', '=', 'blocked'), ('state', 'in', ('done', 'pending', 'ready', 'cancel')), ('is_user_working', '=', False)]}"
+          />
+                    <button
+            name="button_unblock"
+            type="object"
+            string="Unblock"
+            class="btn-danger"
+            attrs="{'invisible': [('working_state', '!=', 'blocked')]}"
+          />
+                    <button
+            name="button_quality_alert"
+            type="object"
+            string="Quality Alert"
+            attrs="{'invisible': [('state', 'in', ('done', 'cancel'))]}"
+          />
+                    <field
+            name="state"
+            widget="statusbar"
+            statusbar_visible="pending,ready,progress,done"
+          />
                 </header>
                 <sheet>
                     <notebook>
                         <page name="data" string="Data">
                     <group>
                         <group>
-                            <field name="nest_id" invisible="1"/>
-                            <field name="possible_workorder_ids"
-                                   string="Possible Workorders"
-                                   invisible="1"/>
-                            <field name="workorder_id"
-                                   options="{'no_create': True}"
-                                   domain="[('id', 'in', possible_workorder_ids)]"/>
-                            <field name="name" readonly="1"/>
-                            <field name="product_id" readonly="1"/>
-                            <field name="qty_producing"/>
-                            <field name="company_id" invisible="1"/>
-                            <field name="finished_lot_id"
-                                   string="Product to Produce Lot"
-                                   context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
-                            <field name="qty_produced" readonly="1"/>
-                            <field name="qty_remaining" readonly="1"/>
-                            <field name="qty_production" readonly="1"/>
+                            <field name="nest_id" invisible="1" />
+                            <field
+                    name="possible_workorder_ids"
+                    string="Possible Workorders"
+                    invisible="1"
+                  />
+                            <field
+                    name="workorder_id"
+                    options="{'no_create': True}"
+                    domain="[('id', 'in', possible_workorder_ids)]"
+                  />
+                            <field name="name" readonly="1" />
+                            <field name="product_id" readonly="1" />
+                            <field name="qty_producing" />
+                            <field name="company_id" invisible="1" />
+                            <field
+                    name="finished_lot_id"
+                    string="Product to Produce Lot"
+                    context="{'default_product_id': product_id, 'default_company_id': company_id}"
+                  />
+                            <field name="qty_produced" readonly="1" />
+                            <field name="qty_remaining" readonly="1" />
+                            <field name="qty_production" readonly="1" />
                         </group>
                         <group>
-                            <field name="product_uom_id" readonly="1"/>
-                            <field name="workcenter_id" readonly="1"/>
-                            <field name="production_id" readonly="1"/>
-                            <field name="date_planned_start" readonly="1"/>
-                            <field name="working_state" invisible="1"/>
-                            <field name="production_state" invisible="1"/>
-                            <field name="is_user_working" invisible="1"/>
-                            <field name="is_produced" invisible="1"/>
-                            <field name="ok_line" nolabel="1" readonly="1"/>
-                            <button name="button_change_ok_line" type="object" string="OK line"/>
+                            <field name="product_uom_id" readonly="1" />
+                            <field name="workcenter_id" readonly="1" />
+                            <field name="production_id" readonly="1" />
+                            <field name="date_planned_start" readonly="1" />
+                            <field name="working_state" invisible="1" />
+                            <field name="production_state" invisible="1" />
+                            <field name="is_user_working" invisible="1" />
+                            <field name="is_produced" invisible="1" />
+                            <field name="ok_line" nolabel="1" readonly="1" />
+                            <button
+                    name="button_change_ok_line"
+                    type="object"
+                    string="OK line"
+                  />
                         </group>
                     </group>
                         </page>
-                        <page name="worksheet" string="Work Instruction"
-                              attrs="{'invisible': [('worksheet', '=', False)]}">
-                            <field name="worksheet" widget="pdf_viewer"/>
+                        <page
+              name="worksheet"
+              string="Work Instruction"
+              attrs="{'invisible': [('worksheet', '=', False)]}"
+            >
+                            <field name="worksheet" widget="pdf_viewer" />
                         </page>
                     </notebook>
                 </sheet>
@@ -191,12 +229,16 @@
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <field name="state" position="before">
-                <button name="button_get_previous_line"
-                        type="object"
-                        icon="fa-chevron-left"/>
-                <button name="button_get_next_line"
-                        type="object"
-                        icon="fa-chevron-right"/>
+                <button
+          name="button_get_previous_line"
+          type="object"
+          icon="fa-chevron-left"
+        />
+                <button
+          name="button_get_next_line"
+          type="object"
+          icon="fa-chevron-right"
+        />
             </field>
         </field>
     </record>
@@ -217,20 +259,27 @@
         <field name="res_model">mrp.workorder.nest.line</field>
         <field name="binding_view_types">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="mrp_workorder_nest_line_view_search"/>
+        <field name="search_view_id" ref="mrp_workorder_nest_line_view_search" />
     </record>
 
-    <menuitem action="mrp_workorder_nest_line_action"
-              id="menu_mrp_workorder_nest_line"
-              parent="nest_app_menu"/>
+    <menuitem
+    action="mrp_workorder_nest_line_action"
+    id="menu_mrp_workorder_nest_line"
+    parent="nest_app_menu"
+  />
 
-    <record id="print_nest_line_worksheet_server_action"
-            model="ir.actions.server">
+    <record id="print_nest_line_worksheet_server_action" model="ir.actions.server">
         <field name="name">Print Worksheet</field>
         <field name="type">ir.actions.server</field>
         <field name="state">code</field>
-        <field name="model_id" ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line"/>
-        <field name="binding_model_id" ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line"/>
+        <field
+      name="model_id"
+      ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line"
+    />
+        <field
+      name="binding_model_id"
+      ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line"
+    />
         <field name="binding_view_types">list</field>
         <field name="code">
             action = records.with_context(print=True).show_worksheets()

@@ -1,29 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record model="ir.ui.view" id="nest_workorder_view_tree">
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view_inherit" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='state']" position="before">
-                <field name="nested_ids" widget="many2many_tags"/>
+                <field name="nested_ids" widget="many2many_tags" />
             </xpath>
         </field>
     </record>
 
     <record model="ir.ui.view" id="main_product_workorder_view_search">
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.view_mrp_production_workorder_form_view_filter" />
+        <field
+      name="inherit_id"
+      ref="mrp.view_mrp_production_workorder_form_view_filter"
+    />
         <field name="arch" type="xml">
             <field name="production_id" position="after">
                 <field name="main_product_id" />
             </field>
             <filter name="late" position="after">
-                <filter string="Nesting Required" name="nesting_required"
-                        domain="[('nesting_required', '=', True)]" />
+                <filter
+          string="Nesting Required"
+          name="nesting_required"
+          domain="[('nesting_required', '=', True)]"
+        />
             </filter>
             <filter name="scheduled_month" position="after">
-                <filter string="Main Product" name="main_product_id"
-                        domain="[]" context="{'group_by':'main_product_id'}"/>
+                <filter
+          string="Main Product"
+          name="main_product_id"
+          domain="[]"
+          context="{'group_by':'main_product_id'}"
+        />
             </filter>
         </field>
     </record>
@@ -36,15 +46,26 @@
                 <field name="main_product_id" />
             </field>
             <filter name="late" position="after">
-                <filter string="Nesting Required" name="nesting_required"
-                        domain="[('nesting_required', '=', True)]" />
+                <filter
+          string="Nesting Required"
+          name="nesting_required"
+          domain="[('nesting_required', '=', True)]"
+        />
             </filter>
             <filter name="date_start_filter" position="after">
                 <separator />
-                <filter string="Main Product" name="main_product_id"
-                        domain="[]" context="{'group_by':'main_product_id'}"/>
-                <filter string="Nest Status" name="nested_status"
-                        domain="[]" context="{'group_by':'nested_status'}" />
+                <filter
+          string="Main Product"
+          name="main_product_id"
+          domain="[]"
+          context="{'group_by':'main_product_id'}"
+        />
+                <filter
+          string="Nest Status"
+          name="nested_status"
+          domain="[]"
+          context="{'group_by':'nested_status'}"
+        />
             </filter>
         </field>
     </record>
@@ -54,20 +75,33 @@
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
-                <button class="oe_stat_button" name="open_nest" type="object" icon="fa-archive" attrs="{'invisible': [('nested_count', '=', 0)]}">
+                <button
+          class="oe_stat_button"
+          name="open_nest"
+          type="object"
+          icon="fa-archive"
+          attrs="{'invisible': [('nested_count', '=', 0)]}"
+        >
                     <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_value"><field name="nested_count"/></span>
+                        <span class="o_stat_value"><field name="nested_count" /></span>
                         <span class="o_stat_text">Nested In</span>
                     </div>
                 </button>
             </div>
-            <xpath expr="//page[@name='workorder_page_misc']//field[@name='workcenter_id']" position="after">
+            <xpath
+        expr="//page[@name='workorder_page_misc']//field[@name='workcenter_id']"
+        position="after"
+      >
                 <field name="nesting_required" invisible="True" />
-                <field name="nested_ids"
-                       widget="many2many_tags"
-                       attrs="{'invisible': [('nesting_required', '!=', True)]}" />
-                <field name="qty_nested"
-                       attrs="{'invisible': [('nesting_required', '!=', True)]}" />
+                <field
+          name="nested_ids"
+          widget="many2many_tags"
+          attrs="{'invisible': [('nesting_required', '!=', True)]}"
+        />
+                <field
+          name="qty_nested"
+          attrs="{'invisible': [('nesting_required', '!=', True)]}"
+        />
             </xpath>
         </field>
     </record>
