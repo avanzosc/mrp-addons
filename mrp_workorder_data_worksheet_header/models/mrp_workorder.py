@@ -1,10 +1,12 @@
 # Copyright 2021 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, models
 from base64 import b64decode, b64encode
 from io import BytesIO
 from logging import getLogger
+
 from reportlab.lib.pagesizes import A4 as A4
+
+from odoo import _, models
 
 logger = getLogger(__name__)
 
@@ -14,7 +16,7 @@ try:
 except ImportError:
     pass
 try:
-    from PyPDF2 import PdfFileWriter, PdfFileReader  # pylint: disable=W0404
+    from PyPDF2 import PdfFileReader, PdfFileWriter  # pylint: disable=W0404
 except ImportError:
     logger.debug("Can not import PyPDF2")
 
@@ -26,7 +28,8 @@ def print_report(records, qweb_name):
     width, height = A4
     for record in records:
         content, content_type = records.env.ref(qweb_name).render_qweb_pdf(
-            res_ids=record.id)
+            res_ids=record.id
+        )
 
         content_pdf = PdfFileReader(BytesIO(content))
         if record._name == "mrp.workorder":
@@ -37,9 +40,7 @@ def print_report(records, qweb_name):
             worksheet = record.workorder_id.worksheet
         else:
             break
-        pdf_worksheet = PdfFileReader(
-            BytesIO(b64decode(worksheet)),
-            strict=False)
+        pdf_worksheet = PdfFileReader(BytesIO(b64decode(worksheet)), strict=False)
 
         for page in pdf_worksheet.pages:
             new_page = pdf.addBlankPage(width, height)
@@ -61,7 +62,8 @@ class MrpWorkorder(models.Model):
         records = self.filtered(lambda r: r.worksheet)
         return print_report(
             records,
-            "mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report")
+            "mrp_workorder_data_worksheet_header.mrp_workorder_worksheet_report",
+        )
 
     def get_worksheets(self):
         pdf = self.print_report()
@@ -71,20 +73,24 @@ class MrpWorkorder(models.Model):
 
     def show_worksheets(self):
         if self.env.context.get("print_nest", False):
-            worksheets = self.mapped(
-                "finished_workorder_line_ids").get_worksheets()
+            worksheets = self.mapped("finished_workorder_line_ids").get_worksheets()
         else:
             worksheets = self.get_worksheets()
         if not worksheets:
             return
-        wizard = self.env["binary.container"].create({
-            "binary_field": (
-                worksheets[0] if isinstance(worksheets, list) else worksheets),
-        })
+        wizard = self.env["binary.container"].create(
+            {
+                "binary_field": (
+                    worksheets[0] if isinstance(worksheets, list) else worksheets
+                ),
+            }
+        )
         action = self.env.ref("pdf_previewer.binary_container_action")
         action_dict = action and action.read()[0] or {}
-        action_dict.update({
-            "name": _("Worksheets"),
-            "res_id": wizard.id,
-        })
+        action_dict.update(
+            {
+                "name": _("Worksheets"),
+                "res_id": wizard.id,
+            }
+        )
         return action_dict
