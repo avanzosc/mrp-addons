@@ -10,8 +10,8 @@ class MultipleCopy(models.TransientModel):
     copy_number = fields.Integer(string="Number of Copies", default="1")
 
     def action_make_copies(self):
-        nest_ids = self._context.get('active_ids')
-        nests = self.env['mrp.workorder.nest'].browse(nest_ids)
+        nest_ids = self._context.get("active_ids")
+        nests = self.env["mrp.workorder.nest"].browse(nest_ids)
         for nest in nests:
             for i in range(self.copy_number):
                 nest.copy()
