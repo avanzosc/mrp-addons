@@ -18,7 +18,7 @@ def migrate(env, version):
     openupgrade.logged_query(
         env.cr,
         """
-        ALTER TABLE 
+        ALTER TABLE
             mrp_workorder
         ADD COLUMN
             nested_count int,
@@ -34,7 +34,7 @@ def migrate(env, version):
             workorder_id IS NULL
         OR
             nest_id IS NULL;
-        """
+        """,
     )
     openupgrade.logged_query(
         env.cr,
@@ -42,13 +42,13 @@ def migrate(env, version):
         INSERT INTO
             mrp_workorder_mrp_workorder_nest_rel
                 (mrp_workorder_id, mrp_workorder_nest_id)
-        SELECT 
+        SELECT
             workorder_id,
             nest_id
         FROM
             mrp_workorder_nest_line
         ON CONFLICT DO NOTHING;
-        """
+        """,
     )
     openupgrade.logged_query(
         env.cr,
@@ -59,11 +59,11 @@ def migrate(env, version):
             nested_count = (
                 SELECT
                     COUNT(DISTINCT(mrp_workorder_nest_id))
-                FROM 
+                FROM
                     mrp_workorder_mrp_workorder_nest_rel nest
                 WHERE
-                    nest.mrp_workorder_id = wo.id); 
-        """
+                    nest.mrp_workorder_id = wo.id);
+        """,
     )
     openupgrade.logged_query(
         env.cr,
@@ -78,5 +78,5 @@ def migrate(env, version):
                     mrp_workorder_nest_line line
                 WHERE
                     line.workorder_id = wo.id);
-        """
+        """,
     )
