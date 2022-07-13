@@ -9,8 +9,7 @@ from odoo.tools import safe_eval
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
-    nested_count = fields.Integer(
-        compute="_compute_nested")
+    nested_count = fields.Integer(compute="_compute_nested")
 
     @api.depends("workorder_ids.nested_ids")
     def _compute_nested(self):
@@ -22,9 +21,11 @@ class MrpProduction(models.Model):
         self.ensure_one()
         nested = self.mapped("workorder_ids.nested_ids")
         action = self.env.ref(
-            "mrp_workorder_grouping_by_material.mrp_workorder_nest_action")
+            "mrp_workorder_grouping_by_material.mrp_workorder_nest_action"
+        )
         action_dict = action and action.read()[0] or {}
-        domain = expression.AND([
-            [("id", "in", nested.ids)], safe_eval(action.domain or "[]")])
+        domain = expression.AND(
+            [[("id", "in", nested.ids)], safe_eval(action.domain or "[]")]
+        )
         action_dict.update({"domain": domain})
         return action_dict

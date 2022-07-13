@@ -27,8 +27,6 @@
         "wizard/nested_new_line_view.xml",
         "wizard/multiple_copy_view.xml",
     ],
-    "external_dependencies": {
-        "python": ["PyPDF2"]
-    },
+    "external_dependencies": {"python": ["PyPDF2"]},
     "installable": True,
 }

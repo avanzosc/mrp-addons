@@ -2,12 +2,18 @@
 <odoo>
     <record id="mrp_production_view_form" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
-                <button class="oe_stat_button" name="open_nest" type="object" icon="fa-archive" attrs="{'invisible': [('nested_count', '=', 0)]}">
+                <button
+          class="oe_stat_button"
+          name="open_nest"
+          type="object"
+          icon="fa-archive"
+          attrs="{'invisible': [('nested_count', '=', 0)]}"
+        >
                     <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_value"><field name="nested_count"/></span>
+                        <span class="o_stat_value"><field name="nested_count" /></span>
                         <span class="o_stat_text">Nested In</span>
                     </div>
                 </button>
