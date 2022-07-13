@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record model="ir.ui.view" id="multiple_copy_form">
         <field name="name">multiple.copy.form</field>
@@ -6,11 +6,15 @@
         <field name="arch" type="xml">
             <form string="Multiple Copies">
                 <group>
-                    <field name="copy_number" required="1"/>
+                    <field name="copy_number" required="1" />
                 </group>
                 <footer>
-                    <button string="Done" name="action_make_copies" type="object"
-                            class="btn-primary"/>
+                    <button
+            string="Done"
+            name="action_make_copies"
+            type="object"
+            class="btn-primary"
+          />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
@@ -20,7 +24,10 @@
     <record id="wizard_multiple_nest_copy" model="ir.actions.act_window">
         <field name="name">Multiple Copy</field>
         <field name="res_model">multiple.copy</field>
-        <field name="binding_model_id" ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest" />
+        <field
+      name="binding_model_id"
+      ref="mrp_workorder_grouping_by_material.model_mrp_workorder_nest"
+    />
         <field name="binding_view_types">list,form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="multiple_copy_form" />

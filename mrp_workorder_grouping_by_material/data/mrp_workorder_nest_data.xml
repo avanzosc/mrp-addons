@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <record id="nested_workorder_code_seq" model="ir.sequence">
         <field name="code">mrp.workorder.nest</field>

@@ -1,12 +1,12 @@
 # Copyright 2021 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+from odoo.tests import tagged
+
 from odoo.addons.mrp.test.common import TestMrpCommon
-from odoo.tests import common, tagged
 
 
 @tagged("post_install", "-at_install")
 class TestMrpWorkorderGroupingMaterial(TestMrpCommon):
-
     def test_nest_creation(self):
         self.workcenter_1.nesting_required = True
         self.production_id.onchange_product_id()
@@ -15,8 +15,11 @@ class TestMrpWorkorderGroupingMaterial(TestMrpCommon):
         self.production_id.action_confirm()
         self.production_id.button_plan()
         workorders = self.env["mrp.workorder"].search([])
-        wiz_nest = self.env["nested.new.line"].with_context(
-            active_ids=workorders.ids, active_model="mrp.workorder").create({})
+        wiz_nest = (
+            self.env["nested.new.line"]
+            .with_context(active_ids=workorders.ids, active_model="mrp.workorder")
+            .create({})
+        )
         wiz_nest.onchange_product_id()
         wiz_nest.action_done()
         nest = self.env["mrp.workorder.nest"].search([])
@@ -30,4 +33,3 @@ class TestMrpWorkorderGroupingMaterial(TestMrpCommon):
         self.assertEquals(nest.state, "blocked")
         nest.nest_unblocked()
         self.assertEquals(nest.state, "progress")
-
