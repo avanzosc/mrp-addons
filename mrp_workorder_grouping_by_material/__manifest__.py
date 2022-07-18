@@ -12,7 +12,7 @@
         "pdf_previewer",
     ],
     "author": "AvanzOSC",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing",
     "data": [
         "data/mrp_workorder_nest_data.xml",
@@ -27,8 +27,6 @@
         "wizard/nested_new_line_view.xml",
         "wizard/multiple_copy_view.xml",
     ],
-    "external_dependencies": {
-        "python": ["PyPDF2"]
-    },
+    "external_dependencies": {"python": ["PyPDF2"]},
     "installable": True,
 }

@@ -7,8 +7,7 @@ class StockProductionLot(models.Model):
     _inherit = "stock.production.lot"
 
     product_life_alert = fields.Boolean(
-        string="Product Life Alert",
-        compute="_compute_product_life_alert"
+        string="Product Life Alert", compute="_compute_product_life_alert"
     )
 
     @api.depends("alert_date")
@@ -16,4 +15,5 @@ class StockProductionLot(models.Model):
         current_date = fields.Datetime.now()
         for lot in self:
             lot.product_life_alert = (
-                lot.alert_date and lot.alert_date <= current_date or False)
+                lot.alert_date and lot.alert_date <= current_date or False
+            )

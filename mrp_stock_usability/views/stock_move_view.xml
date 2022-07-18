@@ -3,20 +3,26 @@
     <record id="stock_move_usability_view_tree" model="ir.ui.view">
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="mrp.view_stock_move_raw_tree" />
-        <field name="groups_id"
-               eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]" />
+        <field
+      name="groups_id"
+      eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]"
+    />
         <field name="arch" type="xml">
             <field name="group_id" position="after">
-                <field name="unreserve_visible" invisible="True"/>
-                <button name="button_assign"
-                        string="Check availability"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}"/>
-                <button name="button_unreserve"
-                        type="object"
-                        string="Unreserve"
-                        attrs="{'invisible':[('unreserve_visible','=',False)]}"/>
+                <field name="unreserve_visible" invisible="True" />
+                <button
+          name="button_assign"
+          string="Check availability"
+          type="object"
+          class="oe_highlight"
+          attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}"
+        />
+                <button
+          name="button_unreserve"
+          type="object"
+          string="Unreserve"
+          attrs="{'invisible':[('unreserve_visible','=',False)]}"
+        />
             </field>
         </field>
     </record>
@@ -25,10 +31,15 @@
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="mrp.view_stock_move_lots" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='move_line_ids']/tree//field[@name='lot_id']"
-                   position="attributes">
-                <attribute name="context" operation="python_dict"
-                           key="default_company_id">
+            <xpath
+        expr="//field[@name='move_line_ids']/tree//field[@name='lot_id']"
+        position="attributes"
+      >
+                <attribute
+          name="context"
+          operation="python_dict"
+          key="default_company_id"
+        >
                     parent.company_id
                 </attribute>
             </xpath>
@@ -37,25 +48,35 @@
 
     <record id="stock_move_usability_view_form" model="ir.ui.view">
         <field name="model">stock.move</field>
+        <field name="priority">100</field>
         <field name="inherit_id" ref="stock_move_view_form" />
-        <field name="groups_id"
-               eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]" />
+        <field
+      name="groups_id"
+      eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]"
+    />
         <field name="arch" type="xml">
             <field name="state" position="replace">
                 <header>
-                    <field name="unreserve_visible" invisible="True"/>
-                    <button name="button_assign"
-                            string="Check availability"
-                            type="object"
-                            class="oe_highlight"
-                            attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}" />
-                    <button name="button_unreserve"
-                            type="object"
-                            string="Unreserve"
-                            attrs="{'invisible':[('unreserve_visible','=',False)]}"/>
-                    <field name="state" widget="statusbar"
-                           statusbar_visible="draft,confirmed,assigned,done"
-                           readonly="1" />
+                    <field name="unreserve_visible" invisible="True" />
+                    <button
+            name="button_assign"
+            string="Check availability"
+            type="object"
+            class="oe_highlight"
+            attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}"
+          />
+                    <button
+            name="button_unreserve"
+            type="object"
+            string="Unreserve"
+            attrs="{'invisible':[('unreserve_visible','=',False)]}"
+          />
+                    <field
+            name="state"
+            widget="statusbar"
+            statusbar_visible="draft,confirmed,assigned,done"
+            readonly="1"
+          />
                 </header>
             </field>
         </field>

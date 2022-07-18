@@ -1,28 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="workorder_data_worksheet_form" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='worksheet_type']" position="before">
-                <button name="show_worksheets"
-                        type="object"
-                        string="Print with header"
-                        context="{'print': True}" />
+                <button
+          name="show_worksheets"
+          type="object"
+          string="Print with header"
+          context="{'print': True}"
+        />
             </xpath>
-            <xpath expr="//field[@name='finished_workorder_line_ids']" position="before">
-                <button name="show_worksheets"
-                        type="object"
-                        string="Print with header"
-                        attrs="{'invisible': ['|',('finished_workorder_line_ids', '=', []),'&amp;',('worksheet', '=', False),('worksheet_google_slide', '=', False)]}"
-                        context="{'print': True, 'print_nest': True}" />
+            <xpath
+        expr="//field[@name='finished_workorder_line_ids']"
+        position="before"
+      >
+                <button
+          name="show_worksheets"
+          type="object"
+          string="Print with header"
+          attrs="{'invisible': ['|',('finished_workorder_line_ids', '=', []),'&amp;',('worksheet', '=', False),('worksheet_google_slide', '=', False)]}"
+          context="{'print': True, 'print_nest': True}"
+        />
             </xpath>
-            <xpath expr="//field[@name='finished_workorder_line_ids']/tree//field[@name='move_id']" position="after">
-                <button name="show_worksheets"
-                        type="object"
-                        string="Print"
-                        icon="fa-print"
-                        context="{'print': True}" />
+            <xpath
+        expr="//field[@name='finished_workorder_line_ids']/tree//field[@name='move_id']"
+        position="after"
+      >
+                <button
+          name="show_worksheets"
+          type="object"
+          string="Print"
+          icon="fa-print"
+          context="{'print': True}"
+        />
             </xpath>
         </field>
     </record>

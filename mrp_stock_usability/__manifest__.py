@@ -7,7 +7,7 @@
     "category": "Sales",
     "license": "AGPL-3",
     "author": "AvanzOSC",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
         "mrp",
         "base_view_inheritance_extension",
