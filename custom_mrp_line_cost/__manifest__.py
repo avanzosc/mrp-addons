@@ -12,7 +12,7 @@
         "mrp",
         "mrp_bom_line_coef",
         "mrp_production_deconstruction",
-        "custom_breeding_apps"
+        "stock_move_line_cost",
     ],
     "data": [
         "security/ir.model.access.csv",
