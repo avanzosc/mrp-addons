@@ -1,0 +1,53 @@
+<odoo>
+    <data noupdate="1">
+        <record forcecreate="True" id="enero" model="killing.cost">
+            <field name="name">Enero</field>
+            <field name="seq">1</field>
+        </record>
+        <record forcecreate="True" id="febrero" model="killing.cost">
+            <field name="name">Febrero</field>
+            <field name="seq">2</field>
+        </record>
+        <record forcecreate="True" id="marzo" model="killing.cost">
+            <field name="name">Marzo</field>
+            <field name="seq">3</field>
+        </record>
+        <record forcecreate="True" id="abril" model="killing.cost">
+            <field name="name">Abril</field>
+            <field name="seq">4</field>
+        </record>
+        <record forcecreate="True" id="mayo" model="killing.cost">
+            <field name="name">Mayo</field>
+            <field name="seq">5</field>
+        </record>
+        <record forcecreate="True" id="junio" model="killing.cost">
+            <field name="name">Junio</field>
+            <field name="seq">6</field>
+        </record>
+        <record forcecreate="True" id="julio" model="killing.cost">
+            <field name="name">Julio</field>
+            <field name="seq">7</field>
+        </record>
+        <record forcecreate="True" id="agosto" model="killing.cost">
+            <field name="name">Agosto</field>
+            <field name="seq">8</field>
+        </record>
+        <record forcecreate="True" id="septiembre" model="killing.cost">
+            <field name="name">Septiembre</field>
+            <field name="seq">9</field>
+        </record>
+        <record forcecreate="True" id="octubre" model="killing.cost">
+            <field name="name">Octubre</field>
+            <field name="seq">10</field>
+        </record>
+        <record forcecreate="True" id="noviembre" model="killing.cost">
+            <field name="name">Noviembre</field>
+            <field name="seq">11</field>
+        </record>
+        <record forcecreate="True" id="diciembre" model="killing.cost">
+            <field name="name">Diciembre</field>
+            <field name="seq">12</field>
+        </record>
+    </data>
+</odoo>
+
