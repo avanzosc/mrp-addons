@@ -7,10 +7,16 @@
                 <field name="nest_id" />
                 <group expand="1" string="Group By">
                     <filter
-            name="nest_id"
+            name="group_nest"
             string="Nested Work Order"
             domain="[]"
             context="{'group_by': 'nest_id'}"
+          />
+                    <filter
+            name="group_workorder"
+            string="Work Order"
+            domain="[]"
+            context="{'group_by': 'workorder_id'}"
           />
                 </group>
             </search>
@@ -27,19 +33,21 @@
         decoration-muted="state == 'cancel'"
       >
                 <field name="nest_id" />
-                <field name="ok_line" invisible="True" />
+                <field name="ok_line" invisible="1" />
                 <field name="possible_workorder_ids" invisible="1" />
+                <field name="main_product_id" invisible="1" />
+                <field name="workcenter_id" invisible="1" />
                 <field
           name="workorder_id"
           options="{'no_create': True}"
           domain="[('id', 'in', possible_workorder_ids)]"
         />
                 <field name="date_planned_start" widget="date" />
-                <field name="worksheet" invisible="True" />
+                <field name="worksheet" invisible="1" />
                 <field name="state" readonly="1" optional="hide" />
                 <field name="product_id" readonly="1" />
                 <field name="product_uom_id" optional="hide" />
-                <field name="product_tracking" invisible="True" />
+                <field name="product_tracking" invisible="1" />
                 <field
           name="qty_producing"
           attrs="{'readonly': ['|', ('product_tracking', '=', 'serial'), ('state', 'in', ('done', 'cancel'))]}"
@@ -133,6 +141,8 @@
                     string="Possible Workorders"
                     invisible="1"
                   />
+                            <field name="main_product_id" invisible="1" />
+                            <field name="workcenter_id" invisible="1" />
                             <field
                     name="workorder_id"
                     options="{'no_create': True}"
