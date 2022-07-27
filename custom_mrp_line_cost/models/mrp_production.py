@@ -35,9 +35,58 @@ class MrpProduction(models.Model):
         compute="_compute_canal_cost",
         store=True)
     currency_id = fields.Many2one(
-        string='Currency',
-        comodel_name='res.currency',
+        string="Currency",
+        comodel_name="res.currency",
         default=lambda self: self.env.company.currency_id.id)
+    month_id = fields.Many2one(
+        string="Month",
+        comodel_name="killing.cost",
+        compute="_compute_month_id",
+        store=True)
+    move_to_do_ids = fields.Many2many(
+        string="Moves To Do",
+        comodel_name="stock.move",
+        compute="_compute_move_to_do_ids")
+    move_line_to_do_ids = fields.Many2many(
+        string="Move Lines To Do",
+        comodel_name="stock.move.line",
+        compute="_compute_move_line_to_do_ids")
+    picking_to_do_ids = fields.Many2many(
+        string="Pickings To Do",
+        comodel_name="stock.picking",
+        compute="_compute_picking_to_do_ids")
+
+    def _compute_move_to_do_ids(self):
+        for production in self:
+            domain = [("state", "not in", ("done", "cancel")),
+                      ("date", ">=", production.date_planned_start),
+                      ("picking_code", "=", "outgoing")]
+            production.move_to_do_ids = self.env["stock.move"].search(domain)
+
+    def _compute_move_line_to_do_ids(self):
+        for production in self:
+            domain = [("state", "not in", ("done", "cancel")),
+                      ("date", ">=", production.date_planned_start),
+                      ("picking_code", "=", "outgoing")]
+            production.move_line_to_do_ids = (
+                self.env["stock.move.line"].search(domain))
+
+    def _compute_picking_to_do_ids(self):
+        for production in self:
+            domain = [("state", "not in", ("done", "cancel")),
+                      ("scheduled_date", ">=", production.date_planned_start),
+                      ("picking_type_code", "=", "outgoing")]
+            production.picking_to_do_ids = (
+                self.env["stock.picking"].search(domain))
+
+    @api.depends("date_planned_start")
+    def _compute_month_id(self):
+        for line in self:
+            if line.date_planned_start:
+                num = line.date_planned_start.month
+                month = self.env["killing.cost"].search([("seq", "=", num)], limit=1)
+                if month:
+                    line.month_id = month.id
 
     @api.depends("purchase_price", "move_line_ids", "move_line_ids.qty_done",
                  "move_line_ids.applied_price", "move_line_ids.amount")
@@ -88,12 +137,13 @@ class MrpProduction(models.Model):
     def _compute_canal_cost(self):
         for line in self:
             line.canal_cost = 0
-            canal_lines = line.move_line_ids.filtered(
-                lambda c: c.canal is True)
-            if canal_lines and sum(canal_lines.mapped("weight")) != 0:
-                line.canal_cost = sum(
-                    canal_lines.mapped("amount"))/sum(
-                        canal_lines.mapped("weight"))
+            if line.move_line_ids:
+                canal_lines = line.move_line_ids.filtered(
+                    lambda c: c.canal is True)
+                if canal_lines and sum(canal_lines.mapped("weight")) != 0:
+                    line.canal_cost = sum(
+                        canal_lines.mapped("amount"))/sum(
+                            canal_lines.mapped("qty_done"))
 
     @api.constrains(
         "move_line_ids", "move_line_ids.percentage")
@@ -105,3 +155,36 @@ class MrpProduction(models.Model):
                         "percentage")) > 100:
                     raise ValidationError(
                         _("The sum of the percentages it can't be more than 100."))
+
+    def action_view_move_to_do(self):
+        context = self.env.context.copy()
+        return {
+            "name": _("Moves To Do"),
+            "view_mode": "tree,form",
+            "res_model": "stock.move",
+            "domain": [("id", "in", self.move_to_do_ids.ids)],
+            "type": "ir.actions.act_window",
+            "context": context
+        }
+
+    def action_view_move_line_to_do(self):
+        context = self.env.context.copy()
+        return {
+            "name": _("Move Lines To Do"),
+            "view_mode": "tree,form",
+            "res_model": "stock.move.line",
+            "domain": [("id", "in", self.move_line_to_do_ids.ids)],
+            "type": "ir.actions.act_window",
+            "context": context
+        }
+
+    def action_view_picking_to_do(self):
+        context = self.env.context.copy()
+        return {
+            "name": _("Pickings To Do"),
+            "view_mode": "tree,form",
+            "res_model": "stock.picking",
+            "domain": [("id", "in", self.picking_to_do_ids.ids)],
+            "type": "ir.actions.act_window",
+            "context": context
+        }

@@ -45,13 +45,12 @@ class StockMoveLine(models.Model):
                  "move_id.bom_line_id.coefficient", "move_id.bom_line_id.cost",
                  "move_id.bom_line_id.expense_kg", "production_id",
                  "production_id.purchase_unit_price",
-                 "production_id.date_planned_start")
+                 "production_id.month_id", "production_id.month_id.cost")
     def _compute_base_price(self):
         for line in self:
             if line.production_id:
                 cost = line.move_id.bom_line_id.coefficient * (
                     line.production_id.purchase_unit_price)
-                date = line.production_id.date_planned_start
                 if (
                     line.production_id) and not (
                         line.production_id.date_planned_start):
@@ -61,10 +60,7 @@ class StockMoveLine(models.Model):
                 if line.move_id.bom_line_id.cost:
                     cost = line.move_id.bom_line_id.cost
                 if line.expense_kg is True:
-                    month_cost = self.env["killing.cost"].search(
-                        [("seq", "=", date.month)], limit=1).cost
-                    if month_cost:
-                        cost += month_cost
+                    cost += line.production_id.month_id.cost
                 line.base_price = cost
                 line.onchange_base_price()
 
@@ -99,9 +95,7 @@ class StockMoveLine(models.Model):
             self.applied_price = self.base_price
         self.onchange_applied_price()
 
-    @api.onchange("qty_done", "applied_price", "expense_kg")
+    @api.onchange("qty_done", "applied_price")
     def onchange_applied_price(self):
         if self.qty_done and self.applied_price:
-            self.amount = self.applied_price
-            if self.expense_kg is True:
                 self.amount = self.applied_price * self.qty_done
