@@ -34,12 +34,6 @@ class MrpWorkorderNest(models.Model):
         )
         return [("id", "in", product_ids)]
 
-    def _domain_workcenter_id(self):
-        workcenter_ids = (
-            self.env["mrp.workcenter"].search([("nesting_required", "=", True)]).ids
-        )
-        return [("id", "in", workcenter_ids)]
-
     name = fields.Char(
         string="Name", readonly=True, required=True, copy=False, default="New"
     )
@@ -53,7 +47,7 @@ class MrpWorkorderNest(models.Model):
     workcenter_id = fields.Many2one(
         string="Work Center",
         comodel_name="mrp.workcenter",
-        domain=_domain_workcenter_id,
+        domain=[("nesting_required", "=", True)],
     )
     main_product_tracking = fields.Selection(
         string="Tracking", related="main_product_id.tracking"
@@ -105,7 +99,6 @@ class MrpWorkorderNest(models.Model):
     )
     line_is_produced = fields.Boolean(compute="_compute_line_states")
     line_is_user_working = fields.Boolean(compute="_compute_line_states")
-    #    worksheets = fields.Binary(string="PDF", help="Upload your PDF file.")
     qty_producing = fields.Float(
         string="Quantity Producing",
         compute="_compute_qty_producing",
@@ -178,7 +171,7 @@ class MrpWorkorderNest(models.Model):
             nest.nested_line_ids.action_check_ready()
             if not any(
                 nest.nested_line_ids.filtered(
-                    lambda l: l.state not in ("ready", "progress")
+                    lambda l: l.state not in ("ready", "progress", "done")
                 )
             ):
                 nest.state = "ready"
@@ -234,12 +227,6 @@ class MrpWorkorderNest(models.Model):
     def button_scrap(self):
         for nest in self:
             nest.nested_line_ids.button_scrap()
-
-    # def check_status(self):
-    #     for nest in self:
-    #         if not any(nest.nested_line_ids.filtered(
-    #                 lambda l: l.state == "done" and l.workorder_state == "done")):
-    #             nest.state == "done"
 
     @api.depends("nested_line_ids")
     def _compute_active_lines(self):

@@ -13,16 +13,20 @@ class TestMrpWorkorderGroupingMaterial(MrpWorkorderGroupingMaterial):
         wiz_nest = (
             self.env["nested.new.line"]
             .with_context(active_ids=workorders.ids, active_model="mrp.workorder")
-            .create({
-                "nest_code": test_code,
-            })
+            .create(
+                {
+                    "nest_code": test_code,
+                }
+            )
         )
         for line in wiz_nest.line_ids:
             line.qty_producing = line.qty_production
         wiz_nest.action_done()
-        nest = self.env["mrp.workorder.nest"].search([
-            ("code", "=", test_code),
-        ])
+        nest = self.env["mrp.workorder.nest"].search(
+            [
+                ("code", "=", test_code),
+            ]
+        )
         self.assertEquals(nest.state, "draft")
         nest.action_check_ready()
         # self.assertEquals(nest.state, "ready")

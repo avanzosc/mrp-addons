@@ -31,11 +31,6 @@ class MrpWorkorderNestLine(models.Model):
         required=True,
         ondelete="cascade",
     )
-    # related_qty_producing = fields.Float(
-    #     related="workorder_id.qty_producing")
-    # related_finished_lot_id = fields.Many2one(
-    #     comodel_name="stock.production.lot",
-    #     related="workorder_id.finished_lot_id")
     qty_producing = fields.Float(
         string="Quantity Producing",
         default=1.0,
@@ -47,11 +42,10 @@ class MrpWorkorderNestLine(models.Model):
         string="Lot/Serial Number",
         domain="[('product_id', '=', product_id)]",
     )
-    # lot_id = fields.Many2one(
-    #     comodel_name="stock.production.lot",
-    #     domain="[('product_id', '=', nest_id.main_product_id.id)]")
     workorder_id = fields.Many2one(
-        string="Workorder", comodel_name="mrp.workorder", required=True
+        string="Workorder",
+        comodel_name="mrp.workorder",
+        required=True,
     )
     qty_produced = fields.Float(
         string="Quantity Produced", related="workorder_id.qty_produced"
@@ -66,6 +60,12 @@ class MrpWorkorderNestLine(models.Model):
         string="Workcenter",
         readonly=True,
     )
+    main_product_id = fields.Many2one(
+        comodel_name="product.product",
+        related="workorder_id.main_product_id",
+        string="Main Product",
+        readonly=True,
+    )
     date_planned_start = fields.Datetime(
         related="workorder_id.date_planned_start",
         string="Scheduled Date Start",
@@ -77,9 +77,6 @@ class MrpWorkorderNestLine(models.Model):
         string="Production",
         readonly=True,
     )
-    # finished_qty = fields.Float(
-    #     compute="_compute_finished_qty",
-    #     store=True)
     product_id = fields.Many2one(
         comodel_name="product.product",
         related="workorder_id.product_id",
@@ -140,12 +137,10 @@ class MrpWorkorderNestLine(models.Model):
         workorder_obj = self.env["mrp.workorder"]
         for nest_line in self:
             nest = nest_line.nest_id
-            # assigned_wo = nest.workorder_ids.ids
             workorders = workorder_obj.search(
                 [
                     ("main_product_id", "=", nest.main_product_id.id),
                     ("workcenter_id", "=", nest.workcenter_id.id),
-                    # ("id", "not in", assigned_wo),
                     ("state", "not in", ["done", "cancel"]),
                 ]
             )
@@ -237,9 +232,7 @@ class MrpWorkorderNestLine(models.Model):
         lot_obj = self.env["stock.production.lot"]
         lot_id = False
         if code:
-            if product_id.tracking == "serial":
-                code = code
-            elif product_id.tracking == "lot":
+            if product_id.tracking == "lot":
                 lot_id = lot_obj.search(
                     [
                         ("name", "=", code),
@@ -325,6 +318,8 @@ class MrpWorkorderNestLine(models.Model):
         for nl in self.filtered(lambda n: n.state == "draft"):
             if nl.workorder_id.state in ("ready", "progress"):
                 nl.state = "ready"
+            elif nl.workorder_id.state == "done":
+                nl.state = "done"
 
     def action_cancel(self):
         if not any(self.filtered(lambda l: l.state == "ready")):
@@ -355,7 +350,7 @@ class MrpWorkorderNestLine(models.Model):
                     wo.with_context(from_nest=True).record_production()
                     nl.state = "done"
                 except UserError as e:
-                    raise UserError(_("{}: {}").format(wo.name, str(e)))
+                    raise UserError(_("{}: {}").format(wo.name, str(e.name)))
 
     def button_pending(self):
         for nl in self:

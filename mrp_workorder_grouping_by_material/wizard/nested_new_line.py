@@ -28,6 +28,7 @@ class NestedNewLine(models.TransientModel):
             ("id", "in", self.env.context.get("active_ids")),
             ("main_product_id", "!=", False),
             ("workcenter_id", "!=", False),
+            ("product_id.tracking", "!=", "serial"),
             ("state", "not in", ["done", "cancel"]),
         ]
 
