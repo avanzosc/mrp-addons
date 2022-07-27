@@ -1,0 +1,217 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* custom_mrp_descarga
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-14 14:57+0000\n"
+"PO-Revision-Date: 2022-09-14 14:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__average_price
+msgid "Average Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Batch"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__consume_qty
+msgid "Consumed Qty"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
+msgid "Deconstruction"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:product.product,name:custom_mrp_descarga.quartering_product
+#: model:product.template,name:custom_mrp_descarga.quartering_product_product_template
+msgid "Despiece"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__dest_qty
+msgid "Dest Qty"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_feed_flour
+msgid "Feed/Flour"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__origin_location_ids
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+#, python-format
+msgid "Hatcheries"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__id
+msgid "ID"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_incubator
+msgid "Incubator"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_integration
+msgid "Integration"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:product.product,weight_uom_name:custom_mrp_descarga.quartering_product
+#: model:product.template,weight_uom_name:custom_mrp_descarga.quartering_product_product_template
+msgid "Kg"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_medicine
+msgid "Medicine"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__batch_id
+msgid "Mother"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_production_lot_form
+#, python-format
+msgid "Move Lines"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__move_line_ids
+msgid "Move Lines With Applied Prices"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__origin_qty
+msgid "Origin Qty"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__product_id
+msgid "Product"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__production_ids
+#, python-format
+msgid "Production"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
+msgid "Production Orders"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_price
+msgid "Purchase Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_unit_price
+msgid "Purchase Unit Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__quartering
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__quartering_ids
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
+msgid "Quartering"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__reproductor_quant_ids
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_reproductor
+msgid "Reproductor"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Saca"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_saca_line
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_line_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Saca Line"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_stock_quant_tree
+msgid "Total Qty"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_stock_quant_tree
+msgid "Total Qty Available"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:product.product,uom_name:custom_mrp_descarga.quartering_product
+#: model:product.template,uom_name:custom_mrp_descarga.quartering_product_product_template
+msgid "Units"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:product.product,volume_uom_name:custom_mrp_descarga.quartering_product
+#: model:product.template,volume_uom_name:custom_mrp_descarga.quartering_product_product_template
+msgid "m³"
+msgstr ""

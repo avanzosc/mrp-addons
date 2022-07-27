@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" string="Move Lines" icon="fa-list-ul" type="object" name="action_view_move_lines"/>
+            </div>
+            <group name="main_group" position="inside">
+                <group>
+                    <field name="average_price"/>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
