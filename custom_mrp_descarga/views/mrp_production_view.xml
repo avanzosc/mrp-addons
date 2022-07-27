@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_mrp_production_filter" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="saca_id"/>
+                <field name="saca_line_id"/>
+                <field name="batch_id"/>
+            </field>
+            <filter name="status" position="after">
+                <filter string="Batch" name="groupby_batch" domain="[]" context="{'group_by': 'batch_id'}"/>
+                <filter string="Saca" name="groupby_saca" domain="[]" context="{'group_by': 'saca_id'}"/>
+                <filter string="Saca Line" name="groupby_saca_line" domain="[]" context="{'group_by': 'saca_line_id'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="custom_mrp_line_cost.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <field name="origin_qty" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="dest_qty" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="purchase_price" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="purchase_unit_price" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </field>
+            <label for="origin_qty" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </label>
+            <label for="dest_qty" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </label>
+            <field name="price_difference" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="purchase_unit_price" position="attributes">
+                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="product_id" position="after">
+                <field name="batch_id" domain="[('batch_type', '=', 'mother')]"/>
+                <field name="origin_location_ids" widget="many2many_tags" domain="[('is_hatchery', '=', True)]"/>
+            </field>
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" string="Hatcheries" icon="fa-home" type="object" name="action_view_reproductor_quant_ids"/>
+            </div>
+            <field name="is_deconstruction" position="after">
+                <field name="saca_id" readonly="1"/>
+                <field name="saca_line_id" readonly="1"/>
+            </field>
+            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='location_id']" position="attributes">
+                <attribute name="domain">[('id', 'child_of', parent.location_src_id)]</attribute>
+            </xpath>
+            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='location_dest_id']" position="attributes">
+                <attribute name="domain">[('usage', '=', 'production')]</attribute>
+            </xpath>
+            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='product_uom_qty']" position="before">
+                <field name="warehouse_id" invisible="1"/>
+                <field name="rest" attrs="{'invisible':[('warehouse_id', '=', False)]}"/>
+            </xpath>
+            <field name="expense_kg" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="canal" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="container" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="product_unit_container" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="unit_container" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="weight" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="percentage" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="base_price" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="applied_price" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="unit" position="attributes">
+                <attribute name="attrs">{'column_invisible':[('parent.saca_line_id', '=', False)]}</attribute>
+            </field>
+            <field name="amount" position="before">
+                <field name="standard_price" attrs="{'column_invisible':[('parent.saca_line_id', '=', True)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="product_qty" position="after">
+                <field name="consume_qty" optional="show"/>
+            </field>
+            <field name="product_uom_id" position="after">
+                <field name="batch_id" optional="show"/>
+            </field>
+            <field name="product_qty" position="after">
+                <field name="purchase_unit_price"/>
+            </field>
+        </field>
+    </record>
+</odoo>

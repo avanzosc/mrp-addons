@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="saca_line_form_view" model="ir.ui.view">
+        <field name="model">saca.line</field>
+        <field name="inherit_id" ref="custom_saca_purchase.saca_line_form_view"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" icon="fa-wrench" type="object" name="action_view_production" string="Production Orders"/>
+            </div>
+            <xpath expr="//page[@name='killing']" position="inside">
+                <group string="Deconstruction">
+                    <field name="production_ids" nolabel="1"/>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='quartering']" position="inside">
+                <group string="Quartering">
+                    <field name="quartering_ids" nolabel="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
