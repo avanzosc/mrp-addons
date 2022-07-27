@@ -3,7 +3,6 @@
 from odoo import fields, models
 
 
-class MrpBomLine(models.Model):
-    _inherit = "mrp.bom.line"
+class StockPicking(models.Model):
+    _inherit = "stock.picking"
 
-    cost = fields.Float(string="Fixed Cost")

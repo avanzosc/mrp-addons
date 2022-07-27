@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 12:24+0000\n"
-"PO-Revision-Date: 2022-07-27 12:24+0000\n"
+"POT-Creation-Date: 2022-08-04 13:32+0000\n"
+"PO-Revision-Date: 2022-08-04 13:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "Nombre mostrado"
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom_line__cost
 msgid "Fixed Cost"
-msgstr "Precio fijo"
+msgstr "Coste fijo"
 
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__id
@@ -148,8 +148,33 @@ msgstr "Actualizado el"
 
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__name
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__month_id
 msgid "Month"
 msgstr "Mes"
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Move Lines"
+msgstr "Operaciones detalladas"
+
+#. module: custom_mrp_line_cost
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__move_line_to_do_ids
+#, python-format
+msgid "Move Lines To Do"
+msgstr "Operaciones detalladas por hacer"
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Moves"
+msgstr "Movimientos"
+
+#. module: custom_mrp_line_cost
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__move_to_do_ids
+#, python-format
+msgid "Moves To Do"
+msgstr "Movimientos por hacer"
 
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__origin_qty
@@ -160,6 +185,18 @@ msgstr "Cantidad origen"
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__canal_weight
 msgid "PMC"
 msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Pickings"
+msgstr "Albaranes"
+
+#. module: custom_mrp_line_cost
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__picking_to_do_ids
+#, python-format
+msgid "Pickings To Do"
+msgstr "Albaranes por hacer"
 
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__price_difference
@@ -213,6 +250,7 @@ msgstr "Secuencia"
 
 #. module: custom_mrp_line_cost
 #: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
 #, python-format
 msgid "The sum of the percentages it can't be more than 100."
 msgstr "La suma de los porcentajes no puede ser mayor que 100."
@@ -260,6 +298,7 @@ msgid "Weight"
 msgstr "Peso"
 
 #. module: custom_mrp_line_cost
+#: code:addons/custom_mrp_line_cost/models/stock_move_line.py:0
 #: code:addons/custom_mrp_line_cost/models/stock_move_line.py:0
 #, python-format
 msgid "You must introduce the planned date."
