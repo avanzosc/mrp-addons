@@ -7,8 +7,8 @@ class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
     coefficient = fields.Float(string='Coefficient')
-    expense_kg = fields.Boolean(string='Expend/Kg', default=False)
-    cost = fields.Float(string='Cost')
+    expense_kg = fields.Boolean(string='Production Cost', default=False)
+    cost = fields.Float(string='Fixed Cost')
     currency_id = fields.Many2one(
         string='Currency',
         comodel_name='res.currency',
