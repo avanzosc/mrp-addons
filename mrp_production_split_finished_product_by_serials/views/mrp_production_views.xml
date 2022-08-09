@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_qty" position="after">
+                <field name="initial_product_qty" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="lot_producing_id" position="before">
+                <field name="initial_product_qty" 
+                    attrs="{'invisible': ['|',('initial_product_qty', '=', 0), ('state','=','draft')], 'readonly': [('state','!=','draft')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
