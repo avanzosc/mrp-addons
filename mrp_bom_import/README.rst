@@ -27,4 +27,5 @@ Contributors
 ------------
 
 * Daniel Campos <danielcampos@avanzosc.es>
+* Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
 * Ana Juaristi <anajuaristi@avanzosc.es>

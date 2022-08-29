@@ -253,12 +253,13 @@ class MrpBomImport(models.Model):
             "name": _("BoM Import Lines"),
             "type": "ir.actions.act_window",
             "res_model": self.bom_import_ids._name,
-            "view_mode": "tree,form",
+            "view_mode": "tree",
+            "view_id": self.env.ref("mrp_bom_import.mrp_bom_line_import_view_tree").id,
             "target": "current",
             "domain": [("id", "in", self.bom_import_ids.ids)],
             "context": {
                 "default_bom_import_id": self.id,
-            }
+            },
         }
 
     def button_open_bom_component_import_line(self):
@@ -267,12 +268,15 @@ class MrpBomImport(models.Model):
             "name": _("Component Import Lines"),
             "type": "ir.actions.act_window",
             "res_model": self.bom_line_import_ids._name,
-            "view_mode": "tree,form",
+            "view_mode": "tree",
+            "view_id": self.env.ref(
+                "mrp_bom_import.mrp_bom_line_component_import_view_tree"
+            ).id,
             "target": "current",
             "domain": [("id", "in", self.bom_line_import_ids.ids)],
             "context": {
                 "default_bom_line_import_id": self.id,
-            }
+            },
         }
 
 
