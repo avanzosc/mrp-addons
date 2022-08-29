@@ -6,14 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-21 08:57+0000\n"
-"PO-Revision-Date: 2022-06-21 08:57+0000\n"
+"POT-Creation-Date: 2022-08-29 10:48+0000\n"
+"PO-Revision-Date: 2022-08-29 10:48+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>code</code>: this will fill <b>Product code</b>"
+msgstr "<code>code</code>: esto rellenará el <b>Código producto</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>name</code>: this will fill <b>Product name</b>"
+msgstr "<code>name</code>: esto rellenará el <b>Nombre producto</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>parent_code</code>: this will fill <b>BoM code</b>"
+msgstr "<code>parent_code</code>: esto rellenará el <b>Código LdM</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>qty</code>: this will fill <b>Quantity</b>"
+msgstr "<code>qty</code>: esto rellenará la <b>Cantidad</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>weight</code>: this will fill <b>Weight</b>"
+msgstr "<code>weight</code>: esto rellenará el <b>Peso</b>"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
@@ -76,6 +101,7 @@ msgstr "Importar LdM"
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 #, python-format
 msgid "BoM Import Lines"
@@ -89,7 +115,7 @@ msgstr "Línea de LdM"
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_code
 msgid "BoM code"
-msgstr "Codigo LdM"
+msgstr "Código LdM"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__parent_line_id
@@ -107,6 +133,7 @@ msgid "Category name"
 msgstr "Nombre categoría"
 
 #. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 #, python-format
@@ -215,6 +242,16 @@ msgstr "Seguidores (Contactos)"
 #: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr "Icono de Font Awesome ej. fa-tasks"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Help"
+msgstr "Ayuda"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Help with Excel column names"
+msgstr "Ayuda con los nombres de columnas de Excel"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__id
@@ -506,3 +543,8 @@ msgstr "Historial de comunicaciones del sitio web"
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__weight
 msgid "Weight"
 msgstr "Peso"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "You must use this column names in order to fill the table:"
+msgstr "Debe usar las siguientes columnas para rellenar la tabla:"
