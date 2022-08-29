@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="mrp_bom_import_view_form" model="ir.ui.view">
+        <field name="model">mrp.bom.import</field>
+        <field name="inherit_id" ref="mrp_bom_import.mrp_bom_import_view_form" />
+        <field name="arch" type="xml">
+            <ul name="tutorial" position="inside">
+                <li><code>long_cut</code>: this will fill <b>Long Cut (mm)</b></li>
+            </ul>
+        </field>
+    </record>
+
     <record id="mrp_bom_line_import_view_tree" model="ir.ui.view">
         <field name="model">mrp.bom.line.import</field>
-        <field name="inherit_id" ref="mrp_bom_import.mrp_bom_line_import_view_tree" />
+        <field
+      name="inherit_id"
+      ref="mrp_bom_import.mrp_bom_line_component_import_view_tree"
+    />
         <field name="arch" type="xml">
             <field name="quantity" position="after">
                 <field name="long_cut" />
