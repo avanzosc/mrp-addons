@@ -101,11 +101,42 @@
                 </group>
                 <notebook>
                     <page string="Lines">
-                        <field name="bom_import_ids" />
-                        <field name="bom_line_import_ids" />
+                        <field
+                name="bom_import_ids"
+                context="{'tree_view_ref':'mrp_bom_import.mrp_bom_line_import_view_tree'}"
+              />
+                        <field
+                name="bom_line_import_ids"
+                context="{'tree_view_ref':'mrp_bom_import.mrp_bom_line_component_import_view_tree'}"
+              />
                     </page>
                     <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
+                    </page>
+                    <page
+              string="Help"
+              name="help_page"
+              attrs="{'invisible': [('state', '=', 'done')]}"
+            >
+                        <group>
+                            <div style="margin-top: 4px;">
+                                <h3>Help with Excel column names</h3>
+                                <p
+                  >You must use this column names in order to fill the table:</p>
+                                <ul name="tutorial">
+                                    <li><code>name</code>: this will fill <b
+                      >Product name</b></li>
+                                    <li><code>code</code>: this will fill <b
+                      >Product code</b></li>
+                                    <li><code>qty</code>: this will fill <b
+                      >Quantity</b></li>
+                                    <li><code>weight</code>: this will fill <b
+                      >Weight</b></li>
+                                    <li><code>parent_code</code>: this will fill <b
+                      >BoM code</b></li>
+                                </ul>
+                            </div>
+                        </group>
                     </page>
                 </notebook>
 
@@ -129,12 +160,24 @@
                 <field name="product_ref" />
                 <field name="product_id" optional="hide" />
                 <field name="quantity" />
-                <field name="bom_code" />
                 <field name="bom_id" optional="hide" />
-                <field name="parent_line_id" optional="hide" />
                 <field name="log_info" />
                 <field name="state" />
             </tree>
+        </field>
+    </record>
+
+    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
+        <field name="model">mrp.bom.line.import</field>
+        <field name="inherit_id" ref="mrp_bom_line_import_view_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="bom_id" position="before">
+                <field name="bom_code" />
+            </field>
+            <field name="bom_id" position="after">
+                <field name="parent_line_id" optional="hide" />
+            </field>
         </field>
     </record>
 
