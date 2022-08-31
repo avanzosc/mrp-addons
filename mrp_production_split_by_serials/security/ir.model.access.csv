@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wiz_split_serials_user,wiz_split_serials user,model_wiz_split_serials,mrp.group_mrp_user,1,1,1,1
+access_wiz_split_serials_manager,wiz_split_serials manager,model_wiz_split_serials,mrp.group_mrp_manager,1,1,1,1
