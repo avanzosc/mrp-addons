@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_split_finished_product_by_serials
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-09 09:43+0000\n"
+"PO-Revision-Date: 2022-08-09 09:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_production_lot__display_name
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_quant__display_name
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_uom_uom__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__id
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_production_lot__id
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_quant__id
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_uom_uom__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__initial_product_qty
+msgid "Initial quantity to produce"
+msgstr ""
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_production_lot____last_update
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_quant____last_update
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_uom_uom____last_update
+msgid "Last Modified on"
+msgstr "最后修改日"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "批次/序列号"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_uom_uom
+msgid "Product Unit of Measure"
+msgstr "产品计量单位"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_mrp_production
+msgid "Production Order"
+msgstr "生产订单"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_quant
+msgid "Quants"
+msgstr "份"
