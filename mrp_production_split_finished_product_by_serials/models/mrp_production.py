@@ -29,7 +29,7 @@ class MrpProduction(models.Model):
 
     def _new_by_product_treatment_after_confirmation(self):
         self.with_context(same_subproduct=True).action_generate_serial()
-        self.lot_producing_id.name = "{} - 001".format(self.name)
+        self.lot_producing_id.name = "{}x001".format(self.name)
 
     def _set_qty_producing(self):
         if self.product_id.tracking and self.product_id.tracking == "serial":
@@ -71,7 +71,13 @@ class MrpProduction(models.Model):
                         line.write({'qty_done': 1,
                                     'lot_id': self.lot_producing_id.id})
                     else:
-                        name = "{} - {}".format(self.name, str(cont).zfill(3))
+                        name = self.lot_producing_id.name
+                        if "x001" in self.lot_producing_id.name:
+                            name = self.lot_producing_id.name.replace(
+                                "x001", "")
+                        else:
+                            name = self.lot_producing_id.name
+                        name = "{}x{}".format(name, str(cont).zfill(3))
                         vals_lot = {'name': name,
                                     'company_id': self.company_id.id,
                                     'product_id': self.product_id.id}
