@@ -64,6 +64,8 @@ class MrpProduction(models.Model):
             cond = [("move_id", '=', move.id)]
             line = self.env["stock.move.line"].search(cond)
             if line:
+                lot_name, lot_counter, lot_counter_length = (
+                    self._calculate_lot_counter())
                 qty_done = line.qty_done
                 while cont < qty_done:
                     cont += 1
@@ -71,13 +73,12 @@ class MrpProduction(models.Model):
                         line.write({'qty_done': 1,
                                     'lot_id': self.lot_producing_id.id})
                     else:
-                        name = self.lot_producing_id.name
-                        if "x001" in self.lot_producing_id.name:
-                            name = self.lot_producing_id.name.replace(
-                                "x001", "")
-                        else:
-                            name = self.lot_producing_id.name
-                        name = "{}x{}".format(name, str(cont).zfill(3))
+                        lot_counter += 1
+                        if len(str(lot_counter)) > lot_counter_length:
+                            lot_counter_length += 1
+                        name = "{}x{}".format(
+                            lot_name, str(lot_counter).zfill(
+                                lot_counter_length))
                         vals_lot = {'name': name,
                                     'company_id': self.company_id.id,
                                     'product_id': self.product_id.id}
@@ -89,9 +90,30 @@ class MrpProduction(models.Model):
                         line.copy(default)
         cond = [('lot_id', '=', self.lot_producing_id.id),
                 ('picking_id', '!=', False)]
-        lines = self.env['stock.move.line'].search(cond, order = 'id asc')
+        lines = self.env['stock.move.line'].search(cond, order='id asc')
         cont = 0
         for line in lines:
             cont += 1
             if cont > 1:
                 line.lot_id = new_lots[cont - 2].id
+
+    def _calculate_lot_counter(self):
+        lot_name = ""
+        lot_counter = 0
+        lot_counter_length = 0
+        my_counter = len(self.lot_producing_id.name) - 1
+        found = False
+        while my_counter > 1 and not found:
+            if str(self.lot_producing_id.name[my_counter:my_counter+1]) == "x":
+                if str(self.lot_producing_id.name[my_counter+1:]).isdigit():
+                    lot_name = str(self.lot_producing_id.name[:my_counter])
+                    lot_counter = int(
+                        self.lot_producing_id.name[my_counter+1:])
+                    lot_counter_length = len(
+                        str(self.lot_producing_id.name[my_counter+1:]))
+                    found = True
+            my_counter -= 1
+        if not found:
+            lot_name = self.lot_producing_id.name
+            lot_counter_length = 3
+        return lot_name, lot_counter, lot_counter_length
