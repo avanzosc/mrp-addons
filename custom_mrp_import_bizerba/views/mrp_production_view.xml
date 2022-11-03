@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button name="action_validate" string="Validate" type="object" class="oe_highlight" attrs="{'invisible': ['|', '|', ('import_state', 'not in', ('draft', '2validate', 'error')), ('saca_line_id', '=', False), ('import_line_ids', '=', [])]}"/>
+                <button name="action_process" string="Process" type="object" class="oe_highlight" attrs="{'invisible': ['|', '|', ('import_state', '!=', 'pass'), ('saca_line_id', '=', False), ('import_line_ids', '=', [])]}"/>
+                <button name="action_conect_with_bizerba" string="Capture Scale" type="object" class="oe_highlight" attrs="{'invisible': ['|', '|', ('state', '=', 'draft'), ('import_state', 'not in', ('pass', 'draft', '2validate', 'error')), ('saca_line_id', '=', False)]}"/>
+            </header>
+            <div class="oe_button_box" name="button_box">
+                <button
+                    string="Import Lines"
+                    type="object"
+                    name="button_open_import_line"
+                    attrs="{'invisible':[('import_line_ids', '=', [])]}"
+                    class="oe_stat_button"
+                    icon="fa-bars"
+            />
+            </div>
+            <group name="group_extra_info" position="inside">
+                <field name="import_state" invisible="1"/>
+            </group>
+            <notebook position="inside">
+                <page string="Imported Lines" attrs="{'invisible': [('saca_line_id', '=', False)]}">
+                    <field name="import_line_ids">
+                        <tree decoration-danger="state == 'error'" decoration-muted="state == 'done'" decoration-it="log_info" editable="top">
+                            <field name="action" readonly="1"/>
+                            <field name="production_id" invisible="1"/>
+                            <field name="line_product_code" readonly="1"/>
+                            <field name="line_product_qty" readonly="1"/>
+                            <field name="line_uom" readonly="1"/>
+                            <field name="line_uom_id" optional="show" readonly="1"/>
+                            <field name="line_chicken_code" readonly="1"/>
+                            <field name="line_lot" readonly="1"/>
+                            <field name="line_date" readonly="1"/>
+                            <field name="line_product_id" optional="show" readonly="1"/>
+                            <field name="state" readonly="1"/>
+                            <field name="log_info" optional="show" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Error Log" attrs="{'invisible':['|', ('log_info','=',''), ('saca_line_id', '=', False)]}">
+                    <field name="log_info"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
