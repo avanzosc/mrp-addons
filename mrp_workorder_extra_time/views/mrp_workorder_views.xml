@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+        <field name="arch" type="xml">
+            <field name="duration" position="after">
+                <field name="extra_time_piece" widget="mrp_time_counter"
+                    attrs="{'invisible': [('production_state','=', 'draft')], 'readonly': [('is_user_working', '=', True)]}"
+                    sum="sum_extra_time_piece" optional="show"/>
+                <field name="total_overtime" widget="mrp_time_counter"
+                    attrs="{'invisible': [('production_state','=', 'draft')], 'readonly': [('is_user_working', '=', True)]}"
+                    sum="sum_total_overtime" optional="show"/>
+                <field name="total_time" widget="mrp_time_counter"
+                    attrs="{'invisible': [('production_state','=', 'draft')], 'readonly': [('is_user_working', '=', True)]}"
+                    sum="sum_total_time" optional="show"/>
+            </field>
+            <field name="duration_expected" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
