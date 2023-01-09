@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record model="ir.ui.view" id="mrp_production_workorder_form_view_inherit">
+         <field name="model">mrp.workorder</field>
+         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+         <field name="arch" type="xml">
+             <xpath expr="//field[@name='time_ids']/tree/field[@name='user_id']" position="before">
+                <field name="initial_plate"/>
+                <field name="final_plate"/>
+                <field name="manufactured_plate" sum="Total Plates Manufactured"/>
+                <field name="speed_average"/>
+             </xpath>
+         </field>
+     </record>
+
+     <record model="ir.ui.view" id="mrp_production_workorder_tree_editable_view">
+         <field name="model">mrp.workorder</field>
+         <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+         <field name="arch" type="xml">
+            <field name="duration" position="after">
+                <field name="plates_manufactured"/>
+            </field>
+         </field>
+     </record>
+</odoo>

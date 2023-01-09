@@ -1,0 +1,80 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workorder_time_plate
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-09 15:14+0000\n"
+"PO-Revision-Date: 2023-01-09 15:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workcenter_productivity__display_name
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workorder__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_workorder_time_plate
+#: code:addons/mrp_workorder_time_plate/models/mrp_workcenter_productivity.py:0
+#, python-format
+msgid "Error: Manufactured plates should be positive."
+msgstr "Error: La cantidad de placas fabricadas debería ser positiva."
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workcenter_productivity__final_plate
+msgid "Final Plate"
+msgstr "Placa final"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workcenter_productivity__id
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workorder__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workcenter_productivity__initial_plate
+msgid "Initial Plate"
+msgstr "Placa inicial"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workcenter_productivity____last_update
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workorder____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workcenter_productivity__manufactured_plate
+msgid "Manufactured Plate"
+msgstr "Placas fabricadas"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workorder__plates_manufactured
+msgid "Plates Manufactured"
+msgstr "Placas fabricadas"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model.fields,field_description:mrp_workorder_time_plate.field_mrp_workcenter_productivity__speed_average
+msgid "Speed Average"
+msgstr "Velocidad media"
+
+#. module: mrp_workorder_time_plate
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_time_plate.mrp_production_workorder_form_view_inherit
+msgid "Total Plates Manufactured"
+msgstr "Total de placas fabricadas"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model,name:mrp_workorder_time_plate.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: mrp_workorder_time_plate
+#: model:ir.model,name:mrp_workorder_time_plate.model_mrp_workcenter_productivity
+msgid "Workcenter Productivity Log"
+msgstr "Registro de productividad del centro de trabajo"
