@@ -9,6 +9,7 @@
     "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
         "mrp",
+        "mrp_bbc",
     ],
     "data": [
         "views/mrp_workorder_view.xml",
