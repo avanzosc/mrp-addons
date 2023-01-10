@@ -25,12 +25,13 @@ class MrpWorkcenterProductivity(models.Model):
         for line in self:
             line.manufactured_plate = line.final_plate - line.initial_plate
 
-    @api.depends("manufactured_plate", "duration")
+    @api.depends("manufactured_plate", "duration_hour")
     def _compute_speed_average(self):
         for line in self:
             line.speed_average = 0
             if line.duration != 0:
-                line.speed_average = line.manufactured_plate / line.duration
+                line.speed_average = (
+                    line.manufactured_plate / line.duration_hour)
 
     @api.constrains("manufactured_plate")
     def _check_manufactured_plate(self):
