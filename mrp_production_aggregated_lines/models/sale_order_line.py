@@ -142,15 +142,16 @@ class SaleOrder(models.Model):
     @api.multi
     def action_cancel(self):
         res = super(SaleOrder, self).action_cancel()
-        for line in self.order_line:
-            if line.mrp_production_id.sale_line_ids == line:
-                line.mrp_production_id.action_cancel()
-            else:
-                production = line.mrp_production_id
-                if production:
-                    production._update_mo_qty(production.product_qty -
-                                              line.product_uom_qty)
-                    production.sale_line_ids = [(3, line.id)]
+        for record in self:
+            for line in record.order_line:
+                if line.mrp_production_id.sale_line_ids == line:
+                    line.mrp_production_id.action_cancel()
+                else:
+                    production = line.mrp_production_id
+                    if production:
+                        production._update_mo_qty(production.product_qty -
+                                                  line.product_uom_qty)
+                        production.sale_line_ids = [(3, line.id)]
         return res
 
     @api.multi
