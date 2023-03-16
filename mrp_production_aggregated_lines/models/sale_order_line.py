@@ -142,7 +142,7 @@ class SaleOrder(models.Model):
     @api.multi
     def action_cancel(self):
         res = super(SaleOrder, self).action_cancel()
-        for line in self.order_line:
+        for line in self.mapped('order_line'):
             if line.mrp_production_id.sale_line_ids == line:
                 line.mrp_production_id.action_cancel()
             else:
