@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="before">
+                <field name="palet_id" />
+                <field name="palet_qty" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_qty_by_packaging.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_packaging_qty" position="before">
+                <field name="palet_id" optional="show"/>
+                <field name="palet_qty" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_filter" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_qty_by_packaging.view_mrp_production_filter" />
+        <field name="arch" type="xml">
+            <field name="product_packaging_id" position="after">
+                <field name="palet_id" />
+            </field>
+            <filter name="packaging" position="after">
+                    <filter string="Palet" name="palet" domain="[]"
+                        context="{'group_by': 'palet_id'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>
