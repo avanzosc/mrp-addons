@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_bom_form_view" model="ir.ui.view">
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="quartering" invisible="1"/>
+            </field>
+            <page name="components" position="attributes">
+                <attribute name="string">Inputs</attribute>
+            </page>
+            <page name="by_products" position="attributes">
+                <attribute name="string">Outputs</attribute>
+            </page>
+            <field name="coefficient" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.quartering', '=', True)]}</attribute>
+            </field>
+            <field name="expense_kg" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.quartering', '=', True)]}</attribute>
+            </field>
+            <field name="cost" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.quartering', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_quartering_bom" model="ir.actions.act_window">
+        <field name="name">Material List</field>
+        <field name="res_model">mrp.bom</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('quartering', '=', True)]</field>
+    </record>
+
+    <record id="action_other_bom" model="ir.actions.act_window">
+        <field name="name">Material List</field>
+        <field name="res_model">mrp.bom</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('quartering', '=', False)]</field>
+    </record>
+
+    <menuitem action="action_quartering_bom" name="Material List" id="menu_quartering_bom" parent="quartering_menu" sequence="6"/>
+
+   <menuitem action="action_other_bom" name="Material List" id="menu_other_bom" parent="custom_descarga.stage_clasificado_menu" sequence="6"/>
+
+</odoo>
