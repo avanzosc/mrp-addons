@@ -13,6 +13,9 @@ class MrpBomCategory(models.Model):
         string="Name",
         required=True,
     )
+    sequence_id = fields.Many2one(
+        string="Sequence",
+        comodel_name="ir.sequence")
 
     _sql_constraints = [
         ("name_unique", "unique(name)", "Category name already exists"),
