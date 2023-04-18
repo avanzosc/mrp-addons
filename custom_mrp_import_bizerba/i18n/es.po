@@ -1,0 +1,509 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* custom_mrp_import_bizerba
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-23 09:34+0000\n"
+"PO-Revision-Date: 2023-01-23 09:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__state
+msgid ""
+" * Draft: The MO is not confirmed yet.\n"
+" * Confirmed: The MO is confirmed, the stock rules and the reordering of the components are trigerred.\n"
+" * In Progress: The production has started (on the MO or on the WO).\n"
+" * To Close: The production is done, the MO has to be closed.\n"
+" * Done: The MO is closed, the stock moves are posted. \n"
+" * Cancelled: The MO has been cancelled, can't be confirmed anymore."
+msgstr ""
+"* Borrador: El MO aún no está confirmado.\n"
+"* Confirmado: El MO está confirmado, las reglas de stock y el reordenamiento de los componentes se gestionan.\n"
+"* En curso: la producción ha comenzado (en el MO o en el WO).\n"
+"* Para cerrar: La producción está hecha, el MO tiene que estar cerrado.\n"
+"* Listo: el MO está cerrado, los movimientos de acciones se registran.\n"
+"* Cancelado: el MO ha sido cancelado, ya no se puede confirmar."
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__action
+msgid "Action"
+msgstr "Acción"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoración de Actividad  de Excepción"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Ícono de tipo de actvidad"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nº de archivos adjuntos"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_product__bizerba_code
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_template__bizerba_code
+msgid "Bizerba Code"
+msgstr "Código Bizerba"
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.mrp_production_form_view
+msgid "Capture Scale"
+msgstr "Capturar báscula"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_chicken_code
+msgid "Chicken Code"
+msgstr "Código pollo"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__bizerba_import_line__action__create
+msgid "Create"
+msgstr "Crear"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__display_name
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_template__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__mrp_production__import_state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__mrp_production__import_state__error
+msgid "Error"
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.mrp_production_form_view
+msgid "Error Log"
+msgstr "Registro de errores"
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
+#, python-format
+msgid "Error: More than one UoM with name {} found."
+msgstr "Error: Se ha encontrado más de una UdM con nombre {}."
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
+#, python-format
+msgid "Error: More than one product with Bizerba code {} found."
+msgstr "Error: Se ha encontrado más de un producto con código Bizerba {}."
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
+#, python-format
+msgid "Error: No UoM found."
+msgstr "Error: No se ha encontrado ninguna UdM."
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
+#, python-format
+msgid "Error: No product found."
+msgstr "Error: No se ha encontrado ningún producto."
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
+#, python-format
+msgid "Error: There is no entry line with this product."
+msgstr "Error: No se han encontrado líneas de entrada con este producto."
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_search
+msgid "Errored"
+msgstr "Error en"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__data
+msgid "File"
+msgstr "Archivo"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__filename
+msgid "Filename"
+msgstr "Nombre de archivo"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icono de Font Awesome ej. fa-tasks"
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__id
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__id
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_template__id
+msgid "ID"
+msgstr "Identificador"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción."
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_needaction
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado hay nuevos mensajes que requieren su atención."
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_has_error
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__file_date
+msgid "Import Date"
+msgstr "Fecha importación"
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.mrp_production_form_view
+msgid "Import Lines"
+msgstr "Líneas importadas"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__import_state
+msgid "Import Status"
+msgstr "Estado de la importación"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__import_id
+msgid "Import Wizard"
+msgstr "Asistente de importación"
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.mrp_production_form_view
+msgid "Imported Lines"
+msgstr "Líneas importadas"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line____last_update
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_template____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__write_date
+msgid "Last Updated on"
+msgstr "Actualizado el"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__import_line_ids
+msgid "Lines to Import"
+msgstr "Líneas para importar"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__log_info
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__log_info
+msgid "Log Info"
+msgstr "Información de registro"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_lot
+msgid "Lot"
+msgstr "Lote"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjuntos principales"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de Envío de Mensaje"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Mi plazo de actividad"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Siguiente plazo de actividad"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__bizerba_import_line__action__nothing
+msgid "Nothing"
+msgstr "Nada"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero de errores"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leidos"
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_form
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.mrp_production_form_view
+msgid "Process"
+msgstr "Procesar"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__mrp_production__import_state__done
+msgid "Processed"
+msgstr "Procesado"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_product_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_search
+msgid "Product"
+msgstr "Producto"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_product_code
+msgid "Product Code"
+msgstr "Código de producto"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_product_qty
+msgid "Product Qty"
+msgstr "Cantidad"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model,name:custom_mrp_import_bizerba.model_product_template
+msgid "Product Template (Multi-Company)"
+msgstr "Plantilla de producto"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__production_id
+msgid "Production"
+msgstr "Producción"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model,name:custom_mrp_import_bizerba.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__name
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega del SMS"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__state
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_search
+msgid "State"
+msgstr "Estado"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Vencida: la fecha tope ya ha pasado\n"
+"Hoy: La fecha tope es hoy\n"
+"Planificada: futuras actividades."
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/mrp_production.py:0
+#, python-format
+msgid "The connection could not be established."
+msgstr "No se ha podido establecer la conexión"
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/mrp_production.py:0
+#, python-format
+msgid "This classification does not have a start/end time or date."
+msgstr "Este clasificado no tiene fecha o hora de inicio/fin del clasificado."
+
+#. module: custom_mrp_import_bizerba
+#: code:addons/custom_mrp_import_bizerba/models/mrp_production.py:0
+#, python-format
+msgid "This classification does not have the lot."
+msgstr "Este clasificado no tiene lote."
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_search
+msgid "To Create"
+msgstr "Para crear"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__mrp_production__import_state__2validate
+msgid "To validate"
+msgstr "Para validar"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de actividad de excepción registrada."
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Nº de mensajes sin leer"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_uom
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_uom_id
+msgid "UoM"
+msgstr "UdM"
+
+#. module: custom_mrp_import_bizerba
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_form
+#: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.mrp_production_form_view
+msgid "Validate"
+msgstr "Validar"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__mrp_production__import_state__pass
+msgid "Validated"
+msgstr "Validado"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model,name:custom_mrp_import_bizerba.model_bizerba_import_line
+msgid "Wizard lines to import Bizerba lines"
+msgstr "Líneas del asistente para importar líneas de Bizerba"
