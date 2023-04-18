@@ -1,6 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class StockProductionLot(models.Model):
@@ -8,22 +8,37 @@ class StockProductionLot(models.Model):
 
     average_price = fields.Float(
         string="Average Price",
-        compute="_compute_average_price")
+        digits="MRP Price Decimal Precision",
+        compute="_compute_average_price",
+        store=True)
     move_line_ids = fields.One2many(
-        string="Move Lines With Applied Prices",
+        string="Move Lines",
         comodel_name="stock.move.line",
         inverse_name="lot_id")
 
+    @api.depends("move_line_ids", "move_line_ids.amount",
+                 "move_line_ids.qty_done", "move_line_ids.state")
     def _compute_average_price(self):
         for line in self:
             line.average_price = 0
-            movelines = self.env["stock.move.line"].search(
-                [("product_id", "=", line.product_id.id),
-                 ("lot_id", "=", line.id), ("production_id", "!=", False)])
-            if movelines:
-                amount_total = sum(movelines.mapped("amount"))
-                if line.product_qty != 0:
-                    line.average_price = amount_total / line.product_qty
+            clasified = line.move_line_ids.filtered(
+                lambda c: c.state == "done" and (
+                    c.location_dest_id.usage == "internal"))
+            quartering = line.move_line_ids.filtered(
+                lambda c: c.production_id and c.production_id.quartering)
+            if clasified:
+                amount_total = sum(clasified.mapped("amount"))
+                qty_done = sum(clasified.mapped("qty_done"))
+                if qty_done != 0:
+                    line.average_price = amount_total / qty_done
+                    if line.company_id.paasa:
+                        for record in quartering:
+                            if record.standard_price != line.average_price:
+                                record.write({
+                                    "standard_price": line.average_price,
+                                    "amount": (
+                                        line.average_price * record.qty_done)
+                                    })
 
     def action_view_move_lines(self):
         context = self.env.context.copy()
@@ -33,8 +48,7 @@ class StockProductionLot(models.Model):
             "view_mode": "tree,form",
             "res_model": "stock.move.line",
             "domain": [("product_id", "=", self.product_id.id),
-                       ("id", "in", self.move_line_ids.ids),
-                       ("applied_price", ">", 0)],
+                       ("id", "in", self.move_line_ids.ids)],
             "type": "ir.actions.act_window",
             "context": context
         }
