@@ -8,6 +8,9 @@
             <field name="company_id" position="before">
                 <field name="is_deconstruction"/>
             </field>
+            <page name="by_products" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_deconstruction', '=', True)]}</attribute>
+            </page>
         </field>
     </record>
 
