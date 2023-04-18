@@ -19,7 +19,7 @@ class StockMoveLine(models.Model):
         if "production_id" in self.env.context:
             production = self.env.context["production_id"]
             production = self.env["mrp.production"].search([("id", "=", production)], limit=1)
-            result = self.env["stock.location"].search([("usage", "=", "production")], limit=1)
+            result = production.production_location_id.id
             if production.is_deconstruction is True:
                 result = production.picking_type_id.default_location_src_id.id
             return result
@@ -31,6 +31,7 @@ class StockMoveLine(models.Model):
 
     @api.onchange("location_id", "location_dest_id")
     def onchange_product_id_domain(self):
+        domain = {}
         if "production_id" in self.env.context:
             production = self.env.context["production_id"]
             production = self.env["mrp.production"].search([("id", "=", production)], limit=1)
@@ -41,4 +42,14 @@ class StockMoveLine(models.Model):
                     if line.product_id.id not in products:
                         products.append(line.product_id.id)
                 domain = {"domain": {"product_id": [("id", "in", products)]}}
-            return domain
+        elif "default_production_id" in self.env.context:
+            production = self.env.context["default_production_id"]
+            production = self.env["mrp.production"].search([("id", "=", production)], limit=1)
+            domain = {}
+            if production.move_byproduct_ids:
+                products = []
+                for line in production.move_byproduct_ids:
+                    if line.product_id.id not in products:
+                        products.append(line.product_id.id)
+                domain = {"domain": {"product_id": [("id", "in", products)]}}
+        return domain
