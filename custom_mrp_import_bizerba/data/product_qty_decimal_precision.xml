@@ -1,0 +1,9 @@
+<odoo>
+    <data noupdate="1">
+        <record forcecreate="True" id="decimal_bizerba_product_qty" model="decimal.precision">
+            <field name="name">Bizerba Product Qty Decimal Precision</field>
+            <field name="digits">15</field>
+        </record>
+    </data>
+</odoo>
+
