@@ -9,6 +9,7 @@
         "mrp",
     ],
     "data": [
+        "data/coef_decimal_precision.xml",
         "views/mrp_bom_view.xml",
     ],
     "license": "AGPL-3",
