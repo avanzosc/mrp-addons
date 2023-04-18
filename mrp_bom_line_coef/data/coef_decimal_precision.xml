@@ -1,0 +1,9 @@
+<odoo>
+    <data noupdate="1">
+        <record forcecreate="True" id="decimal_precision_coef" model="decimal.precision">
+            <field name="name">Coef Decimal Precision</field>
+            <field name="digits">4</field>
+        </record>
+    </data>
+</odoo>
+

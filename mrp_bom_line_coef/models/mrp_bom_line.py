@@ -6,9 +6,13 @@ from odoo import models, fields, api
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
-    coefficient = fields.Float(string='Coefficient')
+    coefficient = fields.Float(
+        string='Coefficient',
+        digits="Coef Decimal Precision")
     expense_kg = fields.Boolean(string='Production Cost', default=False)
-    cost = fields.Float(string='Fixed Cost')
+    cost = fields.Float(
+        string='Fixed Cost',
+        digits="Coef Decimal Precision")
     currency_id = fields.Many2one(
         string='Currency',
         comodel_name='res.currency',
