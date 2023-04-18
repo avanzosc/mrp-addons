@@ -2,19 +2,26 @@
 <odoo>
     <record id="saca_line_form_view" model="ir.ui.view">
         <field name="model">saca.line</field>
-        <field name="inherit_id" ref="custom_saca_purchase.saca_line_form_view"/>
+        <field name="inherit_id" ref="custom_saca.saca_line_form_view"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
-                <button class="oe_stat_button" icon="fa-wrench" type="object" name="action_view_production" string="Production Orders"/>
+                <button class="oe_stat_button" icon="fa-wrench" type="object" name="action_view_production" attrs="{'invisible': [('count_production', '=', 0)]}">
+                    <field string="Production Orders" name="count_production" widget="statinfo"/>
+                </button>
             </div>
-            <xpath expr="//page[@name='killing']" position="inside">
+            <xpath expr="//page[@name='classified']" position="inside">
                 <group string="Deconstruction">
-                    <field name="production_ids" nolabel="1"/>
-                </group>
-            </xpath>
-            <xpath expr="//page[@name='quartering']" position="inside">
-                <group string="Quartering">
-                    <field name="quartering_ids" nolabel="1"/>
+                    <field name="production_ids" nolabel="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="date_planned_start" widget="remaining_days"/>
+                            <field name="product_id"/>
+                            <field name="product_qty"/>
+                            <field name="product_uom_id"/>
+                            <field name="company_id"/>
+                            <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state not in ('done', 'cancel')"/>
+                        </tree>
+                    </field>
                 </group>
             </xpath>
         </field>

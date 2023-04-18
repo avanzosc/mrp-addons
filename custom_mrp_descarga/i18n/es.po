@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-14 14:57+0000\n"
-"PO-Revision-Date: 2022-09-14 14:57+0000\n"
+"POT-Creation-Date: 2023-04-04 13:09+0000\n"
+"PO-Revision-Date: 2023-04-04 13:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,35 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Amount"
+msgstr "Importe"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Amount Duration"
+msgstr "Duración"
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Línea Analítica"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__asphyxiation_units
+msgid "Asphyxiated"
+msgstr "Asfixiados"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__average_price
 msgid "Average Price"
 msgstr "Precio medio"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__average_weight
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Average Weight"
+msgstr "Peso medio"
 
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
@@ -26,9 +52,91 @@ msgid "Batch"
 msgstr "Madre"
 
 #. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__consume_qty
-msgid "Consumed Qty"
-msgstr "Cantidad consumida"
+#: model:ir.model,name:custom_mrp_descarga.model_mrp_bom
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__bom_id
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,help:custom_mrp_descarga.field_mrp_production__bom_id
+msgid ""
+"Bill of Materials allow you to define the list of required components to "
+"make a finished product."
+msgstr ""
+"La lista de materiales le permite definir la lista de componentes necesarios"
+" para hacer un producto terminado."
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_rate
+msgid "Birth %"
+msgstr "% nacimientos"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_date
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Birth Date"
+msgstr "Fecha de nacimiento"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_week
+msgid "Birth Week"
+msgstr "Semana de nacimiento"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__breeding_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Breeding"
+msgstr "Crianza"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__channel_temperature
+msgid "Channel Temperature"
+msgstr "Temperatura canal"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__chick_production
+msgid "Chick Production"
+msgstr "Producción de pollito"
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_production
+msgid "Clasificado"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasification
+msgid "Clasification"
+msgstr "Clasificación"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_date
+msgid "Clasified Date"
+msgstr "Fecha clasificado"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_time_start
+msgid "Clasified Time Start"
+msgstr "Inicio clasificado"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_time_stop
+msgid "Clasified Time Stop"
+msgstr "Fin clasificado"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Classification"
+msgstr "Clasificación"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_ids
+msgid "Classified"
+msgstr "Clasificado"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__count_production
+msgid "Count Production"
+msgstr "Contador OF"
 
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
@@ -36,23 +144,83 @@ msgid "Deconstruction"
 msgstr "Deconstrucción"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__demanding
+msgid "Demanding"
+msgstr "Exigente"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__descarga_order
+msgid "Descarga Order"
+msgstr "Órden de descarga"
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_production
+#: model:ir.ui.menu,name:custom_mrp_descarga.quartering_menu
 #: model:product.product,name:custom_mrp_descarga.quartering_product
 #: model:product.template,name:custom_mrp_descarga.quartering_product_product_template
 msgid "Despiece"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_quartering_production
+msgid "Despieces"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__dest_qty
-msgid "Dest Qty"
+msgid "Dest Kg"
 msgstr "Cantidad destino"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_difference
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__qty_difference
+msgid "Difference"
+msgstr "Diferencia"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__difference_rate
+msgid "Difference %"
+msgstr "% diferencia"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_product__download_product
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__download_product
+msgid "Download Product"
+msgstr "Producto descarga"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__download_unit
+msgid "Download Unit"
+msgstr "Unidades descargadas"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__expected_rate
+msgid "Expected %"
+msgstr "% previsto"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__expected_birth
+msgid "Expected Births"
+msgstr "Nacimientos previstos"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__farm_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__farm_warehouse_id
+msgid "Farm"
+msgstr "Granja"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_feed_flour
@@ -60,16 +228,41 @@ msgid "Feed/Flour"
 msgstr "Pienso/harina"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__finished_move_line_ids
+msgid "Finished Product"
+msgstr "Producto terminado"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__gross_yield
+msgid "Gross Yield"
+msgstr "Rendimiento bruto"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__guide_number
+msgid "Guide Number"
+msgstr "Número de guía"
+
+#. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__origin_location_ids
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
 #, python-format
 msgid "Hatcheries"
 msgstr "Nacedoras"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__hen_unit
+msgid "Hen Units"
+msgstr "Galllinas"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__id
 msgid "ID"
@@ -79,6 +272,17 @@ msgstr "Identificador"
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_incubator
 msgid "Incubator"
 msgstr "Incubadora"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Input Products"
+msgstr "Productos de entrada"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_bom_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Inputs"
+msgstr "Entradas"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_integration
@@ -92,17 +296,50 @@ msgid "Kg"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
 
 #. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Last Month"
+msgstr "Último mes"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Last Week"
+msgstr "Última semana"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Last Year"
+msgstr "Último año"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Lot"
+msgstr "Lote"
+
+#. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_stock_production_lot
 msgid "Lot/Serial"
 msgstr "Lote/Número de serie"
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_other_bom
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_bom
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_other_bom
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_quartering_bom
+msgid "Material List"
+msgstr "Lista de materiales"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_medicine
@@ -115,16 +352,40 @@ msgid "Mother"
 msgstr "Madre"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__batch_location_id
+msgid "Mother Location"
+msgstr "Ubicación madre"
+
+#. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
+#: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__move_line_ids
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_production_lot_form
 #, python-format
 msgid "Move Lines"
 msgstr "Operaciones detalladas"
 
 #. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__move_line_ids
-msgid "Move Lines With Applied Prices"
-msgstr "Op. detalladas con precio aplicado"
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#, python-format
+msgid "No lot has been put on."
+msgstr "No se ha puesto lote"
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#, python-format
+msgid "No mother has been put on."
+msgstr "No se ha puesto madre"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__normal
+msgid "Normal"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Order"
+msgstr "Órden"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__origin_qty
@@ -132,12 +393,52 @@ msgid "Origin Qty"
 msgstr "Cantidad origen"
 
 #. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__product_id
-msgid "Product"
-msgstr "Producto"
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Output Products"
+msgstr "Productos de salida"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_bom_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Outputs"
+msgstr "Salidas"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__paasa
+msgid "PAASA"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__performance
+msgid "Performance"
+msgstr "Rendimiento"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__produced_qty
+msgid "Produced Qty"
+msgstr "Cantidad producida"
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_move_line
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_move_line_classified
+msgid "Product Movements"
+msgstr "Movimientos de producto"
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de Producto (Stock Move Line)"
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__production_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__production_ids
 #, python-format
 msgid "Production"
@@ -149,14 +450,16 @@ msgid "Production Order"
 msgstr "Orden de producción"
 
 #. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_quartering_tree_view
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
 msgid "Production Orders"
 msgstr "Órdenes de producción"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_price
-msgid "Purchase Price"
-msgstr "Precio de compra"
+msgid "Purchase Amount"
+msgstr "Importe de compra"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_unit_price
@@ -164,22 +467,46 @@ msgid "Purchase Unit Price"
 msgstr "Precio unitario"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__product_qty
+msgid "Quantity To Produce"
+msgstr "Cantidad para producir"
+
+#. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_stock_quant
 msgid "Quants"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__quartering
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__quartering
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__quartering_ids
-#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
 msgid "Quartering"
 msgstr "Despiece"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__real_average_weight
+msgid "Real Average Weight"
+msgstr "Peso medio real"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__relaxed
+msgid "Relaxed"
+msgstr "Relajada"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__remolque_id
+msgid "Remolque"
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__reproductor_quant_ids
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_reproductor
 msgid "Reproductor"
 msgstr "Reproductora"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__rto_percentage
+msgid "Rto. %"
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_id
@@ -190,9 +517,98 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_saca_line
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_line_id
-#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
 msgid "Saca Line"
 msgstr "Línea de saca"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__seized_units
+msgid "Seized"
+msgstr "Decomisos"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__staff
+msgid "Staff"
+msgstr "Personal"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
+msgid "Stock Move Lines"
+msgstr "Movimientos de producto"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Sum Total Unit"
+msgstr "Suma total unidades"
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_project_task
+msgid "Task"
+msgstr "Tarea"
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#, python-format
+msgid "The company of the saca and your company is not the same."
+msgstr "La compañía de la saca no es la misma"
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid "The outgoing lot must match the incoming one."
+msgstr "El lote saliente debe coincidir con alguno de la entrada."
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid "The product of the lot does not match with the product of the line."
+msgstr "El producto del lote no coincide con el producto de la línea."
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Today"
+msgstr "Hoy"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__tolvasa
+msgid "Tolvasa"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Total Consumed"
+msgstr "Total consumido"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
+msgid "Total Container"
+msgstr "Total envases"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Total Done"
+msgstr "Total hecho"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Total Pallet"
+msgstr "Total palets"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
+msgid "Total Performance"
+msgstr "Rendimiento total"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Total Produced"
+msgstr "Total producido"
 
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_stock_quant_tree
@@ -205,13 +621,49 @@ msgid "Total Qty Available"
 msgstr "Total disponible"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__unit_difference
+msgid "Unit Difference"
+msgstr "Diferencia de unidades"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__total_unit
 #: model:product.product,uom_name:custom_mrp_descarga.quartering_product
 #: model:product.template,uom_name:custom_mrp_descarga.quartering_product_product_template
 msgid "Units"
 msgstr "Unidades"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__unload_date
+msgid "Unload Date"
+msgstr "Fecha descarga"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__vehicle_id
+msgid "Vehicle"
+msgstr "Vehículo"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__waiting_time
+msgid "Waiting Time"
+msgstr "Tiempo de espera"
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_view_workcenter_cost_despiece
+msgid "Workcenter Cost"
+msgstr "Costes de centros de producción"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Yesterday"
+msgstr "Ayer"
+
+#. module: custom_mrp_descarga
 #: model:product.product,volume_uom_name:custom_mrp_descarga.quartering_product
 #: model:product.template,volume_uom_name:custom_mrp_descarga.quartering_product_product_template
 msgid "m³"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_production_classified
+msgid "Órdenes de producción"
 msgstr ""

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="qty_done" position="before">
+                <field name="container" optional="hide" sum="Total Container"/>
+            </field>
+            <field name="product_uom_id" position="after">
+                <field name="unit"/>
+                <field name="weight" optional="hide"/>
+                <field name="performance" optional="show" sum="Total Performance"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="stock_move_line_classified_tree_view" model="ir.ui.view">
+        <field name="name">stock.move.line.tree</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Move Lines" create="0">
+                <field name="date" optional="show"/>
+                <field name="production_id" optional="show"/>
+                <field name="product_id"/>
+                <field name="lot_id"/>
+                <field name="location_id" optional="hide"/>
+                <field name="location_dest_id" optional="hide"/>
+                <field name="container" optional="show"/>
+                <field name="qty_done"/>
+                <field name="product_uom_id" optional="show"/>
+                <field name="unit" optional="show"/>
+                <field name="weight" optional="show"/>
+                <field name="performance" optional="show"/>
+                <field name="standard_price" optional="show"/>
+                <field name="amount" optional="show"/>
+                <field name="company_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_classified_move_line" model="ir.actions.act_window">
+        <field name="name">Product Movements</field>
+        <field name="res_model">stock.move.line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="stock_move_line_classified_tree_view"/>
+        <field name="domain">[('production_id', '!=', False), ('production_id.quartering', '=', False), ('production_id.paasa', '=', True), ('state', '=', 'done')]</field>
+    </record>
+
+    <menuitem action="action_classified_move_line" name="Product Movements" id="menu_move_line_classified" parent="custom_descarga.stage_clasificado_menu" sequence="7"/>
+
+</odoo>
