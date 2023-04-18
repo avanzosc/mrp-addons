@@ -4,7 +4,8 @@
         <field name="model">mrp.bom.category</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name" />
+                <field name="name"/>
+                <field name="sequence_id"/>
             </tree>
         </field>
     </record>
@@ -15,7 +16,8 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name" />
+                        <field name="name"/>
+                        <field name="sequence_id"/>
                     </group>
                 </sheet>
             </form>
