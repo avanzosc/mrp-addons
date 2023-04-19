@@ -5,22 +5,34 @@
         <field name="name">killing.cost.tree</field>
         <field name="model">killing.cost</field>
         <field name="arch" type="xml">
-            <tree string="Killing Cost" editable="top">
-                <field name="seq" readonly="1"/>
-                <field name="name"/>
-                <field name="cost"/>
+            <tree string="Workcenter Cost" editable="top">
+                <field name="workcenter_id"/>
+                <field name="january"/>
+                <field name="february"/>
+                <field name="march"/>
+                <field name="april"/>
+                <field name="may"/>
+                <field name="june"/>
+                <field name="july"/>
+                <field name="august"/>
+                <field name="september"/>
+                <field name="october"/>
+                <field name="november"/>
+                <field name="december"/>
             </tree>
         </field>
     </record>
 
-    <record id="action_killing_cost_view" model="ir.actions.act_window">
-        <field name="name">Killing Cost</field>
+    <record id="action_workcenter_cost_view" model="ir.actions.act_window">
+        <field name="name">Workcenter Cost</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">killing.cost</field>
         <field name="view_mode">tree</field>
     </record>
 
-    <menuitem action="action_killing_cost_view" id="menu_view_killing_cost"
+    <menuitem action="action_workcenter_cost_view" id="menu_view_workcenter_cost"
               parent="mrp.menu_mrp_configuration" sequence="6"/>
+
+    <menuitem action="action_workcenter_cost_view" id="menu_view_workcenter_cost_clasificado" parent="custom_descarga.stage_clasificado_menu" sequence="7"/>
 
 </odoo>

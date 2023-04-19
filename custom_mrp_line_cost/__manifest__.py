@@ -17,10 +17,14 @@
     "data": [
         "security/ir.model.access.csv",
         "data/mrp_standar_price_decimal_precision.xml",
-        "data/mrp_killing_cost.xml",
         "views/mrp_production_view.xml",
         "views/product_template_view.xml",
         "views/killing_cost_view.xml",
+        "views/mrp_bom_view.xml",
+        "views/stock_move_line_view.xml",
+        "views/mrp_workcenter_view.xml",
+        "views/mrp_workorder_view.xml",
+        "views/mrp_routing_workcenter_view.xml",
     ],
     "installable": True,
 }
