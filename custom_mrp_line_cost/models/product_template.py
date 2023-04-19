@@ -8,5 +8,5 @@ class ProductTemplate(models.Model):
 
     canal = fields.Boolean(string="Canal", default=False)
     standard_price = fields.Float(
-        digits="MRP Standard Price Decimal Precision")
+        digits="MRP Price Decimal Precision")
     unit_container = fields.Integer(string="Unit/Container")

@@ -7,4 +7,4 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     standard_price = fields.Float(
-        digits="MRP Standard Price Decimal Precision")
+        digits="MRP Price Decimal Precision")
