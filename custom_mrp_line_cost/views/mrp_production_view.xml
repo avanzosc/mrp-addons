@@ -5,6 +5,7 @@
         <field name="inherit_id" ref="mrp_production_deconstruction.mrp_production_form_view"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
+                <button class="oe_stat_button" string="Produced Move Lines" icon="fa-random" type="object" name="action_view_finished_move_line_ids"/>
                 <button class="oe_stat_button" string="Pickings To Do" icon="fa-random" type="object" name="action_view_picking_to_do"/>
                 <button class="oe_stat_button" string="Moves To Do" icon="fa-arrows-v" type="object" name="action_view_move_to_do"/>
                 <button class="oe_stat_button" string="Move Lines To Do" icon="fa-list-ul" type="object" name="action_view_move_line_to_do"/>
@@ -14,37 +15,39 @@
                 <div class="o_row" name="origin_qty">
                     <field name="origin_qty"/>
                 </div>
-                <label for="dest_qty"/>
-                <div class="o_row" name="dest_qty">
-                    <field name="dest_qty"/>
-                </div>
                 <field name="currency_id" invisible="1"/>
-                <field name="purchase_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="purchase_price" string="Purchase Amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="purchase_unit_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                <field name="price_difference" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                <field name="month_id" invisible="1"/>
+                <field name="price_difference" invisible="1"/>
+                <field name="month_cost"/>
+                <field name="cost"/>
+                <field name="entry_total_amount" invisible="1"/>
+                <field name="output_total_amount" invisible="1"/>
             </field>
             <group name="group_extra_info" position="inside">
-                <label for="canal_weight"/>
+                <label for="canal_weight" string="Average Weight Canal"/>
                 <div class="o_row" name="canal_weight">
                     <field name="canal_weight"/>
                 </div>
                 <field name="rto_canal"/>
-                <field name="canal_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="canal_cost"/>
             </group>
             <xpath expr="//tree[@name='mrp_move_lines']/field[@name='location_dest_id']" position="after">
-                <field name="expense_kg" optional="hide"/>
-                <field name="canal" optional="hide"/>
-                <field name="container" sum="Total Containers"/>
-                <field name="qty_done" sum="Total Quantity"/>
-                <field name="unit" sum="Total Units"/>
-                <field name="product_unit_container"/>
-                <field name="unit_container"/>
-                <field name="weight"/>
-                <field name="percentage" sum="Total Percentage"/>
+                <field name="expense_kg" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="canal" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="pallet" sum="Total Pallets" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
+                <field name="container" sum="Total Containers" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="unit" sum="Total Units" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="qty_done" sum="Total Quantity" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="product_unit_container" optional="hide"/>
+                <field name="unit_container" readonly="1" force_save="1" optional="show"/>
+                <field name="weight" optional="show"/>
+                <field name="percentage" sum="Total Percentage" string="Rto. %" optional="show"/>
                 <field name="base_price"/>
-                <field name="applied_price"/>
-                <field name="amount" sum="Total amount"/>
+                <field name="applied_price" readonly="1" force_save="1"/>
+                <field name="standard_price" readonly="1" force_save="1" optional="hide"/>
+                <field name="amount" sum="Total amount" optional="show" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
             </xpath>
         </field>
     </record>

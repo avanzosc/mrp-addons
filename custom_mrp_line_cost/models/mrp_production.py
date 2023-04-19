@@ -8,11 +8,11 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     origin_qty = fields.Float(
-        string="Origin Qty")
+        string="Origin Kg")
     dest_qty = fields.Float(
-        string="Dest Qty")
+        string="Dest Kg")
     purchase_price = fields.Float(
-        string="Purchase Price")
+        string="Purchase Amount")
     purchase_unit_price = fields.Float(
         string="Purchase Unit Price")
     price_difference = fields.Float(
@@ -20,29 +20,29 @@ class MrpProduction(models.Model):
         compute="_compute_price_difference",
         store=True)
     canal_weight = fields.Float(
-        string="PMC",
+        string="Canal Average Weight",
         compute="_compute_canal_weight",
         store=True,
-        digits="MRP Standard Price Decimal Precision")
+        digits="Killing Cost Decimal Precision")
     rto_canal = fields.Float(
         string="Rto. Canal",
         compute="_compute_rto_canal",
-        store=True,
-        digits="MRP Standard Price Decimal Precision")
+        store=True)
     canal_cost = fields.Float(
         string="Canal Cost",
-        digits="MRP Standard Price Decimal Precision",
+        digits="Killing Cost Decimal Precision",
         compute="_compute_canal_cost",
         store=True)
     currency_id = fields.Many2one(
         string="Currency",
         comodel_name="res.currency",
         default=lambda self: self.env.company.currency_id.id)
-    month_id = fields.Many2one(
-        string="Month",
-        comodel_name="killing.cost",
-        compute="_compute_month_id",
-        store=True)
+    month_cost = fields.Float(
+        string="Expense/kg",
+        digits="Killing Cost Decimal Precision",
+        compute="_compute_month_cost",
+        store=True
+        )
     move_to_do_ids = fields.Many2many(
         string="Moves To Do",
         comodel_name="stock.move",
@@ -55,6 +55,76 @@ class MrpProduction(models.Model):
         string="Pickings To Do",
         comodel_name="stock.picking",
         compute="_compute_picking_to_do_ids")
+    pallet_id = fields.Many2one(
+        string="Pallet",
+        comodel_name="product.product",
+        related="bom_id.pallet_id",
+        store=True)
+    packaging_id = fields.Many2one(
+        string="Packaging",
+        comodel_name="product.product",
+        related="bom_id.packaging_id",
+        store=True)
+    average_cost = fields.Float(
+        string="Averga Cost",
+        compute="_compute_average_cost",
+        store=True)
+    cost = fields.Float(
+        string="Cost",
+        compute="_compute_cost",
+        store=True)
+    entry_total_amount = fields.Float(
+        string="Entry Total Amount",
+        compute="_compute_total_amount",
+        store=True)
+    output_total_amount = fields.Float(
+        string="Output Total Amount")
+    consume_qty = fields.Float(
+        string="Consumed Qty",
+        compute="_compute_consume_qty",
+        store=True)
+
+    @api.depends("move_line_ids", "move_line_ids.qty_done")
+    def _compute_consume_qty(self):
+        for production in self:
+            production.consume_qty = sum(
+                production.move_line_ids.filtered(
+                    lambda c: c.location_id == (
+                        production.location_dest_id)).mapped("qty_done"))
+
+    @api.depends("purchase_price", "month_cost", "origin_qty")
+    def _compute_cost(self):
+        for production in self:
+            production.cost = production.purchase_price + (
+                production.month_cost * production.origin_qty)
+
+    @api.onchange("move_line_ids", "move_line_ids.amount")
+    def _onchange_move_line_amount(self):
+        if self.move_line_ids:
+            self.entry_total_amount = sum(self.move_line_ids.mapped("amount"))
+
+    @api.depends("finished_move_line_ids", "finished_move_line_ids.amount")
+    def _compute_output_total_amount(self):
+        for production in self:
+            production.output_total_amount = sum(
+                production.finished_move_line_ids.mapped("amount"))
+
+    @api.depends("move_line_ids", "move_line_ids.qty_done",
+                 "move_line_ids.amount")
+    def _compute_average_cost(self):
+        for line in self:
+            line.average_cost = 0
+            if sum(line.move_line_ids.filtered(
+                lambda c: c.location_id == line.location_src_id).mapped(
+                    "qty_done")) != 0:
+                line.average_cost = sum(
+                    line.move_line_ids.filtered(
+                        lambda c: c.location_id == (
+                            line.location_src_id)).mapped("amount")) / sum(
+                                line.move_line_ids.filtered(
+                                    lambda c: c.location_id == (
+                                        line.location_src_id)).mapped(
+                                            "qty_done"))
 
     def _compute_move_to_do_ids(self):
         for production in self:
@@ -79,26 +149,82 @@ class MrpProduction(models.Model):
             production.picking_to_do_ids = (
                 self.env["stock.picking"].search(domain))
 
-    @api.depends("date_planned_start")
-    def _compute_month_id(self):
+    @api.depends("workorder_ids", "workorder_ids.workcenter_id",
+                 "workorder_ids.workcenter_id.cost_ids.january",
+                 "workorder_ids.workcenter_id.cost_ids.february",
+                 "workorder_ids.workcenter_id.cost_ids.march",
+                 "workorder_ids.workcenter_id.cost_ids.april",
+                 "workorder_ids.workcenter_id.cost_ids.may",
+                 "workorder_ids.workcenter_id.cost_ids.june",
+                 "workorder_ids.workcenter_id.cost_ids.july",
+                 "workorder_ids.workcenter_id.cost_ids.august",
+                 "workorder_ids.workcenter_id.cost_ids.september",
+                 "workorder_ids.workcenter_id.cost_ids.october",
+                 "workorder_ids.workcenter_id.cost_ids.november",
+                 "workorder_ids.workcenter_id.cost_ids.december",
+                 "date_planned_start")
+    def _compute_month_cost(self):
         for line in self:
-            if line.date_planned_start:
-                num = line.date_planned_start.month
-                month = self.env["killing.cost"].search([("seq", "=", num)], limit=1)
-                if month:
-                    line.month_id = month.id
+            line.month_cost = 0
+            if line.date_planned_start and line.workorder_ids:
+                month = line.date_planned_start.month
+                if month == 1:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.january)
+                if month == 2:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.february)
+                if month == 3:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.march)
+                if month == 4:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.april)
+                if month == 5:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.may)
+                if month == 6:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.june)
+                if month == 7:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.july)
+                if month == 8:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.august)
+                if month == 9:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.september
+                        )
+                if month == 10:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.october)
+                if month == 11:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.november)
+                if month == 12:
+                    line.month_cost = (
+                        line.workorder_ids[:1].workcenter_id.cost_ids.december)
 
-    @api.depends("purchase_price", "move_line_ids", "move_line_ids.qty_done",
-                 "move_line_ids.applied_price", "move_line_ids.amount")
+    @api.depends("cost", "entry_total_amount", "output_total_amount",
+                 "average_cost", "month_cost", "consume_qty", "move_line_ids",
+                 "move_line_ids.applied_price", "move_line_ids.base_price",
+                 "move_line_ids.amount")
     def _compute_price_difference(self):
         for production in self:
-            production.price_difference = 0
-            if production.purchase_price and production.move_line_ids:
+            dif = 0
+            if production.saca_line_id and (
+                production.purchase_price) and (
+                    production.move_line_ids):
                 for line in production.move_line_ids:
+                    if not line.move_id:
+                        line.move_id = production.move_raw_ids.filtered(
+                            lambda c: c.product_id == line.product_id).id
                     line.applied_price = line.base_price
                     line.onchange_applied_price()
-                dif = production.purchase_price - (
-                    sum(production.move_line_ids.mapped("amount")))
+                    line.onchange_standard_price()
+                    production._onchange_move_line_amount()
+                dif = production.cost - production.entry_total_amount
                 if dif != 0:
                     max_line = max(
                         production.move_line_ids, key=lambda x: x.qty_done)
@@ -106,9 +232,34 @@ class MrpProduction(models.Model):
                         max_line.amount = max_line.amount + dif
                         max_line.applied_price = max_line.applied_price + (
                             dif / max_line.qty_done)
-                        dif = production.purchase_price - sum(
-                            production.move_line_ids.mapped("amount"))
-                production.price_difference = dif
+                        max_line.onchange_applied_price()
+                        dif = production.purchase_price + (
+                            production.month_cost * production.origin_qty) - (
+                                sum(production.move_line_ids.mapped("amount")))
+                production._onchange_move_line_amount()
+            elif not production.saca_line_id and (
+                production.average_cost) and (
+                    production.finished_move_line_ids):
+                for line in production.finished_move_line_ids:
+                    line.applied_price = line.base_price
+                    line.onchange_applied_price()
+                    line.onchange_standard_price()
+                dif = production.average_cost + (
+                    production.month_cost * production.consume_qty) - (
+                        production.output_total_amount)
+                if dif != 0:
+                    max_line = max(
+                        production.finished_move_line_ids,
+                        key=lambda x: x.qty_done)
+                    if max_line and max_line.qty_done != 0:
+                        max_line.amount = max_line.amount + dif
+                        max_line.applied_price = max_line.applied_price + (
+                            dif / max_line.qty_done)
+                        dif = production.average_cost + (
+                            production.month_cost * production.consume_qty) - (
+                                sum(production.finished_move_line_ids.mapped(
+                                    "amount")))
+            production.price_difference = dif
 
     @api.depends("move_line_ids", "move_line_ids.canal",
                  "move_line_ids.qty_done")
@@ -117,10 +268,10 @@ class MrpProduction(models.Model):
             line.canal_weight = 0
             canal_lines = line.move_line_ids.filtered(
                 lambda c: c.canal is True)
-            total_weight = sum(line.move_line_ids.mapped("qty_done"))
             canal_weight = sum(canal_lines.mapped("qty_done"))
-            if canal_weight != 0:
-                line.canal_weight = total_weight / canal_weight
+            canal_unit = sum(canal_lines.mapped("unit"))
+            if canal_unit != 0:
+                line.canal_weight = canal_weight / canal_unit
 
     @api.depends("move_line_ids", "move_line_ids.canal",
                  "move_line_ids.percentage")
@@ -154,7 +305,8 @@ class MrpProduction(models.Model):
                     production.move_line_ids.mapped(
                         "percentage")) > 100:
                     raise ValidationError(
-                        _("The sum of the percentages it can't be more than 100."))
+                        _("The sum of the percentages it can't be" +
+                          " more than 100."))
 
     def action_view_move_to_do(self):
         context = self.env.context.copy()
@@ -185,6 +337,17 @@ class MrpProduction(models.Model):
             "view_mode": "tree,form",
             "res_model": "stock.picking",
             "domain": [("id", "in", self.picking_to_do_ids.ids)],
+            "type": "ir.actions.act_window",
+            "context": context
+        }
+
+    def action_view_finished_move_line_ids(self):
+        context = self.env.context.copy()
+        return {
+            "name": _("Produced Move Lines"),
+            "view_mode": "tree,form",
+            "res_model": "stock.move.line",
+            "domain": [("id", "in", self.finished_move_line_ids.ids)],
             "type": "ir.actions.act_window",
             "context": context
         }
