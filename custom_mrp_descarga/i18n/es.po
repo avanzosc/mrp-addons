@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-04 13:09+0000\n"
-"PO-Revision-Date: 2023-04-04 13:09+0000\n"
+"POT-Creation-Date: 2023-04-20 13:25+0000\n"
+"PO-Revision-Date: 2023-04-20 13:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -144,6 +144,11 @@ msgid "Deconstruction"
 msgstr "Deconstrucción"
 
 #. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Delete Moves With Qty Zero"
+msgstr "Eliminar líneas a cero"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__demanding
 msgid "Demanding"
 msgstr "Exigente"
@@ -196,6 +201,11 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_view_search
+msgid "Done bigger than 0"
+msgstr "Hecho mayor que 0"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_product__download_product
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__download_product
 msgid "Download Product"
@@ -205,6 +215,11 @@ msgstr "Producto descarga"
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__download_unit
 msgid "Download Unit"
 msgstr "Unidades descargadas"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Emtying Hatchers"
+msgstr "Vaciar nacedoras"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__expected_rate
@@ -367,11 +382,13 @@ msgstr "Operaciones detalladas"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #, python-format
 msgid "No lot has been put on."
 msgstr "No se ha puesto lote"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #, python-format
 msgid "No mother has been put on."
@@ -552,17 +569,20 @@ msgstr "Tarea"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#: code:addons/custom_mrp_descarga/models/saca_line.py:0
 #, python-format
 msgid "The company of the saca and your company is not the same."
 msgstr "La compañía de la saca no es la misma"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "The outgoing lot must match the incoming one."
 msgstr "El lote saliente debe coincidir con alguno de la entrada."
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "The product of the lot does not match with the product of the line."

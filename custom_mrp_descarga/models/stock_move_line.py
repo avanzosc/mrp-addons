@@ -15,7 +15,8 @@ class StockMoveLine(models.Model):
     sequence = fields.Integer(
         string="Sequence",
         compute="_compute_sequence",
-        store=True)
+        store=True
+        )
 
     @api.depends("production_id")
     def _compute_sequence(self):
@@ -53,8 +54,8 @@ class StockMoveLine(models.Model):
             self.download_unit = self.unit
 
     @api.onchange("product_id", "location_id", "location_dest_id",
-                  "production_id", "production_id.move_raw_ids",
-                  "production_id.move_byproduct_ids")
+                  "production_id", "production_id",
+                  "production_id")
     def onchange_product_id(self):
         self.ensure_one()
         if "production_id" in self.env.context or "default_production_id" in (
