@@ -28,7 +28,7 @@ class MrpProduction(models.Model):
                         move.location_dest_id = line.location_src_id.id
         return res
 
-    @api.constrains("bom_id", "is_deconstruction", "bom_id.is_deconstruction")
+    @api.constrains("bom_id", "is_deconstruction")
     def _check_is_deconstruction(self):
         for production in self:
             if production.bom_id and (
