@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_line_mrp_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-10 13:37+0000\n"
+"PO-Revision-Date: 2023-05-10 13:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_procurement_group__display_name
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__id
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_procurement_group__id
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line__id
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_procurement_group____last_update
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line____last_update
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_sale_order_line__mrp_production_id
+msgid "MRP Production"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model,name:sale_line_mrp_link.model_procurement_group
+msgid "Procurement Group"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model,name:sale_line_mrp_link.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model_terms:ir.ui.view,arch_db:sale_line_mrp_link.mrp_production_form_view
+msgid "Sale information"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__sale_line_id
+msgid "Sale line"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__sale_line_name
+#: model_terms:ir.ui.view,arch_db:sale_line_mrp_link.mrp_production_form_view
+msgid "Sale line description"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model.fields,field_description:sale_line_mrp_link.field_mrp_production__sale_id
+#: model_terms:ir.ui.view,arch_db:sale_line_mrp_link.view_mrp_production_filter
+msgid "Sale order"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model,name:sale_line_mrp_link.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: sale_line_mrp_link
+#: model:ir.model,name:sale_line_mrp_link.model_stock_move
+msgid "Stock Move"
+msgstr ""
