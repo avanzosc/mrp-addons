@@ -13,6 +13,7 @@
         "mrp_bom_line_coef",
         "mrp_production_deconstruction",
         "stock_move_line_cost",
+        "custom_descarga",
     ],
     "data": [
         "security/ir.model.access.csv",
