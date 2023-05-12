@@ -543,7 +543,6 @@ class MrpProduction(models.Model):
         lines = self.move_line_ids.filtered(lambda c: c.qty_done == 0)
         for line in lines:
             line.unlink()
-        self._onchange_move_line_amount()
 
     def calculate_weeks_start(self, start_date):
         self.ensure_one()
