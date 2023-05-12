@@ -39,7 +39,7 @@
                 <field name="container" sum="Total Containers" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                 <field name="unit" sum="Total Units" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                 <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="qty_done" sum="Total Quantity" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="qty_done" sum="Total Quantity" attrs="{'readonly': [('state', 'in', ('cancel'))]}"/>
                 <field name="product_unit_container" optional="hide"/>
                 <field name="unit_container" readonly="1" force_save="1" optional="show"/>
                 <field name="weight" optional="show"/>
