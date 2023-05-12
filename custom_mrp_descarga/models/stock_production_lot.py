@@ -11,10 +11,6 @@ class StockProductionLot(models.Model):
         digits="MRP Price Decimal Precision",
         compute="_compute_average_price",
         store=True)
-    move_line_ids = fields.One2many(
-        string="Move Lines",
-        comodel_name="stock.move.line",
-        inverse_name="lot_id")
 
     @api.depends("move_line_ids", "move_line_ids.amount",
                  "move_line_ids.qty_done", "move_line_ids.state")

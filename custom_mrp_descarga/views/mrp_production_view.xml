@@ -79,9 +79,6 @@
                 <button name="action_emptying_hatchers" string="Emtying Hatchers" type="object" attrs="{'invisible': ['|', ('chick_production', '=', False), ('state', 'in', ('to_close', 'done', 'cancel'))]}"/>
                 <button name="action_delete_moves_with_qty_zero" string="Delete Moves With Qty Zero" type="object" attrs="{'invisible': ['|', ('saca_line_id', '=', False), ('state', 'not in', ('confirmed', 'progress', 'to_close'))]}"/>
             </button>
-            <button name="action_assign" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', '|', '|', ('state', 'in', ('draft', 'done', 'cancel')), ('reserve_visible', '=', False), ('chick_production', '=', True), ('quartering', '=', True)]}</attribute>
-            </button>
             <label for="date_planned_start" position="attributes">
                 <attribute name="attrs">{'invisible':[('tolvasa', '=', True)]}</attribute>
             </label>
@@ -226,6 +223,7 @@
                             <field name="product_uom_category_id" invisible="1"/>
                             <field name="lot_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
                             <field name="expense_kg" optional="hide"/>
+                            <field name="pallet_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
                             <field name="pallet" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" sum="Total Pallet"/>
                             <field name="container" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" sum="Total Container"/>
                             <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>

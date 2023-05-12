@@ -19,6 +19,7 @@
         "stock_move_line_cost",
         "stock_picking_batch_liquidation",
         "stock_picking_cancel",
+        "stock_move_in_out_qty"
     ],
     "data": [
         "data/quartering_product.xml",
