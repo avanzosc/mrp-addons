@@ -6,7 +6,7 @@
 MRP BOM categories
 ==================
 
-* This module allow to categorize BoM. There are a main category and an alternate category.
+* This module allows to categorize BOMs. There is a main category and another alternative category.
 * There is a sequence in BoM category, for the referece of the manufacture order.
 
 Bug Tracker
