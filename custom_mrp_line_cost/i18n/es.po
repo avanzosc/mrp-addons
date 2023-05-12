@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 09:38+0000\n"
-"PO-Revision-Date: 2023-03-03 09:38+0000\n"
+"POT-Creation-Date: 2023-05-05 10:55+0000\n"
+"PO-Revision-Date: 2023-05-05 10:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -205,6 +205,12 @@ msgstr ""
 "Se utiliza para calcular los márgenes de las órdenes de venta."
 
 #. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_product__palet
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_template__palet
+msgid "Is Palet"
+msgstr "Es palet"
+
+#. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__january
 msgid "January"
 msgstr "Enero"
@@ -253,6 +259,11 @@ msgid "May"
 msgstr "Mayo"
 
 #. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__month_cost
+msgid "Month Cost"
+msgstr "Coste mes"
+
+#. module: custom_mrp_line_cost
 #: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
 #: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__move_line_to_do_ids
@@ -299,9 +310,14 @@ msgstr "Envase"
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom__pallet_id
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__pallet_id
-#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet_id
 msgid "Pallet"
 msgstr "Palet"
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet
+msgid "Pallet Qty"
+msgstr "Cant. Palet"
 
 #. module: custom_mrp_line_cost
 #: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
@@ -318,6 +334,7 @@ msgid "Price Difference"
 msgstr "Diferencia"
 
 #. module: custom_mrp_line_cost
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
 #: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
 #: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
 #, python-format
@@ -336,8 +353,8 @@ msgstr "Movimientos de Producto (Stock Move Line)"
 
 #. module: custom_mrp_line_cost
 #: model:ir.model,name:custom_mrp_line_cost.model_product_template
-msgid "Product Template (Multi-Company)"
-msgstr "Plantilla de producto (multicompañía)"
+msgid "Product Template"
+msgstr "Plantilla de producto"
 
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__product_unit_container

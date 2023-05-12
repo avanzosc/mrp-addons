@@ -8,7 +8,8 @@ class MrpBom(models.Model):
 
     pallet_id = fields.Many2one(
         string="Pallet",
-        comodel_name="product.product")
+        comodel_name="product.product",
+        domain="[('palet', '=', True)]")
     packaging_id = fields.Many2one(
         string="Packaging",
         comodel_name="product.product")

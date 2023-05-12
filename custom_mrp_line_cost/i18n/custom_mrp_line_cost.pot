@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 09:36+0000\n"
-"PO-Revision-Date: 2023-03-03 09:36+0000\n"
+"POT-Creation-Date: 2023-05-05 10:55+0000\n"
+"PO-Revision-Date: 2023-05-05 10:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -201,6 +201,12 @@ msgid ""
 msgstr ""
 
 #. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_product__palet
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_template__palet
+msgid "Is Palet"
+msgstr ""
+
+#. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__january
 msgid "January"
 msgstr ""
@@ -246,6 +252,11 @@ msgstr ""
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__may
 msgid "May"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__month_cost
+msgid "Month Cost"
 msgstr ""
 
 #. module: custom_mrp_line_cost
@@ -295,8 +306,13 @@ msgstr ""
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom__pallet_id
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__pallet_id
-#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet_id
 msgid "Pallet"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet
+msgid "Pallet Qty"
 msgstr ""
 
 #. module: custom_mrp_line_cost
@@ -315,6 +331,7 @@ msgstr ""
 
 #. module: custom_mrp_line_cost
 #: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
 #: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
 #, python-format
 msgid "Produced Move Lines"
@@ -332,7 +349,7 @@ msgstr ""
 
 #. module: custom_mrp_line_cost
 #: model:ir.model,name:custom_mrp_line_cost.model_product_template
-msgid "Product Template (Multi-Company)"
+msgid "Product Template"
 msgstr ""
 
 #. module: custom_mrp_line_cost

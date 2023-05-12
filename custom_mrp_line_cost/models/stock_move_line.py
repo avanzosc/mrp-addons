@@ -7,6 +7,13 @@ from odoo.exceptions import ValidationError
 class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
+    def _default_pallet_id(self):
+        if "default_production_id" in self.env.context:
+            result = self.env["mrp.production"].browse(self.env.context.get("default_production_id")).pallet_id.id
+        else:
+            result = False
+        return result
+
     container = fields.Integer(string="Containers")
     unit = fields.Integer(string="Unit")
     product_unit_container = fields.Integer(
@@ -44,11 +51,16 @@ class StockMoveLine(models.Model):
     brut = fields.Float(
         string="Brut")
     pallet = fields.Integer(
-        string="Pallet")
+        string="Pallet Qty")
     month_cost = fields.Float(
         string="Month Cost",
         compute="_compute_month_cost",
         store=True)
+    pallet_id = fields.Many2one(
+        string="Pallet",
+        comodel_name="product.product",
+        default=_default_pallet_id,
+        domain="[('palet', '=', True)]")
 
     @api.depends("production_id", "production_id.date_planned_start",
                  "move_id", "move_id.bom_line_id",
@@ -154,11 +166,11 @@ class StockMoveLine(models.Model):
                 line.percentage = (
                     line.qty_done * 100 / line.production_id.origin_qty)
 
-    @api.onchange("brut", "pallet", "container")
+    @api.onchange("brut", "pallet", "container", "pallet_id")
     def onchange_brut(self):
         if self.brut:
             self.qty_done = self.brut - (
-                self.pallet * self.production_id.pallet_id.weight) - (
+                self.pallet * self.pallet_id.weight) - (
                     self.container * self.production_id.packaging_id.weight)
 
     @api.onchange("container")

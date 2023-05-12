@@ -10,3 +10,6 @@ class ProductTemplate(models.Model):
     standard_price = fields.Float(
         digits="MRP Price Decimal Precision")
     unit_container = fields.Integer(string="Unit/Container")
+    palet = fields.Boolean(
+        string="Is Palet",
+        default=False)
