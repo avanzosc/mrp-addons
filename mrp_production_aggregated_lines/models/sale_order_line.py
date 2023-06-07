@@ -143,10 +143,12 @@ class SaleOrder(models.Model):
     def action_cancel(self):
         res = super(SaleOrder, self).action_cancel()
         for line in self.mapped('order_line'):
-            if line.mrp_production_id.sale_line_ids == line:
-                line.mrp_production_id.action_cancel()
+            production = line.mrp_production_id
+            if production and production.sale_line_ids == line:
+                finished_workorders = production.workorder_ids.filtered(lambda w: w.state == 'done')
+                if not finished_workorders:
+                    production.action_cancel()
             else:
-                production = line.mrp_production_id
                 if production:
                     production._update_mo_qty(production.product_qty -
                                               line.product_uom_qty)
