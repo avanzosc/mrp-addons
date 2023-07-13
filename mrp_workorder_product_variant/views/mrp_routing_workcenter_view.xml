@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="mrp_routing_workcenter_tree_view" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="time_cycle" position="after">
+                <field name="parent_product_tmpl_id" invisible="1"/>
+                <field name="possible_bom_product_template_attribute_value_ids" widget="many2many_tags" invisible="1"/>
+                <field name="bom_product_template_attribute_value_ids" widget="many2many_tags" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_form_view" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="parent_product_tmpl_id" invisible="1"/>
+                <field name="possible_bom_product_template_attribute_value_ids" widget="many2many_tags" invisible="1"/>
+                <field name="bom_product_template_attribute_value_ids" widget="many2many_tags" optional="hide"/>
+            </field>
+        </field>
+    </record>
+</odoo>
