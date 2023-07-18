@@ -65,6 +65,8 @@ class MrpWorkorderNest(models.Model):
         comodel_name="mrp.workorder.nest.line",
         inverse_name="nest_id",
         string="Nested Lines",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
         copy=True,
     )
     state = fields.Selection(
@@ -169,17 +171,16 @@ class MrpWorkorderNest(models.Model):
         for nest in self.filtered(lambda n: n.state == "draft"):
             nest._check_lot()
             nest.nested_line_ids.action_check_ready()
-            if not any(
-                nest.nested_line_ids.filtered(
-                    lambda l: l.state not in ("ready", "progress", "done")
-                )
-            ):
+            if not any(nest.nested_line_ids.filtered(lambda nl: nl.state == "draft")):
                 nest.state = "ready"
 
     def nest_start(self):
         for nest in self.filtered(lambda n: n.state == "ready"):
             nest._check_lot()
-            nest.state = "progress"
+            if not any(
+                nest.nested_line_ids.filtered(lambda nl: nl.state in ("draft", "ready"))
+            ):
+                nest.state = "progress"
 
     def nest_draft(self):
         for nest in self.filtered(lambda n: n.state == "ready"):
@@ -206,15 +207,21 @@ class MrpWorkorderNest(models.Model):
     def button_start(self):
         self.action_check_ready()
         for nest in self:
-            nest.nest_start()
             nest.nested_line_ids.button_start()
-            # nest.state = "progress"
+            nest.nest_start()
 
     def record_production(self):
         for nest in self:
             nest._check_lot()
             nest.nested_line_ids.record_production()
-            nest.nest_blocked()
+            if any(
+                nest.nested_line_ids.filtered(
+                    lambda nl: nl.state not in ("done", "cancel")
+                )
+            ):
+                nest.nest_blocked()
+            else:
+                nest.state = "done"
 
     def button_pending(self):
         for nest in self:

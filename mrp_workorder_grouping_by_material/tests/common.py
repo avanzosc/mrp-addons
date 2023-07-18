@@ -7,7 +7,7 @@ from odoo.tests import common
 class MrpWorkorderGroupingMaterial(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(MrpWorkorderGroupingMaterial, cls).setUpClass()
+        super().setUpClass()
         manufacture_route = cls.env.ref("mrp.route_warehouse0_manufacture")
         mto_route = cls.env.ref("stock.route_warehouse0_mto")
         product_obj = cls.env["product.product"]

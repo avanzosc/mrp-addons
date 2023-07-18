@@ -2,7 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 {
     "name": "Workorders grouping by main material",
-    "version": "13.0.2.0.0",
+    "version": "13.0.3.0.0",
     "license": "AGPL-3",
     "depends": [
         "mrp",

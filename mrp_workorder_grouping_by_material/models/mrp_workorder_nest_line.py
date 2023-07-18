@@ -3,7 +3,6 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare
 
 from .mrp_workorder_nest import NEST_STATE
 
@@ -45,6 +44,8 @@ class MrpWorkorderNestLine(models.Model):
     workorder_id = fields.Many2one(
         string="Workorder",
         comodel_name="mrp.workorder",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
         required=True,
     )
     qty_produced = fields.Float(
@@ -109,7 +110,10 @@ class MrpWorkorderNestLine(models.Model):
         string="Workorder Status", related="workorder_id.state", readonly=True
     )
     working_state = fields.Selection(
-        string="Workcenter Status", related="workorder_id.working_state", readonly=True
+        string="Workcenter Status",
+        related="nest_id.workcenter_id.working_state",
+        readonly=True,
+        help="Technical: used in views only",
     )
     is_produced = fields.Boolean(related="workorder_id.is_produced")
     is_user_working = fields.Boolean(related="workorder_id.is_user_working")
@@ -122,12 +126,14 @@ class MrpWorkorderNestLine(models.Model):
         comodel_name="mrp.workorder",
         compute="_compute_possible_workorder_ids",
         string="Possible Workorders",
+        store=True,
     )
     worksheet = fields.Binary(
         string="Worksheet", related="workorder_id.worksheet", readonly=True
     )
 
     @api.depends(
+        "state",
         "nest_id",
         "nest_id.main_product_id",
         "nest_id.workcenter_id",
@@ -136,6 +142,9 @@ class MrpWorkorderNestLine(models.Model):
     def _compute_possible_workorder_ids(self):
         workorder_obj = self.env["mrp.workorder"]
         for nest_line in self:
+            if not nest_line.state == "draft":
+                nest_line.possible_workorder_ids = []
+                continue
             nest = nest_line.nest_id
             workorders = workorder_obj.search(
                 [
@@ -146,18 +155,18 @@ class MrpWorkorderNestLine(models.Model):
             )
             nest_line.possible_workorder_ids = [(6, 0, workorders.ids or [])]
 
-    @api.depends("production_id.product_qty", "qty_produced")
-    def _compute_is_produced(self):
-        self.is_produced = False
-        for line in self.filtered(lambda p: p.workorder_id.production_id):
-            rounding = line.workorder_id.production_id.product_uom_id.rounding
-            production_qty = line.workorder_id._get_real_uom_qty(line.qty_producing)
-            line.is_produced = (
-                float_compare(
-                    line.finished_qty, production_qty, precision_rounding=rounding
-                )
-                >= 0
-            )
+    # @api.depends("production_id.product_qty", "qty_produced")
+    # def _compute_is_produced(self):
+    #     self.is_produced = False
+    #     for line in self.filtered(lambda p: p.workorder_id.production_id):
+    #         rounding = line.workorder_id.production_id.product_uom_id.rounding
+    #         production_qty = line.workorder_id._get_real_uom_qty(line.qty_producing)
+    #         line.is_produced = (
+    #             float_compare(
+    #                 line.finished_qty, production_qty, precision_rounding=rounding
+    #             )
+    #             >= 0
+    #         )
 
     def open_workorder_view(self):
         self.ensure_one()
@@ -296,9 +305,10 @@ class MrpWorkorderNestLine(models.Model):
 
     def button_finish(self):
         for nl in self.filtered(
-            lambda n: n.is_produced and n.workorder_state == "progress"
+            lambda n: n.is_produced and n.workorder_id.state == "progress"
         ):
             nl.workorder_id.with_context(from_nest=True).button_finish()
+            nl.action_check_ready()
 
     def _check_final_product_lot(self):
         for wo in self.mapped("workorder_id"):
@@ -311,19 +321,19 @@ class MrpWorkorderNestLine(models.Model):
                 )
 
     def action_back2draft(self):
-        for nl in self.filtered(lambda l: l.state == "ready"):
-            nl.state = "draft"
+        for nest_line in self.filtered(lambda nl: nl.state == "ready"):
+            nest_line.state = "draft"
 
     def action_check_ready(self):
         for nl in self.filtered(lambda n: n.state == "draft"):
-            if nl.workorder_id.state in ("ready", "progress"):
+            if nl.workorder_id.state not in ("pending", "progress"):
+                nl.state = nl.workorder_id.state
+            else:
                 nl.state = "ready"
-            elif nl.workorder_id.state == "done":
-                nl.state = "done"
 
     def action_cancel(self):
-        if not any(self.filtered(lambda l: l.state == "ready")):
-            raise UserError(_(""))
+        if any(self.filtered(lambda nl: nl.state == "done")):
+            raise UserError(_("You can't cancel done nested lines."))
         return self.write({"state": "cancel"})
 
     def button_start(self):
@@ -331,7 +341,7 @@ class MrpWorkorderNestLine(models.Model):
             nl._write_lot_producing_qty()
             nl._check_final_product_lot()
             nl.workorder_id.with_context(from_nest=True).button_start()
-            nl.state = "progress"
+            nl.state = nl.workorder_id.state
 
     def record_production(self):
         for nl in self.filtered(lambda n: n.state == "progress"):
@@ -356,7 +366,7 @@ class MrpWorkorderNestLine(models.Model):
         for nl in self:
             is_user_working = nl.workorder_id.is_user_working
             if (
-                nl.working_state != "blocked"
+                nl.nest_id.workcenter_id.working_state != "blocked"
                 and is_user_working
                 and nl.workorder_id.state not in ("done", "pending", "ready", "cancel")
             ):
@@ -364,7 +374,7 @@ class MrpWorkorderNestLine(models.Model):
 
     def button_scrap(self):
         for nest_line in self.filtered(
-            lambda l: l.workorder_state not in ("confirmed", "cancel")
+            lambda nl: nl.workorder_state not in ("confirmed", "cancel")
         ):
             nest_line.workorder_id.with_context(from_nest=True).button_scrap()
 

@@ -29,11 +29,13 @@ class MrpWorkorder(models.Model):
     nested_count = fields.Integer(
         compute="_compute_nested_ids",
         compute_sudo=True,
+        store=True,
     )
     qty_nested = fields.Float(
         string="Nested Quantity",
         compute="_compute_nested",
         compute_sudo=True,
+        store=True,
     )
     nested_status = fields.Selection(
         selection=[
@@ -155,6 +157,12 @@ class MrpWorkorder(models.Model):
         if not from_nest and self.workcenter_id.nesting_required:
             raise exceptions.UserError(_("The workcenter is 'nesting_required'"))
         return super().button_scrap()
+
+    def action_cancel(self):
+        self.mapped("nested_line_ids").filtered(
+            lambda nl: nl.state != "cancel"
+        ).action_cancel()
+        return super().action_cancel()
 
     def open_nest(self):
         self.ensure_one()
