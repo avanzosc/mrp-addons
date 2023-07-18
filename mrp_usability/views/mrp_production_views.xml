@@ -4,6 +4,9 @@
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
+            <xpath expr="//sheet/div/button[7]" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', 'not in', ('progress', 'to_close', 'done'))]}</attribute>
+            </xpath>
             <div class="oe_button_box" name="button_box">
                 <button
           class="oe_stat_button"
