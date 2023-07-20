@@ -5,6 +5,12 @@
         <field name="arch" type="xml">
             <search>
                 <field name="nest_id" />
+                <field name="state" />
+                <filter
+          name="filter_draft"
+          string="Draft"
+          domain="[('state','=','draft')]"
+        />
                 <group expand="1" string="Group By">
                     <filter
             name="group_nest"
@@ -17,6 +23,12 @@
             string="Work Order"
             domain="[]"
             context="{'group_by': 'workorder_id'}"
+          />
+                    <filter
+            name="group_state"
+            string="Status"
+            domain="[]"
+            context="{'group_by': 'state'}"
           />
                 </group>
             </search>
@@ -31,8 +43,9 @@
         decoration-success="ok_line"
         decoration-danger="working_state == 'blocked'"
         decoration-muted="state == 'cancel'"
+        decoration-it="state == 'done'"
       >
-                <field name="nest_id" />
+                <field name="nest_id" domain="[('state','=','draft')]" />
                 <field name="ok_line" invisible="1" />
                 <field name="possible_workorder_ids" invisible="1" />
                 <field name="main_product_id" invisible="1" />

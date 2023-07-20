@@ -27,7 +27,7 @@ class TestMrpWorkorderGroupingMaterial(MrpWorkorderGroupingMaterial):
                 ("code", "=", test_code),
             ]
         )
-        self.assertEquals(nest.state, "draft")
+        self.assertEqual(nest.state, "draft")
         nest.action_check_ready()
         # self.assertEquals(nest.state, "ready")
         # nest.button_start()
