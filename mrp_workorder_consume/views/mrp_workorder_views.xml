@@ -19,4 +19,24 @@
         </field>
     </record>
 
+    <record id="mrp_workorder_view_tree" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
+        <field name="arch" type="xml">
+            <button name="action_open_wizard" position="before">
+                <field name="post_visible" invisible="1" />
+                <button
+          name="post_inventory"
+          type="object"
+          string="Post Inventory"
+          attrs="{'invisible': [('post_visible', '=', False)]}"
+          groups="base.group_no_one"
+        />
+            </button>
+        </field>
+    </record>
+
 </odoo>
