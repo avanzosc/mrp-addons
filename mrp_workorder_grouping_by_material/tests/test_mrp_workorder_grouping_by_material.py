@@ -17,18 +17,21 @@ class TestMrpWorkorderGroupingMaterial(MrpWorkorderGroupingMaterial):
         wiz_nest = (
             self.env["nested.new.line"]
             .with_context(active_ids=workorders.ids, active_model="mrp.workorder")
-            .create({})
+            .create(
+                {
+                    "nest_code": "Test",
+                }
+            )
         )
-        wiz_nest.onchange_product_id()
         wiz_nest.action_done()
         nest = self.env["mrp.workorder.nest"].search([])
         nest.nest_start()
-        self.assertEquals(nest.state, "ready")
+        self.assertEqual(nest.state, "ready")
         nest.button_start()
-        self.assertEquals(nest.state, "progress")
+        self.assertEqual(nest.state, "progress")
         for line in nest.nested_line_ids.mapped("workorder_id"):
-            self.assertEquals(line.state, "progress")
+            self.assertEqual(line.state, "progress")
         nest.record_production()
-        self.assertEquals(nest.state, "blocked")
+        self.assertEqual(nest.state, "blocked")
         nest.nest_unblocked()
-        self.assertEquals(nest.state, "progress")
+        self.assertEqual(nest.state, "progress")

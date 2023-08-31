@@ -3,3 +3,6 @@ access_mrp_workorder_nest_user,mrp.workorder.nest.user,model_mrp_workorder_nest,
 access_mrp_workorder_nest_manager,mrp.workorder.nest.manager,model_mrp_workorder_nest,mrp.group_mrp_manager,1,1,1,1
 access_mrp_workorder_nest_line_user,mrp.workorder.nest.line.user,model_mrp_workorder_nest_line,mrp.group_mrp_user,1,0,0,0
 access_mrp_workorder_nest_line_manager,mrp.workorder.nest.line.manager,model_mrp_workorder_nest_line,mrp.group_mrp_manager,1,1,1,1
+access_nested_new_line,access_nested_new_line,model_nested_new_line,mrp.group_mrp_user,1,1,1,1
+access_nested_lines_info,access_nested_lines_info,model_nested_lines_info,mrp.group_mrp_user,1,1,1,1
+access_multiple_copy,access_multiple_copy,model_multiple_copy,mrp.group_mrp_user,1,1,1,1
