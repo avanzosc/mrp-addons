@@ -11,7 +11,7 @@
             <notebook position="inside">
                 <page
           string="Components"
-          attrs="{'invisible': [('move_raw_ids', '=', [])]}"
+          attrs="{'invisible': ['|', ('move_raw_ids', '=', []), ('date_planned_start', '=', False)]}"
         >
                     <field
             name="move_raw_ids"
@@ -178,7 +178,14 @@
 
     <record id="mrp_workorder_usability_view_tree" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
+        <field
+      name="groups_id"
+      eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]"
+    />
         <field name="arch" type="xml">
             <button name="action_open_wizard" position="before">
                 <field name="unreserve_visible" invisible="1" />
