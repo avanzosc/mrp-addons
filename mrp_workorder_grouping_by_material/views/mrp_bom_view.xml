@@ -8,10 +8,13 @@
         expr="//field[@name='bom_line_ids']/tree/field[@name='product_id']"
         position="before"
       >
-                <field
-          name="main_material"
-          attrs="{'invisible':[('parent.routing_id','=','false')]}"
-        />
+                <field name="main_material" widget="boolean_toggle" optional="hide" />
+            </xpath>
+            <xpath
+        expr="//field[@name='bom_line_ids']/tree/field[@name='product_id']"
+        position="attributes"
+      >
+                <attribute name="decoration-bf">main_material</attribute>
             </xpath>
         </field>
     </record>

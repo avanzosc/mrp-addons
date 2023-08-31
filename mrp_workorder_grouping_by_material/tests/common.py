@@ -7,19 +7,14 @@ from odoo.tests import common
 class MrpWorkorderGroupingMaterial(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(MrpWorkorderGroupingMaterial, cls).setUpClass()
+        super().setUpClass()
         manufacture_route = cls.env.ref("mrp.route_warehouse0_manufacture")
         mto_route = cls.env.ref("stock.route_warehouse0_mto")
         product_obj = cls.env["product.product"]
         bom_obj = cls.env["mrp.bom"]
-        route_model = cls.env["mrp.routing"]
+        operation_model = cls.env["mrp.routing.workcenter"]
         workcenter_model = cls.env["mrp.workcenter"]
         production_model = cls.env["mrp.production"]
-        partner = cls.env["res.partner"].create(
-            {
-                "name": "Test Partner",
-            }
-        )
         unit_id = cls.env.ref("uom.product_uom_unit")
         cls.man_product = product_obj.create(
             {
@@ -42,27 +37,16 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
                 "nesting_required": True,
             }
         )
-        cls.route = route_model.create(
+        cls.operation1 = operation_model.create(
             {
-                "name": "route",
-                "operation_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "name": "op1",
-                            "workcenter_id": cls.workcenter.id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "name": "op2",
-                            "workcenter_id": cls.workcenter2.id,
-                        },
-                    ),
-                ],
+                "name": "op1",
+                "workcenter_id": cls.workcenter.id,
+            }
+        )
+        cls.operation2 = operation_model.create(
+            {
+                "name": "op2",
+                "workcenter_id": cls.workcenter2.id,
             }
         )
         cls.component = product_obj.create(
@@ -79,7 +63,6 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
             {
                 "product_tmpl_id": cls.man_product.product_tmpl_id.id,
                 "type": "normal",
-                "routing_id": cls.route.id,
                 "bom_line_ids": [
                     (
                         0,
@@ -87,7 +70,7 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
                         {
                             "product_id": cls.component.id,
                             "product_qty": 2.0,
-                            "operation_id": cls.route.operation_ids[0].id,
+                            "operation_id": cls.operation1.id,
                         },
                     ),
                     (
@@ -96,7 +79,7 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
                         {
                             "product_id": cls.main_component.id,
                             "product_qty": 3.0,
-                            "operation_id": cls.route.operation_ids[1].id,
+                            "operation_id": cls.operation2.id,
                             "main_material": True,
                         },
                     ),
@@ -116,5 +99,3 @@ class MrpWorkorderGroupingMaterial(common.SavepointCase):
         cls.production_id.onchange_product_id()
         cls.production_id._onchange_bom_id()
         cls.production_id._onchange_move_raw()
-        cls.production_id.action_confirm()
-        cls.production_id.button_plan()

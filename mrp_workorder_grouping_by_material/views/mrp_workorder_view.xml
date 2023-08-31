@@ -2,10 +2,23 @@
 <odoo>
     <record model="ir.ui.view" id="nest_workorder_view_tree">
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view_inherit" />
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='state']" position="before">
                 <field name="nested_ids" widget="many2many_tags" />
+                <field name="nested_count" invisible="1" />
+                <button
+          name="open_nest"
+          type="object"
+          string="Open Nests"
+          icon="fa-external-link"
+          attrs="{'invisible': [('nested_count','=',0)]}"
+        />
+                <field name="qty_nested" optional="hide" />
+                <field name="nested_status" optional="hide" />
             </xpath>
         </field>
     </record>
@@ -19,6 +32,7 @@
         <field name="arch" type="xml">
             <field name="production_id" position="after">
                 <field name="main_product_id" />
+                <field name="nested_ids" />
             </field>
             <filter name="late" position="after">
                 <filter
@@ -28,11 +42,18 @@
         />
             </filter>
             <filter name="scheduled_month" position="after">
+                <separator />
                 <filter
           string="Main Product"
-          name="main_product_id"
+          name="group_main_product"
           domain="[]"
           context="{'group_by':'main_product_id'}"
+        />
+                <filter
+          string="Nested Status"
+          name="group_nested_status"
+          domain="[]"
+          context="{'group_by':'nested_status'}"
         />
             </filter>
         </field>
@@ -44,6 +65,7 @@
         <field name="arch" type="xml">
             <field name="workcenter_id" position="after">
                 <field name="main_product_id" />
+                <field name="nested_ids" />
             </field>
             <filter name="late" position="after">
                 <filter
@@ -56,13 +78,13 @@
                 <separator />
                 <filter
           string="Main Product"
-          name="main_product_id"
+          name="group_main_product"
           domain="[]"
           context="{'group_by':'main_product_id'}"
         />
                 <filter
-          string="Nest Status"
-          name="nested_status"
+          string="Nested Status"
+          name="group_nested_status"
           domain="[]"
           context="{'group_by':'nested_status'}"
         />
@@ -88,21 +110,21 @@
                     </div>
                 </button>
             </div>
-            <xpath
-        expr="//page[@name='workorder_page_misc']//field[@name='workcenter_id']"
-        position="after"
-      >
-                <field name="nesting_required" invisible="True" />
-                <field
-          name="nested_ids"
-          widget="many2many_tags"
-          attrs="{'invisible': [('nesting_required', '!=', True)]}"
-        />
-                <field
-          name="qty_nested"
-          attrs="{'invisible': [('nesting_required', '!=', True)]}"
-        />
-            </xpath>
+<!--            <xpath-->
+<!--        expr="//page[@name='workorder_page_misc']//field[@name='workcenter_id']"-->
+<!--        position="after"-->
+<!--      >-->
+<!--                <field name="nesting_required" invisible="True" />-->
+<!--                <field-->
+<!--          name="nested_ids"-->
+<!--          widget="many2many_tags"-->
+<!--          attrs="{'invisible': [('nesting_required', '!=', True)]}"-->
+<!--        />-->
+<!--                <field-->
+<!--          name="qty_nested"-->
+<!--          attrs="{'invisible': [('nesting_required', '!=', True)]}"-->
+<!--        />-->
+<!--            </xpath>-->
         </field>
     </record>
 </odoo>

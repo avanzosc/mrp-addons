@@ -8,7 +8,7 @@ from PyPDF2 import PdfFileMerger
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.models import expression
-from odoo.tools import safe_eval
+from odoo.tools.safe_eval import safe_eval
 
 NEST_STATE = [
     ("draft", "Draft"),
@@ -25,23 +25,42 @@ class MrpWorkorderNest(models.Model):
     _description = "Nested Work Orders"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
+    def _domain_main_product_id(self):
+        product_ids = (
+            self.env["mrp.bom.line"]
+            .search([("main_material", "=", True)])
+            .mapped("product_id")
+            .ids
+        )
+        return [("id", "in", product_ids)]
+
+    def _domain_workcenter_id(self):
+        workcenter_ids = (
+            self.env["mrp.workcenter"].search([("nesting_required", "=", True)]).ids
+        )
+        return [("id", "in", workcenter_ids)]
+
     name = fields.Char(
         string="Name", readonly=True, required=True, copy=False, default="New"
     )
     code = fields.Char(string="Code")
-    main_product_id = fields.Many2one(comodel_name="product.product")
-    possible_main_product_ids = fields.Many2many(
-        comodel_name="product.product", compute="_compute_possible_main_products"
+    main_product_id = fields.Many2one(
+        string="Main Product",
+        comodel_name="product.product",
+        required=True,
+        domain=_domain_main_product_id,
     )
-    workcenter_id = fields.Many2one(comodel_name="mrp.workcenter")
-    workorder_ids = fields.Many2many(
-        comodel_name="mrp.workorder", compute="_compute_workorders", store=True
+    workcenter_id = fields.Many2one(
+        string="Work Center",
+        comodel_name="mrp.workcenter",
+        domain=_domain_workcenter_id,
     )
-    possible_workcenter_ids = fields.Many2many(
-        comodel_name="mrp.workcenter", compute="_compute_possible_workcenter"
+    main_product_tracking = fields.Selection(
+        string="Tracking", related="main_product_id.tracking"
     )
-    main_product_tracking = fields.Selection(related="main_product_id.tracking")
-    lot_id = fields.Many2one(comodel_name="stock.production.lot")
+    lot_id = fields.Many2one(
+        string="Lot/Serial Number", comodel_name="stock.production.lot"
+    )
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
@@ -86,7 +105,6 @@ class MrpWorkorderNest(models.Model):
     )
     line_is_produced = fields.Boolean(compute="_compute_line_states")
     line_is_user_working = fields.Boolean(compute="_compute_line_states")
-    worksheets = fields.Binary(string="PDF", help="Upload your PDF file.")
     qty_producing = fields.Float(
         string="Quantity Producing",
         compute="_compute_qty_producing",
@@ -118,23 +136,6 @@ class MrpWorkorderNest(models.Model):
                 )
             )
 
-    def _compute_possible_main_products(self):
-        product_ids = (
-            self.env["mrp.bom.line"]
-            .search([("main_material", "=", True)])
-            .mapped("product_id")
-            .ids
-        )
-        for nest in self:
-            nest.possible_main_product_ids = [(6, 0, product_ids or [])]
-
-    def _compute_possible_workcenter(self):
-        workcenter_ids = (
-            self.env["mrp.workcenter"].search([("nesting_required", "=", True)]).ids
-        )
-        for nest in self:
-            nest.possible_workcenter_ids = [(6, 0, workcenter_ids or [])]
-
     @api.depends("nested_line_ids", "nested_line_ids.workorder_id")
     def _compute_workorders(self):
         for nest in self:
@@ -156,11 +157,6 @@ class MrpWorkorderNest(models.Model):
             result.append((record.id, name))
         return result
 
-    # @api.onchange("lot_id")
-    # def onchange_lot_id(self):
-    #     for line in self.nested_line_ids:
-    #         line.lot_id = self.lot_id.id
-
     @api.model
     def create(self, vals):
         if vals.get("name", "New") == "New":
@@ -177,10 +173,11 @@ class MrpWorkorderNest(models.Model):
 
     def action_check_ready(self):
         for nest in self.filtered(lambda n: n.state == "draft"):
+            nest._check_lot()
             nest.nested_line_ids.action_check_ready()
             if not any(
                 nest.nested_line_ids.filtered(
-                    lambda l: l.state not in ("ready", "progress")
+                    lambda l: l.state not in ("ready", "progress", "done")
                 )
             ):
                 nest.state = "ready"
@@ -236,12 +233,6 @@ class MrpWorkorderNest(models.Model):
     def button_scrap(self):
         for nest in self:
             nest.nested_line_ids.button_scrap()
-
-    # def check_status(self):
-    #     for nest in self:
-    #         if not any(nest.nested_line_ids.filtered(
-    #                 lambda l: l.state == "done" and l.workorder_state == "done")):
-    #             nest.state == "done"
 
     @api.depends("nested_line_ids")
     def _compute_active_lines(self):
