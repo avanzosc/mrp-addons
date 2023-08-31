@@ -7,7 +7,9 @@ class StockProductionLot(models.Model):
     _inherit = "stock.production.lot"
 
     product_life_alert = fields.Boolean(
-        string="Product Life Alert", compute="_compute_product_life_alert"
+        string="Product Life Alert",
+        compute="_compute_product_life_alert",
+        search="_search_product_life_alert",
     )
 
     @api.depends("alert_date")
@@ -17,3 +19,13 @@ class StockProductionLot(models.Model):
             lot.product_life_alert = (
                 lot.alert_date and lot.alert_date <= current_date or False
             )
+
+    def _search_product_life_alert(self, operator, value):
+        today = fields.Date.context_today(self)
+        life_alert_lots = self.search(
+            [("alert_date", "!=", False), ("alert_date", "<=", today)]
+        )
+        if operator == "=" and value:
+            return [("id", "in", life_alert_lots.ids)]
+        else:
+            return [("id", "not in", life_alert_lots.ids)]
