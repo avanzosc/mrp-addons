@@ -35,7 +35,7 @@ class MrpWorkorder(models.Model):
             )
             order.unreserve_visible = any(
                 [m.mrp_unreserve_visible for m in pending_raw_moves]
-            )
+            ) and order.date_planned_start
 
     def _compute_show_check_availability(self):
         """According to `workorder.show_check_availability`, the
@@ -54,7 +54,7 @@ class MrpWorkorder(models.Model):
                     precision_rounding=move.product_uom.rounding,
                 )
                 for move in workorder.move_raw_ids
-            )
+            ) and workorder.date_planned_start
 
     def action_assign(self):
         for order in self:
