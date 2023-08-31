@@ -28,6 +28,7 @@ class NestedNewLine(models.TransientModel):
             ("id", "in", self.env.context.get("active_ids")),
             ("main_product_id", "!=", False),
             ("workcenter_id", "!=", False),
+            ("product_id.tracking", "!=", "serial"),
             ("state", "not in", ["done", "cancel"]),
         ]
 
@@ -178,14 +179,14 @@ class NestedLinesInfo(models.TransientModel):
             # record.finished_qty_nested = wo.finished_qty_nested
             qty_remaining = qty_nested_remaining = 0.0
             if wo:
-                production_qty = wo._get_real_uom_qty(record.qty_production)
-                qty_nested = wo._get_real_uom_qty(record.qty_nested)
+                # production_qty = wo._get_real_uom_qty(record.qty_production)
+                # qty_nested = wo._get_real_uom_qty(record.qty_nested)
                 rounding = wo.production_id.product_uom_id.rounding
                 qty_remaining = float_round(
-                    (production_qty - record.qty_produced), precision_rounding=rounding
+                    (record.qty_production - record.qty_produced), precision_rounding=rounding
                 )
                 qty_nested_remaining = float_round(
-                    qty_remaining - (qty_nested - record.qty_produced),
+                    qty_remaining - (record.qty_nested - record.qty_produced),
                     precision_rounding=rounding,
                 )
             record.qty_remaining = qty_remaining
