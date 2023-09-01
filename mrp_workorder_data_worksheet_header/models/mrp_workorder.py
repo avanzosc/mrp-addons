@@ -27,7 +27,7 @@ def print_report(records, qweb_name):
     pdf = PdfFileWriter()
     width, height = A4
     for record in records:
-        content, content_type = records.env.ref(qweb_name).render_qweb_pdf(
+        content, content_type = records.env.ref(qweb_name)._render_qweb_pdf(
             res_ids=record.id
         )
 

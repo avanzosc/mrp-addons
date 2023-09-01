@@ -19,4 +19,24 @@
             </button>
         </field>
     </record>
+
+    <record id="mrp_workorder_nest_line_view_tree" model="ir.ui.view">
+        <field name="model">mrp.workorder.nest.line</field>
+        <field
+      name="inherit_id"
+      ref="mrp_workorder_grouping_by_material.mrp_workorder_nest_line_field_view_tree"
+    />
+        <field name="arch" type="xml">
+            <field name="working_state" position="after">
+                <button
+          name="show_worksheets"
+          type="object"
+          string="Print"
+          icon="fa-print"
+          context="{'print': True}"
+          attrs="{'invisible': [('worksheet','=',False)]}"
+        />
+            </field>
+        </field>
+    </record>
 </odoo>
