@@ -3,10 +3,6 @@
     <record id="mrp_production_view_form" model="ir.ui.view">
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
-        <field
-      name="groups_id"
-      eval="[(4, ref('mrp_stock_usability.group_mrp_stock_usability'))]"
-    />
         <field name="arch" type="xml">
             <xpath
         expr="//field[@name='move_raw_ids']//tree//button[@name='action_show_details']"
@@ -19,12 +15,14 @@
           type="object"
           class="oe_highlight"
           attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}"
+          groups="mrp_stock_usability.group_mrp_stock_usability"
         />
                 <button
           name="button_unreserve"
           type="object"
           string="Unreserve"
           attrs="{'invisible':[('mrp_unreserve_visible','=',False)]}"
+          groups="mrp_stock_usability.group_mrp_stock_usability"
         />
             </xpath>
         </field>
