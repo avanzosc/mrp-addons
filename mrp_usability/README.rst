@@ -2,9 +2,9 @@
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
-=============
-MRP Usability
-=============
+=======================
+Manufacturing Usability
+=======================
 
 * The buttons that are in the tree view of the work order, put them also in the form view.
 * Link from Production to Work Orders.
