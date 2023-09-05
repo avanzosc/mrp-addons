@@ -4,7 +4,7 @@
     "name": "MRP Usability",
     "version": "14.0.2.1.0",
     "author": "Avanzosc",
-    "website": "https://github.com/OCA/l10n-spain",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "MRP",
     "depends": [
         "mrp",
