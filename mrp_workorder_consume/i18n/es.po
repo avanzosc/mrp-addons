@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0+e\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 10:07+0000\n"
-"PO-Revision-Date: 2021-10-14 10:07+0000\n"
+"POT-Creation-Date: 2023-09-11 08:30+0000\n"
+"PO-Revision-Date: 2023-09-11 08:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,47 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_workorder_consume
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
-msgid "Check availability"
-msgstr "Comprobar disponibilidad"
+#: model:ir.model.fields,field_description:mrp_workorder_consume.field_mrp_workorder__post_visible
+msgid "Allowed to Post Inventory"
+msgstr "Permitido confirmar inventario"
 
 #. module: mrp_workorder_consume
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
-msgid "Components"
-msgstr "Componentes"
-
-#. module: mrp_workorder_consume
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
-msgid "Finished Products"
-msgstr "Productos finalizados"
-
-#. module: mrp_workorder_consume
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_tree
 msgid "Post Inventory"
 msgstr "Confirmar Inventario"
 
 #. module: mrp_workorder_consume
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
-msgid "Produced"
-msgstr "Producido"
-
-#. module: mrp_workorder_consume
-#: model:ir.model.fields,field_description:mrp_workorder_consume.field_mrp_workorder__show_final_lots
-msgid "Show Final Lots"
-msgstr "Mostrar lotes finales"
-
-#. module: mrp_workorder_consume
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
-msgid "Unreserve"
-msgstr "Anular reserva"
+#: model:ir.model.fields,help:mrp_workorder_consume.field_mrp_workorder__post_visible
+msgid "Technical field to check when we can post"
+msgstr "Campo técnico para consultar cuando podemos confirmar inventario"
 
 #. module: mrp_workorder_consume
 #: model:ir.model,name:mrp_workorder_consume.model_mrp_workorder
 msgid "Work Order"
 msgstr "Orden de trabajo"
-
-#. module: mrp_workorder_consume
-#: code:addons/mrp_workorder_consume/models/mrp_workorder.py:0
-#, python-format
-msgid "You can not consume without telling for which lot you consumed it"
-msgstr "No puede consumirlos sin decir para qué lote lo consumió."
