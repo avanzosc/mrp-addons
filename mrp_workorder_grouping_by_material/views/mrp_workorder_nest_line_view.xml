@@ -70,7 +70,7 @@
                 <button
           name="open_workorder_view"
           type="object"
-          string="Open Workorder"
+          title="Open Workorder"
           icon="fa-external-link"
         />
             </field>
@@ -181,11 +181,13 @@
           name="button_get_previous_line"
           type="object"
           icon="fa-chevron-left"
+          title="Previous"
         />
                 <button
           name="button_get_next_line"
           type="object"
           icon="fa-chevron-right"
+          title="Next"
         />
             </field>
         </field>

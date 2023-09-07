@@ -58,9 +58,7 @@ class MrpWorkorderNest(models.Model):
     main_product_tracking = fields.Selection(
         string="Tracking", related="main_product_id.tracking"
     )
-    lot_id = fields.Many2one(
-        string="Lot/Serial Number", comodel_name="stock.production.lot"
-    )
+    lot_id = fields.Many2one(string="Lot/Serial Number", comodel_name="stock.lot")
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",

@@ -4,16 +4,38 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 11:46+0000\n"
-"PO-Revision-Date: 2021-10-05 11:46+0000\n"
+"POT-Creation-Date: 2023-09-11 08:49+0000\n"
+"PO-Revision-Date: 2023-09-11 08:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__production_state
+msgid ""
+" * Draft: The MO is not confirmed yet.\n"
+" * Confirmed: The MO is confirmed, the stock rules and the reordering of the components are trigerred.\n"
+" * In Progress: The production has started (on the MO or on the WO).\n"
+" * To Close: The production is done, the MO has to be closed.\n"
+" * Done: The MO is closed, the stock moves are posted. \n"
+" * Cancelled: The MO has been cancelled, can't be confirmed anymore."
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_production_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_view_form
+msgid "<span class=\"o_stat_text\">Nested In</span>"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
+msgid "<span class=\"o_stat_text\">Nested Lines</span>"
+msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_needaction
@@ -41,13 +63,28 @@ msgid "Activity State"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.actions.act_window,name:mrp_workorder_grouping_by_material.wizard_nested_new_line
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.actions.act_window,name:mrp_workorder_grouping_by_material.nested_new_line_wizard_action
 msgid "Add to Nest"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_nested
+msgid "Already Nested Quantity"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_attachment_count
 msgid "Attachment Count"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
+msgid "Back to Draft"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -61,8 +98,7 @@ msgid "Bill of Material Line"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_form
 msgid "Block"
 msgstr ""
 
@@ -70,6 +106,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__line_state__blocked
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__pre_block_state__blocked
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__state__blocked
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest_line__state__blocked
 msgid "Blocked"
 msgstr ""
 
@@ -78,6 +115,18 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.multiple_copy_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.nested_new_line_form
 msgid "Cancel"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__pre_block_state__cancel
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__state__cancel
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest_line__state__cancel
+msgid "Cancelled"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
+msgid "Check Ready"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -97,8 +146,8 @@ msgid "Confirmed"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "Continue Production"
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workcenter__copy_production_qty
+msgid "Copy Nest Quantity"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -120,19 +169,8 @@ msgid "Created on"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__related_qty_producing
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_producing
-msgid "Currently Produced Quantity"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_form
 msgid "Data"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__date_planned_start
-msgid "Date Planned Start"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -149,6 +187,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__line_state__done
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__pre_block_state__done
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__state__done
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest_line__state__done
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.multiple_copy_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.nested_new_line_form
@@ -159,18 +198,19 @@ msgstr ""
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__line_state__draft
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__pre_block_state__draft
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__state__draft
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest_line__state__draft
 msgid "Draft"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__main_product_tracking
+#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__product_tracking
 msgid "Ensure the traceability of a storable product in your warehouse."
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "Finish Order"
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_new_line__filtered_line_ids
+msgid "Filtered Nest Lines"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -179,16 +219,17 @@ msgid "Followers"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_search
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_search
 msgid "Group By"
 msgstr ""
@@ -196,6 +237,11 @@ msgstr ""
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__is_produced
 msgid "Has Been Produced"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__has_message
+msgid "Has Message"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -219,13 +265,11 @@ msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_needaction
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_has_error
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -237,6 +281,7 @@ msgstr ""
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__pre_block_state__progress
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__state__progress
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest_line__state__progress
 msgid "In Progress"
 msgstr ""
 
@@ -298,19 +343,18 @@ msgid "Line State"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__lot_id
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__lot_id
-msgid "Lot"
+#: model:ir.model,name:mrp_workorder_grouping_by_material.model_nested_lines_info
+msgid "Lines of wizard to nest workorders"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model,name:mrp_workorder_grouping_by_material.model_stock_production_lot
+#: model:ir.model,name:mrp_workorder_grouping_by_material.model_stock_lot
 msgid "Lot/Serial"
-msgstr "Lotea/serie-zenbakia"
+msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__lot_id
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__finished_lot_id
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__related_finished_lot_id
 msgid "Lot/Serial Number"
 msgstr ""
 
@@ -326,26 +370,23 @@ msgid "Main Material"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
-msgid "Main Material Lot"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder__main_product_id
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__main_product_id
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__main_product_id
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.main_product_workorder_view_search
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_view_search
 msgid "Main Product"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_bom.py:0
 #, python-format
 msgid "Main material must have an operation"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest.py:0
 #, python-format
 msgid "Main product lot is not selected"
@@ -372,13 +413,17 @@ msgid "Multiple Copy"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__name
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__name
 msgid "Name"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__nest_id
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__nest_id
 msgid "Nest"
 msgstr ""
@@ -389,6 +434,12 @@ msgid "Nest App"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_production__nested_count
+msgid "Nest Count"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder__nested_line_ids
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_new_line__line_ids
 msgid "Nest Lines"
 msgstr ""
@@ -399,8 +450,31 @@ msgid "Nest Name"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder__nested_status__equal
+msgid "Nested All Quantity"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder__nested_count
+msgid "Nested Count"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder__nested_status__less
+msgid "Nested Less Quantity"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.actions.act_window,name:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_action
+#: model:ir.model,name:mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__nested_line_ids
+#: model:ir.ui.menu,name:mrp_workorder_grouping_by_material.menu_mrp_workorder_nest_line
 msgid "Nested Lines"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder__nested_status__plus
+msgid "Nested More Quantity"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -411,20 +485,41 @@ msgstr ""
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder__qty_nested
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__qty_nested
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_nested
 msgid "Nested Quantity"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder__nested_status
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.main_product_workorder_view_search
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_view_search
+msgid "Nested Status"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_search
+msgid "Nested Work Order"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.actions.act_window,name:mrp_workorder_grouping_by_material.mrp_workorder_nest_action
 #: model:ir.model,name:mrp_workorder_grouping_by_material.model_mrp_workorder_nest
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__nest_id
+#: model:ir.ui.menu,name:mrp_workorder_grouping_by_material.menu_mrp_workorder_nest
 #: model:ir.ui.menu,name:mrp_workorder_grouping_by_material.menu_nested_workorder_action
 msgid "Nested Work Orders"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workcenter__nesting_required
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder__nesting_required
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.main_product_workorder_view_search
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_view_search
 msgid "Nesting Required"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_wizard_form
+msgid "Next"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -445,6 +540,11 @@ msgstr ""
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__done_cancel_lines
 msgid "No Active Lines"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder__nested_status__not_nest
+msgid "Not Nested"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -473,38 +573,34 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_unread_counter
-msgid "Number of unread messages"
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_form
+msgid "OK"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_form
 msgid "OK line"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__ok_line
-msgid "Ok Line"
+msgid "Ok"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "Open Line"
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.nest_workorder_view_tree
+msgid "Open Nests"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_field_view_tree
+msgid "Open Workorder"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__qty_production
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_production
 msgid "Original Production Quantity"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__worksheets
-msgid "PDF"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "Pause"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -518,25 +614,8 @@ msgid "Planned Start Date"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__possible_main_product_ids
-msgid "Possible Main Product"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_new_line__possible_product_ids
 msgid "Possible Product"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__possible_workcenter_ids
-msgid "Possible Workcenter"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__possible_workorder_ids
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
-msgid "Possible Workorders"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -545,14 +624,13 @@ msgid "Pre Block State"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "Print"
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_wizard_form
+msgid "Previous"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_produced
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_production
-msgid "Produce Quantity"
+msgid "Produced Quantity"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -563,13 +641,12 @@ msgid "Product"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_stock_production_lot__product_life_alert
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_stock_lot__product_life_alert
 msgid "Product Life Alert"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_tree
 msgid "Product to Produce Lot"
 msgstr ""
 
@@ -579,13 +656,22 @@ msgid "Production"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model,name:mrp_workorder_grouping_by_material.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__production_state
+msgid "Production State"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__line_state__progress
 msgid "Progress"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_form
 msgid "Quality Alert"
 msgstr ""
 
@@ -601,14 +687,26 @@ msgid "Quantity Producing"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_nested_remaining
+msgid "Quantity To Be Nested"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__qty_remaining
-msgid "Quantity Remaining"
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_remaining
+msgid "Quantity To Be Produced"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_producing
+msgid "Quantity to Nest"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__line_state__ready
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__pre_block_state__ready
 #: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest__state__ready
+#: model:ir.model.fields.selection,name:mrp_workorder_grouping_by_material.selection__mrp_workorder_nest_line__state__ready
 msgid "Ready"
 msgstr ""
 
@@ -618,23 +716,20 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__date_planned_start
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__date_planned_start
-msgid "Scheduled Date Date"
+msgid "Scheduled Date Start"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__show_worksheet
+msgid "Show Worksheet"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "Scrap"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "Start"
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_field_view_tree
+msgid "Show Worksheets"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -644,9 +739,12 @@ msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__state
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__production_state
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__state
 msgid "State"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__state
+msgid "Status"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
@@ -659,38 +757,25 @@ msgid ""
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__is_user_working
-msgid "Technical field indicating whether the current user is working. "
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__line_working_state
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__working_state
 msgid "Technical: used in views only"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__production_state
-msgid "Technical: used in views only."
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__qty_produced
+#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_nested_lines_info__qty_produced
 msgid "The number of products already handled by this work order"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
-#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
-#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
-#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
-#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
+#. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
 #, python-format
 msgid "The workcenter is 'nesting_required'"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_bom.py:0
 #, python-format
 msgid ""
@@ -700,6 +785,7 @@ msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__main_product_tracking
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__product_tracking
 msgid "Tracking"
 msgstr ""
 
@@ -709,8 +795,7 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_form
 msgid "Unblock"
 msgstr ""
 
@@ -725,22 +810,6 @@ msgid "Unit of Measure"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__worksheets
-#: model:ir.model.fields,help:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__worksheet
-msgid "Upload your PDF file."
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__website_message_ids
 msgid "Website Messages"
 msgstr ""
@@ -751,12 +820,23 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model,name:mrp_workorder_grouping_by_material.model_multiple_copy
+msgid "Wizard to Duplicate Nests"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#: model:ir.model,name:mrp_workorder_grouping_by_material.model_nested_new_line
+msgid "Wizard to nest workorders"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
 #: model:ir.model,name:mrp_workorder_grouping_by_material.model_mrp_workcenter
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__workcenter_id
 msgid "Work Center"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_form
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_line_view_form
 msgid "Work Instruction"
 msgstr ""
 
@@ -766,7 +846,6 @@ msgid "Work Order"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__workcenter_id
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__workcenter_id
 msgid "Workcenter"
 msgstr ""
@@ -778,43 +857,33 @@ msgid "Workcenter Status"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__workorder_ids
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__workorder_id
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_nested_lines_info__workorder_id
 msgid "Workorder"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
+#: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__workorder_state
+msgid "Workorder Status"
+msgstr ""
+
+#. module: mrp_workorder_grouping_by_material
+#. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__worksheet
+#, python-format
 msgid "Worksheet"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_workorder_nest_form
-msgid "merge pdfs"
+#. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest.py:0
+#, python-format
+msgid "Worksheets"
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: model:ir.model,name:mrp_workorder_grouping_by_material.model_mrp_workorder_nest_line
-msgid "mrp.workorder.nest.line"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model,name:mrp_workorder_grouping_by_material.model_multiple_copy
-msgid "multiple.copy"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model,name:mrp_workorder_grouping_by_material.model_nested_lines_info
-msgid "nested.lines.info"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
-#: model:ir.model,name:mrp_workorder_grouping_by_material.model_nested_new_line
-msgid "nested.new.line"
-msgstr ""
-
-#. module: mrp_workorder_grouping_by_material
+#. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/wizard/nested_new_line.py:0
 #, python-format
 msgid ""
@@ -822,7 +891,8 @@ msgid ""
 msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
-#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest.py:0
+#. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
 #, python-format
 msgid "{}: You should provide a lot/serial number for the final product."
 msgstr ""

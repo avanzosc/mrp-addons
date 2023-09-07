@@ -38,7 +38,7 @@ class MrpWorkorderNestLine(models.Model):
         copy=True,
     )
     finished_lot_id = fields.Many2one(
-        comodel_name="stock.production.lot",
+        comodel_name="stock.lot",
         string="Lot/Serial Number",
         domain="[('product_id', '=', product_id)]",
     )
@@ -163,22 +163,22 @@ class MrpWorkorderNestLine(models.Model):
 
     def open_workorder_view(self):
         self.ensure_one()
-        view_ref = self.env["ir.model.data"].get_object_reference(
-            "mrp", "mrp_production_workorder_form_view_inherit"
-        )
-        view_id = (view_ref and view_ref[1] or False,)
-        return {
-            "name": _("Workorder"),
-            "domain": [],
-            "res_model": "mrp.workorder",
-            "res_id": self.workorder_id.id,
-            "type": "ir.actions.act_window",
-            "view_mode": "form",
-            "view_type": "form",
-            "view_id": view_id,
-            "context": {},
-            "target": "current",
-        }
+        return self.workorder_id.action_open_wizard()
+        # view_id = self.env["ir.model.data"]._xmlid_to_res_id(
+        #     "mrp.mrp_production_workorder_form_view_inherit"
+        # )
+        # return {
+        #     "name": _("Workorder"),
+        #     "domain": [],
+        #     "res_model": "mrp.workorder",
+        #     "res_id": self.workorder_id.id,
+        #     "type": "ir.actions.act_window",
+        #     "view_mode": "form",
+        #     "view_type": "form",
+        #     "view_id": view_id,
+        #     "context": {},
+        #     "target": "current",
+        # }
 
     def _get_line(self, direction):
         self.ensure_one()
@@ -231,7 +231,7 @@ class MrpWorkorderNestLine(models.Model):
         return action_dict
 
     def _create_assign_lot(self, code, product_id):
-        lot_obj = self.env["stock.production.lot"]
+        lot_obj = self.env["stock.lot"]
         lot_id = False
         if code:
             if product_id.tracking == "lot":

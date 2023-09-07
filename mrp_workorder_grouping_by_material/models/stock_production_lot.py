@@ -3,8 +3,8 @@
 from odoo import api, fields, models
 
 
-class StockProductionLot(models.Model):
-    _inherit = "stock.production.lot"
+class StockLot(models.Model):
+    _inherit = "stock.lot"
 
     product_life_alert = fields.Boolean(
         string="Product Life Alert",
