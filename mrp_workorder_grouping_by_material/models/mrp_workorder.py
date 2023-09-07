@@ -148,8 +148,12 @@ class MrpWorkorder(models.Model):
     def open_nest(self):
         self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id(
-            "mrp_workorder_grouping_by_material.mrp_workorder_nest_action")
+            "mrp_workorder_grouping_by_material.mrp_workorder_nest_action"
+        )
         action["domain"] = expression.AND(
-            [[("id", "in", self.nested_ids.ids)], safe_eval(action.get("domain") or "[]")]
+            [
+                [("id", "in", self.nested_ids.ids)],
+                safe_eval(action.get("domain") or "[]"),
+            ]
         )
         return action

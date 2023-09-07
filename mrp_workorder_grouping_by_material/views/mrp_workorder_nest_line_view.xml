@@ -28,15 +28,17 @@
       >
                 <field name="nest_id" />
                 <field name="ok_line" invisible="True" />
-                <field
-          name="workorder_id"
-          options="{'no_create': True}"
-        />
+                <field name="workorder_id" options="{'no_create': True}" />
                 <field name="date_planned_start" widget="date" />
                 <field name="worksheet" invisible="True" />
-                <field name="state" widget="badge"
-                       decoration-success="state == 'done'"
-                       decoration-info="state not in ('done', 'cancel')"  readonly="1" optional="hide" />
+                <field
+          name="state"
+          widget="badge"
+          decoration-success="state == 'done'"
+          decoration-info="state not in ('done', 'cancel')"
+          readonly="1"
+          optional="hide"
+        />
                 <field name="product_id" readonly="1" />
                 <field name="product_uom_id" optional="hide" />
                 <field name="product_tracking" invisible="True" />
@@ -128,10 +130,7 @@
                     <group>
                         <group>
                             <field name="nest_id" invisible="1" />
-                            <field
-                    name="workorder_id"
-                    options="{'no_create': True}"
-                  />
+                            <field name="workorder_id" options="{'no_create': True}" />
                             <field name="name" readonly="1" />
                             <field name="product_id" readonly="1" />
                             <field name="qty_producing" />
