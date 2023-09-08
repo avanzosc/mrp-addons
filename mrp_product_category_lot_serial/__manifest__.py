@@ -3,16 +3,15 @@
 {
     "name": "Mrp Product Category Lot Serial",
     "version": "16.0.1.0.0",
-    "category": "Sales/Sales",
+    "category": "Hidden",
     "license": "AGPL-3",
-    "author": "https://github.com/avanzosc/odoo-addons",
-    "website": "http://www.avanzosc.es",
+    "author": "AvanzOSC",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
         "mrp",
         "product_category_lot_serial",
     ],
-    "data": [
-    ],
+    "data": [],
     "installable": True,
     "auto_install": True,
 }
