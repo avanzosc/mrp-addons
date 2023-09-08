@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <report
-    id="mrp_workorder_nest_line_worksheet_report"
-    model="mrp.workorder.nest.line"
-    string="Workorder with header"
-    report_type="qweb-pdf"
-    name="mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb"
-    file="mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb"
-    menu="False"
-  />
+    <record id="mrp_workorder_nest_line_worksheet_report" model="ir.actions.report">
+        <field name="name">Workorder with header</field>
+        <field name="model">mrp.workorder.nest.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+      name="report_name"
+    >mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb</field>
+        <field
+      name="report_file"
+    >mrp_workorder_data_worksheet_header.mrp_workorder_nest_line_worksheet_report_qweb</field>
+    </record>
 
     <template id="mrp_workorder_nest_line_worksheet_report_qweb">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-set="production" t-value="doc.production_id" />
                 <t t-set="workorder" t-value="doc.workorder_id" />
-                <t
-          t-set="next_workorder"
-          t-value="doc.workorder_id.next_work_order_id"
-        />
+<!--                <t-->
+<!--          t-set="next_workorder"-->
+<!--          t-value="doc.workorder_id.next_work_order_id"-->
+<!--        />-->
                 <t t-set="product_qty" t-value="doc.qty_producing" />
                 <t t-set="qty_production" t-value="workorder.qty_production" />
                 <t t-set="product_uom" t-value="doc.product_uom_id" />

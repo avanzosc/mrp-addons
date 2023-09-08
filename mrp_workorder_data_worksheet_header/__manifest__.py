@@ -3,7 +3,7 @@
 
 {
     "name": "Workorder data in worksheet header",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
         "mrp",
@@ -21,5 +21,5 @@
         "report/mrp_workorder_nest_line_report.xml",
     ],
     "installable": True,
-    "external_dependencies": {"python": ["PyPDF2"]},
+    "external_dependencies": {"python": ["PyPDF2==1.26.0"]},
 }
