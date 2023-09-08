@@ -31,7 +31,7 @@
                 <button
           name="show_worksheets"
           type="object"
-          string="Print"
+          title="Print"
           icon="fa-print"
           context="{'print': True}"
           attrs="{'invisible': [('worksheet','=',False)]}"

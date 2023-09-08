@@ -21,5 +21,5 @@
         "report/mrp_workorder_nest_line_report.xml",
     ],
     "installable": True,
-    "external_dependencies": {"python": ["PyPDF2"]},
+    "external_dependencies": {"python": ["PyPDF2==1.26.0"]},
 }
