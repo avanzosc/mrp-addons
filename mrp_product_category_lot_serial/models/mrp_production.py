@@ -7,5 +7,6 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     def action_generate_serial(self):
-        return super(MrpProduction, self.with_context(
-            lot_by_category=True)).action_generate_serial()
+        return super(
+            MrpProduction, self.with_context(lot_by_category=True)
+        ).action_generate_serial()
