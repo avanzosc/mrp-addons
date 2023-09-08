@@ -8,9 +8,7 @@ from odoo.tools.float_utils import float_compare
 class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
 
-    show_final_lots = fields.Boolean(
-        string="Show Final Lots", compute="_compute_show_lots"
-    )
+    show_final_lots = fields.Boolean(compute="_compute_show_lots")
     unreserve_visible = fields.Boolean(
         string="Allowed to Unreserve Inventory",
         compute="_compute_unreserve_visible",
