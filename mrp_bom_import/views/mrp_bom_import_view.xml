@@ -27,14 +27,14 @@
             name="action_validate_lines"
             string="Validate"
             type="object"
-            states="2validate,error"
+            states="2validate,error,pass"
             class="oe_read_only"
           />
                 <button
             name="action_process_lines"
             string="Process"
             type="object"
-            states="pass"
+            states="pass,2validate,error"
             class="oe_read_only"
           />
                 <field name="state" widget="statusbar" />
@@ -42,38 +42,12 @@
             <sheet>
                 <div class="oe_button_box" name="button_box">
                         <button
-              string="BoM Import Lines"
-              type="object"
-              name="button_open_bom_import_line"
-              class="oe_stat_button"
-              icon="fa-bars"
-            />
-                        <button
               string="Component Import Lines"
               type="object"
               name="button_open_bom_component_import_line"
               class="oe_stat_button"
               icon="fa-bars"
             />
-                    <button
-              class="oe_stat_button"
-              type="object"
-              name="action_bom_import_products"
-              attrs="{'invisible': [('products_count', '=', 0)]}"
-              icon="fa-table"
-            >
-                         <div class="o_field_widget o_stat_info">
-                            <span class="o_stat_value">
-                                <field
-                    name="products_count"
-                    widget="statinfo"
-                    nolabel="1"
-                    class="mr4"
-                  />
-                            </span>
-                            <span class="o_stat_text">Products</span>
-                        </div>
-                    </button>
                     <button
               class="oe_stat_button"
               type="object"
@@ -93,22 +67,29 @@
                             <span class="o_stat_text">BoMs</span>
                         </div>
                     </button>
+                    <button
+              class="oe_stat_button"
+              type="object"
+              name="action_bom_import_bom_lines"
+              attrs="{'invisible': [('bom_count', '=', 0)]}"
+              icon="fa-flask"
+              string="BoM Lines"
+            >
+                    </button>
                 </div>
                 <group>
-                    <field name="filename" colspan="4" />
-                    <field name="data" filename="filename" />
-                    <field name="file_date" />
+                    <group>
+                        <field name="filename" colspan="4" />
+                        <field name="data" filename="filename" />
+                        <field name="file_date" />
+                    </group>
+                    <group>
+                        <field name="product_found_by_code"/>
+                    </group>
                 </group>
                 <notebook>
                     <page string="Lines">
-                        <field
-                name="bom_import_ids"
-                context="{'tree_view_ref':'mrp_bom_import.mrp_bom_line_import_view_tree'}"
-              />
-                        <field
-                name="bom_line_import_ids"
-                context="{'tree_view_ref':'mrp_bom_import.mrp_bom_line_component_import_view_tree'}"
-              />
+                        <field name="bom_line_import_ids"/>
                     </page>
                     <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
@@ -124,16 +105,20 @@
                                 <p
                   >You must use this column names in order to fill the table:</p>
                                 <ul name="tutorial">
-                                    <li><code>name</code>: this will fill <b
-                      >Product name</b></li>
-                                    <li><code>code</code>: this will fill <b
-                      >Product code</b></li>
-                                    <li><code>qty</code>: this will fill <b
+                                    <li><code>BoM Ref</code>: this will fill <b
+                      >BoM Reference</b></li>
+                                    <li><code>Product Name</code>: this will fill <b
+                      >Product Name</b></li>
+                                    <li><code>Product Code</code>: this will fill <b
+                      >Product Code</b></li>
+                                    <li><code>Quantity</code>: this will fill <b
                       >Quantity</b></li>
-                                    <li><code>weight</code>: this will fill <b
+                                    <li><code>Weight</code>: this will fill <b
                       >Weight</b></li>
-                                    <li><code>parent_code</code>: this will fill <b
-                      >BoM code</b></li>
+                                    <li><code>Parent Code</code>: this will fill <b
+                      >BoM Parent Code</b></li>
+                                    <li><code>Parent Name</code>: this will fill <b
+                      >BoM Parent Name</b></li>
                                 </ul>
                             </div>
                         </group>
@@ -145,7 +130,7 @@
         </field>
     </record>
 
-    <record id="mrp_bom_line_import_view_tree" model="ir.ui.view">
+    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
         <field name="model">mrp.bom.line.import</field>
         <field name="arch" type="xml">
             <tree
@@ -154,30 +139,23 @@
         decoration-danger="state=='error'"
         decoration-muted="state=='done'"
         decoration-info="state=='2validate'"
+        decoration-warning="parent_product_bom_count>0 and state!='done'"
         editable="bottom"
       >
-                <field name="product_name" />
-                <field name="product_ref" />
-                <field name="product_id" optional="hide" />
-                <field name="quantity" />
-                <field name="bom_id" optional="hide" />
-                <field name="log_info" />
-                <field name="state" />
+                <field name="product_ref"/>
+                <field name="product_name"/>
+                <field name="product_id" optional="hide"/>
+                <field name="bom_ref"/>
+                <field name="bom_code"/>
+                <field name="bom_name"/>
+                <field name="bom_product_id" optional="hide"/>
+                <field name="parent_product_bom_count" optional="show"/>
+                <field name="bom_id" optional="hide"/>
+                <field name="bom_line_id" optional="hide"/>
+                <field name="quantity"/>
+                <field name="log_info"/>
+                <field name="state"/>
             </tree>
-        </field>
-    </record>
-
-    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
-        <field name="model">mrp.bom.line.import</field>
-        <field name="inherit_id" ref="mrp_bom_line_import_view_tree" />
-        <field name="mode">primary</field>
-        <field name="arch" type="xml">
-            <field name="bom_id" position="before">
-                <field name="bom_code" />
-            </field>
-            <field name="bom_id" position="after">
-                <field name="parent_line_id" optional="hide" />
-            </field>
         </field>
     </record>
 
