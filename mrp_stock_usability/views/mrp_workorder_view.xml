@@ -9,7 +9,6 @@
           name="action_assign"
           string="Check availability"
           type="object"
-          class="oe_highlight"
           attrs="{'invisible':[('show_check_availability','=',False)]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
         />
@@ -34,7 +33,6 @@
           name="button_assign"
           string="Check availability"
           type="object"
-          class="oe_highlight"
           attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
         />
@@ -63,7 +61,6 @@
           name="action_assign"
           string="Check availability"
           type="object"
-          class="oe_highlight"
           attrs="{'invisible':[('show_check_availability','=',False)]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
         />
