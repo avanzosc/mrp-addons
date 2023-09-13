@@ -13,5 +13,5 @@ class MultipleCopy(models.TransientModel):
         nest_ids = self._context.get("active_ids")
         nests = self.env["mrp.workorder.nest"].browse(nest_ids)
         for nest in nests:
-            for i in range(self.copy_number):
+            for _count in range(self.copy_number):
                 nest.copy()

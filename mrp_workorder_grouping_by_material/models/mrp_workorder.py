@@ -42,7 +42,6 @@ class MrpWorkorder(models.Model):
             ("plus", "Nested More Quantity"),
             ("not_nest", "Not Nested"),
         ],
-        string="Nested Status",
         compute="_compute_nested",
         compute_sudo=True,
         store=True,

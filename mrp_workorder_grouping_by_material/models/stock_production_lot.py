@@ -7,7 +7,6 @@ class StockLot(models.Model):
     _inherit = "stock.lot"
 
     product_life_alert = fields.Boolean(
-        string="Product Life Alert",
         compute="_compute_product_life_alert",
         search="_search_product_life_alert",
     )

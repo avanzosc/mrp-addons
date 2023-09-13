@@ -1,11 +1,14 @@
 # Copyright 2020 Mikel Arregi Etxaniz - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
 from .mrp_workorder_nest import NEST_STATE
+
+_logger = logging.getLogger(__name__)
 
 
 class MrpWorkorderNestLine(models.Model):
@@ -313,7 +316,7 @@ class MrpWorkorderNestLine(models.Model):
                 )
 
     def action_back2draft(self):
-        for nl in self.filtered(lambda l: l.state == "ready"):
+        for nl in self.filtered(lambda n: n.state == "ready"):
             nl.state = "draft"
 
     def action_check_ready(self):
@@ -324,7 +327,7 @@ class MrpWorkorderNestLine(models.Model):
                 nl.state = "done"
 
     def action_cancel(self):
-        if not any(self.filtered(lambda l: l.state == "ready")):
+        if not any(self.filtered(lambda n: n.state == "ready")):
             raise UserError(_(""))
         return self.write({"state": "cancel"})
 
@@ -345,14 +348,20 @@ class MrpWorkorderNestLine(models.Model):
                     if wo.current_quality_check_id.quality_state == "none":
                         wo.current_quality_check_id.do_pass()
                 except AttributeError:
-                    # If enterprise module mrp_workorder module
-                    # is not installed quality check is not necessary
-                    pass
+                    # If enterprise module mrp_workorder is not installed
+                    # quality check is not necessary
+                    _logger.info("Enterprise module 'mrp_workorder' is not installed")
                 try:
                     wo.with_context(from_nest=True).record_production()
                     nl.state = "done"
                 except UserError as e:
-                    raise UserError(_("{}: {}").format(wo.name, str(e.name)))
+                    raise UserError(
+                        _("%(workorder)s: %(error_name)s")
+                        % {
+                            "workorder": wo.name,
+                            "error_name": str(e.name),
+                        }
+                    )
 
     def button_pending(self):
         for nl in self:
@@ -366,7 +375,7 @@ class MrpWorkorderNestLine(models.Model):
 
     def button_scrap(self):
         for nest_line in self.filtered(
-            lambda l: l.workorder_state not in ("confirmed", "cancel")
+            lambda nl: nl.workorder_state not in ("confirmed", "cancel")
         ):
             nest_line.workorder_id.with_context(from_nest=True).button_scrap()
 

@@ -6,5 +6,5 @@ from odoo import fields, models
 class MrpWorkcenter(models.Model):
     _inherit = "mrp.workcenter"
 
-    nesting_required = fields.Boolean(string="Nesting Required")
+    nesting_required = fields.Boolean()
     copy_production_qty = fields.Boolean(string="Copy Nest Quantity")
