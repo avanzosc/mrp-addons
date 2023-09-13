@@ -40,10 +40,8 @@ class MrpWorkorderNest(models.Model):
         )
         return [("id", "in", workcenter_ids)]
 
-    name = fields.Char(
-        string="Name", readonly=True, required=True, copy=False, default="New"
-    )
-    code = fields.Char(string="Code")
+    name = fields.Char(readonly=True, required=True, copy=False, default="New")
+    code = fields.Char()
     main_product_id = fields.Many2one(
         string="Main Product",
         comodel_name="product.product",
@@ -72,9 +70,9 @@ class MrpWorkorderNest(models.Model):
         copy=True,
     )
     state = fields.Selection(
-        selection=NEST_STATE, string="State", default="draft", tracking=True
+        selection=NEST_STATE, string="Status", default="draft", tracking=True
     )
-    pre_block_state = fields.Selection(selection=NEST_STATE, string="Pre Block State")
+    pre_block_state = fields.Selection(selection=NEST_STATE)
     line_state = fields.Selection(
         selection=[
             ("draft", "Draft"),
@@ -155,14 +153,14 @@ class MrpWorkorderNest(models.Model):
             result.append((record.id, name))
         return result
 
-    @api.model
-    def create(self, vals):
-        if vals.get("name", "New") == "New":
-            vals["name"] = (
-                self.env["ir.sequence"].next_by_code("mrp.workorder.nest") or "New"
-            )
-        result = super().create(vals)
-        return result
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("name", "New") == "New":
+                vals["name"] = (
+                    self.env["ir.sequence"].next_by_code("mrp.workorder.nest") or "New"
+                )
+        return super().create(vals_list)
 
     def _check_lot(self):
         self.ensure_one()
@@ -175,7 +173,7 @@ class MrpWorkorderNest(models.Model):
             nest.nested_line_ids.action_check_ready()
             if not any(
                 nest.nested_line_ids.filtered(
-                    lambda l: l.state not in ("ready", "progress", "done")
+                    lambda line: line.state not in ("ready", "progress", "done")
                 )
             ):
                 nest.state = "ready"

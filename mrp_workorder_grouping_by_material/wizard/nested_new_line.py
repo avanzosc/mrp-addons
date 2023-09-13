@@ -84,9 +84,9 @@ class NestedNewLine(models.TransientModel):
         self.ensure_one()
         lines = self.line_ids | self.filtered_line_ids
         self.filtered_line_ids = lines.filtered(
-            lambda l: l.product_id == self.product_id
+            lambda nl: nl.product_id == self.product_id
         )
-        self.line_ids = lines.filtered(lambda l: l.product_id != self.product_id)
+        self.line_ids = lines.filtered(lambda nl: nl.product_id != self.product_id)
 
     def action_done(self):
         main_product_workcenter = {}

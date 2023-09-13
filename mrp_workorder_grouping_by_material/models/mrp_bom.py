@@ -26,7 +26,7 @@ class MrpBom(models.Model):
 class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
-    main_material = fields.Boolean(string="Main Material")
+    main_material = fields.Boolean()
 
     @api.constrains("operation_id", "main_material")
     def _check_main_material_operation(self):
