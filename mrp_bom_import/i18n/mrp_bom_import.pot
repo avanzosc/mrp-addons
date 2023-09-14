@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 14.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-29 10:48+0000\n"
-"PO-Revision-Date: 2022-08-29 10:48+0000\n"
+"POT-Creation-Date: 2023-09-13 12:35+0000\n"
+"PO-Revision-Date: 2023-09-13 12:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,37 +17,42 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>code</code>: this will fill <b>Product code</b>"
+msgid "<code>BoM Ref</code>: this will fill <b>BoM Reference</b>"
 msgstr ""
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>name</code>: this will fill <b>Product name</b>"
+msgid "<code>Parent Code</code>: this will fill <b>BoM Parent Code</b>"
 msgstr ""
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>parent_code</code>: this will fill <b>BoM code</b>"
+msgid "<code>Parent Name</code>: this will fill <b>BoM Parent Name</b>"
 msgstr ""
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>qty</code>: this will fill <b>Quantity</b>"
+msgid "<code>Product Code</code>: this will fill <b>Product Code</b>"
 msgstr ""
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>weight</code>: this will fill <b>Weight</b>"
+msgid "<code>Product Name</code>: this will fill <b>Product Name</b>"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>Quantity</code>: this will fill <b>Quantity</b>"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>Weight</code>: this will fill <b>Weight</b>"
 msgstr ""
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 msgid "<span class=\"o_stat_text\">BoMs</span>"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<span class=\"o_stat_text\">Products</span>"
 msgstr ""
 
 #. module: mrp_bom_import
@@ -92,44 +97,46 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_import_id
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_line_import_id
 #: model:ir.ui.menu,name:mrp_bom_import.menu_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_line_import_view_tree
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_line_component_import_view_tree
 msgid "BoM Import"
 msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 #, python-format
 msgid "BoM Import Lines"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__bom_import_ids
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_line_id
+msgid "BoM Line"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 msgid "BoM Lines"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_name
+msgid "BoM Name"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "BoM Product"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_ref
+msgid "BoM Ref"
 msgstr ""
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_code
 msgid "BoM code"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__parent_line_id
-msgid "BoM parent line"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__category_id
-msgid "Category"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__categ_name
-msgid "Category name"
 msgstr ""
 
 #. module: mrp_bom_import
@@ -161,13 +168,18 @@ msgid "Display Name"
 msgstr ""
 
 #. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Done"
+msgstr ""
+
+#. module: mrp_bom_import
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__error
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__error
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
 msgid "Error"
 msgstr ""
 
 #. module: mrp_bom_import
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: BoM already exist"
@@ -175,13 +187,17 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: BoM not found"
 msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: BoM product not found."
+msgstr ""
+
+#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: More than one BoM already exist"
@@ -189,6 +205,11 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: More than one BoM product found."
+msgstr ""
+
+#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: More than one product already exist"
@@ -196,6 +217,11 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: More than one product found."
+msgstr ""
+
+#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: Product not found"
@@ -203,9 +229,26 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: Product not found."
+msgstr ""
+
+#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: Quantity cannot be 0"
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: Quantity cannot be 0."
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: There is another line with the same parent product errors."
 msgstr ""
 
 #. module: mrp_bom_import
@@ -244,6 +287,11 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Group By"
+msgstr ""
+
+#. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 msgid "Help"
 msgstr ""
@@ -279,6 +327,7 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_has_error
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -340,6 +389,7 @@ msgstr ""
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__log_info
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__log_info
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
 msgid "Log Info"
 msgstr ""
 
@@ -347,6 +397,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:mrp_bom_import.mrp_bom_import_act
 #: model:ir.ui.menu,name:mrp_bom_import.mrp_bom_import
 msgid "MRP BoM Import"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.actions.act_window,name:mrp_bom_import.mrp_bom_line_action
+msgid "MRP BoM Lines"
 msgstr ""
 
 #. module: mrp_bom_import
@@ -415,6 +470,21 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__parent_product_bom_count
+msgid "Parent Bom Qty"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_product_id
+msgid "Parent Product"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Pending"
+msgstr ""
+
+#. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 msgid "Process"
 msgstr ""
@@ -434,6 +504,11 @@ msgstr ""
 #. module: mrp_bom_import
 #: model:ir.model,name:mrp_bom_import.model_product_category
 msgid "Product Category"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__product_found_by_code
+msgid "Product Found By Code"
 msgstr ""
 
 #. module: mrp_bom_import
@@ -457,8 +532,14 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__state
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__state
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
 msgid "Status"
 msgstr ""
 
@@ -492,11 +573,6 @@ msgstr ""
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__bom_count
 msgid "Total BoMs"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__products_count
-msgid "Total Products"
 msgstr ""
 
 #. module: mrp_bom_import
