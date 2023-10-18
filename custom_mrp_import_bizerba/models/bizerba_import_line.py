@@ -1,7 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, fields, models
-from odoo.addons import decimal_precision as dp
 
 
 class BizerbaImportLine(models.Model):
@@ -9,9 +8,7 @@ class BizerbaImportLine(models.Model):
     _inherit = "base.import.line"
     _description = "Wizard lines to import Bizerba lines"
 
-    production_id = fields.Many2one(
-        string="Production",
-        comodel_name="mrp.production")
+    production_id = fields.Many2one(string="Production", comodel_name="mrp.production")
     action = fields.Selection(
         string="Action",
         selection=[
@@ -32,13 +29,13 @@ class BizerbaImportLine(models.Model):
         string="Product Qty",
         states={"done": [("readonly", True)]},
         copy=False,
-        digits=dp.get_precision("Bizerba Product Qty Decimal Precision")
-        )
+        digits="Bizerba Product Qty Decimal Precision",
+    )
     line_uom = fields.Char(
         string="UoM",
         states={"done": [("readonly", True)]},
         copy=False,
-        )
+    )
     line_chicken_code = fields.Char(
         string="Chicken Code",
         states={"done": [("readonly", True)]},
@@ -60,37 +57,35 @@ class BizerbaImportLine(models.Model):
         comodel_name="uom.uom",
         states={"done": [("readonly", True)]},
         copy=False,
-        )
+    )
     line_lot = fields.Char(
         string="Lot",
         states={"done": [("readonly", True)]},
         copy=False,
-        )
+    )
 
     def action_validate(self):
-        super().action_validate()
+        line_values = super().action_validate()
         self.production_id.action_confirm()
-        line_values = []
-        for line in self.filtered(lambda l: l.state != "done"):
-            log_info = ""
-            product = uom = False
+        for line in self.filtered(lambda ln: ln.state != "done"):
+            log_infos = []
             product, log_info_product = line._check_product()
             if log_info_product:
-                log_info += log_info_product
+                log_infos.append(log_info_product)
             uom, log_info_uom = line._check_uom()
             if log_info_uom:
-                log_info += log_info_uom
-            state = "error" if log_info else "pass"
+                log_infos.append(log_info_uom)
+            state = "error" if log_infos else "pass"
             action = "nothing"
             if state != "error":
                 action = "create"
             update_values = {
                 "line_uom_id": uom and uom.id,
                 "line_product_id": product and product.id,
-                "log_info": log_info,
+                "log_info": "\n".join(log_infos),
                 "state": state,
                 "action": action,
-                }
+            }
             line_values.append(
                 (
                     1,
@@ -101,44 +96,40 @@ class BizerbaImportLine(models.Model):
         return line_values
 
     def action_process(self):
-        super().action_validate()
-        line_values = []
+        line_values = super().action_process()
         products = []
-        for line in self.filtered(lambda l: l.state not in ("error", "done")):
+        for line in self.filtered(lambda ln: ln.state not in ("error", "done")):
             log_info = ""
-            if line.action == "create" and (
-                line.line_product_id) not in (
-                    products):
+            if line.action == "create" and (line.line_product_id) not in (products):
                 move_line = line.production_id.move_line_ids.filtered(
-                    lambda c: c.product_id == line.line_product_id)
+                    lambda c: c.product_id == line.line_product_id
+                )
                 if move_line:
                     products.append(line.line_product_id)
                     same_product_lines = self.filtered(
-                        lambda c: c.state not in ("error", "done") and (
-                            c.action == "create") and (
-                                c.line_product_id == line.line_product_id))
+                        lambda c: c.state not in ("error", "done")
+                        and (c.action == "create")
+                        and (c.line_product_id == line.line_product_id)
+                    )
                     container = len(same_product_lines)
-                    qty_done = sum(
-                        same_product_lines.mapped("line_product_qty"))
-                    move_line[:1].write({
-                        "container": container,
-                        "qty_done": qty_done,
-                        "product_uom_id": line.line_uom_id.id})
+                    qty_done = sum(same_product_lines.mapped("line_product_qty"))
+                    move_line[:1].write(
+                        {
+                            "container": container,
+                            "qty_done": qty_done,
+                            "product_uom_id": line.line_uom_id.id,
+                        }
+                    )
                     move_line[:1].onchange_container()
                     move_line[:1].onchange_unit()
                 else:
-                    log_info = (
-                        _("Error: There is no entry line " +
-                          "with this product."))
+                    log_info = _("Error: There is no entry line with this product.")
             if log_info:
-                line.write({
-                    "log_info": log_info,
-                    "state": "error",
-                    "action": "nothing"})
+                line.write(
+                    {"log_info": log_info, "state": "error", "action": "nothing"}
+                )
             else:
-                line.write({
-                    "state": "done",
-                    "action": "nothing"})
+                line.write({"state": "done", "action": "nothing"})
         return line_values
 
     def _check_product(self):
@@ -160,13 +151,12 @@ class BizerbaImportLine(models.Model):
             products = False
             log_info = _(
                 "Error: More than one product with Bizerba code {} found."
-                ).format(code)
+            ).format(code)
         elif len(products) == 1:
             if not self.production_id.move_line_ids.filtered(
                 lambda c: c.product_id == products
-                ):
-                log_info = (_("Error: There is no entry line " +
-                              "with this product."))
+            ):
+                log_info = _("Error: There is no entry line with this product.")
         return products and products[:1], log_info
 
     def _check_uom(self):
@@ -182,7 +172,7 @@ class BizerbaImportLine(models.Model):
             log_info = _("Error: No UoM found.")
         elif len(uoms) > 1:
             uoms = False
-            log_info = _(
-                "Error: More than one UoM with name {} found."
-                ).format(self.line_uom)
+            log_info = _("Error: More than one UoM with name {} found.").format(
+                self.line_uom
+            )
         return uoms and uoms[:1], log_info
