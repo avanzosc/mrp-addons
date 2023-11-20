@@ -17,6 +17,13 @@ class MrpProduction(models.Model):
         domain=lambda self: [
             ("location_dest_id", "in", self.production_location_id.ids)]
         )
+    finished_move_line_ids = fields.One2many(
+        compute=False,
+        inverse_name="production_id",
+        domain=lambda self: [
+            ("location_id", "in", self.production_location_id.ids),
+            ("location_dest_id", "in", self.location_dest_id.ids)]
+        )
 
     def write(self, vals):
         res = super(MrpProduction, self).write(vals)

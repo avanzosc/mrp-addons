@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-14 14:54+0000\n"
-"PO-Revision-Date: 2022-09-14 14:54+0000\n"
+"POT-Creation-Date: 2023-11-15 15:22+0000\n"
+"PO-Revision-Date: 2023-11-15 15:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr "Deconstrucción"
 #: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_production__display_name
 #: model:ir.model.fields,field_description:mrp_production_deconstruction.field_stock_move_line__display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr "Mostrar nombre"
 
 #. module: mrp_production_deconstruction
 #: model:ir.model.fields,field_description:mrp_production_deconstruction.field_stock_move_line__location_id
@@ -103,3 +103,8 @@ msgstr "Hoy"
 #: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.mrp_production_form_view
 msgid "Total Reserved"
 msgstr "Total reservado"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_production_filter
+msgid "Yesterday"
+msgstr "Ayer"
