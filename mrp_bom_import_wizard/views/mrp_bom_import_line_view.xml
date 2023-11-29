@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="bom_import_line_view_search" model="ir.ui.view">
+        <field name="model">mrp.bom.line.import</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <field name="bom_product_id"/>
+                <filter
+                name="pending"
+                string="Pending"
+                domain="[('state', '!=', 'done')]"
+                />
+                <filter
+                name="finished"
+                string="Done"
+                domain="[('state', '=', 'done')]"
+                />
+                <filter
+                name="errored"
+                string="Error"
+                domain="[('state', '=', 'error')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                    string="Status"
+                    name="state_group"
+                    domain="[]"
+                    context="{'group_by':'state'}"
+                    />
+                    <filter
+                    string="Log Info"
+                    name="log_info_group"
+                    domain="[]"
+                    context="{'group_by':'log_info'}"
+                    />
+                    <separator/>
+                    <filter
+                    string="BoM Product"
+                    name="bom_product"
+                    domain="[]"
+                    context="{'group_by':'bom_product_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
+        <field name="model">mrp.bom.line.import</field>
+        <field name="arch" type="xml">
+            <tree
+        string="BoM Import"
+        decoration-success="state=='pass'"
+        decoration-danger="state=='error'"
+        decoration-muted="state=='done'"
+        decoration-info="state=='2validate'"
+        decoration-warning="parent_product_bom_count>0 and state!='done'"
+        editable="bottom"
+      >
+                <field name="product_ref"/>
+                <field name="product_name"/>
+                <field name="product_id"/>
+                <field name="bom_ref"/>
+                <field name="bom_code"/>
+                <field name="bom_name"/>
+                <field name="bom_product_id"/>
+                <field name="parent_product_bom_count"/>
+                <field name="bom_id"/>
+                <field name="bom_line_id"/>
+                <field name="quantity"/>
+                <field name="log_info"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
