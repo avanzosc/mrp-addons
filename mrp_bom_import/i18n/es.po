@@ -1,0 +1,600 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-23 10:02+0000\n"
+"PO-Revision-Date: 2024-01-23 10:02+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>BoM Ref</code>: this will fill <b>BoM Reference</b>"
+msgstr "<code>BoM Ref</code>: esto rellenará la <b>Referencia de LdM</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>Parent Code</code>: this will fill <b>Parent Product Code</b>"
+msgstr ""
+"<code>Parent Code</code>: esto rellenará el <b>Código del producto padre</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>Parent Name</code>: this will fill <b>Parent Product Name</b>"
+msgstr ""
+"<code>Parent Name</code>: esto rellenará el <b>Nombre del producto padre</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>Parent Qty</code>: this will fill <b>Parent Product Quantity</b>"
+msgstr "<code>Parent Qty</code>: esto rellenará la <b>Cantidad del producto padre</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid ""
+"<code>Product Code</code>: this will fill <b>Component Product Code</b>"
+msgstr "<code>Product Code</code>: esto rellenará el <b>Código del componente</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid ""
+"<code>Product Name</code>: this will fill <b>Component Product Name</b>"
+msgstr ""
+"<code>Product Name</code>: esto rellenará el <b>Nombre del componente</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<code>Quantity</code>: this will fill <b>Component Quantity</b>"
+msgstr "<code>Quantity</code>: esto rellenará la <b>Cantidad del componente</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "<span class=\"o_stat_text\">BoMs</span>"
+msgstr "<span class=\"o_stat_text\">LdMs</span>"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoración de Actividad  de Excepción"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Ícono de tipo de actvidad"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nº de archivos adjuntos"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_id
+msgid "BoM"
+msgstr "LdM"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__bom_line_import_ids
+msgid "BoM Component Lines"
+msgstr "Línea de componentes de LdM"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_import_id
+#: model:ir.ui.menu,name:mrp_bom_import.menu_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_line_component_import_view_tree
+msgid "BoM Import"
+msgstr "Importar LdM"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_line_id
+msgid "BoM Line"
+msgstr "Línea de LdM"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "BoM Lines"
+msgstr "Líneas de LdM"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_name
+msgid "BoM Name"
+msgstr "Nombre padre"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "BoM Product"
+msgstr "Producto padre"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_ref
+msgid "BoM Ref"
+msgstr "Referencia de LdM"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_code
+msgid "BoM code"
+msgstr "Código padre"
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+#, python-format
+msgid "Component Import Lines"
+msgstr "Importación de componentes"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__create_uid
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__create_date
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__display_name
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__display_name
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__display_name
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_product__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Done"
+msgstr "Procesado"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__error
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__error
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Error"
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: BoM product not found."
+msgstr "Error: Producto padre no encontrada."
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: More than one BoM product found."
+msgstr "Error: Más de un producto padre encontrado."
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: More than one product found."
+msgstr "Error: Más de un componente encontrado."
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: Product not found."
+msgstr "Error: Componente no encontrado."
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: Quantity cannot be 0."
+msgstr "Error: La cantidad no puede ser 0."
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: There is another line with the same parent product errors."
+msgstr "Error: Hay otra línea para la misma LdM con errores."
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__data
+msgid "File"
+msgstr "Archivo"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__file_date
+msgid "File Import Date"
+msgstr "Fecha importación archivo"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__filename
+msgid "Filename"
+msgstr "Nombre de archivo"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icono de Font Awesome ej. fa-tasks"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Help"
+msgstr "Ayuda"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Help with Excel column names"
+msgstr "Ayuda con los nombres de columnas de Excel"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__id
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__id
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__id
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_product__id
+msgid "ID"
+msgstr "Identificador"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción."
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_needaction
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado hay nuevos mensajes que requieren su atención."
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_has_error
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Import"
+msgstr "Importar"
+
+#. module: mrp_bom_import
+#: model:ir.model,name:mrp_bom_import.model_mrp_bom_import
+msgid "Import BoM from excel file"
+msgstr "Importar LdM de fichero excel"
+
+#. module: mrp_bom_import
+#: model:ir.model,name:mrp_bom_import.model_mrp_bom_line_import
+msgid "Import BoM lines"
+msgstr "Lineas de importador de LdM"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__name
+msgid "Import name"
+msgstr "Nombre importación"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_is_follower
+msgid "Is Follower"
+msgstr "Es un seguidor"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import____last_update
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import____last_update
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_category____last_update
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_product____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__write_uid
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__write_date
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Log"
+msgstr "Registro"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__log_info
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__log_info
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Log Info"
+msgstr "Info log."
+
+#. module: mrp_bom_import
+#: model:ir.actions.act_window,name:mrp_bom_import.mrp_bom_import_act
+#: model:ir.ui.menu,name:mrp_bom_import.mrp_bom_import
+msgid "MRP BoM Import"
+msgstr "MRP Importación LdM"
+
+#. module: mrp_bom_import
+#: model:ir.actions.act_window,name:mrp_bom_import.mrp_bom_line_action
+msgid "MRP BoM Lines"
+msgstr "MRP líneas de LdM"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjuntos principales"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_product__map_number
+msgid "Map Number"
+msgstr "Plano montaje"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de Envío de Mensaje"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Mi fecha límite de actividad"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Siguiente plazo de actividad"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero de errores"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leidos"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__parent_product_bom_count
+msgid "Parent Bom Qty"
+msgstr "Recuento de BoMs"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_product_id
+msgid "Parent Product"
+msgstr "Producto padre"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__parent_qty
+msgid "Parent Quantity"
+msgstr "Cantidad padre"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Process"
+msgstr "Procesar"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__done
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__done
+msgid "Processed"
+msgstr "Procesado"
+
+#. module: mrp_bom_import
+#: model:ir.model,name:mrp_bom_import.model_product_product
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_id
+msgid "Product"
+msgstr "Componente"
+
+#. module: mrp_bom_import
+#: model:ir.model,name:mrp_bom_import.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__product_found_by_code
+msgid "Product Found By Code"
+msgstr "Buscar productos por referencia"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_ref
+msgid "Product code"
+msgstr "Código componente"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_name
+msgid "Product name"
+msgstr "Nombre componente"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__quantity
+msgid "Quantity"
+msgstr "Cantidad componente"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega de SMS"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__state
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__state
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+msgid "Status"
+msgstr "Estado"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Vencida: la fecha tope ya ha pasado\n"
+"Hoy: La fecha tope es hoy\n"
+"Planificada: futuras actividades."
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__supplier_id
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "This is not a valid file."
+msgstr "No es un archivo válido."
+
+#. module: mrp_bom_import
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__2validate
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__2validate
+msgid "To validate"
+msgstr "Para validar"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__bom_count
+msgid "Total BoMs"
+msgstr "Total LdMs"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de actividad de excepción registrada."
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Nº de mensajes sin leer"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "Validate"
+msgstr "Validar"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__pass
+#: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__pass
+msgid "Validated"
+msgstr "Validado"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,help:mrp_bom_import.field_mrp_bom_import__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__weight
+msgid "Weight"
+msgstr "Peso"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid "You must use this column names in order to fill the table:"
+msgstr "Debe usar las siguientes columnas para rellenar la tabla:"
