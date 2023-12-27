@@ -1,6 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -103,3 +103,27 @@ class SacaLine(models.Model):
                     for clas in line.clasified_ids:
                         clas.employee_id = False
                         clas.user_id = False
+
+    @api.depends("stage_id", "production_ids")
+    def _compute_stage(self):
+        super(SacaLine, self)._compute_stage()
+        for line in self:
+            matanza = self.env.ref("custom_descarga.stage_matanza")
+            clasificado = self.env.ref("custom_descarga.stage_clasificado")
+            if line.stage_id == clasificado and not line.production_ids:
+                line.write({
+                    "stage_id": matanza.id,
+                    "is_presaca": False,
+                    "is_saca": False,
+                    "is_descarga": False,
+                    "is_killing": True,
+                    "is_classified": False})
+
+    def write(self, values):
+        result = super(SacaLine, self).write(values)
+        if "gross_origin" in (
+            values) or "tara_origin" in (
+                values) and self.net_origin:
+            for line in self.production_ids:
+                line.product_qty = self.net_origin
+        return result

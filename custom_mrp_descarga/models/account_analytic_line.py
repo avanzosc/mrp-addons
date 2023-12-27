@@ -9,3 +9,7 @@ class AccountAnalyticLine(models.Model):
     production_id = fields.Many2one(
         string="Production",
         comodel_name="mrp.production")
+    unload_date = fields.Datetime(
+        string="Unload Date",
+        related="production_id.saca_line_id.unload_date",
+        store=True)
