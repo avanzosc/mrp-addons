@@ -7,8 +7,6 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     canal = fields.Boolean(string="Canal", default=False)
-    standard_price = fields.Float(
-        digits="MRP Price Decimal Precision")
     unit_container = fields.Integer(string="Unit/Container")
     palet = fields.Boolean(
         string="Is Palet",
