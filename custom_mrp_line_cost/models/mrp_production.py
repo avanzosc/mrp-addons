@@ -1,7 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import _, api, exceptions, fields, models
 
 
 class MrpProduction(models.Model):
@@ -119,11 +118,11 @@ class MrpProduction(models.Model):
                  "move_line_ids.amount")
     def _compute_average_cost(self):
         for line in self:
-            line.average_cost = 0
+            average_cost = 0
             if sum(line.move_line_ids.filtered(
                 lambda c: c.location_id == line.location_src_id).mapped(
                     "qty_done")) != 0:
-                line.average_cost = sum(
+                average_cost = sum(
                     line.move_line_ids.filtered(
                         lambda c: c.location_id == (
                             line.location_src_id)).mapped("amount")) / sum(
@@ -131,6 +130,7 @@ class MrpProduction(models.Model):
                                     lambda c: c.location_id == (
                                         line.location_src_id)).mapped(
                                             "qty_done"))
+            line.average_cost = average_cost
 
     def _compute_move_to_do_ids(self):
         for production in self:
@@ -280,48 +280,39 @@ class MrpProduction(models.Model):
                  "move_line_ids.qty_done")
     def _compute_canal_weight(self):
         for line in self:
-            line.canal_weight = 0
+            canal_weight = 0
             canal_lines = line.move_line_ids.filtered(
                 lambda c: c.canal is True)
             canal_weight = sum(canal_lines.mapped("qty_done"))
             canal_unit = sum(canal_lines.mapped("unit"))
             if canal_unit != 0:
-                line.canal_weight = canal_weight / canal_unit
+                canal_weight = canal_weight / canal_unit
+            line.canal_weight = canal_weight
 
     @api.depends("move_line_ids", "move_line_ids.canal",
                  "move_line_ids.percentage")
     def _compute_rto_canal(self):
         for line in self:
-            line.rto_canal = 0
+            rto_canal = 0
             canal_lines = line.move_line_ids.filtered(
                 lambda c: c.canal is True)
             if canal_lines:
-                line.rto_canal = sum(canal_lines.mapped("percentage"))
+                rto_canal = sum(canal_lines.mapped("percentage"))
+            line.rto_canal = rto_canal
 
     @api.depends("move_line_ids", "move_line_ids.canal",
                  "move_line_ids.qty_done", "move_line_ids.amount")
     def _compute_canal_cost(self):
         for line in self:
-            line.canal_cost = 0
+            canal_cost = 0
             if line.move_line_ids:
                 canal_lines = line.move_line_ids.filtered(
                     lambda c: c.canal is True)
                 if canal_lines and sum(canal_lines.mapped("weight")) != 0:
-                    line.canal_cost = sum(
+                    canal_cost = sum(
                         canal_lines.mapped("amount"))/sum(
                             canal_lines.mapped("qty_done"))
-
-    @api.constrains(
-        "move_line_ids", "move_line_ids.percentage")
-    def _check_lineage_percentage(self):
-        for production in self:
-            if production.move_line_ids:
-                if sum(
-                    production.move_line_ids.mapped(
-                        "percentage")) > 100:
-                    raise ValidationError(
-                        _("The sum of the percentages it can't be" +
-                          " more than 100."))
+            line.canal_cost = canal_cost
 
     def action_view_move_to_do(self):
         context = self.env.context.copy()
