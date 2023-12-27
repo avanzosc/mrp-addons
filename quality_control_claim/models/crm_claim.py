@@ -7,6 +7,6 @@ class CrmClaim(models.Model):
     _inherit = "crm.claim"
 
     def _selection_model(self):
-        result = super(CrmClaim, self)._selection_model()
+        result = super()._selection_model()
         result.extend([("qc.inspection", "Quality control inspection")])
         return result
