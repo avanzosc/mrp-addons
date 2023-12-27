@@ -29,9 +29,7 @@ class QcInspection(models.Model):
     )
 
     def _prepare_inspection_header(self, object_ref, trigger_line):
-        result = super()._prepare_inspection_header(
-            object_ref, trigger_line
-        )
+        result = super()._prepare_inspection_header(object_ref, trigger_line)
         result.update(
             {
                 "automatic_claims": trigger_line.test.automatic_claims,
