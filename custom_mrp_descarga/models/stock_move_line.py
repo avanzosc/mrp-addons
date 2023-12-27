@@ -17,6 +17,11 @@ class StockMoveLine(models.Model):
         compute="_compute_sequence",
         store=True
         )
+    quartering = fields.Boolean(
+        string="Quartering",
+        related="production_id.quartering",
+        store=True
+    )
 
     @api.depends("production_id")
     def _compute_sequence(self):
@@ -33,7 +38,7 @@ class StockMoveLine(models.Model):
                     movelines = line.production_id.finished_move_line_ids
                 if movelines:
                     for record in movelines:
-                        if record not in ids:
+                        if record.id not in ids:
                             ids.append(record.id)
                     if line.id in ids:
                         sequence = ids.index(line.id) + 1
@@ -113,7 +118,9 @@ class StockMoveLine(models.Model):
 
     @api.onchange('lot_id', 'product_id')
     def onchange_product_lot(self):
-        if self.product_id and self.lot_id and self.product_id != self.lot_id.product_id:
+        if self.product_id and (
+            self.lot_id) and (
+                self.product_id != self.lot_id.product_id):
             raise ValidationError(
-                _("The product of the lot does not match with the product of the line."))
-
+                _("The product of the lot does not match with the " +
+                  "product of the line."))
