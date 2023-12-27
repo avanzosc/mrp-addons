@@ -5,12 +5,12 @@
         <field name="inherit_id" ref="stock.view_move_line_tree"/>
         <field name="arch" type="xml">
             <field name="qty_done" position="before">
-                <field name="container" optional="hide" sum="Total Container"/>
+                <field name="container" optional="hide" sum="Total Container" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
             <field name="product_uom_id" position="after">
-                <field name="unit"/>
-                <field name="weight" optional="hide"/>
-                <field name="performance" optional="show" sum="Total Performance"/>
+                <field name="unit" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="weight" optional="hide" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="performance" optional="show" sum="Total Performance" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
         </field>
     </record>
@@ -47,6 +47,9 @@
                 <separator/>
                 <filter string="Done bigger than 0" name="done_qty" domain="[('qty_done', '&gt;', 0)]"/>
             </filter>
+            <filter name="groupby_product_id" position="after">
+                <filter string="Production Order" name="groupby_production" domain="[]" context="{'group_by': 'production_id'}"/>
+            </filter>
         </field>
     </record>
 
@@ -59,6 +62,21 @@
         <field name="domain">[('production_id', '!=', False), ('production_id.quartering', '=', False), ('production_id.paasa', '=', True), ('state', '=', 'done')]</field>
     </record>
 
+    <record id="action_quartering_move_lines" model="ir.actions.act_window">
+        <field name="name">Líneas de despiece</field>
+        <field name="res_model">stock.move.line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="stock.view_move_line_tree"/>
+        <field name="domain">[('quartering', '=', True)]</field>
+        <field name="context">{"search_default_todo": 1, "search_default_groupby_production": 1}</field>
+    </record>
+
     <menuitem action="action_classified_move_line" name="Product Movements" id="menu_move_line_classified" parent="custom_descarga.stage_clasificado_menu" sequence="7"/>
 
+    <menuitem action="action_quartering_move_lines" name="Líneas de despieces" id="menu_quartering_move_lines" parent="quartering_menu" sequence="5"/>
+
+    <record id="mrp.action_mrp_production_moves" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
 </odoo>

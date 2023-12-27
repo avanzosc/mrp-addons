@@ -45,9 +45,8 @@ class MrpProduction(models.Model):
         string="Chick Production",
         related="picking_type_id.chick_production",
         store=True)
-    birth_date = fields.Date(
-        string="Birth Date",
-        default=fields.Date.context_today)
+    production_date = fields.Datetime(
+        default=fields.Datetime.now())
     birth_week = fields.Integer(
         string="Birth Week",
         compute="_compute_birth_week",
@@ -142,15 +141,7 @@ class MrpProduction(models.Model):
         store=True)
     descarga_order = fields.Char(
         string="Descarga Order",
-        related="saca_line_id.descarga_order",
-        store=True)
-    finished_move_line_ids = fields.One2many(
-        compute=False,
-        inverse_name="production_id",
-        domain=lambda self: [
-            ("location_id", "in", self.production_location_id.ids),
-            ("location_dest_id", "in", self.location_dest_id.ids)]
-        )
+        related="saca_line_id.descarga_order")
     produced_qty = fields.Float(
         string="Produced Qty",
         compute="_compute_produced_qty",
@@ -213,40 +204,53 @@ class MrpProduction(models.Model):
         store=True)
     asphyxiation_units = fields.Integer(
         string="Asphyxiated",
-        compute="_compute_asphyxiation_units")
+        compute="_compute_asphyxiation_units",
+        store=True)
     seized_units = fields.Integer(
         string="Seized",
-        compute="_compute_seized_units")
+        compute="_compute_seized_units",
+        store=True)
     rto_percentage = fields.Float(
         string="Rto. %",
-        compute="_compute_rto_percentage")
+        compute="_compute_rto_percentage",
+        store=True)
 
+    @api.depends("move_line_ids", "move_line_ids.percentage")
     def _compute_rto_percentage(self):
         for line in self:
-            line.rto_percentage = 0
+            rto_percentage = 0
             if line.move_line_ids:
-                line.rto_percentage = sum(
+                rto_percentage = sum(
                     line.move_line_ids.mapped("percentage"))
+            line.rto_percentage = rto_percentage
 
+    @api.depends("move_line_ids", "move_line_ids.product_id",
+                 "move_line_ids.product_id.chicken_seized",
+                 "move_line_ids.unit", "quartering")
     def _compute_seized_units(self):
         for line in self:
-            line.seized_units = 0
+            seized_units = 0
             if line.move_line_ids and line.move_line_ids.filtered(
                 lambda c: c.product_id.chicken_seized) and not (
                     line.quartering):
-                line.seized_units = sum(
+                seized_units = sum(
                     line.move_line_ids.filtered(
                         lambda c: c.product_id.chicken_seized).mapped("unit"))
+            line.seized_units = seized_units
 
+    @api.depends("move_line_ids", "move_line_ids.product_id",
+                 "move_line_ids.product_id.asphyxiated", "quartering",
+                 "move_line_ids.unit")
     def _compute_asphyxiation_units(self):
         for line in self:
-            line.asphyxiation_units = 0
+            asphyxiation_units = 0
             if line.move_line_ids and line.move_line_ids.filtered(
                 lambda c: c.product_id.asphyxiated) and not (
                     line.quartering):
-                line.asphyxiation_units = sum(
+                asphyxiation_units = sum(
                     line.move_line_ids.filtered(
                         lambda c: c.product_id.asphyxiated).mapped("unit"))
+            line.asphyxiation_units = asphyxiation_units
 
     def _compute_classified_ids(self):
         for line in self:
@@ -264,60 +268,69 @@ class MrpProduction(models.Model):
     @api.depends("finished_move_line_ids", "finished_move_line_ids.qty_done")
     def _compute_produced_qty(self):
         for production in self:
-            production.produced_qty = 0
+            produced_qty = 0
             if production.finished_move_line_ids:
-                production.produced_qty = sum(
+                produced_qty = sum(
                     production.finished_move_line_ids.mapped("qty_done"))
+            production.produced_qty = produced_qty
 
     @api.depends("move_line_ids", "move_line_ids.qty_done", "origin_qty")
     def _compute_gross_yield(self):
         for line in self:
-            line.gross_yield = 0
+            gross_yield = 0
             if line.origin_qty != 0:
-                line.gross_yield = sum(
+                gross_yield = sum(
                     line.move_line_ids.mapped("qty_done")) / line.origin_qty
+            line.gross_yield = gross_yield
 
     @api.depends("move_line_ids", "move_line_ids.unit")
     def _compute_total_unit(self):
         for line in self:
-            line.total_unit = 0
+            total_unit = 0
             if line.move_line_ids:
-                line.total_unit = sum(line.move_line_ids.mapped("unit"))
+                total_unit = sum(line.move_line_ids.mapped("unit"))
+            line.total_unit = total_unit
 
     @api.depends("download_unit", "move_line_ids", "move_line_ids.unit")
     def _compute_unit_difference(self):
         for line in self:
-            line.unit_difference = line.download_unit
+            unit_difference = line.download_unit
             if line.move_line_ids:
-                line.unit_difference = sum(
+                unit_difference = sum(
                         line.move_line_ids.mapped("unit")) - line.download_unit
+            line.unit_difference = unit_difference
 
     @api.depends("origin_qty", "move_line_ids", "move_line_ids.unit")
     def _compute_real_average_weight(self):
         for line in self:
-            line.real_average_weight = 0
+            real_average_weight = 0
             units = sum(line.move_line_ids.mapped("unit"))
             if units != 0:
-                line.real_average_weight = line.origin_qty / units
+                real_average_weight = line.origin_qty / units
+            line.real_average_weight = real_average_weight
 
     def _compute_clasified_date(self):
         for line in self:
-            line.clasified_date = False
-            line.clasified_time_start = 0
-            line.clasified_time_stop = 0
+            clasified_date = False
+            clasified_time_start = 0
+            clasified_time_stop = 0
             if line.clasified_ids:
                 cl_line = line.clasified_ids[:1]
-                line.clasified_date = cl_line.date
-                line.clasified_time_start = cl_line.time_start
-                line.clasified_time_stop = cl_line.time_stop
+                clasified_date = cl_line.date
+                clasified_time_start = cl_line.time_start
+                clasified_time_stop = cl_line.time_stop
+            line.clasified_date = clasified_date
+            line.clasified_time_start = clasified_time_start
+            line.clasified_time_stop = clasified_time_stop
 
     @api.depends("birth_difference", "product_qty")
     def _compute_difference_rate(self):
         for line in self:
-            line.difference_rate = 0
+            difference_rate = 0
             if line.product_qty != 0:
-                line.difference_rate = (
+                difference_rate = (
                     line.birth_difference * 100 / line.product_qty)
+            line.difference_rate = difference_rate
 
     @api.depends("product_qty", "expected_birth")
     def _compute_birth_difference(self):
@@ -325,47 +338,49 @@ class MrpProduction(models.Model):
             line.birth_difference = line.product_qty - line.expected_birth
 
     @api.depends("batch_id", "batch_id.birth_rate_ids", "product_qty",
-                 "birth_date")
+                 "production_date")
     def _compute_expected_birth(self):
         for line in self:
-            line.expected_birth = 0
-            if line.birth_date:
+            expected_birth = 0
+            if line.production_date:
                 rate = line.batch_id.birth_rate_ids.filtered(
                     lambda c: c.birth_start_date and c.birth_start_date <= (
-                        line.birth_date) and (
+                        line.production_date.date()) and (
                             c.birth_start_date + timedelta(days=7)) > (
-                                line.birth_date))
+                                line.production_date.date()))
                 if rate:
                     line.expected_rate = rate[0].percentage_birth
-                    line.expected_birth = (
+                    expected_birth = (
                         line.product_qty * rate[0].percentage_birth) / 100
+            line.expected_birth = expected_birth
 
     @api.depends("product_qty", "consume_qty")
     def _compute_birth_rate(self):
         for line in self:
-            line.birth_rate = 0
+            birth_rate = 0
             if line.consume_qty != 0:
-                line.birth_rate = line.product_qty * 100 / line.consume_qty
+                birth_rate = line.product_qty * 100 / line.consume_qty
+            line.birth_rate = birth_rate
 
-    @api.depends("birth_date")
+    @api.depends("production_date")
     def _compute_birth_week(self):
         for line in self:
-            line.birth_week = 0
-            if line.birth_date:
+            week = 0
+            if line.production_date:
                 start_date = datetime(
-                    line.birth_date.year, 1, 1, 0, 0).date()
+                    line.production_date.year, 1, 1, 0, 0).date()
                 start_date = line.calculate_weeks_start(start_date)
-                end_date = line.birth_date
+                end_date = line.production_date.date()
                 if end_date < start_date:
                     start_date = datetime(
-                        line.birth_date.year - 1, 1, 1, 0, 0).date()
+                        line.production_date.year - 1, 1, 1, 0, 0).date()
                     start_date = line.calculate_weeks_start(start_date)
                     end_date = datetime(
-                        line.birth_date.year, 1, 1, 0, 0).date()
+                        line.production_date.year, 1, 1, 0, 0).date()
                 week = line.weeks_between(start_date, end_date)
                 if week == 53:
                     week = 1
-                line.birth_week = week
+            line.birth_week = week
 
     def weeks_between(self, start_date, end_date):
         weeks = rrule.rrule(rrule.WEEKLY, dtstart=start_date, until=end_date)
@@ -394,10 +409,10 @@ class MrpProduction(models.Model):
             self.product_id = False
         return result
 
-    @api.onchange("batch_id", "birth_date")
+    @api.onchange("batch_id", "production_date")
     def onchange_batch_id(self):
         self.ensure_one()
-        if self.batch_id and self.birth_date:
+        if self.batch_id and self.production_date:
             self.action_generate_serial()
 
     @api.onchange("product_qty", "product_uom_id")
@@ -495,14 +510,16 @@ class MrpProduction(models.Model):
 
     def button_mark_done(self):
         result = super(MrpProduction, self).button_mark_done()
-        if self.batch_id and self.finished_move_line_ids:
-            for line in self.finished_move_line_ids:
-                line.batch_id = self.batch_id.id
         if self.finished_move_line_ids:
             for line in self.finished_move_line_ids:
-                line.write({
+                values = {
                     "location_id": line.move_id.location_id.id,
-                    "location_dest_id": line.move_id.location_dest_id.id})
+                    "location_dest_id": line.move_id.location_dest_id.id
+                    }
+                if self.batch_id:
+                    values.update({
+                        "batch_id": self.batch_id.id})
+                line.write(values)
         if result is True and self.quartering:
             self.action_delete_quartering_line()
         if self.picking_type_id.chick_production:
@@ -525,7 +542,7 @@ class MrpProduction(models.Model):
 
     def action_generate_serial(self):
         self.ensure_one()
-        date = self.birth_date
+        date = self.production_date.date()
         if not self.lot_producing_id:
             super(MrpProduction, self).action_generate_serial()
             if self.batch_id:
