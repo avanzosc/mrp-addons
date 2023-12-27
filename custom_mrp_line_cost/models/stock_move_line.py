@@ -9,7 +9,8 @@ class StockMoveLine(models.Model):
 
     def _default_pallet_id(self):
         if "default_production_id" in self.env.context:
-            result = self.env["mrp.production"].browse(self.env.context.get("default_production_id")).pallet_id.id
+            result = self.env["mrp.production"].browse(
+                self.env.context.get("default_production_id")).pallet_id.id
         else:
             result = False
         return result
@@ -152,6 +153,7 @@ class StockMoveLine(models.Model):
                                 line.production_id.average_cost)) * (
                                     line.move_id.byproduct_id.coefficient)
                 line.base_price = cost
+                line.onchange_base_price()
 
     @api.depends("unit", "qty_done")
     def _compute_weight(self):

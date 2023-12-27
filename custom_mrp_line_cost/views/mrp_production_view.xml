@@ -32,14 +32,17 @@
                 <field name="rto_canal"/>
                 <field name="canal_cost"/>
             </group>
+            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='qty_done']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
             <xpath expr="//tree[@name='mrp_move_lines']/field[@name='location_dest_id']" position="after">
                 <field name="expense_kg" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                 <field name="canal" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                 <field name="pallet" sum="Total Pallets" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
-                <field name="container" sum="Total Containers" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="unit" sum="Total Units" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="container" sum="Total Containers" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                <field name="unit" sum="Total Units" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
                 <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="qty_done" sum="Total Quantity" attrs="{'readonly': [('state', 'in', ('cancel'))]}"/>
+                <field name="qty_done" sum="Total Quantity" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
                 <field name="product_unit_container" optional="hide"/>
                 <field name="unit_container" readonly="1" force_save="1" optional="show"/>
                 <field name="weight" optional="show"/>
