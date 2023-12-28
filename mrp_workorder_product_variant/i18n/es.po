@@ -1,0 +1,90 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workorder_product_variant
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-13 13:22+0000\n"
+"PO-Revision-Date: 2023-07-13 13:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_routing_workcenter__bom_product_template_attribute_value_ids
+msgid "Apply on Variants"
+msgstr "Variantes"
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model.fields,help:mrp_workorder_product_variant.field_mrp_routing_workcenter__bom_product_template_attribute_value_ids
+msgid "BOM Product Variants needed to apply this line."
+msgstr "Se necesitan variantes de producto LdM para aplicar esta línea."
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model,name:mrp_workorder_product_variant.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: mrp_workorder_product_variant
+#: code:addons/mrp_workorder_product_variant/models/mrp_bom.py:0
+#, python-format
+msgid ""
+"BoM cannot concern product %s and have a line with attributes (%s) at the "
+"same time."
+msgstr ""
+"LdM no puede referirce al producto%s y tener una linea con attributos (%s) "
+"al mismo tiempo."
+#. module: mrp_workorder_product_variant
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_bom__display_name
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_routing_workcenter__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_bom__id
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_production__id
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_routing_workcenter__id
+msgid "ID"
+msgstr "Identificador"
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_bom____last_update
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_routing_workcenter____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_routing_workcenter__parent_product_tmpl_id
+msgid "Parent Product Template"
+msgstr "Plantilla de Producto Padre"
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model.fields,field_description:mrp_workorder_product_variant.field_mrp_routing_workcenter__possible_bom_product_template_attribute_value_ids
+msgid "Possible BOM Product Attribute Value"
+msgstr "Posible valor de atributo de plantilla de producto LDM"
+
+#. module: mrp_workorder_product_variant
+#: model:ir.model,name:mrp_workorder_product_variant.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_workorder_product_variant
+#: code:addons/mrp_workorder_product_variant/models/mrp_bom.py:0
+#, python-format
+msgid ""
+"The attribute value %(attribute)s set on product %(product)s does not match "
+"the BoM product %(bom_product)s."
+msgstr ""
+"El valor del atributo %(attribute)s establecido en el producto %(product)s "
+"no coincide con el producto en la lista de materiales %(bom_product)s."
+#. module: mrp_workorder_product_variant
+#: model:ir.model,name:mrp_workorder_product_variant.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Utilización del centro de producción"
