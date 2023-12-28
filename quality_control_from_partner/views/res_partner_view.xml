@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<openerp>
-    <data>
+<odoo>
         <record id="view_partner_form_inh_inspection_partner" model="ir.ui.view">
             <field name="name">view.partner.form.inh.inspection.partner</field>
             <field name="model">res.partner</field>
@@ -22,5 +21,4 @@
                 </div>
             </field>
         </record>
-    </data>
-</openerp>
+</odoo>

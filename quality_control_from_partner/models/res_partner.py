@@ -1,12 +1,11 @@
 # © 2016 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
-from openerp import _, api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    @api.multi
     def _partner_inspections_count(self):
         inspection_obj = self.env["qc.inspection"]
         for partner in self:
@@ -19,7 +18,6 @@ class ResPartner(models.Model):
         string="# Inspection", compute="_partner_inspections_count"
     )
 
-    @api.multi
     def inspections_from_partner(self):
         inspection_obj = self.env["qc.inspection"]
         self.ensure_one()
