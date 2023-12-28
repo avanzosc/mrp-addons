@@ -6,12 +6,8 @@
     "category": "Manufacturing/Manufacturing",
     "license": "AGPL-3",
     "author": "https://github.com/avanzosc/sale-addons",
-    "website": "http://www.avanzosc.es",
-    "depends": [
-        "product",
-        "sale",
-        "mrp"
-    ],
+    "website": "https://github.com/avanzosc/mrp-addons",
+    "depends": ["product", "sale", "mrp"],
     "data": [
         "views/mrp_production_views.xml",
     ],
