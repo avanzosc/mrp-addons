@@ -7,10 +7,11 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     def write(self, vals):
-        result = super(SaleOrder, self).write(vals)
+        result = super().write(vals)
         if "commitment_date" in vals:
             for sale in self:
                 if sale.mrp_production_ids:
                     sale.mrp_production_ids.write(
-                        {"date_planned_start": vals.get("commitment_date")})
+                        {"date_planned_start": vals.get("commitment_date")}
+                    )
         return result
