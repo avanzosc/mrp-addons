@@ -61,7 +61,7 @@ class SacaLine(models.Model):
                     "bom_id": bom.id,
                     "product_id": line.product_id.id,
                     "product_uom_id": line.product_uom_id.id,
-                    "product_qty": line.qty_done,
+                    "product_qty": self.net_origin,
                     "saca_line_id": self.id,
                     "lot_producing_id": line.lot_id.id,
                     "company_id": self.company_id.id
