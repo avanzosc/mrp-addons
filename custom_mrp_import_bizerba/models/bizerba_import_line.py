@@ -64,73 +64,56 @@ class BizerbaImportLine(models.Model):
         copy=False,
     )
 
-    def action_validate(self):
-        line_values = super().action_validate()
+    def _action_validate(self):
+        update_values = super()._action_validate()
         self.production_id.action_confirm()
-        for line in self.filtered(lambda ln: ln.state != "done"):
-            log_infos = []
-            product, log_info_product = line._check_product()
-            if log_info_product:
-                log_infos.append(log_info_product)
-            uom, log_info_uom = line._check_uom()
-            if log_info_uom:
-                log_infos.append(log_info_uom)
-            state = "error" if log_infos else "pass"
-            action = "nothing"
-            if state != "error":
-                action = "create"
-            update_values = {
-                "line_uom_id": uom and uom.id,
-                "line_product_id": product and product.id,
-                "log_info": "\n".join(log_infos),
-                "state": state,
-                "action": action,
-            }
-            line_values.append(
-                (
-                    1,
-                    line.id,
-                    update_values,
-                )
-            )
-        return line_values
+        log_infos = []
+        product, log_info_product = self._check_product()
+        if log_info_product:
+            log_infos.append(log_info_product)
+        uom, log_info_uom = self._check_uom()
+        if log_info_uom:
+            log_infos.append(log_info_uom)
+        state = "error" if log_infos else "pass"
+        action = "nothing"
+        if state != "error":
+            action = "create"
+        update_values.update({
+            "line_uom_id": uom and uom.id,
+            "line_product_id": product and product.id,
+            "log_info": "\n".join(log_infos),
+            "state": state,
+            "action": action,
+        })
+        return update_values
 
-    def action_process(self):
-        line_values = super().action_process()
-        products = []
-        for line in self.filtered(lambda ln: ln.state not in ("error", "done")):
+    def _action_process(self):
+        update_values = super()._action_process()
+        if self.action == "create":
             log_info = ""
-            if line.action == "create" and (line.line_product_id) not in (products):
-                move_line = line.production_id.move_line_ids.filtered(
-                    lambda c: c.product_id == line.line_product_id
+            move_line = self.production_id.move_line_ids.filtered(
+                    lambda c: c.product_id == self.line_product_id
                 )
-                if move_line:
-                    products.append(line.line_product_id)
-                    same_product_lines = self.filtered(
-                        lambda c: c.state not in ("error", "done")
-                        and (c.action == "create")
-                        and (c.line_product_id == line.line_product_id)
-                    )
-                    container = len(same_product_lines)
-                    qty_done = sum(same_product_lines.mapped("line_product_qty"))
-                    move_line[:1].write(
+            if move_line:
+                move_line[:1].write(
                         {
-                            "container": container,
-                            "qty_done": qty_done,
-                            "product_uom_id": line.line_uom_id.id,
+                            "container": move_line[:1].container + 1,
+                            "qty_done": move_line[:1].qty_done + self.line_product_qty,
+                            "product_uom_id": self.line_uom_id.id,
                         }
                     )
-                    move_line[:1].onchange_container()
-                    move_line[:1].onchange_unit()
-                else:
-                    log_info = _("Error: There is no entry line with this product.")
-            if log_info:
-                line.write(
-                    {"log_info": log_info, "state": "error", "action": "nothing"}
-                )
+                move_line[:1].onchange_container()
+                move_line[:1].onchange_unit()
             else:
-                line.write({"state": "done", "action": "nothing"})
-        return line_values
+                log_info = _("Error: There is no entry line with this product.")
+            state = "error" if log_info else "done"
+            action = "nothing"
+            update_values.update({
+                "log_info": log_info,
+                "action": action,
+                "state": state
+            })
+        return update_values
 
     def _check_product(self):
         self.ensure_one()
