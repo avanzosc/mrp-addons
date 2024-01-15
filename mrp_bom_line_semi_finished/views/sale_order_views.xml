@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='company_id']" position="after">
+                <field name="show_button_bom_line" invisible="1" />
+                <button name="action_show_bom_lines_semi_finished"
+                    type="object" string="BoM Lines" class="float-right btn-secondary"
+                    attrs="{'invisible': [('show_button_bom_line', '=', False)]}"/>
+            </xpath>
+            <button name="action_view_invoice" position="after">
+                <field name="show_button_bom_line" invisible="1"/>
+                <button name="action_show_bom_lines_semi_finished"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-pencil-square-o"
+                    attrs="{'invisible': [('show_button_bom_line', '=', False)]}">
+                    <field name="count_bom_lines" widget="statinfo" string="BoM Lines"/>
+                </button>
+            </button>
+        </field>
+    </record>
+</odoo>
