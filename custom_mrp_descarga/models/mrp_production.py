@@ -509,6 +509,8 @@ class MrpProduction(models.Model):
                         line.lot_id = lot
 
     def button_mark_done(self):
+        if self.move_finished_ids:
+            self.move_finished_ids._do_unreserve()
         result = super(MrpProduction, self).button_mark_done()
         if self.finished_move_line_ids:
             for line in self.finished_move_line_ids:
