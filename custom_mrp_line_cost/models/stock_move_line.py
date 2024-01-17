@@ -130,12 +130,11 @@ class StockMoveLine(models.Model):
                  "production_id.is_deconstruction")
     def _compute_base_price(self):
         for line in self:
-            line.base_price = 0
+            cost = 0
             if line.production_id and not line.production_id.date_planned_start:
                 raise ValidationError(
                         _("You must introduce the planned date."))
             else:
-                cost = 0
                 if line.production_id and (
                     line.move_id.bom_line_id) and (
                         line.production_id.is_deconstruction):
@@ -152,8 +151,12 @@ class StockMoveLine(models.Model):
                             line.month_cost + (
                                 line.production_id.average_cost)) * (
                                     line.move_id.byproduct_id.coefficient)
-                line.base_price = cost
-                line.onchange_base_price()
+            line.base_price = cost
+            line.applied_price = cost
+            line.standard_price = cost
+            line.amount = cost * line.qty_done
+            line.move_id.standard_price = cost
+            line.move_id.amount = cost * line.move_id.quantity_done
 
     @api.depends("unit", "qty_done")
     def _compute_weight(self):
