@@ -154,9 +154,6 @@ class StockMoveLine(models.Model):
             line.base_price = cost
             line.applied_price = cost
             line.standard_price = cost
-            line.amount = cost * line.qty_done
-            line.move_id.standard_price = cost
-            line.move_id.amount = cost * line.move_id.quantity_done
 
     @api.depends("unit", "qty_done")
     def _compute_weight(self):
