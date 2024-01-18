@@ -12,8 +12,8 @@ class StockProductionLot(models.Model):
         compute="_compute_average_price",
         store=True)
 
-    @api.depends("move_line_ids", "move_line_ids.amount",
-                 "move_line_ids.qty_done", "move_line_ids.state")
+    @api.depends("move_line_ids.amount", "move_line_ids.qty_done",
+                 "move_line_ids.state")
     def _compute_average_price(self):
         for line in self:
             line.average_price = 0
@@ -30,11 +30,7 @@ class StockProductionLot(models.Model):
                     if line.company_id.paasa:
                         for record in quartering:
                             if record.standard_price != line.average_price:
-                                record.write({
-                                    "standard_price": line.average_price,
-                                    "amount": (
-                                        line.average_price * record.qty_done)
-                                    })
+                                record.standard_price = line.average_price
 
     def action_view_move_lines(self):
         context = self.env.context.copy()
