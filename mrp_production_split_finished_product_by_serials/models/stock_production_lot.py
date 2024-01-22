@@ -8,7 +8,8 @@ class StockProductionLot(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        if "same_subproduct" in self.env.context:
-            vals_list[0]['name'] = "TEMP - 001"
-        return super(StockProductionLot, self.with_context(
-            mail_create_nosubscribe=True)).create(vals_list)
+        if self.env.context.get("same_subproduct", False):
+            vals_list[0]["name"] = "TEMP - 001"
+        return super(
+            StockProductionLot, self.with_context(mail_create_nosubscribe=True)
+        ).create(vals_list)
