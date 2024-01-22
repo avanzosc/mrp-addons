@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Mrp Production Split Finished Product By Serials",
-    "version": "14.0.1.2.0",
+    "version": "14.0.2.0.0",
     "category": "Manufacturing/Manufacturing",
     "license": "AGPL-3",
     "author": "AvanzOSC",
@@ -10,10 +10,11 @@
     "depends": [
         "mrp",
         "stock",
-        "uom"
+        "uom",
     ],
     "data": [
         "views/mrp_production_views.xml",
     ],
     "installable": True,
+    "post_init_hook": "post_init_hook",
 }
