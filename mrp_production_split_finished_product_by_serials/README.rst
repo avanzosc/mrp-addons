@@ -6,8 +6,8 @@
 Mrp production split finished product by serials
 ================================================
 
-* If the product to be produced has a "tracking" of "By unique serial number",
- "Product Moves (Stock Move Line)" will be created for one unit, with a single
+If the product to be produced has a "tracking" of "By unique serial number",
+"Product Moves (Stock Move Line)" will be created for one unit, with a single
 lot.
 
 Bug Tracker
