@@ -491,22 +491,7 @@ class MrpProduction(models.Model):
     def action_confirm(self):
         super(MrpProduction, self).action_confirm()
         for production in self:
-            if production.move_line_ids:
-                for line in production.move_line_ids:
-                    if line.product_id.tracking != "none" and (
-                        production.lot_producing_id) and not (
-                            line.lot_id):
-                        lot = self.env["stock.production.lot"].search(
-                            [("name", "=", production.lot_producing_id.name),
-                             ("product_id", "=", line.product_id.id)],
-                            limit=1).id
-                        if not lot:
-                            lot = self.env[(
-                                "stock.production.lot")].action_create_lot(
-                                    line.product_id,
-                                    production.lot_producing_id.name,
-                                    production.company_id).id
-                        line.lot_id = lot
+            production.action_assign_serials()
 
     def button_mark_done(self):
         if self.move_finished_ids:
@@ -556,6 +541,24 @@ class MrpProduction(models.Model):
                     self.batch_id.name, date.strftime("%d%m"), (
                         date.strftime("%Y")[2:]))
         self.lot_producing_id.batch_id = self.batch_id.id
+
+    def action_assign_serials(self):
+        for production in self:
+            if production.move_line_ids and production.lot_producing_id:
+                for line in production.move_line_ids:
+                    if line.product_id.tracking != "none" and not (
+                            line.lot_id):
+                        lot = self.env["stock.production.lot"].search(
+                            [("name", "=", production.lot_producing_id.name),
+                             ("product_id", "=", line.product_id.id)],
+                            limit=1).id
+                        if not lot:
+                            lot = self.env[(
+                                "stock.production.lot")].action_create_lot(
+                                    line.product_id,
+                                    production.lot_producing_id.name,
+                                    production.company_id).id
+                        line.lot_id = lot
 
     def action_delete_moves_with_qty_zero(self):
         self.ensure_one()
