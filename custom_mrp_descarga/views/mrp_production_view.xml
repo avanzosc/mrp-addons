@@ -38,6 +38,9 @@
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp_production_date.mrp_production_form_view"/>
         <field name="arch" type="xml">
+            <header position="inside">
+                <button name="action_assign_serials" type="object" string="Assign Serials" attrs="{'invisible': ['|', '|', ('lot_producing_id', '=', False), ('state', '!=', 'progress'), ('is_deconstruction', '!=', True)]}"/>
+            </header>
             <field name="bom_id" position="attributes">
                 <attribute name="invisible">1</attribute>
                 <attribute name="domain">['&amp;', '|', ('company_id', '=', False), ('company_id', '=', company_id), '&amp;', '|', ('product_id','=',product_id), '&amp;', ('product_tmpl_id.product_variant_ids','=',product_id), ('product_id','=',False), ('type', '=', 'normal'), ('quartering', '=', quartering)]</attribute>

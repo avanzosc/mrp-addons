@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-15 15:06+0000\n"
-"PO-Revision-Date: 2023-11-15 15:06+0000\n"
+"POT-Creation-Date: 2024-02-05 15:18+0000\n"
+"PO-Revision-Date: 2024-02-05 15:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,11 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__asphyxiation_units
 msgid "Asphyxiated"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Assign Serials"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -132,6 +137,11 @@ msgid "Classified"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__cost
+msgid "Cost"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__count_production
 msgid "Count Production"
 msgstr ""
@@ -192,6 +202,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__display_name
@@ -241,11 +252,6 @@ msgid "Feed/Flour"
 msgstr ""
 
 #. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__finished_move_line_ids
-msgid "Finished Product"
-msgstr ""
-
-#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__gross_yield
 msgid "Gross Yield"
 msgstr ""
@@ -275,6 +281,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__id
@@ -303,6 +310,11 @@ msgid "Integration"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:product.product,weight_uom_name:custom_mrp_descarga.quartering_product
 #: model:product.template,weight_uom_name:custom_mrp_descarga.quartering_product_product_template
 msgid "Kg"
@@ -315,6 +327,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant____last_update
@@ -536,6 +549,8 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__rto_percentage
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
 msgid "Rto. %"
 msgstr ""
 
@@ -631,6 +646,12 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
 msgid "Total Pallet"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
+msgid "Total Percentage"
 msgstr ""
 
 #. module: custom_mrp_descarga
