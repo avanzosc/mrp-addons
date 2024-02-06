@@ -11,6 +11,7 @@
                 <field name="unit" attrs="{'readonly': [('state', '=', 'done')]}"/>
                 <field name="weight" optional="hide" attrs="{'readonly': [('state', '=', 'done')]}"/>
                 <field name="performance" optional="show" sum="Total Performance" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="percentage" sum="Total Percentage" string="Rto. %" optional="show" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </field>
         </field>
     </record>
@@ -32,6 +33,7 @@
                 <field name="unit" optional="show"/>
                 <field name="weight" optional="show"/>
                 <field name="performance" optional="show"/>
+                <field name="percentage" optional="show" sum="Total Percentage" string="Rto. %"/>
                 <field name="standard_price" optional="show"/>
                 <field name="amount" optional="show"/>
                 <field name="company_id" optional="hide"/>
