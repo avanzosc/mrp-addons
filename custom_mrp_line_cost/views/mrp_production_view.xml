@@ -42,7 +42,7 @@
                 <field name="container" sum="Total Containers" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
                 <field name="unit" sum="Total Units" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
                 <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="qty_done" sum="Total Quantity" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                <field name="qty_done" sum="Total Quantity"/>
                 <field name="product_unit_container" optional="hide"/>
                 <field name="unit_container" readonly="1" force_save="1" optional="show"/>
                 <field name="weight" optional="show"/>
@@ -50,7 +50,7 @@
                 <field name="base_price"/>
                 <field name="applied_price" readonly="1" force_save="1"/>
                 <field name="standard_price" readonly="1" force_save="1" optional="hide"/>
-                <field name="amount" sum="Total amount" optional="show" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="amount" sum="Total amount" optional="show" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
             </xpath>
         </field>
     </record>
