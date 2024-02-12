@@ -152,8 +152,10 @@ class StockMoveLine(models.Model):
                                 line.production_id.average_cost)) * (
                                     line.move_id.byproduct_id.coefficient)
             line.base_price = cost
-            line.applied_price = cost
-            line.standard_price = cost
+            if not line.applied_price:
+                line.applied_price = cost
+            if not line.standard_price:
+                line.standard_price = cost
 
     @api.depends("unit", "qty_done")
     def _compute_weight(self):
