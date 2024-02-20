@@ -9,4 +9,57 @@
             </field>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="production_move_line_ids_tree_view">
+        <field name="name">stock.move.line.tree.view</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <tree string="Entries" editable="top">
+                <field name="production_id" invisible="1" force_save="1"/>
+                <field name="move_id" invisible="1" force_save="1"/>
+                <field name="tracking" invisible="1"/>
+                <field name="product_id" context="{'default_type': 'product'}" required="1" attrs="{'readonly': ['|', ('id', '!=', False), ('state', 'in', ('cancel'))]}" options="{'no_create': True}" force_save="1"/>
+                <field name="lot_id" groups="stock.group_production_lot" attrs="{'readonly': [('tracking', 'not in', ('lot', 'serial'))]}" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                <field name="location_id" optional="hide" force_save="1"/>
+                <field name="location_dest_id" optional="hide" force_save="1"/>
+                <field name="package_id" groups="stock.group_tracking_lot" optional="hide"/>
+                <field name="result_package_id" groups="stock.group_tracking_lot" optional="hide"/>
+                <field name="product_uom_category_id" invisible="1"/>
+                <field name="qty_done"/>
+                <field name="product_uom_qty" optional="hide" readonly="1" attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}" sum="Total Reserved"/>
+                <field name="product_uom_id" optional="hide" options="{'no_create': True}" groups="uom.group_uom" readonly="1" force_save="1" attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"/>
+                <field name="company_id" invisible="1" groups="base.group_multi_company" force_save="1"/>
+                <field name="state" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="production_finished_move_line_ids_tree_view">
+        <field name="name">stock.move.line.tree.view</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <tree string="Outputs" editable="top" limit="300">
+                <field name="state" invisible="1"/>
+                <field name="production_id" invisible="1"/>
+                <field name="move_id" invisible="1"/>
+                <field name="company_id" groups="base.group_multi_company" force_save="1" invisible="1"/>
+                <field name="product_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" options="{'no_create': True}" required="1"/>
+                <field name="product_uom_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="product_uom_category_id" invisible="1"/>
+                <field name="lot_id" domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                <field name="expense_kg" optional="hide"/>
+                <field name="pallet_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
+                <field name="pallet" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" sum="Total Pallet"/>
+                <field name="container" attrs="{'readonly': [('state', '=', 'cancel')]}" sum="Total Container"/>
+                <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="location_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="location_dest_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="qty_done" sum="Total Done"/>
+                <field name="base_price" optional="show"/>
+                <field name="applied_price" optional="show"/>
+                <field name="standard_price" optional="show"/>
+                <field name="amount" optional="show" sum="Amount"/>
+            </tree>
+        </field>
+    </record>
 </odoo>
