@@ -7,6 +7,7 @@ Quality control from hr employee
 ==============================
 
 * Go to inspections from employee form.
+* Employees > Choose an employee to go to form view > Inspections button
 
 Credits
 =======
