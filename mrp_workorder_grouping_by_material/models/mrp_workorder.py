@@ -55,6 +55,7 @@ class MrpWorkorder(models.Model):
     )
 
     @api.depends(
+        "nested_ids",
         "nested_line_ids",
         "nested_line_ids.nest_id",
     )
@@ -64,6 +65,7 @@ class MrpWorkorder(models.Model):
             order.nested_count = len(order.mapped("nested_line_ids.nest_id"))
 
     @api.depends(
+        "nested_ids",
         "nested_line_ids",
         "nested_line_ids.qty_producing",
         "qty_production",
