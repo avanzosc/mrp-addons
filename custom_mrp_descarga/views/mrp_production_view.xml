@@ -23,6 +23,8 @@
                 <filter string="Last Month" name="month_birth" domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=30)).strftime('%%Y-%%m-%%d'))]"/>
                 <filter string="Last Year" name="year_birth" domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=365)).strftime('%%Y-%%m-%%d'))]"/>
                 <separator/>
+                <filter string="Saca Date" name="saca_date" date="saca_date"/>
+                <separator/>
             </filter>
             <filter name="status" position="after">
                 <filter string="Batch" name="groupby_batch" domain="[]" context="{'group_by': 'batch_id'}"/>
@@ -30,6 +32,7 @@
                 <filter string="Lot" name="groupby_lot" domain="[]" context="{'group_by': 'lot_producing_id'}"/>
                 <filter string="Breeding" name="groupby_breeding" domain="[]" context="{'group_by': 'breeding_id'}"/>
                 <filter string="Birth Date" name="groupby_production_date" domain="[]" context="{'group_by': 'production_date'}"/>
+                <filter string="Saca Date" name="groupby_saca_date" domain="[]" context="{'group_by': 'saca_date'}"/>
             </filter>
         </field>
     </record>
@@ -39,7 +42,7 @@
         <field name="inherit_id" ref="mrp_production_date.mrp_production_form_view"/>
         <field name="arch" type="xml">
             <header position="inside">
-                <button name="action_assign_serials" type="object" string="Assign Serials" attrs="{'invisible': ['|', '|', ('lot_producing_id', '=', False), ('state', '!=', 'progress'), ('is_deconstruction', '!=', True)]}"/>
+                <button name="action_assign_serials" type="object" string="Assign Serials" attrs="{'invisible': ['|', '|', ('lot_producing_id', '=', False), ('state', 'not in', ('progress', 'to_close', 'done')), ('is_deconstruction', '!=', True)]}"/>
             </header>
             <field name="bom_id" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -66,7 +69,7 @@
                 <attribute name="decoration-danger">qty_done == 0</attribute>
             </tree>
             <field name="product_id" position="attributes">
-                <attribute name="attrs">{'readonly': ['|', ('saca_line_id', '!=', False), ('state', 'in', ('done', 'cancel'))]}</attribute>
+                <attribute name="attrs">{'readonly': ['|', ('saca_line_id', '!=', False), ('state', 'in', ('cancel'))]}</attribute>
             </field>
             <field name="company_id" position="after">
                 <field name="average_cost" attrs="{'invisible': ['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"/>
@@ -212,8 +215,8 @@
                 <attribute name="attrs">{'column_invisible':[('parent.paasa', '=', False)], 'readonly': [('state', '=', 'cancel')]}</attribute>
             </field>
             <field name="lot_id" position="attributes">
-                <attribute name="attrs">{'column_invisible':[('parent.paasa', '=', True), ('parent.saca_line_id', '!=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
-                <attribute name="options">{'no_create': [('parent.quartering', '=', True)]}</attribute>
+<!--                 <attribute name="attrs">{'column_invisible':[('parent.paasa', '=', True), ('parent.saca_line_id', '!=', False)], 'readonly': [('state', 'in', ('cancel'))]}</attribute>
+ -->                <attribute name="options">{'no_create': [('parent.quartering', '=', True)]}</attribute>
             </field>
             <page name="move_lines" position="attributes">
                 <attribute name="string">Inputs</attribute>
@@ -238,7 +241,7 @@
                             <field name="product_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" options="{'no_create': True}" required="1"/>
                             <field name="product_uom_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                             <field name="product_uom_category_id" invisible="1"/>
-                            <field name="lot_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                            <field name="lot_id" domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
                             <field name="expense_kg" optional="hide"/>
                             <field name="pallet_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
                             <field name="pallet" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" sum="Total Pallet"/>
@@ -246,7 +249,7 @@
                             <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                             <field name="location_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                             <field name="location_dest_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                            <field name="qty_done" attrs="{'readonly': [('state', '=', 'cancel')]}" sum="Total Done"/>
+                            <field name="qty_done" sum="Total Done"/>
                             <field name="performance" attrs="{'column_invisible': [('parent.quartering', '=', False)]}" sum="Total Performance"/>
                             <field name="base_price" optional="show"/>
                             <field name="applied_price" optional="show"/>
@@ -345,8 +348,9 @@
                 <field name="bom_id" optional="hide"/>
                 <field name="lot_producing_id" optional="show"/>
                 <field name="average_weight" optional="show"/>
+                <field name="download_unit" optional="show"/>
                 <field name="total_unit" optional="show"/>
-                <field name="product_qty"/>
+                <field name="origin_qty"/>
                 <field name="product_uom_id" optional="show"/>
                 <field name="rto_percentage" optional="show"/>
                 <field name="purchase_unit_price" optional="show"/>
