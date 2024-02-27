@@ -124,3 +124,23 @@ class StockMoveLine(models.Model):
             raise ValidationError(
                 _("The product of the lot does not match with the " +
                   "product of the line."))
+
+    @api.model
+    def create(self, values):
+        if "qty_done" in values:
+            move = self.env["stock.move"].browse(values.get("move_id"))
+            if move.state == "cancel" and values.get("qty_done") != 0:
+                move.state = "done"
+                for line in move.move_line_ids:
+                    line.state = "done"
+        return super(StockMoveLine, self).create(values)
+
+    def write(self, values):
+        result = super(StockMoveLine, self).write(values)
+        if "qty_done" in values:
+            for line in self:
+                if line.move_id.state == "cancel" and values.get("qty_done") != 0:
+                    line.move_id.state = "done"
+                    line.state = "done"
+        return result
+

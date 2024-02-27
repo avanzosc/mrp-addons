@@ -33,6 +33,10 @@ class MrpProduction(models.Model):
     purchase_unit_price = fields.Float(
         related="saca_line_id.purchase_unit_price",
         store=True)
+    saca_date = fields.Date(
+        string="Saca Date",
+        related="saca_line_id.date",
+        store=True)
     reproductor_quant_ids = fields.One2many(
         string="Reproductor",
         comodel_name="stock.quant",

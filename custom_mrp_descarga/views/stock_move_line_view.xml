@@ -16,6 +16,46 @@
         </field>
     </record>
 
+    <record id="production_finished_move_line_ids_tree_view" model="ir.ui.view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="custom_mrp_line_cost.production_finished_move_line_ids_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="sequence" string=""/>
+            </field>
+            <field name="qty_done" position="after">
+                <field name="performance" sum="Total Performance" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="production_move_line_ids_tree_view" model="ir.ui.view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="custom_mrp_line_cost.production_move_line_ids_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="before">
+                <field name="sequence" string=" "/>
+            </field>
+            <field name="location_dest_id" position="after">
+                <field name="expense_kg" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="canal" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="pallet" sum="Total Pallets" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
+                <field name="container" sum="Total Containers" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                <field name="unit" sum="Total Units" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="qty_done" sum="Total Quantity"/>
+                <field name="product_unit_container" optional="hide"/>
+                <field name="unit_container" readonly="1" force_save="1" optional="show"/>
+                <field name="weight" optional="show"/>
+                <field name="percentage" sum="Total Percentage" string="Rto. %" optional="show"/>
+                <field name="base_price"/>
+                <field name="applied_price" readonly="1" force_save="1"/>
+                <field name="standard_price" readonly="1" force_save="1" optional="hide"/>
+                <field name="amount" sum="Total amount" optional="show" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
+            </field>
+        </field>
+    </record>
+
     <record id="stock_move_line_classified_tree_view" model="ir.ui.view">
         <field name="name">stock.move.line.tree</field>
         <field name="model">stock.move.line</field>
