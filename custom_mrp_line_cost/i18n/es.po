@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 07:36+0000\n"
-"PO-Revision-Date: 2023-10-26 07:36+0000\n"
+"POT-Creation-Date: 2024-02-20 11:30+0000\n"
+"PO-Revision-Date: 2024-02-20 11:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Amount"
+msgstr "Importe"
 
 #. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__applied_price
@@ -150,6 +155,14 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: custom_mrp_line_cost
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_move_line_ids_tree_view
+#, python-format
+msgid "Entries"
+msgstr "Entradas"
+
+#. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__entry_total_amount
 msgid "Entry Total Amount"
 msgstr "Importe total de entradas"
@@ -283,6 +296,14 @@ msgid "Output Total Amount"
 msgstr "Importe total de salidas"
 
 #. module: custom_mrp_line_cost
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+#, python-format
+msgid "Outputs"
+msgstr "Salidas"
+
+#. module: custom_mrp_line_cost
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom__packaging_id
 #: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__packaging_id
 msgid "Packaging"
@@ -316,8 +337,6 @@ msgstr "Diferencia"
 
 #. module: custom_mrp_line_cost
 #: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
-#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
-#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
 #, python-format
 msgid "Produced Move Lines"
 msgstr "Operaciones creadas"
@@ -374,15 +393,24 @@ msgid "September"
 msgstr "Septiembre"
 
 #. module: custom_mrp_line_cost
-#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
-#, python-format
-msgid "The sum of the percentages it can't be more than 100."
-msgstr "La suma de los porcentajes no puede ser mayor que 100."
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Total Container"
+msgstr "Total envases"
 
 #. module: custom_mrp_line_cost
 #: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
 msgid "Total Containers"
 msgstr "Total envases"
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Total Done"
+msgstr "Total hecho"
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Total Pallet"
+msgstr "Total palets"
 
 #. module: custom_mrp_line_cost
 #: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
@@ -398,6 +426,11 @@ msgstr "Porcentajes total"
 #: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
 msgid "Total Quantity"
 msgstr "Cantidad total"
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_move_line_ids_tree_view
+msgid "Total Reserved"
+msgstr "Total reservado"
 
 #. module: custom_mrp_line_cost
 #: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
