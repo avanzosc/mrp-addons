@@ -16,8 +16,6 @@ class MrpProduction(models.Model):
         string="Purchase Unit Price")
     price_difference = fields.Float(
         string="Price Difference",
-        # compute="_compute_price_difference",
-        # store=True
         )
     canal_weight = fields.Float(
         string="Canal Average Weight",
@@ -349,11 +347,40 @@ class MrpProduction(models.Model):
 
     def action_view_finished_move_line_ids(self):
         context = self.env.context.copy()
+        context.update({
+            "default_production_id": self.id,
+            "default_location_id": self.production_location_id.id,
+            "default_location_dest_id": self.location_dest_id.id,
+            "default_company_id": self.company_id.id,
+        })
         return {
-            "name": _("Produced Move Lines"),
-            "view_mode": "tree,form",
+            "name": _("Outputs"),
+            "view_mode": "tree",
+            "view_id": self.env.ref(
+                "custom_mrp_line_cost.production_finished_move_line_ids_tree_view"
+            ).id,
             "res_model": "stock.move.line",
             "domain": [("id", "in", self.finished_move_line_ids.ids)],
+            "type": "ir.actions.act_window",
+            "context": context
+        }
+
+    def action_view_move_line_ids(self):
+        context = self.env.context.copy()
+        context.update({
+            "production_id": self.id,
+            "location_id": self.location_src_id.id,
+            "location_dest_id": self.production_location_id.id,
+            "company_id": self.company_id.id,
+        })
+        return {
+            "name": _("Entries"),
+            "view_mode": "tree",
+            "view_id": self.env.ref(
+                "custom_mrp_line_cost.production_move_line_ids_tree_view"
+            ).id,
+            "res_model": "stock.move.line",
+            "domain": [("id", "in", self.move_line_ids.ids)],
             "type": "ir.actions.act_window",
             "context": context
         }
