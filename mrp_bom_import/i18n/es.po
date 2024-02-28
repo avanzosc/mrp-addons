@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0+e\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-13 12:35+0000\n"
-"PO-Revision-Date: 2023-09-13 12:35+0000\n"
+"POT-Creation-Date: 2024-01-23 10:02+0000\n"
+"PO-Revision-Date: 2024-01-23 10:02+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,36 +22,38 @@ msgstr "<code>BoM Ref</code>: esto rellenará la <b>Referencia de LdM</b>"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>Parent Code</code>: this will fill <b>BoM Parent Code</b>"
+msgid "<code>Parent Code</code>: this will fill <b>Parent Product Code</b>"
 msgstr ""
 "<code>Parent Code</code>: esto rellenará el <b>Código del producto padre</b>"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>Parent Name</code>: this will fill <b>BoM Parent Name</b>"
+msgid "<code>Parent Name</code>: this will fill <b>Parent Product Name</b>"
 msgstr ""
 "<code>Parent Name</code>: esto rellenará el <b>Nombre del producto padre</b>"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>Product Code</code>: this will fill <b>Product Code</b>"
-msgstr "<code>Product Code</code>: esto rellenará el <b>Código producto</b>"
+msgid "<code>Parent Qty</code>: this will fill <b>Parent Product Quantity</b>"
+msgstr "<code>Parent Qty</code>: esto rellenará la <b>Cantidad del producto padre</b>"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>Product Name</code>: this will fill <b>Product Name</b>"
+msgid ""
+"<code>Product Code</code>: this will fill <b>Component Product Code</b>"
+msgstr "<code>Product Code</code>: esto rellenará el <b>Código del componente</b>"
+
+#. module: mrp_bom_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+msgid ""
+"<code>Product Name</code>: this will fill <b>Component Product Name</b>"
 msgstr ""
-"<code>Product Name</code>: esto rellenará el <b>Nombre del producto</b>"
+"<code>Product Name</code>: esto rellenará el <b>Nombre del componente</b>"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>Quantity</code>: this will fill <b>Quantity</b>"
-msgstr "<code>Quantity</code>: esto rellenará la <b>Cantidad</b>"
-
-#. module: mrp_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
-msgid "<code>Weight</code>: this will fill <b>Weight</b>"
-msgstr "<code>Weight</code>: esto rellenará el <b>Peso</b>"
+msgid "<code>Quantity</code>: this will fill <b>Component Quantity</b>"
+msgstr "<code>Quantity</code>: esto rellenará la <b>Cantidad del componente</b>"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
@@ -107,12 +109,6 @@ msgid "BoM Import"
 msgstr "Importar LdM"
 
 #. module: mrp_bom_import
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#, python-format
-msgid "BoM Import Lines"
-msgstr "Importación de LdM"
-
-#. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_line_id
 msgid "BoM Line"
 msgstr "Línea de LdM"
@@ -125,12 +121,12 @@ msgstr "Líneas de LdM"
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_name
 msgid "BoM Name"
-msgstr "Nombre de la LdM"
+msgstr "Nombre padre"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
 msgid "BoM Product"
-msgstr "Producto LdM"
+msgstr "Producto padre"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_ref
@@ -140,7 +136,7 @@ msgstr "Referencia de LdM"
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_code
 msgid "BoM code"
-msgstr "Código LdM"
+msgstr "Código padre"
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
@@ -184,17 +180,6 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#, python-format
-msgid "Error: BoM already exist"
-msgstr "Error: LdM existe"
-
-#. module: mrp_bom_import
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#, python-format
-msgid "Error: BoM not found"
-msgstr "Error: LdM no encontrada"
-
-#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: BoM product not found."
@@ -202,11 +187,6 @@ msgstr "Error: Producto padre no encontrada."
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#, python-format
-msgid "Error: More than one BoM already exist"
-msgstr "Error: existe más de una LdM"
-
-#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: More than one BoM product found."
@@ -214,41 +194,27 @@ msgstr "Error: Más de un producto padre encontrado."
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#, python-format
-msgid "Error: More than one product already exist"
-msgstr "Error: Más de un producto encontrado."
-
-#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: More than one product found."
-msgstr "Error: Más de un producto encontrado."
+msgstr "Error: Más de un componente encontrado."
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#, python-format
-msgid "Error: Product not found"
-msgstr "Error: producto no encontrado"
-
-#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: Product not found."
-msgstr "Error: Producto no encontrado."
+msgstr "Error: Componente no encontrado."
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
-#, python-format
-msgid "Error: Quantity cannot be 0"
-msgstr "Error: La cantidad no puede ser 0"
-
-#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: Quantity cannot be 0."
 msgstr "Error: La cantidad no puede ser 0."
 
 #. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: There is another line with the same parent product errors."
@@ -310,7 +276,7 @@ msgstr "Ayuda con los nombres de columnas de Excel"
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__id
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_product__id
 msgid "ID"
-msgstr ""
+msgstr "Identificador"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_exception_icon
@@ -483,6 +449,11 @@ msgid "Parent Product"
 msgstr "Producto padre"
 
 #. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__parent_qty
+msgid "Parent Quantity"
+msgstr "Cantidad padre"
+
+#. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
 msgid "Pending"
 msgstr "Pendiente"
@@ -502,7 +473,7 @@ msgstr "Procesado"
 #: model:ir.model,name:mrp_bom_import.model_product_product
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_id
 msgid "Product"
-msgstr "Producto"
+msgstr "Componente"
 
 #. module: mrp_bom_import
 #: model:ir.model,name:mrp_bom_import.model_product_category
@@ -517,17 +488,17 @@ msgstr "Buscar productos por referencia"
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_ref
 msgid "Product code"
-msgstr "Código producto"
+msgstr "Código componente"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_name
 msgid "Product name"
-msgstr "Nombre producto"
+msgstr "Nombre componente"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__quantity
 msgid "Quantity"
-msgstr "Cantidad"
+msgstr "Cantidad componente"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__activity_user_id
