@@ -105,20 +105,20 @@
                                 <p
                   >You must use this column names in order to fill the table:</p>
                                 <ul name="tutorial">
+                                    <li><code>Product Code</code>: this will fill <b
+                      >Component Product Code</b></li>
+                                    <li><code>Product Name</code>: this will fill <b
+                      >Component Product Name</b></li>
+                                    <li><code>Quantity</code>: this will fill <b
+                      >Component Quantity</b></li>
+                                    <li><code>Parent Code</code>: this will fill <b
+                      >Parent Product Code</b></li>
+                                    <li><code>Parent Name</code>: this will fill <b
+                      >Parent Product Name</b></li>
+                                    <li><code>Parent Qty</code>: this will fill <b
+                      >Parent Product Quantity</b></li>
                                     <li><code>BoM Ref</code>: this will fill <b
                       >BoM Reference</b></li>
-                                    <li><code>Product Name</code>: this will fill <b
-                      >Product Name</b></li>
-                                    <li><code>Product Code</code>: this will fill <b
-                      >Product Code</b></li>
-                                    <li><code>Quantity</code>: this will fill <b
-                      >Quantity</b></li>
-                                    <li><code>Weight</code>: this will fill <b
-                      >Weight</b></li>
-                                    <li><code>Parent Code</code>: this will fill <b
-                      >BoM Parent Code</b></li>
-                                    <li><code>Parent Name</code>: this will fill <b
-                      >BoM Parent Name</b></li>
                                 </ul>
                             </div>
                         </group>
@@ -145,14 +145,15 @@
                 <field name="product_ref"/>
                 <field name="product_name"/>
                 <field name="product_id" optional="hide"/>
-                <field name="bom_ref"/>
+                <field name="quantity"/>
                 <field name="bom_code"/>
                 <field name="bom_name"/>
                 <field name="bom_product_id" optional="hide"/>
+                <field name="parent_qty"/>
+                <field name="bom_ref"/>
                 <field name="parent_product_bom_count" optional="show"/>
                 <field name="bom_id" optional="hide"/>
                 <field name="bom_line_id" optional="hide"/>
-                <field name="quantity"/>
                 <field name="log_info"/>
                 <field name="state"/>
             </tree>
