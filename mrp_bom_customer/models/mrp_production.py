@@ -24,4 +24,13 @@ class MrpProduction(models.Model):
                 ("customer_id", "=", customer.id),
                 ("company_id", "=", self.company_id.id)]
         bom = bom_obj.search(cond, limit=1)
-        self.bom_id = bom.id if bom else False
+        if bom:
+            self.bom_id = bom.id
+        else:
+            cond = ["|", ("product_id", "=", self.product_id.id),
+                    ("product_tmpl_id", "=", self.product_id.product_tmpl_id.id),
+                    ("customer_id", "=", False),
+                    ("company_id", "=", self.company_id.id)]
+            bom = bom_obj.search(cond, limit=1)
+            if bom:
+                self.bom_id = bom.id
