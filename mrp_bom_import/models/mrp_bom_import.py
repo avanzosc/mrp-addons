@@ -209,9 +209,9 @@ class MrpBomImport(models.Model):
             "product_name": convert2str(row_values.get("Product Name", "")),
             "product_ref": convert2str(row_values.get("Product Code", "")),
             "quantity": check_number(row_values.get("Quantity", 0.0)),
-            "weight": check_number(row_values.get("Weight", 0.0)),
             "bom_code": convert2str(row_values.get("Parent Code", "")),
             "bom_name": convert2str(row_values.get("Parent Name", "")),
+            "parent_qty": check_number(row_values.get("Parent Qty", 0.0)),
         }
         values.update(
             {
@@ -264,7 +264,6 @@ class MrpBomLineImport(models.Model):
         string="Product",
     )
     quantity = fields.Float(string="Quantity")
-    weight = fields.Float(string="Weight")
     bom_ref = fields.Char(string="BoM Ref")
     bom_code = fields.Char(string="BoM code")
     bom_name = fields.Char(string="BoM Name")
@@ -288,6 +287,7 @@ class MrpBomLineImport(models.Model):
         string="Parent Bom Qty",
         related="bom_product_id.bom_count",
         store=True)
+    parent_qty = fields.Float(string="Parent Quantity")
 
     def _check_product(self):
         self.ensure_one()
@@ -363,7 +363,7 @@ class MrpBomLineImport(models.Model):
         bom = self.env["mrp.bom"].create({
             "product_tmpl_id": self.bom_product_id.product_tmpl_id.id,
             "code": self.bom_ref,
-            "product_qty": 1,
+            "product_qty": self.parent_qty,
             "product_uom_id": self.bom_product_id.uom_id.id})
         return bom
 
