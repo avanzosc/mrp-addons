@@ -2,15 +2,13 @@
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
-=============================
-Manufacturing BoM by Customer
-=============================
+================
+Mrp bom customer
+================
 
-This module enables to have different bill of material per customers.
-
-If the customer has no defined one there should be a generic one (defined with the
-field empty). This generic one must have the highest sequence number, in order to
-take first the one for the customer.
+* In bills of Materials new field "customer".
+* When creating an OF from sales, select the bill of materials associated with
+  that customer for the product sold.
 
 Bug Tracker
 ===========
