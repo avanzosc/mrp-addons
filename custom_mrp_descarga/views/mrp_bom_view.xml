@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <field name="code" position="after">
                 <field name="quartering" invisible="1"/>
+                <field name="no_duplicate_lines"/>
             </field>
             <page name="components" position="attributes">
                 <attribute name="string">Inputs</attribute>
