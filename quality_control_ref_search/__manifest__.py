@@ -12,7 +12,7 @@
     ],
     "category": "Quality Control",
     "depends": [
-        "quality_control",
+        "quality_control_oca",
     ],
     "data": [
         "views/qc_inspection_view.xml",
