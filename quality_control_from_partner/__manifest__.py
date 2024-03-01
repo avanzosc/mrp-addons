@@ -13,7 +13,7 @@
     ],
     "category": "Quality control",
     "depends": [
-        "quality_control",
+        "quality_control_oca",
     ],
     "data": [
         "views/res_partner_view.xml",
