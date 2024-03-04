@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_stock_move_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-28 11:44+0000\n"
+"PO-Revision-Date: 2024-02-28 11:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model.fields,field_description:mrp_stock_move_cost.field_mrp_production__cost
+msgid "Cost"
+msgstr "Coste"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model.fields,field_description:mrp_stock_move_cost.field_mrp_production__price_unit_cost
+msgid "Cost Unit Price"
+msgstr "Precio unitario coste"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model,name:mrp_stock_move_cost.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_stock_move_cost
+#: model:ir.actions.server,name:mrp_stock_move_cost.action_cost_in_mrp_production
+msgid "Put Cost"
+msgstr "Poner coste"
+
+#. module: mrp_stock_move_cost
+#: model_terms:ir.ui.view,arch_db:mrp_stock_move_cost.mrp_production_tree_view
+msgid "Total cost"
+msgstr "Total coste"
