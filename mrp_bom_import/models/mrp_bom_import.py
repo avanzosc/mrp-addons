@@ -11,6 +11,7 @@ from odoo.tools.safe_eval import safe_eval
 try:
     import xlrd
 
+
     try:
         from xlrd import xlsx
     except ImportError:

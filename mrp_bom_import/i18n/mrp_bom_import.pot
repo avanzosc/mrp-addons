@@ -9,6 +9,7 @@ msgstr ""
 "POT-Creation-Date: 2024-01-23 10:02+0000\n"
 "PO-Revision-Date: 2024-01-23 10:02+0000\n"
 "Last-Translator: \n"
+
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,6 +55,7 @@ msgstr ""
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+
 msgid "<span class=\"o_stat_text\">BoMs</span>"
 msgstr ""
 
@@ -85,6 +87,7 @@ msgstr ""
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_attachment_count
 msgid "Attachment Count"
+
 msgstr ""
 
 #. module: mrp_bom_import
@@ -102,6 +105,7 @@ msgstr ""
 #: model:ir.ui.menu,name:mrp_bom_import.menu_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_line_component_import_view_tree
+
 msgid "BoM Import"
 msgstr ""
 
@@ -172,6 +176,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__error
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__error
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+
 msgid "Error"
 msgstr ""
 

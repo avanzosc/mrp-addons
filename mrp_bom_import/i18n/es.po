@@ -9,6 +9,7 @@ msgstr ""
 "POT-Creation-Date: 2024-01-23 10:02+0000\n"
 "PO-Revision-Date: 2024-01-23 10:02+0000\n"
 "Last-Translator: \n"
+
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,6 +58,7 @@ msgstr "<code>Quantity</code>: esto rellenará la <b>Cantidad del componente</b>
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+
 msgid "<span class=\"o_stat_text\">BoMs</span>"
 msgstr "<span class=\"o_stat_text\">LdMs</span>"
 
@@ -105,6 +107,7 @@ msgstr "Línea de componentes de LdM"
 #: model:ir.ui.menu,name:mrp_bom_import.menu_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_line_component_import_view_tree
+
 msgid "BoM Import"
 msgstr "Importar LdM"
 
@@ -163,6 +166,7 @@ msgstr "Creado el"
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__display_name
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__display_name
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_product__display_name
+
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -175,6 +179,7 @@ msgstr "Procesado"
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__error
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__error
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+
 msgid "Error"
 msgstr ""
 
@@ -221,11 +226,13 @@ msgid "Error: There is another line with the same parent product errors."
 msgstr "Error: Hay otra línea para la misma LdM con errores."
 
 #. module: mrp_bom_import
+
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__data
 msgid "File"
 msgstr "Archivo"
 
 #. module: mrp_bom_import
+
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__file_date
 msgid "File Import Date"
 msgstr "Fecha importación archivo"
@@ -302,6 +309,7 @@ msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+
 msgid "Import"
 msgstr "Importar"
 
@@ -316,6 +324,7 @@ msgid "Import BoM lines"
 msgstr "Lineas de importador de LdM"
 
 #. module: mrp_bom_import
+
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__name
 msgid "Import name"
 msgstr "Nombre importación"
@@ -325,11 +334,13 @@ msgstr "Nombre importación"
 msgid "Is Follower"
 msgstr "Es un seguidor"
 
+
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import____last_update
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import____last_update
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_category____last_update
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_product____last_update
+
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -359,12 +370,14 @@ msgstr "Registro"
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__log_info
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__log_info
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.bom_import_line_view_search
+
 msgid "Log Info"
 msgstr "Info log."
 
 #. module: mrp_bom_import
 #: model:ir.actions.act_window,name:mrp_bom_import.mrp_bom_import_act
 #: model:ir.ui.menu,name:mrp_bom_import.mrp_bom_import
+
 msgid "MRP BoM Import"
 msgstr "MRP Importación LdM"
 
@@ -377,6 +390,7 @@ msgstr "MRP líneas de LdM"
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__message_main_attachment_id
 msgid "Main Attachment"
 msgstr "Adjuntos principales"
+
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_product__map_number
@@ -460,12 +474,14 @@ msgstr "Pendiente"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+
 msgid "Process"
 msgstr "Procesar"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__done
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__done
+
 msgid "Processed"
 msgstr "Procesado"
 
@@ -474,6 +490,7 @@ msgstr "Procesado"
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_id
 msgid "Product"
 msgstr "Componente"
+
 
 #. module: mrp_bom_import
 #: model:ir.model,name:mrp_bom_import.model_product_category
@@ -489,6 +506,7 @@ msgstr "Buscar productos por referencia"
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_ref
 msgid "Product code"
 msgstr "Código componente"
+
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_name
@@ -530,6 +548,7 @@ msgstr ""
 "Hoy: La fecha tope es hoy\n"
 "Planificada: futuras actividades."
 
+
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__supplier_id
 msgid "Supplier"
@@ -545,6 +564,7 @@ msgstr "No es un archivo válido."
 #. module: mrp_bom_import
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__2validate
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__2validate
+
 msgid "To validate"
 msgstr "Para validar"
 
@@ -570,12 +590,14 @@ msgstr "Nº de mensajes sin leer"
 
 #. module: mrp_bom_import
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
+
 msgid "Validate"
 msgstr "Validar"
 
 #. module: mrp_bom_import
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_import__state__pass
 #: model:ir.model.fields.selection,name:mrp_bom_import.selection__mrp_bom_line_import__state__pass
+
 msgid "Validated"
 msgstr "Validado"
 
@@ -590,6 +612,7 @@ msgid "Website communication history"
 msgstr "Historial de comunicaciones del sitio web"
 
 #. module: mrp_bom_import
+
 #: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__weight
 msgid "Weight"
 msgstr "Peso"
@@ -598,3 +621,4 @@ msgstr "Peso"
 #: model_terms:ir.ui.view,arch_db:mrp_bom_import.mrp_bom_import_view_form
 msgid "You must use this column names in order to fill the table:"
 msgstr "Debe usar las siguientes columnas para rellenar la tabla:"
+
