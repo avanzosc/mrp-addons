@@ -17,7 +17,7 @@
         "quality_control_oca",
     ],
     "data": [
-        "data/quality_control_from_employee_data.xml",
+#        "data/quality_control_from_employee_data.xml",
         "views/hr_employee_view.xml",
     ],
     "installable": True,
