@@ -16,120 +16,117 @@
         <field name="model">mrp.bom.import</field>
         <field name="arch" type="xml">
             <form string="BoM Import">
-            <header>
-                <button
-            name="action_import_bom"
-            string="Import"
-            type="object"
-            class="oe_read_only"
-          />
-                <button
-            name="action_validate_lines"
-            string="Validate"
-            type="object"
-            states="2validate,error,pass"
-            class="oe_read_only"
-          />
-                <button
-            name="action_process_lines"
-            string="Process"
-            type="object"
-            states="pass,2validate,error"
-            class="oe_read_only"
-          />
-                <field name="state" widget="statusbar" />
-            </header>
-            <sheet>
-                <div class="oe_button_box" name="button_box">
+                <header>
+                    <button
+                        name="action_import_bom"
+                        string="Import"
+                        type="object"
+                        groups="mrp.group_mrp_manager"  />
+                    <button
+                        name="action_validate_lines"
+                        string="Validate"
+                        type="object"
+                        states="2validate,error,pass"
+                        groups="mrp.group_mrp_manager" />
+                    <button
+                        name="action_process_lines"
+                        string="Process"
+                        type="object"
+                        states="pass,2validate,error"
+                        groups="mrp.group_mrp_manager" />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                            <button
+                  string="Component Import Lines"
+                  type="object"
+                  name="button_open_bom_component_import_line"
+                  class="oe_stat_button"
+                  icon="fa-bars"
+                />
                         <button
-              string="Component Import Lines"
-              type="object"
-              name="button_open_bom_component_import_line"
-              class="oe_stat_button"
-              icon="fa-bars"
-            />
-                    <button
-              class="oe_stat_button"
-              type="object"
-              name="action_bom_import_boms"
-              attrs="{'invisible': [('bom_count', '=', 0)]}"
-              icon="fa-flask"
-            >
-                         <div class="o_field_widget o_stat_info">
-                            <span class="o_stat_value">
-                                <field
-                    name="bom_count"
-                    widget="statinfo"
-                    nolabel="1"
-                    class="mr4"
-                  />
-                            </span>
-                            <span class="o_stat_text">BoMs</span>
-                        </div>
-                    </button>
-                    <button
-              class="oe_stat_button"
-              type="object"
-              name="action_bom_import_bom_lines"
-              attrs="{'invisible': [('bom_count', '=', 0)]}"
-              icon="fa-flask"
-              string="BoM Lines"
-            >
-                    </button>
-                </div>
-                <group>
-                    <group>
-                        <field name="filename" colspan="4" />
-                        <field name="data" filename="filename" />
-                        <field name="file_date" />
-                    </group>
-                    <group>
-                        <field name="product_found_by_code" />
-                    </group>
-                </group>
-                <notebook>
-                    <page string="Lines">
-                        <field name="bom_line_import_ids" />
-                    </page>
-                    <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
-                        <field name="log_info" />
-                    </page>
-                    <page
-              string="Help"
-              name="help_page"
-              attrs="{'invisible': [('state', '=', 'done')]}"
-            >
-                        <group>
-                            <div style="margin-top: 4px;">
-                                <h3>Help with Excel column names</h3>
-                                <p
-                  >You must use this column names in order to fill the table:</p>
-                                <ul name="tutorial">
-                                    <li><code>BoM Ref</code>: this will fill <b
-                      >BoM Reference</b></li>
-                                    <li><code>Product Name</code>: this will fill <b
-                      >Product Name</b></li>
-                                    <li><code>Product Code</code>: this will fill <b
-                      >Product Code</b></li>
-                                    <li><code>Quantity</code>: this will fill <b
-                      >Quantity</b></li>
-                                    <li><code>Weight</code>: this will fill <b
-                      >Weight</b></li>
-                                    <li><code>Parent Code</code>: this will fill <b
-                      >BoM Parent Code</b></li>
-                                    <li><code>Parent Name</code>: this will fill <b
-                      >BoM Parent Name</b></li>
-                                </ul>
+                  class="oe_stat_button"
+                  type="object"
+                  name="action_bom_import_boms"
+                  attrs="{'invisible': [('bom_count', '=', 0)]}"
+                  icon="fa-flask"
+                >
+                             <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field
+                        name="bom_count"
+                        widget="statinfo"
+                        nolabel="1"
+                        class="mr4"
+                      />
+                                </span>
+                                <span class="o_stat_text">BoMs</span>
                             </div>
+                        </button>
+                        <button
+                  class="oe_stat_button"
+                  type="object"
+                  name="action_bom_import_bom_lines"
+                  attrs="{'invisible': [('bom_count', '=', 0)]}"
+                  icon="fa-flask"
+                  string="BoM Lines"
+                >
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="filename" colspan="4" />
+                            <field name="data" filename="filename" />
+                            <field name="file_date" />
                         </group>
-                    </page>
-                </notebook>
-
-            </sheet>
-            </form>
-        </field>
-    </record>
-
+                        <group>
+                            <field name="product_found_by_code" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="bom_line_import_ids" />
+                        </page>
+                        <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
+                            <field name="log_info" />
+                        </page>
+                        <page
+                  string="Help"
+                  name="help_page"
+                  attrs="{'invisible': [('state', '=', 'done')]}"
+                >
+                            <group>
+                                <div style="margin-top: 4px;">
+                                    <h3>Help with Excel column names</h3>
+                                    <p
+                      >You must use this column names in order to fill the table:</p>
+                                    <ul name="tutorial">
+                                        <li><code>BoM Ref</code>: this will fill <b
+                          >BoM Reference</b></li>
+                                        <li><code>Product Name</code>: this will fill <b
+                          >Product Name</b></li>
+                                        <li><code>Product Code</code>: this will fill <b
+                          >Product Code</b></li>
+                                        <li><code>Quantity</code>: this will fill <b
+                          >Quantity</b></li>
+                                        <li><code>Weight</code>: this will fill <b
+                          >Weight</b></li>
+                                        <li><code>Parent Code</code>: this will fill <b
+                          >BoM Parent Code</b></li>
+                                        <li><code>Parent Name</code>: this will fill <b
+                          >BoM Parent Name</b></li>
+                                    </ul>
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+    
+                </sheet>
+                </form>
+            </field>
+        </record>
+    
     <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
         <field name="model">mrp.bom.line.import</field>
         <field name="arch" type="xml">
