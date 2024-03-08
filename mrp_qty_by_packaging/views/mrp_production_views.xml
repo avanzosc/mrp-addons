@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
             <div name="bom_div" position="after">
-                <label for="product_packaging_id" name="product_packaging" />
+                <label for="product_packaging_id" name="product_packaging"/>
                 <div class='o_row' name="product_packaging">
                     <field name="product_packaging_id" />
                 </div>
-                <label for="product_packaging_qty" name="product_packaging_qty" />
+                <label for="product_packaging_qty" name="product_packaging_qty"/>
                 <div class='o_row' name="product_packaging_qty">
                     <field name="product_packaging_qty" />
                 </div>
@@ -22,8 +22,8 @@
         <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
         <field name="arch" type="xml">
             <field name="state" position="before">
-                <field name="product_packaging_id" optional="show" />
-                <field name="product_packaging_qty" optional="show" />
+                <field name="product_packaging_id" optional="show"/>
+                <field name="product_packaging_qty" optional="show"/>
             </field>
         </field>
     </record>
@@ -36,12 +36,8 @@
                 <field name="product_packaging_id" />
             </field>
             <filter name="scheduled_date" position="after">
-                    <filter
-          string="Packaging"
-          name="packaging"
-          domain="[]"
-          context="{'group_by': 'product_packaging_id'}"
-        />
+                    <filter string="Packaging" name="packaging" domain="[]"
+                        context="{'group_by': 'product_packaging_id'}"/>
             </filter>
         </field>
     </record>

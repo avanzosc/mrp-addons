@@ -17,10 +17,7 @@
 
     <record id="workorder_data_worksheet_tree" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
-        <field
-      name="inherit_id"
-      ref="mrp.mrp_production_workorder_tree_editable_view"
-    />
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
         <field name="arch" type="xml">
             <button name="action_open_wizard" position="after">
                 <button
