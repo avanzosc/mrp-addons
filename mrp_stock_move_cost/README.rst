@@ -11,6 +11,8 @@ Mrp stock move cost
 * In the move line of the product produced, the cost is equal to the sum of the
   cost of products consumed, and the unit price is equal to its cost / quantity
   produced.
+* When change the purchase price of the lot, changes the cost of the OFS
+  associated with that lot.
 
 Bug Tracker
 ===========

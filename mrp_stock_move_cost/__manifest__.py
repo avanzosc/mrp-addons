@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "depends": [
         "stock_move_cost",
-        "mrp"
+        "mrp",
     ],
     "data": [
         "views/mrp_production_views.xml",
