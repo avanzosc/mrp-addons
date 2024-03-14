@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+             <field name="categ_id" position="after">
+                 <field name="stencil_category" readonly="1" />
+             </field>
+        </field>
+    </record>
+
+    <record id="product_template_tree_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+             <field name="categ_id" position="after">
+                 <field name="stencil_category" optional="show" />
+             </field>
+        </field>
+    </record>
+
+    <record id="product_template_search_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+             <filter name="consumable" position="after">
+                 <separator/>
+                 <filter string="Stencil category" name="filter-is_stencil"
+                    domain="[('stencil_category', '=', True)]"/>
+                 <filter string="NO Stencil category" name="filter-is_not_stencil"
+                    domain="[('stencil_category', '=', False)]"/>
+             </filter>
+             <filter name="categ_id" position="after">
+                 <filter string="Stencil Category" name="filter-stencil_category"
+                    context="{'group_by':'stencil_category'}"/>
+             </filter>
+        </field>
+    </record>
+</odoo>
