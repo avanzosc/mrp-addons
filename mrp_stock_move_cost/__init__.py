@@ -10,4 +10,4 @@ def _post_install_put_cost_in_productions(cr, registry):
     productions = env["mrp.production"].search(
         [("state", "=", "done")])
     for production in productions:
-        production.put_cost_in_move_lines()
+        production.update_prodution_cost()
