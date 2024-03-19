@@ -32,9 +32,10 @@ msgstr "Última modificación el"
 
 #. module: mrp_product_template_lineal
 #: model:ir.model.fields,field_description:mrp_product_template_lineal.field_mrp_production__lineal_id
+#: model_terms:ir.ui.view,arch_db:mrp_product_template_lineal.report_mrporder_lineal
 #: model_terms:ir.ui.view,arch_db:mrp_product_template_lineal.view_mrp_production_filter
 msgid "Lineal"
-msgstr ""
+msgstr "Lineal"
 
 #. module: mrp_product_template_lineal
 #: model:ir.model,name:mrp_product_template_lineal.model_mrp_production
