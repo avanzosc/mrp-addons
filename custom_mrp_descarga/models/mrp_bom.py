@@ -10,6 +10,9 @@ class MrpBom(models.Model):
         string="Quartering",
         compute="_compute_quartering",
         store=True)
+    no_duplicate_lines = fields.Boolean(
+        string="No Duplicate Lines",
+        default=False)
 
     @api.depends("category_id")
     def _compute_quartering(self):

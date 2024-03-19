@@ -22,6 +22,11 @@ class StockMoveLine(models.Model):
         related="production_id.quartering",
         store=True
     )
+    saca_date = fields.Date(
+        string="Saca Date",
+        related="saca_line_id.date",
+        store=True
+    )
 
     @api.depends("production_id")
     def _compute_sequence(self):
@@ -111,7 +116,7 @@ class StockMoveLine(models.Model):
                 ("company_id", "=", self.company_id.id),
                 ("create_date", ">=", date)])
             for line in lot:
-                if line not in lots:
+                if line.id not in lots:
                     lots.append(line.id)
             result = {"domain": {"lot_id": [('id', 'in', lots)]}}
         return result
