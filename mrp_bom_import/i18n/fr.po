@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-25 09:56+0000\n"
 "PO-Revision-Date: 2024-03-25 09:56+0000\n"
@@ -24,13 +24,13 @@ msgstr ""
 #: code:addons/mrp_bom_import/models/import_file.py:91
 #, python-format
 msgid "Bill of Material line"
-msgstr "Linea de lista de materiales"
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/import_file.py:48
 #, python-format
 msgid "Bill of material"
-msgstr "Lista de material"
+msgstr ""
 
 #. module: mrp_bom_import
 #: selection:import.file,software:0
@@ -41,13 +41,13 @@ msgstr ""
 #: code:addons/mrp_bom_import/models/import_file.py:74
 #, python-format
 msgid "Component"
-msgstr "Componente"
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:237
 #, python-format
 msgid "Component Import Lines"
-msgstr "Importación de componentes"
+msgstr ""
 
 #. module: mrp_bom_import
 #: selection:import.file,software:0
@@ -58,80 +58,80 @@ msgstr ""
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:331
 #, python-format
 msgid "Error: BoM product not found."
-msgstr "Error: Producto padre no encontrada."
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:334
 #, python-format
 msgid "Error: More than one BoM product found."
-msgstr "Error: Más de un producto padre encontrado."
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:312
 #, python-format
 msgid "Error: More than one product found."
-msgstr "Error: Más de un componente encontrado."
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:309
 #, python-format
 msgid "Error: Product not found."
-msgstr "Error: Componente no encontrado."
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:349
 #, python-format
 msgid "Error: Quantity cannot be 0."
-msgstr "Error: La cantidad no puede ser 0."
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:389
 #, python-format
 msgid "Error: There is another line with the same parent product errors."
-msgstr "Error: Hay otra línea para la misma LdM con errores."
+msgstr ""
 
 #. module: mrp_bom_import
 #: model:ir.model.fields,field_description:mrp_bom_import.field_import_file__software
 msgid "External software"
-msgstr "Software"
+msgstr ""
 
 #. module: mrp_bom_import
 #: model:ir.model,name:mrp_bom_import.model_mrp_bom_import
 msgid "Import BoM from excel file"
-msgstr "Importar LdM de fichero excel"
+msgstr ""
 
 #. module: mrp_bom_import
 #: model:ir.model,name:mrp_bom_import.model_mrp_bom_line_import
 msgid "Import BoM lines"
-msgstr "Lineas de importador de LdM"
+msgstr ""
 
 #. module: mrp_bom_import
 #: selection:import.file,software:0
 msgid "None"
-msgstr "Ninguno"
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/import_file.py:66
 #, python-format
 msgid "Operation"
-msgstr "Operación"
+msgstr ""
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/import_file.py:42
 #: model:ir.model,name:mrp_bom_import.model_product_product
 #, python-format
 msgid "Product"
-msgstr "Componente"
+msgstr "Article"
 
 #. module: mrp_bom_import
 #: model:ir.model,name:mrp_bom_import.model_product_category
 msgid "Product Category"
-msgstr "Categoría de producto"
+msgstr "Catégorie d'article"
 
 #. module: mrp_bom_import
 #: selection:import.file,software:0
 msgid "Products"
-msgstr "Productos"
+msgstr ""
 
 #. module: mrp_bom_import
 #: selection:import.file,software:0
@@ -142,7 +142,7 @@ msgstr ""
 #: code:addons/mrp_bom_import/models/import_file.py:54
 #, python-format
 msgid "Route"
-msgstr "Ruta"
+msgstr ""
 
 #. module: mrp_bom_import
 #: selection:import.file,software:0
@@ -153,7 +153,7 @@ msgstr ""
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:198
 #, python-format
 msgid "This is not a valid file."
-msgstr "No es un archivo válido."
+msgstr ""
 
 #. module: mrp_bom_import
 #: selection:import.file,software:0
@@ -164,5 +164,5 @@ msgstr ""
 #: code:addons/mrp_bom_import/models/import_file.py:60
 #, python-format
 msgid "Workcenter"
-msgstr "Centro de trabajo"
+msgstr ""
 

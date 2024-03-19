@@ -1,13 +1,17 @@
-# Copyright (c) 2019 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
+# Copyright 2019 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, exceptions, api, _
 import base64
-import tempfile
-import math
+
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
+from odoo.models import expression
+from odoo.tools.safe_eval import safe_eval
 
 try:
     import xlrd
+
+
     try:
         from xlrd import xlsx
     except ImportError:
@@ -16,289 +20,390 @@ except ImportError:
     xlrd = xlsx = None
 
 
-class MrpBomImport(models.Model):
-    _name = 'mrp.bom.import'
-
-    @api.multi
-    @api.depends('filename', 'file_date')
-    def _get_import_name(self):
-        for file_import in self:
-            file_import.name = u'{} - {}'.format(file_import.filename,
-                                                 file_import.file_date)
-    products_count = fields.Float(compute='_compute_products_count',
-                                  string='Total Products')
-    bom_count = fields.Float(compute='_compute_products_count',
-                             string='Total BoMs')
-    name = fields.Char(string='Import name', compute='_get_import_name')
-    data = fields.Binary('File', required=True)
-    filename = fields.Char('Filename')
-    file_date = fields.Date(string="File Import Date", required=True,
-                            default=fields.Date.context_today)
-    bom_import_lines = fields.One2many(
-        comodel_name='mrp.bom.line.import', inverse_name='bom_import_id',
-        string='BoM Import Lines'
-    )
-
-    @api.multi
-    def _compute_products_count(self):
-        if self.bom_import_lines:
-            self.products_count = len(
-                set(self.mapped("bom_import_lines.product_id").ids))
-            self.bom_count = len(
-                set(self.mapped("bom_import_lines.bom_id").ids))
-        return {}
-
-    @api.multi
-    def action_bom_import_products(self):
-        views = [
-            (self.env.ref('product.product_product_tree_view').id, 'tree'),
-            (self.env.ref('product.product_normal_form_view').id, 'form')]
-        return {
-            'name': _('Products'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'product.product',
-            'view_id': False,
-            'views': views,
-            'type': 'ir.actions.act_window',
-            'domain': [('id', 'in',
-                        self.bom_import_lines.mapped("product_id").ids)],
-        }
-
-    @api.multi
-    def action_bom_import_boms(self):
-        views = [
-            (self.env.ref('mrp.mrp_bom_tree_view').id, 'tree'),
-            (self.env.ref('mrp.mrp_bom_form_view').id, 'form')]
-        return {
-            'name': _('Products'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'mrp.bom',
-            'view_id': False,
-            'views': views,
-            'type': 'ir.actions.act_window',
-            'domain': [('id', 'in',
-                        self.bom_import_lines.mapped("bom_id").ids)],
-        }
-
-    def check_number(self, number):
-        try:
-            if isinstance(number, float) or isinstance(number, int):
-                return number
-            if "." in number:
-                val = float(number)
-            else:
-                val = int(number)
-            return val
-        except ValueError:
-            return False
-
-    def float2string(self, number):
-        if isinstance(number, float):
-            if math.fmod(number, 1) == 0.0:
-                return str(number).replace('.0', '')
-        return str(number)
-
-    def check_product(self, name, default_code, weight=False, map_number=False,
-                      category_id=False, origin=False):
-        product_obj = self.env['product.product']
-        product_category = self.env['product.category']
-        supplierinfo_obj = self.env['product.supplierinfo']
-        route_obj = self.env['stock.location.route']
-        wh_obj = self.env['stock.warehouse']
-        if not name and not default_code:
-            return False
-        sub_name = product = False
-        if default_code:
-            sub_name = product_obj.search([('name', 'ilike', default_code)],
-                                          limit=1)
-            product = product_obj.search([('default_code', '=', default_code)],
-                                         limit=1)
-        if sub_name:
-            return False
-        if not product and name:
-            product = product_obj.search(([('name', '=', name)]), limit=1)
-        if not product:
-            vals = {'name': name,
-                    'default_code': default_code,
-                    'type': 'product',
-                    'weight': weight,
-                    'map_number': map_number,
-                    }
-            if category_id:
-                vals['categ_id'] = category_id
-            if origin and (origin == 'F' or origin == 'C'):
-                if origin == 'F':
-                    route_id = wh_obj._find_global_route(
-                        'mrp.route_warehouse0_manufacture',
-                        _('Manufacture')).id
-                if origin == 'C':
-                    route_id = wh_obj._find_global_route(
-                        'purchase_stock.route_warehouse0_buy', _('Buy')).id
-                vals['route_ids'] = [(6, 0, [route_id])]
-            product = product_obj.create(vals)
-        if category_id:
-            category = product_category.browse(category_id)
-            if category.supplier_id:
-                sup_info = supplierinfo_obj.search(
-                    [('product_id', '=', product.id),
-                     ('product_tmpl_id', '=',  product.product_tmpl_id.id),
-                     ('name', '=', category.supplier_id.id)])
-                if not sup_info:
-                    supplierinfo_obj.create(
-                        {'product_id': product.id,
-                         'product_tmpl_id': product.product_tmpl_id.id,
-                         'name': category.supplier_id.id})
-        return product.id
-
-    def check_categ(self, name):
-        product_categ_obj = self.env['product.category']
-        if not name:
-            return False
-        categ_lst = product_categ_obj.search([('name', '=', name)], limit=1)
-        if not categ_lst:
-            return False
+def check_number(number):
+    try:
+        if isinstance(number, float) or isinstance(number, int):
+            return number
+        if "." in number:
+            val = float(number)
         else:
-            return categ_lst.id
+            val = int(number)
+        return val
+    except ValueError:
+        return False
+
+def convert2str(value):
+    if isinstance(value, float) or isinstance(value, int):
+        new_value = str(value).strip()
+        if "." in new_value:
+            new_value = new_value[: new_value.index(".")]
+        return new_value.strip(" \n\t")
+    elif isinstance(value, tuple):
+        return value[0].strip(" \n\t")
+    else:
+        return value.strip(" \n\t")
+
+
+IMPORT_STATUS = [
+    ("2validate", "To validate"),
+    ("pass", "Validated"),
+    ("error", "Error"),
+    ("done", "Processed"),
+]
+
+
+class MrpBomImport(models.Model):
+    _name = "mrp.bom.import"
+    _description = "Import BoM from excel file"
+    _order = "file_date desc"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+
+    name = fields.Char(
+        string="Import name",
+        compute="_compute_import_name",
+        copy=False,
+    )
+    bom_count = fields.Integer(
+        compute="_compute_bom_count",
+        string="Total BoMs",
+    )
+    data = fields.Binary(
+        string="File",
+        required=True,
+        copy=False,
+    )
+    filename = fields.Char(
+        string="Filename",
+        copy=False,
+    )
+    file_date = fields.Date(
+        string="File Import Date",
+        required=True,
+        default=fields.Date.context_today,
+        copy=False,
+    )
+    bom_line_import_ids = fields.One2many(
+        comodel_name="mrp.bom.line.import",
+        inverse_name="bom_import_id",
+        string="BoM Component Lines",
+        copy=False,
+    )
+    state = fields.Selection(
+        selection=IMPORT_STATUS,
+        compute="_compute_state",
+        string="Status",
+    )
+    log_info = fields.Text(
+        string="Log Info",
+        compute="_compute_log_info",
+    )
+    product_found_by_code = fields.Boolean(
+        string="Product Found By Code",
+        default=False)
+
+    def _get_import_lines(self):
+        return self.mapped("bom_line_import_ids")
+
+    @api.depends("filename", "file_date")
+    def _compute_import_name(self):
+        for file_import in self:
+            file_import.name = "{} - {}".format(
+                file_import.filename, file_import.file_date
+            )
+
+    @api.depends(
+        "bom_line_import_ids",
+        "bom_line_import_ids.product_id",
+        "bom_line_import_ids.bom_id",
+    )
+    def _compute_bom_count(self):
+        for bom_import in self:
+            lines = bom_import._get_import_lines()
+            bom_import.bom_count = len(lines.mapped("bom_id"))
+
+    @api.depends(
+        "bom_line_import_ids",
+        "bom_line_import_ids.state",
+    )
+    def _compute_state(self):
+        for bom_import in self:
+            lines = bom_import._get_import_lines()
+            line_states = lines.mapped("state")
+            if line_states and any([state == "error" for state in line_states]):
+                bom_import.state = "error"
+            elif line_states and all([state == "done" for state in line_states]):
+                bom_import.state = "done"
+            elif line_states and all([state == "pass" for state in line_states]):
+                bom_import.state = "pass"
+            else:
+                bom_import.state = "2validate"
+
+    @api.depends(
+        "bom_line_import_ids",
+        "bom_line_import_ids.log_info",
+    )
+    def _compute_log_info(self):
+        for bom_import in self:
+            lines = bom_import._get_import_lines()
+            logged_lines = lines.filtered("log_info")
+            if logged_lines:
+                bom_import.log_info = "\n".join(logged_lines.mapped("log_info"))
+            else:
+                bom_import.log_info = ""
+
+    def action_bom_import_boms(self):
+        action = self.env.ref("mrp.mrp_bom_form_action")
+        action_dict = action and action.read()[0]
+        lines = self._get_import_lines()
+        domain = expression.AND(
+            [
+                [("id", "in", lines.mapped("bom_id").ids)],
+                safe_eval(action.domain or "[]"),
+            ]
+        )
+        action_dict.update({"domain": domain})
+        return action_dict
+
+    def action_bom_import_bom_lines(self):
+        action = self.env.ref("mrp_bom_import.mrp_bom_line_action")
+        action_dict = action and action.read()[0]
+        lines = self._get_import_lines()
+        domain = expression.AND(
+            [
+                [("id", "in", lines.mapped("bom_line_id").ids)],
+                safe_eval(action.domain or "[]"),
+            ]
+        )
+        action_dict.update({"domain": domain})
+        return action_dict
 
     def action_import_bom(self):
-        for line in self.bom_import_lines:
-            line.unlink()
-        """Load BoM lines data from the xls file."""
-        file_1 = base64.decodestring(self.data)
-        (fileno, fp_name) = tempfile.mkstemp('.xls', 'odoo_')
-        outFile = open(fp_name, 'wb')
-        outFile.write(file_1)
-        outFile.close()
-        reader = xlrd.open_workbook(fp_name)
-        sheet = reader.sheet_by_index(0)
-        ctx = self.env.context
-        bom_import_line_obj = self.env['mrp.bom.line.import']
-        keys = ['null', 'item', 'qty', 'code', 'map', 'name', 'weight',
-                'qty_total', 'denomination', 'weight2', 'parent_code',
-                'origin', 'category'
-                ]
-        reader.nrow = 10
-        for counter in range(9, sheet.nrows-1):
-            # grab the current row
-            rowValues = sheet.row_values(counter+1, 0, end_colx=sheet.ncols)
-            values = dict(zip(keys, rowValues))
-            line_data = {
-                'bom_import_id': self.id,
-                'product_name': values['name'],
-                'quantity': self.check_number(values['qty']) or 0,
-                'product_ref': self.float2string(values['code']),
-                'map': self.float2string(values['map']),
-                'weight': self.check_number(values['weight']) or 0,
-                'origin': values['origin'],
-                'bom_code': values['parent_code'],
-                'categ_name': values['category'],
-                }
-            try:
-                bom_import_line_obj.create(line_data)
-            except Exception as error:
-                raise exceptions.Warning(u"Line Error: \n")
+        self.ensure_one()
+        (self._get_import_lines()).unlink()
+        book = base64.decodebytes(self.data)
+        reader = xlrd.open_workbook(file_contents=book)
+        try:
+            sheet_list = reader.sheet_names()
+            for sheet_name in sheet_list:
+                sheet = reader.sheet_by_name(sheet_name)
+                bom_import_line_obj = self.env["mrp.bom.line.import"]
+                keys = [c.value for c in sheet.row(0)]
+                for counter in range(1, sheet.nrows):
+                    row_values = sheet.row_values(counter, 0, end_colx=sheet.ncols)
+                    values = dict(zip(keys, row_values))
+                    line_data = self._get_line_values(values)
+                    if line_data:
+                        bom_import_line_obj.create(line_data)
+        except Exception:
+            raise ValidationError(_("This is not a valid file."))
+
+    def _get_line_values(self, row_values):
+        self.ensure_one()
+        if (
+            not row_values.get("Product Name")
+            and not row_values.get("Product Code")
+            and not row_values.get("Quantity", 1)
+        ):
+            return {}
+        values = {
+            "bom_ref": convert2str(row_values.get("BoM Ref", "")),
+            "product_name": convert2str(row_values.get("Product Name", "")),
+            "product_ref": convert2str(row_values.get("Product Code", "")),
+            "quantity": check_number(row_values.get("Quantity", 1)),
+            "bom_code": convert2str(row_values.get("Parent Code", "")),
+            "bom_name": convert2str(row_values.get("Parent Name", "")),
+            "parent_qty": check_number(row_values.get("Parent Qty", 1)),
+        }
+        values.update(
+            {
+                "bom_import_id": self.id,
+            }
+        )
+        return values
 
     def action_validate_lines(self):
-        product_obj = self.env['product.product']
-        bom_obj = self.env['mrp.bom']
-        for line in self.bom_import_lines.filtered(
-                lambda x: x.state not in ('done', 'pass')):
-            category_id = False
-            if line.categ_name:
-                category_id = self.check_categ(line.categ_name)
-                if category_id:
-                    line.category_id = category_id
-            if not category_id:
-                line.state = 'error'
-                line.log_info = 'Error: Category not found'
-                continue
-            if not line.product_id and (line.product_ref or line.product_name):
-                product_id = self.check_product(line.product_name,
-                                                line.product_ref,
-                                                line.weight,
-                                                line.map,
-                                                line.category_id.id,
-                                                line.origin
-                                                )
-                line.product_id = product_id
-                line.state = 'pass'
-            elif line.product_id:
-                line.state = 'pass'
-            else:
-                line.state = 'error'
-                line.log_info = 'Error: Cannot assign product'
-                continue
-            if line.bom_code:
-                bom = bom_obj.search([('code', '=', line.bom_code)])
-                if bom:
-                    line.state = 'error'
-                    line.log_info = 'Error: BoM already exist'
-                    continue
-                bom_product = product_obj.search([('default_code', '=',
-                                                   line.bom_code)])
-                if not bom_product:
-                    line.state = 'error'
-                    line.log_info = 'Error: BoM product does not exist'
-                    continue
-            if not line.quantity:
-                line.state = 'error'
-                line.log_info = 'Error: Quantity cannot be 0'
+        lines = (self._get_import_lines()).filtered(
+            lambda x: x.state not in ("done"))
+        lines.action_validate_lines()
 
     def action_process_lines(self):
-        bom_obj = self.env['mrp.bom']
-        bom_line_obj = self.env['mrp.bom.line']
-        product_obj = self.env['product.product']
-        for line in self.bom_import_lines.filtered(
-                lambda x: x.state == 'pass'):
-            bom_product = product_obj.search(
-                [('default_code', '=', line.bom_code)], limit=1)
-            if not bom_product:
-                line.state = 'error'
-                line.log_info = 'Error: BoM product does not exist'
-                break
-            bom = bom_obj.search(
-                [('code', '=', line.bom_code)], limit=1)
-            if not bom:
-                bom = bom_obj.create(
-                    {'code': line.bom_code,
-                     'product_tmpl_id': bom_product.product_tmpl_id.id,
-                     'product_id':  bom_product.id})
-            bom_line = bom_line_obj.search(
-                [('product_id', '=', line.product_id.id),
-                 ('bom_id', '=', bom.id)], limit=1)
-            if not bom_line:
-                bom_line = bom_line_obj.create(
-                    {'product_id': line.product_id.id,
-                     'product_qty': line.quantity, 'bom_id': bom.id})
-            line.bom_id = bom.id
-            line.state = 'done'
-            line.log_info = ''
+        lines = (self._get_import_lines()).filtered(
+            lambda x: x.state == "pass")
+        lines.action_process_lines()
+
+    def button_open_bom_component_import_line(self):
+        self.ensure_one()
+        return {
+            "name": _("Component Import Lines"),
+            "type": "ir.actions.act_window",
+            "res_model": self.bom_line_import_ids._name,
+            "view_mode": "tree",
+            "view_id": self.env.ref(
+                "mrp_bom_import.mrp_bom_line_component_import_view_tree"
+            ).id,
+            "target": "current",
+            "domain": [("id", "in", self.bom_line_import_ids.ids)],
+            "context": {
+                "default_bom_import_id": self.id,
+            },
+        }
 
 
 class MrpBomLineImport(models.Model):
-    _name = 'mrp.bom.line.import'
+    _name = "mrp.bom.line.import"
+    _description = "Import BoM lines"
 
     bom_import_id = fields.Many2one(
-        comodel_name='mrp.bom.import', string='BoM Import', ondelete='cascade',
-        required=True)
-    quantity = fields.Float(string='Quantity')
-    product_name = fields.Char(string='Product name')
-    product_ref = fields.Char(string='Product code')
-    product_id = fields.Many2one('product.product', string='Product')
-    weight = fields.Float(string='Weight')
-    origin = fields.Char(string='Origin')
-    map = fields.Char(string='Erection Drawing')
-    bom_code = fields.Char(string='BoM code')
-    bom_id = fields.Many2one('mrp.bom', string='BoM')
-    categ_name = fields.Char(string='Category name')
-    category_id = fields.Many2one('product.category', string='Category')
-    log_info = fields.Text(string='Log Info')
-    state = fields.Selection([
-        ('2validate', 'To validate'),
-        ('pass', 'Validated'),
-        ('error', 'Error'),
-        ('done', 'Processed')],
-        string='Import state', default='2validate'
+        comodel_name="mrp.bom.import",
+        string="BoM Import",
+        ondelete="cascade",
     )
+    product_name = fields.Char(string="Product name")
+    product_ref = fields.Char(string="Product code")
+    product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Product",
+    )
+    quantity = fields.Float(string="Quantity")
+    bom_ref = fields.Char(string="BoM Ref")
+    bom_code = fields.Char(string="BoM code")
+    bom_name = fields.Char(string="BoM Name")
+    bom_product_id = fields.Many2one(
+        string="Parent Product",
+        comodel_name="product.product")
+    bom_id = fields.Many2one(
+        comodel_name="mrp.bom",
+        string="BoM",
+    )
+    bom_line_id = fields.Many2one(
+        string="BoM Line",
+        comodel_name="mrp.bom.line")
+    log_info = fields.Text(string="Log Info")
+    state = fields.Selection(
+        selection=IMPORT_STATUS,
+        string="Status",
+        default="2validate",
+    )
+    parent_product_bom_count = fields.Integer(
+        string="Parent Bom Qty",
+        related="bom_product_id.bom_count",
+        store=True)
+    parent_qty = fields.Float(string="Parent Quantity")
+
+    def _check_product(self):
+        self.ensure_one()
+        log_info = ""
+        if self.product_id:
+            return self.product_id, log_info
+        product_obj = self.env["product.product"]
+        search_domain = [("name", "=", self.product_name)]
+        if self.product_ref:
+            search_domain = expression.AND(
+                [[("default_code", "=", self.product_ref)], search_domain]
+            )
+        if self.bom_import_id.product_found_by_code:
+            search_domain = [("default_code", "=", self.product_ref)]
+        products = product_obj.search(search_domain)
+        if not products:
+            products = False
+            log_info = _("Error: Product not found.")
+        elif len(products) != 1:
+            products = False
+            log_info = _("Error: More than one product found.")
+        return products, log_info
+
+    def _check_bom_product(self):
+        self.ensure_one()
+        log_info = ""
+        if self.bom_product_id:
+            return self.bom_product_id, log_info
+        product_obj = self.env["product.product"]
+        search_domain = [("name", "=", self.bom_name)]
+        if self.bom_code:
+            search_domain = expression.AND(
+                [[("default_code", "=", self.bom_code)], search_domain]
+            )
+        if self.bom_import_id.product_found_by_code:
+            search_domain = [("default_code", "=", self.bom_code)]
+        products = product_obj.search(search_domain)
+        if not products:
+            products = False
+            log_info = _("Error: BoM product not found.")
+        elif len(products) != 1:
+            products = False
+            log_info = _("Error: More than one BoM product found.")
+        return products, log_info
+
+    def action_validate_lines(self):
+        for line in self.filtered(lambda x: x.state not in ("done")):
+            line_vals = {}
+            log_info = ""
+            product = bom_product = bom = False
+            product, product_log_info = line._check_product()
+            if product_log_info:
+                log_info += product_log_info
+            bom_product, bom_product_log_info = line._check_bom_product()
+            if bom_product_log_info:
+                log_info += bom_product_log_info
+            if not line.quantity:
+                log_info += _("Error: Quantity cannot be 0.")
+            state = "error" if log_info else "pass"
+            line_vals.update(
+                {
+                    "product_id": product and product.id,
+                    "bom_product_id": bom_product and bom_product.id,
+                    "bom_id": bom and bom.id,
+                    "state": state,
+                    "log_info": log_info,
+                }
+            )
+            line.write(line_vals)
+
+    def _create_bom(self):
+        self.ensure_one()
+        bom = self.env["mrp.bom"].create({
+            "product_tmpl_id": self.bom_product_id.product_tmpl_id.id,
+            "code": self.bom_ref,
+            "product_qty": self.parent_qty,
+            "product_uom_id": self.bom_product_id.uom_id.id})
+        return bom
+
+    def generate_bom_line_values(self):
+        self.ensure_one()
+        bom_line = {
+            "product_id": self.product_id.id,
+            "product_qty": self.quantity,
+            "product_uom_id": self.product_id.uom_id.id}
+        return bom_line
+
+    def action_process_lines(self):
+        bom_product = []
+        for line in self.filtered(lambda x: x.state == "pass"):
+            log_info = ""
+            bom = False
+            if not line.bom_id and line.bom_product_id and line.bom_product_id not in bom_product:
+                state = "2validate"
+                same_parent = line.bom_import_id.bom_line_import_ids.filtered(
+                    lambda c: c.bom_product_id == line.bom_product_id)
+                if any([state.state == "error" for state in same_parent]):
+                    log_info = _("Error: There is another line with the " +
+                              "same parent product errors.")
+                    state = "error"
+                else:
+                    bom = line._create_bom()
+                    for l in same_parent:
+                        bom_line_values = l.generate_bom_line_values()
+                        bom_line_values.update({"bom_id": bom.id})
+                        bom_line = self.env["mrp.bom.line"].create(
+                            bom_line_values)
+                        l.write({
+                            "bom_id": bom.id,
+                            "bom_line_id": bom_line.id,
+                            "state": "done"})
+                    state = "done"
+                line.write(
+                    {
+                        "state": state,
+                        "log_info": log_info,
+                    }
+                )

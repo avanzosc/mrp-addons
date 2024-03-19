@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-25 10:38+0000\n"
-"PO-Revision-Date: 2019-09-25 10:38+0000\n"
+"POT-Creation-Date: 2024-03-25 09:56+0000\n"
+"PO-Revision-Date: 2024-03-25 09:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,181 +16,110 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_import_form
-msgid "<span class=\"o_stat_text\">BoMs</span>"
+#: model:ir.model,name:mrp_bom_import.model_import_file
+msgid "Base for import file"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_import_form
-msgid "<span class=\"o_stat_text\">Products</span>"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_id
-msgid "BoM"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_import_id
-#: model:ir.ui.menu,name:mrp_bom_import.menu_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_import_form
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_import_tree
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_line_tree
-msgid "BoM Import"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__bom_import_lines
-msgid "BoM Import Lines"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__bom_code
-msgid "BoM code"
-msgstr ""
-
-#. module: mrp_bom_import
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:138
+#: code:addons/mrp_bom_import/models/import_file.py:91
 #, python-format
-msgid "Buy"
+msgid "Bill of Material line"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__category_id
-msgid "Category"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__categ_name
-msgid "Category name"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__create_uid
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__create_uid
-msgid "Created by"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__create_date
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__create_date
-msgid "Created on"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__display_name
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__map
-msgid "Erection Drawing"
-msgstr ""
-
-#. module: mrp_bom_import
-#: selection:mrp.bom.line.import,state:0
-msgid "Error"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__data
-msgid "File"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.ui.menu,name:mrp_bom_import.mrp_bom_import
-msgid "File BoM Import"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__file_date
-msgid "File Import Date"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__filename
-msgid "Filename"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__id
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__id
-msgid "ID"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_import_form
-msgid "Import"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__name
-msgid "Import name"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__state
-msgid "Import state"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import____last_update
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__write_uid
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__write_uid
-msgid "Last Updated by"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__write_date
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__write_date
-msgid "Last Updated on"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__log_info
-msgid "Log Info"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.actions.act_window,name:mrp_bom_import.mrp_bom_import_act
-msgid "MRP BoM Import"
-msgstr ""
-
-#. module: mrp_bom_import
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:135
+#: code:addons/mrp_bom_import/models/import_file.py:48
 #, python-format
-msgid "Manufacture"
+msgid "Bill of material"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_product_product__map_number
-msgid "Map Number"
+#: selection:import.file,software:0
+msgid "Clients"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__origin
-msgid "Origin"
+#: code:addons/mrp_bom_import/models/import_file.py:74
+#, python-format
+msgid "Component"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_import_form
-msgid "Process"
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:237
+#, python-format
+msgid "Component Import Lines"
 msgstr ""
 
 #. module: mrp_bom_import
-#: selection:mrp.bom.line.import,state:0
-msgid "Processed"
+#: selection:import.file,software:0
+msgid "Datos extra"
 msgstr ""
 
 #. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:331
+#, python-format
+msgid "Error: BoM product not found."
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:334
+#, python-format
+msgid "Error: More than one BoM product found."
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:312
+#, python-format
+msgid "Error: More than one product found."
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:309
+#, python-format
+msgid "Error: Product not found."
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:349
+#, python-format
+msgid "Error: Quantity cannot be 0."
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:389
+#, python-format
+msgid "Error: There is another line with the same parent product errors."
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.model.fields,field_description:mrp_bom_import.field_import_file__software
+msgid "External software"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.model,name:mrp_bom_import.model_mrp_bom_import
+msgid "Import BoM from excel file"
+msgstr ""
+
+#. module: mrp_bom_import
+#: model:ir.model,name:mrp_bom_import.model_mrp_bom_line_import
+msgid "Import BoM lines"
+msgstr ""
+
+#. module: mrp_bom_import
+#: selection:import.file,software:0
+msgid "None"
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/import_file.py:66
+#, python-format
+msgid "Operation"
+msgstr ""
+
+#. module: mrp_bom_import
+#: code:addons/mrp_bom_import/models/import_file.py:42
 #: model:ir.model,name:mrp_bom_import.model_product_product
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_id
+#, python-format
 msgid "Product"
 msgstr ""
 
@@ -200,69 +129,40 @@ msgid "Product Category"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_ref
-msgid "Product code"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__product_name
-msgid "Product name"
-msgstr ""
-
-#. module: mrp_bom_import
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:57
-#: code:addons/mrp_bom_import/models/mrp_bom_import.py:74
-#, python-format
+#: selection:import.file,software:0
 msgid "Products"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__quantity
-msgid "Quantity"
+#: selection:import.file,software:0
+msgid "Regas de abastecimiento"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__supplier_id
-msgid "Supplier"
+#: code:addons/mrp_bom_import/models/import_file.py:54
+#, python-format
+msgid "Route"
 msgstr ""
 
 #. module: mrp_bom_import
-#: selection:mrp.bom.line.import,state:0
-msgid "To validate"
+#: selection:import.file,software:0
+msgid "Suppliers"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__bom_count
-msgid "Total BoMs"
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:198
+#, python-format
+msgid "This is not a valid file."
 msgstr ""
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_import__products_count
-msgid "Total Products"
+#: selection:import.file,software:0
+msgid "Variantes"
 msgstr ""
 
 #. module: mrp_bom_import
-#: model_terms:ir.ui.view,arch_db:mrp_bom_import.view_mrp_bom_import_form
-msgid "Validate"
-msgstr ""
-
-#. module: mrp_bom_import
-#: selection:mrp.bom.line.import,state:0
-msgid "Validated"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_mrp_bom_line_import__weight
-msgid "Weight"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model,name:mrp_bom_import.model_mrp_bom_import
-msgid "mrp.bom.import"
-msgstr ""
-
-#. module: mrp_bom_import
-#: model:ir.model,name:mrp_bom_import.model_mrp_bom_line_import
-msgid "mrp.bom.line.import"
+#: code:addons/mrp_bom_import/models/import_file.py:60
+#, python-format
+msgid "Workcenter"
 msgstr ""
 
