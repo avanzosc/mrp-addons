@@ -33,6 +33,10 @@
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="custom_mrp_line_cost.production_move_line_ids_tree_view"/>
         <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="default_order">sequence desc</attribute>
+                <attribute name="decoration-danger">qty_done == 0</attribute>
+            </tree>
             <field name="product_id" position="before">
                 <field name="sequence" string=" "/>
             </field>
@@ -62,7 +66,8 @@
         <field name="arch" type="xml">
             <tree string="Stock Move Lines" create="0">
                 <field name="date" optional="show"/>
-                <field name="production_id" optional="show"/>
+                <field name="reference"/>
+                <field name="production_id" optional="hide"/>
                 <field name="product_id"/>
                 <field name="lot_id"/>
                 <field name="location_id" optional="hide"/>
@@ -90,7 +95,12 @@
                 <filter string="Done bigger than 0" name="done_qty" domain="[('qty_done', '&gt;', 0)]"/>
             </filter>
             <filter name="groupby_product_id" position="after">
-                <filter string="Production Order" name="groupby_production" domain="[]" context="{'group_by': 'production_id'}"/>
+                <filter string="Reference" name="groupby_production" domain="[]" context="{'group_by': 'reference'}"/>
+            </filter>
+            <filter name="by_date" position="before">
+                <separator/>
+                <filter string="Saca Date" name="groupby_saca_date" domain="[]" context="{'group_by': 'saca_date'}"/>
+                <separator/>
             </filter>
         </field>
     </record>
@@ -101,7 +111,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="stock_move_line_classified_tree_view"/>
-        <field name="domain">[('production_id', '!=', False), ('production_id.quartering', '=', False), ('production_id.paasa', '=', True), ('state', '=', 'done')]</field>
+        <field name="domain">['|', ('move_id.raw_material_production_id', '!=', False), ('move_id.production_id', '!=', False), '|',('move_id.raw_material_production_id.quartering', '=', False), ('move_id.production_id.quartering', '=', False), '|', ('move_id.production_id.paasa', '=', True), ('move_id.raw_material_production_id.paasa', '=', True), ('state', '=', 'done')]</field>
     </record>
 
     <record id="action_quartering_move_lines" model="ir.actions.act_window">

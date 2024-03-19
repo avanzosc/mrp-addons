@@ -138,6 +138,7 @@
             </div>
             <field name="is_deconstruction" position="after">
                 <field name="quartering" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field name="no_duplicate_lines" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                 <field name="saca_id" readonly="1" attrs="{'invisible':[('saca_id', '=', False)]}"/>
                 <field name="saca_line_id" readonly="1" attrs="{'invisible':[('saca_id', '=', False)]}"/>
                 <field name="farm_warehouse_id" attrs="{'invisible': [('farm_warehouse_id', '=', False)]}"/>
@@ -223,11 +224,9 @@
             </page>
             <page name="components" position="attributes">
                 <attribute name="string">Input Products</attribute>
-                <attribute name="attrs">{'invisible': [('quartering', '=', True)]}</attribute>
             </page>
             <page name="finished_products" position="attributes">
                 <attribute name="string">Output Products</attribute>
-                <attribute name="attrs">{'invisible': [('quartering', '=', True)]}</attribute>
             </page>
             <page name="finished_products" position="after">
                 <page name="finished_move_lines" string="Outputs" attrs="{'invisible': ['|', ('tolvasa', '=', True), ('saca_line_id', '!=', False)]}">
