@@ -156,6 +156,10 @@ class MrpProduction(models.Model):
         store=True)
     quartering = fields.Boolean(
         string="Quartering")
+    no_duplicate_lines = fields.Boolean(
+        string="No Duplicate Lines",
+        related="bom_id.no_duplicate_lines",
+        store=True)
     bom_id = fields.Many2one(
         domain="""[
         '&',
@@ -269,13 +273,15 @@ class MrpProduction(models.Model):
             production.qty_difference = (
                 production.consume_qty - production.produced_qty)
 
-    @api.depends("finished_move_line_ids", "finished_move_line_ids.qty_done")
+    @api.depends("finished_move_line_ids", "finished_move_line_ids.qty_done",
+                 "finished_move_line_ids.product_uom_qty", "product_uom_qty")
     def _compute_produced_qty(self):
         for production in self:
             produced_qty = 0
             if production.finished_move_line_ids:
-                produced_qty = sum(
-                    production.finished_move_line_ids.mapped("qty_done"))
+                produced_qty = sum(production.finished_move_line_ids.filtered(
+                    lambda c: c.product_uom_id == production.product_uom_id
+                ).mapped("qty_done"))
             production.produced_qty = produced_qty
 
     @api.depends("move_line_ids", "move_line_ids.qty_done", "origin_qty")
@@ -501,6 +507,13 @@ class MrpProduction(models.Model):
         if self.move_finished_ids:
             self.move_finished_ids._do_unreserve()
         result = super(MrpProduction, self).button_mark_done()
+        if result is not True and "res_model" in result and result["res_model"] == "mrp.consumption.warning" and self.no_duplicate_lines:
+            entry_qty = sum(self.move_line_ids.mapped("qty_done"))
+            out_qty = sum(self.finished_move_line_ids.mapped("qty_done"))
+            for move in self.move_raw_ids:
+                move.product_uom_qty = entry_qty
+            for move in self.move_byproduct_ids:
+                move.product_uom_qty = out_qty
         if self.finished_move_line_ids:
             for line in self.finished_move_line_ids:
                 values = {
@@ -524,12 +537,8 @@ class MrpProduction(models.Model):
                 for move in line.move_finished_ids.filtered(
                     lambda c: c.product_id == (
                         line.product_id)):
-                    move.state = 'draft'
-                    for move_line in move.move_line_ids:
-                        move_line._refresh_quants_by_picking_cancelation()
-                    move._do_unreserve()
-                    move.move_line_ids.unlink()
-                    move.state = 'cancel'
+                    move.do_cancel_done()
+                    move.state = "cancel"
 
     def action_generate_serial(self):
         self.ensure_one()
@@ -577,3 +586,17 @@ class MrpProduction(models.Model):
             return start_date - timedelta(days=weekday)
         else:
             return start_date + timedelta(days=(7-weekday))
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        result = super(MrpProduction, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
+        for line in result:
+            if '__domain' in line:
+                lines = self.search(line["__domain"])
+                average_weight = sum(lines.mapped("average_weight"))/len(lines)
+                rto_percentage = sum(lines.mapped("rto_percentage"))/len(lines)
+                purchase_unit_price = sum(lines.mapped("purchase_unit_price"))/len(lines)
+                line["average_weight"] = average_weight
+                line["rto_percentage"] = rto_percentage
+                line["purchase_unit_price"] = purchase_unit_price
+        return result
