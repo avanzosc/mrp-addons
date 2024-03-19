@@ -85,13 +85,17 @@ class MrpProduction(models.Model):
         compute="_compute_consume_qty",
         store=True)
 
-    @api.depends("move_line_ids", "move_line_ids.qty_done")
+    @api.depends("move_line_ids", "move_line_ids.qty_done",
+                 "product_uom_id", "move_line_ids.product_uom_id")
     def _compute_consume_qty(self):
         for production in self:
             production.consume_qty = sum(
                 production.move_line_ids.filtered(
                     lambda c: c.location_id == (
-                        production.location_dest_id)).mapped("qty_done"))
+                        production.location_dest_id
+                    ) and c.product_uom_id == production.product_uom_id
+                ).mapped("qty_done")
+            )
 
     @api.depends("purchase_price", "month_cost", "origin_qty")
     def _compute_cost(self):
@@ -212,15 +216,19 @@ class MrpProduction(models.Model):
 
     def button_mark_done(self):
         result = super(MrpProduction, self).button_mark_done()
+        self.button_calculate_costs()
+        return result
+
+    def button_calculate_costs(self):
         for production in self:
             qty = []
             lots = []
             if production.is_deconstruction and (
-                production.purchase_price) and (
                     production.move_line_ids):
                 dif = production.cost - production.entry_total_amount
                 if dif != 0:
                     for line in production.move_line_ids:
+                        line.onchange_applied_price()
                         if not line.move_id:
                             line.move_id = production.move_raw_ids.filtered(
                                 lambda c: c.product_id == line.product_id).id
@@ -231,17 +239,16 @@ class MrpProduction(models.Model):
                                     lambda c: c.lot_id == line.lot_id).mapped(
                                         "qty_done")))
                     i = qty.index(max(qty))
-                    if i:
-                        max_lot = lots[i]
-                        max_qty = qty[i]
-                        if max_lot and max_qty:
-                            lot_lines = production.move_line_ids.filtered(
-                                lambda c: c.lot_id == max_lot)
-                            amount = dif + sum(lot_lines.mapped("amount"))
-                            price = amount / max_qty
-                            for max_line in lot_lines:
-                                max_line.applied_price = price
-                                max_line.onchange_applied_price()
+                    max_lot = lots[i]
+                    max_qty = qty[i]
+                    if max_lot and max_qty:
+                        lot_lines = production.move_line_ids.filtered(
+                            lambda c: c.lot_id == max_lot)
+                        amount = dif + sum(lot_lines.mapped("amount"))
+                        price = amount / max_qty
+                        for max_line in lot_lines:
+                            max_line.applied_price = price
+                            max_line.onchange_applied_price()
             elif not production.is_deconstruction and (
                 production.average_cost) and (
                     production.finished_move_line_ids):
@@ -272,7 +279,6 @@ class MrpProduction(models.Model):
                             for max_line in lot_lines:
                                 max_line.applied_price = price
                                 max_line.onchange_applied_price()
-        return result
 
     @api.depends("move_line_ids", "move_line_ids.canal",
                  "move_line_ids.qty_done")
@@ -352,6 +358,7 @@ class MrpProduction(models.Model):
             "default_location_id": self.production_location_id.id,
             "default_location_dest_id": self.location_dest_id.id,
             "default_company_id": self.company_id.id,
+            "company_id": self.company_id.id,
         })
         return {
             "name": _("Outputs"),
@@ -369,9 +376,11 @@ class MrpProduction(models.Model):
         context = self.env.context.copy()
         context.update({
             "production_id": self.id,
+            "default_production_id": self.id,
             "location_id": self.location_src_id.id,
             "location_dest_id": self.production_location_id.id,
             "company_id": self.company_id.id,
+            "default_company_id": self.company_id.id,
         })
         return {
             "name": _("Entries"),

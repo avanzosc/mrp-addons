@@ -4,6 +4,9 @@
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp_production_deconstruction.mrp_production_form_view"/>
         <field name="arch" type="xml">
+            <header position="inside">
+                <button name="button_calculate_costs" attrs="{'invisible': [('state', '!=', 'done')]}" string="Recalculate Costs" type="object" class="oe_highlight"/>
+            </header>
             <div name="button_box" position="inside">
                 <button class="oe_stat_button" string="Entries" icon="fa-long-arrow-right" type="object" name="action_view_move_line_ids"/>
                 <button class="oe_stat_button" string="Outputs" icon="fa-long-arrow-left" type="object" name="action_view_finished_move_line_ids"/>
