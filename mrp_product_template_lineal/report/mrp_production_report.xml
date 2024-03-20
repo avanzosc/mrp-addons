@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_mrporder_lineal" inherit_id="mrp.report_mrporder">
+        <xpath expr="//table[@t-if='o.move_raw_ids']//th[1]" position="after">
+            <th>Lineal</th>
+        </xpath>
+        <xpath expr="//table[@t-if='o.move_raw_ids']//td[1]" position="after">
+            <td>
+                <span t-field="raw_line.lineal_id"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>
