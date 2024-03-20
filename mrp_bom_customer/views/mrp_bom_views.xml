@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_bom_form_view" model="ir.ui.view">
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="before">
+                <field name="customer_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_bom_tree_view" model="ir.ui.view">
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="before">
+                <field name="customer_id"
+                    context="{'res_partner_search_mode': 'customer'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_bom_filter" model="ir.ui.view">
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.view_mrp_bom_filter" />
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="before">
+                <field name="customer_id" />
+            </field>
+            <filter name="product" position="before">
+                <filter string="Customer" name="customer" domain="[]"
+                    context="{'group_by': 'customer_id'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>
