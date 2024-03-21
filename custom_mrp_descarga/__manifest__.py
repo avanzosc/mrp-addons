@@ -35,6 +35,7 @@
         "views/product_template_view.xml",
         "views/stock_move_line_view.xml",
         "views/killing_cost_view.xml",
+        "report/mrp_production_summary_xlsx.xml",
     ],
     "installable": True,
     "auto_install": True,
