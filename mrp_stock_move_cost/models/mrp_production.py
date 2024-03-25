@@ -26,6 +26,8 @@ class MrpProduction(models.Model):
             production.update_prodution_cost()
 
     def update_prodution_cost(self):
+        price_unit_cost = 0
+        cost = 0
         cond = ["|", ("move_id.raw_material_production_id", "=", self.id),
                 ("move_id.production_id", "=", self.id)]
         lines = self.env["stock.move.line"].search(cond)
