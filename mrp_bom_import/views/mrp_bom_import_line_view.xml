@@ -4,45 +4,114 @@
         <field name="model">mrp.bom.line.import</field>
         <field name="arch" type="xml">
             <search>
-                <field name="product_id"/>
-                <field name="bom_product_id"/>
+                <field name="product_id" />
+                <field name="bom_product_id" />
                 <filter
-                name="pending"
-                string="Pending"
-                domain="[('state', '!=', 'done')]"
-                />
+          name="pending"
+          string="Pending"
+          domain="[('state', '!=', 'done')]"
+        />
                 <filter
-                name="finished"
-                string="Done"
-                domain="[('state', '=', 'done')]"
-                />
+          name="finished"
+          string="Done"
+          domain="[('state', '=', 'done')]"
+        />
                 <filter
-                name="errored"
-                string="Error"
-                domain="[('state', '=', 'error')]"
-                />
-                <group expand="0" string="Group By">
+          name="errored"
+          string="Error"
+          domain="[('state', '=', 'error')]"
+        />
+                <group expand="0" name="group_by" string="Group By">
                     <filter
-                    string="Status"
-                    name="state_group"
-                    domain="[]"
-                    context="{'group_by':'state'}"
-                    />
+            string="Status"
+            name="state_group"
+            context="{'group_by':'state'}"
+          />
+                    <separator />
                     <filter
-                    string="Log Info"
-                    name="log_info_group"
-                    domain="[]"
-                    context="{'group_by':'log_info'}"
-                    />
-                    <separator/>
-                    <filter
-                    string="BoM Product"
-                    name="bom_product"
-                    domain="[]"
-                    context="{'group_by':'bom_product_id'}"
-                    />
+            string="BoM Product"
+            name="bom_product"
+            domain="[]"
+            context="{'group_by':'bom_product_id'}"
+          />
                 </group>
             </search>
         </field>
+    </record>
+
+    <record id="mrp_bom_import_line_view_form" model="ir.ui.view">
+        <field name="model">mrp.bom.line.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            name="button_validate"
+            string="Validate"
+            type="object"
+            class="oe_read_only"
+            states="2validate,error"
+          />
+                    <button
+            name="button_process"
+            string="Process"
+            type="object"
+            class="oe_read_only"
+            states="pass"
+          />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="product_ref" />
+                            <field name="product_name" />
+                            <field name="product_id" />
+                            <field name="quantity" />
+                        </group>
+                        <group>
+                            <field name="bom_code" />
+                            <field name="bom_name" />
+                            <field name="bom_product_id" />
+                        </group>
+                    </group>
+                    <field name="log_info" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mrp_bom_import_line_view_tree" model="ir.ui.view">
+        <field name="model">mrp.bom.line.import</field>
+        <field name="arch" type="xml">
+            <tree
+        decoration-danger="state == 'error'"
+        decoration-muted="state == 'done'"
+        decoration-it="log_info"
+        editable="top"
+      >
+                <field
+          name="action"
+          decoration-muted="action == 'nothing'"
+          decoration-success="action == 'create'"
+        />
+                <field name="product_ref" />
+                <field name="product_name" />
+                <field name="product_id" optional="hide" />
+                <field name="quantity" />
+                <field name="bom_code" />
+                <field name="bom_name" />
+                <field name="bom_product_id" optional="hide" />
+                <field name="state" />
+                <field name="log_info" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_bom_import_line_action" model="ir.actions.act_window">
+        <field name="name">Import BoM Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.bom.line.import</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="mrp_bom_import_line_view_tree" />
     </record>
 </odoo>
