@@ -119,6 +119,10 @@
                       >Parent Product Quantity</b></li>
                                     <li><code>BoM Ref</code>: this will fill <b
                       >BoM Reference</b></li>
+                                    <li><code>Routing Name</code>: this will fill <b
+                      >Routing Name</b></li>
+                                    <li><code>Routing Code</code>: this will fill <b
+                      >Routing Code</b></li>
                                 </ul>
                             </div>
                         </group>
@@ -150,6 +154,9 @@
                 <field name="bom_name"/>
                 <field name="bom_product_id"/>
                 <field name="parent_qty"/>
+                <field name="routing_name"/>
+                <field name="routing_code"/>
+                <field name="routing_id"/>
                 <field name="bom_ref"/>
                 <field name="parent_product_bom_count"/>
                 <field name="bom_id" invisible="1"/>
