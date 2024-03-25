@@ -2,12 +2,11 @@
    :target: https://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==================
-Prado Silos Custom
-==================
+==============
+Mrp BOM Import
+==============
 
-This module adds:
-- Custom process to import BoM.
+Module to import BOMs.
 
 
 Credits
@@ -19,6 +18,7 @@ Images
 Contributors
 ------------
 
+* Berezi Amubieta <bereziamubieta@avanzosc.es>
 * Daniel Campos <danielcampos@avanzosc.es>
 * Ana Juaristi <anajuaristi@avanzosc.es>
 
