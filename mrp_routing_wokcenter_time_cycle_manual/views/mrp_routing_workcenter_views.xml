@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_routing_workcenter_tree_view" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="time_cycle" position="after">
+                <field name="number_insertions" optional="show" sum="Total Num. Insertions"/>
+                <field name="insertion_time" optional="show" widget="float_time"/>
+                <field name="time_cycle_manual" optional="show" widget="float_time" sum="Total time cycle manual"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_form_view" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='time_mode_batch']/.." position="after">
+                <label for="number_insertions" attrs="{'invisible': [('time_mode', '=', 'auto'), ('workorder_count', '!=' , 0)]}"
+                    string="Number of insertions"/>
+                <div attrs="{'invisible':  [('time_mode', '=', 'auto'), ('workorder_count', '!=' , 0)]}">
+                    <field name="number_insertions" class="oe_inline"/>
+                </div>
+                <label for="insertion_time" attrs="{'invisible': [('time_mode', '=', 'auto'), ('workorder_count', '!=' , 0)]}"
+                    string="Insertion time"/>
+                <div attrs="{'invisible':  [('time_mode', '=', 'auto'), ('workorder_count', '!=' , 0)]}">
+                    <field name="insertion_time" widget="float_time" class="oe_inline"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
