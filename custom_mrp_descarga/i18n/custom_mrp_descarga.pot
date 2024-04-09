@@ -6,14 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-13 08:23+0000\n"
-"PO-Revision-Date: 2024-03-13 08:23+0000\n"
+"POT-Creation-Date: 2024-03-21 13:25+0000\n"
+"PO-Revision-Date: 2024-03-21 13:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "% vivo"
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
@@ -142,13 +148,31 @@ msgid "Cost"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Coste"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__count_production
 msgid "Count Production"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Código"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
 msgid "Deconstruction"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Definición"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -201,6 +225,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__display_name
@@ -228,6 +253,12 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
 msgid "Emtying Hatchers"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Envases"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -280,12 +311,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__id
 msgid "ID"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Importe"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -315,6 +353,12 @@ msgid "Inventory Line"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "KGs"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:product.product,weight_uom_name:custom_mrp_descarga.quartering_product
 #: model:product.template,weight_uom_name:custom_mrp_descarga.quartering_product_product_template
 msgid "Kg"
@@ -326,6 +370,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line____last_update
@@ -367,6 +412,11 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.ui.menu,name:custom_mrp_descarga.menu_quartering_move_lines
 msgid "Líneas de despieces"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_report_mrp_production_summary_xlsx
+msgid "MRP Production Summary Report"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -454,6 +504,12 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__performance
 msgid "Performance"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Peso medio"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -555,6 +611,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__reproductor_quant_ids
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_reproductor
 msgid "Reproductor"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.report,name:custom_mrp_descarga.report_mrp_production_summary_xlsx
+msgid "Resumen de mantanza XLSX"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Resumen de matanza"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -719,6 +786,12 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
 msgid "Total amount"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#, python-format
+msgid "Unidades"
 msgstr ""
 
 #. module: custom_mrp_descarga
