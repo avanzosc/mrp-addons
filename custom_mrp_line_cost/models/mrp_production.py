@@ -85,15 +85,12 @@ class MrpProduction(models.Model):
         compute="_compute_consume_qty",
         store=True)
 
-    @api.depends("move_line_ids", "move_line_ids.qty_done",
-                 "product_uom_id", "move_line_ids.product_uom_id")
+    @api.depends("move_line_ids.qty_done")
     def _compute_consume_qty(self):
         for production in self:
             production.consume_qty = sum(
                 production.move_line_ids.filtered(
-                    lambda c: c.location_id == (
-                        production.location_dest_id
-                    ) and c.product_uom_id == production.product_uom_id
+                    lambda c: c.product_uom_id == production.product_uom_id
                 ).mapped("qty_done")
             )
 
@@ -103,20 +100,25 @@ class MrpProduction(models.Model):
             production.cost = production.purchase_price + (
                 production.month_cost * production.origin_qty)
 
-    @api.depends("move_line_ids", "move_line_ids.amount")
+    @api.depends("move_line_ids.amount")
     def _compute_entry_total_amount(self):
         for line in self:
+            entry_total_amount = 0
             if line.move_line_ids:
-                line.entry_total_amount = sum(
+                entry_total_amount = sum(
                     self.move_line_ids.mapped("amount"))
+            line.entry_total_amount = entry_total_amount
 
-    @api.depends("finished_move_line_ids", "finished_move_line_ids.amount")
+    @api.depends("finished_move_line_ids.amount")
     def _compute_output_total_amount(self):
         for production in self:
-            production.output_total_amount = sum(
-                production.finished_move_line_ids.mapped("amount"))
+            output_total_amount = 0
+            if production.finished_move_line_ids:
+                output_total_amount = sum(
+                    production.finished_move_line_ids.mapped("amount"))
+            production.output_total_amount = output_total_amount
 
-    @api.depends("move_line_ids", "move_line_ids.qty_done",
+    @api.depends("move_line_ids.qty_done",
                  "move_line_ids.amount")
     def _compute_average_cost(self):
         for line in self:
