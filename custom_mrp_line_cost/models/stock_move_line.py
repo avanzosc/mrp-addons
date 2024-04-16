@@ -160,15 +160,19 @@ class StockMoveLine(models.Model):
     @api.depends("unit", "qty_done")
     def _compute_weight(self):
         for line in self:
+            weight = 0
             if line.unit != 0:
-                line.weight = line.qty_done / line.unit
+                weight = line.qty_done / line.unit
+            line.weight = weight
 
-    @api.depends("qty_done", "production_id", "production_id.origin_qty")
+    @api.depends("qty_done", "production_id.origin_qty")
     def _compute_percentage(self):
         for line in self:
+            percentage = 0
             if line.production_id.origin_qty != 0:
-                line.percentage = (
+                percentage = (
                     line.qty_done * 100 / line.production_id.origin_qty)
+            line.percentage = percentage
 
     @api.onchange("brut", "pallet", "container", "pallet_id")
     def onchange_brut(self):
