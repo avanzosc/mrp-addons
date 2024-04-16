@@ -175,50 +175,52 @@ class MrpProduction(models.Model):
                  "date_planned_start")
     def _compute_month_cost(self):
         for line in self:
-            line.month_cost = 0
+            month_cost = 0
             if line.date_planned_start and line.workorder_ids:
                 month = line.date_planned_start.month
                 if month == 1:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.january)
                 if month == 2:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.february)
                 if month == 3:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.march)
                 if month == 4:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.april)
                 if month == 5:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.may)
                 if month == 6:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.june)
                 if month == 7:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.july)
                 if month == 8:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.august)
                 if month == 9:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.september
                         )
                 if month == 10:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.october)
                 if month == 11:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.november)
                 if month == 12:
-                    line.month_cost = (
+                    month_cost = (
                         line.workorder_ids[:1].workcenter_id.cost_ids.december)
+            line.month_cost = month_cost
 
     def button_mark_done(self):
         result = super(MrpProduction, self).button_mark_done()
-        self.button_calculate_costs()
+        if "default_mrp_consumption_warning_line_ids" in self.env.context:
+            self.button_calculate_costs()
         return result
 
     def button_calculate_costs(self):
@@ -282,7 +284,7 @@ class MrpProduction(models.Model):
                                 max_line.applied_price = price
                                 max_line.onchange_applied_price()
 
-    @api.depends("move_line_ids", "move_line_ids.canal",
+    @api.depends("move_line_ids.canal",
                  "move_line_ids.qty_done")
     def _compute_canal_weight(self):
         for line in self:
@@ -295,7 +297,7 @@ class MrpProduction(models.Model):
                 canal_weight = canal_weight / canal_unit
             line.canal_weight = canal_weight
 
-    @api.depends("move_line_ids", "move_line_ids.canal",
+    @api.depends("move_line_ids.canal",
                  "move_line_ids.percentage")
     def _compute_rto_canal(self):
         for line in self:
@@ -306,7 +308,7 @@ class MrpProduction(models.Model):
                 rto_canal = sum(canal_lines.mapped("percentage"))
             line.rto_canal = rto_canal
 
-    @api.depends("move_line_ids", "move_line_ids.canal",
+    @api.depends("move_line_ids.canal",
                  "move_line_ids.qty_done", "move_line_ids.amount")
     def _compute_canal_cost(self):
         for line in self:
