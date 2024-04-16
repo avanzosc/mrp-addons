@@ -120,6 +120,8 @@ class MrpProduction(models.Model):
                     self.import_line_ids = [(0, 0, line_data)]
                 row = cursor.fetchone()
             conn.close()
+            if self.state == "draft":
+                self.production_id.action_confirm()
             if self.import_line_ids:
                 self.action_validate()
         except Exception:
