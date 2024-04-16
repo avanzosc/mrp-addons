@@ -259,10 +259,10 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         ) / len(objects)
         worksheet.write(n, m, real_average_weight, result_three_decimal)
         m += 1
-        price_unit = sum(objects.mapped("purchase_unit_price")) / len(objects)
+        purchase_price = sum(objects.mapped("purchase_price"))
+        price_unit = purchase_price / origin_qty
         worksheet.write(n, m, price_unit, result_three_decimal)
         m += 1
-        purchase_price = sum(objects.mapped("purchase_price"))
         worksheet.write(n, m, purchase_price, result_two_decimal)
         m += 1
         worksheet.write(n, m, "", result_int_format)
