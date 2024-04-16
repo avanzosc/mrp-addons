@@ -7,6 +7,7 @@
             <field name="code" position="after">
                 <field name="quartering" invisible="1"/>
                 <field name="no_duplicate_lines"/>
+                <field name="no_produce_product"/>
             </field>
             <page name="components" position="attributes">
                 <attribute name="string">Inputs</attribute>

@@ -110,10 +110,12 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                 categ_average_weight = (
                     categ_qty_done / categ_unit
                 ) if categ_unit else 0
-                categt_applied_price = round(
-                    sum(categ_lines.mapped("standard_price")),3
-                ) / len(categ_lines)
                 categ_amount = sum(categ_lines.mapped("amount"))
+                categt_applied_price = round(
+                    (
+                        categ_amount / categ_qty_done
+                    ) if categ_qty_done != 0 else 0,3
+                )
                 for product in categ_lines:
                     if product.product_id not in products:
                         n += 1
@@ -130,15 +132,19 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                             product_lines.mapped("qty_done")
                         )
                         product_percentage = (
-                            product_qty_done * 100 / categ_qty_done
+                            (
+                                product_qty_done * 100 / categ_qty_done
+                            ) if categ_qty_done else 0
                         )
                         product_average_weight = (
                             product_qty_done / product_unit
                         ) if product_unit else 0
-                        product_applied_price = sum(product_lines.mapped(
-                            "standard_price"
-                        )) / len(product_lines)
                         product_amount = sum(product_lines.mapped("amount"))
+                        product_applied_price = (
+                            (
+                                product_amount / product_qty_done
+                            ) if product_qty_done else 0
+                        )
                         worksheet.write(n, m, round(
                             product_percentage,2
                         ), two_decimal_format)
