@@ -11,6 +11,7 @@ class ProductProduct(models.Model):
         string="Is Manufacturable",
         compute="_compute_manufacturable",
         store=True,
+        compute_sudo=True,
     )
 
     @api.depends("route_ids", "bom_ids")
