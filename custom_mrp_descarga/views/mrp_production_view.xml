@@ -27,6 +27,7 @@
                 <separator/>
             </filter>
             <filter name="status" position="after">
+                <filter string="BoM Category" name="groupby_category" domain="[]" context="{'group_by': 'bom_category_id'}"/>
                 <filter string="Batch" name="groupby_batch" domain="[]" context="{'group_by': 'batch_id'}"/>
                 <filter string="Saca" name="groupby_saca" domain="[]" context="{'group_by': 'saca_id'}"/>
                 <filter string="Lot" name="groupby_lot" domain="[]" context="{'group_by': 'lot_producing_id'}"/>
@@ -52,7 +53,7 @@
                 <field name="bom_id"/>
             </field>
             <field name="qty_producing" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', '=', 'cancel')]}</attribute>
+                <attribute name="attrs">{'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
             </field>
             <field name="confirm_cancel" position="after">
                 <field name="chick_production" invisible="1"/>

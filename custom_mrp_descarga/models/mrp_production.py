@@ -222,8 +222,18 @@ class MrpProduction(models.Model):
         string="Rto. %",
         compute="_compute_rto_percentage",
         store=True)
+    bom_category_id = fields.Many2one(
+        string="Category",
+        related="bom_id.category_id",
+        store=True
+    )
+    no_produce_product = fields.Boolean(
+        string="Don't produce the header product",
+        related="bom_id.no_produce_product",
+        store=True
+    )
 
-    @api.depends("move_line_ids", "move_line_ids.percentage")
+    @api.depends("move_line_ids.percentage")
     def _compute_rto_percentage(self):
         for line in self:
             rto_percentage = 0
@@ -232,7 +242,7 @@ class MrpProduction(models.Model):
                     line.move_line_ids.mapped("percentage"))
             line.rto_percentage = rto_percentage
 
-    @api.depends("move_line_ids", "move_line_ids.product_id",
+    @api.depends("move_line_ids.product_id",
                  "move_line_ids.product_id.chicken_seized",
                  "move_line_ids.unit", "quartering")
     def _compute_seized_units(self):
@@ -246,7 +256,7 @@ class MrpProduction(models.Model):
                         lambda c: c.product_id.chicken_seized).mapped("unit"))
             line.seized_units = seized_units
 
-    @api.depends("move_line_ids", "move_line_ids.product_id",
+    @api.depends("move_line_ids.product_id",
                  "move_line_ids.product_id.asphyxiated", "quartering",
                  "move_line_ids.unit")
     def _compute_asphyxiation_units(self):
@@ -273,8 +283,7 @@ class MrpProduction(models.Model):
             production.qty_difference = (
                 production.consume_qty - production.produced_qty)
 
-    @api.depends("finished_move_line_ids", "finished_move_line_ids.qty_done",
-                 "finished_move_line_ids.product_uom_qty", "product_uom_qty")
+    @api.depends("finished_move_line_ids.qty_done")
     def _compute_produced_qty(self):
         for production in self:
             produced_qty = 0
@@ -284,7 +293,7 @@ class MrpProduction(models.Model):
                 ).mapped("qty_done"))
             production.produced_qty = produced_qty
 
-    @api.depends("move_line_ids", "move_line_ids.qty_done", "origin_qty")
+    @api.depends("move_line_ids.qty_done", "origin_qty")
     def _compute_gross_yield(self):
         for line in self:
             gross_yield = 0
@@ -293,7 +302,7 @@ class MrpProduction(models.Model):
                     line.move_line_ids.mapped("qty_done")) / line.origin_qty
             line.gross_yield = gross_yield
 
-    @api.depends("move_line_ids", "move_line_ids.unit")
+    @api.depends("move_line_ids.unit")
     def _compute_total_unit(self):
         for line in self:
             total_unit = 0
@@ -301,7 +310,7 @@ class MrpProduction(models.Model):
                 total_unit = sum(line.move_line_ids.mapped("unit"))
             line.total_unit = total_unit
 
-    @api.depends("download_unit", "move_line_ids", "move_line_ids.unit")
+    @api.depends("download_unit", "move_line_ids.unit")
     def _compute_unit_difference(self):
         for line in self:
             unit_difference = line.download_unit
@@ -310,7 +319,7 @@ class MrpProduction(models.Model):
                         line.move_line_ids.mapped("unit")) - line.download_unit
             line.unit_difference = unit_difference
 
-    @api.depends("origin_qty", "move_line_ids", "move_line_ids.unit")
+    @api.depends("origin_qty", "move_line_ids.unit")
     def _compute_real_average_weight(self):
         for line in self:
             real_average_weight = 0
@@ -347,7 +356,7 @@ class MrpProduction(models.Model):
         for line in self:
             line.birth_difference = line.product_qty - line.expected_birth
 
-    @api.depends("batch_id", "batch_id.birth_rate_ids", "product_qty",
+    @api.depends("batch_id.birth_rate_ids", "product_qty",
                  "production_date")
     def _compute_expected_birth(self):
         for line in self:
@@ -524,16 +533,16 @@ class MrpProduction(models.Model):
                     values.update({
                         "batch_id": self.batch_id.id})
                 line.write(values)
-        if result is True and self.quartering:
-            self.action_delete_quartering_line()
+        if result is True and self.no_produce_product:
+            self.action_delete_producing_line()
         if self.picking_type_id.chick_production:
             for line in self.move_line_ids:
                 line.onchange_standard_price()
         return result
 
-    def action_delete_quartering_line(self):
+    def action_delete_producing_line(self):
         for line in self:
-            if line.quartering:
+            if line.no_produce_product:
                 for move in line.move_finished_ids.filtered(
                     lambda c: c.product_id == (
                         line.product_id)):

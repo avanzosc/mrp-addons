@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-21 13:26+0000\n"
-"PO-Revision-Date: 2024-03-21 13:26+0000\n"
+"POT-Creation-Date: 2024-04-11 10:14+0000\n"
+"PO-Revision-Date: 2024-04-11 10:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "% vivo"
@@ -94,10 +95,20 @@ msgid "Birth Week"
 msgstr "Semana de nacimiento"
 
 #. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "BoM Category"
+msgstr "Categoría LdM"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__breeding_id
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
 msgid "Breeding"
 msgstr "Crianza"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__bom_category_id
+msgid "Category"
+msgstr "Categoría"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__channel_temperature
@@ -151,6 +162,7 @@ msgstr "Coste"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Coste"
 msgstr ""
@@ -162,6 +174,7 @@ msgstr "Contador OF"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Código"
 msgstr ""
@@ -172,6 +185,7 @@ msgid "Deconstruction"
 msgstr "Deconstrucción"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Definición"
@@ -237,6 +251,12 @@ msgid "Display Name"
 msgstr "Mostrar nombre"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__no_produce_product
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__no_produce_product
+msgid "Don't produce the header product"
+msgstr "No producir producto de cabecera"
+
+#. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_view_search
 msgid "Done bigger than 0"
 msgstr "Hecho mayor que 0"
@@ -258,6 +278,7 @@ msgid "Emtying Hatchers"
 msgstr "Vaciar nacedoras"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Envases"
@@ -324,6 +345,7 @@ msgstr "Identificador"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Importe"
 msgstr ""
@@ -355,6 +377,7 @@ msgid "Inventory Line"
 msgstr "Línea inventario"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "KGs"
@@ -510,6 +533,7 @@ msgstr "Rendimiento"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Peso medio"
 msgstr ""
@@ -621,6 +645,7 @@ msgid "Resumen de mantanza XLSX"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Resumen de matanza"
@@ -791,6 +816,7 @@ msgid "Total amount"
 msgstr "Importe total"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Unidades"
