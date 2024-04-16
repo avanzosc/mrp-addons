@@ -49,13 +49,14 @@ class StockMoveLine(models.Model):
                         sequence = ids.index(line.id) + 1
             line.sequence = sequence
 
-    @api.depends("production_id", "production_id.consume_qty", "qty_done")
+    @api.depends("production_id.consume_qty", "qty_done")
     def _compute_performance(self):
         for line in self:
-            line.performance = 0
+            performance = 0
             if line.production_id and line.production_id.consume_qty != 0:
-                line.performance = (
+                performance = (
                     line.qty_done * 100) / line.production_id.consume_qty
+            line.performance = performance
 
     @api.onchange("unit")
     def onchange_unit(self):
@@ -161,7 +162,7 @@ class StockMoveLine(models.Model):
     def read_group(self, domain, fields, groupby, offset=0, limit=None,
                    orderby=False, lazy=True):
         result = super(StockMoveLine, self).read_group(
-            domain, fields, groupby,offset=offset, limit=limit,
+            domain, fields, groupby, offset=offset, limit=limit,
             orderby=orderby, lazy=lazy
         )
         for line in result:

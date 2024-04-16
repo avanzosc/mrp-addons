@@ -152,7 +152,7 @@ class MrpProduction(models.Model):
         store=True)
     qty_difference = fields.Float(
         string="Difference",
-        compute="_compute_qty_dofference",
+        compute="_compute_qty_difference",
         store=True)
     quartering = fields.Boolean(
         string="Quartering")
@@ -278,7 +278,7 @@ class MrpProduction(models.Model):
             line.clasified_ids = [(6, 0, classified.ids)]
 
     @api.depends("produced_qty", "consume_qty")
-    def _compute_qty_dofference(self):
+    def _compute_qty_difference(self):
         for production in self:
             production.qty_difference = (
                 production.consume_qty - production.produced_qty)
@@ -516,7 +516,9 @@ class MrpProduction(models.Model):
         if self.move_finished_ids:
             self.move_finished_ids._do_unreserve()
         result = super(MrpProduction, self).button_mark_done()
-        if result is not True and "res_model" in result and result["res_model"] == "mrp.consumption.warning" and self.no_duplicate_lines:
+        if result is not True and "res_model" in result and result[
+            "res_model"
+        ] == "mrp.consumption.warning" and self.no_duplicate_lines:
             entry_qty = sum(self.move_line_ids.mapped("qty_done"))
             out_qty = sum(self.finished_move_line_ids.mapped("qty_done"))
             for move in self.move_raw_ids:
@@ -597,14 +599,20 @@ class MrpProduction(models.Model):
             return start_date + timedelta(days=(7-weekday))
 
     @api.model
-    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
-        result = super(MrpProduction, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
+    def read_group(self, domain, fields, groupby, offset=0, limit=None,
+                   orderby=False, lazy=True):
+        result = super(MrpProduction, self).read_group(
+            domain, fields, groupby, offset=offset, limit=limit,
+            orderby=orderby, lazy=lazy
+        )
         for line in result:
             if '__domain' in line:
                 lines = self.search(line["__domain"])
                 average_weight = sum(lines.mapped("average_weight"))/len(lines)
                 rto_percentage = sum(lines.mapped("rto_percentage"))/len(lines)
-                purchase_unit_price = sum(lines.mapped("purchase_unit_price"))/len(lines)
+                purchase_unit_price = sum(
+                    lines.mapped("purchase_unit_price")
+                )/len(lines)
                 line["average_weight"] = average_weight
                 line["rto_percentage"] = rto_percentage
                 line["purchase_unit_price"] = purchase_unit_price
