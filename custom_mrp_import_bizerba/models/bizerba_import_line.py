@@ -8,7 +8,10 @@ class BizerbaImportLine(models.Model):
     _inherit = "base.import.line"
     _description = "Wizard lines to import Bizerba lines"
 
-    production_id = fields.Many2one(string="Production", comodel_name="mrp.production")
+    production_id = fields.Many2one(
+        string="Production", 
+        comodel_name="mrp.production"
+    )
     action = fields.Selection(
         string="Action",
         selection=[
@@ -66,7 +69,6 @@ class BizerbaImportLine(models.Model):
 
     def _action_validate(self):
         update_values = super()._action_validate()
-        self.production_id.action_confirm()
         log_infos = []
         product, log_info_product = self._check_product()
         if log_info_product:
@@ -95,13 +97,23 @@ class BizerbaImportLine(models.Model):
                     lambda c: c.product_id == self.line_product_id
                 )
             if move_line:
+                same_product_lines = (
+                    self.production_id.import_line_ids.filtered(
+                        lambda c: c.line_product_id == self.line_product_id
+                    )
+                )
                 move_line[:1].write(
                         {
-                            "container": move_line[:1].container + 1,
-                            "qty_done": move_line[:1].qty_done + self.line_product_qty,
+                            "container": len(same_product_lines),
+                            "qty_done": sum(same_product_lines.mapped("line_product_qty")),
                             "product_uom_id": self.line_uom_id.id,
                         }
                     )
+                for line in same_product_lines:
+                    line.write({
+                        "action": "nothing",
+                        "state": "done"
+                    })
                 move_line[:1].onchange_container()
                 move_line[:1].onchange_unit()
             else:
