@@ -119,10 +119,12 @@ class StockMoveLine(models.Model):
                  "move_id.byproduct_id.expense_kg")
     def _compute_expense_kg(self):
         for line in self:
+            expense_kg = 0
             if line.move_id and line.move_id.bom_line_id:
-                line.expense_kg = line.move_id.bom_line_id.expense_kg
-            if line.move_id and line.move_id.byproduct_id:
-                line.expense_kg = line.move_id.byproduct_id.expense_kg
+                expense_kg = line.move_id.bom_line_id.expense_kg
+            elif line.move_id and line.move_id.byproduct_id:
+                expense_kg = line.move_id.byproduct_id.expense_kg
+            line.expense_kg = expense_kg
 
     @api.depends("production_id.purchase_unit_price",
                  "production_id.average_cost",
