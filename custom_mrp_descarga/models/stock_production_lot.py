@@ -16,7 +16,7 @@ class StockProductionLot(models.Model):
                  "move_line_ids.state")
     def _compute_average_price(self):
         for line in self:
-            line.average_price = 0
+            average_price = 0
             clasified = line.move_line_ids.filtered(
                 lambda c: c.state == "done" and (
                     c.location_dest_id.usage == "internal"))
@@ -26,11 +26,12 @@ class StockProductionLot(models.Model):
                 amount_total = sum(clasified.mapped("amount"))
                 qty_done = sum(clasified.mapped("qty_done"))
                 if qty_done != 0:
-                    line.average_price = amount_total / qty_done
-                    if line.company_id.paasa:
-                        for record in quartering:
-                            if record.standard_price != line.average_price:
-                                record.standard_price = line.average_price
+                    average_price = amount_total / qty_done
+            line.average_price = average_price
+            if line.company_id.paasa and average_price:
+                for record in quartering:
+                    if record.standard_price != line.average_price:
+                        record.standard_price = line.average_price
 
     def action_view_move_lines(self):
         context = self.env.context.copy()
