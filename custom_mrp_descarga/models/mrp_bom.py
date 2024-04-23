@@ -22,11 +22,12 @@ class MrpBom(models.Model):
     @api.depends("category_id")
     def _compute_quartering(self):
         for line in self:
-            line.quartering = False
+            quartering = False
             try:
                 quartering = (
                     self.env.ref("custom_mrp_descarga.quartering_category"))
                 if line.category_id == quartering:
-                    line.quartering = True
+                    quartering = True
             except Exception:
-                line.quartering = False
+                quartering = False
+            line.quartering = quartering
