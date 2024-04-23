@@ -18,8 +18,7 @@ class MrpProduction(models.Model):
         string="Saca",
         comodel_name="saca",
         related="saca_line_id.saca_id",
-        store=True,
-        copy=False)
+        store=True)
     origin_qty = fields.Float(
         string="Origin Qty",
         related="saca_line_id.net_origin",
@@ -225,13 +224,11 @@ class MrpProduction(models.Model):
     bom_category_id = fields.Many2one(
         string="Category",
         related="bom_id.category_id",
-        store=True
-    )
+        store=True)
     no_produce_product = fields.Boolean(
         string="Don't produce the header product",
         related="bom_id.no_produce_product",
-        store=True
-    )
+        store=True)
 
     @api.depends("move_line_ids.percentage")
     def _compute_rto_percentage(self):

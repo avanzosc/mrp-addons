@@ -205,9 +205,9 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                     n, m, categ_qty_done / origin_qty * 100, result_two_decimal
                 )
                 sum_live_percentage += (categ_qty_done / origin_qty * 100)
-        different_date_planned = objects.mapped("date_planned_start")
+        different_date_planned = objects.mapped("saca_date")
         different_date_planned = list(
-            set([d.date() for d in different_date_planned])
+            set([d for d in different_date_planned])
         )
         n += 1
         m = 0
