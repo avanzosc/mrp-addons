@@ -22,7 +22,7 @@ class MrpProduction(models.Model):
         inverse_name="production_id",
         domain=lambda self: [
             ("location_id", "in", self.production_location_id.ids),
-            ("location_dest_id", "in", self.location_dest_id.ids)]
+            ("location_dest_id", "in", self.location_dest_id.ids)],
         )
 
     @api.depends('product_id', 'company_id', "is_deconstruction")
@@ -44,7 +44,6 @@ class MrpProduction(models.Model):
                         move.location_dest_id = line.location_src_id.id
         return res
 
-    @api.constrains("bom_id", "is_deconstruction")
     def _check_is_deconstruction(self):
         for production in self:
             if production.bom_id and (
