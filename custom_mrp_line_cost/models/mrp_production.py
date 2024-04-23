@@ -229,30 +229,31 @@ class MrpProduction(models.Model):
             lots = []
             if production.is_deconstruction and (
                     production.move_line_ids):
-                dif = production.cost - production.entry_total_amount
-                if dif != 0:
-                    for line in production.move_line_ids:
-                        line.onchange_applied_price()
-                        if not line.move_id:
-                            line.move_id = production.move_raw_ids.filtered(
-                                lambda c: c.product_id == line.product_id).id
-                        if line.lot_id and line.lot_id not in lots:
-                            lots.append(line.lot_id)
-                            qty.append(
-                                sum(production.move_line_ids.filtered(
-                                    lambda c: c.lot_id == line.lot_id).mapped(
-                                        "qty_done")))
-                    i = qty.index(max(qty))
-                    max_lot = lots[i]
-                    max_qty = qty[i]
-                    if max_lot and max_qty:
-                        lot_lines = production.move_line_ids.filtered(
-                            lambda c: c.lot_id == max_lot)
-                        amount = dif + sum(lot_lines.mapped("amount"))
-                        price = amount / max_qty
-                        for max_line in lot_lines:
-                            max_line.applied_price = price
-                            max_line.onchange_applied_price()
+                for line in production.move_line_ids:
+                    line.onchange_applied_price()
+                    if not line.move_id:
+                        line.move_id = production.move_raw_ids.filtered(
+                            lambda c: c.product_id == line.product_id).id
+                    if line.lot_id and line.lot_id not in lots:
+                        lots.append(line.lot_id)
+                        qty.append(
+                            sum(production.move_line_ids.filtered(
+                                lambda c: c.lot_id == line.lot_id).mapped(
+                                    "qty_done")))
+                i = qty.index(max(qty))
+                max_lot = lots[i]
+                max_qty = qty[i]
+                if max_lot and max_qty:
+                    lot_lines = production.move_line_ids.filtered(
+                        lambda c: c.lot_id == max_lot)
+                    amount = (
+                        production.cost - production.entry_total_amount
+                    ) + sum(lot_lines.mapped("amount"))
+                    price = amount / max_qty
+                    for max_line in lot_lines:
+                        max_line.applied_price = price
+                        max_line.onchange_applied_price()
+                production._compute_entry_total_amount()
             elif not production.is_deconstruction and (
                 production.average_cost) and (
                     production.finished_move_line_ids):
