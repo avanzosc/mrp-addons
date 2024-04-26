@@ -83,8 +83,8 @@ class StockMoveLine(models.Model):
                 lambda c: c.product_id == self.product_id and (
                     c.location_id == self.location_id) and (
                         c.location_dest_id == self.location_dest_id))
-            if move and len(move) == 1:
-                self.move_id = move.id
+            if move:
+                self.move_id = move[:1].id
 
     @api.onchange("lot_id")
     def _onchange_lot_id(self):
