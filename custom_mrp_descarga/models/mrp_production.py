@@ -524,14 +524,10 @@ class MrpProduction(models.Model):
                 move.product_uom_qty = out_qty
         if self.finished_move_line_ids:
             for line in self.finished_move_line_ids:
-                values = {
-                    "location_id": line.move_id.location_id.id,
-                    "location_dest_id": line.move_id.location_dest_id.id
-                    }
+                line.onchange_product_id()
                 if self.batch_id:
-                    values.update({
-                        "batch_id": self.batch_id.id})
-                line.write(values)
+                    values = {"batch_id": self.batch_id.id}
+                    line.write(values)
         if result is True and self.no_produce_product:
             self.action_delete_producing_line()
         if self.picking_type_id.chick_production:
