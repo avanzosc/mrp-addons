@@ -234,21 +234,21 @@
                     <field name="finished_move_line_ids" context="{'default_production_id': active_id, 'default_company_id': company_id, 'default_location_id': production_location_id, 'default_location_dest_id': location_dest_id}" attrs="{'readonly': [('state', 'in', ('draft', 'cancel'))]}">
                         <tree editable="bottom" limit="300">
                             <field name="state" invisible="1"/>
-                            <field name="production_id" invisible="1"/>
-                            <field name="move_id" invisible="1"/>
+                            <field name="production_id" invisible="1" force_save="1"/>
+                            <field name="move_id" invisible="1" force_save="1"/>
                             <field name="company_id" invisible="1" groups="base.group_multi_company" force_save="1"/>
                             <field name="sequence" string=""/>
-                            <field name="product_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" options="{'no_create': True}" required="1"/>
-                            <field name="product_uom_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                            <field name="product_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" options="{'no_create': True}" required="1" force_save="1"/>
+                            <field name="product_uom_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
                             <field name="product_uom_category_id" invisible="1"/>
-                            <field name="lot_id" domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                            <field name="lot_id" domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]" context="{'default_product_id': product_id, 'default_company_id': company_id}" force_save="1"/>
                             <field name="expense_kg" optional="hide"/>
                             <field name="pallet_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
                             <field name="pallet" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" sum="Total Pallet"/>
                             <field name="container" attrs="{'readonly': [('state', '=', 'cancel')]}" sum="Total Container"/>
                             <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                            <field name="location_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                            <field name="location_dest_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                            <field name="location_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
+                            <field name="location_dest_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
                             <field name="qty_done" sum="Total Done"/>
                             <field name="performance" attrs="{'column_invisible': [('parent.quartering', '=', False)]}" sum="Total Performance"/>
                             <field name="base_price" optional="show"/>
