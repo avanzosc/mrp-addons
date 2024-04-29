@@ -33,9 +33,9 @@ class MrpBom(models.Model):
                     found = True
                     break
             if not found:
-                result.append(
+                result.append((
                     bom.id, "{}: {}".format(
                         bom.code, bom.product_tmpl_id.display_name
-                    )
+                    ))
                 )
         return result
