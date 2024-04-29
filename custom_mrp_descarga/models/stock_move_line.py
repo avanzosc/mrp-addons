@@ -157,19 +157,3 @@ class StockMoveLine(models.Model):
                     line.move_id.state = "done"
                     line.state = "done"
         return result
-
-    @api.model
-    def read_group(self, domain, fields, groupby, offset=0, limit=None,
-                   orderby=False, lazy=True):
-        result = super(StockMoveLine, self).read_group(
-            domain, fields, groupby, offset=offset, limit=limit,
-            orderby=orderby, lazy=lazy
-        )
-        for line in result:
-            if '__domain' in line:
-                lines = self.search(line["__domain"])
-                weight = sum(lines.mapped("weight"))/len(lines)
-                standard_price = sum(lines.mapped("standard_price"))/len(lines)
-                line["weight"] = weight
-                line["standard_price"] = standard_price
-        return result
