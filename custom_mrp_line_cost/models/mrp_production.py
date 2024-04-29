@@ -233,7 +233,7 @@ class MrpProduction(models.Model):
                     line.onchange_applied_price()
                     if not line.move_id:
                         line.move_id = production.move_raw_ids.filtered(
-                            lambda c: c.product_id == line.product_id).id
+                            lambda c: c.product_id == line.product_id)[:1].id
                     if line.lot_id and line.lot_id not in lots:
                         lots.append(line.lot_id)
                         qty.append(
