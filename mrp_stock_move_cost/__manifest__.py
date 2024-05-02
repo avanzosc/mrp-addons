@@ -4,7 +4,7 @@
     "name": "Mrp Stock Move Cost",
     "version": "16.0.1.1.0",
     "category": "Manufacturing/Manufacturing",
-    "website": "https://avanzosc.es/",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "author": "AvanzOSC",
     "license": "AGPL-3",
     "depends": [
