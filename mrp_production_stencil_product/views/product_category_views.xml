@@ -7,7 +7,7 @@
              <group name="first" col="2" position="after">
                  <group name="stencil" col="2">
                      <separator string="Stencil" />
-                     <field name="stencil_category"/>
+                     <field name="stencil_category" />
                  </group>
              </group>
         </field>
@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="product.product_category_list_view" />
         <field name="arch" type="xml">
               <field name="display_name" position="after">
-                  <field name="stencil_category" optional="show"/>
+                  <field name="stencil_category" optional="show" />
               </field>
         </field>
     </record>
@@ -28,13 +28,23 @@
         <field name="inherit_id" ref="product.product_category_search_view" />
         <field name="arch" type="xml">
               <field name="parent_id" position="after">
-                  <filter string="Stencil category" domain="[('stencil_category', '=', True)]"
-                        name="filter-is_stencil_category"/>
-                  <filter string="NO Stencil category" domain="[('stencil_category', '=', False)]"
-                        name="filter-is_not_stencil_category"/>
+                  <filter
+          string="Stencil category"
+          domain="[('stencil_category', '=', True)]"
+          name="filter-is_stencil_category"
+        />
+                  <filter
+          string="NO Stencil category"
+          domain="[('stencil_category', '=', False)]"
+          name="filter-is_not_stencil_category"
+        />
                   <group expand="0" string="Group By">
-                    <filter string="Stencil category" name="filter-stencil_category" domain="[]"
-                        context="{'group_by': 'stencil_category'}"/>
+                    <filter
+            string="Stencil category"
+            name="filter-stencil_category"
+            domain="[]"
+            context="{'group_by': 'stencil_category'}"
+          />
                   </group>
               </field>
         </field>

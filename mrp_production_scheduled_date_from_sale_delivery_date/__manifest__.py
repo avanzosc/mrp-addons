@@ -10,7 +10,6 @@
     "depends": [
         "mrp_sale_info",
     ],
-    "data": [
-    ],
+    "data": [],
     "installable": True,
 }

@@ -7,10 +7,14 @@ class MrpRoutingWorkcenter(models.Model):
     _inherit = "mrp.routing.workcenter"
 
     number_insertions = fields.Integer(
-        string="Number of insertions", default=0, copy=False,
+        string="Number of insertions",
+        default=0,
+        copy=False,
     )
     insertion_time = fields.Float(
-        string="Insertion time", default=0, copy=False,
+        string="Insertion time",
+        default=0,
+        copy=False,
     )
 
     @api.onchange("number_insertions", "insertion_time")
