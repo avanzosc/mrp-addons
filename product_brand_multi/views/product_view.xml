@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="product_brand_tree_view">
+            <field name="name">product.brand.tree</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <tree editable="top" string="Product brand">
+                    <field name="code" />
+                    <field name="marking" />
+                    <field name="description" />
+                    <field name="partner_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_product_brand_link_form">
+            <field name="name">product.product.brand.link.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <page name="sales" position="after">
+                    <page name="brands" string="Brands">
+                        <field name="brand_ids" nolabel="1"/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_supplierinfo_form_view_inh_product_brand">
+            <field name="name">product.supplierinfo.form.view.inh.product.brand</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
+            <field name="arch" type="xml">
+                 <field name="product_uom" position="after">
+                    <field name="product_brand_id"
+                        domain="[('product_tmpl_id', '=', product_tmpl_id)]"/>
+                 </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_supplierinfo_tree_view_inh_product_brand">
+            <field name="name">product.supplierinfo.tree.view.inh.product.brand</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="jvv_custom.product_supplierinfo_tree_view_view_inh_jvv" />
+            <field name="arch" type="xml">
+                 <field name="product_tmpl_id" position="after">
+                    <field name="product_brand_id"/>
+                 </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_product_supplierinfo_search_inh_product_brand">
+            <field name="name">view.product.supplierinfo.search.inh.product.brand</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product_by_supplier.view_product_supplierinfo_search" />
+            <field name="arch" type="xml">
+                 <field name="product_code" position="after">
+                    <field name="product_brand_id"/>
+                    <field name="certification_id" string="Calificación proveedor"/>
+                 </field>
+                 <filter name="supplier_code" position="after">
+                    <filter string="Código brand" name="product-brand-code" icon="terp-stock_symbol-selection"
+                        domain="[]" context="{'group_by' : 'product_brand_id'}"/>
+                    <filter string="Calificación proveedor" name="prov-certif" icon="terp-stock_symbol-selection"
+                        domain="[]" context="{'group_by' : 'certification_id'}"/>
+                 </filter>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_supplierinfo_search_view_inh_product_brand">
+            <field name="name">product.supplierinfo.search.view.inh.product.brand</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product_supplierinfo_for_customer.product_supplierinfo_search_view" />
+            <field name="arch" type="xml">
+                 <field name="product_tmpl_id" position="after">
+                    <field name="product_brand_id"/>
+                    <field name="certification_id" string="Calificación proveedor"/>
+                 </field>
+                 <filter string="Type" position="after">
+                    <filter string="Código brand" name="product-brand-code" icon="terp-stock_symbol-selection"
+                        domain="[]" context="{'group_by' : 'product_brand_id'}"/>
+                    <filter string="Calificación proveedor" name="prov-certif" icon="terp-stock_symbol-selection"
+                        domain="[]" context="{'group_by' : 'certification_id'}"/>
+                 </filter>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_supplierinfo_search_view2_inh_product_brand">
+            <field name="name">product.supplierinfo.search.view2.inh.product.brand</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="jvv_custom.product_supplierinfo_supplier_search_view" />
+            <field name="arch" type="xml">
+                 <field name="prefix_code" position="after">
+                    <field name="product_brand_id"/>
+                    <field name="certification_id" string="Calificación proveedor"/>
+                 </field>
+                 <filter string="Type" position="after">
+                    <filter string="Código brand" name="product-brand-code" icon="terp-stock_symbol-selection"
+                        domain="[]" context="{'group_by' : 'product_brand_id'}"/>
+                    <filter string="Calificación proveedor" name="prov-certif" icon="terp-stock_symbol-selection"
+                        domain="[]" context="{'group_by' : 'certification_id'}"/>
+                 </filter>
+            </field>
+        </record>
+
+    </data>
+</openerp>

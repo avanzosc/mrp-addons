@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+    <record id="purchase_order_line_tree_inh_product_brand_multi" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree.inh.product.brand.multi</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="brand_supplier" />
+                <field name="product_brand_code" />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_order_line_search_inh_product_brand_multi" model="ir.ui.view">
+        <field name="name">purchase.order.line.search.inh.product.brand.multi</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_search" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="brand_supplier" />
+                <field name="product_brand_code" />
+            </field>
+            <filter name="groupby_product" position="after">
+                <filter name="groupby_product_brand_supplier" string="Fabricator"
+                    icon="terp-accessories-archiver" domain="[]" context="{'group_by' : 'brand_supplier'}"/>
+                <filter name="groupby_product_brand_code" string="Product brand code"
+                    icon="terp-accessories-archiver" domain="[]" context="{'group_by' : 'product_brand_code'}"/>
+            </filter>
+        </field>
+    </record>
+</data>
+</openerp>

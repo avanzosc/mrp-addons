@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+    <record id="purchase_order_form_view_inh_product_brand_code" model="ir.ui.view">
+        <field name="name">purchase.order.form.view.inh.product.brand.code</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="brand_supplier" />
+                <field name="product_brand_code" />
+            </xpath>
+        </field>
+    </record>
+</data>
+</openerp>

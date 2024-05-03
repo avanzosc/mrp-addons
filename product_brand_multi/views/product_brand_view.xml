@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="product_brand_tree_view" model="ir.ui.view">
+            <field name="name">product.brand.tree.view</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <tree string="Brands">
+                    <field name="product_tmpl_id" />
+                    <field name="product_internal_reference" />
+                    <field name="code" />
+                    <field name="marking" />
+                    <field name="description" />
+                    <field name="partner_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_brand_search_view" model="ir.ui.view">
+            <field name="name">product.brand.search.view</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <search string="Search brands">
+                    <field name="product_tmpl_id" />
+                    <field name="product_internal_reference" />
+                    <field name="code" />
+                    <field name="marking" />
+                    <field name="description" />
+                    <field name="partner_id" />
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Product template" name="group_product_template"
+                                domain="[]" context="{'group_by':'product_tmpl_id'}"/>
+                        <filter string="Product internal reference" name="group_product_internal_reference"
+                                domain="[]" context="{'group_by':'product_internal_reference'}"/>
+                        <filter string="Partner" name="group_partner"
+                                domain="[]" context="{'group_by':'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="product_brand_form_view" model="ir.ui.view">
+            <field name="name">product.brand.form.view</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <form string="Brand">
+                    <sheet>
+                        <label string="Product template" />
+                        <h1>
+                            <field name="product_tmpl_id" required="1" class="oe_inline" />
+                        </h1>
+                        <group name="head">
+                            <group>
+                                <field name="code" />
+                                <field name="description" />
+                            </group>
+                            <group>
+                                <field name="marking" />
+                                <field name="partner_id" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_product_brand_view" model="ir.actions.act_window">
+            <field name="name">Brands</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="product_brand_option_view" name="Brands"
+                  action="action_product_brand_view" 
+                  parent="purchase.menu_procurement_management_product" />
+    </data>
+</openerp>
