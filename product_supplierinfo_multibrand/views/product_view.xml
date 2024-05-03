@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
     <data>
         <record model="ir.ui.view" id="supplier_brand_tree_view">
@@ -6,10 +6,10 @@
             <field name="model">supplier.brand</field>
             <field name="arch" type="xml">
                 <tree string="Supplier brand" editable="top">
-                    <field name="supplier_brand_name"/>
-                    <field name="supplier_brand_code"/>
-                    <field name="supplier_id"/>
-                    <field name="brand_id"/>
+                    <field name="supplier_brand_name" />
+                    <field name="supplier_brand_code" />
+                    <field name="supplier_id" />
+                    <field name="brand_id" />
                 </tree>
             </field>
         </record>
@@ -20,10 +20,10 @@
             <field name="arch" type="xml">
                 <form string="Supplier brand" editable="top">
                     <group>
-                        <field name="supplier_brand_name" string="Name"/>
-                        <field name="supplier_brand_code" string="Code"/>
-                        <field name="supplier_id" string="Supplier"/>
-                        <field name="brand_id" string="Brand"/>
+                        <field name="supplier_brand_name" string="Name" />
+                        <field name="supplier_brand_code" string="Code" />
+                        <field name="supplier_id" string="Supplier" />
+                        <field name="brand_id" string="Brand" />
                     </group>
                 </form>
             </field>
@@ -37,16 +37,21 @@
             <field name="arch" type="xml">
                 <page name="sales" position="after">
                     <page name="supplier_brands" string="Supplier Brands">
-                        <field name="possible_suppliers" invisible="1"/>
-                        <field name="possible_brands" invisible="1"/>
+                        <field name="possible_suppliers" invisible="1" />
+                        <field name="possible_brands" invisible="1" />
                         <field name="supplier_brand" nolabel="1">
                             <tree string="Supplier brand" editable="bottom">
-                                <field name="supplier_id"
-                                       domain="[('id', 'in', parent.possible_suppliers[0][2])]"/>
-                                <field name="supplier_brand_name"/>
+                                <field
+                  name="supplier_id"
+                  domain="[('id', 'in', parent.possible_suppliers[0][2])]"
+                />
+                                <field name="supplier_brand_name" />
                                 <field name="supplier_brand_code" />
-                                <field name="brand_id" string="Brand"
-                                       domain="[('id', 'in', parent.possible_brands[0][2])]"/>
+                                <field
+                  name="brand_id"
+                  string="Brand"
+                  domain="[('id', 'in', parent.possible_brands[0][2])]"
+                />
                             </tree>
                         </field>
                     </page>

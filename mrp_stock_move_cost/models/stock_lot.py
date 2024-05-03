@@ -7,9 +7,8 @@ class StockLot(models.Model):
     _inherit = "stock.lot"
 
     def write(self, vals):
-        result = super(StockLot, self).write(vals)
-        if ("from_production" not in self.env.context and
-                "purchase_price" in vals):
+        result = super().write(vals)
+        if "from_production" not in self.env.context and "purchase_price" in vals:
             for lot in self:
                 lot._update_stock_move_lines()
         return result
@@ -25,5 +24,8 @@ class StockLot(models.Model):
         if productions:
             for production in productions:
                 production.write(
-                    {"price_unit_cost" : self.purchase_price,
-                     "cost": self.purchase_price * production.qty_producing})
+                    {
+                        "price_unit_cost": self.purchase_price,
+                        "cost": self.purchase_price * production.qty_producing,
+                    }
+                )

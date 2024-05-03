@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
     <data>
         <record id="supplier_brand_tree_view" model="ir.ui.view">
@@ -27,16 +27,32 @@
                     <field name="supplier_brand_name" />
                     <field name="supplier_brand_code" />
                     <field name="brand_id" />
-                    <separator/>
+                    <separator />
                     <group expand="1" string="Group By">
-                        <filter string="Product template" name="group_product_template"
-                                domain="[]" context="{'group_by':'product_tmpl_id'}"/>
-                        <filter string="Product internal reference" name="group_product_internal_reference"
-                                domain="[]" context="{'group_by':'product_internal_reference'}"/>
-                        <filter string="Supplier" name="group_supplier"
-                                domain="[]" context="{'group_by':'supplier_id'}"/>
-                        <filter string="Brand" name="group_brand"
-                                domain="[]" context="{'group_by':'brand_id'}"/>
+                        <filter
+              string="Product template"
+              name="group_product_template"
+              domain="[]"
+              context="{'group_by':'product_tmpl_id'}"
+            />
+                        <filter
+              string="Product internal reference"
+              name="group_product_internal_reference"
+              domain="[]"
+              context="{'group_by':'product_internal_reference'}"
+            />
+                        <filter
+              string="Supplier"
+              name="group_supplier"
+              domain="[]"
+              context="{'group_by':'supplier_id'}"
+            />
+                        <filter
+              string="Brand"
+              name="group_brand"
+              domain="[]"
+              context="{'group_by':'brand_id'}"
+            />
                     </group>
                 </search>
             </field>
@@ -50,7 +66,11 @@
                     <sheet>
                         <label string="Product template" />
                         <h1>
-                            <field name="product_tmpl_id" required="1" class="oe_inline" />
+                            <field
+                name="product_tmpl_id"
+                required="1"
+                class="oe_inline"
+              />
                         </h1>
                         <group name="head">
                             <group>
@@ -73,8 +93,11 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
-        <menuitem id="supplier_brand_option_view" name="Supplier brands"
-                  action="action_supplier_brand_view" 
-                  parent="purchase.menu_procurement_management_product" />
+        <menuitem
+      id="supplier_brand_option_view"
+      name="Supplier brands"
+      action="action_supplier_brand_view"
+      parent="purchase.menu_procurement_management_product"
+    />
     </data>
 </openerp>

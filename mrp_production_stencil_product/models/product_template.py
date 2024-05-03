@@ -7,6 +7,8 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     stencil_category = fields.Boolean(
-        string="Stencil category", related="categ_id.stencil_category",
-        store= True, copy=False,
+        string="Stencil category",
+        related="categ_id.stencil_category",
+        store=True,
+        copy=False,
     )

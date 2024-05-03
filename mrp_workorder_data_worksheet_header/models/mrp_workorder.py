@@ -28,8 +28,7 @@ def print_report(records, qweb_name):
     width, height = A4
     for record in records:
         content, content_type = records.env["ir.actions.report"]._render_qweb_pdf(
-            qweb_name,
-            res_ids=record.id
+            qweb_name, res_ids=record.id
         )
 
         content_pdf = PdfFileReader(BytesIO(content))
