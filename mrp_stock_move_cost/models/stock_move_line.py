@@ -12,25 +12,24 @@ class StockMoveLine(models.Model):
             if line.production_id not in productions:
                 productions += line.production_id
         for line in self.filtered(
-            lambda x: x.move_id and x.move_id.raw_material_production_id
-        ):
+                lambda x: x.move_id and x.move_id.raw_material_production_id):
             if line.move_id.raw_material_production_id not in productions:
                 productions += line.move_id.raw_material_production_id
-        result = super().unlink()
+        result = super(StockMoveLine, self).unlink()
         for production in productions:
             production.update_prodution_cost()
         return result
 
     @api.model_create_multi
     def create(self, vals_list):
-        lines = super().create(vals_list)
+        lines = super(StockMoveLine, self).create(vals_list)
         done_lines = lines.filtered(lambda x: x.state == "done")
         if done_lines:
             done_lines.search_production_and_update()
         return lines
 
     def write(self, vals):
-        result = super().write(vals)
+        result = super(StockMoveLine, self).write(vals)
         if self and "qty_done" in vals and self.state == "done":
             self.search_production_and_update()
         return result

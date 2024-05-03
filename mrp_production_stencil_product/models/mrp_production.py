@@ -7,11 +7,8 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     stencil_product_ids = fields.Many2many(
-        string="Stencil products",
-        comodel_name="mrp.bom.stencil.product",
-        compute="_compute_stencil_product_ids",
-        store=True,
-        readonly=True,
+        string="Stencil products", comodel_name="mrp.bom.stencil.product",
+        compute='_compute_stencil_product_ids', store=True, readonly=True,
         copy=False,
     )
 

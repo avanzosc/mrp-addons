@@ -7,8 +7,6 @@ class MrpBom(models.Model):
     _inherit = "mrp.bom"
 
     stencil_product_ids = fields.One2many(
-        string="Stencil products",
-        comodel_name="mrp.bom.stencil.product",
-        inverse_name="bom_id",
-        copy=False,
+        string="Stencil products", comodel_name="mrp.bom.stencil.product",
+        inverse_name="bom_id", copy=False
     )
