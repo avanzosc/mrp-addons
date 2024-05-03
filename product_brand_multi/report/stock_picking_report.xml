@@ -1,37 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <openerp>
     <data>
-        <template id="jvv_stock_picking_report_inh_product_brand_code" inherit_id="jvv_reports.jvv_stock_picking_report">
-            <xpath expr="//table[@t-if='not o.pack_operation_ids']/thead//th[1]" position="after">
-                <th t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'" class="text-left">
+        <template
+      id="jvv_stock_picking_report_inh_product_brand_code"
+      inherit_id="jvv_reports.jvv_stock_picking_report"
+    >
+            <xpath
+        expr="//table[@t-if='not o.pack_operation_ids']/thead//th[1]"
+        position="after"
+      >
+                <th
+          t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'"
+          class="text-left"
+        >
                     <strong>Fabricator</strong>
                 </th>
-                <th t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'" class="text-left">
+                <th
+          t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'"
+          class="text-left"
+        >
                     <strong>Product brand code</strong>
                 </th>
             </xpath>
-            <xpath expr="//table[@t-if='not o.pack_operation_ids']/tbody//td[1]" position="after">
-                <td t-if="move.picking_id.picking_type_id and move.picking_id.picking_type_id.code == 'incoming'">
-                    <span t-field="move.brand_supplier"/>
+            <xpath
+        expr="//table[@t-if='not o.pack_operation_ids']/tbody//td[1]"
+        position="after"
+      >
+                <td
+          t-if="move.picking_id.picking_type_id and move.picking_id.picking_type_id.code == 'incoming'"
+        >
+                    <span t-field="move.brand_supplier" />
                 </td>
-                <td t-if="move.picking_id.picking_type_id and move.picking_id.picking_type_id.code == 'incoming'">
-                    <span t-field="move.product_brand_code"/>
+                <td
+          t-if="move.picking_id.picking_type_id and move.picking_id.picking_type_id.code == 'incoming'"
+        >
+                    <span t-field="move.product_brand_code" />
                 </td>
             </xpath>
             <xpath expr="//tr[@name='pack_operation_ids_head']/th[1]" position="after">
-                <th t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'" class="text-left">
+                <th
+          t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'"
+          class="text-left"
+        >
                     <strong>Fabricator</strong>
                 </th>
-                <th t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'" class="text-left">
+                <th
+          t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'"
+          class="text-left"
+        >
                     <strong>Product brand code</strong>
                 </th>
             </xpath>
-            <xpath expr="//span[@t-field='pack_operation.product_qty']/.." position="before">
+            <xpath
+        expr="//span[@t-field='pack_operation.product_qty']/.."
+        position="before"
+      >
                 <td t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'">
-                    <span t-field="pack_operation.brand_supplier"/>
+                    <span t-field="pack_operation.brand_supplier" />
                 </td>
                 <td t-if="o.picking_type_id and o.picking_type_id.code == 'incoming'">
-                    <span t-field="pack_operation.product_brand_code"/>
+                    <span t-field="pack_operation.product_brand_code" />
                 </td>
             </xpath>
         </template>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
     <data>
         <record id="product_brand_tree_view" model="ir.ui.view">
@@ -27,14 +27,26 @@
                     <field name="marking" />
                     <field name="description" />
                     <field name="partner_id" />
-                    <separator/>
+                    <separator />
                     <group expand="1" string="Group By">
-                        <filter string="Product template" name="group_product_template"
-                                domain="[]" context="{'group_by':'product_tmpl_id'}"/>
-                        <filter string="Product internal reference" name="group_product_internal_reference"
-                                domain="[]" context="{'group_by':'product_internal_reference'}"/>
-                        <filter string="Partner" name="group_partner"
-                                domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter
+              string="Product template"
+              name="group_product_template"
+              domain="[]"
+              context="{'group_by':'product_tmpl_id'}"
+            />
+                        <filter
+              string="Product internal reference"
+              name="group_product_internal_reference"
+              domain="[]"
+              context="{'group_by':'product_internal_reference'}"
+            />
+                        <filter
+              string="Partner"
+              name="group_partner"
+              domain="[]"
+              context="{'group_by':'partner_id'}"
+            />
                     </group>
                 </search>
             </field>
@@ -48,7 +60,11 @@
                     <sheet>
                         <label string="Product template" />
                         <h1>
-                            <field name="product_tmpl_id" required="1" class="oe_inline" />
+                            <field
+                name="product_tmpl_id"
+                required="1"
+                class="oe_inline"
+              />
                         </h1>
                         <group name="head">
                             <group>
@@ -71,8 +87,11 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
-        <menuitem id="product_brand_option_view" name="Brands"
-                  action="action_product_brand_view" 
-                  parent="purchase.menu_procurement_management_product" />
+        <menuitem
+      id="product_brand_option_view"
+      name="Brands"
+      action="action_product_brand_view"
+      parent="purchase.menu_procurement_management_product"
+    />
     </data>
 </openerp>

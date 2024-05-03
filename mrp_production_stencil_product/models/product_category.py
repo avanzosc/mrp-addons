@@ -7,6 +7,8 @@ class ProductCategory(models.Model):
     _inherit = "product.category"
 
     stencil_category = fields.Boolean(
-        string="Stencil category", comodel_name="product.category",
-        default=False, copy=False,
+        string="Stencil category",
+        comodel_name="product.category",
+        default=False,
+        copy=False,
     )

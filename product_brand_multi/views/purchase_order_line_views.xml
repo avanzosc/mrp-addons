@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
 <data>
     <record id="purchase_order_line_tree_inh_product_brand_multi" model="ir.ui.view">
@@ -22,10 +22,20 @@
                 <field name="product_brand_code" />
             </field>
             <filter name="groupby_product" position="after">
-                <filter name="groupby_product_brand_supplier" string="Fabricator"
-                    icon="terp-accessories-archiver" domain="[]" context="{'group_by' : 'brand_supplier'}"/>
-                <filter name="groupby_product_brand_code" string="Product brand code"
-                    icon="terp-accessories-archiver" domain="[]" context="{'group_by' : 'product_brand_code'}"/>
+                <filter
+            name="groupby_product_brand_supplier"
+            string="Fabricator"
+            icon="terp-accessories-archiver"
+            domain="[]"
+            context="{'group_by' : 'brand_supplier'}"
+          />
+                <filter
+            name="groupby_product_brand_code"
+            string="Product brand code"
+            icon="terp-accessories-archiver"
+            domain="[]"
+            context="{'group_by' : 'product_brand_code'}"
+          />
             </filter>
         </field>
     </record>

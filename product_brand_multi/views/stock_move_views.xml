@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
 <data>
         <record id="view_move_picking_tree_inh_product_brand_code" model="ir.ui.view">
@@ -33,10 +33,20 @@
                     <field name="product_brand_code" />
                 </field>
                 <filter name="by_product" position="after">
-                    <filter name="groupby_product_brand_supplier" string="Fabricator"
-                        icon="terp-accessories-archiver" domain="[]" context="{'group_by' : 'brand_supplier'}"/>
-                    <filter string="Product brand code" name="by_product_brand_code"
-                        icon="terp-accessories-archiver" domain="[]" context="{'group_by':'product_brand_code'}"/>
+                    <filter
+            name="groupby_product_brand_supplier"
+            string="Fabricator"
+            icon="terp-accessories-archiver"
+            domain="[]"
+            context="{'group_by' : 'brand_supplier'}"
+          />
+                    <filter
+            string="Product brand code"
+            name="by_product_brand_code"
+            icon="terp-accessories-archiver"
+            domain="[]"
+            context="{'group_by':'product_brand_code'}"
+          />
                 </filter>
             </field>
         </record>
