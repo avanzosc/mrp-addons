@@ -6,7 +6,7 @@
     "category": "Manufacturing/Manufacturing",
     "license": "AGPL-3",
     "author": "AvanzOSC",
-    "website": "https://github.com/avanzosc/mrp-addons",
+    "website": "https://www.avanzosc.es",
     "depends": [
         "mrp",
     ],

@@ -9,10 +9,12 @@ class MrpProduction(models.Model):
     price_unit_cost = fields.Float(
         string="Cost Unit Price", digits="Product Price", copy=False
     )
-    cost = fields.Float(string="Cost", digits="Product Price", copy=False)
+    cost = fields.Float(
+        string="Cost", digits="Product Price", copy=False
+    )
 
     def write(self, vals):
-        result = super().write(vals)
+        result = super(MrpProduction, self).write(vals)
         if "state" in vals and vals.get("state", False) == "done":
             for production in self:
                 production.update_prodution_cost()
@@ -26,18 +28,15 @@ class MrpProduction(models.Model):
     def update_prodution_cost(self):
         price_unit_cost = 0
         cost = 0
-        cond = [
-            "|",
-            ("move_id.raw_material_production_id", "=", self.id),
-            ("move_id.production_id", "=", self.id),
-        ]
+        cond = ["|", ("move_id.raw_material_production_id", "=", self.id),
+                ("move_id.production_id", "=", self.id)]
         lines = self.env["stock.move.line"].search(cond)
         if lines:
             consumed_lines = lines.filtered(
-                lambda x: x.move_id.raw_material_production_id == self
-            )
+                lambda x: x.move_id.raw_material_production_id == self)
             cost = sum(consumed_lines.mapped("cost"))
-            produce_lines = lines.filtered(lambda x: x.move_id.production_id == self)
+            produce_lines = lines.filtered(
+                lambda x: x.move_id.production_id == self)
             for produce_line in produce_lines:
                 price_unit_cost = 0
                 if produce_line.qty_done > 0:
@@ -51,5 +50,4 @@ class MrpProduction(models.Model):
         self.price_unit_cost = price_unit_cost
         if self.lot_producing_id:
             self.lot_producing_id.with_context(
-                from_production=True
-            ).purchase_price = price_unit_cost
+                from_production=True).purchase_price = price_unit_cost

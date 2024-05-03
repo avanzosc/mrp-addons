@@ -7,7 +7,10 @@
     "license": "AGPL-3",
     "author": "AvanzOSC",
     "website": "https://github.com/avanzosc/mrp-addons",
-    "depends": ["mrp", "stock"],
+    "depends": [
+        "mrp",
+        "stock"
+    ],
     "data": [
         "views/mrp_production_views.xml",
     ],
