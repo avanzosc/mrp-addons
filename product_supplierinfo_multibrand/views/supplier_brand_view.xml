@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="supplier_brand_tree_view" model="ir.ui.view">
+            <field name="name">supplier.brand.tree.view</field>
+            <field name="model">supplier.brand</field>
+            <field name="arch" type="xml">
+                <tree string="Supplier brands">
+                    <field name="product_tmpl_id" />
+                    <field name="product_internal_reference" />
+                    <field name="supplier_id" />
+                    <field name="supplier_brand_name" />
+                    <field name="supplier_brand_code" />
+                    <field name="brand_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="supplier_brand_search_view" model="ir.ui.view">
+            <field name="name">supplier.brand.search.view</field>
+            <field name="model">supplier.brand</field>
+            <field name="arch" type="xml">
+                <search string="Search supplier brands">
+                    <field name="product_tmpl_id" />
+                    <field name="product_internal_reference" />
+                    <field name="supplier_id" />
+                    <field name="supplier_brand_name" />
+                    <field name="supplier_brand_code" />
+                    <field name="brand_id" />
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Product template" name="group_product_template"
+                                domain="[]" context="{'group_by':'product_tmpl_id'}"/>
+                        <filter string="Product internal reference" name="group_product_internal_reference"
+                                domain="[]" context="{'group_by':'product_internal_reference'}"/>
+                        <filter string="Supplier" name="group_supplier"
+                                domain="[]" context="{'group_by':'supplier_id'}"/>
+                        <filter string="Brand" name="group_brand"
+                                domain="[]" context="{'group_by':'brand_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="supplier_brand_form_view" model="ir.ui.view">
+            <field name="name">supplier.brand.form.view</field>
+            <field name="model">supplier.brand</field>
+            <field name="arch" type="xml">
+                <form string="Supplier brand">
+                    <sheet>
+                        <label string="Product template" />
+                        <h1>
+                            <field name="product_tmpl_id" required="1" class="oe_inline" />
+                        </h1>
+                        <group name="head">
+                            <group>
+                                <field name="supplier_id" />
+                                <field name="supplier_brand_name" />
+                                <field name="supplier_brand_code" />
+                            </group>
+                            <group>
+                                <field name="brand_id" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_supplier_brand_view" model="ir.actions.act_window">
+            <field name="name">Supplier brands</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">supplier.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="supplier_brand_option_view" name="Supplier brands"
+                  action="action_supplier_brand_view" 
+                  parent="purchase.menu_procurement_management_product" />
+    </data>
+</openerp>

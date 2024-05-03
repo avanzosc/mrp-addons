@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+supplier_brand_employee,supplier.brand employee,model_supplier_brand,base.group_user,1,0,0,0
+access_supplier_brand_sale_manager,supplier.brand salemanager,model_supplier_brand,base.group_sale_manager,1,1,1,1
