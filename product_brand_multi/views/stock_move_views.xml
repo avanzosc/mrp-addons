@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<openerp>
-<data>
+<odoo>
         <record id="view_move_picking_tree_inh_product_brand_code" model="ir.ui.view">
             <field name="name">view.move.picking.tree.inh.product.brand.code</field>
             <field name="model">stock.move</field>
@@ -50,5 +49,4 @@
                 </filter>
             </field>
         </record>
-</data>
-</openerp>
+</odoo>

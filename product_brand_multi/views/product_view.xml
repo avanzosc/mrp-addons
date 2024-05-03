@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<openerp>
-    <data>
+<odoo>
         <record model="ir.ui.view" id="product_brand_tree_view">
             <field name="name">product.brand.tree</field>
             <field name="model">product.brand</field>
@@ -169,5 +168,4 @@
             </field>
         </record>
 
-    </data>
-</openerp>
+</odoo>

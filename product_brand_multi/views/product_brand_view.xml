@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<openerp>
-    <data>
+<odoo>
         <record id="product_brand_tree_view" model="ir.ui.view">
             <field name="name">product.brand.tree.view</field>
             <field name="model">product.brand</field>
@@ -84,7 +83,6 @@
             <field name="name">Brands</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">product.brand</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
         <menuitem
@@ -93,5 +91,4 @@
       action="action_product_brand_view"
       parent="purchase.menu_procurement_management_product"
     />
-    </data>
-</openerp>
+</odoo>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<openerp>
-<data>
+<odoo>
         <record id="view_picking_form_inh_product_brand_code" model="ir.ui.view">
             <field name="name">view.picking.form.inh.product.brand.code</field>
             <field name="model">stock.picking</field>
@@ -16,5 +15,4 @@
             </field>
         </record>
 
-</data>
-</openerp>
+</odoo>
