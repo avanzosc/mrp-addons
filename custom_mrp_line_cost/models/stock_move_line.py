@@ -114,18 +114,6 @@ class StockMoveLine(models.Model):
                     month_cost = line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.december
             line.month_cost = month_cost
 
-    @api.depends("move_id", "move_id.bom_line_id", "move_id.byproduct_id",
-                 "move_id.bom_line_id.expense_kg",
-                 "move_id.byproduct_id.expense_kg")
-    def _compute_expense_kg(self):
-        for line in self:
-            expense_kg = 0
-            if line.move_id and line.move_id.bom_line_id:
-                expense_kg = line.move_id.bom_line_id.expense_kg
-            elif line.move_id and line.move_id.byproduct_id:
-                expense_kg = line.move_id.byproduct_id.expense_kg
-            line.expense_kg = expense_kg
-
     @api.depends("production_id.purchase_unit_price",
                  "production_id.average_cost",
                  "production_id.month_cost",
@@ -149,10 +137,17 @@ class StockMoveLine(models.Model):
                 elif line.production_id and line.move_id.byproduct_id:
                     cost = line.move_id.byproduct_id.cost
                     if line.expense_kg:
+                        entry_same_lots = (
+                            line.production_id.move_line_ids.filtered(
+                                lambda c: c.lot_id.name == line.lot_id.name
+                            )
+                        )
+                        entry_cost = sum(
+                            entry_same_lots.mapped("amount")
+                        )/sum(entry_same_lots.mapped("qty_done"))
                         cost = (
-                            line.month_cost + (
-                                line.production_id.average_cost)) * (
-                                    line.move_id.byproduct_id.coefficient)
+                            line.month_cost + entry_cost
+                        ) * (line.move_id.byproduct_id.coefficient)
             line.base_price = cost
             if not line.applied_price:
                 line.applied_price = cost

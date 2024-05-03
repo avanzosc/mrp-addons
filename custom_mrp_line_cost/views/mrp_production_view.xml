@@ -45,6 +45,7 @@
                 <field name="pallet" sum="Total Pallets" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
                 <field name="container" sum="Total Containers" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
                 <field name="unit" sum="Total Units" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
+                <field name="download_unit" invisible="1" force_save="1"/>
                 <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
                 <field name="qty_done" sum="Total Quantity"/>
                 <field name="product_unit_container" optional="hide"/>
