@@ -260,9 +260,11 @@ class MrpProduction(models.Model):
                 for line in production.finished_move_line_ids:
                     line.applied_price = line.base_price
                     line.standard_price = line.applied_price
-                dif = production.average_cost + (
-                    production.month_cost * production.consume_qty) - (
-                        production.output_total_amount)
+                dif = ((
+                    production.average_cost + production.month_cost
+                ) * production.consume_qty) - sum(
+                    production.finished_move_line_ids.mapped("amount")
+                )
                 if dif != 0:
                     for line in production.finished_move_line_ids:
                         if line.lot_id and line.lot_id not in lots:
