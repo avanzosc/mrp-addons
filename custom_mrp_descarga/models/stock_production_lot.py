@@ -21,7 +21,10 @@ class StockProductionLot(models.Model):
                 lambda c: c.state == "done" and (
                     c.location_dest_id.usage == "internal"))
             quartering = line.move_line_ids.filtered(
-                lambda c: c.production_id and c.production_id.quartering)
+                lambda c: c.production_id and c.production_id.quartering and (
+                    c.location_id == c.production_id.location_src_id
+                )
+            )
             if clasified:
                 amount_total = sum(clasified.mapped("amount"))
                 qty_done = sum(clasified.mapped("qty_done"))
