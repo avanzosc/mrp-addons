@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-11 08:49+0000\n"
-"PO-Revision-Date: 2023-09-11 08:49+0000\n"
+"POT-Creation-Date: 2024-05-15 11:44+0000\n"
+"PO-Revision-Date: 2024-05-15 11:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,14 @@ msgid ""
 " * Done: The MO is closed, the stock moves are posted. \n"
 " * Cancelled: The MO has been cancelled, can't be confirmed anymore."
 msgstr "Técnico: utilizado sólo en vistas"
+
+#. module: mrp_workorder_grouping_by_material
+#. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
+#, python-format
+msgid "%(workorder)s: %(error_name)s"
+msgstr ""
 
 #. module: mrp_workorder_grouping_by_material
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_grouping_by_material.mrp_production_view_form
@@ -381,12 +389,14 @@ msgstr "Material principal"
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_bom.py:0
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_bom.py:0
 #, python-format
 msgid "Main material must have an operation"
 msgstr "El material principal debe tener una operación"
 
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest.py:0
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest.py:0
 #, python-format
 msgid "Main product lot is not selected"
@@ -739,10 +749,6 @@ msgstr "Empezar a trabajar"
 
 #. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest__state
-msgid "State"
-msgstr "Estado"
-
-#. module: mrp_workorder_grouping_by_material
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__state
 msgid "Status"
 msgstr "Estado"
@@ -774,12 +780,14 @@ msgstr "El número de productos tomados por esta orden de trabajo"
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder.py:0
 #, python-format
 msgid "The workcenter is 'nesting_required'"
 msgstr "El centro de trabajo requiere anidado"
 
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_bom.py:0
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_bom.py:0
 #, python-format
 msgid ""
@@ -874,6 +882,7 @@ msgstr "Estado de la orden de trabajo"
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
 #: model:ir.model.fields,field_description:mrp_workorder_grouping_by_material.field_mrp_workorder_nest_line__worksheet
 #, python-format
 msgid "Worksheet"
@@ -882,12 +891,14 @@ msgstr "Hoja de trabajo"
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest.py:0
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest.py:0
 #, python-format
 msgid "Worksheets"
 msgstr "Hojas de trabajo"
 
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/wizard/nested_new_line.py:0
 #: code:addons/mrp_workorder_grouping_by_material/wizard/nested_new_line.py:0
 #, python-format
 msgid ""
@@ -896,6 +907,7 @@ msgstr "La cantidad a producir debe ser menor o igual a la cantidad producida"
 
 #. module: mrp_workorder_grouping_by_material
 #. odoo-python
+#: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
 #: code:addons/mrp_workorder_grouping_by_material/models/mrp_workorder_nest_line.py:0
 #, python-format
 msgid "{}: You should provide a lot/serial number for the final product."
