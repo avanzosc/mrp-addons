@@ -7,9 +7,7 @@ class MrpBomStencilProduct(models.Model):
     _name = "mrp.bom.stencil.product"
     _description = "Stentil products in BoMs"
 
-    bom_id = fields.Many2one(
-        string="BoM", comodel_name="mrp.bom", copy=False
-    )
+    bom_id = fields.Many2one(string="BoM", comodel_name="mrp.bom", copy=False)
     product_id = fields.Many2one(
         string="Product", comodel_name="product.product", copy=False
     )
