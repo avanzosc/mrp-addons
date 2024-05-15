@@ -9,7 +9,7 @@
     "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
         "mrp",
-        "stock"
+        "stock",
     ],
     "data": [
         "views/mrp_production_views.xml",
