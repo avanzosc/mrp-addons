@@ -9,7 +9,7 @@ class MrpProduction(models.Model):
     price_unit_cost = fields.Float(
         string="Cost Unit Price", digits="Product Price", copy=False
     )
-    cost = fields.Float(string="Cost", digits="Product Price", copy=False)
+    cost = fields.Float(digits="Product Price", copy=False)
 
     def write(self, vals):
         result = super().write(vals)
