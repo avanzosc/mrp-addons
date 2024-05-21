@@ -208,7 +208,7 @@ class StockMoveLine(models.Model):
                 elif line.production_id and line.move_id.byproduct_id:
                     cost = line.move_id.byproduct_id.cost
                     if line.expense_kg:
-                        entry_same_lots = (
+                   entry_same_lots = (
                                 line.production_id.move_line_ids.filtered(
                                     lambda c: c.lot_id.name == line.lot_id.name
                                 )
