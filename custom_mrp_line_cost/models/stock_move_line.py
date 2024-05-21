@@ -154,7 +154,7 @@ class StockMoveLine(models.Model):
                                     lambda c: c.lot_id.name == line.lot_id.name
                                 )
                             )
-                        if not entry_same_lots and sum(entry_same_lots.mapped("qty_done")) == 0:
+                        if not entry_same_lots or sum(entry_same_lots.mapped("qty_done")) == 0:
                             cost = 0
                         else:
                             entry_cost = sum(
