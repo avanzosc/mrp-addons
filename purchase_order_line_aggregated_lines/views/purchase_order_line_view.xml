@@ -1,22 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record model="ir.ui.view" id="production_product_lines_sale_lines_purchase_form">
-        <field name="name">production.product.lines.sale.lines.purchase.form</field>
+    <record
+    model="ir.ui.view"
+    id="production_product_lines_sale_lines_purchase_form"
+  >
+        <field
+      name="name"
+    >production.product.lines.sale.lines.purchase.form</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='order_line']/form//notebook" position="inside">
+            <xpath
+        expr="//field[@name='order_line']/form//notebook"
+        position="inside"
+      >
                 <page string="References">
                     <group>
-                        <field name="sale_line_ids"/>
+                        <field name="sale_line_ids" />
                         <field name="mrp_production_product_line_ids">
                             <tree string="Scheduled Products">
-                                <field name="production_id"/>
-                                <field name="date_planned_start"/>
-                                <field name="product_id"/>
-                                <field name="product_qty"/>
-                                <field name="product_uom_id" groups="uom.group_uom"/>
-                                <field name="state"/>
+                                <field name="production_id" />
+                                <field name="date_planned_start" />
+                                <field name="product_id" />
+                                <field name="product_qty" />
+                                <field
+                  name="product_uom_id"
+                  groups="uom.group_uom"
+                />
+                                <field name="state" />
                             </tree>
                         </field>
                     </group>
@@ -28,20 +39,23 @@
     <record model="ir.ui.view" id="production_product_lines_sale_lines_form">
         <field name="name">production.product.lines.sale.lines.form</field>
         <field name="model">purchase.order.line</field>
-        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='invoice_lines']" position="after">
-                <separator string="References"/>
+                <separator string="References" />
                 <group>
-                    <field name="sale_line_ids"/>
+                    <field name="sale_line_ids" />
                     <field name="mrp_production_product_line_ids">
                         <tree string="Scheduled Products">
-                            <field name="production_id"/>
-                            <field name="date_planned_start"/>
-                            <field name="product_id"/>
-                            <field name="product_qty"/>
-                            <field name="product_uom_id" groups="uom.group_uom"/>
-                            <field name="state"/>
+                            <field name="production_id" />
+                            <field name="date_planned_start" />
+                            <field name="product_id" />
+                            <field name="product_qty" />
+                            <field
+                name="product_uom_id"
+                groups="uom.group_uom"
+              />
+                            <field name="state" />
                         </tree>
                     </field>
                 </group>

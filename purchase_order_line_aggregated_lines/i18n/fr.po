@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_order_line_aggregated_lines
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-27 12:10+0000\n"
+"PO-Revision-Date: 2024-05-27 12:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.actions.server,name:purchase_order_line_aggregated_lines.aggregate_create_purchase_lines_from_sale_lines
+msgid "Create Purchase Lines"
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model.fields,field_description:purchase_order_line_aggregated_lines.field_purchase_order_line__mrp_production_product_line_ids
+msgid "Mrp Production Product Line"
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model.fields,field_description:purchase_order_line_aggregated_lines.field_purchase_order_line__mrp_qty
+msgid "Mrp Qty"
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: code:addons/purchase_order_line_aggregated_lines/models/mrp.py:23
+#: code:addons/purchase_order_line_aggregated_lines/models/mrp.py:24
+#, python-format
+msgid "No procurement rule found in location \"%s\" for product \"%s\".\n"
+" Check routes configuration."
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model.fields,field_description:purchase_order_line_aggregated_lines.field_purchase_order_line__extra_qty
+msgid "Product Quantity"
+msgstr "Quantité d'articles"
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model,name:purchase_order_line_aggregated_lines.model_mrp_production_product_line
+msgid "Production Scheduled Product"
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model,name:purchase_order_line_aggregated_lines.model_purchase_order_line
+#: model:ir.model.fields,field_description:purchase_order_line_aggregated_lines.field_sale_order_line__purchase_order_line_id
+msgid "Purchase Order Line"
+msgstr "Ligne de commande d'achat"
+
+#. module: purchase_order_line_aggregated_lines
+#: model_terms:ir.ui.view,arch_db:purchase_order_line_aggregated_lines.production_product_lines_sale_lines_form
+#: model_terms:ir.ui.view,arch_db:purchase_order_line_aggregated_lines.production_product_lines_sale_lines_purchase_form
+msgid "References"
+msgstr "Références"
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model.fields,field_description:purchase_order_line_aggregated_lines.field_purchase_order_line__sale_line_ids
+msgid "Sale Line"
+msgstr "Ligne de vente"
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model.fields,field_description:purchase_order_line_aggregated_lines.field_purchase_order_line__sale_qty
+msgid "Sale Qty"
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model,name:purchase_order_line_aggregated_lines.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: purchase_order_line_aggregated_lines
+#: model_terms:ir.ui.view,arch_db:purchase_order_line_aggregated_lines.production_product_lines_sale_lines_form
+#: model_terms:ir.ui.view,arch_db:purchase_order_line_aggregated_lines.production_product_lines_sale_lines_purchase_form
+msgid "Scheduled Products"
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model,name:purchase_order_line_aggregated_lines.model_stock_rule
+msgid "Stock Rule"
+msgstr "Règle de stock minimum"
+
+#. module: purchase_order_line_aggregated_lines
+#: code:addons/purchase_order_line_aggregated_lines/models/stock_rule.py:41
+#: code:addons/purchase_order_line_aggregated_lines/models/stock_rule.py:54
+#, python-format
+msgid "There is no vendor associated to the product %s. Please define a vendor for this product."
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: code:addons/purchase_order_line_aggregated_lines/models/mrp.py:13
+#: code:addons/purchase_order_line_aggregated_lines/models/sale.py:22
+#, python-format
+msgid "There is no vendor associated to the product {}. Please define a vendor for this product."
+msgstr ""
+
+#. module: purchase_order_line_aggregated_lines
+#: model:ir.model.fields,field_description:purchase_order_line_aggregated_lines.field_purchase_order_line__total_qty
+msgid "Total Qty"
+msgstr ""
+

@@ -5,16 +5,17 @@
     "version": "12.0.1.0.0",
     "license": "AGPL-3",
     "depends": [
-        "sale", "sale_order_line_input", "mrp_production_generate_structure"
+        "sale",
+        "sale_order_line_input",
+        "mrp_production_generate_structure",
     ],
     "author": "AvanzOSC",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Tools",
     "data": [
         "views/sale_order_line_view.xml",
         "views/purchase_order_line_view.xml",
     ],
-    'demo': [],
-    'installable': True,
-    'auto_install': False,
+    "installable": True,
+    "auto_install": False,
 }
