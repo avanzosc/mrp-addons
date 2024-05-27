@@ -4,8 +4,8 @@
     "name": "MRP Production Generate Structure",
     "version": "12.0.1.3.2",
     "license": "AGPL-3",
-    "author": "AvanzOSC, ",
-    "website": "http://www.avanzosc.es",
+    "author": "AvanzOSC",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing",
     "depends": [
         "mrp_scheduled_products",

@@ -1,42 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record model="ir.ui.view" id="mrp_production_view_form">
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
-                <button name="button_show_manufacturing_orders" type="object"
-                        class="oe_stat_button oe_inline"
-                        icon="fa-gears"
-                        attrs="{'invisible': [('manufacture_count','=',0)]}">
-                   <field name="manufacture_count" string="Manufacturing Orders" widget="statinfo" />
+                <button
+          name="button_show_manufacturing_orders"
+          type="object"
+          class="oe_stat_button oe_inline"
+          icon="fa-gears"
+          attrs="{'invisible': [('manufacture_count','=',0)]}"
+        >
+                   <field
+            name="manufacture_count"
+            string="Manufacturing Orders"
+            widget="statinfo"
+          />
                 </button>
-                <button name="button_show_purchase_orders" type="object"
-                        class="oe_stat_button oe_inline"
-                        icon="fa-shopping-cart"
-                        attrs="{'invisible': [('purchase_count','=',0)]}">
-                   <field name="purchase_count" string="Purchase Orders" widget="statinfo" />
+                <button
+          name="button_show_purchase_orders"
+          type="object"
+          class="oe_stat_button oe_inline"
+          icon="fa-shopping-cart"
+          attrs="{'invisible': [('purchase_count','=',0)]}"
+        >
+                   <field
+            name="purchase_count"
+            string="Purchase Orders"
+            widget="statinfo"
+          />
                 </button>
-                <button name="button_with_child_structure" type="object"
-                        class="oe_stat_button oe_inline"
-                        icon="fa-list-alt" string="Planned Products" />
+                <button
+          name="button_with_child_structure"
+          type="object"
+          class="oe_stat_button oe_inline"
+          icon="fa-list-alt"
+          string="Planned Products"
+        />
             </div>
         </field>
     </record>
 
     <record model="ir.ui.view" id="mrp_production_product_lines_view_form">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_lines" />
+        <field
+      name="inherit_id"
+      ref="mrp_scheduled_products.mrp_production_product_lines"
+    />
         <field name="arch" type="xml">
             <button name="action_compute" position="after">
-                  <button name="button_create_manufacturing_structure"
-                          string="Create Manufacturing Structure"
-                          type="object"
-                          attrs="{'invisible':[('state','not in',['draft'])]}" />
-                  <button name="button_create_purchase_order"
-                          string="Create Purchase Structure"
-                          type="object"
-                          attrs="{'invisible':[('state','not in',['draft'])]}"/>
+                  <button
+          name="button_create_manufacturing_structure"
+          string="Create Manufacturing Structure"
+          type="object"
+          attrs="{'invisible':[('state','not in',['draft'])]}"
+        />
+                  <button
+          name="button_create_purchase_order"
+          string="Create Purchase Structure"
+          type="object"
+          attrs="{'invisible':[('state','not in',['draft'])]}"
+        />
             </button>
         </field>
     </record>
@@ -60,8 +85,12 @@
                 <field name="origin_production_id" />
             </field>
             <xpath expr="//group[1]" position="inside">
-                <filter string="Origin manufacturing order" name="origin_production_id" domain="[]"
-                        context="{'group_by':'origin_production_id'}"/>
+                <filter
+          string="Origin manufacturing order"
+          name="origin_production_id"
+          domain="[]"
+          context="{'group_by':'origin_production_id'}"
+        />
             </xpath>
         </field>
     </record>
