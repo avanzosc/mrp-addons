@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="mrp_production_product_line_view_form" model="ir.ui.view">
         <field name="model">mrp.production.product.line</field>
-        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_form_view" />
+        <field
+      name="inherit_id"
+      ref="mrp_scheduled_products.mrp_production_product_form_view"
+    />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_id']/.." position="after">
                  <group colspan="4" col="6">
-                     <field name="route_id"/>
-                     <field name="make_to_order"/>
+                     <field name="route_id" />
+                     <field name="make_to_order" />
 <!--                    <field name="date"/>-->
                 </group>
                 <group attrs="{'invisible': [('new_production_id','=',False)]}">
@@ -19,11 +22,14 @@
                     <field name="purchase_date_order" />
                 </group>
                 <bottom>
-                    <button name="button_create_purchase_manufacturing_order"
-                            string="Create purchase/manufacturing order"
-                            type="object" class="oe_highlight"
-                            attrs="{'invisible': ['|','|',('new_production_id','!=',False),('purchase_order_id','!=',False),('state','not in',['draft'])]}"
-                            context="{'hide_production_id': False}"/>
+                    <button
+            name="button_create_purchase_manufacturing_order"
+            string="Create purchase/manufacturing order"
+            type="object"
+            class="oe_highlight"
+            attrs="{'invisible': ['|','|',('new_production_id','!=',False),('purchase_order_id','!=',False),('state','not in',['draft'])]}"
+            context="{'hide_production_id': False}"
+          />
                 </bottom>
             </xpath>
         </field>
@@ -31,17 +37,32 @@
 
     <record id="mrp_production_product_line_view_tree" model="ir.ui.view">
         <field name="model">mrp.production.product.line</field>
-        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_tree_view"/>
+        <field
+      name="inherit_id"
+      ref="mrp_scheduled_products.mrp_production_product_tree_view"
+    />
         <field name="arch" type="xml">
             <field name="product_uom_id" position="after">
-                <field name="analytic_account_id"/>
-                <field name="route_id"/>
-                <field name="make_to_order"/>
+                <field name="analytic_account_id" />
+                <field name="route_id" />
+                <field name="make_to_order" />
 <!--                <field name="date" />-->
-                <field name="new_production_id" invisible="context.get('hide_production_id',True)"/>
-                <field name="production_date_planned_start" invisible="context.get('hide_production_id',True)"/>
-                <field name="purchase_order_id" invisible="context.get('hide_production_id',True)"/>
-                <field name="purchase_date_order" invisible="context.get('hide_production_id',True)"/>
+                <field
+          name="new_production_id"
+          invisible="context.get('hide_production_id',True)"
+        />
+                <field
+          name="production_date_planned_start"
+          invisible="context.get('hide_production_id',True)"
+        />
+                <field
+          name="purchase_order_id"
+          invisible="context.get('hide_production_id',True)"
+        />
+                <field
+          name="purchase_date_order"
+          invisible="context.get('hide_production_id',True)"
+        />
             </field>
             <field name="product_qty" position="attributes">
                 <attribute name="sum">Total</attribute>
@@ -51,26 +72,41 @@
 
     <record model="ir.ui.view" id="mrp_production_product_line_view_search">
         <field name="model">mrp.production.product.line</field>
-        <field name="inherit_id" ref="mrp_scheduled_products.mrp_production_product_search_view"/>
+        <field
+      name="inherit_id"
+      ref="mrp_scheduled_products.mrp_production_product_search_view"
+    />
         <field name="arch" type="xml">
             <field name="product_uom_id" position="after">
-                <field name="new_production_id"/>
-                <field name="route_id"/>
-                <field name="make_to_order"/>
-                <field name="product_id"/>
-                <field name="purchase_order_id"/>
+                <field name="new_production_id" />
+                <field name="route_id" />
+                <field name="make_to_order" />
+                <field name="product_id" />
+                <field name="purchase_order_id" />
             </field>
             <filter name="groupby_state" position="after">
                 <separator />
-                <filter name="group_route" string="Route"
-                        context="{'group_by':'route_id'}"/>
-                <filter name="group_mto" string="Make to order"
-                        context="{'group_by':'make_to_order'}"/>
+                <filter
+          name="group_route"
+          string="Route"
+          context="{'group_by':'route_id'}"
+        />
+                <filter
+          name="group_mto"
+          string="Make to order"
+          context="{'group_by':'make_to_order'}"
+        />
                 <separator />
-                <filter name="group_new_production" string="Created Production Order"
-                        context="{'group_by':'new_production_id'}"/>
-                <filter name="group_purchase_order" string="Created Purchase Order"
-                        context="{'group_by':'purchase_order_id'}"/>
+                <filter
+          name="group_new_production"
+          string="Created Production Order"
+          context="{'group_by':'new_production_id'}"
+        />
+                <filter
+          name="group_purchase_order"
+          string="Created Purchase Order"
+          context="{'group_by':'purchase_order_id'}"
+        />
             </filter>
         </field>
     </record>
