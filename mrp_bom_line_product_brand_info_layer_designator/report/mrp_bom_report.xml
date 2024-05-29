@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mrp_bom_product_brand_document" inherit_id="mrp_bom_line_product_brand_info.mrp_bom_product_brand_document">
+        <th name="th-qty" position="before">
+            <th class="text-start">Layer</th>
+            <th class="text-start">Designator</th>
+        </th>
+        <td name="td-qty" position="before">
+            <td class="text-start">
+                <span t-esc="line['layer']"/>
+            </td>
+            <td class="text-start">
+                <span t-esc="line['designator']"/>
+            </td>
+        </td>
+    </template>
+</odoo>
