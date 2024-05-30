@@ -1,6 +1,6 @@
 # Copyright 2022 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import _, api, exceptions, fields, models
 
 
 class MrpProduction(models.Model):
@@ -57,13 +57,19 @@ class MrpProduction(models.Model):
         )
         return values
 
-    def _generate_backorder_productions(self, close_mo=True):
-        backorders = super()._generate_backorder_productions(close_mo=close_mo)
-        for backorder in backorders.filtered(
+    def _split_productions(
+        self, amounts=False, cancel_remaining_qty=False, set_consumed_qty=False
+    ):
+        productions = super()._split_productions(
+            amounts=amounts,
+            cancel_remaining_qty=cancel_remaining_qty,
+            set_consumed_qty=set_consumed_qty,
+        )
+        for production in productions.filtered(
             lambda b: b.product_id.tracking == "serial"
         ):
-            backorder.qty_producing = backorder.product_qty
-        return backorders
+            production.qty_producing = production.product_qty
+        return productions
 
     def _get_lot_name(self, number=1):
         self.ensure_one()
@@ -79,14 +85,20 @@ class MrpProduction(models.Model):
         return new_lot_name
 
     def action_generate_serial(self):
+        if (
+            self.product_tracking == "serial"
+            and self.state not in ("done", "cancel")
+            and not self.serial_lot_name
+        ):
+            raise exceptions.UserError(_("You must introduce the serial lot name."))
         if self.serial_lot_name:
             lot_name = self._get_lot_name(self.total_produced_qty + 1)
-        return super(
-            MrpProduction,
-            self.with_context(
-                default_name=lot_name, qty_twith_serial=self.qty_producing
-            ),
-        ).action_generate_serial()
+            return super(
+                MrpProduction,
+                self.with_context(
+                    default_name=lot_name, qty_twith_serial=self.qty_producing
+                ),
+            ).action_generate_serial()
 
     def _set_qty_producing(self):
         if self.product_id.tracking and self.product_id.tracking == "serial":
@@ -100,7 +112,7 @@ class MrpProduction(models.Model):
         if self.product_tracking == "serial":
             if not self.lot_producing_id:
                 lot_name = self._get_lot_name(self.total_produced_qty + 1)
-                self.lot_producing_id = self.env["stock.production.lot"].create(
+                self.lot_producing_id = self.env["stock.lot"].create(
                     {
                         "name": lot_name,
                         "product_id": self.product_id.id,
@@ -116,7 +128,9 @@ class MrpProduction(models.Model):
     def _post_inventory(self, cancel_backorder=False):
         for production in self.filtered(lambda p: p.product_id.tracking == "serial"):
             production.create_lot_for_tracking_serial()
-        result = super()._post_inventory(cancel_backorder=cancel_backorder)
+        result = super()._post_inventory(
+            cancel_backorder=cancel_backorder
+        )
         return result
 
     def create_lot_for_tracking_serial(self):
@@ -124,7 +138,7 @@ class MrpProduction(models.Model):
         moves = self.move_finished_ids.filtered(
             lambda x: x.product_id == self.product_id
         )
-        lot_obj = self.env["stock.production.lot"]
+        lot_obj = self.env["stock.lot"]
         offset = self.total_produced_qty or 0
         cont = offset
         for move in moves:

@@ -21,7 +21,7 @@ def post_init_hook(cr, registry):
         """
         UPDATE mrp_production m
         SET serial_lot_name = (
-            SELECT name FROM stock_production_lot l WHERE l.id = m.lot_producing_id LIMIT 1)
+            SELECT name FROM stock_lot l WHERE l.id = m.lot_producing_id LIMIT 1)
         WHERE lot_producing_id IS NOT NULL;
         """,
     )

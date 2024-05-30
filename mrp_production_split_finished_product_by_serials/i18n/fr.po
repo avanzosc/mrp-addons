@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-22 06:50+0000\n"
-"PO-Revision-Date: 2024-07-22 06:50+0000\n"
+"POT-Creation-Date: 2024-07-22 06:52+0000\n"
+"PO-Revision-Date: 2024-07-22 06:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,22 +23,22 @@ msgstr ""
 #. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/série"
 
 #. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_uom_uom
 msgid "Product Unit of Measure"
-msgstr ""
+msgstr "Unité de mesure de produit"
 
 #. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_mrp_production
 msgid "Production Order"
-msgstr ""
+msgstr "Ordre de production"
 
 #. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quantités"
 
 #. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__serial_lot_name

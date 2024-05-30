@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0+e\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-09 09:44+0000\n"
-"PO-Revision-Date: 2022-08-09 09:44+0000\n"
+"POT-Creation-Date: 2024-07-22 06:52+0000\n"
+"PO-Revision-Date: 2024-07-22 06:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,38 +16,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_production_split_finished_product_by_serials
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__display_name
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_production_lot__display_name
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_quant__display_name
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_uom_uom__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
-
-#. module: mrp_production_split_finished_product_by_serials
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__id
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_production_lot__id
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_quant__id
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_uom_uom__id
-msgid "ID"
-msgstr ""
-
-#. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__initial_product_qty
-msgid "Initial quantity to produce"
+msgid "Initial Quantity To Produce"
 msgstr "Cantidad inicial a producir"
 
 #. module: mrp_production_split_finished_product_by_serials
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production____last_update
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_production_lot____last_update
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_stock_quant____last_update
-#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_uom_uom____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: mrp_production_split_finished_product_by_serials
-#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_production_lot
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_lot
 msgid "Lot/Serial"
-msgstr "Lote/Nº de serie"
+msgstr "Lote/Número de serie"
 
 #. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_uom_uom
@@ -62,4 +38,26 @@ msgstr "Orden de producción"
 #. module: mrp_production_split_finished_product_by_serials
 #: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Cantidades"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__serial_lot_name
+msgid "Serial Lot Name"
+msgstr "Nombre serie lote"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model_terms:ir.ui.view,arch_db:mrp_production_split_finished_product_by_serials.mrp_production_form_view
+msgid "Total Quantity"
+msgstr "Total Cantidad"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__total_produced_qty
+msgid "Total Quantity Produced"
+msgstr "Total cantidad producida"
+
+#. module: mrp_production_split_finished_product_by_serials
+#. odoo-python
+#: code:addons/mrp_production_split_finished_product_by_serials/models/mrp_production.py:0
+#, python-format
+msgid "You must introduce the serial lot name."
+msgstr "Debe de intorudicr el nombre serie lote."
