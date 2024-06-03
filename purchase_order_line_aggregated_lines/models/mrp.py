@@ -15,8 +15,9 @@ class MrpProductionProductLine(models.Model):
                 "Please define a vendor for this product."
             ).format(self.product_id.name)
             raise ValidationError(message)
-        location = self.production_id.location_src_id or self.env.ref(
-            "stock.stock_location_stock"
+        location = (
+            self.production_id.location_src_id or
+            self.env["stock.warehouse"].search([("company_id", "=", self.env.user.company_id.id)], limit=1).lot_stock_id
         )
         rule = self.env["procurement.group"]._get_rule(self.product_id, location, {})
         if not rule:
