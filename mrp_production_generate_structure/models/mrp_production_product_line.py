@@ -94,8 +94,9 @@ class MrpProductionProductLine(models.Model):
                 "Please define a vendor for this product."
             ).format(self.product_id.name)
             raise ValidationError(message)
-        location = self.production_id.location_src_id or self.env.ref(
-            "stock.stock_location_stock"
+        location = (
+            self.production_id.location_src_id or
+            self.env["stock.warehouse"].search([("company_id", "=", self.env.user.company_id.id)], limit=1).lot_stock_id
         )
         rule = self.env["procurement.group"]._get_rule(self.product_id, location, {})
         if not rule:
@@ -145,18 +146,19 @@ class MrpProductionProductLine(models.Model):
                     "manufacturing order."
                 )
             )
-        location = self.product_id.location_id or self.env.ref(
-            "stock.stock_location_stock"
+        location = (
+            self.production_id.location_src_id or
+            self.env["stock.warehouse"].search([("company_id", "=", self.env.user.company_id.id)], limit=1).lot_stock_id
         )
         rule = self.env["procurement.group"]._get_rule(self.product_id, location, {})
-        warehouse = self.env.ref("stock.warehouse0", False)
+        warehouse = rule.warehouse_id or self.product_id.warehouse_id
         values = {
             "company_id": self.production_id.company_id,
             "date_planned_start": self.production_id.date_planned_start
             - relativedelta(days=self.product_id.produce_delay),
             "date_planned": self.production_id.date_planned_start
             - relativedelta(days=self.product_id.produce_delay),
-            "warehouse_id": (self.product_id.warehouse_id or rule.warehouse_id),
+            "warehouse_id": warehouse,
             "picking_type_id": warehouse.manu_type_id,
             "priority": 1,
         }
