@@ -14,26 +14,36 @@ class SaleOrderLine(models.Model):
             allfields=["state"])["state"]["selection"]
 
     mrp_production_id = fields.Many2one(
-        comodel_name="mrp.production", string="Production",
-        copy=False)
+        comodel_name="mrp.production",
+        string="Production",
+        copy=False,
+    )
     production_state = fields.Selection(
         string="Production State",
         selection="_get_selection_production_state",
         related="mrp_production_id.state",
-        store=True)
+        related_sudo=True,
+        store=True,
+    )
     manufacturable_product = fields.Boolean(
         string="Is Product Manufacturable?",
         related="product_id.is_manufacturable",
+        related_sudo=True,
         store=True,
-        index=True)
+        index=True,
+    )
     stock_qty = fields.Float(
         string="Qty to Manufacture for Stock",
         related="mrp_production_id.stock_qty",
-        store=True)
+        related_sudo=True,
+        store=True,
+    )
     sale_line_qty = fields.Float(
         string="Sold Qty to Manufacture",
         related="mrp_production_id.sale_line_qty",
-        store=True)
+        related_sudo=True,
+        store=True,
+    )
 
     def _action_mrp_dict(self):
         self.ensure_one()
