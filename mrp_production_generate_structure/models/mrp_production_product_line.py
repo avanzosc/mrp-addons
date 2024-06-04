@@ -9,32 +9,43 @@ from odoo.exceptions import UserError, ValidationError
 class MrpProductionProductLine(models.Model):
     _inherit = "mrp.production.product.line"
 
-    route_id = fields.Many2one(comodel_name="stock.location.route", string="Route")
+    route_id = fields.Many2one(
+        comodel_name="stock.location.route",
+        string="Route",
+    )
     make_to_order = fields.Boolean(string="Make to order")
     date = fields.Date(string="Date")
     new_production_id = fields.Many2one(
-        comodel_name="mrp.production", string="Created Production Order"
+        comodel_name="mrp.production",
+        string="Created Production Order",
     )
     production_date_planned_start = fields.Datetime(
         string="Deadline start",
         related="new_production_id.date_planned_start",
+        related_sudo=True,
         store=True,
     )
     purchase_order_line_id = fields.Many2one(
-        comodel_name="purchase.order.line", string="Purchase order line"
+        comodel_name="purchase.order.line",
+        string="Purchase order line",
     )
     purchase_order_id = fields.Many2one(
         comodel_name="purchase.order",
         string="Purchase order",
         related="purchase_order_line_id.order_id",
+        related_sudo=True,
         store=True,
     )
     purchase_date_order = fields.Datetime(
-        string="Purchase Date", related="purchase_order_id.date_order", store=True
+        string="Purchase Date",
+        related="purchase_order_id.date_order",
+        related_sudo=True,
+        store=True,
     )
     analytic_account_id = fields.Many2one(
         comodel_name="account.analytic.account",
         related="production_id.analytic_account_id",
+        related_sudo=True,
         store=True,
     )
 
@@ -75,7 +86,8 @@ class MrpProductionProductLine(models.Model):
             "company_id": self.production_id.company_id,
             "date_planned": self.production_id.date_planned_start,
             "priority": 1,
-            "warehouse_id": (self.product_id.warehouse_id or rule.warehouse_id),
+            "warehouse_id": (rule.warehouse_id or
+                             self.production_id.picking_type_id.warehouse_id),
         }
 
     @api.multi
@@ -96,7 +108,8 @@ class MrpProductionProductLine(models.Model):
             raise ValidationError(message)
         location = (
             self.production_id.location_src_id or
-            self.env["stock.warehouse"].search([("company_id", "=", self.env.user.company_id.id)], limit=1).lot_stock_id
+            self.env["stock.warehouse"].search([
+                ("company_id", "=", self.env.user.company_id.id)], limit=1).lot_stock_id
         )
         rule = self.env["procurement.group"]._get_rule(self.product_id, location, {})
         if not rule:
@@ -142,13 +155,14 @@ class MrpProductionProductLine(models.Model):
         if self.production_id.state != "draft":
             raise ValidationError(
                 _(
-                    "You are not allowed to create a manufacturing order in a confirmed "
-                    "manufacturing order."
+                    "You are not allowed to create a manufacturing order in a "
+                    "confirmed manufacturing order."
                 )
             )
         location = (
             self.production_id.location_src_id or
-            self.env["stock.warehouse"].search([("company_id", "=", self.env.user.company_id.id)], limit=1).lot_stock_id
+            self.env["stock.warehouse"].search([
+                ("company_id", "=", self.env.user.company_id.id)], limit=1).lot_stock_id
         )
         rule = self.env["procurement.group"]._get_rule(self.product_id, location, {})
         warehouse = rule.warehouse_id or self.product_id.warehouse_id
