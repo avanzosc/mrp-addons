@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="mrp_production_form_view" model="ir.ui.view">
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <page name="miscellaneous" position="after">
+                    <page name="historical" string="Historical">
+                        <field name="mrp_production_historical_ids" nolabel="1">
+                            <tree>
+                                <field name="production_id" invisible="1" />
+                                <field name="historical_date" />
+                                <field name="type" />
+                                <field name="user_id" />
+                                <field name="product_id" />
+                                <field name="programed_qty" />
+                                <field name="scraped_qty" />
+                                <field name="bom_line_changes" />
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>
