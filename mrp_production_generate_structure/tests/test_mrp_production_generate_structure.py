@@ -26,8 +26,8 @@ class TestMrpProductionGenerateStructure(MrpProductionCommon):
         self.assertEqual(
             len(
                 self.production.product_line_ids.filtered(
-                    lambda l: l.route_id == self.manufacture_route
-                    and not l.make_to_order
+                    lambda ln: ln.route_id == self.manufacture_route
+                    and not ln.make_to_order
                 )
             ),
             self.production.manufacture_count,
@@ -46,7 +46,7 @@ class TestMrpProductionGenerateStructure(MrpProductionCommon):
         self.assertEqual(
             len(
                 self.production.product_line_ids.filtered(
-                    lambda l: l.route_id == self.buy_route and not l.make_to_order
+                    lambda ln: ln.route_id == self.buy_route and not ln.make_to_order
                 )
             ),
             self.production.purchase_count,
