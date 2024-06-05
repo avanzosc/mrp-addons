@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_production_historical.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <page name="historical" position="after">
+                <page name="followers" string="Followers">
+                    <field name="mrp_production_follower_ids" nolabel="1"/>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

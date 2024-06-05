@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mrp_production_historical_scraped" model="mail.template">
+            <field name="name">Scraped product in MRP production</field>
+            <field name="email_from">${user.company_id.email or ''}</field>
+            <field name="subject">Scraped product in production: ${object.production_id.name}.</field>
+            <field name="model_id" ref="model_mrp_production_historical"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+    <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p>Hello</p>
+        <p>The product <strong>${object.product_id.name}</strong> has been scrapped by de user: <strong>${object.user_id.name}</strong>. Initial planned quantity: <strong>${object.programed_qty}</strong>, quantity scraped: <strong>${object.scraped_qty}</strong>.</p>
+        <p>Production: <strong>${object.production_id.name}</strong>, production state: <strong>${object.production_id.state}</strong>.</p>
+        <p>Thank you very much and good day.</p>
+    
+        <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+            <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+        </div>
+        <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+            <span style="color: #222; margin-bottom: 5px; display: block; ">
+                ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+            </span>
+            % if user.company_id.phone:
+                <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                    Phone: ${user.company_id.phone}
+                </div>
+            % endif
+            % if user.company_id.website:
+                <div>
+                    Web: <a href="${user.company_id.website}">${user.company_id.website}</a>
+                </div>
+            %endif
+            <p></p>
+        </div>
+    </div>
+            ]]></field>
+        </record>
+    
+        <record id="mrp_production_historical_add" model="mail.template">
+            <field name="name">Add product in MRP production</field>
+            <field name="email_from">${user.company_id.email or ''}</field>
+            <field name="subject">Added product in production: ${object.production_id.name}.</field>
+            <field name="model_id" ref="model_mrp_production_historical"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+    <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p>Hello</p>
+        <p>The product <strong>${object.product_id.name}</strong> has been add by de user: <strong>${object.user_id.name}</strong>. Initial planned quantity: <strong>${object.programed_qty}</strong>.</p>
+        <p>Production: <strong>${object.production_id.name}</strong>, production state: <strong>${object.production_id.state}</strong>.</p>
+        <p>Thank you very much and good day.</p>
+    
+        <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+            <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+        </div>
+        <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+            <span style="color: #222; margin-bottom: 5px; display: block; ">
+                ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+            </span>
+            % if user.company_id.phone:
+                <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                    Phone: ${user.company_id.phone}
+                </div>
+            % endif
+            % if user.company_id.website:
+                <div>
+                    Web: <a href="${user.company_id.website}">${user.company_id.website}</a>
+                </div>
+            %endif
+            <p></p>
+        </div>
+    </div>
+            ]]></field>
+        </record>
+    
+        <record id="mrp_production_histo_bom1" model="mail.template">
+            <field name="name">BoM line changed for MRP production</field>
+            <field name="email_from">${user.company_id.email or ''}</field>
+            <field name="subject">Product ${object.bom_line_movement} in BoM: ${object.production_bom_id.name}, for production: ${object.production_id.name}.</field>
+            <field name="model_id" ref="model_mrp_production_historical"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+    <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p>Hello</p>
+        <p>The product <strong>${object.product_id.name}</strong> has been <strong>${object.bom_line_movement}</strong> by de user: <strong>${object.user_id.name}</strong>, in BoM: <strong>${object.production_bom_id.name}</strong>. Initial planned quantity: <strong>${object.programed_qty}</strong>.</p>
+        <p>Production: <strong>${object.production_id.name}</strong>, production state: <strong>${object.production_id.state}</strong>.</p>
+        <p>Thank you very much and good day.</p>
+    
+        <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+            <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+        </div>
+        <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+            <span style="color: #222; margin-bottom: 5px; display: block; ">
+                ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+            </span>
+            % if user.company_id.phone:
+                <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                    Phone: ${user.company_id.phone}
+                </div>
+            % endif
+            % if user.company_id.website:
+                <div>
+                    Web: <a href="${user.company_id.website}">${user.company_id.website}</a>
+                </div>
+            %endif
+            <p></p>
+        </div>
+    </div>
+            ]]></field>
+        </record>
+    
+        <record id="mrp_production_histo_bom2" model="mail.template">
+            <field name="name">BoM line information changed for MRP production</field>
+            <field name="email_from">${user.company_id.email or ''}</field>
+            <field name="subject">Changed BoM: ${object.production_bom_id.name}, for production: ${object.production_id.name}.</field>
+            <field name="model_id" ref="model_mrp_production_historical"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${user.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+    <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p>Hello</p>
+        <p>The BoM <strong>${object.production_bom_id.name}</strong> has been changed by de user: <strong>${object.user_id.name}</strong>.</p>
+        <p>Production: <strong>${object.production_id.name}</strong>, production state: <strong>${object.production_id.state}</strong>.</p>
+        <p>${object.bom_line_changes}</p>
+    
+        <p>Thank you very much and good day.</p>
+    
+        <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+            <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+        </div>
+        <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+            <span style="color: #222; margin-bottom: 5px; display: block; ">
+                ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+            </span>
+            % if user.company_id.phone:
+                <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                    Phone: ${user.company_id.phone}
+                </div>
+            % endif
+            % if user.company_id.website:
+                <div>
+                    Web: <a href="${user.company_id.website}">${user.company_id.website}</a>
+                </div>
+            %endif
+            <p></p>
+        </div>
+    </div>
+            ]]></field>
+        </record>
+    </data>
+</odoo>
