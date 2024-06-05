@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t
+    t-name="mrp_bom_line_layer_and_designator.BomOverviewTable"
+    t-inherit="mrp.BomOverviewTable"
+    t-inherit-mode="extension"
+    owl="1"
+  >
+        <xpath expr="//thead/tr/th[last()-1]" position="after">
+            <th>Layer</th>
+            <th>Designator</th>
+        </xpath>
+    </t>
+    <t
+    t-name="mrp_bom_line_layer_and_designator.BomOverviewLine"
+    t-inherit="mrp.BomOverviewLine"
+    t-inherit-mode="extension"
+    owl="1"
+  >
+        <xpath expr="//td[last()-1]" position="after">
+            <td>
+                <t t-esc="data.layer" />
+            </td>
+            <td>
+                <t t-esc="data.designator" />
+            </td>
+        </xpath>
+    </t>
+</templates>

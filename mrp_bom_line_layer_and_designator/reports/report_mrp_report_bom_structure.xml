@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrp_bom_layer_designator" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//thead/tr/th[last()-2]" position="after">
+            <th
+        class="o_mrp_bom_cost text-right"
+        title="Layer of the product"
+      >Layer</th>
+                        <th
+        class="o_mrp_bom_cost text-right"
+        title="Designator of the product"
+      >Designator</th>
+        </xpath>
+        <xpath expr="//tbody/tr/td[last()-2]" position="after">
+            <td class="text-end" />
+            <td class="text-end" />
+        </xpath>
+        <xpath expr="//tbody/tr[last()]/td[last()-2]" position="after">
+            <td class="text-end" />
+            <td class="text-end" />
+        </xpath>
+        <xpath expr="//tbody/t[last()]/tr/td[last()-2]" position="after">
+            <td class="text-end">
+                <span t-esc="l['layer']" />
+            </td>
+            <td class="text-end">
+                <span t-esc="l['designator']" />
+            </td>
+        </xpath>
+    </template>
+    <template id="report_mrp_bom_pdf_line" inherit_id="mrp.report_mrp_bom_pdf_line">
+        <xpath expr="//td[last()-2]" position="after">
+            <td class="text-right">
+                <span t-esc="l['layer']" />
+            </td>
+            <td class="text-right">
+                <span t-esc="l['designator']" />
+            </td>
+        </xpath>
+    </template>
+</odoo>
