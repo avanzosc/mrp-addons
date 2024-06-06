@@ -138,7 +138,7 @@ class MrpProduction(models.Model):
             "state": "confirmed",
             "active": "True",
         })
-        return self._generate_moves()
+        return orders_to_confirm._generate_moves()
 
     @api.multi
     def _action_compute_lines(self):
