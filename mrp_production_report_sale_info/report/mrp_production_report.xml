@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_mrporder" inherit_id="mrp_production_report.report_mrporder">
+        <div name="bom" position="before">
+            <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_id" name="sale">
+                <strong>Sale Order:</strong><br/>
+                <span t-field="o.sale_id.name"/>
+            </div>
+        </div>
+    </template>
+</odoo>
