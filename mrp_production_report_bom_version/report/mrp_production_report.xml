@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_mrporder" inherit_id="mrp_production_report.report_mrporder">
+        <div name="bom" position="after">
+            <div class="col-auto col-3 mw-100 mb-2" t-if="o.bom_id and o.bom_id.version" name="bom-version">
+                <strong>BoM Version:</strong><br/>
+                <span t-field="o.bom_id.version"/>
+            </div>
+        </div>
+    </template>
+</odoo>
