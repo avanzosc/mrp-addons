@@ -50,7 +50,8 @@ class MrpProductionProductLine(models.Model):
     )
 
     @api.onchange("product_id")
-    def onchange_product_id(self):
+    def _onchange_product_id(self):
+        super()._onchange_product_id()
         make_to_order = self.env.ref("stock.route_warehouse0_mto", False)
         buy = self.env.ref("purchase_stock.route_warehouse0_buy", False)
         manufacture = self.env.ref("mrp.route_warehouse0_manufacture", False)

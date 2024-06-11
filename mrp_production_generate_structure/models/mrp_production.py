@@ -27,13 +27,6 @@ class MrpProduction(models.Model):
         compute="_compute_purchase_count",
     )
 
-    @api.multi
-    def action_compute(self):
-        res = super().action_compute()
-        for line in self.mapped("product_line_ids"):
-            line.onchange_product_id()
-        return res
-
     def _get_manufacturing_orders(self):
         self.ensure_one()
         origin = self.origin_production_id.id or self.id
