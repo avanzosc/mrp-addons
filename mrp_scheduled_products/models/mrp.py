@@ -50,11 +50,11 @@ class MrpProductionProductLine(models.Model):
         for line in self:
             line.state = line.production_id.state
 
-    @api.onchange("product_id")
+    @api.onchange("product_id", "bom_line_id")
     def _onchange_product_id(self):
         if self.product_id:
-            self.product_uom_id = self.product_id.uom_id
-            self.name = self.product_id.name
+            self.product_uom_id = self.bom_line_id.product_uom_id or self.product_id.uom_id
+            self.name = self.product_id.name or self.bom_line_id.product_tmpl_id.name
             try:
                 self.product_tmpl_id = self.product_id.product_tmpl_id
             except Exception:
@@ -71,6 +71,21 @@ class MrpProduction(models.Model):
     state = fields.Selection(selection_add=[("draft", "Draft")],
                              default="draft")
     active = fields.Boolean(string="Active", default=False)
+
+    @api.onchange("product_qty")
+    def _onchange_product_qty(self):
+        for production in self:
+            res = production._prepare_lines()
+            prod_lines = []
+            for bom_line, line_data in res:
+                prod_lines.append((0, 0, line_data))
+            production.update({
+                "product_line_ids": [
+                    (2, line.id) for line in production.product_line_ids],
+            })
+            production.update({
+                "product_line_ids": prod_lines,
+            })
 
     def _get_raw_move_dict(self, product_line):
         self.ensure_one()
@@ -153,44 +168,47 @@ class MrpProduction(models.Model):
             res = production._prepare_lines()
             results = res  # product_lines
             # reset product_lines in production order
-            for line in results:
-                line_data = line[1]
-                bom_line = line[0]
-                product = bom_line.product_id
-                prod_line = {
-                    "name": product.name or bom_line.product_tmpl_id.name,
-                    "product_id": product.id,
-                    "product_qty": line_data["qty"],
-                    "bom_line_id": bom_line.id,
-                    "product_uom_id": bom_line.product_uom_id.id,
-                    "production_id": production.id,
-                }
-                prod_line_obj.create(prod_line)
+            for bom_line, line_data in res:
+                prod_line_obj.create(line_data)
         return results
 
     @api.multi
     def _prepare_lines(self):
         # search BoM structure and route
-        bom_obj = self.env["mrp.bom"]
-        bom_point = self.bom_id
-        if not bom_point:
-            bom_point = bom_obj._bom_find(product=self.product_id)
-            if bom_point:
-                routing = bom_point.routing_id
-                self.write({
-                    "bom_id": bom_point.id,
-                    "routing_id": routing.id,
-                })
+        lines_done = []
+        if self.product_id:
+            bom_obj = self.env["mrp.bom"]
+            product_line_obj = self.env["mrp.production.product.line"]
+            bom_point = self.bom_id
+            if not bom_point:
+                bom_point = bom_obj._bom_find(product=self.product_id)
+                if bom_point:
+                    routing = bom_point.routing_id
+                    self.write({
+                        "bom_id": bom_point.id,
+                        "routing_id": routing.id,
+                    })
 
-        if not bom_point:
-            raise exceptions.MissingError(
-                _("Cannot find a bill of material for this product."))
+            if not bom_point:
+                raise exceptions.MissingError(
+                    _("Cannot find a bill of material for this product."))
 
-        # get components from BoM structure
-        factor = self.product_uom_id._compute_quantity(
-            self.product_qty, bom_point.product_uom_id)
-        boms_done, lines_done = bom_point.explode(
-            self.product_id, factor / bom_point.product_qty)
+            # get components from BoM structure
+            factor = self.product_uom_id._compute_quantity(
+                self.product_qty, bom_point.product_uom_id)
+            boms_done, lines_done = bom_point.explode(
+                self.product_id, factor / bom_point.product_qty)
+            for bom_line, line_data in lines_done:
+                prod_line_vals = {
+                    "product_id": bom_line.product_id.id,
+                    "product_qty": line_data["qty"],
+                    "bom_line_id": bom_line.id,
+                    "production_id": self.id,
+                }
+                new_line = product_line_obj.new(prod_line_vals)
+                for onchange_method in new_line._onchange_methods["product_id"]:
+                    onchange_method(new_line)
+                line_data.update(product_line_obj._convert_to_write(new_line._cache))
         return lines_done
 
     @api.multi

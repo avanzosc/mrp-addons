@@ -35,9 +35,11 @@
                 <field name="production_id" invisible="context.get('hide_production_id',True)" />
                 <field name="date_planned_start" invisible="context.get('hide_production_id',True)" />
                 <field name="product_id"/>
+                <field name="name" invisible="1" />
                 <field name="product_qty"/>
                 <field name="product_uom_id" groups="uom.group_uom"/>
                 <field name="state" invisible="context.get('hide_production_id',True)" />
+                <field name="bom_line_id" invisible="1" />
             </tree>
         </field>
     </record>
