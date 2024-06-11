@@ -40,14 +40,13 @@ class MrpProduction(models.Model):
     @api.onchange("stock_qty", "sale_line_qty")
     def _onchange_stock_qty(self):
         for production in self:
-            production.product_qty = (
-                production.stock_qty + production.sale_line_qty)
+            production.product_qty = production.stock_qty + production.sale_line_qty
 
     @api.onchange("product_qty")
     def _onchange_product_qty(self):
+        super()._onchange_product_qty()
         for production in self:
-            production.stock_qty = (
-                production.product_qty - production.sale_line_qty)
+            production.stock_qty = production.product_qty - production.sale_line_qty
 
     def _update_mo_qty(self, qty):
         self.ensure_one()
@@ -76,30 +75,3 @@ class MrpProduction(models.Model):
     def _action_recalculate_product_qty(self):
         for mrp in self:
             mrp.product_qty = mrp._recalculate_mo_qty()
-
-    @api.onchange("product_qty")
-    def _action_recalculate_lines(self):
-        for production in self:
-            res = production._prepare_lines()
-            results = res  # product_lines
-            prod_lines = []
-            for line in results:
-                line_data = line[1]
-                bom_line = line[0]
-                product = bom_line.product_id
-                prod_line = {
-                    "name": product.name or bom_line.product_tmpl_id.name,
-                    "product_id": product.id,
-                    "product_qty": line_data["qty"],
-                    "bom_line_id": bom_line.id,
-                    "product_uom_id": bom_line.product_uom_id.id,
-                    "production_id": production.id,
-                }
-                prod_lines.append(prod_line)
-            production.update({
-                "product_line_ids": [
-                    (2, line.id) for line in production.product_line_ids],
-            })
-            production.update({
-                "product_line_ids": prod_lines,
-            })
