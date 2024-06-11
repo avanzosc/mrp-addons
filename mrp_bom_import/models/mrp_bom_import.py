@@ -213,6 +213,8 @@ class MrpBomImport(models.Model):
             "bom_code": convert2str(row_values.get("Parent Code", "")),
             "bom_name": convert2str(row_values.get("Parent Name", "")),
             "parent_qty": check_number(row_values.get("Parent Qty", 1)),
+            "routing_name": convert2str(row_values.get("Routing Name", "")),
+            "routing_code": convert2str(row_values.get("Routing Code", "")),
         }
         values.update(
             {
@@ -289,6 +291,12 @@ class MrpBomLineImport(models.Model):
         related="bom_product_id.bom_count",
         store=True)
     parent_qty = fields.Float(string="Parent Quantity")
+    routing_name = fields.Char(string="Routing Name")
+    routing_code = fields.Char(string="Routing Code")
+    routing_id = fields.Many2one(
+        string="Route",
+        comodel_name="mrp.routing"
+    )
 
     def _check_product(self):
         self.ensure_one()
@@ -334,11 +342,35 @@ class MrpBomLineImport(models.Model):
             log_info = _("Error: More than one BoM product found.")
         return products, log_info
 
+    def _check_bom_routing(self):
+        self.ensure_one()
+        log_info = ""
+        if self.routing_id:
+            return self.routing_id, log_info
+        routing_obj = self.env["mrp.routing"]
+        search_domain = []
+        if self.routing_name:
+            search_domain = expression.AND(
+                [[("name", "=", self.routing_name)], search_domain]
+            )
+        if self.routing_code:
+            search_domain = expression.AND(
+                [[("code", "=", self.routing_code)], search_domain]
+            )
+        routings = routing_obj.search(search_domain)
+        if not routings:
+            routings = False
+            log_info = _("Error: BoM routing not found.")
+        elif len(routings) != 1:
+            routings = False
+            log_info = _("Error: More than one BoM routing found.")
+        return routings, log_info
+
     def action_validate_lines(self):
         for line in self.filtered(lambda x: x.state not in ("done")):
             line_vals = {}
             log_info = ""
-            product = bom_product = bom = False
+            product = bom_product = bom = routing = False
             product, product_log_info = line._check_product()
             if product_log_info:
                 log_info += product_log_info
@@ -347,12 +379,17 @@ class MrpBomLineImport(models.Model):
                 log_info += bom_product_log_info
             if not line.quantity:
                 log_info += _("Error: Quantity cannot be 0.")
+            if line.routing_code or line.routing_name:
+                routing, routing_log_info = line._check_bom_routing()
+                if routing_log_info:
+                    log_info += routing_log_info
             state = "error" if log_info else "pass"
             line_vals.update(
                 {
                     "product_id": product and product.id,
                     "bom_product_id": bom_product and bom_product.id,
                     "bom_id": bom and bom.id,
+                    "routing_id": routing and routing.id,
                     "state": state,
                     "log_info": log_info,
                 }
@@ -365,7 +402,8 @@ class MrpBomLineImport(models.Model):
             "product_tmpl_id": self.bom_product_id.product_tmpl_id.id,
             "code": self.bom_ref,
             "product_qty": self.parent_qty,
-            "product_uom_id": self.bom_product_id.uom_id.id})
+            "product_uom_id": self.bom_product_id.uom_id.id,
+            "routing_id": self.routing_id.id,})
         return bom
 
     def generate_bom_line_values(self):

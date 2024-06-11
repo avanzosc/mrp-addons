@@ -10,6 +10,7 @@
         'product',
     ],
     'author':  "AvanzOSC",
+    "category": "Manufacturing",
     'license': "AGPL-3",
     'summary': '''MRP BoM Import''',
     'website': 'http://www.avanzosc.es',
