@@ -3,6 +3,7 @@
 {
     "name": "Quality control claim",
     "version": "16.0.1.0.0",
+    "license": "AGPL-3",
     "author": "OdooMRP team," "AvanzOSC," "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "https://github.com/avanzosc/mrp-addons",
     "contributors": [
