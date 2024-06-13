@@ -49,6 +49,22 @@ class MrpProductionProductLine(models.Model):
         store=True,
     )
 
+    @api.multi
+    def unlink(self):
+        if any(self.mapped("new_production_id")):
+            raise UserError(
+                _(
+                    "Unable to erase scheduled product lines, there are already manufacturing orders created."
+                )
+            )
+        if any(self.mapped("purchase_order_id")):
+            raise UserError(
+                _(
+                    "Unable to erase scheduled product lines, there are already purchase orders created."
+                )
+            )
+        return super().unlink()
+
     @api.onchange("product_id")
     def _onchange_product_id(self):
         super()._onchange_product_id()
