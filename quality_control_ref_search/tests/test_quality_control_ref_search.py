@@ -4,13 +4,15 @@ import odoo.tests.common as common
 
 
 class TestQualityControlRefSearch(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.inspection_model = self.env["qc.inspection"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.inspection_model = cls.env["qc.inspection"]
+        cls.product = cls.env["product.product"].create({"name": "Test product"})
 
     def test_quality_control_ref_search(self):
         inspection_vals = {
-            "object_id": ("res.partner," + str(self.ref("base.res_partner_2")))
+            "object_id": "%s,%d" % (self.product._name, self.product.id),
         }
         self.inspection = self.inspection_model.create(inspection_vals)
         self.assertNotEqual(

@@ -6,10 +6,6 @@
     "license": "AGPL-3",
     "author": "AvanzOSC",
     "website": "https://github.com/avanzosc/mrp-addons",
-    "contributors": [
-        "Ana Juaristi <anajuaristi@avanzosc.es>",
-        "Alfredo de la Fuente <alfredodelafuente@avanzosc.es",
-    ],
     "category": "Quality Control",
     "depends": [
         "quality_control_oca",

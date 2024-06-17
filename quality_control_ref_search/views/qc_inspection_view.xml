@@ -21,11 +21,11 @@
             </field>
             <filter name="group_by_object_id" position="replace">
                 <filter
-        name="group_by_reference"
-        string="Reference"
-        domain="[]"
-        help="Reference"
-        context="{'group_by':'ref_model_name'}"
+          name="group_by_reference"
+          string="Reference"
+          domain="[]"
+          help="Reference"
+          context="{'group_by':'ref_model_name'}"
         />
             </filter>
         </field>
