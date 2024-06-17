@@ -2,11 +2,11 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Mrp machine relation
-====================
+================================
+Machine Manager in Manufacturing
+================================
 
-In Work Center new field "Machine".
+This modules links mrp.workcenters and machines.
 
 Bug Tracker
 ===========
