@@ -39,6 +39,7 @@ class SacaLine(models.Model):
             'view_mode': 'tree,form',
             'res_model': 'mrp.production',
             'domain': [('id', 'in', self.production_ids.ids)],
+            'search_view_id': self.env.ref('mrp.view_mrp_production_filter').id,
             'type': 'ir.actions.act_window',
             'context': context,
         }
