@@ -1,0 +1,61 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_usability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-19 12:16+0000\n"
+"PO-Revision-Date: 2024-06-19 12:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production__operator_id
+msgid "Operator"
+msgstr "Operador"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production__produced_quantity
+msgid "Produced Quantity"
+msgstr "Cantidad Producida"
+
+#. module: mrp_production_usability
+#: model:ir.model,name:mrp_production_usability.model_mrp_production
+msgid "Production Usability"
+msgstr "Producción Usable"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production__quality_responsible_id
+msgid "Quality Responsible"
+msgstr "Responsable de la Calidad"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production__rejected_quantity
+msgid "Rejected Quantity"
+msgstr "Cantidad Rechazada"
+
+#. module: mrp_production_usability
+#: model:ir.model.fields,field_description:mrp_production_usability.field_mrp_production__shortage_quantity
+msgid "Shortage Quantity"
+msgstr "Cantidad Faltante"
