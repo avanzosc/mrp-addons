@@ -1,16 +1,206 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="report_mrp_bom_line_inherit" inherit_id="mrp.report_mrp_bom_line">
-        <xpath expr="//td[@name='td_mrp_bom']" position="after">
+        <xpath expr="//t[@t-as='l']/tr/td[6]" position="after">
             <td class="text-right">
-                <span t-esc="round(l['prod_qty'] * l['prod_cost'], 4)"/>
+                <span t-if="data['report_structure'] != 'bom_structure'">
+                    <t t-if="currency.position == 'before'">
+                        <t t-esc="currency.symbol" />
+                        <t
+              t-esc="'{:.4f}'.format(round(l['prod_qty'] * l['prod_cost'], 4)).replace('.', ',')"
+            />
+                    </t>
+                    <t t-else="">
+                        <t
+              t-esc="'{:.4f}'.format(round(l['prod_qty'] * l['prod_cost'], 4)).replace('.', ',')"
+            />
+                        <t t-esc="currency.symbol" />
+                    </t>
+                </span>
+            </td>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[3]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[3]" position="after">
+            <td class="text-right">
+                <span t-if="data['report_structure'] != 'bom_structure'">
+                    <t
+            t-esc="'{:.4f}'.format(round(l['prod_qty'], 4)).replace('.', ',')"
+          />
+                </span>
+            </td>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[5]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[5]" position="after">
+            <td class="text-right">
+                <span t-if="data['report_structure'] != 'bom_structure'">
+                    <t t-if="currency.position == 'before'">
+                        <t t-esc="currency.symbol" />
+                        <t
+              t-esc="'{:.4f}'.format(round(l['prod_cost'], 4)).replace('.', ',')"
+            />
+                    </t>
+                    <t t-else="">
+                        <t
+              t-esc="'{:.4f}'.format(round(l['prod_cost'], 4)).replace('.', ',')"
+            />
+                        <t t-esc="currency.symbol" />
+                    </t>
+                </span>
+            </td>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[6]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//t[@t-as='l']/tr/td[6]" position="after">
+            <td class="text-right">
+                <span t-if="data['report_structure'] != 'bom_structure'">
+                    <t t-if="currency.position == 'before'">
+                        <t t-esc="currency.symbol" />
+                        <t
+              t-esc="'{:.4f}'.format(round(l['total'], 4)).replace('.', ',')"
+            />
+                    </t>
+                    <t t-else="">
+                        <t
+              t-esc="'{:.4f}'.format(round(l['total'], 4)).replace('.', ',')"
+            />
+                        <t t-esc="currency.symbol" />
+                    </t>
+                </span>
             </td>
         </xpath>
     </template>
 
     <template id="report_mrp_bom_inherit" inherit_id="mrp.report_mrp_bom">
-        <xpath expr="//thead/tr/th[3]" position="before">
-            <th class="text-right">Prod Qty * Prod Price</th>
+        <xpath expr="//thead/tr/th[6]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//thead/tr/th[6]" position="after">
+            <th t-if="data['report_structure'] != 'bom_structure'" class="text-right">
+                Prod Qty * Prod Price
+            </th>
+        </xpath>
+
+        <xpath expr="//tfoot/tr/td[5]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//tfoot/tr/td[5]" position="after">
+            <td
+        class="o_mrp_prod_cost text-right"
+        t-if="data['report_structure'] != 'bom_structure'"
+      >
+                <span>
+                    <t t-if="currency.position == 'before'">
+                        <t t-esc="currency.symbol" />
+                        <t
+              t-esc="'{:.4f}'.format(round(data['price']/data['bom_qty'], 4)).replace('.', ',')"
+            />
+                    </t>
+                    <t t-else="">
+                        <t
+              t-esc="'{:.4f}'.format(round(data['price']/data['bom_qty'], 4)).replace('.', ',')"
+            />
+                        <t t-esc="currency.symbol" />
+                    </t>
+                </span>
+            </td>
+        </xpath>
+
+        <xpath expr="//tfoot/tr/td[6]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//tfoot/tr/td[6]" position="after">
+            <td
+        class="o_mrp_prod_cost text-right"
+        t-if="data['report_structure'] != 'bom_structure'"
+      >
+                <span>
+                    <t t-if="currency.position == 'before'">
+                        <t t-esc="currency.symbol" />
+                        <t
+              t-esc="'{:.4f}'.format(round(data['total']/data['bom_qty'], 4)).replace('.', ',')"
+            />
+                    </t>
+                    <t t-else="">
+                        <t
+              t-esc="'{:.4f}'.format(round(data['total']/data['bom_qty'], 4)).replace('.', ',')"
+            />
+                        <t t-esc="currency.symbol" />
+                    </t>
+                </span>
+            </td>
+        </xpath>
+
+        <xpath expr="//tbody/tr/td[3]/span" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//tbody/tr/td[3]/span" position="after">
+            <td>
+                <span t-if="data['report_structure'] != 'bom_structure'">
+                    <t
+            t-esc="'{:.4f}'.format(round(data['bom_qty'], 4)).replace('.', ',')"
+          />
+                </span>
+            </td>
+        </xpath>
+
+        <xpath expr="//tbody/tr/td[5]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//tbody/tr/td[5]" position="after">
+            <td class="o_mrp_prod_cost text-right">
+                <span t-if="data['report_structure'] != 'bom_structure'">
+                    <t t-if="currency.position == 'before'">
+                        <t t-esc="currency.symbol" />
+                        <t
+              t-esc="'{:.4f}'.format(round(data['price'], 4)).replace('.', ',')"
+            />
+                    </t>
+                    <t t-else="">
+                        <t
+              t-esc="'{:.4f}'.format(round(data['price'], 4)).replace('.', ',')"
+            />
+                        <t t-esc="currency.symbol" />
+                    </t>
+                </span>
+            </td>
+        </xpath>
+
+        <xpath expr="//tbody/tr/td[6]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//tbody/tr/td[6]" position="after">
+            <td class="o_mrp_bom_cost text-right">
+                <span t-if="data['report_structure'] != 'bom_structure'">
+                    <t t-if="currency.position == 'before'">
+                        <t t-esc="currency.symbol" />
+                        <t
+              t-esc="'{:.4f}'.format(round(data['total'], 4)).replace('.', ',')"
+            />
+                    </t>
+                    <t t-else="">
+                        <t
+              t-esc="'{:.4f}'.format(round(data['total'], 4)).replace('.', ',')"
+            />
+                        <t t-esc="currency.symbol" />
+                    </t>
+                </span>
+            </td>
         </xpath>
     </template>
 </odoo>
