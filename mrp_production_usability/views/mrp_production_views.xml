@@ -15,5 +15,23 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="mrp_production_form_view_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//label[@for='product_qty']" position="after">
+                        <field name="produced_quantity"/>
+                        <field name="shortage_quantity"/>
+                        <field name="rejected_quantity"/>
+                        <field name="operator_id"/>
+                        <field name="quality_responsible_id"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
     </data>
 </odoo>

@@ -4,7 +4,7 @@
     'category': 'Manufacturing',
     'depends': ['base', 'mrp', 'hr'],
     'data': [
-        'views/mrp_production_view.xml',
+        'views/mrp_production_views.xml',
     ],
     'installable': True,
     'auto_install': False,
