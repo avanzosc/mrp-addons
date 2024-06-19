@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Herencia de la vista de formulario de OF -->
+        <record id="view_mrp_production_form_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_qty']" position="after">
+                    <field name="produced_quantity"/>
+                    <field name="shortage_quantity"/>
+                    <field name="rejected_quantity"/>
+                    <field name="operator_id"/>
+                    <field name="quality_responsible_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

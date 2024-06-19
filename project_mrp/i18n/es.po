@@ -1,0 +1,181 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: project_mrp\n"
+"POT-Creation-Date: 2024-06-19\n"
+"PO-Revision-Date: 2024-06-19\n"
+"Language-Team: Español\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models/project_task.py:7
+msgid "Manufacturing Order"
+msgstr "Orden de Fabricación"
+
+#: models/project_task.py:8
+msgid "Product"
+msgstr "Producto"
+
+#: models/project_task.py:9
+msgid "Verification By"
+msgstr "Verificación Por"
+
+#: models/project_task.py:10
+msgid "Unverified"
+msgstr "Sin Verificar"
+
+#: models/project_task.py:11
+msgid "Sent"
+msgstr "Enviado"
+
+#: models/project_task.py:12
+msgid "By Prototype"
+msgstr "Por Prototipo"
+
+#: models/project_task.py:13
+msgid "By Antiquity"
+msgstr "Por Antigüedad"
+
+#: models/project_task.py:14
+msgid "By Plan"
+msgstr "Por Plano"
+
+#: models/project_task.py:17
+msgid "Preparation"
+msgstr "Preparación"
+
+#: models/project_task.py:18
+msgid "Closed Box"
+msgstr "Caja Cerrada"
+
+#: models/project_task.py:19
+msgid "Open Box"
+msgstr "Caja Abierta"
+
+#: models/project_task.py:20
+msgid "Only Bodies"
+msgstr "Solo Cuerpos"
+
+#: models/project_task.py:21
+msgid "Only Lids"
+msgstr "Solo Tapas"
+
+#: models/project_task.py:22
+msgid "Only Fronts"
+msgstr "Solo Frontales"
+
+#: models/project_task.py:23
+msgid "No Preparation"
+msgstr "Sin Preparación"
+
+#: models/project_task.py:29
+msgid "Start Date"
+msgstr "Fecha de Inicio"
+
+#: models/project_task.py:30
+msgid "End Date"
+msgstr "Fecha de Fin"
+
+#: models/mrp_production.py:6
+msgid "Related Tasks"
+msgstr "Tareas Relacionadas"
+
+#: models/product_template.py:7
+#: models/product_template.py:18
+msgid "Verification By"
+msgstr "Verificación Por"
+
+#: models/product_template.py:8
+msgid "Unverified"
+msgstr "Sin Verificar"
+
+#: models/product_template.py:9
+msgid "Sent"
+msgstr "Enviado"
+
+#: models/product_template.py:10
+msgid "By Prototype"
+msgstr "Por Prototipo"
+
+#: models/product_template.py:11
+msgid "By Antiquity"
+msgstr "Por Antigüedad"
+
+#: models/product_template.py:12
+msgid "By Plan"
+msgstr "Por Plano"
+
+#: models/product_template.py:15
+#: models/product_template.py:26
+msgid "Preparation"
+msgstr "Preparación"
+
+#: models/product_template.py:16
+msgid "Closed Box"
+msgstr "Caja Cerrada"
+
+#: models/product_template.py:17
+msgid "Open Box"
+msgstr "Caja Abierta"
+
+#: models/product_template.py:19
+msgid "Only Bodies"
+msgstr "Solo Cuerpos"
+
+#: models/product_template.py:20
+msgid "Only Lids"
+msgstr "Solo Tapas"
+
+#: models/product_template.py:21
+msgid "Only Fronts"
+msgstr "Solo Frontales"
+
+#: models/product_template.py:22
+msgid "No Preparation"
+msgstr "Sin Preparación"
+
+#: models/project_project.py:6
+msgid "Sale Hourly Rate"
+msgstr "Precio Hora Venta"
+
+#: views/project_task_views.xml:7
+msgid "Produced Quantity"
+msgstr "Cantidad Producida"
+
+#: views/project_task_views.xml:8
+msgid "Shortage Quantity"
+msgstr "Cantidad Faltante"
+
+#: views/project_task_views.xml:9
+msgid "Rejected Quantity"
+msgstr "Cantidad Rechazada"
+
+#: views/project_task_views.xml:10
+msgid "Operator"
+msgstr "Operario"
+
+#: views/project_task_views.xml:11
+msgid "Quality Responsible"
+msgstr "Responsable de Calidad"
+
+#: views/mrp_production_views.xml:7
+#: views/mrp_production_views.xml:8
+msgid "Produced Quantity"
+msgstr "Cantidad Producida"
+
+#: views/mrp_production_views.xml:9
+msgid "Shortage Quantity"
+msgstr "Cantidad Faltante"
+
+#: views/mrp_production_views.xml:10
+msgid "Rejected Quantity"
+msgstr "Cantidad Rechazada"
+
+#: views/mrp_production_views.xml:11
+msgid "Operator"
+msgstr "Operario"
+
+#: views/mrp_production_views.xml:12
+msgid "Quality Responsible"
+msgstr "Responsable de Calidad"

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Herencia de la vista de árbol de OF -->
+        <record id="view_mrp_production_tree_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.tree.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="produced_quantity"/>
+                    <field name="shortage_quantity"/>
+                    <field name="rejected_quantity"/>
+                    <field name="operator_id"/>
+                    <field name="quality_responsible_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
