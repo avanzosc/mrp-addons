@@ -1,18 +1,15 @@
 <?xml version="1.0"?>
 <odoo>
     <data>
-        <!-- Herencia de la vista de formulario de tareas -->
         <record id="view_task_form_inherit" model="ir.ui.view">
             <field name="name">project.task.form.inherit</field>
             <field name="model">project.task</field>
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='product_qty']" position="after">
-                    <field name="produced_quantity"/>
-                    <field name="shortage_quantity"/>
-                    <field name="rejected_quantity"/>
-                    <field name="operator_id"/>
-                    <field name="quality_responsible_id"/>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="sale_order_id" invisible="1"/>
+                    <field name="mrp_production_id" domain="['|',('sale_id', '=', sale_order_id),  ('sale_id', '=', False)]"/>
+                    <field name="product_id"/>
                 </xpath>
             </field>
         </record>

@@ -1,0 +1,30 @@
+
+<odoo>
+    <record id="view_task_form_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.date.compute</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="create_date" invisible="0"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_tree_inherit" model="ir.ui.view">
+        <field name="name">project.task.tree.inherit.date.compute</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="create_date"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
