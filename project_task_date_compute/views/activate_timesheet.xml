@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="module_hr_timesheet_config_param" model="ir.config_parameter">
+            <field name="key">module_hr_timesheet</field>
+            <field name="value" eval="True"/>
+        </record>
+    </data>
+</odoo>
