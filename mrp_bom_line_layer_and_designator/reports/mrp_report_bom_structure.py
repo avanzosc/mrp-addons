@@ -79,9 +79,7 @@ class BomStructureReport(models.AbstractModel):
     def _get_pdf_line(
         self, bom_id, product_id=False, qty=1, unfolded_ids=None, unfolded=False
     ):
-        res = super()._get_pdf_line(
-            bom_id, product_id, qty, unfolded_ids, unfolded
-        )
+        res = super()._get_pdf_line(bom_id, product_id, qty, unfolded_ids, unfolded)
         line_ids = self.env["mrp.bom.line"].search([("bom_id", "=", bom_id)])
         for line in res["lines"]:
             line_id = line_ids.filtered(
