@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="mrp_production_tree_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
         <field name="arch" type="xml">
             <field name="product_id" position="after">
-                <field name="sale_id" readonly="1" optional="show"/>
-                <field name="sale_line_id" readonly="1" optional="show"/>
-                <field name="sale_line_name" readonly="1" optional="show"/>
+                <field name="sale_id" readonly="1" optional="show" />
+                <field name="sale_line_id" readonly="1" optional="show" />
+                <field name="sale_line_name" readonly="1" optional="show" />
             </field>
         </field>
     </record>
 
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
             <notebook position="before">
                 <group colspan="4">
-                    <separator string="Sale line description" colspan="4"/>
+                    <separator string="Sale line description" colspan="4" />
                     <field name="sale_line_name" colspan="4" readonly="1" nolabel="1" />
                 </group>
             </notebook>
             <xpath expr="//page[@name='miscellaneous']/group[1]" position="after">
                 <group string="Sale information">
                     <group>
-                        <field name="sale_id" readonly="1"/>
+                        <field name="sale_id" readonly="1" />
                     </group>
                     <group>
-                        <field name="sale_line_id" readonly="1"/>
+                        <field name="sale_line_id" readonly="1" />
                     </group>
                 </group>
             </xpath>
@@ -37,7 +37,7 @@
 
     <record id="view_mrp_production_filter" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
         <field name="arch" type="xml">
             <field name="origin" position="after">
                 <field name="sale_id" />
@@ -45,8 +45,12 @@
                 <field name="sale_line_name" />
             </field>
             <filter name="scheduled_date" position="after">
-                <filter string="Sale order" name="sale-order" domain="[]"
-                    context="{'group_by': 'sale_id'}"/>
+                <filter
+          string="Sale order"
+          name="sale-order"
+          domain="[]"
+          context="{'group_by': 'sale_id'}"
+        />
             </filter>
         </field>
     </record>
