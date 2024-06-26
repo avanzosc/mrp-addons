@@ -114,7 +114,7 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                 categt_applied_price = round(
                     (
                         categ_amount / categ_qty_done
-                    ) if categ_qty_done != 0 else 0,3
+                    ) if categ_qty_done != 0 else 0, 3
                 )
                 for product in categ_lines:
                     if product.product_id not in products:
@@ -146,7 +146,7 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                             ) if product_qty_done else 0
                         )
                         worksheet.write(n, m, round(
-                            product_percentage,2
+                            product_percentage, 2
                         ), two_decimal_format)
                         m += 1
                         worksheet.write(n, m, product.product_id.default_code)
@@ -168,11 +168,13 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                         )
                         m += 1
                         worksheet.write(
-                            n, m, round(product_amount,2), two_decimal_format
+                            n, m, round(product_amount, 2), two_decimal_format
                         )
                         m += 1
                         worksheet.write(
-                            n, m, round(product_qty_done / origin_qty * 100,2),
+                            n, m, round(
+                                product_qty_done / origin_qty * 100, 2
+                            ),
                             two_decimal_format
                         )
                 n += 1

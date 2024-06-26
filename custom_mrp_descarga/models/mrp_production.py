@@ -1,14 +1,17 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import rrule
-from _datetime import timedelta
 from odoo.exceptions import ValidationError
 
 
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
+
+    def _default_production_date(self):
+        result = fields.Datetime.now()
+        return result
 
     saca_line_id = fields.Many2one(
         string="Saca Line",
@@ -49,7 +52,7 @@ class MrpProduction(models.Model):
         related="picking_type_id.chick_production",
         store=True)
     production_date = fields.Datetime(
-        default=fields.Datetime.now())
+        default=_default_production_date)
     birth_week = fields.Integer(
         string="Birth Week",
         compute="_compute_birth_week",
