@@ -25,4 +25,47 @@
             </xpath>
         </field>
     </record>
+
+    <record id="mrp_production_search_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_ready']" position="after">
+                <separator />
+                <filter
+          string="Rejected Quantity"
+          name="filter_qty_rejected"
+          domain="[('qty_rejected', '!=', False)]"
+        />
+                <filter
+          string="Operator"
+          name="filter_operator"
+          domain="[('operator_id', '!=', False)]"
+        />
+                <filter
+          string="Manufacturer"
+          name="filter_manufacturer"
+          domain="[('quality_responsible_id', '!=', False)]"
+        />
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <separator />
+                <filter
+          name="group_by_qty_rejected"
+          string="Rejected Quantity"
+          context="{'group_by': 'qty_rejected'}"
+        />
+                <filter
+          name="group_by_operator"
+          string="Operator"
+          context="{'group_by': 'operator_id'}"
+        />
+                <filter
+          name="group_by_manufacturer"
+          string="Manufacturer"
+          context="{'group_by': 'quality_responsible_id'}"
+        />
+            </xpath>
+        </field>
+    </record>
 </odoo>
