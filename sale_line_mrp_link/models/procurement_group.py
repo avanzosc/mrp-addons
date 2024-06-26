@@ -11,14 +11,20 @@ class ProcurementGroup(models.Model):
         result = False
         if len(self) > 0 or not procurements:
             return super(ProcurementGroup, self).run(
-                procurements, raise_user_error=raise_user_error)
+                procurements, raise_user_error=raise_user_error
+            )
         for procurement in procurements:
-            if ("sale_line_id" not in procurement.values or not
-                    procurement.values.get("sale_line_id", False)):
+            if "sale_line_id" not in procurement.values or not procurement.values.get(
+                "sale_line_id", False
+            ):
                 result = super(ProcurementGroup, self).run(
-                    [procurement], raise_user_error=raise_user_error)
+                    [procurement], raise_user_error=raise_user_error
+                )
             else:
-                result = super(ProcurementGroup, self.with_context(
-                    sale_line_id=procurement.values.get("sale_line_id"))).run(
-                        [procurement], raise_user_error=raise_user_error)
+                result = super(
+                    ProcurementGroup,
+                    self.with_context(
+                        sale_line_id=procurement.values.get("sale_line_id")
+                    ),
+                ).run([procurement], raise_user_error=raise_user_error)
         return result

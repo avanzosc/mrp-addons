@@ -7,4 +7,7 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     mrp_production_id = fields.Many2one(
-        string="MRP Production", comodel_name="mrp.production", copy=False)
+        string="MRP Production",
+        comodel_name="mrp.production",
+        copy=False,
+    )
