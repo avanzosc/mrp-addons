@@ -4,16 +4,32 @@
         <field name="model">bizerba.import.line</field>
         <field name="arch" type="xml">
             <search>
-                <field name="line_product_id"/>
-                <field name="line_product_code"/>
-                <field name="line_chicken_code"/>
-                <separator/>
-                <filter string="Errored" name="error" domain="[('state', '=', 'error')]"/>
-                <separator/>
-                <filter string="To Create" name="2create" domain="[('action', '=', 'create')]"/>
+                <field name="line_product_id" />
+                <field name="line_product_code" />
+                <field name="line_chicken_code" />
+                <separator />
+                <filter
+          string="Errored"
+          name="error"
+          domain="[('state', '=', 'error')]"
+        />
+                <separator />
+                <filter
+          string="To Create"
+          name="2create"
+          domain="[('action', '=', 'create')]"
+        />
                 <group expand="0" name="group_by" string="Group By">
-                    <filter name="group_product" string="Product" context="{'group_by': 'line_product_id'}"/>
-                    <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                    <filter
+            name="group_product"
+            string="Product"
+            context="{'group_by': 'line_product_id'}"
+          />
+                    <filter
+            name="group_state"
+            string="State"
+            context="{'group_by': 'state'}"
+          />
                 </group>
             </search>
         </field>
@@ -24,24 +40,39 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_validate" string="Validate" type="object" class="oe_read_only" states="2validate,error"/>
-                    <button name="action_process" string="Process" type="object" class="oe_read_only" states="pass"/>
-                    <field name="state" widget="statusbar"/>
+                    <button
+            name="action_validate"
+            string="Validate"
+            type="object"
+            class="oe_read_only"
+            states="2validate,error"
+          />
+                    <button
+            name="action_process"
+            string="Process"
+            type="object"
+            class="oe_read_only"
+            states="pass"
+          />
+                    <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <group>
                         <group>
-                            <field name="line_product_code"/>
-                            <field name="line_product_qty"/>
-                            <field name="line_chicken_code"/>
-                            <field name="line_date"/>
-                            <field name="line_lot"/>
+                            <field name="line_product_code" />
+                            <field name="line_product_qty" />
+                            <field name="line_chicken_code" />
+                            <field name="line_date" />
+                            <field name="line_lot" />
                         </group>
                         <group>
-                            <field name="line_product_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field
+                name="line_product_id"
+                options="{'no_create': True, 'no_open': True}"
+              />
                         </group>
                     </group>
-                    <field name="log_info"/>
+                    <field name="log_info" />
                 </sheet>
             </form>
         </field>
@@ -50,19 +81,24 @@
     <record id="bizerba_import_line_view_tree" model="ir.ui.view">
         <field name="model">bizerba.import.line</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="state == 'error'" decoration-muted="state == 'done'" decoration-it="log_info" editable="top">
-                <field name="action" readonly="1"/>
-                <field name="production_id" invisible="1"/>
-                <field name="line_product_code" readonly="1"/>
-                <field name="line_product_qty" readonly="1"/>
-                <field name="line_uom" readonly="1"/>
-                <field name="line_uom_id" optional="show" readonly="1"/>
-                <field name="line_chicken_code" readonly="1"/>
-                <field name="line_lot" readonly="1"/>
-                <field name="line_date" readonly="1"/>
-                <field name="line_product_id" optional="show" readonly="1"/>
-                <field name="state" readonly="1"/>
-                <field name="log_info" optional="show" readonly="1"/>
+            <tree
+        decoration-danger="state == 'error'"
+        decoration-muted="state == 'done'"
+        decoration-it="log_info"
+        editable="top"
+      >
+                <field name="action" readonly="1" />
+                <field name="production_id" invisible="1" />
+                <field name="line_product_code" readonly="1" />
+                <field name="line_product_qty" readonly="1" />
+                <field name="line_uom" readonly="1" />
+                <field name="line_uom_id" optional="show" readonly="1" />
+                <field name="line_chicken_code" readonly="1" />
+                <field name="line_lot" readonly="1" />
+                <field name="line_date" readonly="1" />
+                <field name="line_product_id" optional="show" readonly="1" />
+                <field name="state" readonly="1" />
+                <field name="log_info" optional="show" readonly="1" />
             </tree>
         </field>
     </record>

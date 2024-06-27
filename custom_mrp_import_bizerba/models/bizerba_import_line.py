@@ -9,8 +9,8 @@ class BizerbaImportLine(models.Model):
     _description = "Wizard lines to import Bizerba lines"
 
     production_id = fields.Many2one(
-        string="Production", 
-        comodel_name="mrp.production"
+        string="Production",
+        comodel_name="mrp.production",
     )
     action = fields.Selection(
         string="Action",
@@ -80,13 +80,15 @@ class BizerbaImportLine(models.Model):
         action = "nothing"
         if state != "error":
             action = "create"
-        update_values.update({
-            "line_uom_id": uom and uom.id,
-            "line_product_id": product and product.id,
-            "log_info": "\n".join(log_infos),
-            "state": state,
-            "action": action,
-        })
+        update_values.update(
+            {
+                "line_uom_id": uom and uom.id,
+                "line_product_id": product and product.id,
+                "log_info": "\n".join(log_infos),
+                "state": state,
+                "action": action,
+            }
+        )
         return update_values
 
     def _action_process(self):
@@ -94,37 +96,30 @@ class BizerbaImportLine(models.Model):
         if self.action == "create":
             log_info = ""
             move_line = self.production_id.move_line_ids.filtered(
-                    lambda c: c.product_id == self.line_product_id
-                )
+                lambda c: c.product_id == self.line_product_id
+            )
             if move_line:
-                same_product_lines = (
-                    self.production_id.import_line_ids.filtered(
-                        lambda c: c.line_product_id == self.line_product_id
-                    )
+                same_product_lines = self.production_id.import_line_ids.filtered(
+                    lambda c: c.line_product_id == self.line_product_id
                 )
                 move_line[:1].write(
-                        {
-                            "container": len(same_product_lines),
-                            "qty_done": sum(same_product_lines.mapped("line_product_qty")),
-                            "product_uom_id": self.line_uom_id.id,
-                        }
-                    )
+                    {
+                        "container": len(same_product_lines),
+                        "qty_done": sum(same_product_lines.mapped("line_product_qty")),
+                        "product_uom_id": self.line_uom_id.id,
+                    }
+                )
                 for line in same_product_lines:
-                    line.write({
-                        "action": "nothing",
-                        "state": "done"
-                    })
+                    line.write({"action": "nothing", "state": "done"})
                 move_line[:1].onchange_container()
                 move_line[:1].onchange_unit()
             else:
                 log_info = _("Error: There is no entry line with this product.")
             state = "error" if log_info else "done"
             action = "nothing"
-            update_values.update({
-                "log_info": log_info,
-                "action": action,
-                "state": state
-            })
+            update_values.update(
+                {"log_info": log_info, "action": action, "state": state}
+            )
         return update_values
 
     def _check_product(self):
