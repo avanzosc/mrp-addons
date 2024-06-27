@@ -33,9 +33,10 @@ class MrpWorkorder(models.Model):
             pending_raw_moves = order.move_raw_ids.filtered(
                 lambda m: m.state not in ("done", "cancel")
             )
-            order.unreserve_visible = any(
-                [m.mrp_unreserve_visible for m in pending_raw_moves]
-            ) and order.date_planned_start
+            order.unreserve_visible = (
+                any([m.mrp_unreserve_visible for m in pending_raw_moves])
+                and order.date_planned_start
+            )
 
     def _compute_show_check_availability(self):
         """According to `workorder.show_check_availability`, the
@@ -46,15 +47,18 @@ class MrpWorkorder(models.Model):
             if workorder.state in ("done", "cancel"):
                 workorder.show_check_availability = False
                 continue
-            workorder.show_check_availability = any(
-                move.state in ("waiting", "confirmed", "partially_available")
-                and float_compare(
-                    move.product_uom_qty,
-                    0,
-                    precision_rounding=move.product_uom.rounding,
+            workorder.show_check_availability = (
+                any(
+                    move.state in ("waiting", "confirmed", "partially_available")
+                    and float_compare(
+                        move.product_uom_qty,
+                        0,
+                        precision_rounding=move.product_uom.rounding,
+                    )
+                    for move in workorder.move_raw_ids
                 )
-                for move in workorder.move_raw_ids
-            ) and workorder.date_planned_start
+                and workorder.date_planned_start
+            )
 
     def action_assign(self):
         for order in self:
