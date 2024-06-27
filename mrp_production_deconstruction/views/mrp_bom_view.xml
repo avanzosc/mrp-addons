@@ -1,26 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
     <record id="mrp_bom_form_view" model="ir.ui.view">
         <field name="model">mrp.bom</field>
-        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
         <field name="arch" type="xml">
             <field name="company_id" position="before">
-                <field name="is_deconstruction"/>
+                <field name="is_deconstruction" />
             </field>
             <page name="by_products" position="attributes">
-                <attribute name="attrs">{'invisible': [('is_deconstruction', '=', True)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible': [('is_deconstruction', '=', True)]}</attribute>
             </page>
         </field>
     </record>
 
     <record id="view_mrp_bom_filter" model="ir.ui.view">
         <field name="model">mrp.bom</field>
-        <field name="inherit_id" ref="mrp.view_mrp_bom_filter"/>
+        <field name="inherit_id" ref="mrp.view_mrp_bom_filter" />
         <field name="arch" type="xml">
             <filter name="inactive" position="before">
-                <filter string="Deconstruction" name="is_deconstruction" domain="[('is_deconstruction', '=', True)]"/>
-                <separator/>
+                <filter
+          string="Deconstruction"
+          name="is_deconstruction"
+          domain="[('is_deconstruction', '=', True)]"
+        />
+                <separator />
             </filter>
         </field>
     </record>
