@@ -6,11 +6,29 @@ from odoo import models
 class StockRule(models.Model):
     _inherit = "stock.rule"
 
-    def _prepare_mo_vals(self, product_id, product_qty, product_uom,
-                         location_id, name, origin, company_id, values, bom):
+    def _prepare_mo_vals(
+        self,
+        product_id,
+        product_qty,
+        product_uom,
+        location_id,
+        name,
+        origin,
+        company_id,
+        values,
+        bom,
+    ):
         mo_values = super(StockRule, self)._prepare_mo_vals(
-            product_id, product_qty, product_uom, location_id, name, origin,
-            company_id, values, bom)
+            product_id,
+            product_qty,
+            product_uom,
+            location_id,
+            name,
+            origin,
+            company_id,
+            values,
+            bom,
+        )
         if "origin" in mo_values and mo_values.get("origin", False):
             sale_obj = self.env["sale.order"]
             cond = [("name", "=", mo_values.get("origin"))]
@@ -25,7 +43,6 @@ class StockRule(models.Model):
                     cond = [("name", "=", sale.origin)]
                     sale_origin = sale_obj.sudo().search(cond, limit=1)
                     if sale_origin:
-                        origin = "{} - {}".format(
-                            sale_origin.partner_id.name, origin)
+                        origin = "{} - {}".format(sale_origin.partner_id.name, origin)
                 mo_values["origin"] = origin
         return mo_values
