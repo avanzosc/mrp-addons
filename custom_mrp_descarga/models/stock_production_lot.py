@@ -10,20 +10,22 @@ class StockProductionLot(models.Model):
         string="Average Price",
         digits="MRP Price Decimal Precision",
         compute="_compute_average_price",
-        store=True)
+        store=True,
+    )
 
-    @api.depends("move_line_ids.amount", "move_line_ids.qty_done",
-                 "move_line_ids.state")
+    @api.depends(
+        "move_line_ids.amount", "move_line_ids.qty_done", "move_line_ids.state"
+    )
     def _compute_average_price(self):
         for line in self:
             average_price = 0
             clasified = line.move_line_ids.filtered(
-                lambda c: c.state == "done" and (
-                    c.location_dest_id.usage == "internal"))
+                lambda c: c.state == "done" and (c.location_dest_id.usage == "internal")
+            )
             quartering = line.move_line_ids.filtered(
-                lambda c: c.production_id and c.production_id.quartering and (
-                    c.location_id == c.production_id.location_src_id
-                )
+                lambda c: c.production_id
+                and c.production_id.quartering
+                and (c.location_id == c.production_id.location_src_id)
             )
             if clasified:
                 amount_total = sum(clasified.mapped("amount"))
@@ -43,8 +45,10 @@ class StockProductionLot(models.Model):
             "name": _("Move Lines"),
             "view_mode": "tree,form",
             "res_model": "stock.move.line",
-            "domain": [("product_id", "=", self.product_id.id),
-                       ("id", "in", self.move_line_ids.ids)],
+            "domain": [
+                ("product_id", "=", self.product_id.id),
+                ("id", "in", self.move_line_ids.ids),
+            ],
             "type": "ir.actions.act_window",
-            "context": context
+            "context": context,
         }

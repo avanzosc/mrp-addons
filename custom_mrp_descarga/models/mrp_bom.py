@@ -7,16 +7,11 @@ class MrpBom(models.Model):
     _inherit = "mrp.bom"
 
     quartering = fields.Boolean(
-        string="Quartering",
-        compute="_compute_quartering",
-        store=True
+        string="Quartering", compute="_compute_quartering", store=True
     )
-    no_duplicate_lines = fields.Boolean(
-        string="No Duplicate Lines",
-        default=False)
+    no_duplicate_lines = fields.Boolean(string="No Duplicate Lines", default=False)
     no_produce_product = fields.Boolean(
-        string="Don't produce the header product",
-        default=False
+        string="Don't produce the header product", default=False
     )
 
     @api.depends("category_id")
@@ -24,8 +19,7 @@ class MrpBom(models.Model):
         for line in self:
             quartering = False
             try:
-                quartering = (
-                    self.env.ref("custom_mrp_descarga.quartering_category"))
+                quartering = self.env.ref("custom_mrp_descarga.quartering_category")
                 if line.category_id == quartering:
                     quartering = True
             except Exception:

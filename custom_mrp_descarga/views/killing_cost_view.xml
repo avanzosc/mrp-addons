@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
-    <menuitem action="custom_mrp_line_cost.action_workcenter_cost_view" id="menu_view_workcenter_cost_despiece" parent="quartering_menu" sequence="7"/>
+    <menuitem
+    action="custom_mrp_line_cost.action_workcenter_cost_view"
+    id="menu_view_workcenter_cost_despiece"
+    parent="quartering_menu"
+    sequence="7"
+  />
 
 </odoo>

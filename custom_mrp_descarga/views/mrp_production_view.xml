@@ -2,234 +2,499 @@
 <odoo>
     <record id="view_mrp_production_filter" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="saca_id"/>
-                <field name="farm_warehouse_id"/>
-                <field name="farm_id"/>
-                <field name="vehicle_id"/>
-                <field name="remolque_id"/>
-                <field name="breeding_id"/>
-                <field name="batch_id"/>
-                <field name="lot_producing_id"/>
+                <field name="saca_id" />
+                <field name="farm_warehouse_id" />
+                <field name="farm_id" />
+                <field name="vehicle_id" />
+                <field name="remolque_id" />
+                <field name="breeding_id" />
+                <field name="batch_id" />
+                <field name="lot_producing_id" />
             </field>
             <filter name="filter_date_planned_start" position="before">
-                <separator/>
-                <filter string="Birth Date" name="production_date" date="production_date"/>
-                <filter string="Yesterday" name="yesterday_birth" domain="[('production_date', '&lt;', context_today().strftime('%Y-%m-%d')), ('production_date','&gt;', (context_today() - datetime.timedelta(days=2)).strftime('%Y-%m-%d'))]"/>
-                <filter string="Today" name="today_birth" domain="[('production_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
-                <filter string="Last Week" name="last_week_birth" domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
-                <filter string="Last Month" name="month_birth" domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=30)).strftime('%%Y-%%m-%%d'))]"/>
-                <filter string="Last Year" name="year_birth" domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=365)).strftime('%%Y-%%m-%%d'))]"/>
-                <separator/>
-                <filter string="Saca Date" name="saca_date" date="saca_date"/>
-                <separator/>
+                <separator />
+                <filter
+          string="Birth Date"
+          name="production_date"
+          date="production_date"
+        />
+                <filter
+          string="Yesterday"
+          name="yesterday_birth"
+          domain="[('production_date', '&lt;', context_today().strftime('%Y-%m-%d')), ('production_date','&gt;', (context_today() - datetime.timedelta(days=2)).strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Today"
+          name="today_birth"
+          domain="[('production_date', '=', context_today().strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Last Week"
+          name="last_week_birth"
+          domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Last Month"
+          name="month_birth"
+          domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=30)).strftime('%%Y-%%m-%%d'))]"
+        />
+                <filter
+          string="Last Year"
+          name="year_birth"
+          domain="[('production_date','&gt;', (context_today() - datetime.timedelta(days=365)).strftime('%%Y-%%m-%%d'))]"
+        />
+                <separator />
+                <filter string="Saca Date" name="saca_date" date="saca_date" />
+                <separator />
             </filter>
             <filter name="status" position="after">
-                <filter string="BoM Category" name="groupby_category" domain="[]" context="{'group_by': 'bom_category_id'}"/>
-                <filter string="Batch" name="groupby_batch" domain="[]" context="{'group_by': 'batch_id'}"/>
-                <filter string="Saca" name="groupby_saca" domain="[]" context="{'group_by': 'saca_id'}"/>
-                <filter string="Lot" name="groupby_lot" domain="[]" context="{'group_by': 'lot_producing_id'}"/>
-                <filter string="Breeding" name="groupby_breeding" domain="[]" context="{'group_by': 'breeding_id'}"/>
-                <filter string="Birth Date" name="groupby_production_date" domain="[]" context="{'group_by': 'production_date'}"/>
-                <filter string="Saca Date" name="groupby_saca_date" domain="[]" context="{'group_by': 'saca_date'}"/>
+                <filter
+          string="BoM Category"
+          name="groupby_category"
+          domain="[]"
+          context="{'group_by': 'bom_category_id'}"
+        />
+                <filter
+          string="Batch"
+          name="groupby_batch"
+          domain="[]"
+          context="{'group_by': 'batch_id'}"
+        />
+                <filter
+          string="Saca"
+          name="groupby_saca"
+          domain="[]"
+          context="{'group_by': 'saca_id'}"
+        />
+                <filter
+          string="Lot"
+          name="groupby_lot"
+          domain="[]"
+          context="{'group_by': 'lot_producing_id'}"
+        />
+                <filter
+          string="Breeding"
+          name="groupby_breeding"
+          domain="[]"
+          context="{'group_by': 'breeding_id'}"
+        />
+                <filter
+          string="Birth Date"
+          name="groupby_production_date"
+          domain="[]"
+          context="{'group_by': 'production_date'}"
+        />
+                <filter
+          string="Saca Date"
+          name="groupby_saca_date"
+          domain="[]"
+          context="{'group_by': 'saca_date'}"
+        />
             </filter>
         </field>
     </record>
 
     <record id="view_mrp_production_filter_lot" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+        <field name="priority" eval="100" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <field name="lot_producing_id" position="replace">
-                <field name="lot_producing_id" filter_domain="[('lot_producing_id','=ilike',str(self)+'%')]"/>
+                <field
+          name="lot_producing_id"
+          filter_domain="[('lot_producing_id','=ilike',str(self)+'%')]"
+        />
             </field>
         </field>
     </record>
 
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp_production_date.mrp_production_form_view"/>
+        <field name="inherit_id" ref="mrp_production_date.mrp_production_form_view" />
+        <field name="priority" eval="100" />
         <field name="arch" type="xml">
             <header position="inside">
-                <button name="action_assign_serials" type="object" string="Assign Serials" attrs="{'invisible': ['|', '|', ('lot_producing_id', '=', False), ('state', 'not in', ('progress', 'to_close', 'done')), ('is_deconstruction', '!=', True)]}"/>
+                <button
+          name="action_assign_serials"
+          type="object"
+          string="Assign Serials"
+          attrs="{'invisible': ['|', '|', ('lot_producing_id', '=', False), ('state', 'not in', ('progress', 'to_close', 'done')), ('is_deconstruction', '!=', True)]}"
+        />
             </header>
             <field name="bom_id" position="attributes">
                 <attribute name="invisible">1</attribute>
-                <attribute name="domain">['&amp;', '|', ('company_id', '=', False), ('company_id', '=', company_id), '&amp;', '|', ('product_id','=',product_id), '&amp;', ('product_tmpl_id.product_variant_ids','=',product_id), ('product_id','=',False), ('type', '=', 'normal'), ('quartering', '=', quartering)]</attribute>
+                <attribute
+          name="domain"
+        >['&amp;', '|', ('company_id', '=', False), ('company_id', '=', company_id), '&amp;', '|', ('product_id','=',product_id), '&amp;', ('product_tmpl_id.product_variant_ids','=',product_id), ('product_id','=',False), ('type', '=', 'normal'), ('quartering', '=', quartering)]</attribute>
             </field>
             <field name="product_id" position="before">
-                <field name="bom_id"/>
+                <field name="bom_id" />
             </field>
             <field name="qty_producing" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
+                <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
             </field>
             <field name="confirm_cancel" position="after">
-                <field name="chick_production" invisible="1"/>
-                <field name="paasa" invisible="1"/>
-                <field name="tolvasa" invisible="1"/>
+                <field name="chick_production" invisible="1" />
+                <field name="paasa" invisible="1" />
+                <field name="tolvasa" invisible="1" />
             </field>
             <field name="user_id" position="attributes">
-                <attribute name="attrs">{'invisible': [('saca_line_id', '!=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible': [('saca_line_id', '!=', False)]}</attribute>
             </field>
             <field name="company_id" position="attributes">
-                <attribute name="attrs">{'invisible': [('saca_line_id', '!=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible': [('saca_line_id', '!=', False)]}</attribute>
             </field>
             <tree name="mrp_move_lines" position="attributes">
                 <attribute name="decoration-danger">qty_done == 0</attribute>
             </tree>
             <field name="product_id" position="attributes">
-                <attribute name="attrs">{'readonly': ['|', ('saca_line_id', '!=', False), ('state', 'in', ('cancel'))]}</attribute>
+                <attribute
+          name="attrs"
+        >{'readonly': ['|', ('saca_line_id', '!=', False), ('state', 'in', ('cancel'))]}</attribute>
             </field>
             <field name="company_id" position="after">
-                <field name="average_cost" attrs="{'invisible': ['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"/>
-                <field name="consume_qty" attrs="{'invisible':['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"/>
-                <field name="produced_qty" attrs="{'invisible':['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"/>
-                <field name="qty_difference" attrs="{'invisible':['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"/>
+                <field
+          name="average_cost"
+          attrs="{'invisible': ['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"
+        />
+                <field
+          name="consume_qty"
+          attrs="{'invisible':['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"
+        />
+                <field
+          name="produced_qty"
+          attrs="{'invisible':['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"
+        />
+                <field
+          name="qty_difference"
+          attrs="{'invisible':['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"
+        />
             </field>
             <field name="cost" position="after">
-                <field name="gross_yield" invisible="1"/>
-                <field name="download_unit" attrs="{'invisible':[('saca_line_id', '=', False)]}" force_save="1"/>
-                <field name="unit_difference" attrs="{'invisible':[('saca_line_id', '=', False)]}"/>
-                <field name="average_weight" attrs="{'invisible':[('saca_line_id', '=', False)]}" string="Average Weight"/>
-                <field name="real_average_weight" attrs="{'invisible':[('saca_line_id', '=', False)]}"/>
+                <field name="gross_yield" invisible="1" />
+                <field
+          name="download_unit"
+          attrs="{'invisible':[('saca_line_id', '=', False)]}"
+          force_save="1"
+        />
+                <field
+          name="unit_difference"
+          attrs="{'invisible':[('saca_line_id', '=', False)]}"
+        />
+                <field
+          name="average_weight"
+          attrs="{'invisible':[('saca_line_id', '=', False)]}"
+          string="Average Weight"
+        />
+                <field
+          name="real_average_weight"
+          attrs="{'invisible':[('saca_line_id', '=', False)]}"
+        />
             </field>
             <button name="action_assign" position="after">
-                <button name="action_emptying_hatchers" string="Emtying Hatchers" type="object" attrs="{'invisible': ['|', ('chick_production', '=', False), ('state', 'in', ('to_close', 'done', 'cancel'))]}"/>
-                <button name="action_delete_moves_with_qty_zero" string="Delete Moves With Qty Zero" type="object" attrs="{'invisible': ['|', ('saca_line_id', '=', False), ('state', 'not in', ('confirmed', 'progress', 'to_close'))]}"/>
+                <button
+          name="action_emptying_hatchers"
+          string="Emtying Hatchers"
+          type="object"
+          attrs="{'invisible': ['|', ('chick_production', '=', False), ('state', 'in', ('to_close', 'done', 'cancel'))]}"
+        />
+                <button
+          name="action_delete_moves_with_qty_zero"
+          string="Delete Moves With Qty Zero"
+          type="object"
+          attrs="{'invisible': ['|', ('saca_line_id', '=', False), ('state', 'not in', ('confirmed', 'progress', 'to_close'))]}"
+        />
             </button>
             <label for="date_planned_start" position="attributes">
-                <attribute name="attrs">{'invisible':[('tolvasa', '=', True)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('tolvasa', '=', True)]}</attribute>
             </label>
             <field name="date_planned_start" position="attributes">
-                <attribute name="attrs">{'invisible':[('tolvasa', '=', True)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('tolvasa', '=', True)]}</attribute>
             </field>
             <field name="origin_qty" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="month_cost" position="attributes">
-                <attribute name="attrs">{'invisible':[('tolvasa', '=', True)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('tolvasa', '=', True)]}</attribute>
             </field>
             <field name="purchase_price" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="purchase_unit_price" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <label for="origin_qty" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </label>
             <field name="purchase_unit_price" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <label for="canal_weight" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </label>
             <field name="canal_weight" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="is_deconstruction" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="rto_canal" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="canal_cost" position="attributes">
-                <attribute name="attrs">{'invisible':[('saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible':[('saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="product_id" position="after">
-                <field name="batch_id" domain="[('batch_type', '=', 'mother')]" attrs="{'invisible':[('chick_production', '=', False)], 'readonly': [('state', 'in', ('done', 'cancel'))]}"/>
+                <field
+          name="batch_id"
+          domain="[('batch_type', '=', 'mother')]"
+          attrs="{'invisible':[('chick_production', '=', False)], 'readonly': [('state', 'in', ('done', 'cancel'))]}"
+        />
             </field>
             <field name="lot_producing_id" position="attributes">
-                <attribute name="attrs">{'readonly': [('state', 'in', ('done', 'cancel'))]}</attribute>
+                <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ('done', 'cancel'))]}</attribute>
             </field>
             <div name="button_box" position="inside">
-                <button class="oe_stat_button" string="Hatcheries" icon="fa-home" type="object" name="action_view_reproductor_quant_ids" attrs="{'invisible':[('chick_production', '=', False)]}"/>
+                <button
+          class="oe_stat_button"
+          string="Hatcheries"
+          icon="fa-home"
+          type="object"
+          name="action_view_reproductor_quant_ids"
+          attrs="{'invisible':[('chick_production', '=', False)]}"
+        />
             </div>
             <field name="is_deconstruction" position="after">
-                <field name="quartering" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="no_duplicate_lines" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="saca_id" readonly="1" attrs="{'invisible':[('saca_id', '=', False)]}"/>
-                <field name="saca_line_id" readonly="1" attrs="{'invisible':[('saca_id', '=', False)]}"/>
-                <field name="farm_warehouse_id" attrs="{'invisible': [('farm_warehouse_id', '=', False)]}"/>
-                <field name="farm_id" attrs="{'invisible': ['|', ('farm_warehouse_id', '!=', False), ('saca_line_id', '=', False)]}"/>
-                <field name="vehicle_id" attrs="{'invisible': [('saca_id', '=', False)]}"/>
-                <field name="remolque_id" attrs="{'invisible': [('saca_id', '=', False)]}"/>
-                <field name="breeding_id" attrs="{'invisible': [('breeding_id', '=', False)]}"/>
-                <field name="guide_number" attrs="{'invisible':[('saca_id', '=', False)]}"/>
-                <field name="channel_temperature" attrs="{'invisible':[('saca_id', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="staff" attrs="{'invisible':[('saca_id', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
+                <field
+          name="quartering"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field
+          name="no_duplicate_lines"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field
+          name="saca_id"
+          readonly="1"
+          attrs="{'invisible':[('saca_id', '=', False)]}"
+        />
+                <field
+          name="saca_line_id"
+          readonly="1"
+          attrs="{'invisible':[('saca_id', '=', False)]}"
+        />
+                <field
+          name="farm_warehouse_id"
+          attrs="{'invisible': [('farm_warehouse_id', '=', False)]}"
+        />
+                <field
+          name="farm_id"
+          attrs="{'invisible': ['|', ('farm_warehouse_id', '!=', False), ('saca_line_id', '=', False)]}"
+        />
+                <field
+          name="vehicle_id"
+          attrs="{'invisible': [('saca_id', '=', False)]}"
+        />
+                <field
+          name="remolque_id"
+          attrs="{'invisible': [('saca_id', '=', False)]}"
+        />
+                <field
+          name="breeding_id"
+          attrs="{'invisible': [('breeding_id', '=', False)]}"
+        />
+                <field
+          name="guide_number"
+          attrs="{'invisible':[('saca_id', '=', False)]}"
+        />
+                <field
+          name="channel_temperature"
+          attrs="{'invisible':[('saca_id', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field
+          name="staff"
+          attrs="{'invisible':[('saca_id', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
             </field>
             <field name="production_date" position="replace">
-                <label for="production_date" attrs="{'invisible':[('chick_production', '=', False)]}" string="Birth Date"/>
+                <label
+          for="production_date"
+          attrs="{'invisible':[('chick_production', '=', False)]}"
+          string="Birth Date"
+        />
                 <div class="o_row">
-                    <field name="production_date" attrs="{'invisible':[('chick_production', '=', False)]}"/>
-                    <field name="birth_week" attrs="{'invisible':[('chick_production', '=', False)]}"/>
+                    <field
+            name="production_date"
+            attrs="{'invisible':[('chick_production', '=', False)]}"
+          />
+                    <field
+            name="birth_week"
+            attrs="{'invisible':[('chick_production', '=', False)]}"
+          />
                 </div>
-                <field name="production_date" attrs="{'invisible':[('chick_production', '!=', False)]}"/>
+                <field
+          name="production_date"
+          attrs="{'invisible':[('chick_production', '!=', False)]}"
+        />
             </field>
-                <label for="production_date" attrs="{'invisible':[('chick_production', '=', False)]}"/>
+                <label
+        for="production_date"
+        attrs="{'invisible':[('chick_production', '=', False)]}"
+      />
                 <div class="o_row">
-                    <field name="production_date" attrs="{'invisible':[('chick_production', '=', False)]}"/>
-                    <field name="birth_week" attrs="{'invisible':[('chick_production', '=', False)]}"/>
+                    <field
+          name="production_date"
+          attrs="{'invisible':[('chick_production', '=', False)]}"
+        />
+                    <field
+          name="birth_week"
+          attrs="{'invisible':[('chick_production', '=', False)]}"
+        />
                 </div>
-            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='product_id']" position="before">
-                <field name="sequence" attrs="{'column_invisible': [('parent.quartering', '=', False)]}" string=" "/>
+            <xpath
+        expr="//tree[@name='mrp_move_lines']/field[@name='product_id']"
+        position="before"
+      >
+                <field
+          name="sequence"
+          attrs="{'column_invisible': [('parent.quartering', '=', False)]}"
+          string=" "
+        />
             </xpath>
-            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='location_id']" position="attributes">
-                <attribute name="domain">[('id', 'child_of', parent.location_src_id)]</attribute>
+            <xpath
+        expr="//tree[@name='mrp_move_lines']/field[@name='location_id']"
+        position="attributes"
+      >
+                <attribute
+          name="domain"
+        >[('id', 'child_of', parent.location_src_id)]</attribute>
             </xpath>
-            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='location_dest_id']" position="attributes">
+            <xpath
+        expr="//tree[@name='mrp_move_lines']/field[@name='location_dest_id']"
+        position="attributes"
+      >
                 <attribute name="domain">[('usage', '=', 'production')]</attribute>
             </xpath>
-            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='product_uom_qty']" position="before">
-                <field name="rest" optional="show" attrs="{'column_invisible':[('parent.paasa', '!=', False)]}"/>
+            <xpath
+        expr="//tree[@name='mrp_move_lines']/field[@name='product_uom_qty']"
+        position="before"
+      >
+                <field
+          name="rest"
+          optional="show"
+          attrs="{'column_invisible':[('parent.paasa', '!=', False)]}"
+        />
             </xpath>
             <field name="expense_kg" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="canal" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="container" position="attributes">
-                <attribute name="attrs">{'column_invisible':[('parent.paasa', '=', False)], 'readonly': [('state', '=', 'cancel')]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':[('parent.paasa', '=', False)], 'readonly': [('state', '=', 'cancel')]}</attribute>
             </field>
             <field name="pallet" position="attributes">
-                <attribute name="attrs">{'column_invisible':[('parent.paasa', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':[('parent.paasa', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
             </field>
             <field name="qty_done" position="after">
-                <field name="download_unit" invisible="1" force_save="1"/>
-                <field name="average_weight" attrs="{'column_invisible':[('parent.quartering', '=', False)]}"/>
+                <field name="download_unit" invisible="1" force_save="1" />
+                <field
+          name="average_weight"
+          attrs="{'column_invisible':[('parent.quartering', '=', False)]}"
+        />
             </field>
             <field name="brut" position="attributes">
-                <attribute name="attrs">{'column_invisible':[('parent.quartering', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':[('parent.quartering', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
             </field>
             <field name="product_unit_container" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="unit_container" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="weight" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="percentage" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="base_price" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
             <field name="applied_price" position="attributes">
-                <attribute name="attrs">{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
             </field>
             <field name="unit" position="attributes">
-                <attribute name="attrs">{'column_invisible':[('parent.paasa', '=', False)], 'readonly': [('state', '=', 'cancel')]}</attribute>
+                <attribute
+          name="attrs"
+        >{'column_invisible':[('parent.paasa', '=', False)], 'readonly': [('state', '=', 'cancel')]}</attribute>
             </field>
             <field name="lot_id" position="attributes">
 <!--                 <attribute name="attrs">{'column_invisible':[('parent.paasa', '=', True), ('parent.saca_line_id', '!=', False)], 'readonly': [('state', 'in', ('cancel'))]}</attribute>
- -->                <attribute name="options">{'no_create': [('parent.quartering', '=', True)]}</attribute>
+ -->                <attribute
+          name="options"
+        >{'no_create': [('parent.quartering', '=', True)]}</attribute>
             </field>
             <page name="move_lines" position="attributes">
                 <attribute name="string">Inputs</attribute>
@@ -241,58 +506,132 @@
                 <attribute name="string">Output Products</attribute>
             </page>
             <page name="finished_products" position="after">
-                <page name="finished_move_lines" string="Outputs" attrs="{'invisible': ['|', ('tolvasa', '=', True), ('saca_line_id', '!=', False)]}">
-                    <field name="finished_move_line_ids" context="{'default_production_id': active_id, 'default_company_id': company_id, 'default_location_id': production_location_id, 'default_location_dest_id': location_dest_id}" attrs="{'readonly': [('state', 'in', ('draft', 'cancel'))]}">
+                <page
+          name="finished_move_lines"
+          string="Outputs"
+          attrs="{'invisible': ['|', ('tolvasa', '=', True), ('saca_line_id', '!=', False)]}"
+        >
+                    <field
+            name="finished_move_line_ids"
+            context="{'default_production_id': active_id, 'default_company_id': company_id, 'default_location_id': production_location_id, 'default_location_dest_id': location_dest_id}"
+            attrs="{'readonly': [('state', 'in', ('draft', 'cancel'))]}"
+          >
                         <tree editable="bottom" limit="300">
-                            <field name="state" invisible="1"/>
-                            <field name="production_id" invisible="1" force_save="1"/>
-                            <field name="move_id" invisible="1" force_save="1"/>
-                            <field name="company_id" invisible="1" groups="base.group_multi_company" force_save="1"/>
-                            <field name="sequence" string=""/>
-                            <field name="product_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" options="{'no_create': True}" required="1" force_save="1"/>
-                            <field name="product_uom_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
-                            <field name="product_uom_category_id" invisible="1"/>
-                            <field name="lot_id" domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]" context="{'default_product_id': product_id, 'default_company_id': company_id}" force_save="1"/>
-                            <field name="expense_kg" optional="hide"/>
-                            <field name="pallet_id" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
-                            <field name="pallet" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" sum="Total Pallet"/>
-                            <field name="container" attrs="{'readonly': [('state', '=', 'cancel')]}" sum="Total Container"/>
-                            <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                            <field name="location_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
-                            <field name="location_dest_id" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
-                            <field name="qty_done" sum="Total Done"/>
-                            <field name="performance" attrs="{'column_invisible': [('parent.quartering', '=', False)]}" sum="Total Performance"/>
-                            <field name="base_price" optional="show"/>
-                            <field name="applied_price" optional="show"/>
-                            <field name="standard_price" optional="show"/>
-                            <field name="amount" optional="show" sum="Amount"/>
+                            <field name="state" invisible="1" />
+                            <field name="production_id" invisible="1" force_save="1" />
+                            <field name="move_id" invisible="1" force_save="1" />
+                            <field
+                name="company_id"
+                invisible="1"
+                groups="base.group_multi_company"
+                force_save="1"
+              />
+                            <field name="sequence" string="" />
+                            <field
+                name="product_id"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+                options="{'no_create': True}"
+                required="1"
+                force_save="1"
+              />
+                            <field
+                name="product_uom_id"
+                optional="hide"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+                force_save="1"
+              />
+                            <field name="product_uom_category_id" invisible="1" />
+                            <field
+                name="lot_id"
+                domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]"
+                context="{'default_product_id': product_id, 'default_company_id': company_id}"
+                force_save="1"
+              />
+                            <field name="expense_kg" optional="hide" />
+                            <field
+                name="pallet_id"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+                optional="show"
+              />
+                            <field
+                name="pallet"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+                sum="Total Pallet"
+              />
+                            <field
+                name="container"
+                attrs="{'readonly': [('state', '=', 'cancel')]}"
+                sum="Total Container"
+              />
+                            <field
+                name="brut"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+              />
+                            <field
+                name="location_id"
+                optional="hide"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+                force_save="1"
+              />
+                            <field
+                name="location_dest_id"
+                optional="hide"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+                force_save="1"
+              />
+                            <field name="qty_done" sum="Total Done" />
+                            <field
+                name="performance"
+                attrs="{'column_invisible': [('parent.quartering', '=', False)]}"
+                sum="Total Performance"
+              />
+                            <field name="base_price" optional="show" />
+                            <field name="applied_price" optional="show" />
+                            <field name="standard_price" optional="show" />
+                            <field name="amount" optional="show" sum="Amount" />
                         </tree>
                     </field>
                 </page>
             </page>
             <notebook position="inside">
-                <page name="clasification" string="Classification" attrs="{'invisible': ['|', ('saca_line_id', '=', False), ('paasa', '=', False)]}">
+                <page
+          name="clasification"
+          string="Classification"
+          attrs="{'invisible': ['|', ('saca_line_id', '=', False), ('paasa', '=', False)]}"
+        >
                     <group>
                         <group>
-                            <field name="clasification"/>
+                            <field name="clasification" />
                         </group>
                         <group>
-                            <field name="channel_temperature" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                            <field name="waiting_time" widget="float_time"/>
+                            <field
+                name="channel_temperature"
+                attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+              />
+                            <field name="waiting_time" widget="float_time" />
                         </group>
                     </group>
                     <field name="clasified_ids" nolabel="1" options="{'create': false}">
                         <tree editable="bottom">
-                            <field name="date" optional="show"/>
-                            <field name="unload_date" optional="show"/>
-                            <field name="project_id" optional="show" readonly="1"/>
-                            <field name="task_id" optional="show" readonly="1"/>
-                            <field name="employee_id" optional="hide"/>
-                            <field name="user_id" readonly="1" optional="show"/>
-                            <field name="time_start" widget="float_time" tabindex="-1"/>
-                            <field name="time_stop" widget="float_time"/>
-                            <field name="unit_amount" optional="show" widget="float_time" sum="Amount Duration"/>
-                            <field name="company_id" invisible="1"/>
+                            <field name="date" optional="show" />
+                            <field name="unload_date" optional="show" />
+                            <field name="project_id" optional="show" readonly="1" />
+                            <field name="task_id" optional="show" readonly="1" />
+                            <field name="employee_id" optional="hide" />
+                            <field name="user_id" readonly="1" optional="show" />
+                            <field
+                name="time_start"
+                widget="float_time"
+                tabindex="-1"
+              />
+                            <field name="time_stop" widget="float_time" />
+                            <field
+                name="unit_amount"
+                optional="show"
+                widget="float_time"
+                sum="Amount Duration"
+              />
+                            <field name="company_id" invisible="1" />
                         </tree>
                     </field>
                 </page>
@@ -302,43 +641,45 @@
 
     <record id="mrp_production_tree_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
         <field name="arch" type="xml">
             <tree position="attributes">
-                <attribute name="default_order">unload_date, priority desc, date_planned_start desc</attribute>
+                <attribute
+          name="default_order"
+        >unload_date, priority desc, date_planned_start desc</attribute>
             </tree>
             <field name="name" position="before">
-                <field name="descarga_order" optional="show" string="Order"/>
+                <field name="descarga_order" optional="show" string="Order" />
             </field>
             <field name="date_planned_start" position="attributes">
                 <attribute name="optional">hide</attribute>
             </field>
             <field name="date_planned_start" position="after">
-                <field name="unload_date" optional="show"/>
-                <field name="production_date" optional="show"/>
-                <field name="birth_week" optional="show"/>
-                <field name="breeding_id" optional="show"/>
-                <field name="vehicle_id" optional="show"/>
-                <field name="remolque_id" optional="show"/>
+                <field name="unload_date" optional="show" />
+                <field name="production_date" optional="show" />
+                <field name="birth_week" optional="show" />
+                <field name="breeding_id" optional="show" />
+                <field name="vehicle_id" optional="show" />
+                <field name="remolque_id" optional="show" />
             </field>
             <field name="product_qty" position="after">
-                <field name="total_unit" optional="show" sum="Sum Total Unit"/>
-                <field name="consume_qty" optional="show" sum="Total Consumed"/>
-                <field name="produced_qty" optional="show" sum="Total Produced"/>
-                <field name="qty_difference" optional="show"/>
-                <field name="asphyxiation_units" optional="show"/>
-                <field name="seized_units" optional="show"/>
-                <field name="birth_rate" optional="show"/>
-                <field name="expected_rate" optional="show"/>
-                <field name="expected_birth" optional="show"/>
-                <field name="birth_difference" optional="show"/>
-                <field name="difference_rate" optional="show"/>
-                <field name="purchase_unit_price" optional="show"/>
+                <field name="total_unit" optional="show" sum="Sum Total Unit" />
+                <field name="consume_qty" optional="show" sum="Total Consumed" />
+                <field name="produced_qty" optional="show" sum="Total Produced" />
+                <field name="qty_difference" optional="show" />
+                <field name="asphyxiation_units" optional="show" />
+                <field name="seized_units" optional="show" />
+                <field name="birth_rate" optional="show" />
+                <field name="expected_rate" optional="show" />
+                <field name="expected_birth" optional="show" />
+                <field name="birth_difference" optional="show" />
+                <field name="difference_rate" optional="show" />
+                <field name="purchase_unit_price" optional="show" />
             </field>
             <field name="product_uom_id" position="after">
-                <field name="batch_id" optional="show"/>
-                <field name="batch_location_id" optional="show"/>
-                <field name="hen_unit" optional="show"/>
+                <field name="batch_id" optional="show" />
+                <field name="batch_location_id" optional="show" />
+                <field name="hen_unit" optional="show" />
             </field>
         </field>
     </record>
@@ -347,30 +688,39 @@
         <field name="name">mrp.production.tree</field>
         <field name="model">mrp.production</field>
         <field name="arch" type="xml">
-            <tree string="Production Orders" default_order="unload_date, priority desc, date_planned_start desc" decoration-danger="rto_percentage > 100">
-                <field name="descarga_order" optional="show"/>
-                <field name="name"/>
-                <field name="date_planned_start" optional="show"/>
-                <field name="unload_date" optional="show"/>
-                <field name="breeding_id" optional="show"/>
-                <field name="vehicle_id" optional="show"/>
-                <field name="remolque_id" optional="show"/>
+            <tree
+        default_order="unload_date, priority desc, date_planned_start desc"
+        decoration-danger="rto_percentage > 100"
+      >
+                <field name="descarga_order" optional="show" />
+                <field name="name" />
+                <field name="date_planned_start" optional="show" />
+                <field name="unload_date" optional="show" />
+                <field name="breeding_id" optional="show" />
+                <field name="vehicle_id" optional="show" />
+                <field name="remolque_id" optional="show" />
                 <field name="product_id" />
-                <field name="bom_id" optional="hide"/>
-                <field name="lot_producing_id" optional="show"/>
-                <field name="average_weight" optional="show"/>
-                <field name="download_unit" optional="show"/>
-                <field name="total_unit" optional="show"/>
-                <field name="origin_qty"/>
-                <field name="product_uom_id" optional="show"/>
-                <field name="rto_percentage" optional="show"/>
-                <field name="purchase_unit_price" optional="show"/>
-                <field name="asphyxiation_units" optional="show"/>
-                <field name="seized_units" optional="show"/>
-                <field name="cost" optional="show"/>
-                <field name="entry_total_amount" optional="show"/>
-                <field name="state" optional="show" widget="badge" decoration-success="state == 'done'" decoration-info="state not in ('done', 'cancel')"/>
-                <field name="company_id" optional="hide"/>
+                <field name="bom_id" optional="hide" />
+                <field name="lot_producing_id" optional="show" />
+                <field name="average_weight" optional="show" />
+                <field name="download_unit" optional="show" />
+                <field name="total_unit" optional="show" />
+                <field name="origin_qty" />
+                <field name="product_uom_id" optional="show" />
+                <field name="rto_percentage" optional="show" />
+                <field name="purchase_unit_price" optional="show" />
+                <field name="asphyxiation_units" optional="show" />
+                <field name="seized_units" optional="show" />
+                <field name="cost" optional="show" />
+                <field name="entry_total_amount" optional="show" />
+                <field
+          name="state"
+          optional="show"
+          widget="badge"
+          decoration-success="state == 'done'"
+          decoration-info="state not in ('done', 'cancel')"
+        />
+                <field name="company_id" optional="hide" />
             </tree>
         </field>
     </record>
@@ -379,17 +729,23 @@
         <field name="name">mrp.production.tree</field>
         <field name="model">mrp.production</field>
         <field name="arch" type="xml">
-            <tree string="Production Orders" default_order="unload_date, priority desc, date_planned_start desc">
-                <field name="name"/>
-                <field name="date_planned_start" optional="show"/>
-                <field name="product_id"/>
-                <field name="bom_id" optional="show"/>
-                <field name="consume_qty" optional="show"/>
-                <field name="produced_qty" optional="show"/>
-                <field name="qty_difference" optional="show"/>
-                <field name="average_cost" optional="show"/>
-                <field name="state" optional="show" widget="badge" decoration-success="state == 'done'" decoration-info="state not in ('done', 'cancel')"/>
-                <field name="company_id" optional="hide"/>
+            <tree default_order="unload_date, priority desc, date_planned_start desc">
+                <field name="name" />
+                <field name="date_planned_start" optional="show" />
+                <field name="product_id" />
+                <field name="bom_id" optional="show" />
+                <field name="consume_qty" optional="show" />
+                <field name="produced_qty" optional="show" />
+                <field name="qty_difference" optional="show" />
+                <field name="average_cost" optional="show" />
+                <field
+          name="state"
+          optional="show"
+          widget="badge"
+          decoration-success="state == 'done'"
+          decoration-info="state not in ('done', 'cancel')"
+        />
+                <field name="company_id" optional="hide" />
             </tree>
         </field>
     </record>
@@ -399,10 +755,12 @@
         <field name="res_model">mrp.production</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="mrp_production_quartering_tree_view"/>
+        <field name="view_id" ref="mrp_production_quartering_tree_view" />
         <field name="search_view_id" ref="mrp.view_mrp_production_filter" />
         <field name="domain">[('quartering', '=', True), ('paasa', '=', True)]</field>
-        <field name="context">{"search_default_todo": 1, 'default_quartering': True}</field>
+        <field
+      name="context"
+    >{"search_default_todo": 1, 'default_quartering': True}</field>
     </record>
 
     <record id="action_classified_production" model="ir.actions.act_window">
@@ -410,16 +768,33 @@
         <field name="res_model">mrp.production</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="mrp_production_classified_tree_view"/>
+        <field name="view_id" ref="mrp_production_classified_tree_view" />
         <field name="search_view_id" ref="view_mrp_production_filter_lot" />
         <field name="domain">[('saca_line_id', '!=', False)]</field>
         <field name="context">{"search_default_todo": 1}</field>
     </record>
 
-    <menuitem name="Despiece" id="quartering_menu" sequence="118" web_icon="custom_mrp_descarga,static/description/despiece.png"/>
+    <menuitem
+    name="Despiece"
+    id="quartering_menu"
+    sequence="118"
+    web_icon="custom_mrp_descarga,static/description/despiece.png"
+  />
 
-    <menuitem action="action_quartering_production" name="Despieces" id="menu_quartering_production" parent="quartering_menu" sequence="5"/>
+    <menuitem
+    action="action_quartering_production"
+    name="Despieces"
+    id="menu_quartering_production"
+    parent="quartering_menu"
+    sequence="5"
+  />
 
-    <menuitem action="action_classified_production" name="Órdenes de producción" id="menu_production_classified" parent="custom_descarga.stage_clasificado_menu" sequence="5"/>
+    <menuitem
+    action="action_classified_production"
+    name="Órdenes de producción"
+    id="menu_production_classified"
+    parent="custom_descarga.stage_clasificado_menu"
+    sequence="5"
+  />
 
 </odoo>
