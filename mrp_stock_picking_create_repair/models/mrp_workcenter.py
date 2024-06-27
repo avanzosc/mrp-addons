@@ -7,5 +7,7 @@ class MrpWorkcenter(models.Model):
     _inherit = "mrp.workcenter"
 
     use_in_repairs = fields.Boolean(
-        string="Use in repairs", default=False, copy=False
+        string="Use in repairs",
+        default=False,
+        copy=False,
     )

@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="repair.view_repair_order_tree" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="workcenter_id" optional="show"/>
+                <field name="workcenter_id" optional="show" />
             </field>
         </field>
     </record>
@@ -16,7 +16,7 @@
         <field name="priority">100</field>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="workcenter_id" domain="[('use_in_repairs', '=', True)]"/>
+                <field name="workcenter_id" domain="[('use_in_repairs', '=', True)]" />
             </field>
         </field>
     </record>
@@ -29,8 +29,12 @@
                 <field name="workcenter_id" />
             </field>
             <filter name="partner" position="after">
-                <filter string="Work center" name="workcenter" domain="[]"
-                    context="{'group_by': 'workcenter_id'}"/>
+                <filter
+          string="Work center"
+          name="workcenter"
+          domain="[]"
+          context="{'group_by': 'workcenter_id'}"
+        />
             </filter>
         </field>
     </record>
