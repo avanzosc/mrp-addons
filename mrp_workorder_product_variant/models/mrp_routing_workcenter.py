@@ -9,25 +9,34 @@ class MrpRoutingWorkcenter(models.Model):
     parent_product_tmpl_id = fields.Many2one(
         comodel_name="product.template",
         string="Parent Product Template",
-        related="bom_id.product_tmpl_id")
+        related="bom_id.product_tmpl_id",
+    )
     possible_bom_product_template_attribute_value_ids = fields.Many2many(
-        string='Possible BOM Product Attribute Value',
-        relation='rel_routing_variant',
-        column1='routing_workcenter_id',
-        column2='product_template_attribute_id',
-        comodel_name='product.template.attribute.value',
-        compute='_compute_possible_bom_product_template_attribute_value_ids',
-        store=True)
+        string="Possible BOM Product Attribute Value",
+        relation="rel_routing_variant",
+        column1="routing_workcenter_id",
+        column2="product_template_attribute_id",
+        comodel_name="product.template.attribute.value",
+        compute="_compute_possible_bom_product_template_attribute_value_ids",
+        store=True,
+    )
     bom_product_template_attribute_value_ids = fields.Many2many(
         comodel_name="product.template.attribute.value",
         string="Apply on Variants",
         ondelete="restrict",
         domain="[('id', 'in', possible_bom_product_template_attribute_value_ids)]",
-        help="BOM Product Variants needed to apply this line.")
+        help="BOM Product Variants needed to apply this line.",
+    )
 
     @api.depends(
         "parent_product_tmpl_id",
-        "parent_product_tmpl_id.valid_product_template_attribute_line_ids")
+        "parent_product_tmpl_id.valid_product_template_attribute_line_ids",
+    )
     def _compute_possible_bom_product_template_attribute_value_ids(self):
         for line in self:
-            line.possible_bom_product_template_attribute_value_ids = line.parent_product_tmpl_id.valid_product_template_attribute_line_ids._without_no_variant_attributes().product_template_value_ids._only_active()
+            parent_tmpl_id = line.parent_product_tmpl_id
+            attr_lines = parent_tmpl_id.valid_product_template_attribute_line_ids
+            no_variant_attrs = attr_lines._without_no_variant_attributes()
+            line.possible_bom_product_template_attribute_value_ids = (
+                no_variant_attrs.product_template_value_ids._only_active()
+            )
