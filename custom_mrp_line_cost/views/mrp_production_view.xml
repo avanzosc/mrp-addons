@@ -2,60 +2,159 @@
 <odoo>
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp_production_deconstruction.mrp_production_form_view"/>
+        <field
+      name="inherit_id"
+      ref="mrp_production_deconstruction.mrp_production_form_view"
+    />
         <field name="arch" type="xml">
             <header position="inside">
-                <button name="button_calculate_costs" attrs="{'invisible': [('state', '!=', 'done')]}" string="Recalculate Costs" type="object" class="oe_highlight"/>
+                <button
+          name="button_calculate_costs"
+          attrs="{'invisible': [('state', '!=', 'done')]}"
+          string="Recalculate Costs"
+          type="object"
+          class="oe_highlight"
+        />
             </header>
             <div name="button_box" position="inside">
-                <button class="oe_stat_button" string="Entries" icon="fa-long-arrow-right" type="object" name="action_view_move_line_ids"/>
-                <button class="oe_stat_button" string="Outputs" icon="fa-long-arrow-left" type="object" name="action_view_finished_move_line_ids"/>
-                <button class="oe_stat_button" string="Pickings To Do" icon="fa-random" type="object" name="action_view_picking_to_do"/>
-                <button class="oe_stat_button" string="Moves To Do" icon="fa-arrows-v" type="object" name="action_view_move_to_do"/>
-                <button class="oe_stat_button" string="Move Lines To Do" icon="fa-list-ul" type="object" name="action_view_move_line_to_do"/>
+                <button
+          class="oe_stat_button"
+          string="Entries"
+          icon="fa-long-arrow-right"
+          type="object"
+          name="action_view_move_line_ids"
+        />
+                <button
+          class="oe_stat_button"
+          string="Outputs"
+          icon="fa-long-arrow-left"
+          type="object"
+          name="action_view_finished_move_line_ids"
+        />
+                <button
+          class="oe_stat_button"
+          string="Pickings To Do"
+          icon="fa-random"
+          type="object"
+          name="action_view_picking_to_do"
+        />
+                <button
+          class="oe_stat_button"
+          string="Moves To Do"
+          icon="fa-arrows-v"
+          type="object"
+          name="action_view_move_to_do"
+        />
+                <button
+          class="oe_stat_button"
+          string="Move Lines To Do"
+          icon="fa-list-ul"
+          type="object"
+          name="action_view_move_line_to_do"
+        />
             </div>
             <field name="product_description_variants" position="after">
-                <label for="origin_qty"/>
+                <label for="origin_qty" />
                 <div class="o_row" name="origin_qty">
-                    <field name="origin_qty"/>
+                    <field name="origin_qty" />
                 </div>
-                <field name="currency_id" invisible="1"/>
-                <field name="purchase_price" string="Purchase Amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                <field name="purchase_unit_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                <field name="price_difference" invisible="1"/>
-                <field name="month_cost"/>
-                <field name="cost"/>
-                <field name="entry_total_amount" invisible="1"/>
-                <field name="output_total_amount" invisible="1"/>
+                <field name="currency_id" invisible="1" />
+                <field
+          name="purchase_price"
+          string="Purchase Amount"
+          widget="monetary"
+          options="{'currency_field': 'currency_id'}"
+        />
+                <field
+          name="purchase_unit_price"
+          widget="monetary"
+          options="{'currency_field': 'currency_id'}"
+        />
+                <field name="price_difference" invisible="1" />
+                <field name="month_cost" />
+                <field name="cost" />
+                <field name="entry_total_amount" invisible="1" />
+                <field name="output_total_amount" invisible="1" />
             </field>
             <group name="group_extra_info" position="inside">
-                <label for="canal_weight" string="Average Weight Canal"/>
+                <label for="canal_weight" string="Average Weight Canal" />
                 <div class="o_row" name="canal_weight">
-                    <field name="canal_weight"/>
+                    <field name="canal_weight" />
                 </div>
-                <field name="rto_canal"/>
-                <field name="canal_cost"/>
+                <field name="rto_canal" />
+                <field name="canal_cost" />
             </group>
-            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='qty_done']" position="attributes">
+            <xpath
+        expr="//tree[@name='mrp_move_lines']/field[@name='qty_done']"
+        position="attributes"
+      >
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//tree[@name='mrp_move_lines']/field[@name='location_dest_id']" position="after">
-                <field name="expense_kg" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="canal" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="pallet" sum="Total Pallets" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
-                <field name="container" sum="Total Containers" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
-                <field name="unit" sum="Total Units" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
-                <field name="download_unit" invisible="1" force_save="1"/>
-                <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="qty_done" sum="Total Quantity"/>
-                <field name="product_unit_container" optional="hide"/>
-                <field name="unit_container" readonly="1" force_save="1" optional="show"/>
-                <field name="weight" optional="show"/>
-                <field name="percentage" sum="Total Percentage" string="Rto. %" optional="show"/>
-                <field name="base_price"/>
-                <field name="applied_price" readonly="1" force_save="1"/>
-                <field name="standard_price" readonly="1" force_save="1" optional="hide"/>
-                <field name="amount" sum="Total amount" optional="show" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
+            <xpath
+        expr="//tree[@name='mrp_move_lines']/field[@name='location_dest_id']"
+        position="after"
+      >
+                <field
+          name="expense_kg"
+          optional="hide"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field
+          name="canal"
+          optional="hide"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field
+          name="pallet"
+          sum="Total Pallets"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          optional="show"
+        />
+                <field
+          name="container"
+          sum="Total Containers"
+          attrs="{'readonly': [('state', '=', 'cancel')]}"
+        />
+                <field
+          name="unit"
+          sum="Total Units"
+          attrs="{'readonly': [('state', '=', 'cancel')]}"
+        />
+                <field name="download_unit" invisible="1" force_save="1" />
+                <field
+          name="brut"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field name="qty_done" sum="Total Quantity" />
+                <field name="product_unit_container" optional="hide" />
+                <field
+          name="unit_container"
+          readonly="1"
+          force_save="1"
+          optional="show"
+        />
+                <field name="weight" optional="show" />
+                <field
+          name="percentage"
+          sum="Total Percentage"
+          string="Rto. %"
+          optional="show"
+        />
+                <field name="base_price" />
+                <field name="applied_price" readonly="1" force_save="1" />
+                <field
+          name="standard_price"
+          readonly="1"
+          force_save="1"
+          optional="hide"
+        />
+                <field
+          name="amount"
+          sum="Total amount"
+          optional="show"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          force_save="1"
+        />
             </xpath>
         </field>
     </record>

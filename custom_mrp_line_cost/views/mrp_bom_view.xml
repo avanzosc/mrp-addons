@@ -2,16 +2,19 @@
 <odoo>
     <record id="mrp_bom_form_view" model="ir.ui.view">
         <field name="model">mrp.bom</field>
-        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group/group" position="inside">
-                <field name="pallet_id"/>
-                <field name="packaging_id"/>
+                <field name="pallet_id" />
+                <field name="packaging_id" />
             </xpath>
-            <xpath expr="//field[@name='byproduct_ids']/tree/field[@name='product_uom_id']" position="after">
-                <field name="coefficient"/>
-                <field name="expense_kg"/>
-                <field name="cost"/>
+            <xpath
+        expr="//field[@name='byproduct_ids']/tree/field[@name='product_uom_id']"
+        position="after"
+      >
+                <field name="coefficient" />
+                <field name="expense_kg" />
+                <field name="cost" />
             </xpath>
         </field>
     </record>
