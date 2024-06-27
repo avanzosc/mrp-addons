@@ -19,35 +19,35 @@ class StockInventoryLine(models.Model):
         if self.inventory_id and self.inventory_id.batch_id:
             if self.prod_lot_id:
                 entry_line = self.inventory_id.batch_id.move_line_ids.filtered(
-                    lambda c: c.lot_id == self.prod_lot_id and (
-                        c.location_dest_id == self.location_id
-                    ) and c.picking_id
+                    lambda c: c.lot_id == self.prod_lot_id
+                    and (c.location_dest_id == self.location_id)
+                    and c.picking_id
                 )
                 dev_line = self.inventory_id.batch_id.move_line_ids.filtered(
-                    lambda c: c.lot_id == self.prod_lot_id and (
-                        c.location_id == self.location_id
-                    ) and c.picking_id
+                    lambda c: c.lot_id == self.prod_lot_id
+                    and (c.location_id == self.location_id)
+                    and c.picking_id
                 )
                 if entry_line:
                     dev_line_amount = sum(dev_line.mapped("amount")) or 0
                     dev_line_qty = sum(dev_line.mapped("qty_done")) or 0
-                    self.cost = (
-                        sum(entry_line.mapped("amount")) - dev_line_amount
-                    ) / (sum(entry_line.mapped("qty_done")) - dev_line_qty)
+                    self.cost = (sum(entry_line.mapped("amount")) - dev_line_amount) / (
+                        sum(entry_line.mapped("qty_done")) - dev_line_qty
+                    )
             elif self.product_id:
                 entry_line = self.inventory_id.batch_id.move_line_ids.filtered(
-                    lambda c: c.product_id == self.product_id and (
-                        c.location_dest_id == self.location_id
-                    ) and c.picking_id
+                    lambda c: c.product_id == self.product_id
+                    and (c.location_dest_id == self.location_id)
+                    and c.picking_id
                 )
                 dev_line = self.inventory_id.batch_id.move_line_ids.filtered(
-                    lambda c: c.product_id == self.product_id and (
-                        c.location_id == self.location_id
-                    ) and c.picking_id
+                    lambda c: c.product_id == self.product_id
+                    and (c.location_id == self.location_id)
+                    and c.picking_id
                 )
                 if entry_line:
                     dev_line_amount = sum(dev_line.mapped("amount")) or 0
                     dev_line_qty = sum(dev_line.mapped("qty_done")) or 0
-                    self.cost = (
-                        sum(entry_line.mapped("amount")) - dev_line_amount
-                    ) / (sum(entry_line.mapped("qty_done")) - dev_line_qty)
+                    self.cost = (sum(entry_line.mapped("amount")) - dev_line_amount) / (
+                        sum(entry_line.mapped("qty_done")) - dev_line_qty
+                    )
