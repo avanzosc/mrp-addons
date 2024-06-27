@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="product.product_template_only_form_view" />
         <field name="arch" type="xml">
             <field name="default_code" position="after">
-                <field name="bizerba_code"/>
+                <field name="bizerba_code" />
             </field>
         </field>
     </record>
