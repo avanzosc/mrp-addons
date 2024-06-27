@@ -8,10 +8,12 @@ class MrpWorkorderPendingWizard(models.TransientModel):
 
     def button_create_claim(self):
         if self.loss_id:
-            workorder = self.env['mrp.workorder'].browse(
-                self.env.context.get('active_id'))
+            workorder = self.env["mrp.workorder"].browse(
+                self.env.context.get("active_id")
+            )
             if workorder.time_ids:
                 mrp_workcenter_productivity = max(
-                    workorder.time_ids, key=lambda x: x.date_end)
+                    workorder.time_ids, key=lambda x: x.date_end
+                )
                 mrp_workcenter_productivity.loss_id = self.loss_id.id
         return super(MrpWorkorderPendingWizard, self).button_create_claim()
