@@ -183,7 +183,8 @@ class NestedLinesInfo(models.TransientModel):
                 # qty_nested = wo._get_real_uom_qty(record.qty_nested)
                 rounding = wo.production_id.product_uom_id.rounding
                 qty_remaining = float_round(
-                    (record.qty_production - record.qty_produced), precision_rounding=rounding
+                    (record.qty_production - record.qty_produced),
+                    precision_rounding=rounding,
                 )
                 qty_nested_remaining = float_round(
                     qty_remaining - (record.qty_nested - record.qty_produced),

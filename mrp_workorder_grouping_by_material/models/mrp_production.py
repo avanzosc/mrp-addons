@@ -28,7 +28,8 @@ class MrpProduction(models.Model):
         self.ensure_one()
         nested = self.mapped("workorder_ids.nested_line_ids.nest_id")
         action = self.env["ir.actions.actions"]._for_xml_id(
-            "mrp_workorder_grouping_by_material.mrp_workorder_nest_action")
+            "mrp_workorder_grouping_by_material.mrp_workorder_nest_action"
+        )
         action["domain"] = expression.AND(
             [[("id", "in", nested.ids)], safe_eval(action.get("domain") or "[]")]
         )
