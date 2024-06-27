@@ -12,7 +12,7 @@
     "author": "AvanzOSC",
     "license": "AGPL-3",
     "summary": """Quality Control Private Test""",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "data": [
         "views/quality_control_view.xml",
         "views/product_template_view.xml",
