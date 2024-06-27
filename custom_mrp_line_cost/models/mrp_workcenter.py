@@ -9,4 +9,5 @@ class MrpWorkcenter(models.Model):
     cost_ids = fields.One2many(
         string="Workcenter Costs",
         comodel_name="killing.cost",
-        inverse_name="workcenter_id")
+        inverse_name="workcenter_id",
+    )

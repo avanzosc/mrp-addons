@@ -2,25 +2,25 @@
 <odoo>
     <record id="mrp_workcenter_view" model="ir.ui.view">
         <field name="model">mrp.workcenter</field>
-        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page name="cost" string="Costs">
                     <field name="cost_ids">
                         <tree editable="bottom">
-                            <field name="workcenter_id" invisible="1"/>
-                            <field name="january"/>
-                            <field name="february"/>
-                            <field name="march"/>
-                            <field name="april"/>
-                            <field name="may"/>
-                            <field name="june"/>
-                            <field name="july"/>
-                            <field name="august"/>
-                            <field name="september"/>
-                            <field name="october"/>
-                            <field name="november"/>
-                            <field name="december"/>
+                            <field name="workcenter_id" invisible="1" />
+                            <field name="january" />
+                            <field name="february" />
+                            <field name="march" />
+                            <field name="april" />
+                            <field name="may" />
+                            <field name="june" />
+                            <field name="july" />
+                            <field name="august" />
+                            <field name="september" />
+                            <field name="october" />
+                            <field name="november" />
+                            <field name="december" />
                         </tree>
                     </field>
                 </page>

@@ -8,6 +8,4 @@ class ProductTemplate(models.Model):
 
     canal = fields.Boolean(string="Canal", default=False)
     unit_container = fields.Integer(string="Unit/Container")
-    palet = fields.Boolean(
-        string="Is Palet",
-        default=False)
+    palet = fields.Boolean(string="Is Palet", default=False)
