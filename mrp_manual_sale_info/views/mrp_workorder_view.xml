@@ -2,8 +2,10 @@
 <odoo>
     <record id="mrp_workorder_view_tree" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id"
-               ref="mrp.mrp_production_workorder_tree_editable_view" />
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
         <field name="arch" type="xml">
             <field name="date_planned_start" position="after">
                 <field name="manual_sale_id" optional="hide" />
@@ -19,10 +21,12 @@
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
         <field name="arch" type="xml">
             <page name="time_tracking" position="after">
-                <page string="Manual Sale Information"
-                      name="manual_sale_info"
-                      groups="mrp.group_mrp_manager"
-                      attrs="{'invisible': [('manual_sale_id','=',False)]}">
+                <page
+          string="Manual Sale Information"
+          name="manual_sale_info"
+          groups="mrp.group_mrp_manager"
+          attrs="{'invisible': [('manual_sale_id','=',False)]}"
+        >
                     <group>
                         <field name="manual_sale_id" />
                         <field name="manual_partner_id" />
