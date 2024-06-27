@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="mrp.mrp_workcenter_tree_view" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="use_in_repairs" optional="show"/>
+                <field name="use_in_repairs" optional="show" />
             </field>
         </field>
     </record>
@@ -25,14 +25,24 @@
         <field name="inherit_id" ref="mrp.view_mrp_workcenter_search" />
         <field name="arch" type="xml">
             <filter name="archived" position="before">
-                <filter name="use-in-repair" string="Use in repairs"
-                    domain="[('use_in_repairs', '=', True)]"/>
-                <filter name="not-use-in-repair" string="Not use in repairs"
-                    domain="[('use_in_repairs', '=', False)]"/>
+                <filter
+          name="use-in-repair"
+          string="Use in repairs"
+          domain="[('use_in_repairs', '=', True)]"
+        />
+                <filter
+          name="not-use-in-repair"
+          string="Not use in repairs"
+          domain="[('use_in_repairs', '=', False)]"
+        />
             </filter>
             <filter name="company" position="before">
-                <filter string="Use in repairs" name="use_in_repair" domain="[]"
-                context="{'group_by': 'use_in_repairs'}"/>
+                <filter
+          string="Use in repairs"
+          name="use_in_repair"
+          domain="[]"
+          context="{'group_by': 'use_in_repairs'}"
+        />
             </filter>
         </field>
     </record>

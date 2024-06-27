@@ -6,7 +6,7 @@
     "category": "Manufacturing/Manufacturing",
     "license": "AGPL-3",
     "author": "Avanzosc",
-    "website": "https://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
         "stock_picking_create_repair",
         "mrp",
