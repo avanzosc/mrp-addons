@@ -6,10 +6,10 @@
         <field name="model">mrp.bom.line</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="bom_id"/>
-                <field name="product_tmpl_id"/>
-                <field name="product_qty"/>
-                <field name="product_uom_id"/>
+                <field name="bom_id" />
+                <field name="product_tmpl_id" />
+                <field name="product_qty" />
+                <field name="product_uom_id" />
             </tree>
         </field>
     </record>
@@ -19,7 +19,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">mrp.bom.line</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="mrp_bom_line_view_tree"/>
+        <field name="view_id" ref="mrp_bom_line_view_tree" />
     </record>
 
 </odoo>
