@@ -1,16 +1,19 @@
 # Copyright 2021 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
-    version = fields.Char(string='Version')
+    version = fields.Char(string="Version")
     outdate = fields.Boolean(
-        string='Out Date', compute='_compute_outdate', store=True)
+        string="Out Date",
+        compute="_compute_outdate",
+        store=True,
+    )
 
-    @api.depends('version', 'product_id.last_version', 'product_id')
+    @api.depends("version", "product_id.last_version", "product_id")
     def _compute_outdate(self):
         for line in self:
             if int(line.version) < int(line.product_id.last_version):

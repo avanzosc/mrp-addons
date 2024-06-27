@@ -2,19 +2,19 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "MRP Product Version To BOM",
-    'version': '14.0.1.0.0',
+    "version": "14.0.1.0.0",
     "author": "Avanzosc",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "MRP",
     "depends": [
         "product",
-        "mrp"
+        "mrp",
     ],
     "data": [
         "views/mrp_bom_views.xml",
         "views/product_template_views.xml",
-        "views/mrp_production_views.xml"
+        "views/mrp_production_views.xml",
     ],
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
 }
