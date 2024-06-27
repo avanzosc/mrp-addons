@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="qc_test_form_view" model="ir.ui.view">
         <field name="name">qc.test.form</field>
         <field name="model">qc.test</field>
-        <field name="inherit_id" ref="quality_control_oca.qc_test_form_view"/>
+        <field name="inherit_id" ref="quality_control_oca.qc_test_form_view" />
         <field name="arch" type="xml">
             <field name="test_lines" position="after">
                 <group string="Related" name="related">
                 <notebook>
                     <page name="produt_tmpl" string="Product Templates">
                         <field name="qc_product_tmpl_triggers" nolabel="1">
-                            <tree string="Products" editable="bottom">
-                                <field name="product_template"/>
-                                <field name="trigger"/>
+                            <tree editable="bottom">
+                                <field name="product_template" />
+                                <field name="trigger" />
                             </tree>
                          </field>
                      </page>
@@ -22,4 +22,3 @@
         </field>
     </record>
 </odoo>
-
