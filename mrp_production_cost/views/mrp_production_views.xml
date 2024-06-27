@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']" position="after">
-                <field name="product_standard_cost"/>
-                <field name="material_cost_to_consume"/>
-                <field name="material_cost_consumed"/>
+            <xpath
+        expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']"
+        position="after"
+      >
+                <field name="product_standard_cost" />
+                <field name="material_cost_to_consume" />
+                <field name="material_cost_consumed" />
             </xpath>
             <field name="material_cost_to_consume" position="attributes">
                 <attribute name="sum">Cost Material to consume</attribute>
@@ -22,12 +25,15 @@
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">         
+            <field name="company_id" position="after">
                 <field name="cost_material_to_consume" sum="Cost Material to consume" />
                 <field name="cost_material_consumed" sum="Cost Material consumed" />
                 <field name="cost_workorder_estimated" sum="Cost Workorder estimated" />
                 <field name="cost_workorder_real" sum="Cost Workorder real" />
-                <field name="cost_manufacturing_estimated" sum="Cost Manufacturing estimated" />
+                <field
+          name="cost_manufacturing_estimated"
+          sum="Cost Manufacturing estimated"
+        />
                 <field name="cost_manufacturing_real" sum="Cost Manufacturing real" />
             </field>
         </field>
