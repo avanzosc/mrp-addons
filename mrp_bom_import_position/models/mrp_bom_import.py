@@ -14,8 +14,7 @@ class MrpBomImport(models.Model):
         if values:
             values.update(
                 {
-                    "line_position": convert2str(
-                        row_values.get("Position", "")),
+                    "line_position": convert2str(row_values.get("Position", "")),
                 }
             )
         return values
