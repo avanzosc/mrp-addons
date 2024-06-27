@@ -31,10 +31,18 @@
                 <field name="alt_category_id" />
             </field>
             <filter name="default_unit_of_measure" position="after">
-                <filter string="Category" name="category"
-                        domain="[]" context="{'group_by': 'category_id'}"/>
-                <filter string="Alternate Category" name="alt_category"
-                        domain="[]" context="{'group_by': 'alt_category_id'}"/>
+                <filter
+          string="Category"
+          name="category"
+          domain="[]"
+          context="{'group_by': 'category_id'}"
+        />
+                <filter
+          string="Alternate Category"
+          name="alt_category"
+          domain="[]"
+          context="{'group_by': 'alt_category_id'}"
+        />
             </filter>
         </field>
     </record>
