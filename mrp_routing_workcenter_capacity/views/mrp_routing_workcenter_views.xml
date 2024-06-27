@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="mrp_routing_workcenter_tree_view" model="ir.ui.view">
         <field name="model">mrp.routing.workcenter</field>
-        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view"/>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
         <field name="arch" type="xml">
             <field name="time_cycle" position="before">
                 <field name="capacity" />
@@ -14,17 +14,25 @@
 
     <record id="mrp_routing_workcenter_form_view" model="ir.ui.view">
         <field name="model">mrp.routing.workcenter</field>
-        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='time_mode_batch']/.." position="after">
                 <field name="capacity" />
-                <label for="time_start"/>
+                <label for="time_start" />
                 <div>
-                    <field name="time_start" widget="float_time" class="oe_inline"/> minutes
+                    <field
+            name="time_start"
+            widget="float_time"
+            class="oe_inline"
+          /> minutes
                 </div>
-                <label for="time_stop"/>
+                <label for="time_stop" />
                 <div>
-                    <field name="time_stop" widget="float_time" class="oe_inline"/> minutes
+                    <field
+            name="time_stop"
+            widget="float_time"
+            class="oe_inline"
+          /> minutes
                 </div>
             </xpath>
         </field>

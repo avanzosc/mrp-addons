@@ -17,16 +17,19 @@ class ReportBomStructure(models.AbstractModel):
         qty = bom.product_uom_id._compute_quantity(qty, bom.product_tmpl_id.uom_id)
         for operation in bom.operation_ids:
             operation_cycle = float_round(
-                qty / operation.capacity, precision_rounding=1, rounding_method="UP")
-            duration_expected = (
-                operation_cycle * (operation.time_cycle + (
-                    operation.time_stop + operation.time_start)))
-            total = ((duration_expected / 60.0) * operation.workcenter_id.costs_hour)
-            operations.append({
-                "level": level or 0,
-                "operation": operation,
-                "name": operation.name + " - " + operation.workcenter_id.name,
-                "duration_expected": duration_expected,
-                "total": self.env.company.currency_id.round(total),
-            })
+                qty / operation.capacity, precision_rounding=1, rounding_method="UP"
+            )
+            duration_expected = operation_cycle * (
+                operation.time_cycle + (operation.time_stop + operation.time_start)
+            )
+            total = (duration_expected / 60.0) * operation.workcenter_id.costs_hour
+            operations.append(
+                {
+                    "level": level or 0,
+                    "operation": operation,
+                    "name": operation.name + " - " + operation.workcenter_id.name,
+                    "duration_expected": duration_expected,
+                    "total": self.env.company.currency_id.round(total),
+                }
+            )
         return operations
