@@ -84,12 +84,12 @@
                         <field name="file_date" />
                     </group>
                     <group>
-                        <field name="product_found_by_code"/>
+                        <field name="product_found_by_code" />
                     </group>
                 </group>
                 <notebook>
                     <page string="Lines">
-                        <field name="bom_line_import_ids"/>
+                        <field name="bom_line_import_ids" />
                     </page>
                     <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
@@ -134,7 +134,6 @@
         <field name="model">mrp.bom.line.import</field>
         <field name="arch" type="xml">
             <tree
-        string="BoM Import"
         decoration-success="state=='pass'"
         decoration-danger="state=='error'"
         decoration-muted="state=='done'"
@@ -142,20 +141,20 @@
         decoration-warning="parent_product_bom_count>0 and state!='done'"
         editable="bottom"
       >
-                <field name="product_ref"/>
-                <field name="product_name"/>
-                <field name="product_id" optional="hide"/>
-                <field name="quantity"/>
-                <field name="bom_code"/>
-                <field name="bom_name"/>
-                <field name="bom_product_id" optional="hide"/>
-                <field name="parent_qty"/>
-                <field name="bom_ref"/>
-                <field name="parent_product_bom_count" optional="show"/>
-                <field name="bom_id" optional="hide"/>
-                <field name="bom_line_id" optional="hide"/>
-                <field name="log_info"/>
-                <field name="state"/>
+                <field name="product_ref" />
+                <field name="product_name" />
+                <field name="product_id" optional="hide" />
+                <field name="quantity" />
+                <field name="bom_code" />
+                <field name="bom_name" />
+                <field name="bom_product_id" optional="hide" />
+                <field name="parent_qty" />
+                <field name="bom_ref" />
+                <field name="parent_product_bom_count" optional="show" />
+                <field name="bom_id" optional="hide" />
+                <field name="bom_line_id" optional="hide" />
+                <field name="log_info" />
+                <field name="state" />
             </tree>
         </field>
     </record>

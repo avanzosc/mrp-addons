@@ -31,6 +31,7 @@ def check_number(number):
     except ValueError:
         return False
 
+
 def convert2str(value):
     if isinstance(value, float) or isinstance(value, int):
         new_value = str(value).strip()
@@ -98,7 +99,8 @@ class MrpBomImport(models.Model):
     )
     product_found_by_code = fields.Boolean(
         string="Product Found By Code",
-        default=False)
+        default=False,
+    )
 
     def _get_import_lines(self):
         return self.mapped("bom_line_import_ids")
@@ -221,13 +223,11 @@ class MrpBomImport(models.Model):
         return values
 
     def action_validate_lines(self):
-        lines = (self._get_import_lines()).filtered(
-            lambda x: x.state not in ("done"))
+        lines = self._get_import_lines().filtered(lambda x: x.state not in ("done"))
         lines.action_validate_lines()
 
     def action_process_lines(self):
-        lines = (self._get_import_lines()).filtered(
-            lambda x: x.state == "pass")
+        lines = self._get_import_lines().filtered(lambda x: x.state == "pass")
         lines.action_process_lines()
 
     def button_open_bom_component_import_line(self):
@@ -269,14 +269,16 @@ class MrpBomLineImport(models.Model):
     bom_name = fields.Char(string="BoM Name")
     bom_product_id = fields.Many2one(
         string="Parent Product",
-        comodel_name="product.product")
+        comodel_name="product.product",
+    )
     bom_id = fields.Many2one(
         comodel_name="mrp.bom",
         string="BoM",
     )
     bom_line_id = fields.Many2one(
         string="BoM Line",
-        comodel_name="mrp.bom.line")
+        comodel_name="mrp.bom.line",
+    )
     log_info = fields.Text(string="Log Info")
     state = fields.Selection(
         selection=IMPORT_STATUS,
@@ -286,7 +288,8 @@ class MrpBomLineImport(models.Model):
     parent_product_bom_count = fields.Integer(
         string="Parent Bom Qty",
         related="bom_product_id.bom_count",
-        store=True)
+        store=True,
+    )
     parent_qty = fields.Float(string="Parent Quantity")
 
     def _check_product(self):
@@ -360,11 +363,14 @@ class MrpBomLineImport(models.Model):
 
     def _create_bom(self):
         self.ensure_one()
-        bom = self.env["mrp.bom"].create({
-            "product_tmpl_id": self.bom_product_id.product_tmpl_id.id,
-            "code": self.bom_ref,
-            "product_qty": self.parent_qty,
-            "product_uom_id": self.bom_product_id.uom_id.id})
+        bom = self.env["mrp.bom"].create(
+            {
+                "product_tmpl_id": self.bom_product_id.product_tmpl_id.id,
+                "code": self.bom_ref,
+                "product_qty": self.parent_qty,
+                "product_uom_id": self.bom_product_id.uom_id.id,
+            }
+        )
         return bom
 
     def generate_bom_line_values(self):
@@ -372,7 +378,8 @@ class MrpBomLineImport(models.Model):
         bom_line = {
             "product_id": self.product_id.id,
             "product_qty": self.quantity,
-            "product_uom_id": self.product_id.uom_id.id}
+            "product_uom_id": self.product_id.uom_id.id,
+        }
         return bom_line
 
     def action_process_lines(self):
@@ -380,25 +387,34 @@ class MrpBomLineImport(models.Model):
         for line in self.filtered(lambda x: x.state == "pass"):
             log_info = ""
             bom = False
-            if not line.bom_id and line.bom_product_id and line.bom_product_id not in bom_product:
+            if (
+                not line.bom_id
+                and line.bom_product_id
+                and line.bom_product_id not in bom_product
+            ):
                 state = "2validate"
                 same_parent = line.bom_import_id.bom_line_import_ids.filtered(
-                    lambda c: c.bom_product_id == line.bom_product_id)
+                    lambda c: c.bom_product_id == line.bom_product_id
+                )
                 if any([state.state == "error" for state in same_parent]):
-                    log_info = _("Error: There is another line with the " +
-                              "same parent product errors.")
+                    log_info = _(
+                        "Error: There is another line with the same parent product"
+                        " errors."
+                    )
                     state = "error"
                 else:
                     bom = line._create_bom()
-                    for l in same_parent:
-                        bom_line_values = l.generate_bom_line_values()
+                    for ln in same_parent:
+                        bom_line_values = ln.generate_bom_line_values()
                         bom_line_values.update({"bom_id": bom.id})
-                        bom_line = self.env["mrp.bom.line"].create(
-                            bom_line_values)
-                        l.write({
-                            "bom_id": bom.id,
-                            "bom_line_id": bom_line.id,
-                            "state": "done"})
+                        bom_line = self.env["mrp.bom.line"].create(bom_line_values)
+                        ln.write(
+                            {
+                                "bom_id": bom.id,
+                                "bom_line_id": bom_line.id,
+                                "state": "done",
+                            }
+                        )
                     state = "done"
                 line.write(
                     {
