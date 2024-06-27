@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="mrp_bom_category_view_tree" model="ir.ui.view">
         <field name="model">mrp.bom.category</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="sequence_id"/>
+                <field name="name" />
+                <field name="sequence_id" />
             </tree>
         </field>
     </record>
@@ -16,8 +16,8 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="sequence_id"/>
+                        <field name="name" />
+                        <field name="sequence_id" />
                     </group>
                 </sheet>
             </form>
@@ -40,9 +40,11 @@
          <field name="res_model">mrp.bom.category</field>
     </record>
 
-    <menuitem id="mrp_bom_category_menu"
-              action="mrp_bom_category_action"
-              parent="mrp.menu_mrp_configuration"
-              sequence="50"/>
+    <menuitem
+    id="mrp_bom_category_menu"
+    action="mrp_bom_category_action"
+    parent="mrp.menu_mrp_configuration"
+    sequence="50"
+  />
 
 </odoo>

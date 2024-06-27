@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields, models
-        
+
 
 class MrpBomCategory(models.Model):
     _name = "mrp.bom.category"
@@ -15,7 +15,8 @@ class MrpBomCategory(models.Model):
     )
     sequence_id = fields.Many2one(
         string="Sequence",
-        comodel_name="ir.sequence")
+        comodel_name="ir.sequence",
+    )
 
     _sql_constraints = [
         ("name_unique", "unique(name)", "Category name already exists"),
