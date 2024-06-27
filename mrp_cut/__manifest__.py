@@ -4,10 +4,17 @@
     "name": "MRP Cut",
     "version": "14.0.1.0.0",
     "author": "Avanzosc",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "MRP",
-    "depends": ["product_second_uom", "mrp", "product_dimension"],
-    "data": ["views/mrp_bom_views.xml", "views/mrp_production.xml"],
+    "depends": [
+        "product_second_uom",
+        "mrp",
+        "product_dimension",
+    ],
+    "data": [
+        "views/mrp_bom_views.xml",
+        "views/mrp_production.xml",
+    ],
     "license": "AGPL-3",
     "installable": True,
 }
