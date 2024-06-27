@@ -3,10 +3,9 @@
 {
     "name": "Quality control claim",
     "version": "14.0.1.0.0",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "website": "http://www.odoomrp.com",
+    "author": "OdooMRP team," "AvanzOSC," "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "website": "https://github.com/avanzosc/mrp-addons",
+    "license": "AGPL-3",
     "contributors": [
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com",
         "Ana Juaristi <ajuaristio@gmail.com>",
