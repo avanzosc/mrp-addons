@@ -32,8 +32,10 @@ class MrpProduction(models.Model):
     @api.constrains("manual_sale_id", "manual_partner_id")
     def _check_auto_renew_canceled_lines(self):
         for rec in self:
-            if (rec.manual_sale_id and
-                    rec.manual_sale_id.partner_id != rec.manual_partner_id):
+            if (
+                rec.manual_sale_id
+                and rec.manual_sale_id.partner_id != rec.manual_partner_id
+            ):
                 raise ValidationError(
                     _("Customer must be same as customer from Sale Order!")
                 )
