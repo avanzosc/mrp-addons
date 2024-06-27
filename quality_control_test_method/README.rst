@@ -2,9 +2,9 @@
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
-==========================
+===========================
 Quality Control Test Method
-==========================
+===========================
 
 * Test method and test proof new two objects.
 * Method and proof fields in quality control test question and quality control inspection lines.
