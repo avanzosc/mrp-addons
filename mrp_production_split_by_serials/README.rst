@@ -7,7 +7,7 @@ Mrp production split by serials
 ===============================
 
 * When confirming an OF, if the product to be produced is "Traceable by serial
-number", create as many unit OFs as the quantity to be produced had the OF.
+  number", create as many unit OFs as the quantity to be produced had the OF.
 
 Bug Tracker
 ===========
