@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
     <record id="view_test_proof_tree" model="ir.ui.view">
         <field name="name">qc.test.proof.tree</field>
         <field name="model">qc.test.proof</field>
         <field name="arch" type="xml">
-            <tree string="Test Proof" editable="bottom">
-                <field name="name"/>
-                <field name="type"/>
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="type" />
             </tree>
         </field>
     </record>
@@ -22,9 +21,12 @@
          <field name="context">{}</field>
     </record>
 
-    <menuitem id="menu_test_proof"
-        action="action_test_proof"
-        name="Test Proof" parent="quality_control_oca.menu_qc_config"
-        sequence="3"/>
+    <menuitem
+    id="menu_test_proof"
+    action="action_test_proof"
+    name="Test Proof"
+    parent="quality_control_oca.menu_qc_config"
+    sequence="3"
+  />
 
 </odoo>

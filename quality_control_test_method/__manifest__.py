@@ -2,9 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Quality Control Test Method",
-    'version': '14.0.1.0.0',
+    "version": "14.0.1.0.0",
     "author": "Avanzosc",
-    "website": "https://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "MRP",
     "depends": [
         "quality_control_oca",
@@ -16,8 +16,8 @@
         "views/qc_test_proof_views.xml",
         "views/qc_inspection_line_views.xml",
         "views/qc_test_question_views.xml",
-        "views/qc_inspection_views.xml"
+        "views/qc_inspection_views.xml",
     ],
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
 }
