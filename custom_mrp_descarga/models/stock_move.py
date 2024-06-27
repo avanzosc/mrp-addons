@@ -6,8 +6,12 @@ from odoo import api, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.depends("purchase_line_id", "sale_line_id",
-                 "raw_material_production_id", "production_id")
+    @api.depends(
+        "purchase_line_id",
+        "sale_line_id",
+        "raw_material_production_id",
+        "production_id",
+    )
     def _compute_saca_line_id(self):
         super(StockMove, self)._compute_saca_line_id()
         for move in self:

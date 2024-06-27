@@ -2,60 +2,131 @@
 <odoo>
     <record id="view_move_line_tree" model="ir.ui.view">
         <field name="model">stock.move.line</field>
-        <field name="inherit_id" ref="stock.view_move_line_tree"/>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
         <field name="arch" type="xml">
             <field name="qty_done" position="before">
-                <field name="container" optional="hide" sum="Total Container" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field
+          name="container"
+          optional="hide"
+          sum="Total Container"
+          attrs="{'readonly': [('state', '=', 'done')]}"
+        />
             </field>
             <field name="product_uom_id" position="after">
-                <field name="unit" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                <field name="weight" optional="hide" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                <field name="performance" optional="show" sum="Total Performance" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                <field name="percentage" sum="Total Percentage" string="Rto. %" optional="show" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="unit" attrs="{'readonly': [('state', '=', 'done')]}" />
+                <field
+          name="weight"
+          optional="hide"
+          attrs="{'readonly': [('state', '=', 'done')]}"
+        />
+                <field
+          name="performance"
+          optional="show"
+          sum="Total Performance"
+          attrs="{'readonly': [('state', '=', 'done')]}"
+        />
+                <field
+          name="percentage"
+          sum="Total Percentage"
+          string="Rto. %"
+          optional="show"
+          attrs="{'readonly': [('state', '=', 'done')]}"
+        />
             </field>
         </field>
     </record>
 
     <record id="production_finished_move_line_ids_tree_view" model="ir.ui.view">
         <field name="model">stock.move.line</field>
-        <field name="inherit_id" ref="custom_mrp_line_cost.production_finished_move_line_ids_tree_view"/>
+        <field
+      name="inherit_id"
+      ref="custom_mrp_line_cost.production_finished_move_line_ids_tree_view"
+    />
         <field name="arch" type="xml">
             <field name="product_id" position="before">
-                <field name="sequence" string=""/>
+                <field name="sequence" string="" />
             </field>
             <field name="qty_done" position="after">
-                <field name="performance" sum="Total Performance" optional="hide"/>
+                <field name="performance" sum="Total Performance" optional="hide" />
             </field>
         </field>
     </record>
 
     <record id="production_move_line_ids_tree_view" model="ir.ui.view">
         <field name="model">stock.move.line</field>
-        <field name="inherit_id" ref="custom_mrp_line_cost.production_move_line_ids_tree_view"/>
+        <field
+      name="inherit_id"
+      ref="custom_mrp_line_cost.production_move_line_ids_tree_view"
+    />
         <field name="arch" type="xml">
             <tree position="attributes">
                 <attribute name="default_order">sequence desc</attribute>
                 <attribute name="decoration-danger">qty_done == 0</attribute>
             </tree>
             <field name="product_id" position="before">
-                <field name="sequence" string=" "/>
+                <field name="sequence" string=" " />
             </field>
             <field name="location_dest_id" position="after">
-                <field name="expense_kg" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="canal" optional="hide" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="pallet" sum="Total Pallets" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" optional="show"/>
-                <field name="container" sum="Total Containers" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
-                <field name="unit" sum="Total Units" attrs="{'readonly': [('state', '=', 'cancel')]}"/>
-                <field name="brut" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"/>
-                <field name="qty_done" sum="Total Quantity"/>
-                <field name="product_unit_container" optional="hide"/>
-                <field name="unit_container" readonly="1" force_save="1" optional="show"/>
-                <field name="weight" optional="show"/>
-                <field name="percentage" sum="Total Percentage" string="Rto. %" optional="show"/>
-                <field name="base_price"/>
-                <field name="applied_price" readonly="1" force_save="1"/>
-                <field name="standard_price" readonly="1" force_save="1" optional="hide"/>
-                <field name="amount" sum="Total amount" optional="show" attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}" force_save="1"/>
+                <field
+          name="expense_kg"
+          optional="hide"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field
+          name="canal"
+          optional="hide"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field
+          name="pallet"
+          sum="Total Pallets"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          optional="show"
+        />
+                <field
+          name="container"
+          sum="Total Containers"
+          attrs="{'readonly': [('state', '=', 'cancel')]}"
+        />
+                <field
+          name="unit"
+          sum="Total Units"
+          attrs="{'readonly': [('state', '=', 'cancel')]}"
+        />
+                <field
+          name="brut"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+        />
+                <field name="qty_done" sum="Total Quantity" />
+                <field name="product_unit_container" optional="hide" />
+                <field
+          name="unit_container"
+          readonly="1"
+          force_save="1"
+          optional="show"
+        />
+                <field name="weight" optional="show" />
+                <field
+          name="percentage"
+          sum="Total Percentage"
+          string="Rto. %"
+          optional="show"
+        />
+                <field name="base_price" />
+                <field name="applied_price" readonly="1" force_save="1" />
+                <field
+          name="standard_price"
+          readonly="1"
+          force_save="1"
+          optional="hide"
+        />
+                <field
+          name="amount"
+          sum="Total amount"
+          optional="show"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          force_save="1"
+        />
             </field>
         </field>
     </record>
@@ -64,43 +135,62 @@
         <field name="name">stock.move.line.tree</field>
         <field name="model">stock.move.line</field>
         <field name="arch" type="xml">
-            <tree string="Stock Move Lines" create="0">
-                <field name="date" optional="show"/>
-                <field name="reference"/>
-                <field name="production_id" optional="hide"/>
-                <field name="product_id"/>
-                <field name="lot_id"/>
-                <field name="location_id" optional="hide"/>
-                <field name="location_dest_id" optional="hide"/>
-                <field name="container" optional="show"/>
-                <field name="qty_done"/>
-                <field name="product_uom_id" optional="show"/>
-                <field name="unit" optional="show"/>
-                <field name="weight" optional="show"/>
-                <field name="performance" optional="show"/>
-                <field name="percentage" optional="show" sum="Total Percentage" string="Rto. %"/>
-                <field name="standard_price" optional="show"/>
-                <field name="amount" optional="show"/>
-                <field name="company_id" optional="hide"/>
+            <tree create="0">
+                <field name="date" optional="show" />
+                <field name="reference" />
+                <field name="production_id" optional="hide" />
+                <field name="product_id" />
+                <field name="lot_id" />
+                <field name="location_id" optional="hide" />
+                <field name="location_dest_id" optional="hide" />
+                <field name="container" optional="show" />
+                <field name="qty_done" />
+                <field name="product_uom_id" optional="show" />
+                <field name="unit" optional="show" />
+                <field name="weight" optional="show" />
+                <field name="performance" optional="show" />
+                <field
+          name="percentage"
+          optional="show"
+          sum="Total Percentage"
+          string="Rto. %"
+        />
+                <field name="standard_price" optional="show" />
+                <field name="amount" optional="show" />
+                <field name="company_id" optional="hide" />
             </tree>
         </field>
     </record>
 
     <record id="stock_move_line_view_search" model="ir.ui.view">
         <field name="model">stock.move.line</field>
-        <field name="inherit_id" ref="stock.stock_move_line_view_search"/>
+        <field name="inherit_id" ref="stock.stock_move_line_view_search" />
         <field name="arch" type="xml">
             <filter name="done" position="after">
-                <separator/>
-                <filter string="Done bigger than 0" name="done_qty" domain="[('qty_done', '&gt;', 0)]"/>
+                <separator />
+                <filter
+          string="Done bigger than 0"
+          name="done_qty"
+          domain="[('qty_done', '&gt;', 0)]"
+        />
             </filter>
             <filter name="groupby_product_id" position="after">
-                <filter string="Reference" name="groupby_production" domain="[]" context="{'group_by': 'reference'}"/>
+                <filter
+          string="Reference"
+          name="groupby_production"
+          domain="[]"
+          context="{'group_by': 'reference'}"
+        />
             </filter>
             <filter name="by_date" position="before">
-                <separator/>
-                <filter string="Saca Date" name="groupby_saca_date" domain="[]" context="{'group_by': 'saca_date'}"/>
-                <separator/>
+                <separator />
+                <filter
+          string="Saca Date"
+          name="groupby_saca_date"
+          domain="[]"
+          context="{'group_by': 'saca_date'}"
+        />
+                <separator />
             </filter>
         </field>
     </record>
@@ -109,11 +199,14 @@
         <field name="name">stock.move.line.search.view</field>
         <field name="model">stock.move.line</field>
         <field name="mode">primary</field>
-        <field name="priority">30</field>
-        <field name="inherit_id" ref="stock.stock_move_line_view_search"/>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="stock.stock_move_line_view_search" />
         <field name="arch" type="xml">
             <field name="lot_id" position="replace">
-                <field name="lot_id" filter_domain="[('lot_id','=ilike',str(self)+'%')]"/>
+                <field
+          name="lot_id"
+          filter_domain="[('lot_id','=ilike',str(self)+'%')]"
+        />
             </field>
         </field>
     </record>
@@ -123,9 +216,11 @@
         <field name="res_model">stock.move.line</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="stock.view_move_line_tree"/>
+        <field name="view_id" ref="stock.view_move_line_tree" />
         <field name="search_view_id" ref="stock.stock_move_line_view_search" />
-        <field name="domain">['|', ('move_id.raw_material_production_id', '!=', False), ('move_id.production_id', '!=', False), '|',('move_id.raw_material_production_id.quartering', '=', False), ('move_id.production_id.quartering', '=', False), '|', ('move_id.production_id.paasa', '=', True), ('move_id.raw_material_production_id.paasa', '=', True), ('state', '=', 'done')]</field>
+        <field
+      name="domain"
+    >['|', ('move_id.raw_material_production_id', '!=', False), ('move_id.production_id', '!=', False), '|',('move_id.raw_material_production_id.quartering', '=', False), ('move_id.production_id.quartering', '=', False), '|', ('move_id.production_id.paasa', '=', True), ('move_id.raw_material_production_id.paasa', '=', True), ('state', '=', 'done')]</field>
     </record>
 
     <record id="action_quartering_move_lines" model="ir.actions.act_window">
@@ -133,15 +228,32 @@
         <field name="res_model">stock.move.line</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="stock.view_move_line_tree"/>
-        <field name="search_view_id" ref="custom_mrp_descarga.stock_move_line_view_search_lot" />
+        <field name="view_id" ref="stock.view_move_line_tree" />
+        <field
+      name="search_view_id"
+      ref="custom_mrp_descarga.stock_move_line_view_search_lot"
+    />
         <field name="domain">[('quartering', '=', True)]</field>
-        <field name="context">{"search_default_todo": 1, "search_default_groupby_production": 1}</field>
+        <field
+      name="context"
+    >{"search_default_todo": 1, "search_default_groupby_production": 1}</field>
     </record>
 
-    <menuitem action="action_classified_move_line" name="Product Movements" id="menu_move_line_classified" parent="custom_descarga.stage_clasificado_menu" sequence="7"/>
+    <menuitem
+    action="action_classified_move_line"
+    name="Product Movements"
+    id="menu_move_line_classified"
+    parent="custom_descarga.stage_clasificado_menu"
+    sequence="7"
+  />
 
-    <menuitem action="action_quartering_move_lines" name="Líneas de despieces" id="menu_quartering_move_lines" parent="quartering_menu" sequence="5"/>
+    <menuitem
+    action="action_quartering_move_lines"
+    name="Líneas de despieces"
+    id="menu_quartering_move_lines"
+    parent="quartering_menu"
+    sequence="5"
+  />
 
     <record id="mrp.action_mrp_production_moves" model="ir.actions.act_window">
         <field name="view_mode">tree,form,pivot</field>

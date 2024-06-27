@@ -1,14 +1,13 @@
-<odoo>
-    <data noupdate="1">
-        <record id="quartering_sequence" model="ir.sequence">
-            <field name="name">Secuencia para órdenes de producción de despiece</field>
-            <field name="prefix">DESP/</field>
-            <field name="padding">5</field>
-        </record>
-        <record id="classified_sequence" model="ir.sequence">
-            <field name="name">Secuencia para órdenes de producción de clasificado</field>
-            <field name="prefix">CLAS/</field>
-            <field name="padding">5</field>
-        </record>
-    </data>
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="quartering_sequence" model="ir.sequence">
+        <field name="name">Secuencia para órdenes de producción de despiece</field>
+        <field name="prefix">DESP/</field>
+        <field name="padding">5</field>
+    </record>
+    <record id="classified_sequence" model="ir.sequence">
+        <field name="name">Secuencia para órdenes de producción de clasificado</field>
+        <field name="prefix">CLAS/</field>
+        <field name="padding">5</field>
+    </record>
 </odoo>

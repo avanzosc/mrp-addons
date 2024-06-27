@@ -1,12 +1,17 @@
-<odoo>
-    <data noupdate="1">
-        <record id="quartering_category" model="mrp.bom.category">
-            <field name="name">Despiece</field>
-            <field name="sequence_id" eval="ref('custom_mrp_descarga.quartering_sequence')"/>
-        </record>
-        <record id="classified_category" model="mrp.bom.category">
-            <field name="name">Clasificado</field>
-            <field name="sequence_id" eval="ref('custom_mrp_descarga.classified_sequence')"/>
-        </record>
-    </data>
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="quartering_category" model="mrp.bom.category">
+        <field name="name">Despiece</field>
+        <field
+      name="sequence_id"
+      eval="ref('custom_mrp_descarga.quartering_sequence')"
+    />
+    </record>
+    <record id="classified_category" model="mrp.bom.category">
+        <field name="name">Clasificado</field>
+        <field
+      name="sequence_id"
+      eval="ref('custom_mrp_descarga.classified_sequence')"
+    />
+    </record>
 </odoo>

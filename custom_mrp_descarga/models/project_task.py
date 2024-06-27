@@ -6,6 +6,4 @@ from odoo import fields, models
 class ProjectTask(models.Model):
     _inherit = "project.task"
 
-    production_id = fields.Many2one(
-        string="Production",
-        comodel_name="mrp.production")
+    production_id = fields.Many2one(string="Production", comodel_name="mrp.production")

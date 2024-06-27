@@ -7,7 +7,7 @@
     "category": "MRP",
     "license": "AGPL-3",
     "author": "AvanzOSC",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
         "custom_mrp_line_cost",
         "custom_descarga",
