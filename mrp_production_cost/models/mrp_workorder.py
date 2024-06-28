@@ -6,34 +6,25 @@ from odoo import api, fields, models
 class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
 
-    machine_hour_cost = fields.Float(
-        string="Machine hour cost",
-        readonly=True,
-        store=True,
-        copy=False,
-        related="workcenter_id.costs_hour",
-    )
     workorder_cost_estimated = fields.Float(
-        string="Workorder Cost estimated",
+        string="Estimated Cost",
         copy=False,
         store=True,
         compute="_compute_workorder_cost_estimated",
     )
     workorder_cost_real = fields.Float(
-        string="Workorder Cost real",
+        string="Real Cost",
         copy=False,
         store=True,
         compute="_compute_workorder_cost_real",
     )
 
-    @api.depends("duration_expected", "machine_hour_cost")
+    @api.depends("duration_expected", "costs_hour")
     def _compute_workorder_cost_estimated(self):
         for order in self:
-            order.workorder_cost_estimated = (
-                order.machine_hour_cost * order.duration_expected
-            )
+            order.workorder_cost_estimated = order.costs_hour * order.duration_expected
 
-    @api.depends("duration", "machine_hour_cost")
+    @api.depends("duration", "costs_hour")
     def _compute_workorder_cost_real(self):
         for order in self:
-            order.workorder_cost_real = order.machine_hour_cost * order.duration
+            order.workorder_cost_real = order.costs_hour * order.duration

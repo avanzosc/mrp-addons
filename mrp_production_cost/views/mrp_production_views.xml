@@ -5,19 +5,21 @@
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
             <xpath
-        expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']"
+        expr="//field[@name='move_raw_ids']/tree/field[@name='quantity_done']"
         position="after"
       >
-                <field name="product_standard_cost" />
-                <field name="material_cost_to_consume" />
-                <field name="material_cost_consumed" />
+                <field name="price_unit" optional="hide" />
+                <field
+          name="material_cost_to_consume"
+          sum="Estimated Total Cost"
+          optional="hide"
+        />
+                <field
+          name="material_cost_consumed"
+          sum="Real Total Cost"
+          optional="hide"
+        />
             </xpath>
-            <field name="material_cost_to_consume" position="attributes">
-                <attribute name="sum">Cost Material to consume</attribute>
-            </field>
-            <field name="material_cost_consumed" position="attributes">
-                <attribute name="sum">Cost Material consumed</attribute>
-            </field>
         </field>
     </record>
 
@@ -25,16 +27,29 @@
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
-                <field name="cost_material_to_consume" sum="Cost Material to consume" />
-                <field name="cost_material_consumed" sum="Cost Material consumed" />
-                <field name="cost_workorder_estimated" sum="Cost Workorder estimated" />
-                <field name="cost_workorder_real" sum="Cost Workorder real" />
+            <field name="production_real_duration" position="after">
                 <field
-          name="cost_manufacturing_estimated"
-          sum="Cost Manufacturing estimated"
+          name="cost_material_to_consume"
+          sum="Estimated Material Cost"
+          optional="hide"
         />
-                <field name="cost_manufacturing_real" sum="Cost Manufacturing real" />
+                <field
+          name="cost_material_consumed"
+          sum="Real Material Cost"
+          optional="hide"
+        />
+                <field
+          name="cost_workorder_estimated"
+          sum="Estimated Work Cost"
+          optional="hide"
+        />
+                <field
+          name="cost_workorder_real"
+          sum="Real Work Cost"
+          optional="hide"
+        />
+                <field name="cost_manufacturing_estimated" sum="Estimated Total Cost" />
+                <field name="cost_manufacturing_real" sum="Real Total Cost" />
             </field>
         </field>
     </record>

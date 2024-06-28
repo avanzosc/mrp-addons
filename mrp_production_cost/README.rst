@@ -6,11 +6,9 @@
 MRP Production Cost
 ===================
 
-Cost related fields in manufacturing orders:
+This module makes an estimation of the cost of a Manufacturing Order.
 
-* In "Components" of a Manufacturing Order
-* In "Work Orders" of a Manufacturing Order
-* In the Manufacturing Order List
+The user can visualise the cost data in the component lines, in the work orders and in the list of production orders.
 
 Bug Tracker
 ===========
