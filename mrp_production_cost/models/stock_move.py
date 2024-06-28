@@ -6,36 +6,25 @@ from odoo import api, fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    product_standard_cost = fields.Float(
-        string="Standard Cost",
-        readonly=True,
-        store=True,
-        copy=False,
-        related="product_id.standard_price",
-    )
     material_cost_to_consume = fields.Float(
-        string="Material cost to consume",
+        string="Estimated Cost",
         store=True,
         copy=False,
         compute="_compute_material_cost_to_consume",
     )
     material_cost_consumed = fields.Float(
-        string="Material cost consumed",
+        string="Real Cost",
         store=True,
         copy=False,
         compute="_compute_material_cost_consumed",
     )
 
-    @api.depends("product_standard_cost", "product_uom_qty")
+    @api.depends("price_unit", "product_uom_qty")
     def _compute_material_cost_to_consume(self):
         for move in self:
-            move.material_cost_to_consume = (
-                move.product_standard_cost * move.product_uom_qty
-            )
+            move.material_cost_to_consume = move.price_unit * move.product_uom_qty
 
-    @api.depends("product_standard_cost", "quantity_done")
+    @api.depends("price_unit", "quantity_done")
     def _compute_material_cost_consumed(self):
         for move in self:
-            move.material_cost_consumed = (
-                move.product_standard_cost * move.quantity_done
-            )
+            move.material_cost_consumed = move.price_unit * move.quantity_done

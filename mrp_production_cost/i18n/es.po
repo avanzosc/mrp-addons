@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-20 13:26+0000\n"
-"PO-Revision-Date: 2022-06-20 13:26+0000\n"
+"POT-Creation-Date: 2024-07-16 08:40+0000\n"
+"PO-Revision-Date: 2024-07-16 08:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,89 +16,35 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_estimated
+#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__material_cost_to_consume
+msgid "Estimated Cost"
+msgstr "Coste estimado"
+
+#. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_manufacturing_estimated
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
-msgid "Cost Manufacturing estimated"
-msgstr "Coste de Fabricación estimado"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_manufacturing_real
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
-msgid "Cost Manufacturing real"
-msgstr "Coste de Fabricación real"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_material_consumed
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
-msgid "Cost Material consumed"
-msgstr "Coste de Material consumido"
+msgid "Estimated Manufacturing Cost"
+msgstr "Coste de fabricación estimado"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_material_to_consume
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
+msgid "Estimated Material Cost"
+msgstr "Coste de material estimado"
+
+#. module: mrp_production_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
-msgid "Cost Material to consume"
-msgstr "Coste de Material a consumir"
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
+msgid "Estimated Total Cost"
+msgstr "Coste total estimado"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_workorder_estimated
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
-msgid "Cost Workorder estimated"
-msgstr "Coste de Orden de trabajo estimado"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_workorder_real
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
-msgid "Cost Workorder real"
-msgstr "Coste de Orden de trabajo real"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__display_name
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__display_name
-#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__id
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__id
-#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__id
-msgid "ID"
-msgstr ""
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,help:mrp_production_cost.field_stock_move__product_standard_cost
-msgid ""
-"In Standard Price & AVCO: value of the product (automatically computed in AVCO).\n"
-"        In FIFO: value of the last unit that left the stock (automatically computed).\n"
-"        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n"
-"        Used to compute margins on sale orders."
-msgstr ""
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production____last_update
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder____last_update
-#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__machine_hour_cost
-msgid "Machine hour cost"
-msgstr "Coste hora máquina"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__material_cost_consumed
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
-msgid "Material cost consumed"
-msgstr "Coste de Material consumido"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__material_cost_to_consume
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
-msgid "Material cost to consume"
-msgstr "Coste de Material a consumir"
+msgid "Estimated Work Cost"
+msgstr "Coste de trabajo estimado"
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_mrp_production
@@ -106,14 +52,35 @@ msgid "Production Order"
 msgstr "Orden de producción"
 
 #. module: mrp_production_cost
-#: model:ir.model.fields,help:mrp_production_cost.field_mrp_workorder__machine_hour_cost
-msgid "Specify cost of work center per hour."
-msgstr "Especificar coste por hora del centro de trabajo"
+#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_real
+#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__material_cost_consumed
+msgid "Real Cost"
+msgstr "Coste real"
 
 #. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__product_standard_cost
-msgid "Standard Cost"
-msgstr "Coste Estándard"
+#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_manufacturing_real
+msgid "Real Manufacturing Cost"
+msgstr "Coste de fabricación real"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_material_consumed
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
+msgid "Real Material Cost"
+msgstr "Coste de material real"
+
+#. module: mrp_production_cost
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
+msgid "Real Total Cost"
+msgstr "Coste real total"
+
+#. module: mrp_production_cost
+#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_workorder_real
+#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
+msgid "Real Work Cost"
+msgstr "Coste de trabajo real"
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_stock_move
@@ -124,15 +91,3 @@ msgstr "Movimiento de existencias"
 #: model:ir.model,name:mrp_production_cost.model_mrp_workorder
 msgid "Work Order"
 msgstr "Orden de trabajo"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_estimated
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
-msgid "Workorder Cost estimated"
-msgstr "Coste de Orden de trabajo estimado"
-
-#. module: mrp_production_cost
-#: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_real
-#: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
-msgid "Workorder Cost real"
-msgstr "Coste de Orden de trabajo real"

@@ -8,39 +8,39 @@ class MrpProduction(models.Model):
 
     # Material costs
     cost_material_to_consume = fields.Float(
-        string="Cost Material to consume",
+        string="Estimated Material Cost",
         copy=False,
         store=True,
         compute="_compute_cost_material_to_consume",
     )
     cost_material_consumed = fields.Float(
-        string="Cost Material consumed",
+        string="Real Material Cost",
         copy=False,
         store=True,
         compute="_compute_cost_material_consumed",
     )
     # Workorder costs
     cost_workorder_estimated = fields.Float(
-        string="Cost Workorder estimated",
+        string="Estimated Work Cost",
         copy=False,
         store=True,
         compute="_compute_cost_workorder_estimated",
     )
     cost_workorder_real = fields.Float(
-        string="Cost Workorder real",
+        string="Real Work Cost",
         copy=False,
         store=True,
         compute="_compute_cost_workorder_real",
     )
     # Manufacturing costs
     cost_manufacturing_estimated = fields.Float(
-        string="Cost Manufacturing estimated",
+        string="Estimated Manufacturing Cost",
         copy=False,
         store=True,
         compute="_compute_cost_manufacturing_estimated",
     )
     cost_manufacturing_real = fields.Float(
-        string="Cost Manufacturing real",
+        string="Real Manufacturing Cost",
         copy=False,
         store=True,
         compute="_compute_cost_manufacturing_real",
@@ -50,28 +50,28 @@ class MrpProduction(models.Model):
     def _compute_cost_material_to_consume(self):
         for production in self:
             production.cost_material_to_consume = sum(
-                production.move_raw_ids.mapped("material_cost_to_consume")
+                production.mapped("move_raw_ids.material_cost_to_consume")
             )
 
     @api.depends("move_raw_ids.material_cost_consumed")
     def _compute_cost_material_consumed(self):
         for production in self:
             production.cost_material_consumed = sum(
-                production.move_raw_ids.mapped("material_cost_consumed")
+                production.mapped("move_raw_ids.material_cost_consumed")
             )
 
     @api.depends("workorder_ids.workorder_cost_estimated")
     def _compute_cost_workorder_estimated(self):
         for production in self:
             production.cost_workorder_estimated = sum(
-                production.workorder_ids.mapped("workorder_cost_estimated")
+                production.mapped("workorder_ids.workorder_cost_estimated")
             )
 
     @api.depends("workorder_ids.workorder_cost_real")
     def _compute_cost_workorder_real(self):
         for production in self:
             production.cost_workorder_real = sum(
-                production.workorder_ids.mapped("workorder_cost_real")
+                production.mapped("workorder_ids.workorder_cost_real")
             )
 
     @api.depends("cost_material_to_consume", "cost_workorder_estimated")

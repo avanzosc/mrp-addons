@@ -5,15 +5,17 @@
         <field name="inherit_id" ref="stock.view_move_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
-                <field name="material_cost_to_consume" />
-                <field name="material_cost_consumed" />
+                <field
+          name="material_cost_to_consume"
+          sum="Estimated Total Cost"
+          optional="hide"
+        />
+                <field
+          name="material_cost_consumed"
+          sum="Real Total Cost"
+          optional="hide"
+        />
             </xpath>
-            <field name="material_cost_to_consume" position="attributes">
-                <attribute name="sum">Material cost to consume</attribute>
-            </field>
-            <field name="material_cost_consumed" position="attributes">
-                <attribute name="sum">Material cost consumed</attribute>
-            </field>
         </field>
     </record>
 </odoo>
