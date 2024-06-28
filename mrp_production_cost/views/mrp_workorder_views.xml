@@ -8,16 +8,18 @@
     />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='duration']" position="after">
-                <field name="machine_hour_cost" />
-                <field name="workorder_cost_estimated" />
-                <field name="workorder_cost_real" />
+                <field name="costs_hour" optional="hide" />
+                <field
+          name="workorder_cost_estimated"
+          sum="Estimated Total Cost"
+          optional="hide"
+        />
+                <field
+          name="workorder_cost_real"
+          sum="Real Total Cost"
+          optional="hide"
+        />
             </xpath>
-            <field name="workorder_cost_estimated" position="attributes">
-                <attribute name="sum">Workorder Cost estimated</attribute>
-            </field>
-            <field name="workorder_cost_real" position="attributes">
-                <attribute name="sum">Workorder Cost real</attribute>
-            </field>
         </field>
     </record>
 </odoo>
