@@ -21,13 +21,9 @@ class StockMoveLine(models.Model):
     container = fields.Integer(string="Containers")
     unit = fields.Integer(string="Unit")
     product_unit_container = fields.Integer(
-        string="Product Unit/Container",
-        related="product_id.unit_container",
-        store=True,
+        string="Product Unit/Container", related="product_id.unit_container", store=True
     )
-    unit_container = fields.Float(
-        string="Unit/Container",
-    )
+    unit_container = fields.Float(string="Unit/Container")
     weight = fields.Float(
         string="Weight",
         compute="_compute_weight",
@@ -47,29 +43,16 @@ class StockMoveLine(models.Model):
         store=True,
     )
     applied_price = fields.Float(
-        string="Applied Price",
-        digits="MRP Price Decimal Precision",
+        string="Applied Price", digits="MRP Price Decimal Precision"
     )
     expense_kg = fields.Boolean(
-        string="Cost/Kgm",
-        compute="_compute_expense_kg",
-        store=True,
+        string="Cost/Kgm", compute="_compute_expense_kg", store=True
     )
-    canal = fields.Boolean(
-        string="Canal",
-        related="product_id.canal",
-        store=True,
-    )
-    brut = fields.Float(
-        string="Brut",
-    )
-    pallet = fields.Integer(
-        string="Pallet Qty",
-    )
+    canal = fields.Boolean(string="Canal", related="product_id.canal", store=True)
+    brut = fields.Float(string="Brut")
+    pallet = fields.Integer(string="Pallet Qty")
     month_cost = fields.Float(
-        string="Month Cost",
-        compute="_compute_month_cost",
-        store=True,
+        string="Month Cost", compute="_compute_month_cost", store=True
     )
     pallet_id = fields.Many2one(
         string="Pallet",
@@ -77,6 +60,30 @@ class StockMoveLine(models.Model):
         default=_default_pallet_id,
         domain="[('palet', '=', True)]",
     )
+    clean_qty = fields.Float(
+        string="Clean",
+    )
+    clean_performance = fields.Float(
+        string="Clean Performance", compute="_compute_clean_performance", store=True
+    )
+
+    @api.depends(
+        "production_id",
+        "production_id.move_line_ids",
+        "production_id.move_line_ids.clean_qty",
+        "qty_done",
+    )
+    def _compute_clean_performance(self):
+        for line in self:
+            clean_performance = 0
+            if (
+                line.production_id
+                and sum(line.production_id.move_line_ids.mapped("clean_qty")) != 0
+            ):
+                clean_performance = line.qty_done / sum(
+                    line.production_id.move_line_ids.mapped("clean_qty")
+                )
+            line.clean_performance = clean_performance
 
     @api.depends(
         "production_id",
@@ -105,8 +112,8 @@ class StockMoveLine(models.Model):
             if (
                 line.production_id.date_planned_start
                 and line.move_id
-                and line.move_id.byproduct_id
-                and line.move_id.byproduct_id.operation_id
+                and (line.move_id.byproduct_id)
+                and (line.move_id.byproduct_id.operation_id)
             ):
                 month = line.production_id.date_planned_start.month
                 if month == 1:
@@ -189,15 +196,15 @@ class StockMoveLine(models.Model):
             else:
                 if (
                     line.production_id
-                    and line.move_id.bom_line_id
-                    and line.production_id.is_deconstruction
+                    and (line.move_id.bom_line_id)
+                    and (line.production_id.is_deconstruction)
                 ):
                     cost = line.move_id.bom_line_id.cost
                     if line.expense_kg:
                         cost = (
                             line.production_id.month_cost
-                            + line.production_id.purchase_unit_price
-                        ) * line.move_id.bom_line_id.coefficient
+                            + (line.production_id.purchase_unit_price)
+                        ) * (line.move_id.bom_line_id.coefficient)
                 elif line.production_id and line.move_id.byproduct_id:
                     cost = line.move_id.byproduct_id.cost
                     if line.expense_kg:
@@ -213,9 +220,8 @@ class StockMoveLine(models.Model):
                             entry_cost = sum(entry_same_lots.mapped("amount")) / sum(
                                 entry_same_lots.mapped("qty_done")
                             )
-                            cost = (
-                                line.month_cost
-                                + entry_cost * line.move_id.byproduct_id.coefficient
+                            cost = (line.month_cost + entry_cost) * (
+                                line.move_id.byproduct_id.coefficient
                             )
             line.base_price = cost
             if not line.applied_price:

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record forcecreate="True" id="moveline_standard_price" model="decimal.precision">
         <field name="name">MRP Price Decimal Precision</field>

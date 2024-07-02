@@ -7,14 +7,9 @@ class MrpBom(models.Model):
     _inherit = "mrp.bom"
 
     pallet_id = fields.Many2one(
-        string="Pallet",
-        comodel_name="product.product",
-        domain="[('palet', '=', True)]",
+        string="Pallet", comodel_name="product.product", domain="[('palet', '=', True)]"
     )
-    packaging_id = fields.Many2one(
-        string="Packaging",
-        comodel_name="product.product",
-    )
+    packaging_id = fields.Many2one(string="Packaging", comodel_name="product.product")
 
     @api.model
     def name_search(self, name="", args=None, operator="ilike", limit=100):
