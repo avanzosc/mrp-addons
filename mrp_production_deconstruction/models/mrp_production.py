@@ -7,9 +7,7 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     is_deconstruction = fields.Boolean(
-        string="Is Deconstruction?",
-        related="bom_id.is_deconstruction",
-        store=True,
+        string="Is Deconstruction?", related="bom_id.is_deconstruction", store=True
     )
     move_line_ids = fields.One2many(
         string="Move Lines",
@@ -30,15 +28,16 @@ class MrpProduction(models.Model):
 
     @api.depends("product_id", "company_id", "is_deconstruction")
     def _compute_production_location(self):
-        super(MrpProduction, self)._compute_production_location()
+        result = super()._compute_production_location()
         for production in self:
             if production.is_deconstruction:
                 production.production_location_id = (
                     production.picking_type_id.default_location_src_id.id
                 ) or (False)
+        return result
 
     def write(self, vals):
-        res = super(MrpProduction, self).write(vals)
+        res = super().write(vals)
         if "move_finished_ids" in vals:
             for line in self:
                 if line.is_deconstruction and line.move_finished_ids:
@@ -51,13 +50,13 @@ class MrpProduction(models.Model):
         for production in self:
             if (
                 production.bom_id
-                and production.is_deconstruction is True
-                and production.move_raw_ids
+                and (production.is_deconstruction) is True
+                and (production.move_raw_ids)
             ):
                 origin = production.picking_type_id.default_location_src_id
                 if origin.usage != "internal" and (
-                    production.production_location_id.usage == "internal"
-                ):
+                    production.production_location_id.usage
+                ) == ("internal"):
                     origin = production.production_location_id
                 dest = production.move_raw_ids.location_dest_id
                 if dest.usage == "production":
@@ -70,33 +69,24 @@ class MrpProduction(models.Model):
                     )
                     for move in production.move_raw_ids:
                         move.write(
-                            {
-                                "location_id": dest.id,
-                                "location_dest_id": origin.id,
-                            }
+                            {"location_id": dest.id, "location_dest_id": origin.id}
                         )
                         for line in move.move_line_ids:
                             line.write(
-                                {
-                                    "location_id": dest.id,
-                                    "location_dest_id": origin.id,
-                                }
+                                {"location_id": dest.id, "location_dest_id": origin.id}
                             )
 
     def action_confirm(self):
         self._check_is_deconstruction()
-        return super(MrpProduction, self).action_confirm()
+        return super().action_confirm()
 
     def button_mark_done(self):
-        result = super(MrpProduction, self).button_mark_done()
+        result = super().button_mark_done()
         for production in self:
             if production.is_deconstruction is True:
                 origin = production.finished_move_line_ids.location_id
                 dest = production.finished_move_line_ids.location_dest_id
                 production.finished_move_line_ids.write(
-                    {
-                        "location_id": dest.id,
-                        "location_dest_id": origin.id,
-                    }
+                    {"location_id": dest.id, "location_dest_id": origin.id}
                 )
         return result
