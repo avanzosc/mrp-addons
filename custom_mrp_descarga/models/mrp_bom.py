@@ -19,8 +19,10 @@ class MrpBom(models.Model):
         for line in self:
             quartering = False
             try:
-                quartering = self.env.ref("custom_mrp_descarga.quartering_category")
-                if line.category_id == quartering:
+                quartering_type = self.env.ref(
+                    "custom_mrp_descarga.quartering_category"
+                )
+                if line.category_id == quartering_type:
                     quartering = True
             except Exception:
                 quartering = False
