@@ -7,7 +7,7 @@
              <page name="miscellaneous" position="after">
                  <page name="stencil-products" string="Stencil products">
                      <field name="stencil_product_ids" nolabel="1">
-                         <tree string="Stencil products" editable="bottom">
+                         <tree editable="bottom">
                              <field name="bom_id" invisible="1" />
                              <field
                 name="product_id"
