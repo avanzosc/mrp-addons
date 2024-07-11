@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* quality_control_ref_search
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-17 10:45+0000\n"
+"PO-Revision-Date: 2024-06-17 10:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: quality_control_ref_search
+#: model:ir.model,name:quality_control_ref_search.model_qc_inspection
+msgid "Quality control inspection"
+msgstr "Inspección del control de calidad"
+
+#. module: quality_control_ref_search
+#: model:ir.model.fields,field_description:quality_control_ref_search.field_qc_inspection__ref_model_name
+msgid "Ref. Model"
+msgstr "Ref. modelo"
+
+#. module: quality_control_ref_search
+#: model:ir.model.fields,field_description:quality_control_ref_search.field_qc_inspection__ref_name
+msgid "Ref. Name"
+msgstr "Ref. descripción"
+
+#. module: quality_control_ref_search
+#: model_terms:ir.ui.view,arch_db:quality_control_ref_search.qc_inspection_search_view_inh_refsearch
+msgid "Reference"
+msgstr "Referencia"

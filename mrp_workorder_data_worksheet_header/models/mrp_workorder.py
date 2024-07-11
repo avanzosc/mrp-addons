@@ -14,7 +14,7 @@ try:
     # we need this to be sure PIL has loaded PDF support
     from PIL import PdfImagePlugin  # noqa: F401
 except ImportError:
-    pass
+    logger.debug("Can not import PIL")
 try:
     from PyPDF2 import PdfFileReader, PdfFileWriter  # pylint: disable=W0404
 except ImportError:

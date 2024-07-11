@@ -354,14 +354,14 @@ class MrpWorkorderNestLine(models.Model):
                 try:
                     wo.with_context(from_nest=True).record_production()
                     nl.state = "done"
-                except UserError as e:
+                except UserError as exc:
                     raise UserError(
                         _("%(workorder)s: %(error_name)s")
                         % {
                             "workorder": wo.name,
-                            "error_name": str(e.name),
+                            "error_name": str(exc.name),
                         }
-                    )
+                    ) from exc
 
     def button_pending(self):
         for nl in self:

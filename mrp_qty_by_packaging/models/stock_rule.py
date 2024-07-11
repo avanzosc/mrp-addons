@@ -36,11 +36,11 @@ class StockRule(models.Model):
         ):
             move = values.get("move_dest_ids")[0]
             if move.sale_line_id.product_packaging_id:
-                mo_values[
-                    "product_packaging_id"
-                ] = move.sale_line_id.product_packaging_id.id
+                mo_values["product_packaging_id"] = (
+                    move.sale_line_id.product_packaging_id.id
+                )
             if move.sale_line_id.product_packaging_qty:
-                mo_values[
-                    "product_packaging_qty"
-                ] = move.sale_line_id.product_packaging_qty
+                mo_values["product_packaging_qty"] = (
+                    move.sale_line_id.product_packaging_qty
+                )
         return mo_values

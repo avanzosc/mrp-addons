@@ -50,6 +50,6 @@ class MrpProduction(models.Model):
             price_unit_cost = 0
         self.price_unit_cost = price_unit_cost
         if self.lot_producing_id:
-            self.lot_producing_id.with_context(
-                from_production=True
-            ).purchase_price = price_unit_cost
+            self.lot_producing_id.with_context(from_production=True).purchase_price = (
+                price_unit_cost
+            )
