@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="qc_inspection_tree_view_inh_refsearch" model="ir.ui.view">
-        <field name="name">qc.inspection.tree.view.inh.refsearch</field>
         <field name="model">qc.inspection</field>
         <field name="inherit_id" ref="quality_control_oca.qc_inspection_tree_view" />
         <field name="arch" type="xml">
@@ -12,9 +11,9 @@
         </field>
     </record>
     <record id="qc_inspection_search_view_inh_refsearch" model="ir.ui.view">
-        <field name="name">qc.inspection.search.view.inh.refsearch</field>
         <field name="model">qc.inspection</field>
         <field name="inherit_id" ref="quality_control_oca.qc_inspection_search_view" />
+        <field name="priority">100</field>
         <field name="arch" type="xml">
             <field name="object_id" position="replace">
                 <field name="ref_name" />
