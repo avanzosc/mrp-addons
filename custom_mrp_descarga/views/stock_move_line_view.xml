@@ -199,14 +199,13 @@
         <field name="name">stock.move.line.search.view</field>
         <field name="model">stock.move.line</field>
         <field name="mode">primary</field>
-        <field name="priority">100</field>
+        <field name="priority">30</field>
         <field name="inherit_id" ref="stock.stock_move_line_view_search" />
         <field name="arch" type="xml">
-            <field name="lot_id" position="replace">
-                <field
-          name="lot_id"
-          filter_domain="[('lot_id','=ilike',str(self)+'%')]"
-        />
+            <field name="lot_id" position="attributes">
+                <attribute
+          name="filter_domain"
+        >[('lot_id','=ilike',str(self)+'%')]</attribute>
             </field>
         </field>
     </record>
