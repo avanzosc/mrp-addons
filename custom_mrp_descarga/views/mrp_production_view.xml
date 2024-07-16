@@ -100,10 +100,12 @@
     <record id="view_mrp_production_filter_lot" model="ir.ui.view">
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
-        <field name="priority" eval="100" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <field name="lot_producing_id" position="replace">
+            <field name="lot_producing_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="lot_producing_id" position="after">
                 <field
           name="lot_producing_id"
           filter_domain="[('lot_producing_id','=ilike',str(self)+'%')]"
@@ -115,7 +117,6 @@
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp_production_date.mrp_production_form_view" />
-        <field name="priority" eval="100" />
         <field name="arch" type="xml">
             <header position="inside">
                 <button
@@ -354,7 +355,10 @@
           attrs="{'invisible':[('saca_id', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}"
         />
             </field>
-            <field name="production_date" position="replace">
+            <field name="production_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="production_date" position="after">
                 <label
           for="production_date"
           attrs="{'invisible':[('chick_production', '=', False)]}"

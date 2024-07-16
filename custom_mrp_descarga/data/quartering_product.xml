@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="quartering_product" model="product.product">
         <field name="name">Despiece</field>
