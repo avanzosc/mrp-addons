@@ -175,15 +175,4 @@ class StockMoveLine(models.Model):
                 if line.move_id.state == "cancel" and values.get("qty_done") != 0:
                     line.move_id.state = "done"
                     line.state = "done"
-        if "qty_done" or "amount" or "state" in values:
-            for line in self:
-                if line.lot_id and line.company_id.paasa:
-                    quartering = line.lot_id.move_line_ids.filtered(
-                        lambda c: c.production_id
-                        and c.production_id.quartering
-                        and (c.location_id == c.production_id.location_src_id)
-                    )
-                    for record in quartering:
-                        if record.standard_price != line.lot_id.average_price:
-                            record.standard_price = line.lot_id.average_price
         return result
