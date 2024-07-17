@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-25 08:03+0000\n"
-"PO-Revision-Date: 2024-06-25 08:03+0000\n"
+"POT-Creation-Date: 2024-07-17 11:41+0000\n"
+"PO-Revision-Date: 2024-07-17 11:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -166,6 +166,7 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
@@ -178,6 +179,7 @@ msgid "Count Production"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
@@ -231,6 +233,7 @@ msgid "Dest Kg"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Diferencia"
@@ -292,11 +295,13 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Entradas"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
@@ -366,6 +371,7 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
@@ -400,11 +406,13 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG bruto"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG envases"
@@ -412,11 +420,13 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG neto"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG palets"
@@ -510,6 +520,12 @@ msgid "Medicine"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#, python-format
+msgid "Merma"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__batch_id
 msgid "Mother"
 msgstr ""
@@ -580,6 +596,7 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Palets"
 msgstr ""
@@ -590,6 +607,7 @@ msgid "Performance"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
@@ -639,13 +657,12 @@ msgid "Production Order"
 msgstr ""
 
 #. module: custom_mrp_descarga
-#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_classified_tree_view
-#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_quartering_tree_view
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
 msgid "Production Orders"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Producto"
@@ -706,6 +723,7 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Resumen de despiece"
 msgstr ""
@@ -757,6 +775,7 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Salidas"
 msgstr ""
@@ -774,11 +793,6 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__staff
 msgid "Staff"
-msgstr ""
-
-#. module: custom_mrp_descarga
-#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
-msgid "Stock Move Lines"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -845,6 +859,7 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Total Entradas"
 msgstr ""
@@ -895,6 +910,7 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Total Salidas"
 msgstr ""
@@ -910,6 +926,7 @@ msgid "Total amount"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
