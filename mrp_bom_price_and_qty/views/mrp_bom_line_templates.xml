@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_mrp_bom_line_inherit" inherit_id="mrp.report_mrp_bom_line">
+        <xpath expr="//td[@name='td_mrp_bom']" position="after">
+            <td class="text-right">
+                <span t-esc="round(l['prod_qty'] * l['prod_cost'], 4)"/>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="report_mrp_bom_inherit" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//thead/tr/th[3]" position="before">
+            <th class="text-right">Prod Qty * Prod Price</th>
+        </xpath>
+    </template>
+</odoo>
