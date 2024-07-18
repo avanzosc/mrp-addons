@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrp_bom_customized_document">
+        <t t-call="mrp_bom_report.external_layout_mrp_bom_customized">
+            <t
+        t-set="doc"
+        t-value="doc.with_context(lang=doc.create_uid.partner_id.lang)"
+      />
+            <div class="page">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="text-start">Reference/Description</th>
+                            <th name="th-qty" class="text-end">Qty.</th>
+                            <th name="th-operation" class="text-start">Fase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc._get_children(doc.bom_line_ids)" t-as="line">
+                            <td class="text-start">
+                                <span id="product_name" t-raw="line['product_name']" />
+                            </td>
+                            <td name="td-qty" class="text-end">
+                                <span t-esc="line['product_qty']" />
+                            </td>
+                            <td name="td-operation" class="text-start">
+                                <span t-esc="line['operation']" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer">
+                <div class="row">
+                    <div style="text-align: center;">
+                        <span class="page" />
+                        /
+                        <span class="topage" />
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_mrp_bom_customized">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+          t-call="mrp_bom_report.report_mrp_bom_customized_document"
+          t-lang="doc.create_uid.partner_id.lang"
+        />
+            </t>
+        </t>
+    </template>
+
+    <record id="action_mrp_bom_customized_report" model="ir.actions.report">
+        <field name="name">Cutomized BoM Report</field>
+        <field name="model">mrp.bom</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mrp_bom_report.report_mrp_bom_customized</field>
+        <field name="report_file">mrp_bom_report.report_mrp_bom_customized</field>
+        <field
+      name="print_report_name"
+    >(not object.product_id and 'BoM For Product - %s' % (object.product_tmpl_id.name)) or 'BoM For Variant - %s' % (object.product_id.name)</field>
+        <field name="binding_model_id" ref="mrp.model_mrp_bom" />
+        <field name="binding_type">report</field>
+        <field
+      name="paperformat_id"
+      ref="mrp_bom_report.paperformat_mrp_bom_personalized"
+    />
+    </record>
+</odoo>
