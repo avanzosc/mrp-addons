@@ -3,14 +3,14 @@
    :alt: License: AGPL-3
 
 =====================
-Quality control claim
+Quality Control Claim
 =====================
 
 If the quality test status is 'Quality failed', a claim is automatically
 generated, to accomplish this, we have defined the field 'Automatic Claims',
 in "test", and "inspection" objects.
 
-It also defined the field "Automatic Claims by line", when this fiels is
+It also defined the field "Automatic Claims by line", when this fields is
 checked, and the test line state is "No ok",a claim is automatically generated
 per line.
 
@@ -19,8 +19,8 @@ Credits
 
 Contributors
 ------------
-* "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com",
-* "Ana Juaristi <ajuaristio@gmail.com>",
-* "Alfredo de la Fuente <alfredodelafuente@avanzosc.es>",
-* "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-* "Daniel Campos <danielcampos@avanzosc.es>",
+* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Ana Juaristi <ajuaristio@gmail.com>
+* Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
+* Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
+* Daniel Campos <danielcampos@avanzosc.es>

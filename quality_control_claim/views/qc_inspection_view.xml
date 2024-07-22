@@ -6,10 +6,18 @@
         <field name="view_mode">tree,form</field>
         <field
       name="context"
-    >{'default_model_ref_id': 'qc.inspection,'+str(context.get('active_id', False))}</field>
+    >{'default_model_ref_id': 'qc.inspection,'+context.get('active_id', False)}</field>
         <field
       name="domain"
-    >[('model_ref_id','=','qc.inspection,'+str(context.get('active_id',False)))]</field>
+    >[('model_ref_id','=','qc.inspection,'+context.get('active_id',False))]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data found!
+            </p>
+            <p>
+                Record and track your claims.
+            </p>
+        </field>
     </record>
 
     <record id="qc_inspection_claim_tree_view" model="ir.ui.view">
@@ -34,14 +42,14 @@
                 <field name="automatic_claims_by_line" />
             </field>
             <div name="button_box" position="inside">
-                    <button
+                <button
           class="oe_stat_button"
           type="action"
           name="%(action_claims_per_inspection)d"
           icon="fa-bookmark-o"
         >
-                        <field name="claims" widget="statinfo" />
-                    </button>
+                    <field name="claims" widget="statinfo" />
+                </button>
             </div>
         </field>
     </record>
