@@ -3,13 +3,13 @@
 from odoo import api, models
 
 
-class StockProductionLot(models.Model):
-    _inherit = "stock.production.lot"
+class StockLot(models.Model):
+    _inherit = "stock.lot"
 
     @api.model_create_multi
     def create(self, vals_list):
         if self.env.context.get("same_subproduct", False):
             vals_list[0]["name"] = "TEMP - 001"
-        return super(
-            StockProductionLot, self.with_context(mail_create_nosubscribe=True)
-        ).create(vals_list)
+        return super(StockLot, self.with_context(mail_create_nosubscribe=True)).create(
+            vals_list
+        )

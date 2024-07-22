@@ -9,4 +9,4 @@ class StockQuant(models.Model):
     @api.constrains("quantity")
     def check_quantity(self):
         if "with_tracking_serial" not in self.env.context:
-            return super(StockQuant, self).check_quantity()
+            return super().check_quantity()

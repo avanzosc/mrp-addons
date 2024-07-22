@@ -10,7 +10,7 @@ class UomUom(models.Model):
         self, qty, to_unit, round=True, rounding_method="UP", raise_if_failure=True
     ):
         if "qty_twith_serial" in self.env.context:
-            return super(UomUom, self)._compute_quantity(
+            return super()._compute_quantity(
                 self.env.context.get("qty_twith_serial"),
                 to_unit,
                 round=round,
@@ -18,7 +18,7 @@ class UomUom(models.Model):
                 raise_if_failure=raise_if_failure,
             )
         else:
-            return super(UomUom, self)._compute_quantity(
+            return super()._compute_quantity(
                 qty,
                 to_unit,
                 round=round,
