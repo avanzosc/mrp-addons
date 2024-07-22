@@ -13,13 +13,11 @@ class QcInspection(models.Model):
         self.claims = len(claims)
 
     automatic_claims = fields.Boolean(
-        string="Automatic Claims",
         default=False,
         help="If you want to create one claim when the quality test status is"
         " 'Quality failed'.",
     )
     automatic_claims_by_line = fields.Boolean(
-        string="Automatic Claims by line",
         default=False,
         help="If you want to create one claim per quality test line, when the"
         " quality test line status is 'No ok'.",
@@ -42,22 +40,28 @@ class QcInspection(models.Model):
 
     def action_approve(self):
         crm_claim_obj = self.env["crm.claim"]
-        super().action_approve()
+        result = super().action_approve()
         for inspection in self:
             if inspection.state == "failed" and inspection.automatic_claims:
                 vals = inspection.init_claim_vals()
                 if self.object_id:
                     res_id, name = self.object_id.name_get()[0]
                     vals["name"] = _(
-                        "Quality test %s for object %s " " unsurpassed"
-                    ) % (self.name, name)
+                        "Quality test %(test_name)s for object %(name)s unsurpassed"
+                    ) % {
+                        "test_name": self.name,
+                        "name": name,
+                    }
                 else:
-                    vals["name"] = _("Quality test %s unsurpassed") % (self.name)
+                    vals["name"] = _("Quality test %(test_name)s unsurpassed") % {
+                        "test_name": self.name,
+                    }
                 crm_claim_obj.create(vals)
             elif inspection.automatic_claims_by_line:
                 for line in inspection.inspection_lines:
                     if not line.success:
                         inspection.create_claim_by_line(line)
+        return result
 
     def init_claim_vals(self):
         vals = {
@@ -72,12 +76,15 @@ class QcInspection(models.Model):
         if self.object_id:
             res_id, name = self.object_id.name_get()[0]
             vals["name"] = _(
-                "Quality test %s for %s unsurpassed, in test" " line %s"
-            ) % (self.name, name, line.name)
+                "Quality test %(test_name)s for %(name)s unsurpassed, in test line %("
+                "line_name)s"
+            ) % {"test_name": self.name, "name": name, "line_name": line.name}
         else:
-            vals["name"] = _("Quality test %s unsurpassed, in test line %s") % (
-                self.name,
-                line.name,
-            )
+            vals["name"] = _(
+                "Quality test %(test_name)s unsurpassed, in test line %(line_name)s"
+            ) % {
+                "test_name": self.name,
+                "line_name": line.name,
+            }
         claim = crm_claim_obj.create(vals)
         return claim
