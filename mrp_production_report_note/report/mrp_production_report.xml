@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+        <t t-if="o.move_raw_ids" position="after">
+            <t t-if="o.notes">
+                <strong>Notes:</strong><br />
+                <span t-field="o.notes" class="mt-4" />
+            </t>
+        </t>
+    </template>
+</odoo>
