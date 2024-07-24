@@ -1,0 +1,158 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_line_semi_finished
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-18 12:11+0000\n"
+"PO-Revision-Date: 2023-04-18 12:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model,name:mrp_bom_line_semi_finished.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Línea de Lista de Materiales"
+
+#. module: mrp_bom_line_semi_finished
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_order_form
+msgid "BoM Lines"
+msgstr "Componentes LdM"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__bom_code
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_mrp_bom_line_filter
+msgid "BoM Reference"
+msgstr "Referencia LdM"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__bom_type
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_mrp_bom_line_filter
+msgid "BoM Type"
+msgstr "Tipo LdM"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.actions.act_window,name:mrp_bom_line_semi_finished.mrp_bom_line_tree_action
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_mrp_bom_line_tree
+msgid "BoM,s Components"
+msgstr "Componentes Listas Materiales"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order__count_bom_lines
+msgid "Count BoM Components"
+msgstr "Contador componentes LdM"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__display_name
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_product__display_name
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_template__display_name
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order__display_name
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__virtual_available
+msgid "Forecast Quantity"
+msgstr "Cant. Prevista"
+
+#. module: mrp_bom_line_semi_finished
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_mrp_bom_line_filter
+msgid "Group By..."
+msgstr "Agrupar Por..."
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__id
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_product__id
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_template__id
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order__id
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order_line__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_bom_line_semi_finished
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.product_template_search_view
+msgid "IS NOT Semi finished"
+msgstr "NO ES Semiternado"
+
+#. module: mrp_bom_line_semi_finished
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.product_template_search_view
+msgid "IS Semi finished"
+msgstr "ES Semiterminado"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_product__semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_template__semi_finished
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.product_template_search_view
+msgid "Is semi-finished?"
+msgstr "¿Es semiterminado?"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line____last_update
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_product____last_update
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_template____last_update
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order____last_update
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order__mrp_bom_line_semi_finished_ids
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order_line__mrp_bom_line_semi_finished_ids
+msgid "MRP BoM Components with semi finished product"
+msgstr "MRP Componentes LdM con producto semiterminado."
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_product_product__mrp_bom_ids
+msgid "Mrp BoM"
+msgstr "Mrp LdM"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model,name:mrp_bom_line_semi_finished.model_product_product
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_mrp_bom_line_filter
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model,name:mrp_bom_line_semi_finished.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__product_to_produce_id
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_mrp_bom_line_filter
+msgid "Product to produce"
+msgstr "Producto a producir"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_mrp_bom_line__qty_available
+msgid "Quantity On Hand"
+msgstr "Cant. A mano"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model,name:mrp_bom_line_semi_finished.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model,name:mrp_bom_line_semi_finished.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: mrp_bom_line_semi_finished
+#: model_terms:ir.ui.view,arch_db:mrp_bom_line_semi_finished.view_mrp_bom_line_filter
+msgid "Search BoM,s Components"
+msgstr "Buscar componentes de Listas Materiales"
+
+#. module: mrp_bom_line_semi_finished
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order__show_button_bom_line
+#: model:ir.model.fields,field_description:mrp_bom_line_semi_finished.field_sale_order_line__show_button_bom_line
+msgid "Show button BoM Components"
+msgstr "Mostrar botón Componentes LdM"
