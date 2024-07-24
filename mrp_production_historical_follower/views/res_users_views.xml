@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <notebook position="before">
+                <label
+          for="mrp_production_follower"
+          string="Manufacturing orders follower"
+        />
+                <field name="mrp_production_follower" nolabel="1" />
+            </notebook>
+        </field>
+    </record>
+
+    <record id="view_users_tree" model="ir.ui.view">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="mrp_production_follower" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_users_search" model="ir.ui.view">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_search" />
+        <field name="arch" type="xml">
+            <field name="share" position="after">
+                <filter
+          name="production-follower"
+          string="Production follower"
+          icon="terp-partner"
+          domain="[('mrp_production_follower','=',True)]"
+        />
+                <filter
+          name="production--no-follower"
+          string="No production follower"
+          icon="terp-partner"
+          domain="[('mrp_production_follower','=',False)]"
+        />
+            </field>
+        </field>
+    </record>
+</odoo>
