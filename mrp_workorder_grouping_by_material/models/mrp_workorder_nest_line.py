@@ -293,7 +293,7 @@ class MrpWorkorderNestLine(models.Model):
                         move_line.write(
                             {
                                 "lot_id": n_line.nest_id.lot_id.id,
-                                "qty_done": move_line.qty_to_consume,
+                                "qty_done": move_line.reserved_qty,
                             }
                         )
                 # if res:
@@ -326,10 +326,10 @@ class MrpWorkorderNestLine(models.Model):
             elif nl.workorder_id.state == "done":
                 nl.state = "done"
 
-    def action_cancel(self):
-        if not any(self.filtered(lambda n: n.state == "ready")):
-            raise UserError(_(""))
-        return self.write({"state": "cancel"})
+    # def action_cancel(self):
+    #     if not any(self.filtered(lambda n: n.state == "ready")):
+    #         raise UserError(_(""))
+    #     return self.write({"state": "cancel"})
 
     def button_start(self):
         for nl in self.filtered(lambda n: n.state == "ready"):
