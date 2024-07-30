@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_bom_change_tree_view" model="ir.ui.view">
+        <field name="name">mrp.bom.change.tree.view</field>
+        <field name="model">mrp.bom.change</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="old_component_id" />
+                <field name="new_component_id" />
+                <field name="date" />
+                <field name="user" />
+                <field name="reason" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_bom_change_form_view" model="ir.ui.view">
+        <field name="name">mrp.bom.change.form.view</field>
+        <field name="model">mrp.bom.change</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            class="oe_highlight"
+            name="do_component_change"
+            string="Change Component"
+            type="object"
+            attrs="{'invisible':[('old_component_id','=',False)]}"
+          />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="old_component_id" />
+                            <field name="new_component_id" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="user" />
+                        </group>
+                    </group>
+                    <group colspan="4">
+                        <field name="reason" colspan="4" />
+                    </group>
+
+                    <separator string="BoMs" colspan="4" />
+                    <field name="bom_ids" colspan="4" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_bom_change_view">
+        <field name="name">Mass component change in BoMs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.bom.change</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+    action="action_bom_change_view"
+    name="Mass component change in BoMs"
+    id="mrp_bom_change_menu"
+    parent="mrp.menu_mrp_bom"
+    sequence="14"
+  />
+</odoo>
