@@ -126,6 +126,13 @@
           attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
         />
                 <field name="qty_done" sum="Total Quantity" />
+                <field
+          name="clean_qty"
+          optional="hide"
+          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          sum="Total Clean"
+        />
+                <field name="clean_performance" optional="hide" />
                 <field name="product_unit_container" optional="hide" />
                 <field
           name="unit_container"

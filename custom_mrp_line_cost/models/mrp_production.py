@@ -20,9 +20,7 @@ class MrpProduction(models.Model):
         digits="Killing Cost Decimal Precision",
     )
     rto_canal = fields.Float(
-        string="Rto. Canal",
-        compute="_compute_rto_canal",
-        store=True,
+        string="Rto. Canal", compute="_compute_rto_canal", store=True
     )
     canal_cost = fields.Float(
         string="Canal Cost",
@@ -69,19 +67,11 @@ class MrpProduction(models.Model):
         store=True,
     )
     average_cost = fields.Float(
-        string="Averga Cost",
-        compute="_compute_average_cost",
-        store=True,
+        string="Averga Cost", compute="_compute_average_cost", store=True
     )
-    cost = fields.Float(
-        string="Cost",
-        compute="_compute_cost",
-        store=True,
-    )
+    cost = fields.Float(string="Cost", compute="_compute_cost", store=True)
     entry_total_amount = fields.Float(
-        string="Entry Total Amount",
-        compute="_compute_entry_total_amount",
-        store=True,
+        string="Entry Total Amount", compute="_compute_entry_total_amount", store=True
     )
     output_total_amount = fields.Float(string="Output Total Amount")
     consume_qty = fields.Float(
@@ -136,11 +126,11 @@ class MrpProduction(models.Model):
             ):
                 average_cost = sum(
                     line.move_line_ids.filtered(
-                        lambda c: c.location_id == line.location_src_id
+                        lambda c: c.location_id == (line.location_src_id)
                     ).mapped("amount")
                 ) / sum(
                     line.move_line_ids.filtered(
-                        lambda c: c.location_id == line.location_src_id
+                        lambda c: c.location_id == (line.location_src_id)
                     ).mapped("qty_done")
                 )
             line.average_cost = average_cost
@@ -263,8 +253,8 @@ class MrpProduction(models.Model):
                 production._compute_entry_total_amount()
             elif (
                 not production.is_deconstruction
-                and production.average_cost
-                and production.finished_move_line_ids
+                and (production.average_cost)
+                and (production.finished_move_line_ids)
             ):
                 for line in production.finished_move_line_ids:
                     line.applied_price = line.base_price
