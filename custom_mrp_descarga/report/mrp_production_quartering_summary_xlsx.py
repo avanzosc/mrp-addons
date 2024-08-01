@@ -120,12 +120,14 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
         m += 1
         worksheet.write(n, m, _("Peso medio"), table_header)
         m += 1
-        worksheet.write(n, m, _("% rendimiento"), table_header)
+        worksheet.write(n, m, _("%"), table_header)
         for m in range(m + 1, 13):
             worksheet.write(n, m, "", table_header)
         entry_movelines = objects.mapped("move_line_ids")
         categories = []
         products = []
+        total_entry_pallet_weight = 0
+        total_entry_container_weight = 0
         for line in entry_movelines:
             if line.product_category_id not in categories:
                 categories.append(line.product_category_id)
@@ -157,12 +159,10 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                             line.move_id.raw_material_production_id.packaging_id.weight
                             * line.container
                         )
+                total_entry_pallet_weight += categ_pallet_weight
+                total_entry_container_weight += categ_container_weight
                 categ_qty_done = sum(categ_lines.mapped("qty_done"))
-                categ_average_weight = (
-                    categ_qty_done / sum(categ_lines.mapped("download_unit"))
-                    if sum(categ_lines.mapped("download_unit"))
-                    else 0
-                )
+                categ_average_weight = categ_qty_done / categ_unit if categ_unit else 0
                 categ_amount = sum(categ_lines.mapped("amount"))
                 categt_applied_price = round(
                     (categ_amount / categ_qty_done) if categ_qty_done != 0 else 0, 3
@@ -202,10 +202,7 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                                 )
                         product_qty_done = sum(product_lines.mapped("qty_done"))
                         product_average_weight = (
-                            product_qty_done
-                            / sum(product_lines.mapped("download_unit"))
-                            if sum(product_lines.mapped("download_unit"))
-                            else 0
+                            product_qty_done / product_unit if product_unit else 0
                         )
                         product_amount = sum(product_lines.mapped("amount"))
                         product_applied_price = (
@@ -287,11 +284,58 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                     categ_qty_done * 100 / sum(entry_movelines.mapped("qty_done")),
                     result_two_decimal,
                 )
+        n += 1
+        m = 1
+        worksheet.write(n, m, "TOTAL", result_int_format)
+        m += 1
+        worksheet.write(n, m, sum(entry_movelines.mapped("pallet")), result_int_format)
+        m += 1
+        worksheet.write(
+            n, m, sum(entry_movelines.mapped("container")), result_int_format
+        )
+        m += 1
+        total_entry_unit = sum(entry_movelines.mapped("unit"))
+        worksheet.write(n, m, total_entry_unit, result_int_format)
+        m += 1
+        worksheet.write(n, m, sum(entry_movelines.mapped("brut")), result_two_decimal)
+        m += 1
+        worksheet.write(n, m, total_entry_pallet_weight, result_two_decimal)
+        m += 1
+        worksheet.write(n, m, total_entry_container_weight, result_two_decimal)
+        m += 1
+        total_qty_done = sum(entry_movelines.mapped("qty_done"))
+        worksheet.write(n, m, total_qty_done, result_two_decimal)
+        total_entry_amount = sum(entry_movelines.mapped("amount"))
+        m += 1
+        worksheet.write(
+            n,
+            m,
+            round((total_entry_amount / total_qty_done) if total_qty_done else 0, 3),
+            result_three_decimal,
+        )
+        m += 1
+        worksheet.write(n, m, total_entry_amount, result_two_decimal)
+        m += 1
+        worksheet.write(
+            n,
+            m,
+            (total_qty_done / total_entry_unit if total_entry_unit else 0),
+            result_two_decimal,
+        )
+        m += 1
+        worksheet.write(
+            n,
+            m,
+            100,
+            result_two_decimal,
+        )
         n += 3
         m = 0
         worksheet.write(n, m, _("Salidas"), table_header)
         categories = []
         products = []
+        total_out_pallet_weight = 0
+        total_out_container_weight = 0
         out_movelines = objects.mapped("finished_move_line_ids")
         for line in out_movelines:
             if line.product_category_id not in categories:
@@ -322,6 +366,8 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                             line.move_id.production_id.packaging_id.weight
                             * line.container
                         )
+                total_out_pallet_weight += categ_pallet_weight
+                total_out_container_weight += categ_container_weight
                 categ_qty_done = sum(categ_lines.mapped("qty_done"))
                 categ_amount = sum(categ_lines.mapped("amount"))
                 categt_applied_price = round(
@@ -430,6 +476,41 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                     categ_qty_done * 100 / sum(entry_movelines.mapped("qty_done")),
                     result_two_decimal,
                 )
+                n += 1
+        m = 1
+        worksheet.write(n, m, "TOTAL", result_int_format)
+        m += 1
+        worksheet.write(n, m, sum(out_movelines.mapped("pallet")), result_int_format)
+        m += 1
+        worksheet.write(n, m, sum(out_movelines.mapped("container")), result_int_format)
+        m += 2
+        worksheet.write(n, m, sum(out_movelines.mapped("brut")), result_two_decimal)
+        m += 1
+        worksheet.write(n, m, total_out_pallet_weight, result_two_decimal)
+        m += 1
+        worksheet.write(n, m, total_out_container_weight, result_two_decimal)
+        m += 1
+        total_out_qty_done = sum(out_movelines.mapped("qty_done"))
+        worksheet.write(n, m, total_out_qty_done, result_two_decimal)
+        total_out_amount = sum(out_movelines.mapped("amount"))
+        m += 1
+        worksheet.write(
+            n,
+            m,
+            round(
+                (total_out_amount / total_out_qty_done) if total_out_qty_done else 0, 3
+            ),
+            result_three_decimal,
+        )
+        m += 1
+        worksheet.write(n, m, total_out_amount, result_two_decimal)
+        m += 2
+        worksheet.write(
+            n,
+            m,
+            total_out_qty_done * 100 / sum(entry_movelines.mapped("qty_done")),
+            result_two_decimal,
+        )
         n += 2
         m = 0
         worksheet.write(n, m, _("Total Entradas"), result_summary)
@@ -446,10 +527,22 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
         m = 0
         worksheet.write(n, m, _("Diferencia"), result_summary)
         m += 1
+        dif = sum(entry_movelines.mapped("qty_done")) - sum(
+            out_movelines.mapped("qty_done")
+        )
         worksheet.write(
             n,
             m,
-            sum(entry_movelines.mapped("qty_done"))
-            - sum(out_movelines.mapped("qty_done")),
+            dif,
+            result_two_decimal,
+        )
+        n += 1
+        m = 0
+        worksheet.write(n, m, _("Merma"), result_summary)
+        m += 1
+        worksheet.write(
+            n,
+            m,
+            dif / sum(entry_movelines.mapped("qty_done")) * 100,
             result_two_decimal,
         )

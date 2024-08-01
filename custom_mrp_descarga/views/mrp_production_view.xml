@@ -457,7 +457,7 @@
             <field name="brut" position="attributes">
                 <attribute
           name="attrs"
-        >{'column_invisible':[('parent.quartering', '=', False)], 'readonly': [('state', 'in', ('cancel', 'done'))]}</attribute>
+        >{'column_invisible':[('parent.quartering', '=', False)], 'readonly': [('state', '=', 'cancel')]}</attribute>
             </field>
             <field name="product_unit_container" position="attributes">
                 <attribute
