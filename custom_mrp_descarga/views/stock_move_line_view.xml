@@ -29,8 +29,7 @@
           name="percentage"
           sum="Total Percentage"
           string="Rto. %"
-          optional="show"
-          attrs="{'readonly': [('state', '=', 'done')]}"
+          optional="hide"
         />
             </field>
         </field>
@@ -93,10 +92,7 @@
           sum="Total Units"
           attrs="{'readonly': [('state', '=', 'cancel')]}"
         />
-                <field
-          name="brut"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
-        />
+                <field name="brut" attrs="{'readonly': [('state', '=', 'cancel')]}" />
                 <field name="qty_done" sum="Total Quantity" />
                 <field name="product_unit_container" optional="hide" />
                 <field
@@ -110,7 +106,7 @@
           name="percentage"
           sum="Total Percentage"
           string="Rto. %"
-          optional="show"
+          optional="hide"
         />
                 <field name="base_price" />
                 <field name="applied_price" readonly="1" force_save="1" />
@@ -151,7 +147,7 @@
                 <field name="performance" optional="show" />
                 <field
           name="percentage"
-          optional="show"
+          optional="hide"
           sum="Total Percentage"
           string="Rto. %"
         />
