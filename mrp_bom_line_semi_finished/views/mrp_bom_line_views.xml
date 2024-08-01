@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <record id="view_mrp_bom_line_tree" model="ir.ui.view">
+            <field name="name">view.mrp.bom.line.tree</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="bom_id" />
+                    <field name="bom_code" optional="show" />
+                    <field name="bom_type" optional="show" />
+                    <field name="product_to_produce_id" />
+                    <field name="company_id" optional="hidden" />
+                    <field name="product_id" />
+                    <field name="product_tmpl_id" invisible="1" />
+                    <field name="semi_finished" optional="show" readonly="1" />
+                    <field name="qty_available" optional="show" readonly="1" />
+                    <field name="virtual_available" optional="show" readonly="1" />
+                    <field name="product_qty" optional="show" />
+                    <field name="product_uom_category_id" invisible="1" />
+                    <field name="parent_product_tmpl_id" invisible="1" />
+                    <field
+          name="possible_bom_product_template_attribute_value_ids"
+          invisible="1"
+        />
+                    <field
+          name="product_uom_id"
+          optional="show"
+          groups="uom.group_uom"
+        />
+                    <field name="allowed_operation_ids" invisible="1" />
+                    <field
+          name="operation_id"
+          groups="mrp.group_mrp_routings"
+          optional="hidden"
+        />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mrp_bom_line_filter" model="ir.ui.view">
+            <field name="name">view.mrp.bom.line.filter</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="arch" type="xml">
+                <search string="Search BoM,s Components">
+                    <field name="product_to_produce_id" />
+                    <field name="bom_code" string="BoM Reference" />
+                    <field name="product_id" string="Product" />
+                    <group expand="0" string="Group By...">
+                        <filter
+            string="Product to produce"
+            name="group-product-to_produce"
+            domain="[]"
+            context="{'group_by': 'product_to_produce_id'}"
+          />
+                        <filter
+            string="BoM Reference"
+            name="bom-code"
+            domain="[]"
+            context="{'group_by': 'bom_code'}"
+          />
+                        <filter
+            string='BoM Type'
+            name="group_by_type"
+            domain="[]"
+            context="{'group_by' : 'bom_type'}"
+          />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="mrp_bom_line_tree_action" model="ir.actions.act_window">
+            <field name="name">BoM,s Components</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.bom.line</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_mrp_bom_line_filter" />
+        </record>
+</odoo>

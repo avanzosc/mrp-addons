@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_template_search_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="semi_finished" />
+            </field>
+            <filter name="activities_exception" position="after">
+                <separator />
+                <filter
+          string="IS Semi finished"
+          name="is-semi-finished"
+          domain="[('semi_finished', '=', True)]"
+        />
+                <filter
+          string="IS NOT Semi finished"
+          name="is-not-semi-finished"
+          domain="[('semi_finished', '=', True)]"
+        />
+            </filter>
+            <filter name="categ_id" position="after">
+                <filter
+          string="Is semi-finished?"
+          name="group-semi-finished"
+          context="{'group_by':'semi_finished'}"
+        />
+            </filter>
+        </field>
+    </record>
+
+    <record id="product_template_tree_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="semi_finished" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <div name="options" position="before">
+                <div>
+                    <group>
+                        <field name="semi_finished" />
+                    </group>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
