@@ -1,6 +1,5 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from datetime import timedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -109,31 +108,6 @@ class StockMoveLine(models.Model):
                     raise ValidationError(
                         _("The outgoing lot must match the incoming one.")
                     )
-        return result
-
-    @api.onchange("batch_id", "location_id", "product_id")
-    def onchange_lot_domain(self):
-        result = super(StockMoveLine, self).onchange_lot_domain()
-        if (
-            self.production_id
-            and not (self.production_id.quartering)
-            and (self.location_id == self.production_id.location_dest_id)
-        ):
-            lots = []
-            date = fields.Datetime.now()
-            date = date - timedelta(days=5)
-            date = date.date()
-            lot = self.env["stock.production.lot"].search(
-                [
-                    ("product_id", "=", self.product_id.id),
-                    ("company_id", "=", self.company_id.id),
-                    ("create_date", ">=", date),
-                ]
-            )
-            for line in lot:
-                if line.id not in lots:
-                    lots.append(line.id)
-            result = {"domain": {"lot_id": [("id", "in", lots)]}}
         return result
 
     @api.onchange("lot_id", "product_id")
