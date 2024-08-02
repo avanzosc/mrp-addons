@@ -91,23 +91,31 @@ class StockMoveLine(models.Model):
     @api.onchange("lot_id")
     def _onchange_lot_id(self):
         result = super(StockMoveLine, self)._onchange_lot_id()
-        if self.production_id and (self.production_id.quartering) and (self.lot_id):
+        if (
+            self.production_id
+            and (self.production_id.bring_cost_from_lots)
+            and (self.lot_id)
+        ):
             self.standard_price = self.lot_id.average_price
-            if self.location_dest_id == self.production_id.location_src_id:
-                lot = self.lot_id.name
-                if not any(
-                    [
-                        line.lot_id.name == lot
-                        for line in (
-                            self.production_id.move_line_ids.filtered(
-                                lambda c: c.location_id != self.location_id
-                            )
+        if (
+            self.production_id
+            and self.production_id.filter_only_entry_lots
+            and self.location_dest_id == self.production_id.location_src_id
+        ):
+            lot = self.lot_id.name
+            if not any(
+                [
+                    line.lot_id.name == lot
+                    for line in (
+                        self.production_id.move_line_ids.filtered(
+                            lambda c: c.location_id != self.location_id
                         )
-                    ]
-                ):
-                    raise ValidationError(
-                        _("The outgoing lot must match the incoming one.")
                     )
+                ]
+            ):
+                raise ValidationError(
+                    _("The outgoing lot must match the incoming one.")
+                )
         return result
 
     @api.onchange("lot_id", "product_id")

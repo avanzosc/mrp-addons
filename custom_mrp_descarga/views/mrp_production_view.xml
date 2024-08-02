@@ -359,6 +359,10 @@
                 <attribute name="invisible">1</attribute>
             </field>
             <field name="production_date" position="after">
+                <field
+          name="production_cost_date"
+          attrs="{'invisible':[('tolvasa', '=', True)]}"
+        />
                 <label
           for="production_date"
           attrs="{'invisible':[('chick_production', '=', False)]}"
