@@ -13,6 +13,10 @@ class MrpBom(models.Model):
     no_produce_product = fields.Boolean(
         string="Don't produce the header product", default=False
     )
+    bring_cost_from_lots = fields.Boolean(string="Bring Costs From Lots", default=False)
+    filter_only_entry_lots = fields.Boolean(
+        string="Filter Only Entry Lots", default=False
+    )
 
     @api.depends("category_id")
     def _compute_quartering(self):
