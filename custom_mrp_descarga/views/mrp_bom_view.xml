@@ -8,6 +8,8 @@
                 <field name="quartering" />
                 <field name="no_duplicate_lines" />
                 <field name="no_produce_product" />
+                <field name="bring_cost_from_lots" />
+                <field name="filter_only_entry_lots" />
             </field>
             <page name="components" position="attributes">
                 <attribute name="string">Inputs</attribute>

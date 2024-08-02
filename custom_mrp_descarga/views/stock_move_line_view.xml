@@ -158,6 +158,33 @@
         </field>
     </record>
 
+    <record id="stock_move_line_quartering_tree_view" model="ir.ui.view">
+        <field name="name">stock.move.line.tree</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <tree create="0" editable="bottom">
+                <field name="date" optional="show" />
+                <field name="reference" />
+                <field name="production_id" />
+                <field name="product_id" />
+                <field name="lot_id" />
+                <field name="location_id" optional="hide" />
+                <field name="location_dest_id" optional="hide" />
+                <field name="pallet" />
+                <field name="container" />
+                <field name="unit" />
+                <field name="brut" />
+                <field name="weight" optional="show" />
+                <field name="qty_done" />
+                <field name="average_weight" optional="hide" />
+                <field name="performance" optional="show" />
+                <field name="standard_price" />
+                <field name="amount" />
+                <field name="company_id" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
     <record id="stock_move_line_view_search" model="ir.ui.view">
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="stock.stock_move_line_view_search" />
@@ -223,7 +250,7 @@
         <field name="res_model">stock.move.line</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="stock.view_move_line_tree" />
+        <field name="view_id" ref="stock_move_line_quartering_tree_view" />
         <field
       name="search_view_id"
       ref="custom_mrp_descarga.stock_move_line_view_search_lot"
