@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+        <xpath
+      expr="//div[@t-if='o.product_description_variants']/.."
+      position="attributes"
+    >
+            <attribute name="class">row mt-4 mb-4</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='o.product_id']/.." position="attributes">
+            <attribute name="class">col-auto col-3 mw-100 mb-2</attribute>
+        </xpath>
+        <xpath
+      expr="//span[@t-field='o.product_description_variants']/.."
+      position="attributes"
+    >
+            <attribute name="class">col-auto col-3 mw-100 mb-2</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='o.product_qty']/.." position="attributes">
+            <attribute name="class">col-auto col-3 mw-100 mb-2</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='o.qty_producing']/.." position="attributes">
+            <attribute name="class">col-auto col-3 mw-100 mb-2</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='o.qty_producing']/.." position="after">
+            <div class="col-auto col-3 mw-100 mb-2" name="date_planned_start">
+                <strong>Scheduled Date:</strong><br />
+                <span t-field="o.date_planned_start" t-options='{"widget": "date"}' />
+            </div>
+            <div class="col-auto col-3 mw-100 mb-2" t-if="o.bom_id" name="bom">
+                <strong>BoM:</strong><br />
+                <span t-field="o.bom_id" />
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-if='o.workorder_ids']//th[2]" position="after">
+            <th name="date-start"><strong>Date Start</strong></th>
+        </xpath>
+        <xpath expr="//span[@t-field='line2.workcenter_id.name']/.." position="after">
+            <td name="date-start"><span
+          t-if="line2.date_planned_start"
+          t-field="line2.date_planned_start"
+        /></td>
+        </xpath>
+    </template>
+
+    <template
+    id="report_mrp_production_components"
+    inherit_id="mrp.report_mrp_production_components"
+  >
+        <th t-if="o.state in ('progress', 'to_close','done')" position="before">
+            <th name="th-lots" class="text-start">
+                Lots
+            </th>
+            <th name="th-location" class="text-start">
+                Location
+            </th>
+        </th>
+        <xpath expr="//span[@t-field='raw_line.product_id']/.." position="after">
+            <td name="td-lots" class="text-start">
+                <span t-esc="raw_line._get_lots_mrp_production_report()" />
+            </td>
+            <td name="td-location" class="text-start">
+                <span t-field="raw_line.location_id.name" />
+            </td>
+        </xpath>
+    </template>
+</odoo>
