@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+        <t t-if="o.move_raw_ids" position="after">
+            <div t-if="o.stencil_product_ids">
+                <h3>
+                    <span>Stencil Products</span>
+                </h3>
+                <table class="table table-sm">
+                    <tr>
+                        <th class="text-start"><strong>Product</strong></th>
+                        <th class="text-start"><strong>Location</strong></th>
+                        <th class="text-end"><strong>Quantity</strong></th>
+                    </tr>
+                    <tr t-foreach="o.stencil_product_ids" t-as="line">
+                        <td class="text-start"><span
+                t-field="line.product_id.name"
+              /></td>
+                        <td class="text-start"><span
+                t-field="line.location_id.name"
+              /></td>
+                        <td class="text-end">
+                            <span t-field="line.product_uom_qty" />
+                            <span t-field="line.product_uom_id" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//field[@name='move_raw_ids']/tree/field[@name='quantity_done']"
+        position="after"
+      >
+                <field name="price_unit" optional="hide" />
+                <field
+          name="material_cost_to_consume"
+          sum="Estimated Total Cost"
+          optional="hide"
+        />
+                <field
+          name="material_cost_consumed"
+          sum="Real Total Cost"
+          optional="hide"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_production_tree_view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="production_real_duration" position="after">
+                <field
+          name="cost_material_to_consume"
+          sum="Estimated Material Cost"
+          optional="hide"
+        />
+                <field
+          name="cost_material_consumed"
+          sum="Real Material Cost"
+          optional="hide"
+        />
+                <field
+          name="cost_workorder_estimated"
+          sum="Estimated Work Cost"
+          optional="hide"
+        />
+                <field
+          name="cost_workorder_real"
+          sum="Real Work Cost"
+          optional="hide"
+        />
+                <field name="cost_manufacturing_estimated" sum="Estimated Total Cost" />
+                <field name="cost_manufacturing_real" sum="Real Total Cost" />
+            </field>
+        </field>
+    </record>
+</odoo>

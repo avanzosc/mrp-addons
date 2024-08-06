@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_production_workorder_tree_editable_view">
+        <field name="model">mrp.workorder</field>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='duration']" position="after">
+                <field name="costs_hour" optional="hide" />
+                <field
+          name="workorder_cost_estimated"
+          sum="Estimated Total Cost"
+          optional="hide"
+        />
+                <field
+          name="workorder_cost_real"
+          sum="Real Total Cost"
+          optional="hide"
+        />
+            </xpath>
+        </field>
+    </record>
+</odoo>
