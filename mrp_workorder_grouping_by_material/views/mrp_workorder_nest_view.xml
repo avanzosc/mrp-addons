@@ -24,6 +24,12 @@
             domain="[]"
             context="{'group_by': 'date_planned_start'}"
           />
+                    <filter
+            name="group_state"
+            string="Status"
+            domain="[]"
+            context="{'group_by': 'state'}"
+          />
                 </group>
             </search>
         </field>
@@ -39,7 +45,14 @@
                 <field name="lot_id" />
                 <field name="date_planned_start" widget="date" />
                 <field name="done_cancel_lines" invisible="1" />
-                <field name="state" invisible="1" />
+                <field
+          name="state"
+          widget="badge"
+          decoration-success="state == 'done'"
+          decoration-info="state not in ('done', 'cancel')"
+          readonly="1"
+          optional="show"
+        />
             </tree>
         </field>
     </record>
