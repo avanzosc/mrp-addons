@@ -1,0 +1,28 @@
+<odoo>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product_last_mrp_info.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <field name="last_mrp_date" position="after">
+                 <field name="last_mrp_price_unit_cost" />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_product_tree_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field
+      name="inherit_id"
+      ref="product_last_mrp_info.product_product_tree_view"
+    />
+        <field name="arch" type="xml">
+            <field name="last_mrp_date" position="after">
+                <field
+          name="last_mrp_price_unit_cost"
+          optional="show"
+          groups="mrp.group_mrp_user"
+        />
+            </field>
+        </field>
+    </record>
+</odoo>
