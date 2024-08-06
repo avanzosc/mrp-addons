@@ -1,0 +1,278 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_historical
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-12 07:01+0000\n"
+"PO-Revision-Date: 2024-07-12 07:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid ""
+"%(text)s\n"
+"* New product: %(product)s."
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid ""
+"%(text)s\n"
+"* Replaced the designator: %(old_desig)s, by the new designator: %(new_desig)s"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid ""
+"%(text)s\n"
+"* Replaced the layer: %(old_layer)s, by the new layer: %(new_layer)s"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid ""
+"%(text)s\n"
+"* Replaced the manufacturer code: %(old_code)s, by the new manufacturer code: %(new_code)s"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid ""
+"%(text)s\n"
+"* Replaced the quantity: %(old_qty)s, by the new quantity: %(new_qty)s."
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid ""
+"%(text)s\n"
+"* Replaced the unit of measure: %(old_unit)s, by the new measure: %(new_unit)s"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid "Added BoM line"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_production_historical.py:0
+#: model:ir.model.fields.selection,name:mrp_production_historical.selection__mrp_production_historical__type__add
+#, python-format
+msgid "Added product"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model,name:mrp_production_historical.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Llista de material"
+
+#. module: mrp_production_historical
+#: model:ir.model,name:mrp_production_historical.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Línia de Llista de Materials"
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,help:mrp_production_historical.field_mrp_production_historical__production_bom_id
+msgid ""
+"Bill of Materials allow you to define the list of required components to "
+"make a finished product."
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__bom_id
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__production_bom_id
+msgid "BoM"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__bom_line_changes
+msgid "BoM line changes"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__bom_line_movement
+msgid "BoM line movement"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_production_historical.py:0
+#: model:ir.model.fields.selection,name:mrp_production_historical.selection__mrp_production_historical__type__bomadd
+#, python-format
+msgid "BoM: Added product"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_production_historical.py:0
+#: model:ir.model.fields.selection,name:mrp_production_historical.selection__mrp_production_historical__type__bomdel
+#, python-format
+msgid "BoM: Deleted product"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_production_historical.py:0
+#: model:ir.model.fields.selection,name:mrp_production_historical.selection__mrp_production_historical__type__bommod
+#, python-format
+msgid "BoM: Modified line"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__historical_date
+msgid "Date"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid "Deleted BoM line"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_bom__historical_ids
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production__mrp_production_historical_ids
+#: model_terms:ir.ui.view,arch_db:mrp_production_historical.mrp_bom_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_historical.mrp_production_form_view
+msgid "Historical"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__production_id
+msgid "MRP Production"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model,name:mrp_production_historical.model_mrp_production_historical
+msgid "MRP Production historical"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__product_id
+msgid "Product"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model,name:mrp_production_historical.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__programed_qty
+msgid "Programed quantity"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model,name:mrp_production_historical.model_stock_scrap
+msgid "Scrap"
+msgstr "Deixalla"
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_production_historical.py:0
+#: model:ir.model.fields.selection,name:mrp_production_historical.selection__mrp_production_historical__type__scraped
+#, python-format
+msgid "Scraped product"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__scraped_qty
+msgid "Scraped quantity"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model,name:mrp_production_historical.model_stock_move
+msgid "Stock Move"
+msgstr "Moviment d'estoc"
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid "The product: %(product)s the following changes have been made:"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__type
+msgid "Type"
+msgstr ""
+
+#. module: mrp_production_historical
+#: model:ir.model.fields,field_description:mrp_production_historical.field_mrp_production_historical__user_id
+msgid "User"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid "added"
+msgstr ""
+
+#. module: mrp_production_historical
+#. odoo-python
+#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
+#, python-format
+msgid "deleted"
+msgstr ""
