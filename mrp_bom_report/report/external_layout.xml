@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="external_layout_mrp_bom">
+        <div
+      t-attf-class="header o_company_#{company.id}_layout"
+      t-att-style="report_header_style"
+    >
+            <div class="row">
+                <div class="col-10 mb4">
+                    <h3>Cutomized BoM Report</h3>
+                    <div class="row">
+                        <div class="col-8">
+                            <strong>BoM Name:</strong>
+                            <span
+                t-if="not doc.product_id"
+                t-field="doc.product_tmpl_id.name"
+              />
+                            <span t-if="doc.product_id" t-field="doc.product_id.name" />
+                            <br />
+                            <strong>Internal Ref.:</strong>
+                            <span
+                t-if="not doc.product_id"
+                t-field="doc.product_tmpl_id.default_code"
+              />
+                            <span
+                t-if="doc.product_id"
+                t-field="doc.product_id.prefix_code"
+              />
+                            <t t-if="doc.code">
+                                <br />
+                                <strong>BoM Ref.:</strong>
+                                <span t-field="doc.code" />
+                            </t>
+                        </div>
+                        <div class="col-4">
+                            <span id="date-printing">
+                                <strong id="date-printing">Date Printing:</strong>
+                                <span t-esc="doc.get_date_now()" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 text-end" name="moto">
+                    <img
+            t-if="company.logo"
+            t-att-src="image_data_uri(company.logo)"
+            style="max-width:130px; max-height: 130px;"
+            alt="Logo"
+          />
+                </div>
+            </div>
+        </div>
+
+        <div
+      t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+      t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+      t-att-data-oe-model="o and o._name"
+      t-att-data-oe-id="o and o.id"
+      t-att-data-oe-lang="o and o.env.context.get('lang')"
+    >
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout" />
+            </div>
+            <t t-out="0" />
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div t-field="company.report_footer" />
+                </ul>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page" /> / <span class="topage" />
+                </div>
+                <div
+          t-if="report_type == 'pdf' and display_name_in_footer"
+          class="text-muted"
+        >
+                    <span t-field="o.name" />
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="external_layout_mrp_bom_customized">
+        <t t-if="not o" t-set="o" t-value="doc" />
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+        <t t-call="mrp_bom_report.external_layout_mrp_bom"><t t-out="0" /></t>
+    </template>
+</odoo>
