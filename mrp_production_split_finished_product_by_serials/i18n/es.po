@@ -58,6 +58,8 @@ msgstr "Total cantidad producida"
 #. module: mrp_production_split_finished_product_by_serials
 #. odoo-python
 #: code:addons/mrp_production_split_finished_product_by_serials/models/mrp_production.py:0
+#: code:addons/mrp_production_split_finished_product_by_serials/models/mrp_production.py:0
+#: code:addons/mrp_production_split_finished_product_by_serials/models/mrp_production.py:0
 #, python-format
 msgid "You must introduce the serial lot name."
 msgstr "Debe de intorudicr el nombre serie lote."
