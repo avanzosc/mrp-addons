@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+    id="report_mrp_bom_customized_document"
+    inherit_id="mrp_bom_report.report_mrp_bom_customized_document"
+  >
+        <span id="product_name" position="after">
+            <span t-if="line['manufacturer_codes']">
+                <br />
+                <span t-esc="line['manufacturer_codes']" />
+            </span>
+        </span>
+    </template>
+</odoo>
