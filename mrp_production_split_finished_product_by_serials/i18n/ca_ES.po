@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_split_finished_product_by_serials
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-22 06:51+0000\n"
+"PO-Revision-Date: 2024-07-22 06:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__initial_product_qty
+msgid "Initial Quantity To Produce"
+msgstr ""
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_lot
+msgid "Lot/Serial"
+msgstr "Lot/núm. de sèrie"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_uom_uom
+msgid "Product Unit of Measure"
+msgstr "Unitat de mesura del producte"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_mrp_production
+msgid "Production Order"
+msgstr "Ordre de producció"
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model,name:mrp_production_split_finished_product_by_serials.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__serial_lot_name
+msgid "Serial Lot Name"
+msgstr ""
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model_terms:ir.ui.view,arch_db:mrp_production_split_finished_product_by_serials.mrp_production_form_view
+msgid "Total Quantity"
+msgstr ""
+
+#. module: mrp_production_split_finished_product_by_serials
+#: model:ir.model.fields,field_description:mrp_production_split_finished_product_by_serials.field_mrp_production__total_produced_qty
+msgid "Total Quantity Produced"
+msgstr ""
+
+#. module: mrp_production_split_finished_product_by_serials
+#. odoo-python
+#: code:addons/mrp_production_split_finished_product_by_serials/models/mrp_production.py:0
+#: code:addons/mrp_production_split_finished_product_by_serials/models/mrp_production.py:0
+#: code:addons/mrp_production_split_finished_product_by_serials/models/mrp_production.py:0
+#, python-format
+msgid "You must introduce the serial lot name."
+msgstr ""

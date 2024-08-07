@@ -7,10 +7,10 @@
       ref="mrp_account.product_product_view_form_normal_inherit_extended"
     />
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='button_bom_cost']" position="attributes">
-                <attribute name="t-if">False</attribute>
-            </xpath>
-                <field name="standard_price" position="after">
+            <button name="button_bom_cost" position="attributes">
+                <attribute name="t-if" value="False" />
+            </button>
+            <field name="standard_price" position="after">
                 <button
           name="button_call_wizard_calculate_bom_cost"
           string="Compute cost from BoM"

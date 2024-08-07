@@ -1,0 +1,37 @@
+<odoo>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <page name="inventory" position="after">
+                <page
+          string="MRP"
+          name="page-mrp"
+          groups="mrp.group_mrp_user"
+          attrs="{'invisible':[('type', '=', 'service')]}"
+        >
+                    <group name="group-mrp">
+                        <field name="last_mrp_id" />
+                        <field name="last_mrp_date" />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="product_product_tree_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="standard_price" position="before">
+                <field name="last_mrp_id" optional="show" groups="mrp.group_mrp_user" />
+                <field
+          name="last_mrp_date"
+          optional="show"
+          widget="date"
+          groups="mrp.group_mrp_user"
+        />
+            </field>
+        </field>
+    </record>
+</odoo>

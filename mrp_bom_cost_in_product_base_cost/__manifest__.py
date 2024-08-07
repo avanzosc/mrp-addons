@@ -4,7 +4,10 @@
     "name": "MRP BoM Cost In Product Base Cost",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
-    "depends": ["product_category_sale_price", "mrp_account"],
+    "depends": [
+        "product_category_sale_price",
+        "mrp_account",
+    ],
     "author": "AvanzOSC",
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Sales",

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_bom_view_notes_form" model="ir.ui.view">
+         <field name="model">mrp.bom</field>
+         <field name="inherit_id" ref="mrp_bom_note.mrp_bom_view_notes_form" />
+         <field name="arch" type="xml">
+             <field name="notes" position="attributes">
+                 <attribute
+          name="attrs"
+        >{'readonly': [('state', '!=', 'draft')]}</attribute>
+             </field>
+         </field>
+    </record>
+</odoo>

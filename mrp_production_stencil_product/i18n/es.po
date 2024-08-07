@@ -145,3 +145,24 @@ msgstr "Unidad de medida"
 #: model:ir.model,name:mrp_production_stencil_product.model_mrp_workorder
 msgid "Work Order"
 msgstr "Orden de trabajo"
+
+#. module: mrp_production_stencil_product
+#: model_terms:ir.ui.view,arch_db:mrp_production_stencil_product.report_mrporder
+msgid "<span>Stencil Products</span>"
+msgstr "<span>Utillaje</span>"
+
+#. module: mrp_production_stencil_product
+#: model_terms:ir.ui.view,arch_db:mrp_production_stencil_product.report_mrporder
+msgid "<strong>Location</strong>"
+msgstr "<strong>Ubicación</strong>"
+
+#. module: mrp_production_stencil_product
+#: model_terms:ir.ui.view,arch_db:mrp_production_stencil_product.report_mrporder
+msgid "<strong>Product</strong>"
+msgstr "<strong>Producto</strong>"
+
+#. module: mrp_production_stencil_product
+#: model_terms:ir.ui.view,arch_db:mrp_production_stencil_product.report_mrporder
+msgid "<strong>Quantity</strong>"
+msgstr "<strong>Cantidad</strong>"
+
