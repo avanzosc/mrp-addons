@@ -73,6 +73,16 @@ class MrpProduction(models.Model):
 
     def _get_lot_name(self, number=1):
         self.ensure_one()
+        if (
+            self.product_tracking == "serial"
+            and self.state not in ("done", "cancel")
+            and not self.serial_lot_name
+        ):
+            if "from_product_lot_sequence" not in self.env.context or (
+                "from_product_lot_sequence" in self.env.context
+                and not self.product_id.lot_sequence_id
+            ):
+                raise exceptions.UserError(_("You must introduce the serial lot name."))
         number = int(number)
         lot_counter_length = max(len(str(int(self.initial_product_qty))), 3)
         lot_name = self.serial_lot_name
@@ -86,11 +96,23 @@ class MrpProduction(models.Model):
 
     def action_generate_serial(self):
         if (
+            "from_product_lot_sequence" in self.env.context
+            and "from_button_mark_done" in self.env.context
+            and self.product_id.lot_sequence_id
+            and not self.serial_lot_name
+        ):
+            return True
+
+        if (
             self.product_tracking == "serial"
             and self.state not in ("done", "cancel")
             and not self.serial_lot_name
         ):
-            raise exceptions.UserError(_("You must introduce the serial lot name."))
+            if "from_product_lot_sequence" not in self.env.context or (
+                "from_product_lot_sequence" in self.env.context
+                and not self.product_id.lot_sequence_id
+            ):
+                raise exceptions.UserError(_("You must introduce the serial lot name."))
         if self.serial_lot_name:
             lot_name = self._get_lot_name(self.total_produced_qty + 1)
             return super(
@@ -98,6 +120,11 @@ class MrpProduction(models.Model):
                 self.with_context(
                     default_name=lot_name, qty_twith_serial=self.qty_producing
                 ),
+            ).action_generate_serial()
+        else:
+            return super(
+                MrpProduction,
+                self.with_context(qty_twith_serial=self.qty_producing),
             ).action_generate_serial()
 
     def _set_qty_producing(self):
@@ -111,14 +138,25 @@ class MrpProduction(models.Model):
     def button_mark_done(self):
         if self.product_tracking == "serial":
             if not self.lot_producing_id:
-                lot_name = self._get_lot_name(self.total_produced_qty + 1)
-                self.lot_producing_id = self.env["stock.lot"].create(
-                    {
-                        "name": lot_name,
-                        "product_id": self.product_id.id,
-                        "company_id": self.company_id.id,
-                    }
-                )
+                if (
+                    "from_product_lot_sequence" not in self.env.context
+                    or (
+                        "from_product_lot_sequence" in self.env.context
+                        and not self.product_id.lot_sequence_id
+                    )
+                    or (
+                        "from_product_lot_sequence" in self.env.context
+                        and self.serial_lot_name
+                    )
+                ):
+                    lot_name = self._get_lot_name(self.total_produced_qty + 1)
+                    self.lot_producing_id = self.env["stock.lot"].create(
+                        {
+                            "name": lot_name,
+                            "product_id": self.product_id.id,
+                            "company_id": self.company_id.id,
+                        }
+                    )
             return super(
                 MrpProduction, self.with_context(with_tracking_serial=True)
             ).button_mark_done()
@@ -155,16 +193,36 @@ class MrpProduction(models.Model):
                 )
             while cont < qty_done:
                 cont += 1
-                lot_name = self._get_lot_name(cont)
-                lot = lot_obj.search([("name", "=", lot_name)])
-                if not lot:
+                if (
+                    "from_product_lot_sequence" not in self.env.context
+                    or (
+                        "from_product_lot_sequence" in self.env.context
+                        and not self.product_id.lot_sequence_id
+                    )
+                    or (
+                        "from_product_lot_sequence" in self.env.context
+                        and self.serial_lot_name
+                    )
+                ):
+                    lot_name = self._get_lot_name(cont)
+                    lot = lot_obj.search([("name", "=", lot_name)])
+                    if not lot:
+                        lot = lot_obj.create(
+                            {
+                                "name": lot_name,
+                                "product_id": move.product_id.id,
+                                "company_id": self.company_id.id,
+                            }
+                        )
+                else:
                     lot = lot_obj.create(
                         {
-                            "name": lot_name,
                             "product_id": move.product_id.id,
                             "company_id": self.company_id.id,
                         }
                     )
+                    if cont == 1 and not self.lot_producing_id:
+                        self.lot_producing_id = lot.id
                 move_line_vals = move._prepare_move_line_vals(quantity=0)
                 move_line_vals["lot_id"] = lot.id
                 move_line_vals["lot_name"] = lot.name
@@ -176,3 +234,23 @@ class MrpProduction(models.Model):
                     "move_line_ids": move_lines_commands,
                 }
             )
+
+    def _prepare_stock_lot_values(self):
+        self.ensure_one()
+        if self.product_id.tracking == "lot":
+            return super()._prepare_stock_lot_values()
+        if "default_name" in self.env.context:
+            return {
+                "product_id": self.product_id.id,
+                "company_id": self.company_id.id,
+                "name": self.env.context.get("default_name"),
+            }
+        if (
+            "from_product_lot_sequence" in self.env.context
+            and self.product_id.lot_sequence_id
+        ):
+            return {
+                "product_id": self.product_id.id,
+                "company_id": self.company_id.id,
+            }
+        return super()._prepare_stock_lot_values()
