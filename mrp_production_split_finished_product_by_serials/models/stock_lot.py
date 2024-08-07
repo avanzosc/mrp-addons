@@ -10,6 +10,7 @@ class StockLot(models.Model):
     def create(self, vals_list):
         if self.env.context.get("same_subproduct", False):
             vals_list[0]["name"] = "TEMP - 001"
-        return super(StockLot, self.with_context(mail_create_nosubscribe=True)).create(
+        lot = super(StockLot, self.with_context(mail_create_nosubscribe=True)).create(
             vals_list
         )
+        return lot
