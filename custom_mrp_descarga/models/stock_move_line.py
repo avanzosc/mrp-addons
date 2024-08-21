@@ -101,6 +101,7 @@ class StockMoveLine(models.Model):
             self.production_id
             and self.production_id.filter_only_entry_lots
             and self.location_dest_id == self.production_id.location_src_id
+            and self.lot_id
         ):
             lot = self.lot_id.name
             if not any(
