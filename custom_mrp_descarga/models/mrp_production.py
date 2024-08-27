@@ -213,6 +213,11 @@ class MrpProduction(models.Model):
         related="bom_id.filter_only_entry_lots",
         store=True,
     )
+    recalculate_cost = fields.Boolean(
+        string="Recalculate Costs",
+        related="bom_id.recalculate_cost",
+        store=True,
+    )
 
     @api.depends("move_line_ids.percentage")
     def _compute_rto_percentage(self):
@@ -631,10 +636,20 @@ class MrpProduction(models.Model):
         return result
 
     def action_recalculate_production_cost(self):
-        for production in self.filtered(lambda c: not c.production_cost_date):
+        for production in self.filtered(
+            lambda c: not c.production_cost_date
+            and c.state == "done"
+            and c.recalculate_cost
+        ):
             for line in production.move_line_ids:
                 line._onchange_lot_id()
+                line.onchange_standard_price()
             for line in production.finished_move_line_ids:
                 line._compute_base_price()
+                line.onchange_standard_price()
             production.button_calculate_costs()
             production.production_cost_date = fields.Datetime.now()
+
+    def ir_cron_recalculate_cost_in_production_orders(self):
+        productions = self.env["mrp.production"].search([])
+        productions.action_recalculate_production_cost()

@@ -10,6 +10,7 @@
                 <field name="no_produce_product" />
                 <field name="bring_cost_from_lots" />
                 <field name="filter_only_entry_lots" />
+                <field name="recalculate_cost" />
             </field>
             <page name="components" position="attributes">
                 <attribute name="string">Inputs</attribute>

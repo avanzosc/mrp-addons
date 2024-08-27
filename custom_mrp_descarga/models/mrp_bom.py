@@ -17,6 +17,7 @@ class MrpBom(models.Model):
     filter_only_entry_lots = fields.Boolean(
         string="Filter Only Entry Lots", default=False
     )
+    recalculate_cost = fields.Boolean(string="Recalculate Costs", default=False)
 
     @api.depends("category_id")
     def _compute_quartering(self):

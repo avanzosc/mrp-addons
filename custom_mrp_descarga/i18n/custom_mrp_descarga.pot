@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-20 08:15+0000\n"
-"PO-Revision-Date: 2024-08-20 08:15+0000\n"
+"POT-Creation-Date: 2024-08-27 13:12+0000\n"
+"PO-Revision-Date: 2024-08-27 13:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -710,6 +710,19 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__real_average_weight
 msgid "Real Average Weight"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__recalculate_cost
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__recalculate_cost
+msgid "Recalculate Costs"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_recalculate_cost_in_production_orders_ir_actions_server
+#: model:ir.cron,cron_name:custom_mrp_descarga.ir_cron_recalculate_cost_in_production_orders
+#: model:ir.cron,name:custom_mrp_descarga.ir_cron_recalculate_cost_in_production_orders
+msgid "Recalculate cost in production orders"
 msgstr ""
 
 #. module: custom_mrp_descarga
