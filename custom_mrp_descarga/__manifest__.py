@@ -27,6 +27,7 @@
         "data/quartering_product.xml",
         "data/ir_sequence.xml",
         "data/mrp_bom_category.xml",
+        "data/ir_cron_data.xml",
         "views/saca_line_view.xml",
         "views/mrp_production_view.xml",
         "views/stock_production_lot_view.xml",
