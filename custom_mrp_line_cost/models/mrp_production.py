@@ -78,12 +78,16 @@ class MrpProduction(models.Model):
         string="Consumed Qty", compute="_compute_consume_qty", store=True
     )
 
-    @api.depends("move_line_ids.qty_done")
+    @api.depends(
+        "move_line_ids.qty_done",
+        "move_line_ids.product_id",
+        "move_line_ids.product_id.sum_in_production",
+    )
     def _compute_consume_qty(self):
         for production in self:
             production.consume_qty = sum(
                 production.move_line_ids.filtered(
-                    lambda c: c.product_uom_id == production.product_uom_id
+                    lambda c: c.product_id.sum_in_production
                 ).mapped("qty_done")
             )
 
