@@ -8,6 +8,7 @@
                 <field name="canal" />
                 <field name="unit_container" />
                 <field name="palet" />
+                <field name="sum_in_production" />
             </group>
         </field>
     </record>
