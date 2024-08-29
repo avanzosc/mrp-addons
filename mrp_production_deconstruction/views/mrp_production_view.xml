@@ -63,7 +63,7 @@
                             <field name="product_uom_category_id" invisible="1" />
                             <field name="qty_done" />
                             <field
-                name="product_uom_qty"
+                name="reserved_uom_qty"
                 optional="hide"
                 readonly="1"
                 attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
@@ -78,12 +78,7 @@
                 force_save="1"
                 attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
               />
-                            <field
-                name="company_id"
-                invisible="1"
-                groups="base.group_multi_company"
-                force_save="1"
-              />
+                            <field name="company_id" invisible="1" force_save="1" />
                             <field name="state" optional="hide" />
                         </tree>
                     </field>

@@ -6,7 +6,7 @@
 MPR Production Deconstruction
 ==============================
 
-Deconstruction in production order. If is a deconstruction, it changes the location and the destination location.
+Deconstruction in production order. If is a deconstruction, it changes the source location and the destination location.
 
 Bug Tracker
 ===========
