@@ -30,7 +30,7 @@ class MrpProduction(models.Model):
 
     @api.depends("product_id", "company_id", "is_deconstruction")
     def _compute_production_location(self):
-        super(MrpProduction, self)._compute_production_location()
+        super()._compute_production_location()
         for production in self:
             if production.is_deconstruction:
                 production.production_location_id = (
@@ -38,7 +38,7 @@ class MrpProduction(models.Model):
                 ) or (False)
 
     def write(self, vals):
-        res = super(MrpProduction, self).write(vals)
+        res = super().write(vals)
         if "move_finished_ids" in vals:
             for line in self:
                 if line.is_deconstruction and line.move_finished_ids:
@@ -85,10 +85,10 @@ class MrpProduction(models.Model):
 
     def action_confirm(self):
         self._check_is_deconstruction()
-        return super(MrpProduction, self).action_confirm()
+        return super().action_confirm()
 
     def button_mark_done(self):
-        result = super(MrpProduction, self).button_mark_done()
+        result = super().button_mark_done()
         for production in self:
             if production.is_deconstruction is True:
                 origin = production.finished_move_line_ids.location_id
