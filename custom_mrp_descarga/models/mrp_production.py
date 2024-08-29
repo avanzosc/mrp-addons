@@ -280,14 +280,18 @@ class MrpProduction(models.Model):
         for production in self:
             production.qty_difference = production.consume_qty - production.produced_qty
 
-    @api.depends("finished_move_line_ids.qty_done")
+    @api.depends(
+        "finished_move_line_ids.qty_done",
+        "finished_move_line_ids.product_id",
+        "finished_move_line_ids.product_id.sum_in_production",
+    )
     def _compute_produced_qty(self):
         for production in self:
             produced_qty = 0
             if production.finished_move_line_ids:
                 produced_qty = sum(
                     production.finished_move_line_ids.filtered(
-                        lambda c: c.product_uom_id == production.product_uom_id
+                        lambda c: c.product_id.sum_in_production
                     ).mapped("qty_done")
                 )
             production.produced_qty = produced_qty
