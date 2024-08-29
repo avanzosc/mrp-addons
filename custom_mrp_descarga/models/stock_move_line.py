@@ -18,6 +18,9 @@ class StockMoveLine(models.Model):
         string="Quartering", related="production_id.quartering", store=True
     )
     saca_date = fields.Date(string="Saca Date", related="saca_line_id.date", store=True)
+    qty_done = fields.Float(
+        digits="Weight Decimal Precision",
+    )
 
     @api.depends("production_id")
     def _compute_sequence(self):
