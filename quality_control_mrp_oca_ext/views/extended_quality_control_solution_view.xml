@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="extended_quality_control_solution_tree_view" model="ir.ui.view">
+        <field name="name">extended.quality.control.solution.tree.view</field>
+        <field name="model">extended.quality.control.solution</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="extended_quality_control_solution_search_view" model="ir.ui.view">
+        <field name="name">extended.quality.control.solution.search.view</field>
+        <field name="model">extended.quality.control.solution</field>
+        <field name="arch" type="xml">
+            <search string="Search production control solutions">
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record
+    id="action_extended_quality_control_solution_view"
+    model="ir.actions.act_window"
+  >
+        <field name="name">Solutions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">extended.quality.control.solution</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+    id="extended_quality_control_solution_option_view"
+    name="Solutions"
+    action="action_extended_quality_control_solution_view"
+    parent="qc_production_control_menu_parent"
+    groups="mrp.group_mrp_manager"
+    sequence="35"
+  />
+ </odoo>
