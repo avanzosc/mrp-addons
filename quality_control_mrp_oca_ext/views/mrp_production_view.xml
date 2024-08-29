@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <page name="miscellaneous" position="after">
+                <page string="Production control" name="productioncontrol">
+                    <field
+            name="extended_quality_control_ids"
+            nolabel="1"
+            context="{'default_mrp_production_id': active_id}"
+          >
+                        <tree>
+                            <field name="mrp_production_id" invisible="1" />
+                            <field name="mrp_product_id" invisible="1" />
+                            <field name="verification_type_id" optional="show" />
+                            <field name="packaging_id" optional="show" />
+                            <field name="lot_id" optional="show" />
+                            <field name="quantity_produced" optional="show" />
+                        </tree>
+                        <form string="Production control">
+                            <sheet>
+                                <h1>
+                                    <field
+                    name="mrp_production_id"
+                    class="oe_inline"
+                    invisible="1"
+                  />
+                                </h1>
+                                <group name="head">
+                                    <group>
+                                        <field name="mrp_product_id" invisible="1" />
+                                        <field name="verification_type_id" />
+                                        <field name="packaging_id" />
+                                    </group>
+                                    <group>
+                                        <field name="lot_id" />
+                                        <field name="quantity_produced" />
+                                    </group>
+                                    <separator string="Operators lines" colspan="4" />
+                                    <field
+                    name="operators_lines_ids"
+                    nolabel="1"
+                    colspan="4"
+                    context="{'default_extended_quality_control_id': active_id}"
+                  >
+                                        <tree>
+                                            <field
+                        name="extended_quality_control_id"
+                        invisible="1"
+                      />
+                                            <field name="operator_id" optional="show" />
+                                            <field
+                        name="control_date"
+                        optional="show"
+                      />
+                                            <field
+                        name="start_hour"
+                        widget="float_time"
+                        optional="show"
+                      />
+                                            <field
+                        name="final_hour"
+                        widget="float_time"
+                        optional="show"
+                      />
+                                            <field
+                        name="total_time"
+                        widget="float_time"
+                        optional="show"
+                      />
+                                            <field name="cause" optional="show" />
+                                            <field
+                        name="component_id"
+                        optional="show"
+                      />
+                                            <field name="solution_id" optional="show" />
+                                            <field name="quantity" optional="show" />
+                                        </tree>
+                                        <form string="Production control lines">
+                                            <sheet>
+                                                <h1>
+                                                    <field
+                            name="extended_quality_control_id"
+                            class="oe_inline"
+                            invisible="1"
+                          />
+                                                </h1>
+                                                <group name="head">
+                                                    <group>
+                                                        <field name="operator_id" />
+                                                        <field name="control_date" />
+                                                        <field name="component_id" />
+                                                        <field name="solution_id" />
+                                                    </group>
+                                                    <group>
+                                                        <field
+                              name="start_hour"
+                              widget="float_time"
+                            />
+                                                        <field
+                              name="final_hour"
+                              widget="float_time"
+                            />
+                                                        <field
+                              name="total_time"
+                              widget="float_time"
+                            />
+                                                    </group>
+                                                    <group>
+                                                        <field name="cause" />
+                                                    </group>
+                                                    <group>
+                                                        <field name="quantity" />
+                                                    </group>>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                    </field>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+ </odoo>

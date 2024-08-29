@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_template_tree_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="qc_inspection_type_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="qc_inspection_type_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_search_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="qc_inspection_type_id" />
+            </field>
+            <filter name="categ_id" position="after">
+                <filter
+          string="Inspection type"
+          name="qc_inspection_type_id"
+          context="{'group_by':'qc_inspection_type_id'}"
+        />
+            </filter>
+        </field>
+    </record>
+ </odoo>
