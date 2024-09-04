@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_manufacturing_order_stock_picking_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-05 10:55+0000\n"
+"PO-Revision-Date: 2024-09-05 10:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_manufacturing_order_stock_picking_link
+#: model:ir.model.fields,field_description:mrp_manufacturing_order_stock_picking_link.field_mrp_production__internal_picking_ids
+#: model_terms:ir.ui.view,arch_db:mrp_manufacturing_order_stock_picking_link.view_mrp_production_form_inherit
+msgid "Internal Pickings"
+msgstr "Albaranaes Internos"
+
+#. module: mrp_manufacturing_order_stock_picking_link
+#: model:ir.model.fields,field_description:mrp_manufacturing_order_stock_picking_link.field_stock_picking__mrp_production_id
+msgid "Manufacturing Order"
+msgstr "Orden de Fabricación"
+
+#. module: mrp_manufacturing_order_stock_picking_link
+#: model:ir.model,name:mrp_manufacturing_order_stock_picking_link.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_manufacturing_order_stock_picking_link
+#: model:ir.model,name:mrp_manufacturing_order_stock_picking_link.model_stock_picking
+msgid "Transfer"
+msgstr "Albarán"

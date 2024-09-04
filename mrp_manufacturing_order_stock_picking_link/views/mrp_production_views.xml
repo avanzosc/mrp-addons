@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_mrp_production_form_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_raw_ids']" position="after">
+                <field name="internal_picking_ids" options="{'no_create': True}">
+                    <tree editable="bottom">
+                        <field name="name" />
+                        <field name="picking_type_id" />
+                        <field name="state" />
+                    </tree>
+                </field>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button
+          name="action_open_internal_pickings"
+          type="object"
+          class="btn-primary"
+          string="Internal Pickings"
+        />
+            </xpath>
+        </field>
+    </record>
+</odoo>
