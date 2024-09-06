@@ -1,0 +1,183 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* qc_inspection_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-04 10:20+0000\n"
+"PO-Revision-Date: 2024-09-04 10:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "&amp;nbsp;"
+msgstr "&amp;nbsp;"
+
+#. module: qc_inspection_report
+#: model:ir.actions.report,print_report_name:qc_inspection_report.report_qc_inspection
+msgid "'Quality control for inspection: %s' % (object.name)"
+msgstr "'Control calidad para inspección: %s' % (object.name)"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid ""
+"<br/>\n"
+"                        VAT:"
+msgstr ""
+"<br/>\n"
+"                        NIF:"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid "<span> | Email: </span>"
+msgstr ""
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid "<span> | Fax: </span>"
+msgstr "<span> | Fax: </span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid "<span> | VAT: </span>"
+msgstr "<span> | NIF: </span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid "<span> | Website: </span>"
+msgstr "<span> | Sitio web: </span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span><strong>Qualitative value</strong></span>"
+msgstr "<span><strong>Valor cualitativo</strong></span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span><strong>Quantitative value</strong></span>"
+msgstr "<span><strong>Valor cuantitativo</strong></span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span><strong>Question type</strong></span>"
+msgstr "<span><strong>Tipo pregunta</strong></span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span><strong>Question</strong></span>"
+msgstr "<span><strong>Pregunta</strong></span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span><strong>Success</strong></span>"
+msgstr "<span><strong>Correcta</strong></span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span><strong>UoM</strong></span>"
+msgstr "<span><strong>UdM</strong></span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span><strong>Valid values</strong></span>"
+msgstr "<span><strong>Valores válidos</strong></span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span>Inspection:</span>"
+msgstr "<span>Inspección:</span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid ""
+"<span>Page: </span>\n"
+"                    <span class=\"page\"/>\n"
+"                    <span> / </span>\n"
+"                    <span class=\"topage\"/>"
+msgstr ""
+"<span>Página: </span>\n"
+"                    <span class=\"page\"/>\n"
+"                    <span> / </span>\n"
+"                    <span class=\"topage\"/>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<span>QUALITY CONTROL TEST</span>"
+msgstr "<span>TEST CONTROL CALIDAD</span>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid "<strong>COMPANY WITH CERTIFICATION </strong>"
+msgstr "<strong>COMPAÑÍA CON CERTIFICACIÓN </strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>Date</strong>"
+msgstr "<strong>Fecha</strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>Lot</strong>"
+msgstr "<strong>Lote</strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>Picking</strong>"
+msgstr "<strong>Albarán</strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>Product</strong>"
+msgstr "<strong>Producto</strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>Quantity</strong>"
+msgstr "<strong>Cantidad</strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>Reference</strong>"
+msgstr "<strong>Referencia</strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>Test</strong>"
+msgstr "<strong>Test</strong>"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.report_qc_inspection_document
+msgid "<strong>User</strong>"
+msgstr "<strong>Usuario</strong>"
+
+#. module: qc_inspection_report
+#: model:ir.model.fields,field_description:qc_inspection_report.field_res_company__iso_quality_control
+msgid "Certification ISO for quality control"
+msgstr "Certificado ISO para control calidad"
+
+#. module: qc_inspection_report
+#: model:ir.model,name:qc_inspection_report.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: qc_inspection_report
+#: model:ir.actions.report,name:qc_inspection_report.report_qc_inspection
+msgid "Inspection"
+msgstr "Inspección"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid "Logo"
+msgstr "Logo"
+
+#. module: qc_inspection_report
+#: model_terms:ir.ui.view,arch_db:qc_inspection_report.external_layout_standard_qc_inspection
+msgid "Phone:"
+msgstr "Teléfono:"
