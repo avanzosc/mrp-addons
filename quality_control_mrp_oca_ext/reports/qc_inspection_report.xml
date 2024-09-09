@@ -133,7 +133,7 @@
                       /></td>
                                     <td class="text-left">
                                         <span
-                        t-if="l2.soluction_id"
+                        t-if="l2.solution_id"
                         t-field="l2.solution_id"
                       />
                                     </td>
