@@ -21,6 +21,7 @@ class StockMoveLine(models.Model):
     qty_done = fields.Float(
         digits="Weight Decimal Precision",
     )
+    average_price = fields.Float(string="Average Price", related="lot_id.average_price")
 
     @api.depends("production_id")
     def _compute_sequence(self):
