@@ -745,6 +745,9 @@
                 <field name="consume_qty" optional="show" />
                 <field name="produced_qty" optional="show" />
                 <field name="qty_difference" optional="show" />
+                <field name="entry_total_amount" optional="show" />
+                <field name="output_total_amount" optional="show" />
+                <field name="dif_total_amount" optional="show" />
                 <field name="average_cost" optional="show" />
                 <field
           name="state"
