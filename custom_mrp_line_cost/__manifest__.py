@@ -3,7 +3,7 @@
 
 {
     "name": "Custom MRP Line Cost",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "MRP",
     "license": "AGPL-3",
     "author": "AvanzOSC",
@@ -28,4 +28,5 @@
         "views/mrp_routing_workcenter_view.xml",
     ],
     "installable": True,
+    "pre_init_hook": "pre_init_hook",
 }
