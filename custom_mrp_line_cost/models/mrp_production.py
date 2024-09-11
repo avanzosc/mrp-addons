@@ -73,10 +73,22 @@ class MrpProduction(models.Model):
     entry_total_amount = fields.Float(
         string="Entry Total Amount", compute="_compute_entry_total_amount", store=True
     )
-    output_total_amount = fields.Float(string="Output Total Amount")
+    output_total_amount = fields.Float(
+        string="Output Total Amount", compute="_compute_output_total_amount", store=True
+    )
     consume_qty = fields.Float(
         string="Consumed Qty", compute="_compute_consume_qty", store=True
     )
+    dif_total_amount = fields.Float(
+        string="Dif. Total Amount", compute="_compute_dif_total_amount", store=True
+    )
+
+    @api.depends("entry_total_amount", "output_total_amount")
+    def _compute_dif_total_amount(self):
+        for production in self:
+            production.dif_total_amount = (
+                production.output_total_amount - production.entry_total_amount
+            )
 
     @api.depends(
         "move_line_ids.qty_done",
@@ -103,7 +115,7 @@ class MrpProduction(models.Model):
         for line in self:
             entry_total_amount = 0
             if line.move_line_ids:
-                entry_total_amount = sum(self.move_line_ids.mapped("amount"))
+                entry_total_amount = sum(line.move_line_ids.mapped("amount"))
             line.entry_total_amount = entry_total_amount
 
     @api.depends("finished_move_line_ids.amount")
@@ -263,6 +275,7 @@ class MrpProduction(models.Model):
                 for line in production.finished_move_line_ids:
                     line.applied_price = line.base_price
                     line.standard_price = line.applied_price
+                    line.amount = line.standard_price * line.qty_done
                 dif = (
                     (production.average_cost + production.month_cost)
                     * production.consume_qty
