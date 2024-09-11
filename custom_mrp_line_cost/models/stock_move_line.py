@@ -54,6 +54,12 @@ class StockMoveLine(models.Model):
     month_cost = fields.Float(
         string="Month Cost", compute="_compute_month_cost", store=True
     )
+    operation_id = fields.Many2one(
+        string="Operation",
+        comodel_name="mrp.routing.workcenter",
+        related="move_id.byproduct_id.operation_id",
+        store=True,
+    )
     pallet_id = fields.Many2one(
         string="Pallet",
         comodel_name="product.product",
@@ -187,6 +193,8 @@ class StockMoveLine(models.Model):
         "production_id.average_cost",
         "production_id.month_cost",
         "production_id.is_deconstruction",
+        "production_id.move_line_ids",
+        "production_id.move_line_ids.amount",
     )
     def _compute_base_price(self):
         for line in self:
