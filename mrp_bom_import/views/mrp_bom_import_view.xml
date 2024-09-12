@@ -17,25 +17,18 @@
         <field name="arch" type="xml">
             <form string="BoM Import">
             <header>
-                <button
-            name="action_import_bom"
-            string="Import"
-            type="object"
-            class="oe_read_only"
-          />
+                <button name="action_import_bom" string="Import" type="object" />
                 <button
             name="action_validate_lines"
             string="Validate"
             type="object"
             states="2validate,error,pass"
-            class="oe_read_only"
           />
                 <button
             name="action_process_lines"
             string="Process"
             type="object"
             states="pass,2validate,error"
-            class="oe_read_only"
           />
                 <field name="state" widget="statusbar" />
             </header>
@@ -79,7 +72,7 @@
                 </div>
                 <group>
                     <group>
-                        <field name="filename" colspan="4" />
+                        <field name="filename" />
                         <field name="data" filename="filename" />
                         <field name="file_date" />
                     </group>
@@ -94,34 +87,28 @@
                     <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
                     </page>
-                    <page
-              string="Help"
-              name="help_page"
-              attrs="{'invisible': [('state', '=', 'done')]}"
-            >
-                        <group>
+                    <page string="Help" name="help_page">
                             <div style="margin-top: 4px;">
                                 <h3>Help with Excel column names</h3>
                                 <p
-                  >You must use this column names in order to fill the table:</p>
+                >You must use this column names in order to fill the table:</p>
                                 <ul name="tutorial">
                                     <li><code>Product Code</code>: this will fill <b
-                      >Component Product Code</b></li>
+                    >Component Product Code</b></li>
                                     <li><code>Product Name</code>: this will fill <b
-                      >Component Product Name</b></li>
+                    >Component Product Name</b></li>
                                     <li><code>Quantity</code>: this will fill <b
-                      >Component Quantity</b></li>
+                    >Component Quantity</b></li>
                                     <li><code>Parent Code</code>: this will fill <b
-                      >Parent Product Code</b></li>
+                    >Parent Product Code</b></li>
                                     <li><code>Parent Name</code>: this will fill <b
-                      >Parent Product Name</b></li>
+                    >Parent Product Name</b></li>
                                     <li><code>Parent Qty</code>: this will fill <b
-                      >Parent Product Quantity</b></li>
+                    >Parent Product Quantity</b></li>
                                     <li><code>BoM Ref</code>: this will fill <b
-                      >BoM Reference</b></li>
+                    >BoM Reference</b></li>
                                 </ul>
                             </div>
-                        </group>
                     </page>
                 </notebook>
 

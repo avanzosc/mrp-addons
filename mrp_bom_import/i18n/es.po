@@ -531,11 +531,6 @@ msgstr ""
 "Planificada: futuras actividades."
 
 #. module: mrp_bom_import
-#: model:ir.model.fields,field_description:mrp_bom_import.field_product_category__supplier_id
-msgid "Supplier"
-msgstr "Proveedor"
-
-#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format

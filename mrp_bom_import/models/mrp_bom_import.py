@@ -73,7 +73,6 @@ class MrpBomImport(models.Model):
         copy=False,
     )
     filename = fields.Char(
-        string="Filename",
         copy=False,
     )
     file_date = fields.Date(
@@ -94,11 +93,9 @@ class MrpBomImport(models.Model):
         string="Status",
     )
     log_info = fields.Text(
-        string="Log Info",
         compute="_compute_log_info",
     )
     product_found_by_code = fields.Boolean(
-        string="Product Found By Code",
         default=False,
     )
 
@@ -195,8 +192,8 @@ class MrpBomImport(models.Model):
                     line_data = self._get_line_values(values)
                     if line_data:
                         bom_import_line_obj.create(line_data)
-        except Exception:
-            raise ValidationError(_("This is not a valid file."))
+        except Exception as err:
+            raise ValidationError(_("This is not a valid file.")) from err
 
     def _get_line_values(self, row_values):
         self.ensure_one()
@@ -257,16 +254,28 @@ class MrpBomLineImport(models.Model):
         string="BoM Import",
         ondelete="cascade",
     )
-    product_name = fields.Char(string="Product name")
-    product_ref = fields.Char(string="Product code")
+    product_name = fields.Char(
+        string="Product name",
+    )
+    product_ref = fields.Char(
+        string="Product code",
+    )
     product_id = fields.Many2one(
         comodel_name="product.product",
         string="Product",
     )
-    quantity = fields.Float(string="Quantity")
-    bom_ref = fields.Char(string="BoM Ref")
-    bom_code = fields.Char(string="BoM code")
-    bom_name = fields.Char(string="BoM Name")
+    quantity = fields.Float(
+        default=1.0,
+    )
+    bom_ref = fields.Char(
+        string="BoM Ref",
+    )
+    bom_code = fields.Char(
+        string="BoM code",
+    )
+    bom_name = fields.Char(
+        string="BoM Name",
+    )
     bom_product_id = fields.Many2one(
         string="Parent Product",
         comodel_name="product.product",
@@ -279,7 +288,7 @@ class MrpBomLineImport(models.Model):
         string="BoM Line",
         comodel_name="mrp.bom.line",
     )
-    log_info = fields.Text(string="Log Info")
+    log_info = fields.Text()
     state = fields.Selection(
         selection=IMPORT_STATUS,
         string="Status",
@@ -290,7 +299,10 @@ class MrpBomLineImport(models.Model):
         related="bom_product_id.bom_count",
         store=True,
     )
-    parent_qty = fields.Float(string="Parent Quantity")
+    parent_qty = fields.Float(
+        string="Parent Quantity",
+        default=1.0,
+    )
 
     def _check_product(self):
         self.ensure_one()
