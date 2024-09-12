@@ -195,6 +195,8 @@ class StockMoveLine(models.Model):
         "production_id.is_deconstruction",
         "production_id.move_line_ids",
         "production_id.move_line_ids.amount",
+        "production_id.move_line_ids.lot_id",
+        "lot_id",
     )
     def _compute_base_price(self):
         for line in self:
