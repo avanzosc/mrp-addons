@@ -82,8 +82,26 @@
                 </group>
                 <notebook>
                     <page string="Lines">
-                        <field name="bom_line_import_ids" />
-                    </page>
+                        <field name="bom_line_import_ids">
+                            <tree>
+                                <field name="bom_import_id" optional="show" />
+                                <field name="product_name" optional="show" />
+                                <field name="product_ref" optional="show" />
+                                <field name="product_id" optional="show" />
+                                <field name="quantity" optional="show" />
+                                <field name="bom_ref" optional="show" />
+                                <field name="bom_code" optional="show" />
+                                <field name="bom_name" optional="show" />
+                                <field name="bom_product_id" optional="show" />
+                                <field name="bom_id" optional="show" />
+                                <field name="bom_line_id" optional="show" />
+                                <field name="log_info" optional="show" />
+                                <field name="state" optional="show" />
+                                <field name="parent_product_bom_count" optional="show" />
+                                <field name="parent_qty" optional="show" />                   
+                            </tree>
+                        </field>
+                            </page>
                     <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
                     </page>
