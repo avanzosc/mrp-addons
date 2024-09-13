@@ -11,6 +11,7 @@
     ],
     "data": [
         "views/mrp_bom_import_view.xml",
+        "views/mrp_bom_line_import_view.xml",
     ],
     "installable": True,
     "application": False,
