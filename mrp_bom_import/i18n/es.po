@@ -179,11 +179,19 @@ msgid "Error"
 msgstr ""
 
 #. module: mrp_bom_import
+#. odoo-python
+#: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
+#, python-format
+msgid "Error: Product and BOM product are the same"
+msgstr "Error: El producto y el producto padre son iguales"
+
+
+#. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
 #, python-format
 msgid "Error: BoM product not found."
-msgstr "Error: Producto padre no encontrada."
+msgstr "Error: Producto padre no encontrado."
 
 #. module: mrp_bom_import
 #: code:addons/mrp_bom_import/models/mrp_bom_import.py:0
