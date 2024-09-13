@@ -207,10 +207,10 @@ class MrpBomImport(models.Model):
             "bom_ref": convert2str(row_values.get("BoM Ref", "")),
             "product_name": convert2str(row_values.get("Product Name", "")),
             "product_ref": convert2str(row_values.get("Product Code", "")),
-            "quantity": check_number(row_values.get("Quantity", 0.0)),
+            "quantity": check_number(row_values.get("Quantity", 1.0)),
             "bom_code": convert2str(row_values.get("Parent Code", "")),
             "bom_name": convert2str(row_values.get("Parent Name", "")),
-            "parent_qty": check_number(row_values.get("Parent Qty", 0.0)),
+            "parent_qty": check_number(row_values.get("Parent Qty", 1.0)),
         }
         values.update(
             {
@@ -361,6 +361,8 @@ class MrpBomLineImport(models.Model):
                 log_info += bom_product_log_info
             if not line.quantity:
                 log_info += _("Error: Quantity cannot be 0.")
+            if product and bom_product and product.id == bom_product.id:
+                log_info += _("Error: Product and BOM product are the same")
             state = "error" if log_info else "pass"
             line_vals.update(
                 {
