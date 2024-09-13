@@ -2,11 +2,13 @@
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
-==============================
-MPR Production Deconstruction
-==============================
+=========================
+Production Deconstruction
+=========================
 
-Deconstruction in production order. If is a deconstruction, it changes the source location and the destination location.
+Production orders as Deconstruction orders.
+
+If is a deconstruction, it changes the source location and the destination location.
 
 Bug Tracker
 ===========
