@@ -83,12 +83,17 @@ class MrpProduction(models.Model):
         string="Dif. Total Amount", compute="_compute_dif_total_amount", store=True
     )
 
-    @api.depends("entry_total_amount", "output_total_amount")
+    @api.depends("entry_total_amount", "output_total_amount", "purchase_price")
     def _compute_dif_total_amount(self):
         for production in self:
-            production.dif_total_amount = (
+            dif_total_amount = (
                 production.output_total_amount - production.entry_total_amount
             )
+            if production.is_deconstruction:
+                dif_total_amount = (
+                    production.entry_total_amount - production.purchase_price
+                )
+            production.dif_total_amount = dif_total_amount
 
     @api.depends(
         "move_line_ids.qty_done",
@@ -236,6 +241,7 @@ class MrpProduction(models.Model):
         for production in self:
             qty = []
             lots = []
+            products = []
             if production.is_deconstruction and (production.move_line_ids):
                 for line in production.move_line_ids:
                     line.onchange_applied_price()
@@ -282,26 +288,26 @@ class MrpProduction(models.Model):
                 ) - sum(production.finished_move_line_ids.mapped("amount"))
                 if dif != 0:
                     for line in production.finished_move_line_ids:
-                        if line.lot_id and line.lot_id not in lots:
-                            lots.append(line.lot_id)
+                        if line.product_id and line.product_id not in products:
+                            products.append(line.product_id)
                             qty.append(
                                 sum(
                                     production.finished_move_line_ids.filtered(
-                                        lambda c: c.lot_id == line.lot_id
+                                        lambda c: c.product_id == line.product_id
                                     ).mapped("qty_done")
                                 )
                             )
                     i = qty.index(max(qty))
                     if i:
-                        max_lot = lots[i]
+                        max_product = products[i]
                         max_qty = qty[i]
-                        if max_lot and max_qty:
-                            lot_lines = production.finished_move_line_ids.filtered(
-                                lambda c: c.lot_id == max_lot
+                        if max_product and max_qty:
+                            product_lines = production.finished_move_line_ids.filtered(
+                                lambda c: c.product_id == max_product
                             )
-                            amount = dif + sum(lot_lines.mapped("amount"))
+                            amount = dif + sum(product_lines.mapped("amount"))
                             price = amount / max_qty
-                            for max_line in lot_lines:
+                            for max_line in product_lines:
                                 max_line.applied_price = price
                                 max_line.onchange_applied_price()
 
