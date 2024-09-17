@@ -129,10 +129,10 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
         total_entry_pallet_weight = 0
         total_entry_container_weight = 0
         for line in entry_movelines:
-            if line.product_category_id not in categories:
-                categories.append(line.product_category_id)
+            if line.product_family_id not in categories:
+                categories.append(line.product_family_id)
                 categ_lines = entry_movelines.filtered(
-                    lambda c: c.product_category_id == line.product_category_id
+                    lambda c: c.product_family_id == line.product_family_id
                 )
                 categ_pallet = sum(categ_lines.mapped("pallet"))
                 categ_container = sum(categ_lines.mapped("container"))
@@ -253,7 +253,7 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                 n += 1
                 m = 0
                 worksheet.write(
-                    n, m, line.product_category_id.display_name, result_int_format
+                    n, m, line.product_family_id.display_name, result_int_format
                 )
                 m += 1
                 worksheet.write(n, m, "", result_int_format)
@@ -338,10 +338,10 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
         total_out_container_weight = 0
         out_movelines = objects.mapped("finished_move_line_ids")
         for line in out_movelines:
-            if line.product_category_id not in categories:
-                categories.append(line.product_category_id)
+            if line.product_family_id not in categories:
+                categories.append(line.product_family_id)
                 categ_lines = out_movelines.filtered(
-                    lambda c: c.product_category_id == line.product_category_id
+                    lambda c: c.product_family_id == line.product_family_id
                 )
                 categ_pallet = sum(categ_lines.mapped("pallet"))
                 categ_container = sum(categ_lines.mapped("container"))
@@ -449,7 +449,7 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                 n += 1
                 m = 0
                 worksheet.write(
-                    n, m, line.product_category_id.display_name, result_int_format
+                    n, m, line.product_family_id.display_name, result_int_format
                 )
                 m += 1
                 worksheet.write(n, m, "", result_int_format)

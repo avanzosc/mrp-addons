@@ -675,6 +675,9 @@
                 <field name="consume_qty" optional="show" sum="Total Consumed" />
                 <field name="produced_qty" optional="show" sum="Total Produced" />
                 <field name="qty_difference" optional="show" />
+                <field name="entry_total_amount" optional="show" />
+                <field name="output_total_amount" optional="show" />
+                <field name="dif_total_amount" optional="show" />
                 <field name="asphyxiation_units" optional="show" />
                 <field name="seized_units" optional="show" />
                 <field name="birth_rate" optional="show" />
@@ -719,8 +722,10 @@
                 <field name="purchase_unit_price" optional="show" />
                 <field name="asphyxiation_units" optional="show" />
                 <field name="seized_units" optional="show" />
+                <field name="purchase_price" optional="show" />
                 <field name="cost" optional="show" />
                 <field name="entry_total_amount" optional="show" />
+                <field name="dif_total_amount" optional="show" />
                 <field
           name="state"
           optional="show"
