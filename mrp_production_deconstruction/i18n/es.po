@@ -1,0 +1,110 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_deconstruction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-15 15:22+0000\n"
+"PO-Revision-Date: 2023-11-15 15:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model,name:mrp_production_deconstruction.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_bom_filter
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_production_filter
+msgid "Deconstruction"
+msgstr "Deconstrucción"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_bom__display_name
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_stock_move_line__display_name
+msgid "Display Name"
+msgstr "Mostrar nombre"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_stock_move_line__location_id
+msgid "From"
+msgstr "Desde"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_bom__id
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_production__id
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_stock_move_line__id
+msgid "ID"
+msgstr "Identificador"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_bom__is_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_production__is_deconstruction
+msgid "Is Deconstruction?"
+msgstr "¿Es una deconstrucción?"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_bom____last_update
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_stock_move_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_production_filter
+msgid "Last Month"
+msgstr "Último mes"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_production_filter
+msgid "Last Week"
+msgstr "Última semana"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_production_filter
+msgid "Last Year"
+msgstr "Último año"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_production__move_line_ids
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.mrp_production_form_view
+msgid "Move Lines"
+msgstr "Operaciones detalladas"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model,name:mrp_production_deconstruction.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de Producto (Stock Move Line)"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model,name:mrp_production_deconstruction.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_production_deconstruction
+#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_stock_move_line__location_dest_id
+msgid "To"
+msgstr "Hasta"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_production_filter
+msgid "Today"
+msgstr "Hoy"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.mrp_production_form_view
+msgid "Total Reserved"
+msgstr "Total reservado"
+
+#. module: mrp_production_deconstruction
+#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.view_mrp_production_filter
+msgid "Yesterday"
+msgstr "Ayer"

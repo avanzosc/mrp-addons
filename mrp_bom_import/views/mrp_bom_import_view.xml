@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_bom_import_view_tree" model="ir.ui.view">
+        <field name="model">mrp.bom.import</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="state=='error'">
+                <field name="filename" />
+                <field name="data" filename="filename" />
+                <field name="file_date" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_bom_import_view_form" model="ir.ui.view">
+        <field name="model">mrp.bom.import</field>
+        <field name="arch" type="xml">
+            <form string="BoM Import">
+            <header>
+                <button name="action_import_bom" string="Import" type="object" />
+                <button
+            name="action_validate_lines"
+            string="Validate"
+            type="object"
+            states="2validate,error,pass"
+          />
+                <button
+            name="action_process_lines"
+            string="Process"
+            type="object"
+            states="pass,2validate,error"
+          />
+                <field name="state" widget="statusbar" />
+            </header>
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                        <button
+              string="Component Import Lines"
+              type="object"
+              name="button_open_bom_component_import_line"
+              class="oe_stat_button"
+              icon="fa-bars"
+            />
+                    <button
+              class="oe_stat_button"
+              type="object"
+              name="action_bom_import_boms"
+              attrs="{'invisible': [('bom_count', '=', 0)]}"
+              icon="fa-flask"
+            >
+                         <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field
+                    name="bom_count"
+                    widget="statinfo"
+                    nolabel="1"
+                    class="mr4"
+                  />
+                            </span>
+                            <span class="o_stat_text">BoMs</span>
+                        </div>
+                    </button>
+                    <button
+              class="oe_stat_button"
+              type="object"
+              name="action_bom_import_bom_lines"
+              attrs="{'invisible': [('bom_count', '=', 0)]}"
+              icon="fa-flask"
+              string="BoM Lines"
+            >
+                    </button>
+                </div>
+                <group>
+                    <group>
+                        <field name="filename" />
+                        <field name="data" filename="filename" />
+                        <field name="file_date" />
+                    </group>
+                    <group>
+                        <field name="product_found_by_code" />
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Lines">
+                        <field name="bom_line_import_ids" />
+                    </page>
+                    <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
+                        <field name="log_info" />
+                    </page>
+                    <page string="Help" name="help_page">
+                            <div style="margin-top: 4px;">
+                                <h3>Help with Excel column names</h3>
+                                <p
+                >You must use this column names in order to fill the table:</p>
+                                <ul name="tutorial">
+                                    <li><code>Product Code</code>: this will fill <b
+                    >Component Product Code</b></li>
+                                    <li><code>Product Name</code>: this will fill <b
+                    >Component Product Name</b></li>
+                                    <li><code>Quantity</code>: this will fill <b
+                    >Component Quantity</b></li>
+                                    <li><code>Parent Code</code>: this will fill <b
+                    >Parent Product Code</b></li>
+                                    <li><code>Parent Name</code>: this will fill <b
+                    >Parent Product Name</b></li>
+                                    <li><code>Parent Qty</code>: this will fill <b
+                    >Parent Product Quantity</b></li>
+                                    <li><code>BoM Ref</code>: this will fill <b
+                    >BoM Reference</b></li>
+                                </ul>
+                            </div>
+                    </page>
+                </notebook>
+
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
+        <field name="model">mrp.bom.line.import</field>
+        <field name="arch" type="xml">
+            <tree
+        decoration-success="state=='pass'"
+        decoration-danger="state=='error'"
+        decoration-muted="state=='done'"
+        decoration-info="state=='2validate'"
+        decoration-warning="parent_product_bom_count>0 and state!='done'"
+        editable="bottom"
+      >
+                <field name="product_ref" />
+                <field name="product_name" />
+                <field name="product_id" optional="hide" />
+                <field name="quantity" />
+                <field name="bom_code" />
+                <field name="bom_name" />
+                <field name="bom_product_id" optional="hide" />
+                <field name="parent_qty" />
+                <field name="bom_ref" />
+                <field name="parent_product_bom_count" optional="show" />
+                <field name="bom_id" optional="hide" />
+                <field name="bom_line_id" optional="hide" />
+                <field name="log_info" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_bom_import_act" model="ir.actions.act_window">
+        <field name="name">MRP BoM Import</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.bom.import</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="mrp_bom_import_view_tree" />
+    </record>
+
+    <menuitem
+    id="menu_bom_import"
+    name="BoM Import"
+    parent="mrp.menu_mrp_configuration"
+    groups="mrp.group_mrp_manager"
+    sequence="120"
+  />
+
+    <menuitem
+    id="mrp_bom_import"
+    parent="menu_bom_import"
+    action="mrp_bom_import_act"
+    sequence="10"
+  />
+</odoo>
