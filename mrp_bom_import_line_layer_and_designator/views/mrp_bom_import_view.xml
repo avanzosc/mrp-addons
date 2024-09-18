@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_bom_import_view_form" model="ir.ui.view">
+        <field name="model">mrp.bom.import</field>
+        <field name="inherit_id" ref="mrp_bom_import.mrp_bom_import_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[3]/div/ul" position="inside">
+                <li>
+                    <code>Layer</code>: this will fill <b>Layer</b>
+                </li>
+                <li>
+                    <code>Designator</code>: this will fill <b>Designator</b>
+                </li>
+            </xpath>
+        </field>
+    </record>
+</odoo>

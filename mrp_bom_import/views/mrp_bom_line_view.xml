@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="mrp_bom_line_view_tree" model="ir.ui.view">
+    <field name="name">mrp.bom.line.tree</field>
+        <field name="model">mrp.bom.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bom_id" />
+                <field name="product_tmpl_id" />
+                <field name="product_qty" />
+                <field name="product_uom_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_bom_line_action" model="ir.actions.act_window">
+        <field name="name">MRP BoM Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.bom.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="mrp_bom_line_view_tree" />
+    </record>
+
+</odoo>

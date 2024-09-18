@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="external_layout_standard_qc_inspection">
+        <div
+      t-attf-class="header o_company_#{company.id}_layout"
+      t-att-style="report_header_style"
+    >
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img
+            t-if="company.logo"
+            t-att-src="image_data_uri(company.logo)"
+            style="max-height: 45px;"
+            alt="Logo"
+          />
+                </div>
+                <div
+          class="col-9 text-end"
+          style="margin-top:22px;"
+          t-field="company.report_header"
+          name="moto"
+        />
+            </div>
+            <div
+        t-if="company.logo or company.report_header"
+        class="row zero_min_height"
+      >
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;" />
+                </div>
+            </div>
+            <div class="row">
+                <div
+          class="col-6"
+          name="company_address"
+          style="font-family:ubuntu; font-size:14px"
+        >
+                    <ul class="list-unstyled">
+                        <strong><span t-field="o.company_id.name" /></strong>
+                        <br />
+                        <span t-field="o.company_id.street" />
+                        <span t-field="o.company_id.zip" />
+                        <br />
+                        <span t-field="o.company_id.city" />
+                        -
+                        <span t-field="o.company_id.state_id.name" />
+                        <br />
+                        <span t-field="o.company_id.country_id.name" />
+                        <br />
+                        <span t-field="o.company_id.phone" />
+                        <br />
+                        <span t-field="o.company_id.partner_id.fax" />
+                        <br />
+                        VAT:
+                        <span t-field="o.company_id.vat" />
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div
+      t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+      t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+      t-att-data-oe-model="o and o._name"
+      t-att-data-oe-id="o and o.id"
+      t-att-data-oe-lang="o and o.env.context.get('lang')"
+    >
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout" />
+            </div>
+            <t t-out="0" />
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" t-if="company.iso_quality_control">
+                <strong>COMPANY WITH CERTIFICATION </strong>
+                <strong><span t-field="company.iso_quality_control" /></strong>
+            </div>
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline">
+                    Phone: <span t-field="company.phone" />
+                    <t t-if="company.partner_id.fax">
+                        <span> | Fax: </span><span t-field="company.partner_id.fax" />
+                    </t>
+                    <t t-if="company.email">
+                        <span> | Email: </span><span t-field="company.email" />
+                    </t>
+                    <t t-if="company.website">
+                        <span> | Website: </span><span t-field="company.website" />
+                    </t>
+                    <t t-if="company.vat">
+                        <span> | VAT: </span><span t-field="company.vat" />
+                    </t>
+                </ul>
+                <ul class="list-inline">
+                    <span>Page: </span>
+                    <span class="page" />
+                    <span> / </span>
+                    <span class="topage" />
+                </ul>
+            </div>
+        </div>
+    </template>
+
+    <template id="external_layout_qc_inspection">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+        <t t-call="qc_inspection_report.external_layout_standard_qc_inspection"><t
+        t-out="0"
+      /></t>
+    </template>
+</odoo>
