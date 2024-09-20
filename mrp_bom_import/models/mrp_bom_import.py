@@ -377,10 +377,22 @@ class MrpBomLineImport(models.Model):
 
     def _create_bom(self):
         self.ensure_one()
+
+        if not self.bom_ref:
+            if self.bom_count == 0:
+                if self.bom_product_id.default_code:
+                    bom_ref = self.bom_product_id.default_code
+                else:
+                    bom_ref = self.bom_product_id.name
+            else:
+                bom_ref = f"{self.bom_ref}-{self.bom_count + 1}"
+        else:
+            bom_ref = self.bom_ref
+
         bom = self.env["mrp.bom"].create(
             {
                 "product_tmpl_id": self.bom_product_id.product_tmpl_id.id,
-                "code": self.bom_ref,
+                "code": bom_ref,
                 "product_qty": self.parent_qty,
                 "product_uom_id": self.bom_product_id.uom_id.id,
             }
