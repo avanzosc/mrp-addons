@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_import_line_layer_and_designator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-13 13:42+0000\n"
+"PO-Revision-Date: 2024-09-13 13:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_import_line_layer_and_designator
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import_line_layer_and_designator.mrp_bom_import_view_form
+msgid "<code>Designator</code>: this will fill <b>Designator</b>"
+msgstr "<code>Designator</code>: esto rellenará el <b>Designador</b>"
+
+#. module: mrp_bom_import_line_layer_and_designator
+#: model_terms:ir.ui.view,arch_db:mrp_bom_import_line_layer_and_designator.mrp_bom_import_view_form
+msgid "<code>Layer</code>: this will fill <b>Layer</b>"
+msgstr "<code>Layer</code>: esto rellenará la <b>Capa</b>"
+
+#. module: mrp_bom_import_line_layer_and_designator
+#: model:ir.model.fields,field_description:mrp_bom_import_line_layer_and_designator.field_mrp_bom_line_import__designator
+msgid "Designator"
+msgstr "Designador"
+
+#. module: mrp_bom_import_line_layer_and_designator
+#: model:ir.model,name:mrp_bom_import_line_layer_and_designator.model_mrp_bom_import
+msgid "Import BoM from excel file"
+msgstr "Importar LdM de fichero excel"
+
+#. module: mrp_bom_import_line_layer_and_designator
+#: model:ir.model,name:mrp_bom_import_line_layer_and_designator.model_mrp_bom_line_import
+msgid "Import BoM lines"
+msgstr "Lineas de importador de LdM"
+
+#. module: mrp_bom_import_line_layer_and_designator
+#: model:ir.model.fields,field_description:mrp_bom_import_line_layer_and_designator.field_mrp_bom_line_import__layer
+msgid "Layer"
+msgstr "Capa"

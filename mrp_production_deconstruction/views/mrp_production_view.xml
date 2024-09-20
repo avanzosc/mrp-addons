@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="is_deconstruction" invisible="1" />
+            </field>
+            <field name="forecast_availability" position="attributes">
+                <attribute
+          name="attrs"
+        >{'column_invisible':[('parent.is_deconstruction', '=', True)]}</attribute>
+            </field>
+            <page name="components" position="before">
+                <page name="move_lines" string="Move Lines">
+                    <field
+            name="move_line_ids"
+            context="{'production_id': active_id, 'default_company_id': company_id}"
+            attrs="{'readonly': [('state', 'in', ('draft', 'cancel'))]}"
+          >
+                        <tree
+              name="mrp_move_lines"
+              editable="bottom"
+              decoration-muted="state == 'cancel'"
+              default_order="location_id"
+              limit="300"
+            >
+                            <field name="production_id" invisible="1" />
+                            <field name="move_id" invisible="1" />
+                            <field name="tracking" invisible="1" />
+                            <field
+                name="product_id"
+                context="{'default_type': 'product'}"
+                required="1"
+                attrs="{'readonly': ['|', ('id', '!=', False), ('state', 'in', ('cancel'))]}"
+                options="{'no_create': True}"
+                force_save="1"
+              />
+                            <field
+                name="lot_id"
+                groups="stock.group_production_lot"
+                attrs="{'readonly': [('tracking', 'not in', ('lot', 'serial'))]}"
+                context="{'default_product_id': product_id, 'default_company_id': company_id}"
+              />
+                            <field name="location_id" optional="hide" force_save="1" />
+                            <field
+                name="location_dest_id"
+                optional="hide"
+                force_save="1"
+              />
+                            <field
+                name="package_id"
+                groups="stock.group_tracking_lot"
+                optional="hide"
+              />
+                            <field
+                name="result_package_id"
+                groups="stock.group_tracking_lot"
+                optional="hide"
+              />
+                            <field name="product_uom_category_id" invisible="1" />
+                            <field name="qty_done" />
+                            <field
+                name="reserved_uom_qty"
+                optional="hide"
+                readonly="1"
+                attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
+                sum="Total Reserved"
+              />
+                            <field
+                name="product_uom_id"
+                optional="hide"
+                options="{'no_create': True}"
+                groups="uom.group_uom"
+                readonly="1"
+                force_save="1"
+                attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
+              />
+                            <field name="company_id" invisible="1" force_save="1" />
+                            <field name="state" optional="hide" />
+                        </tree>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="activity_exception_decoration" position="after">
+                <field name="is_deconstruction" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_filter" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+        <field name="arch" type="xml">
+            <filter name="todo" position="before">
+                <filter
+          string="Deconstruction"
+          name="is_deconstruction"
+          domain="[('is_deconstruction', '=', True)]"
+        />
+                <separator />
+            </filter>
+            <filter name="filter_date_planned_start" position="after">
+                <filter
+          string="Yesterday"
+          name="yesterday"
+          domain="[('date_planned_start', '&lt;', (context_today()).strftime('%Y-%m-%d')), ('date_planned_start','&gt;', (context_today() - datetime.timedelta(days=2)).strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Today"
+          name="today"
+          domain="[('date_planned_start', '&lt;', (context_today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d')), ('date_planned_start','&gt;', (context_today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Last Week"
+          name="last_week"
+          domain="[('date_planned_start','&gt;', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+        />
+                <filter
+          string="Last Month"
+          name="month"
+          domain="[('date_planned_start','&gt;', (context_today() - datetime.timedelta(days=30)).strftime('%%Y-%%m-%%d'))]"
+        />
+                <filter
+          string="Last Year"
+          name="year"
+          domain="[('date_planned_start','&gt;', (context_today() - datetime.timedelta(days=365)).strftime('%%Y-%%m-%%d'))]"
+        />
+            </filter>
+        </field>
+    </record>
+
+</odoo>

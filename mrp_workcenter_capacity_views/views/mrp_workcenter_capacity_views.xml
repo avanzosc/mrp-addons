@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_workcenter_capacity_tree_view" model="ir.ui.view">
+        <field name="name">mrp.workcenter.capacity.tree.view</field>
+        <field name="model">mrp.workcenter.capacity</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="workcenter_id" />
+                <field name="product_id" />
+                <field name="product_uom_id" groups="uom.group_uom" />
+                <field name="capacity" />
+                <field name="time_start" optional="hide" />
+                <field name="time_stop" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_workcenter_capacity_form_view" model="ir.ui.view">
+        <field name="name">mrp.workcenter.capacity.form.view</field>
+        <field name="model">mrp.workcenter.capacity</field>
+        <field name="arch" type="xml">
+            <form string="Specific capacity">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="workcenter_id" />
+                            <field name="product_id" />
+                            <field name="product_uom_id" groups="uom.group_uom" />
+                        </group>
+                        <group>
+                            <field name="capacity" />
+                            <field name="time_start" />
+                            <field name="time_stop" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mrp_workcenter_capacity_search_view" model="ir.ui.view">
+        <field name="name">mrp.workcenter.capacity.search.view</field>
+        <field name="model">mrp.workcenter.capacity</field>
+        <field name="arch" type="xml">
+            <search string="Search specific capacity">
+                <field name="workcenter_id" />
+                <field name="product_id" />
+                <group expand="0" string="Group By...">
+                    <filter
+            string="Workcenter"
+            name="group-workcenter"
+            domain="[]"
+            context="{'group_by': 'workcenter_id'}"
+          />
+                    <filter
+            string="Product"
+            name="group-product"
+            domain="[]"
+            context="{'group_by': 'product_id'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mrp_workcenter_capacity_action" model="ir.actions.act_window">
+        <field name="name">Specific Capacities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.workcenter.capacity</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="mrp_workcenter_capacity_tree_view" />
+        <field name="search_view_id" ref="mrp_workcenter_capacity_search_view" />
+    </record>
+
+    <menuitem
+    id="menu_view_workcenter_capacity"
+    action="mrp_workcenter_capacity_action"
+    groups="mrp.group_mrp_routings"
+    parent="mrp.menu_mrp_configuration"
+    sequence="91"
+  />
+</odoo>
