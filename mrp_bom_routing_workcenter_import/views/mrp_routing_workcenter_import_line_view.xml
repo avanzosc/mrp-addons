@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_routing_workcenter_import_line_view_search" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter.import.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="bom_ref" />
+                <separator />
+                <filter
+          string="Errored"
+          name="error"
+          domain="[('state', '=', 'error')]"
+        />
+                <separator />
+                <filter
+          string="Create"
+          name="create"
+          domain="[('action', '=', 'create')]"
+        />
+                <filter
+          string="Do Nothing"
+          name="do_nothing"
+          domain="[('action', '=', 'nothing')]"
+        />
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="bom" string="BoM" context="{'group_by': 'bom_id'}" />
+          <filter
+            name="workcenter"
+            string="Workcenter"
+            context="{'group_by': 'workcenter_id'}"
+          />
+          <filter
+            name="product"
+            string="Product"
+            context="{'group_by': 'product_id'}"
+          />
+                    <separator />
+                    <filter
+            string="Status"
+            name="state_group"
+            domain="[]"
+            context="{'group_by':'state'}"
+          />
+                    <filter
+            string="Action"
+            name="action_group"
+            domain="[]"
+            context="{'group_by':'action'}"
+          />
+                    <filter
+            string="Log Info"
+            name="log_info_group"
+            domain="[]"
+            context="{'group_by':'log_info'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_import_line_view_form" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter.import.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            name="action_validate"
+            string="Validate"
+            type="object"
+            class="oe_read_only"
+            states="2validate,error,pass"
+          />
+                    <button
+            name="action_process"
+            string="Process"
+            type="object"
+            class="oe_read_only"
+            states="error,pass"
+          />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="import_id" invisible="1" />
+                            <field name="action" invisible="1" />
+                            <field name="bom_ref" />
+                            <field name="bom_id" />
+                            <field name="operation_name" />
+                            <field name="workcenter_name" />
+                            <field name="workcenter_id" />
+                            <field name="product_code" />
+                            <field name="product_name" />
+                            <field name="product_id" />
+                        </group>
+                    </group>
+                    <field name="log_info" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_import_line_view_tree" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter.import.line</field>
+        <field name="arch" type="xml">
+            <tree
+        decoration-danger="state == 'error'"
+        decoration-muted="state == 'done'"
+        decoration-it="log_info"
+        editable="top"
+      >
+                <field
+          name="action"
+          decoration-muted="action == 'nothing'"
+          decoration-info="action == 'create'"
+        />
+                <field name="import_id" invisible="1" />
+                <field name="bom_ref" />
+                <field name="bom_id" optional="hide" />
+                <field name="operation_name" />
+                <field name="workcenter_name" />
+                <field name="workcenter_id" optional="hide" />
+                <field name="product_code" />
+                <field name="product_name" />
+                <field name="product_id" optional="hide" />
+                <field name="state" optional="show" />
+                <field name="log_info" optional="show" readonly="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record
+    id="mrp_routing_workcenter_import_line_action"
+    model="ir.actions.act_window"
+  >
+        <field name="name">Import MRP BoM Routing</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.routing.workcenter.import.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="mrp_routing_workcenter_import_line_view_tree" />
+    </record>
+</odoo>
