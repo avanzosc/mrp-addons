@@ -1,0 +1,577 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_routing_workcenter_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-03 14:21+0000\n"
+"PO-Revision-Date: 2024-10-03 14:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "<code>BoM Ref</code>: this will fill <b>BoM Reference</b>"
+msgstr "<code>BoM Ref</code>: esto rellenará la <b>Referencia de LdM</b>"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "<code>Operation</code>: this will fill <b>Operation Name</b>"
+msgstr "<code>Operation</code>: esto rellenará el <b>Nombre de operación</b>"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "<code>Product Code</code>: this will fill <b>Product Code</b>"
+msgstr "<code>Product Code</code>: esto rellenará el <b>código del componente</b>"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "<code>Product Name</code>: this will fill <b>Product Name</b>"
+msgstr "<code>Product Name</code>: esto rellenará el <b>Nombre del componente</b>"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "<code>Workcenter</code>: this will fill <b>Workcenter</b>"
+msgstr "<code>Workcenter</code>: esto rellenará el <b>Centro de operación</b>"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__action
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "Action"
+msgstr "Acción"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Actividad excepción decoración"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono de tipo de actividad"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_attachment_count
+msgid "Attachment Count"
+msgstr "Recuento de anexos"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "BoM"
+msgstr "LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.ui.menu,name:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_menu
+msgid "BoM Operation Import"
+msgstr "Importar operaciones de LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "BoMs"
+msgstr "LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__bom_id
+msgid "Bom"
+msgstr "LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__bom_ref
+msgid "Bom Ref"
+msgstr "Referencia LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields.selection,name:mrp_bom_routing_workcenter_import.selection__mrp_routing_workcenter_import_line__action__create
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "Create"
+msgstr "Crear"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__create_uid
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__create_date
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__display_name
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "Do Nothing"
+msgstr "No hacer nada"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_search
+msgid "Done"
+msgstr "Hecho"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_search
+msgid "Error"
+msgstr ""
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Error Log"
+msgstr "Registro de errores"
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: BoM not found."
+msgstr "Error: LdM no encontrada."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: More than one BoM found."
+msgstr "Error: Más de una LdM encontrada."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: More than one product found."
+msgstr "Error: Más de un producto encontrado."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: More than one workcenter found."
+msgstr "Error: Más de un centro de producción encontrado."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: No product in BoM without operation."
+msgstr "Error: No hay producto en LdM sin operación."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: Operation name is required."
+msgstr "Error: Nombre de operación es requerida."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: Product not found."
+msgstr "Error: Producto no encontrado."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: Product not in BoM."
+msgstr "Error: El producto no se encuentra en LdM."
+
+#. module: mrp_bom_routing_workcenter_import
+#. odoo-python
+#: code:addons/mrp_bom_routing_workcenter_import/models/mrp_workcenter_routing_import.py:0
+#, python-format
+msgid "Error: Workcenter not found."
+msgstr "Error: Centro de producción no encontrada."
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "Errored"
+msgstr "Con error"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__data
+msgid "File"
+msgstr "Archivo"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__filename
+msgid "Filename"
+msgstr "Nombre del archivo"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (contactos)"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__has_message
+msgid "Has Message"
+msgstr "Tiene mensajes"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Help"
+msgstr "Ayuda"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Help with Excel column names"
+msgstr "Ayuda con los nombres de las columnas de excel"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__id
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcada, nuevos mensajes requieren su atención."
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_has_error
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcada, algunos mensajes tienen un error de entrega."
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Import"
+msgstr "Importar"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Import Data"
+msgstr "Datos de la importación"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__file_date
+msgid "Import Date"
+msgstr "Fecha de la importación"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Import Lines"
+msgstr "Líneas importadas"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.actions.act_window,name:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_action
+msgid "Import MRP BoM Routing"
+msgstr "Importar operaciones de LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.actions.act_window,name:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_action
+#: model:ir.ui.menu,name:mrp_bom_routing_workcenter_import.mrp_bom_routing_workcenter_import_menu_action
+msgid "Import Routing Workcenter Lines"
+msgstr "Importar operaciones de LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__import_id
+msgid "Import Wizard"
+msgstr "Asistente de importación"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model,name:mrp_bom_routing_workcenter_import.model_mrp_routing_workcenter_import
+msgid "Import Workcenter Routing from excel file"
+msgstr "Importar operaciones de LdM desde archivo excel"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Imported Lines"
+msgstr "Líneas importadas"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import____last_update
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line____last_update
+msgid "Last Modified on"
+msgstr "Modificado el"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__write_uid
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__write_date
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__write_date
+msgid "Last Updated on"
+msgstr "Actualizado el"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__import_line_ids
+msgid "Lines to Import"
+msgstr "Líneas para importar"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model,name:mrp_bom_routing_workcenter_import.model_mrp_routing_workcenter_import_line
+msgid "Lines to import workcenter routing"
+msgstr "Líneas para importar operaciones de LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__log_info
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__log_info
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "Log Info"
+msgstr "Información de registro"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunto principal"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega del mensaje"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Mi actividad Plazo"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Próximo evento del calendario de actividades"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha límite para la próxima actividad"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la próxima actividad"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__operation_id
+msgid "Operation"
+msgstr "Operación"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__operation_name
+msgid "Operation Name"
+msgstr "Nombre de operación"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Operations"
+msgstr "Operaciones"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_search
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Process"
+msgstr "Procesar"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__product_id
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "Product"
+msgstr "Componente"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__product_code
+msgid "Product Code"
+msgstr "Código del componente"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__product_found_by_code
+msgid "Product Found By Code"
+msgstr "Buscar componente por código"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__product_name
+msgid "Product Name"
+msgstr "Nombre del componente"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Rounting Workcenter Information"
+msgstr "Información de operaciones de LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega de SMS"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__split_size
+msgid "Split Size"
+msgstr "Tamaño de salto"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__state
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__state
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_search
+msgid "Status"
+msgstr "Estado"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Atrasado: La fecha de vencimiento ya ha pasado\n"
+"Hoy: La fecha de la actividad es hoy\n"
+"Planificadas: Actividades futuras."
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__bom_count
+msgid "Total BoMs"
+msgstr "Total LdM"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__operation_count
+msgid "Total Operations"
+msgstr "Total operaciones"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de la actividad de excepción registrada."
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_form
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "Validate"
+msgstr "Validar"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,help:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import__website_message_ids
+msgid "Website communication history"
+msgstr "Historia de la comunicación en la web"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__workcenter_id
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_line_view_search
+msgid "Workcenter"
+msgstr "Centro de producción"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model:ir.model.fields,field_description:mrp_bom_routing_workcenter_import.field_mrp_routing_workcenter_import_line__workcenter_name
+msgid "Workcenter Name"
+msgstr "Nombre del centro de producción"
+
+#. module: mrp_bom_routing_workcenter_import
+#: model_terms:ir.ui.view,arch_db:mrp_bom_routing_workcenter_import.mrp_routing_workcenter_import_view_form
+msgid "You must use this column names in order to fill the table:"
+msgstr "Debe utilizar estos nombres de columna para rellenar la tabla:"
