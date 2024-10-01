@@ -5,10 +5,19 @@
         <field name="inherit_id" ref="stock.view_move_line_tree" />
         <field name="arch" type="xml">
             <field name="product_uom_id" position="after">
-                <field name="applied_price" optional="show" />
+                <field
+          name="applied_price"
+          optional="show"
+          attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+        />
             </field>
             <field name="qty_done" position="after">
-                <field name="clean_qty" optional="hide" sum="Total Clean" />
+                <field
+          name="clean_qty"
+          optional="hide"
+          sum="Total Clean"
+          attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+        />
                 <field name="clean_performance" optional="hide" />
             </field>
         </field>
@@ -128,9 +137,10 @@
           attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
           sum="Total Pallet"
         />
+                <field name="is_locked" invisible="1" />
                 <field
           name="container"
-          attrs="{'readonly': [('state', '=', 'cancel')]}"
+          attrs="{'readonly': [('state', '=', 'cancel'), ('is_locked', '=', True)]}"
           sum="Total Container"
         />
                 <field
