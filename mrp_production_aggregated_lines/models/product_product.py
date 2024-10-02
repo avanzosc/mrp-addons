@@ -14,7 +14,8 @@ class ProductProduct(models.Model):
         compute_sudo=True,
     )
 
-    @api.depends("route_ids", "bom_ids")
+    @api.depends("route_ids", "bom_ids", "variant_bom_ids", "bom_ids.type",
+                 "variant_bom_ids.type")
     def _compute_manufacturable(self):
         manufacture = self.env.ref("mrp.route_warehouse0_manufacture")
         for product in self:
