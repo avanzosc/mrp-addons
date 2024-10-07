@@ -27,8 +27,8 @@ class SaleOrderLine(models.Model):
     )
     manufacturable_product = fields.Boolean(
         string="Is Product Manufacturable?",
-        related="product_id.is_manufacturable",
-        related_sudo=True,
+        compute="_compute_manufacturable",
+        compute_sudo=True,
         store=True,
         index=True,
     )
@@ -44,6 +44,21 @@ class SaleOrderLine(models.Model):
         related_sudo=True,
         store=True,
     )
+
+    @api.depends(
+        "product_id", "product_id.route_ids", "product_id.bom_ids",
+        "product_id.variant_bom_ids", "product_id.bom_ids.type",
+        "product_id.variant_bom_ids.type")
+    def _compute_manufacturable(self):
+        manufacture = self.env.ref("mrp.route_warehouse0_manufacture")
+        for line in self:
+            manufacture_route = (manufacture in line.product_id.route_ids)
+            manufacture_bom = any(
+                line.product_id.variant_bom_ids.filtered(
+                    lambda l: l.type == "normal") |
+                line.product_id.bom_ids.filtered(
+                    lambda l: l.type == "normal"))
+            line.is_manufacturable = manufacture_route and manufacture_bom
 
     def _action_mrp_dict(self):
         self.ensure_one()
@@ -142,8 +157,7 @@ class SaleOrder(models.Model):
     def action_create_mrp_from_lines(self):
         for sale in self:
             for line in sale.order_line.filtered(
-                    lambda x: not x.mrp_production_id and
-                    x.manufacturable_product):
+                    lambda x: not x.mrp_production_id and x.manufacturable_product):
                 try:
                     line.action_create_mrp()
                 except exceptions.MissingError:
