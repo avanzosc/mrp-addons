@@ -28,7 +28,7 @@ class StockInventoryLine(models.Model):
                     and (c.location_id == self.location_id)
                     and c.picking_id
                 )
-                if entry_line:
+                if entry_line and sum(entry_line.mapped("qty_done")) != 0:
                     dev_line_amount = sum(dev_line.mapped("amount")) or 0
                     dev_line_qty = sum(dev_line.mapped("qty_done")) or 0
                     self.cost = (sum(entry_line.mapped("amount")) - dev_line_amount) / (
