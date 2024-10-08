@@ -218,6 +218,44 @@ class MrpProduction(models.Model):
         related="bom_id.recalculate_cost",
         store=True,
     )
+    total_duration = fields.Float(compute="_compute_total_duration", store=True)
+    speed_consume_qty = fields.Float(
+        string="Produced Kg/Hour", compute="_compute_speed_consume_qty", store=True
+    )
+    speed_consume_unit = fields.Float(
+        string="Input Unit/Hour",
+        compute="_compute_speed_consume_unit",
+        store=True,
+    )
+    timesheet_ids = fields.One2many(
+        comodel_name="account.analytic.line", related="saca_line_id.timesheet_ids"
+    )
+
+    @api.depends("total_duration", "total_unit")
+    def _compute_speed_consume_unit(self):
+        for production in self:
+            speed_consume_unit = 0
+            if production.total_duration != 0:
+                speed_consume_unit = (
+                    production.total_unit / production.total_duration * 60
+                )
+            production.speed_consume_unit = speed_consume_unit
+
+    @api.depends("total_duration", "produced_qty")
+    def _compute_speed_consume_qty(self):
+        for production in self:
+            speed_produced_qty = 0
+            if production.total_duration != 0:
+                speed_produced_qty = (
+                    production.produced_qty / production.total_duration * 60
+                )
+            production.speed_consume_qty = speed_produced_qty
+
+    @api.depends("workorder_ids", "workorder_ids.duration")
+    def _compute_total_duration(self):
+        for production in self:
+            duration = sum(production.workorder_ids.mapped("duration"))
+            production.total_duration = duration
 
     @api.depends("move_line_ids.percentage")
     def _compute_rto_percentage(self):
@@ -268,12 +306,6 @@ class MrpProduction(models.Model):
                     ).mapped("unit")
                 )
             line.asphyxiation_units = asphyxiation_units
-
-    def _compute_classified_ids(self):
-        for line in self:
-            cond = [("production_id", "=", line.id), ("classified", "=", True)]
-            classified = self.env["account.analytic.line"].search(cond)
-            line.clasified_ids = [(6, 0, classified.ids)]
 
     @api.depends("produced_qty", "consume_qty")
     def _compute_qty_difference(self):
