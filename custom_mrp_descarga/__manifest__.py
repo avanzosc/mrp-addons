@@ -30,6 +30,7 @@
         "data/ir_cron_data.xml",
         "views/saca_line_view.xml",
         "views/mrp_production_view.xml",
+        "views/mrp_workorder_view.xml",
         "views/stock_production_lot_view.xml",
         "views/stock_quant_view.xml",
         "views/mrp_bom_view.xml",
