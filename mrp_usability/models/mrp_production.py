@@ -17,6 +17,22 @@ class MrpProduction(models.Model):
     workorder_count = fields.Integer(
         string="# Work Orders", compute="_compute_workorder_count"
     )
+    move_line_ids = fields.One2many(
+        string="Move Lines",
+        comodel_name="stock.move.line",
+        inverse_name="production_id",
+        domain=lambda self: [
+            ("location_dest_id", "in", self.production_location_id.ids)
+        ],
+    )
+    finished_move_line_ids = fields.One2many(
+        compute=False,
+        inverse_name="production_id",
+        domain=lambda self: [
+            ("location_id", "in", self.production_location_id.ids),
+            ("location_dest_id", "in", self.location_dest_id.ids),
+        ],
+    )
 
     def action_view_workorder(self):
         self.ensure_one()

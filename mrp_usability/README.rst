@@ -8,6 +8,8 @@ Manufacturing Usability
 
 * The buttons that are in the tree view of the work order, put them also in the form view.
 * Link from Production to Work Orders.
+* In manufacturing order form new tab "Move Lines", and new field "Finished Move
+  lines".
 
 Bug Tracker
 ===========

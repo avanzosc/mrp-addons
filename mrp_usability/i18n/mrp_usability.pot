@@ -58,3 +58,10 @@ msgstr ""
 #, python-format
 msgid "Work Orders"
 msgstr ""
+
+#. module: mrp_usability
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__move_line_ids
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+msgid "Move Lines"
+msgstr ""
+
