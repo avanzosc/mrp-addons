@@ -2,12 +2,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Production Deconstruction",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.1.0",
     "author": "Avanzosc",
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing/Manufacturing",
     "depends": [
-        "mrp",
+        "mrp_usability",
     ],
     "data": [
         "views/mrp_production_view.xml",

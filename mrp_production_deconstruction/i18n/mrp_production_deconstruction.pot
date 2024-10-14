@@ -74,12 +74,6 @@ msgid "Last Year"
 msgstr ""
 
 #. module: mrp_production_deconstruction
-#: model:ir.model.fields,field_description:mrp_production_deconstruction.field_mrp_production__move_line_ids
-#: model_terms:ir.ui.view,arch_db:mrp_production_deconstruction.mrp_production_form_view
-msgid "Move Lines"
-msgstr ""
-
-#. module: mrp_production_deconstruction
 #: model:ir.model,name:mrp_production_deconstruction.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
 msgstr ""

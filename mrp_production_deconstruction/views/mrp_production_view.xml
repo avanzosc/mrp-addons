@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="mrp_production_form_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
@@ -13,77 +12,30 @@
           name="attrs"
         >{'column_invisible':[('parent.is_deconstruction', '=', True)]}</attribute>
             </field>
-            <page name="components" position="before">
-                <page name="move_lines" string="Move Lines">
-                    <field
-            name="move_line_ids"
-            context="{'production_id': active_id, 'default_company_id': company_id}"
-            attrs="{'readonly': [('state', 'in', ('draft', 'cancel'))]}"
-          >
-                        <tree
-              name="mrp_move_lines"
-              editable="bottom"
-              decoration-muted="state == 'cancel'"
-              default_order="location_id"
-              limit="300"
-            >
-                            <field name="production_id" invisible="1" />
-                            <field name="move_id" invisible="1" />
-                            <field name="tracking" invisible="1" />
-                            <field
-                name="product_id"
-                context="{'default_type': 'product'}"
-                required="1"
-                attrs="{'readonly': ['|', ('id', '!=', False), ('state', 'in', ('cancel'))]}"
-                options="{'no_create': True}"
-                force_save="1"
-              />
-                            <field
-                name="lot_id"
-                groups="stock.group_production_lot"
-                attrs="{'readonly': [('tracking', 'not in', ('lot', 'serial'))]}"
-                context="{'default_product_id': product_id, 'default_company_id': company_id}"
-              />
-                            <field name="location_id" optional="hide" force_save="1" />
-                            <field
-                name="location_dest_id"
-                optional="hide"
-                force_save="1"
-              />
-                            <field
-                name="package_id"
-                groups="stock.group_tracking_lot"
-                optional="hide"
-              />
-                            <field
-                name="result_package_id"
-                groups="stock.group_tracking_lot"
-                optional="hide"
-              />
-                            <field name="product_uom_category_id" invisible="1" />
-                            <field name="qty_done" />
-                            <field
-                name="reserved_uom_qty"
-                optional="hide"
-                readonly="1"
-                attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
-                sum="Total Reserved"
-              />
-                            <field
-                name="product_uom_id"
-                optional="hide"
-                options="{'no_create': True}"
-                groups="uom.group_uom"
-                readonly="1"
-                force_save="1"
-                attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
-              />
-                            <field name="company_id" invisible="1" force_save="1" />
-                            <field name="state" optional="hide" />
-                        </tree>
-                    </field>
-                </page>
-            </page>
+        </field>
+    </record>
+
+
+    <record id="mrp_production_form_view2" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_usability.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//field[@name='move_line_ids']/tree/field[@name='reserved_uom_qty']"
+        position="attributes"
+      >
+                <attribute
+          name="attrs"
+        >{'column_invisible':[('parent.is_deconstruction', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+        expr="//field[@name='move_line_ids']/tree/field[@name='product_uom_id']"
+        position="attributes"
+      >
+                <attribute
+          name="attrs"
+        >{'column_invisible':[('parent.is_deconstruction', '=', True)]}</attribute>
+            </xpath>
         </field>
     </record>
 
