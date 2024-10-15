@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_sale_info.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="sale_id" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="commitment_date" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="client_order_ref" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
