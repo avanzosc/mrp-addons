@@ -29,17 +29,17 @@ msgstr ""
 #. module: mrp_stock_move_cost
 #: model:ir.model,name:mrp_stock_move_cost.model_stock_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/série"
 
 #. module: mrp_stock_move_cost
 #: model:ir.model,name:mrp_stock_move_cost.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Mouvements de stock"
 
 #. module: mrp_stock_move_cost
 #: model:ir.model,name:mrp_stock_move_cost.model_mrp_production
 msgid "Production Order"
-msgstr ""
+msgstr "Ordre de production"
 
 #. module: mrp_stock_move_cost
 #: model:ir.actions.server,name:mrp_stock_move_cost.action_cost_in_mrp_production
@@ -49,7 +49,7 @@ msgstr ""
 #. module: mrp_stock_move_cost
 #: model:ir.model,name:mrp_stock_move_cost.model_stock_scrap
 msgid "Scrap"
-msgstr ""
+msgstr "Rebut"
 
 #. module: mrp_stock_move_cost
 #: model:ir.model.fields,field_description:mrp_stock_move_cost.field_mrp_production__scrap_cost

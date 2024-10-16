@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_scrap_form_view" model="ir.ui.view">
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scrap_qty']/.." position="after">
+                <field name="price_unit_cost" />
+                <field name="scrap_cost" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_scrap_form_view2" model="ir.ui.view">
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scrap_qty']/.." position="after">
+                <field name="price_unit_cost" />
+                <field name="scrap_cost" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_scrap_tree_view" model="ir.ui.view">
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_uom_id" position="after">
+                <field name="price_unit_cost" readonly="1" optional="show" />
+                <field
+          name="scrap_cost"
+          readonly="1"
+          optional="show"
+          sum="Total Scrap Cost"
+        />
+            </field>
+        </field>
+    </record>
+</odoo>

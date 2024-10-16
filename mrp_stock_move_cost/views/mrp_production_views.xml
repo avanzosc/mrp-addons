@@ -9,8 +9,17 @@
                     <group>
                         <field name="price_unit_cost" readonly="1" />
                     </group>
-                    <group>
+                    <group />
+                </group>
+                <group colspan="4" col="6">
+                    <group colspan="2">
                         <field name="cost" readonly="1" />
+                    </group>
+                    <group colspan="2">
+                        <field name="scrap_cost" readonly="1" />
+                    </group>
+                    <group colspan="2">
+                        <field name="total_cost" readonly="1" />
                     </group>
                 </group>
             </notebook>
@@ -24,6 +33,8 @@
             <field name="product_uom_id" position="after">
                 <field name="price_unit_cost" optional="show" />
                 <field name="cost" optional="show" sum="Total cost" />
+                <field name="scrap_cost" optional="show" sum="Total Scrap Cost" />
+                <field name="total_cost" optional="show" sum="Total MO Cost" />
             </field>
         </field>
     </record>

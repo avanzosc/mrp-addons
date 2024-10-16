@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-28 11:44+0000\n"
-"PO-Revision-Date: 2024-02-28 11:44+0000\n"
+"POT-Creation-Date: 2024-10-16 12:32+0000\n"
+"PO-Revision-Date: 2024-10-16 12:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,8 +22,19 @@ msgstr "Coste"
 
 #. module: mrp_stock_move_cost
 #: model:ir.model.fields,field_description:mrp_stock_move_cost.field_mrp_production__price_unit_cost
+#: model:ir.model.fields,field_description:mrp_stock_move_cost.field_stock_scrap__price_unit_cost
 msgid "Cost Unit Price"
 msgstr "Precio unitario coste"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model,name:mrp_stock_move_cost.model_stock_lot
+msgid "Lot/Serial"
+msgstr "Lote/Número de serie"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model,name:mrp_stock_move_cost.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de productos (línea de movimiento de existencias)"
 
 #. module: mrp_stock_move_cost
 #: model:ir.model,name:mrp_stock_move_cost.model_mrp_production
@@ -34,6 +45,33 @@ msgstr "Orden de producción"
 #: model:ir.actions.server,name:mrp_stock_move_cost.action_cost_in_mrp_production
 msgid "Put Cost"
 msgstr "Poner coste"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model,name:mrp_stock_move_cost.model_stock_scrap
+msgid "Scrap"
+msgstr "Desechar"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model.fields,field_description:mrp_stock_move_cost.field_mrp_production__scrap_cost
+#: model:ir.model.fields,field_description:mrp_stock_move_cost.field_stock_scrap__scrap_cost
+msgid "Scrap Cost"
+msgstr "Coste desecho"
+
+#. module: mrp_stock_move_cost
+#: model:ir.model.fields,field_description:mrp_stock_move_cost.field_mrp_production__total_cost
+msgid "Total Cost"
+msgstr "Total coste"
+
+#. module: mrp_stock_move_cost
+#: model_terms:ir.ui.view,arch_db:mrp_stock_move_cost.mrp_production_tree_view
+msgid "Total MO Cost"
+msgstr "Total coste OF"
+
+#. module: mrp_stock_move_cost
+#: model_terms:ir.ui.view,arch_db:mrp_stock_move_cost.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_stock_move_cost.stock_scrap_tree_view
+msgid "Total Scrap Cost"
+msgstr "Total coste desecho"
 
 #. module: mrp_stock_move_cost
 #: model_terms:ir.ui.view,arch_db:mrp_stock_move_cost.mrp_production_tree_view

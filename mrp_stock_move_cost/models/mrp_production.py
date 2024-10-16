@@ -10,6 +10,8 @@ class MrpProduction(models.Model):
         string="Cost Unit Price", digits="Product Price", copy=False
     )
     cost = fields.Float(digits="Product Price", copy=False)
+    scrap_cost = fields.Float(digits="Product Price", copy=False)
+    total_cost = fields.Float(digits="Product Price", copy=False)
 
     def write(self, vals):
         result = super().write(vals)
@@ -26,6 +28,11 @@ class MrpProduction(models.Model):
     def update_prodution_cost(self):
         price_unit_cost = 0
         cost = 0
+        scrap_cost = 0
+        if self.scrap_ids:
+            scrap_cost = sum(self.scrap_ids.mapped("scrap_cost"))
+        self.scrap_cost = scrap_cost
+        total_of_cost = scrap_cost
         cond = [
             "|",
             ("move_id.raw_material_production_id", "=", self.id),
@@ -37,15 +44,17 @@ class MrpProduction(models.Model):
                 lambda x: x.move_id.raw_material_production_id == self
             )
             cost = sum(consumed_lines.mapped("cost"))
+            total_of_cost += cost
             produce_lines = lines.filtered(lambda x: x.move_id.production_id == self)
             for produce_line in produce_lines:
                 price_unit_cost = 0
                 if produce_line.qty_done > 0:
-                    price_unit_cost = cost / produce_line.qty_done
+                    price_unit_cost = total_of_cost / produce_line.qty_done
                 produce_line.price_unit_cost = price_unit_cost
         self.cost = cost
-        if cost and self.qty_producing:
-            price_unit_cost = cost / self.qty_producing
+        self.total_cost = total_of_cost
+        if total_of_cost and self.qty_producing:
+            price_unit_cost = total_of_cost / self.qty_producing
         else:
             price_unit_cost = 0
         self.price_unit_cost = price_unit_cost
