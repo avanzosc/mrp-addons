@@ -26,28 +26,15 @@ class MrpProduction(models.Model):
     def update_prodution_cost(self):
         price_unit_cost = 0
         cost = 0
-        cond = [
-            "|",
-            ("move_id.raw_material_production_id", "=", self.id),
-            ("move_id.production_id", "=", self.id),
-        ]
-        lines = self.env["stock.move.line"].search(cond)
-        if lines:
-            consumed_lines = lines.filtered(
-                lambda x: x.move_id.raw_material_production_id == self
-            )
-            cost = sum(consumed_lines.mapped("cost"))
-            produce_lines = lines.filtered(lambda x: x.move_id.production_id == self)
-            for produce_line in produce_lines:
-                price_unit_cost = 0
-                if produce_line.qty_done > 0:
-                    price_unit_cost = cost / produce_line.qty_done
-                produce_line.price_unit_cost = price_unit_cost
+        if self.move_raw_ids:
+            cost = sum(self.move_raw_ids.mapped("cost"))
+        if cost and self.move_finished_ids:
+            for move in self.move_finished_ids:
+                if move.quantity_done > 0:
+                    move.price_unit_cost = cost / move.quantity_done
         self.cost = cost
         if cost and self.qty_producing:
             price_unit_cost = cost / self.qty_producing
-        else:
-            price_unit_cost = 0
         self.price_unit_cost = price_unit_cost
         if self.lot_producing_id:
             self.lot_producing_id.with_context(from_production=True).purchase_price = (
