@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_product_loss
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-23 07:30+0000\n"
+"PO-Revision-Date: 2024-10-23 07:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_product_loss
+#: model:ir.model,name:mrp_product_loss.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model:ir.model.fields,field_description:mrp_product_loss.field_stock_move__product_loss_qty
+#: model:ir.model.fields,field_description:mrp_product_loss.field_stock_reservation__product_loss_qty
+#: model_terms:ir.ui.view,arch_db:mrp_product_loss.mrp_bom_form_view
+msgid "Loss Quantity"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model:ir.model.fields,field_description:mrp_product_loss.field_product_product__product_loss_qty
+#: model:ir.model.fields,field_description:mrp_product_loss.field_product_template__product_loss_qty
+msgid "Loss in products to be consumed"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model:ir.model.fields,field_description:mrp_product_loss.field_mrp_bom_line__product_loss_qty
+msgid "Loss quantity"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model_terms:ir.ui.view,arch_db:mrp_product_loss.view_template_property_form
+msgid "Manufacturing"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model:ir.model,name:mrp_product_loss.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model:ir.model,name:mrp_product_loss.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model:ir.model,name:mrp_product_loss.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: mrp_product_loss
+#: model:ir.model.fields,field_description:mrp_product_loss.field_stock_move__to_consume_before_loss_qty
+#: model:ir.model.fields,field_description:mrp_product_loss.field_stock_reservation__to_consume_before_loss_qty
+msgid "To Consume Before Loss Quantity"
+msgstr ""
