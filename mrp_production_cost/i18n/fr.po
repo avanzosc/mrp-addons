@@ -18,115 +18,114 @@ msgstr ""
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__price_unit_cost
 msgid "Cost Unit Price"
-msgstr "Precio coste unitario"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_estimated
 #: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__estimated_material_cost_to_consume
 #: model:ir.model.fields,field_description:mrp_production_cost.field_stock_reservation__estimated_material_cost_to_consume
 msgid "Estimated Cost"
-msgstr "Coste estimado"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_manufacturing_estimated
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Estimated Manufacturing Cost"
-msgstr "Coste estimado OF"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__estimated_material_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Estimated Material Cost"
-msgstr "Coste estimado material"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
 msgid "Estimated Material Cost To Consume"
-msgstr "Coste Estimado material a consumir"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
 msgid "Estimated Total Cost"
-msgstr "Coste total estimado"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_workorder_estimated
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Estimated Work Cost"
-msgstr "Coste estimado trabajo"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_stock_lot
 msgid "Lot/Serial"
-msgstr "Lote/Número de serie"
+msgstr "Lot/série"
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr "Movimientos de productos (línea de movimiento de existencias)"
+msgstr "Mouvements de stock"
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_mrp_production
 msgid "Production Order"
-msgstr "Orden de producción"
+msgstr "Ordre de production"
 
 #. module: mrp_production_cost
 #: model:ir.actions.server,name:mrp_production_cost.action_cost_in_mrp_production
 msgid "Put Cost"
-msgstr "Poner coste"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_real
 #: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__real_cost_consumed_material
 #: model:ir.model.fields,field_description:mrp_production_cost.field_stock_reservation__real_cost_consumed_material
 msgid "Real Cost"
-msgstr "Coste real"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
 msgid "Real Cost Consumed Material"
-msgstr "Coste real material consumido"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__real_manufacturing_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Real Manufacturing Cost"
-msgstr "Coste real OF"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__real_material_cost
 msgid "Real Material Cost"
-msgstr "Coste real material"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
 msgid "Real Total Cost"
-msgstr "Coste real total"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_workorder_real
 msgid "Real Work Cost"
-msgstr "Coste real trabajo"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de existencias"
+msgstr "Mouvement de stock"
 
 #. module: mrp_production_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Total Real Material Cost"
-msgstr "Total coste real material"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Total Real Work Cost"
-msgstr "total coste real trabajo"
+msgstr ""
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_mrp_workorder
 msgid "Work Order"
-msgstr "Orden de trabajo"
-
+msgstr "Ordre de travail"

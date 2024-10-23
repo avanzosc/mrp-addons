@@ -12,12 +12,12 @@
                 <field
           name="workorder_cost_estimated"
           sum="Estimated Total Cost"
-          optional="hide"
+          optional="show"
         />
                 <field
           name="workorder_cost_real"
           sum="Real Total Cost"
-          optional="hide"
+          optional="show"
         />
             </xpath>
         </field>

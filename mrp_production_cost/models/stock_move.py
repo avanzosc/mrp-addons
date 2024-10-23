@@ -6,25 +6,33 @@ from odoo import api, fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    material_cost_to_consume = fields.Float(
+    estimated_material_cost_to_consume = fields.Float(
         string="Estimated Cost",
         store=True,
         copy=False,
-        compute="_compute_material_cost_to_consume",
+        compute="_compute_estimated_material_cost_to_consume",
     )
-    material_cost_consumed = fields.Float(
+    real_cost_consumed_material = fields.Float(
         string="Real Cost",
         store=True,
         copy=False,
-        compute="_compute_material_cost_consumed",
+        compute="_compute_real_cost_consumed_material",
     )
 
     @api.depends("price_unit", "product_uom_qty")
-    def _compute_material_cost_to_consume(self):
+    def _compute_estimated_material_cost_to_consume(self):
         for move in self:
-            move.material_cost_to_consume = move.price_unit * move.product_uom_qty
+            move.estimated_material_cost_to_consume = (
+                move.price_unit * move.product_uom_qty
+            )
 
-    @api.depends("price_unit", "quantity_done")
-    def _compute_material_cost_consumed(self):
+    @api.depends(
+        "move_line_ids", "move_line_ids", "move_line_ids.state", "move_line_ids.cost"
+    )
+    def _compute_real_cost_consumed_material(self):
         for move in self:
-            move.material_cost_consumed = move.price_unit * move.quantity_done
+            real_cost_consumed_material = 0
+            lines = move.move_line_ids.filtered(lambda x: x.state == "done")
+            if lines:
+                real_cost_consumed_material = sum(lines.mapped("cost"))
+            move.real_cost_consumed_material = real_cost_consumed_material
