@@ -10,16 +10,29 @@
       >
                 <field name="price_unit" optional="hide" />
                 <field
-          name="material_cost_to_consume"
+          name="estimated_material_cost_to_consume"
           sum="Estimated Total Cost"
-          optional="hide"
+          optional="show"
         />
                 <field
-          name="material_cost_consumed"
-          sum="Real Total Cost"
-          optional="hide"
+          name="real_cost_consumed_material"
+          sum="Real Cost Consumed Material"
+          optional="show"
         />
             </xpath>
+            <notebook position="before">
+                <group name="estimated_cost_info" col="6">
+                    <group colspan="2">
+                        <field name="cost_manufacturing_estimated" />
+                    </group>
+                    <group colspan="2">
+                        <field name="real_manufacturing_cost" readonly="1" />
+                    </group>
+                    <group colspan="2">
+                        <field name="price_unit_cost" readonly="1" />
+                    </group>
+                </group>
+            </notebook>
         </field>
     </record>
 
@@ -29,13 +42,8 @@
         <field name="arch" type="xml">
             <field name="production_real_duration" position="after">
                 <field
-          name="cost_material_to_consume"
+          name="estimated_material_cost"
           sum="Estimated Material Cost"
-          optional="hide"
-        />
-                <field
-          name="cost_material_consumed"
-          sum="Real Material Cost"
           optional="hide"
         />
                 <field
@@ -44,13 +52,39 @@
           optional="hide"
         />
                 <field
-          name="cost_workorder_real"
-          sum="Real Work Cost"
+          name="cost_manufacturing_estimated"
+          sum="Estimated Manufacturing Cost"
+          optional="show"
+        />
+                <field
+          name="real_material_cost"
+          sum="Total Real Material Cost"
           optional="hide"
         />
-                <field name="cost_manufacturing_estimated" sum="Estimated Total Cost" />
-                <field name="cost_manufacturing_real" sum="Real Total Cost" />
+                <field
+          name="cost_workorder_real"
+          sum="Total Real Work Cost"
+          optional="hide"
+        />
+                <field
+          name="real_manufacturing_cost"
+          sum="Real Manufacturing Cost"
+          optional="show"
+        />
+                <field name="price_unit_cost" optional="show" />
             </field>
+        </field>
+    </record>
+
+    <record id="action_cost_in_mrp_production" model="ir.actions.server">
+        <field name="name">Put Cost</field>
+        <field name="model_id" ref="mrp.model_mrp_production" />
+        <field name="binding_model_id" ref="mrp.model_mrp_production" />
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records._put_cost_in_mrp_production()
         </field>
     </record>
 </odoo>

@@ -6,9 +6,12 @@
 MRP Production Cost
 ===================
 
-This module makes an estimation of the cost of a Manufacturing Order.
+* This module makes an real and estimation cost in OF.
+* In "Components" tab, show the estimated and real cost of the products to be
+  consumed.
+* In "Work Order" tab, show the estimated and real cost of the operations.
+* This information is also displayed in the manufacturing tree view.
 
-The user can visualise the cost data in the component lines, in the work orders and in the list of production orders.
 
 Bug Tracker
 ===========
