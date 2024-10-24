@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_usability.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//tree[@name='mrp_move_lines']/field[@name='product_id']"
+        position="before"
+      >
+                <field
+          name="reader"
+          attrs="{'readonly': [('state', '=', 'done')]}"
+          context="{'from_mrp_production':True}"
+        />
+            </xpath>
+        </field>
+    </record>
+</odoo>
