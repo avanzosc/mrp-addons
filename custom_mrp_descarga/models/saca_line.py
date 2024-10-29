@@ -93,6 +93,9 @@ class SacaLine(models.Model):
                 production._onchange_workorder_ids()
                 production._check_production_lines()
                 production._create_update_move_finished()
+                for analytic in self.timesheet_ids:
+                    if not analytic.mrp_production_id:
+                        analytic.mrp_production_id = production.id
             if self.production_ids:
                 for line in self.production_ids:
                     if not line.clasified_ids:

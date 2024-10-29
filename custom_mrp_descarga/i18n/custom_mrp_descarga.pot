@@ -6,14 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 09:12+0000\n"
-"PO-Revision-Date: 2024-10-22 09:12+0000\n"
+"POT-Creation-Date: 2024-10-29 11:09+0000\n"
+"PO-Revision-Date: 2024-10-29 11:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,help:custom_mrp_descarga.field_account_analytic_line__production_state
+msgid ""
+" * Draft: The MO is not confirmed yet.\n"
+" * Confirmed: The MO is confirmed, the stock rules and the reordering of the components are trigerred.\n"
+" * In Progress: The production has started (on the MO or on the WO).\n"
+" * To Close: The production is done, the MO has to be closed.\n"
+" * Done: The MO is closed, the stock moves are posted. \n"
+" * Cancelled: The MO has been cancelled, can't be confirmed anymore."
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
@@ -33,11 +44,17 @@ msgid "Amount Duration"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_analytic
+msgid "Analytic"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_account_analytic_line
 msgid "Analytic Line"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__asphyxiation_units
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__asphyxiation_units
 msgid "Asphyxiated"
 msgstr ""
@@ -54,6 +71,7 @@ msgid "Average Price"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__average_weight
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__average_weight
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
 msgid "Average Weight"
@@ -99,7 +117,9 @@ msgid "BoM Category"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__breeding_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__breeding_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
 msgid "Breeding"
 msgstr ""
@@ -161,6 +181,7 @@ msgid "Classified"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__cost
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__cost
 msgid "Cost"
 msgstr ""
@@ -216,6 +237,7 @@ msgid "Demanding"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__descarga_order
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__descarga_order
 msgid "Descarga Order"
 msgstr ""
@@ -236,6 +258,11 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__dest_qty
 msgid "Dest Kg"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__dif_total_amount
+msgid "Dif. Total Amount"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -296,6 +323,7 @@ msgid "Download Product"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__download_unit
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__download_unit
 msgid "Download Unit"
 msgstr ""
@@ -310,6 +338,11 @@ msgstr ""
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Entradas"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__entry_total_amount
+msgid "Entry Total Amount"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -400,6 +433,11 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_incubator
 msgid "Incubator"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_production_analytic
+msgid "Informe analítico"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -512,6 +550,12 @@ msgid "Lot/Serial"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__lot_producing_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
+msgid "Lot/Serial Number"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_move_lines
 msgid "Líneas de despiece"
 msgstr ""
@@ -600,6 +644,7 @@ msgid "Order"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__origin_qty
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__origin_qty
 msgid "Origin Qty"
 msgstr ""
@@ -652,6 +697,11 @@ msgid "Produced Qty"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_id
+msgid "Product"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_move_line
 #: model:ir.ui.menu,name:custom_mrp_descarga.menu_move_line_classified
 msgid "Product Movements"
@@ -665,6 +715,11 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_product_template
 msgid "Product Template"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_uom_id
+msgid "Product Unit of Measure"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -684,6 +739,8 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_mrp_production
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__mrp_production_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
 msgid "Production Order"
 msgstr ""
 
@@ -700,11 +757,13 @@ msgid "Producto"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__purchase_price
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_price
 msgid "Purchase Amount"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__purchase_unit_price
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_unit_price
 msgid "Purchase Unit Price"
 msgstr ""
@@ -755,6 +814,7 @@ msgid "Relaxed"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__remolque_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__remolque_id
 msgid "Remolque"
 msgstr ""
@@ -790,6 +850,7 @@ msgid "Resumen de matanza"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__rto_percentage
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__rto_percentage
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
@@ -825,6 +886,7 @@ msgid "Salidas"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__seized_units
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__seized_units
 msgid "Seized"
 msgstr ""
@@ -840,6 +902,11 @@ msgid "Staff"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_state
+msgid "State"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
 msgid "Sum Total Unit"
 msgstr ""
@@ -847,6 +914,11 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_project_task
 msgid "Task"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
+msgid "Task Name"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -873,6 +945,11 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__timesheet_ids
 msgid "Timesheet"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__task_name
+msgid "Title"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -1009,6 +1086,7 @@ msgid "Unload Date"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__vehicle_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__vehicle_id
 msgid "Vehicle"
 msgstr ""
