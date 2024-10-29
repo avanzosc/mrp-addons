@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_account_analytic_line_filter" model="ir.ui.view">
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_filter" />
+        <field name="arch" type="xml">
+            <filter name="group_date" position="after">
+                <separator />
+                <filter
+          string="Task Name"
+          name="task_name"
+          context="{'group_by': 'task_name'}"
+        />
+                <filter
+          string="Production Order"
+          name="production"
+          context="{'group_by': 'mrp_production_id'}"
+        />
+                <filter
+          string="Breeding"
+          name="breeding"
+          context="{'group_by': 'breeding_id'}"
+        />
+                <filter
+          string="Lot/Serial Number"
+          name="lot_producing"
+          context="{'group_by': 'lot_producing_id'}"
+        />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_line_tree" model="ir.ui.view">
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="mrp_production_id" optional="hide" />
+                <field name="descarga_order" optional="show" />
+                <field name="breeding_id" optional="show" />
+                <field name="vehicle_id" optional="show" />
+                <field name="remolque_id" optional="show" />
+                <field name="production_product_id" optional="show" />
+                <field name="production_product_uom_id" optional="show" />
+                <field name="lot_producing_id" optional="show" />
+                <field name="average_weight" optional="show" />
+                <field name="download_unit" optional="show" />
+                <field name="origin_qty" optional="show" />
+                <field name="rto_percentage" optional="show" />
+                <field name="purchase_unit_price" optional="show" />
+                <field name="asphyxiation_units" optional="show" />
+                <field name="seized_units" optional="show" />
+                <field name="purchase_price" optional="hide" />
+                <field name="cost" optional="hide" />
+                <field name="entry_total_amount" optional="hide" />
+                <field name="dif_total_amount" optional="hide" />
+                <field name="production_state" optional="hide" />
+                <field name="time_start" optional="hide" />
+                <field name="time_stop" optional="hide" />
+                <field name="unit_amount" optional="hide" />
+                <field name="speed" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="action_classified_analytic" model="ir.actions.act_window">
+        <field name="name">Analytic</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_account_analytic_line_tree" />
+        <field name="search_view_id" ref="view_account_analytic_line_filter" />
+        <field name="domain">[('mrp_production_id', '!=', False)]</field>
+    </record>
+
+    <menuitem
+    action="action_classified_analytic"
+    name="Informe analítico"
+    id="menu_production_analytic"
+    parent="custom_descarga.stage_clasificado_menu"
+    sequence="6"
+  />
+
+</odoo>

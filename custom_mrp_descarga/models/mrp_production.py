@@ -228,7 +228,9 @@ class MrpProduction(models.Model):
         store=True,
     )
     timesheet_ids = fields.One2many(
-        comodel_name="account.analytic.line", related="saca_line_id.timesheet_ids"
+        string="Timesheet",
+        comodel_name="account.analytic.line",
+        inverse_name="mrp_production_id",
     )
 
     @api.depends("total_duration", "total_unit")
