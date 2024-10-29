@@ -105,6 +105,9 @@ class MrpProduction(models.Model):
                 production.cost_manufacturing_real / production.qty_producing
             )
 
+    def _post_inventory(self, cancel_backorder=False):
+        return super()._post_inventory(cancel_backorder=cancel_backorder)
+
     def write(self, vals):
         result = super().write(vals)
         if "state" in vals and vals.get("state", False) == "done":
