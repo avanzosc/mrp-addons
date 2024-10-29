@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* analytic_mrp_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-29 10:17+0000\n"
+"PO-Revision-Date: 2024-10-29 10:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: analytic_mrp_info
+#: model:ir.model,name:analytic_mrp_info.model_account_analytic_line
+msgid "Analytic Line"
+msgstr ""
+
+#. module: analytic_mrp_info
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_account_analytic_line__display_name
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_workorder__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: analytic_mrp_info
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_account_analytic_line__id
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_production__id
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_workorder__id
+msgid "ID"
+msgstr ""
+
+#. module: analytic_mrp_info
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_account_analytic_line____last_update
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_workorder____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: analytic_mrp_info
+#: model:ir.model,name:analytic_mrp_info.model_mrp_production
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_account_analytic_line__mrp_production_id
+msgid "Production Order"
+msgstr ""
+
+#. module: analytic_mrp_info
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_production__timesheet_ids
+#: model:ir.model.fields,field_description:analytic_mrp_info.field_mrp_workorder__timesheet_id
+msgid "Timesheet"
+msgstr ""
+
+#. module: analytic_mrp_info
+#: model:ir.model,name:analytic_mrp_info.model_mrp_workorder
+msgid "Work Order"
+msgstr ""
