@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_prototype
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-31 12:15+0000\n"
+"PO-Revision-Date: 2024-10-31 12:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_prototype
+#: model:ir.model.fields,help:mrp_production_prototype.field_mrp_production__prototype_order_state
+msgid ""
+" * Draft: The MO is not confirmed yet.\n"
+" * Confirmed: The MO is confirmed, the stock rules and the reordering of the components are trigerred.\n"
+" * In Progress: The production has started (on the MO or on the WO).\n"
+" * To Close: The production is done, the MO has to be closed.\n"
+" * Done: The MO is closed, the stock moves are posted. \n"
+" * Cancelled: The MO has been cancelled, can't be confirmed anymore."
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model_terms:ir.ui.view,arch_db:mrp_production_prototype.view_mrp_production_filter
+msgid "Is Not Prototype"
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model_terms:ir.ui.view,arch_db:mrp_production_prototype.view_mrp_production_filter
+msgid "Is Prototype"
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model:ir.model.fields,field_description:mrp_production_prototype.field_mrp_production__is_prototype
+msgid "Is Prototype?"
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model_terms:ir.ui.view,arch_db:mrp_production_prototype.view_mrp_production_filter
+msgid "Is prototype"
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model:ir.model,name:mrp_production_prototype.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model:ir.model.fields,field_description:mrp_production_prototype.field_mrp_production__prototype_order_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_prototype.view_mrp_production_filter
+msgid "Prototype Manufacturing Order"
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model:ir.model.fields,field_description:mrp_production_prototype.field_mrp_production__prototype_order_state
+msgid "Prototype Order State"
+msgstr ""
+
+#. module: mrp_production_prototype
+#: model:ir.model.fields,field_description:mrp_production_prototype.field_mrp_production__parent_prototype_validation_date
+#: model:ir.model.fields,field_description:mrp_production_prototype.field_mrp_production__prototype_validation_date
+#: model_terms:ir.ui.view,arch_db:mrp_production_prototype.view_mrp_production_filter
+msgid "Prototype Validation Date"
+msgstr ""

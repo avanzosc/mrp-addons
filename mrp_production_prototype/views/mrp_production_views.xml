@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="prototype_order_state" />
+                <field name="parent_prototype_validation_date" />
+            </field>
+            <field name="product_id" position="before">
+                <field name="is_prototype" />
+            </field>
+            <label for="date_planned_start" position="before">
+                <field
+          name="prototype_validation_date"
+          attrs="{'invisible': [('is_prototype','=', False)]}"
+        />
+            </label>
+            <field name="product_tmpl_id" position="after">
+                <field
+          name="prototype_order_id"
+          attrs="{'invisible': [('is_prototype','=',True)]}"
+          domain="[('is_prototype','=', True), ('product_id','=', product_id)]"
+        />
+            </field>
+            <xpath
+        expr="//header/button[@name='button_mark_done'][1]"
+        position="attributes"
+      >
+                <attribute name="attrs">{'invisible': [
+                    '|', '|', '|',
+                    ('state', 'in', ('draft', 'cancel', 'done', 'to_close')),
+                    ('qty_producing', '=', 0),
+                    ('move_raw_ids', '!=', []),
+                    '&amp;',
+                    ('prototype_order_id', '!=', False),
+                    '|',
+                    ('prototype_order_state', '!=', 'done'),
+                    ('parent_prototype_validation_date', '=', False)
+                    ]}</attribute>
+            </xpath>
+            <xpath
+        expr="//header/button[@name='button_mark_done'][2]"
+        position="attributes"
+      >
+                <attribute name="attrs">{'invisible': [
+                    '|','|', '|',
+                    ('state', 'in', ('draft', 'cancel', 'done', 'to_close')),
+                    ('qty_producing', '=', 0),
+                    ('move_raw_ids', '=', []),
+                    '&amp;',
+                    ('prototype_order_id', '!=', False),
+                    '|',
+                    ('prototype_order_state', '!=', 'done'),
+                    ('parent_prototype_validation_date', '=', False)
+                    ]}</attribute>
+            </xpath>
+            <xpath
+        expr="//header/button[@name='button_mark_done'][3]"
+        position="attributes"
+      >
+                <attribute name="attrs">{'invisible': [
+                    '|', '|',
+                    ('move_raw_ids', '=', []),
+                    '&amp;', '|',
+                    ('state', 'not in', ('confirmed', 'progress')),
+                    ('qty_producing', '!=', 0),
+                    ('state', '!=', 'to_close'),
+                    '&amp;',
+                    ('prototype_order_id', '!=', False), '|',
+                    ('prototype_order_state', '!=', 'done'),
+                    ('parent_prototype_validation_date', '=', False)
+                    ]}</attribute>
+            </xpath>
+            <xpath
+        expr="//header/button[@name='button_mark_done'][4]"
+        position="attributes"
+      >
+                <attribute name="attrs">{'invisible': [
+                    '|', '|',
+                    ('move_raw_ids', '!=', []),
+                    '&amp;', '|',
+                    ('state', 'not in', ('confirmed', 'progress')),
+                    ('qty_producing', '!=', 0),
+                    ('state', '!=', 'to_close'),
+                    '&amp;',
+                    ('prototype_order_id', '!=', False), '|',
+                    ('prototype_order_state', '!=', 'done'),
+                    ('parent_prototype_validation_date', '=', False)
+                    ]}</attribute>
+            </xpath>
+            <button name="button_plan" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',
+                     '|', '|',
+                     ('state', 'not in', ('confirmed', 'progress', 'to_close')),
+                     ('workorder_ids', '=', []),
+                     ('is_planned', '=', True),
+                     '&amp;', ('prototype_order_id', '!=', False),
+                     '|',
+                     ('prototype_order_state', '!=', 'done'),
+                     ('parent_prototype_validation_date', '=', False)
+                    ]}</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="is_prototype" optional="show" />
+                <field name="prototype_validation_date" optional="show" />
+                <field name="prototype_order_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_filter" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="prototype_validation_date" />
+                <field name="prototype_order_id" />
+            </field>
+            <filter name="todo" position="before">
+                <filter
+          string="Is Prototype"
+          name="is-prototype"
+          domain="[('is_prototype', '=', True)]"
+        />
+                <filter
+          string="Is Not Prototype"
+          name="is-not-prototype"
+          domain="[('is_prototype', '=', False)]"
+        />
+                <separator />
+            </filter>
+            <filter name="scheduled_date" position="after">
+                <filter
+          string="Is prototype"
+          name="group-is-prototype"
+          domain="[]"
+          context="{'group_by': 'is_prototype'}"
+        />
+                <filter
+          string="Prototype Validation Date"
+          name="group-prototype_validation_date"
+          domain="[]"
+          context="{'group_by': 'prototype_validation_date'}"
+        />
+                <filter
+          string="Prototype Manufacturing Order"
+          name="group-prototype_mo"
+          domain="[]"
+          context="{'group_by': 'prototype_order_id'}"
+        />
+            </filter>
+        </field>
+    </record>
+</odoo>
