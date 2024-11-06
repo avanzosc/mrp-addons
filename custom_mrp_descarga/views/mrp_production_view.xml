@@ -730,7 +730,7 @@
         <field name="model">mrp.production</field>
         <field name="arch" type="xml">
             <tree
-        default_order="unload_date, priority desc, date_planned_start desc"
+        default_order="unload_date, priority desc, saca_id desc, date_planned_start desc"
         decoration-danger="rto_percentage > 100"
       >
                 <field name="descarga_order" optional="show" />
