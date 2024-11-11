@@ -113,6 +113,7 @@
                        string="Ordered Qty"
                        context="{'partner_id':order_partner_id, 'quantity':product_uom_qty, 'uom':product_uom, 'company_id': company_id}"
                        attrs="{'readonly': [('state', 'in', ('done', 'cancel'))]}"/>
+                <field name="product_route_ids" widget="many2many_tags" groups="stock.group_adv_location" />
                 <button name="action_create_mrp" string="Aggregate to MO"
                         attrs="{'invisible':['|', ('mrp_production_id', '!=', False), ('manufacturable_product','=', False)]}"
                         type="object"/>
@@ -164,7 +165,10 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,pivot,graph</field>
         <field name="view_id" ref="view_sales_order_line_mrp_tree"/>
-        <field name="domain">[('state','!=','cancel'),('product_id.is_manufacturable','=',True)]</field>
+        <field name="domain" eval="[
+            ('state','!=','cancel'),
+            ('product_route_ids','=',ref('mrp.route_warehouse0_manufacture'))
+        ]" />
     </record>
 
     <record id="action_summary_sales_order_line_mrp" model="ir.actions.act_window">
@@ -202,5 +206,5 @@
               action="action_summary_sales_order_line_mrp"
               parent="sale.sale_order_menu"
               groups="sales_team.group_sale_salesman"
-              sequence="30"/>
+              sequence="35"/>
 </odoo>

@@ -1,6 +1,6 @@
-==========================
-Production Aggreated Lines
-==========================
+===========================
+Production Aggregated Lines
+===========================
 
 Avoid creating new production orders by updating the quantities in an existing order.
 

@@ -7,6 +7,8 @@
     "depends": [
         "sale",
         "sale_stock",
+        "sale_order_line_input",
+        "sale_order_line_input_route",
         "mrp",
         "mrp_scheduled_products",
     ],
