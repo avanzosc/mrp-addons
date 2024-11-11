@@ -52,7 +52,9 @@ class SaleOrderLine(models.Model):
     def _compute_manufacturable(self):
         manufacture = self.env.ref("mrp.route_warehouse0_manufacture")
         for line in self:
-            product = line.product_id.with_context(force_company=line.order_id.company_id)
+            product = line.product_id.with_context(
+                force_company=line.order_id.company_id.id
+            )
             manufacture_route = (manufacture in line.product_id.route_ids)
             manufacture_bom = any(
                 product.variant_bom_ids.filtered(lambda l: l.type == "normal") |

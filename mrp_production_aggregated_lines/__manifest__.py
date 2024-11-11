@@ -13,7 +13,7 @@
         "mrp_scheduled_products",
     ],
     "author": "AvanzOSC",
-    "website": "http://www.avanzosc.es",
+    "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Tools",
     "data": [
         "views/mrp_production_view.xml",
