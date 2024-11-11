@@ -55,12 +55,12 @@ class SaleOrderLine(models.Model):
             product = line.product_id.with_context(
                 force_company=line.order_id.company_id.id
             )
-            manufacture_route = (manufacture in line.product_id.route_ids)
+            manufacture_route = (manufacture in product.route_ids)
             manufacture_bom = any(
                 product.variant_bom_ids.filtered(lambda l: l.type == "normal") |
                 product.bom_ids.filtered(lambda l: l.type == "normal")
             )
-            line.is_manufacturable = manufacture_route and manufacture_bom
+            line.manufacturable_product = manufacture_route and manufacture_bom
 
     def _action_mrp_dict(self):
         self.ensure_one()
