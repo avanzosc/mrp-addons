@@ -381,8 +381,8 @@ class MrpBomLineImport(models.Model):
         bom_ref = self.bom_ref
         if not bom_ref:
             bom_ref = self.bom_product_id.default_code or self.bom_product_id.name
-        if self.bom_count:
-            bom_ref = f"{bom_ref}-{self.bom_count + 1}"
+        if self.bom_import_id.bom_count:
+            bom_ref = f"{bom_ref}-{self.bom_import_id.bom_count + 1}"
 
         bom = self.env["mrp.bom"].create(
             {
