@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <group name="description" position="after">
+                <t groups="mrp.group_mrp_manager">
+                    <group
+            string="Warning when Manufacturing this Product"
+            name="warning-mrp-production"
+          >
+                        <field name="mrp_production_warn" nolabel="1" colspan="2" />
+                        <field
+              name="mrp_production_warn_msg"
+              colspan="2"
+              nolabel="1"
+              placeholder="Type a message..."
+              attrs="{'required':[('mrp_production_warn','!=','no-message')],'readonly':[('mrp_production_warn','=','no-message')]}"
+            />
+                    </group>
+                </t>
+            </group>
+        </field>
+    </record>
+</odoo>
