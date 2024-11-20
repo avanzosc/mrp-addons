@@ -1,5 +1,8 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+from datetime import datetime
+
+import pytz
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -51,6 +54,117 @@ class StockMoveLine(models.Model):
             if line.production_id and line.production_id.consume_qty != 0:
                 performance = (line.qty_done * 100) / line.production_id.consume_qty
             line.performance = performance
+
+    @api.onchange("reader")
+    def onchange_reader(self):
+        if self.reader:
+            if (
+                len(self.reader) == 44
+                and self.reader[16] == "1"
+                and self.reader[17] == "5"
+            ):
+                self.reader_44_15(reader=self.reader)
+            elif (
+                len(self.reader) == 46
+                and self.reader[16] == "3"
+                and self.reader[17] == "1"
+            ):
+                self.reader_46_31(reader=self.reader)
+            else:
+                message = _("Unidentified barcode format : %(reader)s") % {
+                    "reader": self.reader,
+                }
+                raise ValidationError(message)
+
+    def reader_44_15(self, reader):
+        self.ensure_one()
+        if reader and len(reader) == 44 and reader[16] == "1" and reader[17] == "5":
+            product_code = reader[5:15]
+            product_code = product_code.lstrip("0")
+            product_domain = [("default_code", "=", product_code)]
+            product = (
+                self.env["product.product"]
+                .search(product_domain)
+                .filtered(
+                    lambda c: c.company_id == self.company_id
+                    or self.company_id in c.company_ids
+                )
+            )
+            if not product:
+                message = _(
+                    "Product not found, reader information for product code: %(reader)s"
+                ) % {
+                    "reader": product_code,
+                }
+                raise ValidationError(message)
+            self.product_id = product.id
+            expiration_date = reader[18:24]
+            timezone = pytz.timezone(self._context.get("tz") or "UTC")
+            expiration_date = datetime.strptime(expiration_date, "%y%m%d")
+            expiration_date = timezone.localize(expiration_date).astimezone(pytz.UTC)
+            expiration_date = expiration_date.replace(tzinfo=None)
+            qty_done = reader[28:31]
+            qty_done_decimal = reader[31:34]
+            qty_done = qty_done + "." + qty_done_decimal
+            qty_done = float(qty_done)
+            lot_name = reader[36:44]
+            lot_domain = [
+                ("name", "=", lot_name),
+                ("company_id", "=", self.company_id.id),
+                ("product_id", "=", product.id),
+            ]
+            lot = self.env["stock.production.lot"].search(lot_domain)
+            if not lot:
+                lot = self.env["stock.production.lot"].action_create_lot(
+                    product, lot_name, self.company_id
+                )
+            self.write(
+                {
+                    "expiration_date": expiration_date,
+                    "qty_done": qty_done,
+                    "lot_id": lot.id,
+                }
+            )
+
+    def reader_46_31(self, reader):
+        self.ensure_one()
+        if reader and len(reader) == 46 and reader[16] == "3" and reader[17] == "1":
+            product_code = reader[5:15]
+            product_code = product_code.lstrip("0")
+            product_domain = [("default_code", "=", product_code)]
+            product = (
+                self.env["product.product"]
+                .search(product_domain)
+                .filtered(
+                    lambda c: c.company_id == self.company_id
+                    or self.company_id in c.company_ids
+                )
+            )
+            if not product:
+                message = _(
+                    "Product not found, reader information for product code: %(reader)s"
+                ) % {
+                    "reader": product_code,
+                }
+                raise ValidationError(message)
+            self.product_id = product.id
+            qty_done = reader[20:23]
+            qty_done_decimal = reader[23:26]
+            qty_done = qty_done + "." + qty_done_decimal
+            container = int(reader[28:36])
+            lot_name = reader[38:46]
+            lot_domain = [
+                ("name", "=", lot_name),
+                ("company_id", "=", self.company_id.id),
+                ("product_id", "=", product.id),
+            ]
+            lot = self.env["stock.production.lot"].search(lot_domain)
+            if not lot:
+                lot = self.env["stock.production.lot"].action_create_lot(
+                    product, lot_name, self.company_id
+                )
+            vals = {"container": container, "qty_done": qty_done, "lot_id": lot.id}
+            self.write(vals)
 
     @api.onchange("unit")
     def onchange_unit(self):
