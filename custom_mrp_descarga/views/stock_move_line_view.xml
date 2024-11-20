@@ -44,6 +44,11 @@
         <field name="arch" type="xml">
             <field name="product_id" position="before">
                 <field name="sequence" string="" />
+                <field
+          name="reader"
+          attrs="{'readonly': ('state', 'in', ('done', 'cancel'))}"
+          optional="show"
+        />
             </field>
             <field name="qty_done" position="after">
                 <field name="performance" sum="Total Performance" optional="hide" />
@@ -64,6 +69,12 @@
             </tree>
             <field name="product_id" position="before">
                 <field name="sequence" string=" " />
+                <field
+          name="reader"
+          attrs="{'readonly': ('state', 'in', ('done', 'cancel'))}"
+          optional="show"
+        />
+                <field name="expiration_date" optional="hide" force_save="1" />
             </field>
             <field name="location_dest_id" position="after">
                 <field

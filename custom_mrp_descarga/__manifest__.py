@@ -22,6 +22,9 @@
         "stock_move_in_out_qty",
         "mrp_production_date",
         "stock_inventory_import_cost",
+        "product_expiry",
+        "stock_move_line_product_lot_reader",
+        "product_multi_company_usability",
     ],
     "data": [
         "data/quartering_product.xml",

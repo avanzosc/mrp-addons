@@ -31,9 +31,13 @@ class StockInventoryLine(models.Model):
                 if entry_line and sum(entry_line.mapped("qty_done")) != 0:
                     dev_line_amount = sum(dev_line.mapped("amount")) or 0
                     dev_line_qty = sum(dev_line.mapped("qty_done")) or 0
-                    self.cost = (sum(entry_line.mapped("amount")) - dev_line_amount) / (
-                        sum(entry_line.mapped("qty_done")) - dev_line_qty
-                    )
+                    if sum(entry_line.mapped("qty_done")) - dev_line_qty != 0:
+                        cost = (sum(entry_line.mapped("amount")) - dev_line_amount) / (
+                            sum(entry_line.mapped("qty_done")) - dev_line_qty
+                        )
+                    else:
+                        cost = 0
+                    self.cost = cost
             elif self.product_id:
                 entry_line = self.inventory_id.batch_id.move_line_ids.filtered(
                     lambda c: c.product_id == self.product_id
