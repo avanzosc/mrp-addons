@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+        <xpath expr="//span[@t-field='o.product_qty']/.." position="after">
+            <div
+        t-if="o.lot_producing_id"
+        class="col-auto col-3 mw-100 mb-2"
+        name="lot-serial-number"
+      >
+                <strong>Lot/Serial Number:</strong><br />
+                <span t-field="o.lot_producing_id.name" />
+            </div>
+        </xpath>
         <xpath
       expr="//div[@t-if='o.product_description_variants']/.."
       position="attributes"

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="report_mrporder" inherit_id="mrp_production_report.report_mrporder">
-        <div name="bom" position="before">
-            <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_id" name="sale">
-                <strong>Sale Order:</strong><br />
-                <span t-field="o.sale_id.name" />
+    <template id="report_mrporder" inherit_id="mrp.report_mrporder" priority="100">
+        <div t-if="o.origin" position="replace">
+            <div class="col-3" t-if="o.origin">
+                <strong t-if="not o.sale_id">Source:</strong>
+                <strong t-if="o.sale_id">Sale Order:</strong>
+                <br />
+                <span t-field="o.origin" />
+            </div>
+            <div class="col-3" t-if="o.sale_id">
+                <strong>Customer:</strong><br />
+                <span t-field="o.sale_id.partner_id.name" />
             </div>
         </div>
     </template>
