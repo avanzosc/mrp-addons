@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-06 11:47+0000\n"
-"PO-Revision-Date: 2024-06-06 11:47+0000\n"
+"POT-Creation-Date: 2024-11-14 10:57+0000\n"
+"PO-Revision-Date: 2024-11-14 10:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,5 +17,15 @@ msgstr ""
 
 #. module: mrp_production_report_sale_info
 #: model_terms:ir.ui.view,arch_db:mrp_production_report_sale_info.report_mrporder
-msgid "<strong>Sale Order:</strong><br/>"
-msgstr "<strong>Pedido Venta:</strong><br/>"
+msgid "<strong>Customer:</strong><br/>"
+msgstr "<strong>Cliente:</strong><br/>"
+
+#. module: mrp_production_report_sale_info
+#: model_terms:ir.ui.view,arch_db:mrp_production_report_sale_info.report_mrporder
+msgid "Sale Order:"
+msgstr "Pedido Venta"
+
+#. module: mrp_production_report_sale_info
+#: model_terms:ir.ui.view,arch_db:mrp_production_report_sale_info.report_mrporder
+msgid "Source:"
+msgstr "Origen:"

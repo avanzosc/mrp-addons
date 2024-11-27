@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-14 11:27+0000\n"
-"PO-Revision-Date: 2024-11-14 11:27+0000\n"
+"POT-Creation-Date: 2024-11-14 11:26+0000\n"
+"PO-Revision-Date: 2024-11-14 11:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,34 +18,34 @@ msgstr ""
 #. module: mrp_production_report
 #: model_terms:ir.ui.view,arch_db:mrp_production_report.report_mrporder
 msgid "<strong>BoM:</strong><br/>"
-msgstr "<strong>LdM:</strong><br/>"
+msgstr ""
 
 #. module: mrp_production_report
 #: model_terms:ir.ui.view,arch_db:mrp_production_report.report_mrporder
 msgid "<strong>Date Start</strong>"
-msgstr "<strong>Fecha inicio</strong>"
+msgstr ""
 
 #. module: mrp_production_report
 #: model_terms:ir.ui.view,arch_db:mrp_production_report.report_mrporder
 msgid "<strong>Lot/Serial Number:</strong><br/>"
-msgstr "<strong>Lote/Num.Serie:</strong><br/>"
+msgstr ""
 
 #. module: mrp_production_report
 #: model_terms:ir.ui.view,arch_db:mrp_production_report.report_mrporder
 msgid "<strong>Scheduled Date:</strong><br/>"
-msgstr "<strong>Fecha prevista:</strong><br/>"
+msgstr ""
 
 #. module: mrp_production_report
 #: model_terms:ir.ui.view,arch_db:mrp_production_report.report_mrp_production_components
 msgid "Location"
-msgstr "Ubicación"
+msgstr ""
 
 #. module: mrp_production_report
 #: model_terms:ir.ui.view,arch_db:mrp_production_report.report_mrp_production_components
 msgid "Lots"
-msgstr "Lotes"
+msgstr ""
 
 #. module: mrp_production_report
 #: model:ir.model,name:mrp_production_report.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de existencias"
+msgstr "Moviment d'estoc"

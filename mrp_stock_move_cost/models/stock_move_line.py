@@ -31,8 +31,10 @@ class StockMoveLine(models.Model):
 
     def write(self, vals):
         result = super().write(vals)
-        if self and "qty_done" in vals and self.state == "done":
-            self.search_production_and_update()
+        if "qty_done" in vals:
+            self.filtered(
+                lambda line: line.state == "done"
+            ).search_production_and_update()
         return result
 
     def search_production_and_update(self):

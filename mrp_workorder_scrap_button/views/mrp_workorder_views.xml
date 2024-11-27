@@ -1,0 +1,35 @@
+<odoo>
+    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <button
+          name="button_scrap"
+          type="object"
+          string="Scrap"
+          attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"
+        />
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
+        <field name="arch" type="xml">
+            <button name="action_open_wizard" position="before">
+                <button
+          name="button_scrap"
+          type="object"
+          attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"
+          help="Scrap"
+          icon="fa-eraser"
+        />
+            </button>
+        </field>
+    </record>
+</odoo>
