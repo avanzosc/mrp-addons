@@ -12,6 +12,9 @@ Cost related fields in manufacturing orders:
 * In "Work Orders" of a Manufacturing Order
 * In the Manufacturing Order List
 
+To see costs the user must be in the "See costs in BoM" group. This group is
+defined in the "mrp_bom_report_group" module.
+
 Bug Tracker
 ===========
 

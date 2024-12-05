@@ -6,12 +6,8 @@
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "MRP",
     "license": "AGPL-3",
-    "version": "14.0.1.0.0",
-    "depends": [
-        "product",
-        "mrp",
-        "stock",
-    ],
+    "version": "14.0.1.1.0",
+    "depends": ["product", "mrp", "stock", "mrp_bom_report_group"],
     "data": [
         "views/mrp_production_views.xml",
         "views/mrp_stockmove_views.xml",

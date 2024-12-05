@@ -8,9 +8,18 @@
     />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='duration']" position="after">
-                <field name="machine_hour_cost" />
-                <field name="workorder_cost_estimated" />
-                <field name="workorder_cost_real" />
+                <field
+          name="machine_hour_cost"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
+                <field
+          name="workorder_cost_estimated"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
+                <field
+          name="workorder_cost_real"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
             </xpath>
             <field name="workorder_cost_estimated" position="attributes">
                 <attribute name="sum">Workorder Cost estimated</attribute>

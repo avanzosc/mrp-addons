@@ -8,9 +8,18 @@
         expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']"
         position="after"
       >
-                <field name="product_standard_cost" />
-                <field name="material_cost_to_consume" />
-                <field name="material_cost_consumed" />
+                <field
+          name="product_standard_cost"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
+                <field
+          name="material_cost_to_consume"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
+                <field
+          name="material_cost_consumed"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
             </xpath>
             <field name="material_cost_to_consume" position="attributes">
                 <attribute name="sum">Cost Material to consume</attribute>
@@ -26,15 +35,36 @@
         <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
         <field name="arch" type="xml">
             <field name="company_id" position="after">
-                <field name="cost_material_to_consume" sum="Cost Material to consume" />
-                <field name="cost_material_consumed" sum="Cost Material consumed" />
-                <field name="cost_workorder_estimated" sum="Cost Workorder estimated" />
-                <field name="cost_workorder_real" sum="Cost Workorder real" />
+                <field
+          name="cost_material_to_consume"
+          sum="Cost Material to consume"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
+                <field
+          name="cost_material_consumed"
+          sum="Cost Material consumed"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
+                <field
+          name="cost_workorder_estimated"
+          sum="Cost Workorder estimated"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
+                <field
+          name="cost_workorder_real"
+          sum="Cost Workorder real"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
                 <field
           name="cost_manufacturing_estimated"
           sum="Cost Manufacturing estimated"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
         />
-                <field name="cost_manufacturing_real" sum="Cost Manufacturing real" />
+                <field
+          name="cost_manufacturing_real"
+          sum="Cost Manufacturing real"
+          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+        />
             </field>
         </field>
     </record>
