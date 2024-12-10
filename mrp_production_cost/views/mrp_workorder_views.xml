@@ -11,14 +11,17 @@
                 <field
           name="machine_hour_cost"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="workorder_cost_estimated"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="workorder_cost_real"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
             </xpath>
             <field name="workorder_cost_estimated" position="attributes">

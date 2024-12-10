@@ -11,14 +11,17 @@
                 <field
           name="product_standard_cost"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="material_cost_to_consume"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="material_cost_consumed"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
             </xpath>
             <field name="material_cost_to_consume" position="attributes">
@@ -39,31 +42,37 @@
           name="cost_material_to_consume"
           sum="Cost Material to consume"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="cost_material_consumed"
           sum="Cost Material consumed"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="cost_workorder_estimated"
           sum="Cost Workorder estimated"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="cost_workorder_real"
           sum="Cost Workorder real"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="cost_manufacturing_estimated"
           sum="Cost Manufacturing estimated"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
                 <field
           name="cost_manufacturing_real"
           sum="Cost Manufacturing real"
           groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          optional="show"
         />
             </field>
         </field>
