@@ -6,10 +6,14 @@
 Manufacturing Usability
 =======================
 
-* The buttons that are in the tree view of the work order, put them also in the form view.
+* The buttons that are in the tree view of the work order, put them also in the
+  form view.
 * Link from Production to Work Orders.
 * In manufacturing order form new tab "Move Lines", and new field "Finished Move
   lines".
+* Show "Unreserve" button, only if there is a reserved component.
+* Show "Check Availabitiy", only if some component is not reserved, or partially
+  reserved.
 
 Bug Tracker
 ===========
