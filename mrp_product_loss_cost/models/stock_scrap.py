@@ -37,7 +37,7 @@ class StockScrap(models.Model):
             and x.production_id
             and x.production_id.state == "done"
         ):
-            scrap.production_id.update_prodution_cost()
+            scrap.production_id._update_finished_move_cost_and_lot()
         return scraps
 
     def write(self, vals):
@@ -49,7 +49,7 @@ class StockScrap(models.Model):
             and x.production_id
             and x.production_id.state == "done"
         ):
-            scrap.production_id.update_prodution_cost()
+            scrap.production_id._update_finished_move_cost_and_lot()
         return result
 
     def unlink(self):
@@ -59,7 +59,7 @@ class StockScrap(models.Model):
             productions = scraps_with_productions.mapped("production_id")
         result = super().unlink()
         for production in productions:
-            production.update_prodution_cost()
+            production._update_finished_move_cost_and_lot()
         return result
 
     def _calculate_price_unit_cost(self, vals):

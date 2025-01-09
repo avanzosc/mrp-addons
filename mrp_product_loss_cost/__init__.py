@@ -19,4 +19,4 @@ def _post_install_put_cost_in_scrap(cr, registry):
             }
         )
         if scrap.production_id and scrap.production_id.state == "done":
-            scrap.production_id.update_prodution_cost()
+            scrap.production_id._update_finished_move_cost_and_lot()
