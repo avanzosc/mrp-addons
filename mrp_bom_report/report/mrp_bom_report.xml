@@ -1,50 +1,91 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="report_mrp_bom_customized_document">
-        <t t-call="mrp_bom_report.external_layout_mrp_bom_customized">
-            <t
-        t-set="doc"
-        t-value="doc.with_context(lang=doc.create_uid.partner_id.lang)"
-      />
-            <div class="page">
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th class="text-start">Reference/Description</th>
-                            <th name="th-qty" class="text-end">Qty.</th>
-                            <th name="th-operation" class="text-start">Fase</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="doc._get_children(doc.bom_line_ids)" t-as="line">
-                            <td class="text-start">
-                                <span id="product_name" t-raw="line['product_name']" />
-                            </td>
-                            <td name="td-qty" class="text-end">
-                                <span t-esc="line['product_qty']" />
-                            </td>
-                            <td name="td-operation" class="text-start">
-                                <span t-esc="line['operation']" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="footer">
-                <div class="row">
-                    <div style="text-align: center;">
-                        <span class="page" />
-                        /
-                        <span class="topage" />
+        <t t-name="mrp_bom_report.report_mrp_bom_customized_document">
+            <t t-call="mrp_bom_report.external_layout_mrp_bom_customized">
+                <t
+          t-set="doc"
+          t-value="doc.with_context(lang=doc.create_uid.partner_id.lang)"
+        />
+                <div class="page">
+                    <table class="table table-condensed" style="margin-top: 100px;">
+                        <thead>
+                            <tr>
+                                <th class="text-start">Reference/Description</th>
+                                <th name="th-qty" class="text-end">Qty.</th>
+                                <th name="th-operation" class="text-start">Fase</th>
+                                <th class="text-start">Product Code</th>
+                                <th class="text-start">Manufacturer Codes</th>
+                                <th class="text-start">Brand</th>
+                                <th class="text-start">Layer</th>
+                                <th class="text-start">Designator</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                t-foreach="doc._get_children(doc.bom_line_ids)"
+                t-as="line"
+              >
+                                <t t-foreach="doc.bom_line_ids" t-as="bom_line_id">
+                                    <t
+                    t-set="code"
+                    t-value="line['product_name'].split('[')[1].split(']')[0] if '[' in line['product_name'] and ']' in line['product_name'] else ''"
+                  />
+                                                            <t
+                    t-if="bom_line_id.product_id.default_code == code"
+                  >
+
+                                    <td class="text-start">
+                                        <span
+                        id="product_name"
+                        t-raw="line['product_name'] or ''"
+                      />
+                                    </td>
+                                    <td name="td-qty" class="text-end">
+                                        <span t-esc="line['product_qty'] or 0.0" />
+                                    </td>
+                                    <td name="td-operation" class="text-start">
+                                        <span t-esc="line['operation'] or ''" />
+                                    </td>
+                                    <td class="text-start">
+                                            <span
+                        t-esc="bom_line_id['product_code'] or ''"
+                      />
+                                    </td>
+                                    <td class="text-start">
+                                            <span
+                        t-esc="bom_line_id['manufacturer_codes'] or ''"
+                      />
+                                    </td>
+                                    <td class="text-start">
+                                            <span
+                        t-esc="bom_line_id['markings'].name if bom_line_id['markings'] else ''"
+                      />
+                                    </td>
+                                    <td class="text-start">
+                                            <span t-esc="bom_line_id['layer'] or ''" />
+                                    </td>
+                                    <td class="text-start">
+                                            <span
+                        t-esc="bom_line_id['designator'] or ''"
+                      />
+                                    </td>
+                                </t>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer">
+                    <div class="row">
+                        <div style="text-align: center;">
+                            <span class="page" />
+                            /
+                            <span class="topage" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </t>
         </t>
     </template>
 
