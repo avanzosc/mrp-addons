@@ -12,6 +12,15 @@
                     <code>Designator</code>: this will fill <b>Designator</b>
                 </li>
             </xpath>
+
+            <header position="inside">
+            <button
+          name="action_update_layer_and_designator"
+          string="Update Layer and Designator"
+          type="object"
+          states="error,pass"
+        />
+            </header>
         </field>
     </record>
 </odoo>
