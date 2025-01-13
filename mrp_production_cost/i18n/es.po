@@ -32,26 +32,26 @@ msgstr "Coste de Fabricación real"
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Cost Material consumed"
-msgstr "Coste de Material consumido"
+msgstr "Cte consumido"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_material_to_consume
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Cost Material to consume"
-msgstr "Coste de Material a consumir"
+msgstr "Cte a consumir"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_workorder_estimated
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Cost Workorder estimated"
-msgstr "Coste de Orden de trabajo estimado"
+msgstr "Coste OT estimada"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__cost_workorder_real
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_tree_view
 msgid "Cost Workorder real"
-msgstr "Coste de Orden de trabajo real"
+msgstr "Coste OT Real"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_production__display_name
@@ -92,13 +92,13 @@ msgstr "Coste hora máquina"
 #: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__material_cost_consumed
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
 msgid "Material cost consumed"
-msgstr "Coste de Material consumido"
+msgstr "Cte consumido"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__material_cost_to_consume
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.view_move_tree
 msgid "Material cost to consume"
-msgstr "Coste de Material a consumir"
+msgstr "Cte a consumir"
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_mrp_production
@@ -113,7 +113,7 @@ msgstr "Especificar coste por hora del centro de trabajo"
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_stock_move__product_standard_cost
 msgid "Standard Cost"
-msgstr "Coste Estándard"
+msgstr "Cte.Estandar"
 
 #. module: mrp_production_cost
 #: model:ir.model,name:mrp_production_cost.model_stock_move
@@ -129,10 +129,10 @@ msgstr "Orden de trabajo"
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_estimated
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
 msgid "Workorder Cost estimated"
-msgstr "Coste de Orden de trabajo estimado"
+msgstr "Coste OT estimada"
 
 #. module: mrp_production_cost
 #: model:ir.model.fields,field_description:mrp_production_cost.field_mrp_workorder__workorder_cost_real
 #: model_terms:ir.ui.view,arch_db:mrp_production_cost.mrp_production_workorder_tree_editable_view
 msgid "Workorder Cost real"
-msgstr "Coste de Orden de trabajo real"
+msgstr "Coste OT Real"

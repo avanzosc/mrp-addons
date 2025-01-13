@@ -36,4 +36,4 @@ class MrpWorkorder(models.Model):
     @api.depends("duration", "machine_hour_cost")
     def _compute_workorder_cost_real(self):
         for order in self:
-            order.workorder_cost_real = order.machine_hour_cost * order.duration
+            order.workorder_cost_real = (order.machine_hour_cost / 60) * order.duration
