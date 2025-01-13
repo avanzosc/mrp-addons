@@ -68,25 +68,35 @@ class MrpWorkcenterRoutingImport(models.Model):
 
     def button_open_boms(self):
         self.ensure_one()
-        boms = self.mapped("import_line_ids.bom_id")
-        action = self.env.ref("mrp.mrp_bom_form_action")
-        action_dict = action.read()[0] if action else {}
+        action = self.env["ir.actions.actions"]._for_xml_id("mrp.mrp_bom_form_action")
         domain = expression.AND(
-            [[("id", "=", boms.ids)], safe_eval(action.domain or "[]")]
+            [
+                [("id", "in", self.mapped("import_line_ids.bom_id").ids)],
+                safe_eval(action.get("domain") or "[]"),
+            ]
         )
-        action_dict.update({"domain": domain})
-        return action_dict
+        action.update(
+            {
+                "domain": domain,
+            }
+        )
+        return action
 
     def button_open_operations(self):
         self.ensure_one()
-        operation = self.mapped("import_line_ids.operation_id")
-        action = self.env.ref("mrp.mrp_routing_action")
-        action_dict = action.read()[0] if action else {}
+        action = self.env["ir.actions.actions"]._for_xml_id("mrp.mrp_routing_action")
         domain = expression.AND(
-            [[("id", "=", operation.ids)], safe_eval(action.domain or "[]")]
+            [
+                [("id", "in", self.mapped("import_line_ids.operation_id").ids)],
+                safe_eval(action.get("domain") or "[]"),
+            ]
         )
-        action_dict.update({"domain": domain})
-        return action_dict
+        action.update(
+            {
+                "domain": domain,
+            }
+        )
+        return action
 
 
 class MrpWorkcenterRoutingImportLine(models.Model):
