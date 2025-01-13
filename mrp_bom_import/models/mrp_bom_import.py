@@ -150,30 +150,38 @@ class MrpBomImport(models.Model):
                 bom_import.log_info = ""
 
     def action_bom_import_boms(self):
-        action = self.env.ref("mrp.mrp_bom_form_action")
-        action_dict = action and action.read()[0]
+        action = self.env["ir.actions.actions"]._for_xml_id("mrp.mrp_bom_form_action")
         lines = self._get_import_lines()
         domain = expression.AND(
             [
                 [("id", "in", lines.mapped("bom_id").ids)],
-                safe_eval(action.domain or "[]"),
+                safe_eval(action.get("domain") or "[]"),
             ]
         )
-        action_dict.update({"domain": domain})
-        return action_dict
+        action.update(
+            {
+                "domain": domain,
+            }
+        )
+        return action
 
     def action_bom_import_bom_lines(self):
-        action = self.env.ref("mrp_bom_import.mrp_bom_line_action")
-        action_dict = action and action.read()[0]
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "mrp_bom_import.mrp_bom_line_action"
+        )
         lines = self._get_import_lines()
         domain = expression.AND(
             [
                 [("id", "in", lines.mapped("bom_line_id").ids)],
-                safe_eval(action.domain or "[]"),
+                safe_eval(action.get("domain") or "[]"),
             ]
         )
-        action_dict.update({"domain": domain})
-        return action_dict
+        action.update(
+            {
+                "domain": domain,
+            }
+        )
+        return action
 
     def action_import_bom(self):
         self.ensure_one()
