@@ -26,6 +26,21 @@ class StockMoveLine(models.Model):
     )
     average_price = fields.Float(string="Average Price", related="lot_id.average_price")
 
+    @api.depends(
+        "product_id", "picking_type_use_create_lots", "lot_id.expiration_date", "reader"
+    )
+    def _compute_expiration_date(self):
+        for move_line in self:
+            if (
+                move_line.reader
+                and len(move_line.reader) == 44
+                and move_line.reader[16] == "1"
+                and (move_line.reader[17]) == "5"
+            ):
+                return True
+            else:
+                return super()._compute_expiration_date()
+
     @api.depends("production_id")
     def _compute_sequence(self):
         for line in self:
@@ -120,9 +135,13 @@ class StockMoveLine(models.Model):
                 )
             self.write(
                 {
-                    "expiration_date": expiration_date,
                     "qty_done": qty_done,
                     "lot_id": lot.id,
+                }
+            )
+            self.write(
+                {
+                    "expiration_date": expiration_date,
                 }
             )
 
