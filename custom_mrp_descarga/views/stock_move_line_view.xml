@@ -35,6 +35,32 @@
         </field>
     </record>
 
+    <record id="view_stock_move_line_detailed_operation_tree" model="ir.ui.view">
+        <field name="model">stock.move.line</field>
+        <field
+      name="inherit_id"
+      ref="stock_move_line_product_lot_reader.view_stock_move_line_detailed_operation_tree"
+    />
+        <field name="arch" type="xml">
+           <field name="reader" position="attributes">
+               <attribute name="optional">hide</attribute>
+           </field>
+        </field>
+    </record>
+
+    <record id="view_move_line_tree_mrp" model="ir.ui.view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="qty_done" position="attributes">
+                <attribute
+          name="attrs"
+        >{'readonly': [('state', 'in', ('cancel'))]}</attribute>
+            </field>
+        </field>
+    </record>
+
     <record id="production_finished_move_line_ids_tree_view" model="ir.ui.view">
         <field name="model">stock.move.line</field>
         <field
@@ -47,7 +73,7 @@
                 <field
           name="reader"
           attrs="{'readonly': ('state', 'in', ('done', 'cancel'))}"
-          optional="show"
+          optional="hide"
         />
             </field>
             <field name="qty_done" position="after">
@@ -72,7 +98,7 @@
                 <field
           name="reader"
           attrs="{'readonly': ('state', 'in', ('done', 'cancel'))}"
-          optional="show"
+          optional="hide"
         />
                 <field name="expiration_date" optional="hide" force_save="1" />
             </field>
@@ -293,5 +319,6 @@
 
     <record id="mrp.action_mrp_production_moves" model="ir.actions.act_window">
         <field name="view_mode">tree,form,pivot</field>
+        <field name="view_id" ref="view_move_line_tree_mrp" />
     </record>
 </odoo>
