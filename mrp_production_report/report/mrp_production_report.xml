@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+        <t t-call="web.internal_layout" position="attributes">
+            <attribute name="t-call">web.external_layout</attribute>
+        </t>
         <xpath expr="//span[@t-field='o.product_qty']/.." position="after">
             <div
         t-if="o.lot_producing_id"
@@ -51,27 +54,56 @@
           t-field="line2.date_planned_start"
         /></td>
         </xpath>
+
+        <xpath expr="//table/tr[1]/th[1]" position="before">
+            <th width="15%" class="text-center"><strong>Sequence</strong></th>
+        </xpath>
+        <xpath expr="//table/tr[2]/td[1]" position="before">
+            <td width="15%" class="text-center">
+                <span t-field="line2.sequence" />
+                <div
+          t-field="line2.sequence"
+          t-options="{'widget': 'barcode', 'width': 600, 'height': 100, 'img_style': 'width:100%;height:35px'}"
+        />
+            </td>
+        </xpath>
     </template>
 
     <template
     id="report_mrp_production_components"
     inherit_id="mrp.report_mrp_production_components"
   >
-        <th t-if="o.state in ('progress', 'to_close','done')" position="before">
-            <th name="th-lots" class="text-start">
-                Lots
-            </th>
-            <th name="th-location" class="text-start">
-                Location
-            </th>
+        <th t-if="o.state in ('progress', 'to_close','done')" position="replace" />
+        <xpath expr="//tbody//td[2]" position="replace" />
+        <th t-if="has_product_barcode" position="before">
+            <th t-if="o.state in ('progress', 'confirmed')">Reserved</th>
+            <th t-if="o.state == 'done'">done</th>
         </th>
-        <xpath expr="//span[@t-field='raw_line.product_id']/.." position="after">
-            <td name="td-lots" class="text-start">
-                <span t-esc="raw_line._get_lots_mrp_production_report()" />
+        <th t-if="has_product_barcode" position="replace" />
+        <td t-if="has_product_barcode" position="before">
+            <td
+        t-if="o.state in ('confirmed','progress')"
+        style="text-align: left !important;"
+      >
+                <span t-field="raw_line.forecast_availability" />
             </td>
-            <td name="td-location" class="text-start">
-                <span t-field="raw_line.location_id.name" />
+            <td t-if="o.state == 'done'" style="text-align: left !important;">
+                <span t-field="raw_line.quantity_done" />
+                <span t-field="raw_line.product_uom" groups="uom.group_uom" />
             </td>
-        </xpath>
+        </td>
+        <td t-if="has_product_barcode" position="replace" />
+
+        <span t-field="raw_line.product_id" position="after">
+            <t t-foreach="raw_line.move_line_ids" t-as="move_line">
+                <br />
+                <span t-if="move_line.lot_id" t-field="move_line.lot_id" />
+                //
+                <span t-if="move_line.location_id" t-field="move_line.location_id" />
+                //
+                <span t-field="move_line.qty_done" />
+            </t>
+        </span>
+
     </template>
 </odoo>

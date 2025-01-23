@@ -8,9 +8,7 @@
     "author": "AvanzOSC,",
     "license": "AGPL-3",
     "summary": "BoM notes",
-    "depends": [
-        "mrp",
-    ],
+    "depends": ["mrp", "mrp_workorder_sequence"],
     "data": ["report/mrp_production_report.xml"],
     "installable": True,
 }
