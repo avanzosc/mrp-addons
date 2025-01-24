@@ -10,7 +10,8 @@
         class="col-auto col-3 mw-100 mb-2"
         name="lot-serial-number"
       >
-                <strong>Lot/Serial Number:</strong><br />
+                <strong>Lot/Serial Number:</strong>
+                <br />
                 <span t-field="o.lot_producing_id.name" />
             </div>
         </xpath>
@@ -37,26 +38,34 @@
         </xpath>
         <xpath expr="//span[@t-field='o.qty_producing']/.." position="after">
             <div class="col-auto col-3 mw-100 mb-2" name="date_planned_start">
-                <strong>Scheduled Date:</strong><br />
+                <strong>Scheduled Date:</strong>
+                <br />
                 <span t-field="o.date_planned_start" t-options='{"widget": "date"}' />
             </div>
             <div class="col-auto col-3 mw-100 mb-2" t-if="o.bom_id" name="bom">
-                <strong>BoM:</strong><br />
+                <strong>BoM:</strong>
+                <br />
                 <span t-field="o.bom_id" />
             </div>
         </xpath>
         <xpath expr="//div[@t-if='o.workorder_ids']//th[2]" position="after">
-            <th name="date-start"><strong>Date Start</strong></th>
+            <th name="date-start">
+                <strong>Date Start</strong>
+            </th>
         </xpath>
         <xpath expr="//span[@t-field='line2.workcenter_id.name']/.." position="after">
-            <td name="date-start"><span
+            <td name="date-start">
+                <span
           t-if="line2.date_planned_start"
           t-field="line2.date_planned_start"
-        /></td>
+        />
+            </td>
         </xpath>
 
         <xpath expr="//table/tr[1]/th[1]" position="before">
-            <th width="15%" class="text-center"><strong>Sequence</strong></th>
+            <th width="15%" class="text-center">
+                <strong>Sequence</strong>
+            </th>
         </xpath>
         <!-- Añadir qr en cada línea -->
         <xpath expr="//table/tr[2]/td[1]" position="before">
@@ -106,7 +115,7 @@
         </th>
         <td t-if="has_product_barcode" position="before">
             <td
-        t-if="o.state in ('confirmed','progress')"
+        t-if="o.state in ('confirmed','progress','to_close')"
         style="text-align: left !important;"
       >
                 <span t-field="raw_line.forecast_availability" />
@@ -121,15 +130,25 @@
         </td>
 
         <span t-field="raw_line.product_id" position="after">
-            <t t-foreach="raw_line.move_line_ids" t-as="move_line">
-                <br />
-                <span t-if="move_line.lot_id" t-field="move_line.lot_id" />
-                //
-                <span t-if="move_line.location_id" t-field="move_line.location_id" />
-                //
-                <span t-field="move_line.qty_done" />
-            </t>
+            <table style="margin-left: auto; margin-right: 0; text-align: right;">
+                <t t-foreach="raw_line.move_line_ids" t-as="move_line">
+                    <tr>
+                        <td style="padding: 2px; text-align: right; min-width: 75px;">
+                            <t t-if="move_line.lot_id">
+                                <span t-field="move_line.lot_id" />
+                            </t>
+                        </td>
+                        <td style="padding: 2px; text-align: right; min-width: 120px;">
+                            <t t-if="move_line.location_id">
+                                <span t-field="move_line.location_id" />
+                            </t>
+                        </td>
+                        <td style="padding: 2px; text-align: right; min-width: 75px;">
+                            <span t-field="move_line.qty_done" />
+                        </td>
+                    </tr>
+                </t>
+            </table>
         </span>
-
     </template>
 </odoo>
