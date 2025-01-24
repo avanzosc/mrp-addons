@@ -4,7 +4,7 @@
     "category": "Product",
     "author": "Avanzosc",
     "license": "LGPL-3",
-    "depends": [],
+    "depends": ["mrp"],
     "data": [],
     "installable": True,
     "application": False,
