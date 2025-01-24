@@ -82,13 +82,10 @@
         <!-- Añadir QR del nombre -->
         <xpath expr="//span[@t-field='o.name']/../.." position="after">
             <t t-set="qr_code" t-value="o._create_qr_code(o.name)" />
-            <div style="position: absolute; top: -1px; left: 700px;">
-                <img
-          t-att-src="'data:image/png;base64,' + qr_code"
-          width="100px"
-          height="100px"
-        />
-            </div>
+            <img
+        t-att-src="'data:image/png;base64,' + qr_code"
+        style="height: 100; width: 100px;"
+      />
         </xpath>
         <!-- Quitar código de barras -->
         <xpath expr="//div[@t-field='o.name']/.." position="attributes">
