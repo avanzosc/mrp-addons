@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_mrp_production_form_inherit_customer_code" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.customer.code</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/group" position="inside">
+                <field name="product_customer_code" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
