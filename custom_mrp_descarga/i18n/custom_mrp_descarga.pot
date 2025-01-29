@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 11:09+0000\n"
-"PO-Revision-Date: 2024-10-29 11:09+0000\n"
+"POT-Creation-Date: 2025-01-30 13:22+0000\n"
+"PO-Revision-Date: 2025-01-30 13:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -65,6 +65,7 @@ msgid "Assign Serials"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__lot_average_price
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__average_price
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__average_price
 msgid "Average Price"
@@ -275,6 +276,7 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_difference
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__qty_difference
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__difference
 msgid "Difference"
 msgstr ""
 
@@ -293,6 +295,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__display_name
@@ -414,6 +418,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__id
@@ -517,6 +523,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot____last_update
@@ -540,8 +548,20 @@ msgid "Last Year"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__lot_id
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
 msgid "Lot"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__lot_average_price
+msgid "Lot Average Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__lot_cost
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__lot_cost
+msgid "Lot Cost"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -687,6 +707,11 @@ msgid "Peso medio"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__price_unit
+msgid "Price Unit"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__speed_consume_qty
 msgid "Produced Kg/Hour"
 msgstr ""
@@ -720,6 +745,15 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_uom_id
 msgid "Product Unit of Measure"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid "Product not found, reader information for product code: %(reader)s"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -876,6 +910,16 @@ msgstr ""
 #: model:ir.model,name:custom_mrp_descarga.model_saca_line
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_line_id
 msgid "Saca Line"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_sale_report
+msgid "Sales Analysis Report"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_sale_order_line
+msgid "Sales Order Line"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -1065,6 +1109,13 @@ msgstr ""
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Unidades"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid "Unidentified barcode format : %(reader)s"
 msgstr ""
 
 #. module: custom_mrp_descarga
