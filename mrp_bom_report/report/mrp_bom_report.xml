@@ -17,12 +17,10 @@
                                 <th class="text-start">Product Code</th>
                                 <th class="text-start">Manufacturer Codes</th>
                                 <th class="text-start">Brand</th>
-                                <th class="text-start">Layer</th>
-                                <th class="text-start">Designator</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
+                            <t
                 t-foreach="doc._get_children(doc.bom_line_ids)"
                 t-as="line"
               >
@@ -31,48 +29,41 @@
                     t-set="code"
                     t-value="line['product_name'].split('[')[1].split(']')[0] if '[' in line['product_name'] and ']' in line['product_name'] else ''"
                   />
-                                                            <t
+                                    <t
                     t-if="bom_line_id.product_id.default_code == code"
                   >
-
-                                    <td class="text-start">
-                                        <span
-                        id="product_name"
-                        t-raw="line['product_name'] or ''"
-                      />
-                                    </td>
-                                    <td name="td-qty" class="text-end">
-                                        <span t-esc="line['product_qty'] or 0.0" />
-                                    </td>
-                                    <td name="td-operation" class="text-start">
-                                        <span t-esc="line['operation'] or ''" />
-                                    </td>
-                                    <td class="text-start">
+                                      <tr>
+                                        <td class="text-start">
                                             <span
-                        t-esc="bom_line_id['product_code'] or ''"
-                      />
-                                    </td>
-                                    <td class="text-start">
-                                            <span
-                        t-esc="bom_line_id['manufacturer_codes'] or ''"
-                      />
-                                    </td>
-                                    <td class="text-start">
-                                            <span
-                        t-esc="bom_line_id['markings'].name if bom_line_id['markings'] else ''"
-                      />
-                                    </td>
-                                    <td class="text-start">
-                                            <span t-esc="bom_line_id['layer'] or ''" />
-                                    </td>
-                                    <td class="text-start">
-                                            <span
-                        t-esc="bom_line_id['designator'] or ''"
-                      />
-                                    </td>
+                          id="product_name"
+                          t-raw="line['product_name'] or ''"
+                        />
+                                        </td>
+                                        <td name="td-qty" class="text-end">
+                                            <span t-esc="line['product_qty'] or 0.0" />
+                                        </td>
+                                        <td name="td-operation" class="text-start">
+                                            <span t-esc="line['operation'] or ''" />
+                                        </td>
+                                        <td class="text-start">
+                                                <span
+                          t-esc="bom_line_id['product_code'] or ''"
+                        />
+                                        </td>
+                                        <td class="text-start">
+                                                <span
+                          t-esc="bom_line_id['manufacturer_codes'] or ''"
+                        />
+                                        </td>
+                                        <td class="text-start">
+                                                <span
+                          t-esc="bom_line_id['markings'].name if bom_line_id['markings'] else ''"
+                        />
+                                        </td>
+                                      </tr>
+                                  </t>
                                 </t>
-                                </t>
-                            </tr>
+                            </t>
                         </tbody>
                     </table>
                 </div>
