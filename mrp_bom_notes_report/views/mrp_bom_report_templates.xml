@@ -1,0 +1,10 @@
+<odoo>
+    <template
+    id="report_mrp_bom_customized_document_inherit"
+    inherit_id="mrp_bom_report.report_mrp_bom_customized_document"
+  >
+        <xpath expr="//table" position="after">
+            <span t-esc="doc.notes or ''" />
+        </xpath>
+    </template>
+</odoo>
