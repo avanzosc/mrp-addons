@@ -13,9 +13,7 @@
                         <th class="text-end"><strong>Quantity</strong></th>
                     </tr>
                     <tr t-foreach="o.stencil_product_ids" t-as="line">
-                        <td class="text-start"><span
-                t-field="line.product_id.name"
-              /></td>
+                        <td class="text-start"><span t-field="line.product_id" /></td>
                         <td class="text-start"><span
                 t-field="line.location_id.name"
               /></td>
