@@ -8,7 +8,9 @@
     "license": "AGPL-3",
     "author": "AvanzOSC",
     "website": "https://github.com/avanzosc/mrp-addons",
-    "depends": ["mrp", "mrp_bom_report"],
+    "depends": [
+        "mrp_bom_report",
+    ],
     "data": [
         "reports/report_mrp_bom_report_customized_document.xml",
         "reports/report_mrp_report_bom_structure.xml",

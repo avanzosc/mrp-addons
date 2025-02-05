@@ -14,9 +14,6 @@
                                 <th class="text-start">Reference/Description</th>
                                 <th name="th-qty" class="text-end">Qty.</th>
                                 <th name="th-operation" class="text-start">Fase</th>
-                                <th class="text-start">Product Code</th>
-                                <th class="text-start">Manufacturer Codes</th>
-                                <th class="text-start">Brand</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,21 +41,6 @@
                                         </td>
                                         <td name="td-operation" class="text-start">
                                             <span t-esc="line['operation'] or ''" />
-                                        </td>
-                                        <td class="text-start">
-                                                <span
-                          t-esc="bom_line_id['product_code'] or ''"
-                        />
-                                        </td>
-                                        <td class="text-start">
-                                                <span
-                          t-esc="bom_line_id['manufacturer_codes'] or ''"
-                        />
-                                        </td>
-                                        <td class="text-start">
-                                                <span
-                          t-esc="bom_line_id['markings'].name if bom_line_id['markings'] else ''"
-                        />
                                         </td>
                                       </tr>
                                   </t>
