@@ -7,12 +7,12 @@
         <field name="page_height">210</field>
         <field name="page_width">298</field>
         <field name="orientation">Portrait</field>
-        <field name="margin_top">10</field>
+        <field name="margin_top">30</field>
         <field name="margin_bottom">20</field>
         <field name="margin_left">5</field>
         <field name="margin_right">5</field>
         <field name="header_line" eval="False" />
-        <field name="header_spacing">0</field>
+        <field name="header_spacing">25</field>
         <field name="dpi">95</field>
     </record>
 </odoo>
