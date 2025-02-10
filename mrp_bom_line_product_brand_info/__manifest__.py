@@ -9,7 +9,6 @@
     "license": "AGPL-3",
     "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
-        "mrp",
         "mrp_bom_report",
         "product_brand_supplierinfo",
     ],
