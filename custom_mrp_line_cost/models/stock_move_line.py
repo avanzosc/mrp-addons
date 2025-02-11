@@ -18,7 +18,13 @@ class StockMoveLine(models.Model):
             result = False
         return result
 
-    container = fields.Integer(string="Containers")
+    def _default_container(self):
+        result = 0
+        if "default_production_id" in self.env.context:
+            result = 1
+        return result
+
+    container = fields.Integer(string="Containers", default=_default_container)
     unit = fields.Integer(string="Unit")
     product_unit_container = fields.Integer(
         string="Product Unit/Container", related="product_id.unit_container", store=True
