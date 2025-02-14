@@ -20,7 +20,9 @@ class StockProductionLot(models.Model):
         for line in self:
             average_price = 0
             clasified = line.move_line_ids.filtered(
-                lambda c: c.state == "done" and (c.location_dest_id.usage == "internal")
+                lambda c: c.state == "done"
+                and (c.location_dest_id.usage == "internal")
+                and (c.location_id.usage != "internal")
             )
             if clasified:
                 amount_total = sum(clasified.mapped("amount"))
