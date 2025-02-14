@@ -112,6 +112,17 @@ class StockMoveLine(models.Model):
                     "reader": product_code,
                 }
                 raise ValidationError(message)
+            if self.product_id and self.product_id != product:
+                message = _(
+                    "The product of the reader, %(reader)s, is not the same of the line."
+                ) % {
+                    "reader": product.display_name,
+                }
+                raise ValidationError(message)
+            if product:
+                self.check_product_in_bom(
+                    product=product, production=self.production_id
+                )
             self.product_id = product.id
             expiration_date = reader[18:24]
             timezone = pytz.timezone(self._context.get("tz") or "UTC")
@@ -166,6 +177,17 @@ class StockMoveLine(models.Model):
                     "reader": product_code,
                 }
                 raise ValidationError(message)
+            if self.product_id and self.product_id != product:
+                message = _(
+                    "The product of the reader, %(reader)s, is not the same of the line."
+                ) % {
+                    "reader": product.display_name,
+                }
+                raise ValidationError(message)
+            if product:
+                self.check_product_in_bom(
+                    product=product, production=self.production_id
+                )
             self.product_id = product.id
             qty_done = reader[20:23]
             qty_done_decimal = reader[23:26]
@@ -184,6 +206,35 @@ class StockMoveLine(models.Model):
                 )
             vals = {"container": container, "qty_done": qty_done, "lot_id": lot.id}
             self.write(vals)
+
+    def check_product_in_bom(self, product, production):
+        if product and production:
+            if "location_id" in self.env.context:
+                location = self.env["stock.location"].browse(
+                    self.env.context.get("location_id")
+                )
+                if location == production.location_src_id:
+                    bom_products = production.move_raw_ids.mapped("product_id")
+                    if product not in bom_products:
+                        message = _(
+                            "Product not in entries of the BoM: %(product)s"
+                        ) % {
+                            "product": product.display_name,
+                        }
+                        raise ValidationError(message)
+            elif "default_location_id" in self.env.context:
+                location = self.env["stock.location"].browse(
+                    self.env.context.get("default_location_id")
+                )
+                if location == production.production_location_id:
+                    bom_products = production.move_byproduct_ids.mapped("product_id")
+                    if product not in bom_products:
+                        message = _(
+                            "Product not in outputs of the BoM: %(product)s"
+                        ) % {
+                            "product": product.display_name,
+                        }
+                        raise ValidationError(message)
 
     @api.onchange("unit")
     def onchange_unit(self):
