@@ -8,12 +8,8 @@
         expr="//field[@name='bom_line_ids']/tree/field[@name='attachments_count']"
         position="after"
       >
-                <field name="product_tmpl_id" invisible="1" />
-                <field name="seller_id" optional="show" options="{'no_create': True}" />
-                <field name="product_name" optional="show" />
-                <field name="product_code" optional="show" />
-                <field name="manufacturer_codes" optional="show" />
-                <field name="markings" optional="show" />
+                <field name="manufacturer_codes" optional="show" readonly="1" />
+                <field name="markings" optional="show" readonly="1" />
             </xpath>
         </field>
     </record>

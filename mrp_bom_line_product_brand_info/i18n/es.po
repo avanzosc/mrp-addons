@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 12:33+0000\n"
-"PO-Revision-Date: 2024-12-17 12:33+0000\n"
+"POT-Creation-Date: 2024-06-03 08:34+0000\n"
+"PO-Revision-Date: 2024-06-03 08:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,42 +21,11 @@ msgid "Bill of Material Line"
 msgstr "Línea de Lista de Materiales"
 
 #. module: mrp_bom_line_product_brand_info
-#: model:ir.model.fields,field_description:mrp_bom_line_product_brand_info.field_mrp_bom_line__markings
-msgid "Brand"
-msgstr "Marcas"
-
-#. module: mrp_bom_line_product_brand_info
 #: model:ir.model.fields,field_description:mrp_bom_line_product_brand_info.field_mrp_bom_line__manufacturer_codes
-msgid "Brand Code"
+msgid "Manufacturer codes"
 msgstr "Códigos fabricación"
 
 #. module: mrp_bom_line_product_brand_info
-#: model:ir.model.fields,field_description:mrp_bom_line_product_brand_info.field_mrp_bom_line__seller_id
-msgid "Seller"
-msgstr "Tarifa de proveedor"
-
-#. module: mrp_bom_line_product_brand_info
-#: model:ir.model.fields,help:mrp_bom_line_product_brand_info.field_mrp_bom_line__product_code
-msgid ""
-"This vendor's product code will be used when printing a request for "
-"quotation. Keep empty to use the internal one."
-msgstr ""
-"El código de producto de este proveedor se utilizará al imprimir "
-"una solicitud de presupuesto. Mantener vacío para utilizar el interno."
-#. module: mrp_bom_line_product_brand_info
-#: model:ir.model.fields,help:mrp_bom_line_product_brand_info.field_mrp_bom_line__product_name
-msgid ""
-"This vendor's product name will be used when printing a request for "
-"quotation. Keep empty to use the internal one."
-msgstr ""
-"El nombre de producto de este proveedor se utilizará al imprimir "
-"una solicitud de presupuesto. Mantener vacío para utilizar el interno."
-#. module: mrp_bom_line_product_brand_info
-#: model:ir.model.fields,field_description:mrp_bom_line_product_brand_info.field_mrp_bom_line__product_code
-msgid "Vendor Product Code"
-msgstr "Código producto proveedor"
-
-#. module: mrp_bom_line_product_brand_info
-#: model:ir.model.fields,field_description:mrp_bom_line_product_brand_info.field_mrp_bom_line__product_name
-msgid "Vendor Product Name"
-msgstr "Nombre producto proveedor"
+#: model:ir.model.fields,field_description:mrp_bom_line_product_brand_info.field_mrp_bom_line__markings
+msgid "Markings"
+msgstr "Marcas"

@@ -5,12 +5,8 @@
         <field name="inherit_id" ref="mrp.mrp_bom_line_view_form" />
         <field name="arch" type="xml">
             <field name="operation_id" position="after">
-                <field name="product_tmpl_id" invisible="1" />
-                <field name="seller_id" optional="show" options="{'no_create': True}" />
-                <field name="product_name" optional="show" />
-                <field name="product_code" optional="show" />
-                <field name="manufacturer_codes" optional="show" />
-                <field name="markings" optional="show" />
+                <field name="manufacturer_codes" readonly="1" />
+                <field name="markings" readonly="1" />
             </field>
         </field>
     </record>
