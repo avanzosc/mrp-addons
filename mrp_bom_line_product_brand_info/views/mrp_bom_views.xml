@@ -8,7 +8,6 @@
         expr="//field[@name='bom_line_ids']/tree/field[@name='attachments_count']"
         position="after"
       >
-                <field name="manufacturer_codes" optional="show" readonly="1" />
                 <field name="markings" optional="show" readonly="1" />
             </xpath>
         </field>
