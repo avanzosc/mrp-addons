@@ -8,24 +8,21 @@ class MrpBomLine(models.Model):
 
     def _compute_product_brand_info(self):
         for line in self.filtered(lambda c: c.product_tmpl_id):
-            markings = ""
-            for idx, seller in enumerate(
-                line.product_tmpl_id.seller_ids.filtered(lambda s: s.product_brand_id)
+            markings = set()
+            for seller in line.product_tmpl_id.seller_ids.filtered(
+                lambda s: s.product_brand_id
             ):
-                marking = seller.product_brand_id
                 brand_code = seller.brand_code
+                marking_name = seller.product_brand_id.name
 
                 if brand_code:
-                    marking_info = "[{}] {}".format(brand_code, marking.name)
+                    marking_info = "[{}] {}".format(brand_code, marking_name)
                 else:
-                    marking_info = "{}".format(marking.name)
+                    marking_info = "{}".format(marking_name)
 
-                if idx > 0:
-                    markings += "\n"
+                markings.add(marking_info)
 
-                markings += marking_info
-
-            line.markings = markings
+            line.markings = "\n".join(markings)
 
     def get_datas_to_print_bom(self):
         result = super().get_datas_to_print_bom()
