@@ -1,28 +1,30 @@
-# Copyright 2024 Alfredo de la Fuente - AvanzOSC
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from odoo import fields, models
 
 
 class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
-    seller_id = fields.Many2one(
-        comodel_name="product.supplierinfo",
-        domain="['|', ('product_id', '=', product_id), '&', "
-        "('product_tmpl_id', '=', product_tmpl_id), "
-        "('product_id', '=', False)]",
-    )
-    product_name = fields.Char(
-        related="seller_id.product_name",
-        store=True,
-    )
-    product_code = fields.Char(
-        related="seller_id.product_code",
-        store=True,
-    )
-    manufacturer_codes = fields.Char(related="seller_id.brand_code", store=True)
-    markings = fields.Many2one(
-        comodel_name="product.brand",
-        related="seller_id.product_brand_id",
-        store=True,
-    )
+    markings = fields.Text(compute="_compute_product_brand_info")
+
+    def _compute_product_brand_info(self):
+        for line in self.filtered(lambda c: c.product_tmpl_id):
+            markings = set()
+            for seller in line.product_tmpl_id.seller_ids.filtered(
+                lambda s: s.product_brand_id
+            ):
+                brand_code = seller.brand_code
+                marking_name = seller.product_brand_id.name
+
+                if brand_code:
+                    marking_info = "[{}] {}".format(brand_code, marking_name)
+                else:
+                    marking_info = "{}".format(marking_name)
+
+                markings.add(marking_info)
+
+            line.markings = "\n".join(markings)
+
+    def get_datas_to_print_bom(self):
+        result = super().get_datas_to_print_bom()
+        result["markings"] = self.markings
+        return result
