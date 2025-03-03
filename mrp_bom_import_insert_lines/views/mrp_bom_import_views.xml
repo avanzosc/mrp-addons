@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_mrp_bom_import_form_inherit" model="ir.ui.view">
+        <field name="name">mrp.bom.import.form.inherit</field>
+        <field name="model">mrp.bom.import</field>
+        <field name="inherit_id" ref="mrp_bom_import.mrp_bom_import_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+          name="action_insert_lines"
+          string="Insert Lines"
+          type="object"
+          class="oe_highlight"
+        />
+            </xpath>
+        </field>
+    </record>
+</odoo>
