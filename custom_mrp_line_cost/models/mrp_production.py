@@ -258,21 +258,22 @@ class MrpProduction(models.Model):
                                 ).mapped("qty_done")
                             )
                         )
-                i = qty.index(max(qty))
-                max_lot = lots[i]
-                max_qty = qty[i]
-                if max_lot and max_qty:
-                    lot_lines = production.move_line_ids.filtered(
-                        lambda c: c.lot_id == max_lot
-                    )
-                    amount = (production.cost - production.entry_total_amount) + sum(
-                        lot_lines.mapped("amount")
-                    )
-                    price = amount / max_qty
-                    for max_line in lot_lines:
-                        max_line.applied_price = price
-                        max_line.onchange_applied_price()
-                production._compute_entry_total_amount()
+                if qty:
+                    i = qty.index(max(qty))
+                    max_lot = lots[i]
+                    max_qty = qty[i]
+                    if max_lot and max_qty:
+                        lot_lines = production.move_line_ids.filtered(
+                            lambda c: c.lot_id == max_lot
+                        )
+                        amount = (
+                            production.cost - production.entry_total_amount
+                        ) + sum(lot_lines.mapped("amount"))
+                        price = amount / max_qty
+                        for max_line in lot_lines:
+                            max_line.applied_price = price
+                            max_line.onchange_applied_price()
+                    production._compute_entry_total_amount()
             elif (
                 not production.is_deconstruction
                 and (production.average_cost)
