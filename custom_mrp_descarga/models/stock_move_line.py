@@ -24,7 +24,17 @@ class StockMoveLine(models.Model):
     qty_done = fields.Float(
         digits="Weight Decimal Precision",
     )
-    average_price = fields.Float(string="Average Price", related="lot_id.average_price")
+    average_price = fields.Float(
+        string="Average Price", compute="_compute_average_price"
+    )
+
+    @api.depends("lot_id", "lot_id.average_price")
+    def _compute_average_price(self):
+        for line in self:
+            average_price = 0
+            if line.lot_id:
+                average_price = line.lot_id.average_price
+            line.average_price = average_price
 
     @api.depends(
         "product_id", "picking_type_use_create_lots", "lot_id.expiration_date", "reader"
@@ -119,6 +129,11 @@ class StockMoveLine(models.Model):
                     "reader": product.display_name,
                 }
                 raise ValidationError(message)
+            if len(product) > 1:
+                message = _("More than one product found with code: %(reader)s.") % {
+                    "reader": product_code,
+                }
+                raise ValidationError(message)
             if product:
                 self.check_product_in_bom(
                     product=product, production=self.production_id
@@ -174,6 +189,11 @@ class StockMoveLine(models.Model):
                 message = _(
                     "Product not found, reader information for product code: %(reader)s"
                 ) % {
+                    "reader": product_code,
+                }
+                raise ValidationError(message)
+            if len(product) > 1:
+                message = _("More than one product found with code: %(reader)s.") % {
                     "reader": product_code,
                 }
                 raise ValidationError(message)
@@ -306,6 +326,13 @@ class StockMoveLine(models.Model):
                     _("The outgoing lot must match the incoming one.")
                 )
         return result
+
+    @api.onchange("product_id", "product_uom_id", "lot_id")
+    def _onchange_product_id(self):
+        res = super()._onchange_product_id()
+        if self.move_id.inventory_id and self.lot_id:
+            self.standard_price = self.lot_id.average_price
+        return res
 
     @api.onchange("lot_id", "product_id")
     def onchange_product_lot(self):

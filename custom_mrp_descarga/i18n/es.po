@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 07:40+0000\n"
-"PO-Revision-Date: 2025-03-03 07:40+0000\n"
+"POT-Creation-Date: 2025-03-05 11:47+0000\n"
+"PO-Revision-Date: 2025-03-05 11:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -618,6 +618,15 @@ msgid "Merma"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid "More than one product found with code: %(reader)s."
+msgstr "Más de un producto encontrado con código: %(reader)s."
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__batch_id
 msgid "Mother"
 msgstr "Madre"
@@ -760,11 +769,13 @@ msgstr "Producto no encontrado, código de producto del lector: %(reader)s"
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "Product not in entries of the BoM: %(product)s"
 msgstr "El producto no se encuentra en las entradas de la LdM: %(product)s"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "Product not in outputs of the BoM: %(product)s"
@@ -1003,9 +1014,12 @@ msgstr "El producto del lote no coincide con el producto de la línea."
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "The product of the reader, %(reader)s, is not the same of the line."
-msgstr "El producto del lector, %(reader)s, no es el mismo que el de la línea."
+msgstr ""
+"El producto del lector, %(reader)s, no es el mismo que el de la línea."
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__timesheet_ids
