@@ -10,7 +10,6 @@ class StockProductionLot(models.Model):
         string="Average Price",
         digits="MRP Price Decimal Precision",
         compute="_compute_average_price",
-        store=True,
     )
 
     @api.depends(
