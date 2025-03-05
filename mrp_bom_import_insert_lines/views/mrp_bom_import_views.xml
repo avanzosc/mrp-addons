@@ -15,4 +15,36 @@
             </xpath>
         </field>
     </record>
+
+    <record
+    id="mrp_bom_line_component_import_view_tree_add_validate_button"
+    model="ir.ui.view"
+  >
+        <field name="name">mrp.bom.line.import.tree.add.validate.button</field>
+        <field name="model">mrp.bom.line.import</field>
+        <field
+      name="inherit_id"
+      ref="mrp_bom_import.mrp_bom_line_component_import_view_tree"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="validated_line" invisible="1" />
+                <button
+          name="action_validate_lines"
+          string="Validate Lines"
+          type="object"
+          class="btn oe_highlight"
+          attrs="{'invisible': [('validated_line', '=', True)]}"
+        />
+                <button
+          name="action_validate_lines"
+          string="Validated"
+          type="object"
+          class="btn btn-success"
+          title="Revalidate"
+          attrs="{'invisible': [('validated_line', '!=', True)]}"
+        />
+            </xpath>
+        </field>
+    </record>
 </odoo>
