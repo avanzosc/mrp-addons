@@ -18,18 +18,23 @@ class SaleReport(models.Model):
     difference = fields.Float(
         readonly=True,
     )
+    surplus = fields.Boolean(
+        readonly=True,
+    )
 
     def _group_by_sale(self, groupby=""):
         res = super()._group_by_sale(groupby)
         res += """, l.lot_id"""
         res += """, l.price_unit"""
         res += """, l.lot_average_price"""
+        res += """, l.surplus"""
         return res
 
     def _select_additional_fields(self, fields):
         fields["lot_id"] = ", l.lot_id as lot_id"
         fields["price_unit"] = ", l.price_unit as price_unit"
         fields["lot_average_price"] = ", l.lot_average_price as lot_average_price"
+        fields["surplus"] = ", l.surplus as surplus"
         return super()._select_additional_fields(fields)
 
     def _query(self, with_clause="", fields=None, groupby="", from_clause=""):
