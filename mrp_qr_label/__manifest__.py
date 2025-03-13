@@ -12,6 +12,7 @@
         "report/mrp_finished_product_qr_label.xml",
         "report/mrp_product_to_consume_qr_label.xml",
         "report/mrp_consumed_product_qr_label.xml",
+        "report/mrp_production_reports.xml",
     ],
     "installable": True,
 }
