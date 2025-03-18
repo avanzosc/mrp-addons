@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+    id="external_layout_mrp_bom"
+    inherit_id="mrp_bom_report.external_layout_mrp_bom"
+  >
+        <span id="date-printing" position="after">
+            <span t-if="doc.print_product_image" id="product_image">
+                <br />
+                <img
+          t-if="doc.product_id and doc.product_id.image_1920"
+          t-att-src="image_data_uri(doc.product_id.image_1920)"
+          style="max-height: 2cm; max-width: 4cm;"
+        />
+                <img
+          t-if="not doc.product_id and doc.product_tmpl_id and doc.product_tmpl_id.image_1920"
+          t-att-src="image_data_uri(doc.product_tmpl_id.image_1920)"
+          style="max-height: 2cm; max-width: 4cm;"
+        />
+            </span>
+        </span>
+    </template>
+</odoo>
