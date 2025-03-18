@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrp_bom" inherit_id="mrp.report_mrp_bom">
+        <th name="th_mrp_bom_h" position="before">
+            <th
+        t-if="data['bom'].print_product_image"
+        name="th_product_image"
+      >Image</th>
+        </th>
+        <td name="td_mrp_bom" position="before">
+            <td t-if="data['bom'].print_product_image" name="td_product_image">
+                <img
+          t-if="data['product'].image_1920"
+          t-att-src="image_data_uri(data['product'].image_1920)"
+          style="max-height: 2cm; max-width: 4cm;"
+        />
+            </td>
+        </td>
+    </template>
+
+    <template id="report_mrp_bom_pdf_line" inherit_id="mrp.report_mrp_bom_pdf_line">
+        <td name="td_mrp_code" position="before">
+            <td t-if="data['bom'].print_product_image" name="td_product_image">
+                <img
+          t-if="'product_image' in l and l.get('product_image', False)"
+          t-att-src="image_data_uri(l['product_image'])"
+          style="max-height: 2cm; max-width: 4cm;"
+        />
+            </td>
+        </td>
+    </template>
+</odoo>
