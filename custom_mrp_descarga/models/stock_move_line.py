@@ -144,8 +144,13 @@ class StockMoveLine(models.Model):
             expiration_date = datetime.strptime(expiration_date, "%y%m%d")
             expiration_date = timezone.localize(expiration_date).astimezone(pytz.UTC)
             expiration_date = expiration_date.replace(tzinfo=None)
-            qty_done = reader[28:31]
-            qty_done_decimal = reader[31:34]
+            if int(reader[27]) <= 6:
+                k = 6 - int(reader[27])
+                qty_done = reader[28 : 28 + k]
+                qty_done_decimal = reader[28 + k : 34]
+            else:
+                qty_done = reader[28:31]
+                qty_done_decimal = reader[31:34]
             qty_done = qty_done + "." + qty_done_decimal
             qty_done = float(qty_done)
             lot_name = reader[36:44]
@@ -209,8 +214,13 @@ class StockMoveLine(models.Model):
                     product=product, production=self.production_id
                 )
             self.product_id = product.id
-            qty_done = reader[20:23]
-            qty_done_decimal = reader[23:26]
+            if int(reader[19]) <= 6:
+                k = 6 - int(reader[19])
+                qty_done = reader[20 : 20 + k]
+                qty_done_decimal = reader[20 + k : 26]
+            else:
+                qty_done = reader[20:23]
+                qty_done_decimal = reader[23:26]
             qty_done = qty_done + "." + qty_done_decimal
             container = int(reader[28:36])
             lot_name = reader[38:46]
