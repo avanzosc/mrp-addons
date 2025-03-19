@@ -203,8 +203,12 @@ class MrpProduction(models.Model):
     def _compute_month_cost(self):
         for line in self:
             month_cost = 0
-            if line.date_planned_start and line.workorder_ids:
-                month = line.date_planned_start.month
+            if line.month_cost:
+                month_cost = line.month_cost
+            date = line.date_planned_start
+            lock_date = line.company_id.fiscalyear_lock_date
+            if date and line.workorder_ids and lock_date and date.date() >= lock_date:
+                month = date.month
                 if month == 1:
                     month_cost = line.workorder_ids[:1].workcenter_id.cost_ids.january
                 if month == 2:
