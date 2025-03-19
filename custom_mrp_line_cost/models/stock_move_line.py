@@ -121,13 +121,19 @@ class StockMoveLine(models.Model):
     def _compute_month_cost(self):
         for line in self:
             month_cost = 0
+            if line.month_cost:
+                month_cost = line.month_cost
+            date = line.production_id.date_planned_start
+            lock_date = line.company_id.fiscalyear_lock_date
             if (
-                line.production_id.date_planned_start
+                date
                 and line.move_id
-                and (line.move_id.byproduct_id)
-                and (line.move_id.byproduct_id.operation_id)
+                and line.move_id.byproduct_id
+                and line.move_id.byproduct_id.operation_id
+                and lock_date
+                and date.date() >= lock_date
             ):
-                month = line.production_id.date_planned_start.month
+                month = date.month
                 if month == 1:
                     month_cost = (
                         line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.january

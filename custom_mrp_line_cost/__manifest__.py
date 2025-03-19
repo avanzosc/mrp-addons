@@ -14,6 +14,7 @@
         "mrp_production_deconstruction",
         "stock_move_line_cost",
         "custom_descarga",
+        "account_lock_date_update",
     ],
     "data": [
         "security/ir.model.access.csv",
