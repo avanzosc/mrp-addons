@@ -5,10 +5,11 @@ class MrpWorkcenterProductivity(models.Model):
     _inherit = "mrp.workcenter.productivity"
 
     calendar_id = fields.Many2one(
-        "resource.calendar",
+        comodel_name="resource.calendar",
         string="Work Schedule",
         required=True,
         help="Work schedule of the employee at the time of this record.",
+        default=lambda self: self.env.company.resource_calendar_id,
     )
 
     @api.onchange("user_id")
@@ -26,7 +27,7 @@ class MrpWorkcenterProductivity(models.Model):
     @api.model
     def create(self, vals):
         """Ensure calendar_id is set when creating a record with a user_id."""
-        if "user_id" in vals and vals["user_id"] and "calendar_id" not in vals:
+        if vals.get("user_id", False) and "calendar_id" not in vals:
             employee = self.env["hr.employee"].search(
                 [("user_id", "=", vals["user_id"])], limit=1
             )
