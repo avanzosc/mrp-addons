@@ -1,6 +1,6 @@
 # Copyright 2020 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models
+from odoo import _, fields, models
 
 
 class SaleReport(models.Model):
@@ -21,6 +21,19 @@ class SaleReport(models.Model):
     surplus = fields.Boolean(
         readonly=True,
     )
+
+    def action_view_sale_report(self):
+        context = self.env.context.copy()
+        cron = self.env.ref("custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost")
+        if cron:
+            cron.method_direct_trigger()
+        return {
+            "name": _("Sale Report"),
+            "view_mode": "pivot",
+            "res_model": "sale.report",
+            "type": "ir.actions.act_window",
+            "context": context,
+        }
 
     def _group_by_sale(self, groupby=""):
         res = super()._group_by_sale(groupby)
