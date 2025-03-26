@@ -11,4 +11,16 @@
         <field name="numbercall">-1</field>
         <field name="active">True</field>
     </record>
+
+    <record id="ir_cron_recalculate_lot_avergae_cost" model="ir.cron">
+        <field name="name">Recalculate lot_average_cost</field>
+        <field name="model_id" ref="model_sale_order_line" />
+        <field name="state">code</field>
+        <field name="code">model._compute_average_price()</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
 </odoo>

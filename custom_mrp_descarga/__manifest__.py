@@ -43,6 +43,7 @@
         "views/account_analytic_line_view.xml",
         "report/mrp_production_summary_xlsx.xml",
         "report/mrp_production_quartering_summary_xlsx.xml",
+        "report/sale_report_view.xml",
     ],
     "installable": True,
     "auto_install": True,
