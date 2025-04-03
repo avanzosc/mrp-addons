@@ -7,19 +7,12 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _action_assign(self, force_qty=False):
-        res = super()._action_assign(force_qty=force_qty)
         for move in self.filtered(
-            lambda x: x.production_id or x.raw_material_production_id
+            lambda c: c.production_id or c.raw_material_production_id
         ):
             if (
                 move.should_consume_qty
                 and move.should_consume_qty < move.product_uom_qty
-                and move.state != "cancel"
             ):
-                move.write(
-                    {
-                        "reserved_availability": move.should_consume_qty,
-                        "quantity_done": move.should_consume_qty,
-                    }
-                )
-        return res
+                super(StockMove, move)._action_assign(force_qty=move.should_consume_qty)
+        return super()._action_assign(force_qty=force_qty)
