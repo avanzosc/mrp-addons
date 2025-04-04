@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <label for="date_planned_start" position="before">
+                <field name="mrp_production_parent_id" readonly="1" />
+            </label>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="mrp_production_parent_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_filter" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="mrp_production_parent_id" />
+            </field>
+            <filter name="status" position="after">
+                <filter
+          string="Production Parent"
+          name="production_parent"
+          domain="[]"
+          context="{'group_by': 'mrp_production_parent_id'}"
+        />
+            </filter>
+        </field>
+    </record>
+</odoo>
