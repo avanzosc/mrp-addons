@@ -10,6 +10,9 @@
     "depends": ["mrp_sale_info"],
     "data": [
         "views/mrp_production_views.xml",
+        "views/sale_order_views.xml",
     ],
     "installable": True,
+    "pre_init_hook": "pre_init_hook",
+    "post_init_hook": "post_init_hook",
 }
