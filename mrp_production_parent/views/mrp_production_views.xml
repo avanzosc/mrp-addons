@@ -25,9 +25,16 @@
         <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
         <field name="arch" type="xml">
             <field name="origin" position="after">
+                <field name="sale_id" />
                 <field name="mrp_production_parent_id" />
             </field>
             <filter name="status" position="after">
+                <filter
+          string="Sale Order"
+          name="groupsaleorder"
+          domain="[]"
+          context="{'group_by': 'sale_id'}"
+        />
                 <filter
           string="Production Parent"
           name="production_parent"

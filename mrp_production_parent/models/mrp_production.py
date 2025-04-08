@@ -28,12 +28,11 @@ class MrpProduction(models.Model):
             if procurement_group.sale_id:
                 sale_id = procurement_group.sale_id.id
             else:
-                if production.mrp_production_parent_id:
-                    procurement_group = (
-                        production.mrp_production_parent_id.source_procurement_group_id
-                    )
-                    if procurement_group.sale_id:
-                        sale_id = procurement_group.sale_id.id
+                if (
+                    production.mrp_production_parent_id
+                    and production.mrp_production_parent_id.sale_id
+                ):
+                    sale_id = production.mrp_production_parent_id.sale_id.id
             production.sale_id = sale_id
 
     @api.model_create_multi
@@ -44,4 +43,6 @@ class MrpProduction(models.Model):
                 production_parent = self.search(cond, limit=1)
                 if production_parent:
                     vals["mrp_production_parent_id"] = production_parent.id
+                    if production_parent.sale_id:
+                        vals["sale_id"] = production_parent.sale_id.id
         return super().create(vals_list)
