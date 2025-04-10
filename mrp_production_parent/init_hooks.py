@@ -35,11 +35,11 @@ def post_init_hook(cr, registry):
 
 
 def force_compute_sale_order(env):
-    cond = [("origin", "!=", False), ("sale_id", "=", False)]
+    cond = [("origin", "!=", False)]
     productions = env["mrp.production"].search(cond, order="id asc")
     _logger.info("Force-compute Production Parent on %s productions" % len(productions))
     for production in productions:
-        cond = [("name", "=", production.name)]
+        cond = [("name", "=", production.origin)]
         production_parent = env["mrp.production"].search(cond, limit=1)
         if production_parent:
             vals = {"mrp_production_parent_id": production_parent.id}
