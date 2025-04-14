@@ -3,9 +3,10 @@
     <template id="report_mrporder" inherit_id="mrp.report_mrporder" priority="100">
         <div t-if="o.origin" position="replace">
             <div class="col-3" t-if="o.origin">
-                <strong t-if="not o.sale_id">Source:</strong>
-                <strong t-if="o.sale_id">Sale Order:</strong>
-                <br />
+                <strong>Source:</strong><br />
+                <t t-if="o.sale_id">
+                    <span t-field="o.sale_id" /><br />
+                </t>
                 <span t-field="o.origin" />
             </div>
             <div class="col-3" t-if="o.sale_id">
