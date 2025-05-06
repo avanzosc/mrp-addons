@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-12 10:20+0000\n"
-"PO-Revision-Date: 2025-03-12 10:20+0000\n"
+"POT-Creation-Date: 2025-04-11 10:26+0000\n"
+"PO-Revision-Date: 2025-04-11 10:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -208,6 +208,11 @@ msgid "Count Production"
 msgstr "Contador OF"
 
 #. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_product_customerinfo
+msgid "Customer Pricelist"
+msgstr "Tarifa de cliente"
+
+#. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
@@ -291,6 +296,7 @@ msgstr "% diferencia"
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx__display_name
@@ -387,6 +393,11 @@ msgid "Filter Only Entry Lots"
 msgstr "Filtrar por lotes de entrada"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__final_partner_price
+msgid "Final Partner Price"
+msgstr "Precio cliente final"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__gross_yield
 msgid "Gross Yield"
 msgstr "Rendimiento bruto"
@@ -414,6 +425,7 @@ msgstr "Galllinas"
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx__id
@@ -519,6 +531,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx____last_update
@@ -619,6 +632,15 @@ msgstr ""
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"More than one product found for product code %(code)s and partner "
+"%(partner)s"
+msgstr ""
+"Más de un producto encontrado con código %(code)s y contacto "
+"%(partner)s"
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
@@ -665,9 +687,20 @@ msgid "No mother has been put on."
 msgstr "No se ha puesto madre"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid "No product found for product code %(code)s and partner %(partner)s"
+msgstr "Producto no encontrado con código %(code)s y contact %(partner)s"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__normal
 msgid "Normal"
 msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.sale_report_menu
+msgid "Online Sales"
+msgstr "Ventas online"
 
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
@@ -863,6 +896,13 @@ msgid "Recalculate cost in production orders"
 msgstr "Recalcular costes en órdenes de producción"
 
 #. module: custom_mrp_descarga
+#: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost_ir_actions_server
+#: model:ir.cron,cron_name:custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost
+#: model:ir.cron,name:custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost
+msgid "Recalculate lot_average_cost"
+msgstr ""
+
+#. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_view_search
 msgid "Reference"
 msgstr "Referencia"
@@ -938,6 +978,14 @@ msgid "Saca Line"
 msgstr "Línea de saca"
 
 #. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/report/sale_report.py:0
+#: code:addons/custom_mrp_descarga/report/sale_report.py:0
+#: model:ir.actions.server,name:custom_mrp_descarga.action_sale_report
+#, python-format
+msgid "Sale Report"
+msgstr "Informe ventas"
+
+#. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_sale_report
 msgid "Sales Analysis Report"
 msgstr "Informe de análisis de ventas"
@@ -1009,6 +1057,21 @@ msgstr "La compañía de la saca no es la misma"
 msgid "The outgoing lot must match the incoming one."
 msgstr "El lote saliente debe coincidir con alguno de la entrada."
 
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid "The picking has no partner."
+msgstr "El albarán no tiene contacto."
+
+#. module: custom_mrp_descarga
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"The product of the line %(product)s is not the same as the product found "
+"%(product_found)s"
+msgstr ""
+"El producto de la línea %(product)s no es el mismo que el producto encontrado "
+"%(product_found)s"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0

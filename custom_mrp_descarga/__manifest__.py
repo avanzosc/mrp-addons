@@ -25,6 +25,7 @@
         "product_expiry",
         "stock_move_line_product_lot_reader",
         "product_multi_company_usability",
+        "product_supplierinfo_for_customer",
     ],
     "data": [
         "data/quartering_product.xml",
@@ -41,6 +42,7 @@
         "views/stock_move_line_view.xml",
         "views/killing_cost_view.xml",
         "views/account_analytic_line_view.xml",
+        "views/product_customerinfo_view.xml",
         "report/mrp_production_summary_xlsx.xml",
         "report/mrp_production_quartering_summary_xlsx.xml",
         "report/sale_report_view.xml",
