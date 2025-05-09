@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_production_product_label_wizard_user,production.product.label.wizard.user,model_production_product_label_wizard,mrp.group_mrp_user,1,1,1,1
+access_production_product_label_wizard_line_user,production.product.label.wizard.line.user,model_production_product_label_wizard_line,mrp.group_mrp_user,1,1,1,1
