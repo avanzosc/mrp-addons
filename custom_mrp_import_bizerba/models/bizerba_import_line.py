@@ -132,7 +132,7 @@ class BizerbaImportLine(models.Model):
             code = self.line_product_code
         else:
             code = self.line_chicken_code
-        search_domain = [("bizerba_code", "=", code)]
+        search_domain = [("bizerba_code", "=", code.zfill(3))]
         products = product_obj.search(search_domain)
         if not products:
             products = False

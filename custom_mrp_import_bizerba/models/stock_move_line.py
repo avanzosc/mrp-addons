@@ -102,7 +102,7 @@ class StockMoveLine(models.Model):
                 )
             )
             if not product:
-                product_domain = [("bizerba_code", "=", product_code)]
+                product_domain = [("bizerba_code", "=", product_code.zfill(3))]
                 product = (
                     self.env["product.product"]
                     .search(product_domain)
@@ -194,7 +194,7 @@ class StockMoveLine(models.Model):
                 )
             )
             if not product:
-                product_domain = [("bizerba_code", "=", product_code)]
+                product_domain = [("bizerba_code", "=", product_code.zfill(3))]
                 product = (
                     self.env["product.product"]
                     .search(product_domain)
