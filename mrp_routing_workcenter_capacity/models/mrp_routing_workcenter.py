@@ -7,7 +7,6 @@ class MrpRoutingWorkcenter(models.Model):
     _inherit = "mrp.routing.workcenter"
 
     capacity = fields.Float(
-        string="Capacity",
         default=1.0,
     )
     time_start = fields.Float(
