@@ -21,6 +21,7 @@ class SaleReport(models.Model):
     surplus = fields.Boolean(
         readonly=True,
     )
+    commitment_date = fields.Datetime(string="Delivery Date", readonly=True)
 
     def action_view_sale_report(self):
         context = self.env.context.copy()
@@ -48,6 +49,7 @@ class SaleReport(models.Model):
         fields["price_unit"] = ", l.price_unit as price_unit"
         fields["lot_average_price"] = ", l.lot_average_price as lot_average_price"
         fields["surplus"] = ", l.surplus as surplus"
+        fields["commitment_date"] = ", s.commitment_date as commitment_date"
         return super()._select_additional_fields(fields)
 
     def _query(self, with_clause="", fields=None, groupby="", from_clause=""):
