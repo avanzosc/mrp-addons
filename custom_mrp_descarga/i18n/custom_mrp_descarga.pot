@@ -1316,3 +1316,11 @@ msgstr ""
 #: model:ir.ui.menu,name:custom_mrp_descarga.menu_production_classified
 msgid "Órdenes de producción"
 msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__commitment_date
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_order_product_search
+msgid "Delivery Date"
+msgstr ""
+
+

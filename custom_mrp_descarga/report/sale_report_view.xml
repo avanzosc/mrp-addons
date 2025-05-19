@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <record id="view_order_product_pivot" model="ir.ui.view">
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_pivot" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="commitment_date" interval="month" type="row" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_order_product_search" model="ir.ui.view">
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="commitment_date" />
+            </field>
+            <filter name="date" position="after">
+                <filter
+          string="Delivery Date"
+          name="delivery-date"
+          context="{'group_by':'commitment_date'}"
+        />
+            </filter>
+        </field>
+    </record>
+
     <record id="action_sale_report" model="ir.actions.server">
         <field name="name">Sale Report</field>
         <field name="type">ir.actions.server</field>
