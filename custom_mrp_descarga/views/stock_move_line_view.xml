@@ -202,16 +202,16 @@
             <tree create="0" editable="bottom">
                 <field name="date" optional="show" />
                 <field name="reference" />
-                <field name="production_id" />
-                <field name="product_id" />
-                <field name="lot_id" />
+                <field name="production_id" optional="show" />
+                <field name="product_id" optional="show" />
+                <field name="lot_id" optional="show" />
                 <field name="average_price" optional="show" />
                 <field name="location_id" optional="hide" />
                 <field name="location_dest_id" optional="hide" />
-                <field name="pallet" />
-                <field name="container" />
-                <field name="unit" />
-                <field name="brut" />
+                <field name="pallet" optional="show" />
+                <field name="container" optional="show" />
+                <field name="unit" optional="show" />
+                <field name="brut" optional="show" />
                 <field name="weight" optional="show" />
                 <field name="qty_done" />
                 <field name="average_weight" optional="hide" />
