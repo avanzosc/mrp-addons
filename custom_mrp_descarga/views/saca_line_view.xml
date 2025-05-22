@@ -2,7 +2,7 @@
 <odoo>
     <record id="saca_line_form_view" model="ir.ui.view">
         <field name="model">saca.line</field>
-        <field name="inherit_id" ref="custom_saca.saca_line_form_view" />
+        <field name="inherit_id" ref="custom_descarga.saca_line_form_view" />
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button
@@ -38,6 +38,14 @@
                         </tree>
                     </field>
                 </group>
+            </xpath>
+            <xpath expr="//field[@name='sampler_id']/../.." position="before">
+                <button
+          string="Update Data"
+          type="object"
+          name="action_compute_mo_data"
+          attrs="{'invisible': '[('production_ids', '=', [])]}"
+        />
             </xpath>
         </field>
     </record>

@@ -11,3 +11,4 @@ from . import stock_inventory_line
 from . import mrp_workorder
 from . import sale_order_line
 from . import product_customerinfo
+from . import product_category

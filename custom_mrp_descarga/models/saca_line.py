@@ -149,3 +149,24 @@ class SacaLine(models.Model):
             for line in self.production_ids:
                 line.product_qty = self.net_origin
         return result
+
+    def action_compute_mo_data(self):
+        self.ensure_one()
+        for line in self:
+            move_lines = line.mapped("production_ids.move_line_ids")
+            asphyxiated = move_lines.filtered(
+                lambda l: l.product_id.default_code == "8650"
+            )
+            seizured = move_lines.filtered(
+                lambda l: l.product_id.default_code == "9020"
+            )
+            line.asphyxiated_percentage = (
+                sum(asphyxiated.mapped("qty_done")) / line.download_unit
+            )
+            line.seizured_percentage = (
+                sum(seizured.mapped("qty_done")) / line.download_unit
+            )
+            line.second_performance = sum(
+                line.mapped("production_ids.second_performance")
+            )
+        return True

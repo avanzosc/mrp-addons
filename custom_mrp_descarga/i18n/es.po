@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-11 10:26+0000\n"
-"PO-Revision-Date: 2025-04-11 10:26+0000\n"
+"POT-Creation-Date: 2025-05-23 08:15+0000\n"
+"PO-Revision-Date: 2025-05-23 08:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,8 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "% vivo"
 msgstr ""
@@ -198,6 +200,10 @@ msgstr "Fecha cálculo de coste"
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Coste"
 msgstr ""
@@ -217,6 +223,10 @@ msgstr "Tarifa de cliente"
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Código"
 msgstr ""
@@ -229,6 +239,8 @@ msgstr "Deconstrucción"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Definición"
 msgstr ""
@@ -275,6 +287,8 @@ msgstr "Dif. Importe total"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Diferencia"
 msgstr ""
@@ -296,6 +310,7 @@ msgstr "% diferencia"
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__display_name
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__display_name
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__display_name
@@ -347,6 +362,8 @@ msgstr "Vaciar nacedoras"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Entradas"
 msgstr ""
@@ -361,6 +378,10 @@ msgstr "Importe total entradas"
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Envases"
 msgstr ""
@@ -410,6 +431,8 @@ msgstr "Número de guía"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/mrp_production.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/mrp_production.py:0
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
 #, python-format
 msgid "Hatcheries"
@@ -425,6 +448,7 @@ msgstr "Galllinas"
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__id
@@ -445,6 +469,10 @@ msgstr "Identificador"
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Importe"
 msgstr ""
@@ -488,6 +516,8 @@ msgstr "Línea inventario"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG bruto"
 msgstr ""
@@ -495,6 +525,8 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG envases"
 msgstr ""
@@ -502,6 +534,8 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG neto"
 msgstr ""
@@ -509,6 +543,8 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "KG palets"
 msgstr ""
@@ -516,6 +552,8 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "KGs"
 msgstr ""
@@ -531,6 +569,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder____last_update
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template____last_update
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task____last_update
@@ -626,27 +665,11 @@ msgstr "Medicina"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Merma"
 msgstr ""
-
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid ""
-"More than one product found for product code %(code)s and partner "
-"%(partner)s"
-msgstr ""
-"Más de un producto encontrado con código %(code)s y contacto "
-"%(partner)s"
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid "More than one product found with code: %(reader)s."
-msgstr "Más de un producto encontrado con código: %(reader)s."
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__batch_id
@@ -661,6 +684,8 @@ msgstr "Ubicación madre"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
 #: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/stock_production_lot.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/stock_production_lot.py:0
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_production_lot_form
 #, python-format
 msgid "Move Lines"
@@ -675,6 +700,8 @@ msgstr "No duplicar líneas"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/mrp_production.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/mrp_production.py:0
 #, python-format
 msgid "No lot has been put on."
 msgstr "No se ha puesto lote"
@@ -682,15 +709,11 @@ msgstr "No se ha puesto lote"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/mrp_production.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/mrp_production.py:0
 #, python-format
 msgid "No mother has been put on."
 msgstr "No se ha puesto madre"
-
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid "No product found for product code %(code)s and partner %(partner)s"
-msgstr "Producto no encontrado con código %(code)s y contact %(partner)s"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__normal
@@ -732,6 +755,8 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Palets"
 msgstr ""
@@ -746,6 +771,10 @@ msgstr "Rendimiento"
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Peso medio"
 msgstr ""
@@ -771,6 +800,11 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: custom_mrp_descarga
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_move_line
 #: model:ir.ui.menu,name:custom_mrp_descarga.menu_move_line_classified
 msgid "Product Movements"
@@ -784,7 +818,7 @@ msgstr "Movimientos de Producto (Stock Move Line)"
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_product_template
 msgid "Product Template"
-msgstr "Plantilla de producto"
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_uom_id
@@ -794,15 +828,8 @@ msgstr "UdM de producto"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid "Product not found, reader information for product code: %(reader)s"
-msgstr "Producto no encontrado, código de producto del lector: %(reader)s"
-
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "Product not in entries of the BoM: %(product)s"
 msgstr "El producto no se encuentra en las entradas de la LdM: %(product)s"
@@ -810,6 +837,8 @@ msgstr "El producto no se encuentra en las entradas de la LdM: %(product)s"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "Product not in outputs of the BoM: %(product)s"
 msgstr "El producto no se encuentra en las salidas de la LdM: %(product)s"
@@ -817,6 +846,8 @@ msgstr "El producto no se encuentra en las salidas de la LdM: %(product)s"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/saca_line.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/saca_line.py:0
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__production_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__production_ids
@@ -844,6 +875,8 @@ msgstr "Órdenes de producción"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Producto"
 msgstr ""
@@ -927,6 +960,8 @@ msgstr "Reproductora"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Resumen de despiece"
 msgstr ""
@@ -944,6 +979,8 @@ msgstr ""
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Resumen de matanza"
 msgstr ""
@@ -980,6 +1017,8 @@ msgstr "Línea de saca"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/sale_report.py:0
 #: code:addons/custom_mrp_descarga/report/sale_report.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/sale_report.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/sale_report.py:0
 #: model:ir.actions.server,name:custom_mrp_descarga.action_sale_report
 #, python-format
 msgid "Sale Report"
@@ -998,9 +1037,21 @@ msgstr "Línea de pedido de venta"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Salidas"
 msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category__second_category
+msgid "Second Category"
+msgstr "Categoría segunda"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__second_performance
+msgid "Second Performance"
+msgstr "Rendimiento segunda"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__seized_units
@@ -1046,6 +1097,8 @@ msgstr "Nombre de tarea"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/saca_line.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/saca_line.py:0
 #, python-format
 msgid "The company of the saca and your company is not the same."
 msgstr "La compañía de la saca no es la misma"
@@ -1053,41 +1106,20 @@ msgstr "La compañía de la saca no es la misma"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "The outgoing lot must match the incoming one."
 msgstr "El lote saliente debe coincidir con alguno de la entrada."
 
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid "The picking has no partner."
-msgstr "El albarán no tiene contacto."
-
-#. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid ""
-"The product of the line %(product)s is not the same as the product found "
-"%(product_found)s"
-msgstr ""
-"El producto de la línea %(product)s no es el mismo que el producto encontrado "
-"%(product_found)s"
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/models/stock_move_line.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/models/stock_move_line.py:0
 #, python-format
 msgid "The product of the lot does not match with the product of the line."
 msgstr "El producto del lote no coincide con el producto de la línea."
-
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid "The product of the reader, %(reader)s, is not the same of the line."
-msgstr ""
-"El producto del lector, %(reader)s, no es el mismo que el de la línea."
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__timesheet_ids
@@ -1140,6 +1172,8 @@ msgstr "Duración total"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Total Entradas"
 msgstr ""
@@ -1191,6 +1225,8 @@ msgstr "Cantidad total"
 #. module: custom_mrp_descarga
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #, python-format
 msgid "Total Salidas"
 msgstr ""
@@ -1210,16 +1246,13 @@ msgstr "Importe total"
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/github/avanzosc/mrp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/temp-addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
 #, python-format
 msgid "Unidades"
 msgstr ""
-
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
-msgid "Unidentified barcode format : %(reader)s"
-msgstr "Formato de lector indefinido: %(reader)s"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__unit_difference
@@ -1238,6 +1271,11 @@ msgstr "Unidades"
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__unload_date
 msgid "Unload Date"
 msgstr "Fecha descarga"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
+msgid "Update Data"
+msgstr "Actualizar datos"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__vehicle_id
