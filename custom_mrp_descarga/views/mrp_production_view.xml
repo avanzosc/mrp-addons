@@ -180,6 +180,7 @@
           name="qty_difference"
           attrs="{'invisible':['|', ('saca_line_id', '!=', False), ('tolvasa', '=', True)]}"
         />
+                <field name="second_performance" />
             </field>
             <field name="cost" position="after">
                 <field name="gross_yield" invisible="1" />

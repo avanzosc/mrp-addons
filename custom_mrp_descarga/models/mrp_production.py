@@ -232,6 +232,10 @@ class MrpProduction(models.Model):
         comodel_name="account.analytic.line",
         inverse_name="mrp_production_id",
     )
+    second_performance = fields.Float(
+        compute="_compute_second_performance",
+        store=True,
+    )
 
     @api.depends("total_duration", "total_unit")
     def _compute_speed_consume_unit(self):
@@ -448,6 +452,22 @@ class MrpProduction(models.Model):
             ).filtered(
                 lambda c: c.product_id.egg is True
                 and (c.location_id.is_hatchery is True)
+            )
+
+    @api.depends(
+        "move_line_ids",
+        "move_line_ids.performance",
+        "move_line_ids.product_id",
+        "move_line_ids.product_id.categ_id",
+        "move_line_ids.product_id.categ_id.second_category",
+    )
+    def _compute_second_performance(self):
+        for production in self:
+            move_lines = production.mapped("move_line_ids").filtered(
+                lambda l: l.product_id.categ_id.second_category
+            )
+            production.second_performance = (
+                sum(move_lines.mapped("performance")) if move_lines else 0.0
             )
 
     @api.onchange("picking_type_id")
