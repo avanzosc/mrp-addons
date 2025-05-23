@@ -166,7 +166,7 @@ class SacaLine(models.Model):
             line.seizured_percentage = (
                 sum(seizured.mapped("qty_done")) / line.download_unit
             )
-            line.second_performance = sum(
+            line.second_percentage = sum(
                 line.mapped("production_ids.second_performance")
             )
         return True

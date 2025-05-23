@@ -456,7 +456,7 @@ class MrpProduction(models.Model):
 
     @api.depends(
         "move_line_ids",
-        "move_line_ids.performance",
+        "move_line_ids.percentage",
         "move_line_ids.product_id",
         "move_line_ids.product_id.categ_id",
         "move_line_ids.product_id.categ_id.second_category",
@@ -467,7 +467,7 @@ class MrpProduction(models.Model):
                 lambda l: l.product_id.categ_id.second_category
             )
             production.second_performance = (
-                sum(move_lines.mapped("performance")) if move_lines else 0.0
+                sum(move_lines.mapped("percentage")) if move_lines else 0.0
             )
 
     @api.onchange("picking_type_id")
