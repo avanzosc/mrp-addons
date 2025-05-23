@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_qc_inspection_document">
+        <t t-call="qc_inspection_report.external_layout_qc_inspection">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <div class="page" style="font-family:ubuntu; font-size:14px">
+                <div class="oe_structure" />
+                <h2 class="text-center">
+                    <span>QUALITY CONTROL TEST</span>
+                </h2>
+                <div class="col-12" style="text-align:left; font-size:18px">
+                    <br />
+                    <t>
+                        <strong>
+                            <span>Inspection:</span>
+                            <span t-field="o.name" />
+                        </strong>
+                    </t>
+                    <br />
+                </div>
+                <table
+          name="first_block"
+          class="table table-condensed"
+          style="border-top-style:hidden;border-bottom-style:hidden;"
+        >
+                   <tbody>
+                        <tr
+              t-if="o.test"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>Test</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.test" />
+                            </td>
+                        </tr>
+                        <tr
+              t-if="o.user"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>User</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.user" />
+                            </td>
+                        </tr>
+                        <tr
+              t-if="o.object_id"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>Reference</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.object_id" />
+                            </td>
+                        </tr>
+                        <tr
+              t-if="o.qty"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>Quantity</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.qty" />
+                            </td>
+                        </tr>
+                        <tr
+              t-if="o.product_id"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>Product</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.product_id" />
+                            </td>
+                        </tr>
+                        <tr
+              t-if="o.picking_id"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>Picking</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.picking_id" />
+                            </td>
+                        </tr>
+                        <tr
+              t-if="o.lot_id"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>Lot</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.lot_id" />
+                            </td>
+                        </tr>
+                        <tr
+              name="date"
+              style="border-top-style:hidden;border-bottom-style:hidden;"
+            >
+                            <td>
+                                <strong>Date</strong>
+                            </td>
+                            <td><spam>&amp;nbsp;</spam></td>
+                            <td>
+                                <span t-field="o.date" t-options='{"widget": "date"}' />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table
+          name="last_block"
+          class="table table-condensed"
+          style="margin-bottom: 0px;"
+        >
+                    <thead>
+                        <tr>
+                            <th>
+                              <span><strong>Question</strong></span>
+                            </th>
+                            <th>
+                              <span><strong>Question type</strong></span>
+                            </th>
+                            <th>
+                              <span><strong>Qualitative value</strong></span>
+                            </th>
+                            <th>
+                              <span><strong>Quantitative value</strong></span>
+                            </th>
+                            <th>
+                              <span><strong>UoM</strong></span>
+                            </th>
+                            <th>
+                              <span><strong>Valid values</strong></span>
+                            </th>
+                            <th name="success">
+                              <span><strong>Success</strong></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <t t-foreach="o.inspection_lines" t-as="l">
+                        <tr>
+                            <td><span t-field="l.name" /></td>
+                            <td><span t-field="l.question_type" /></td>
+                            <td><span t-field="l.qualitative_value" /></td>
+                            <td><span t-field="l.quantitative_value" /></td>
+                            <td><span t-field="l.uom_id" /></td>
+                            <td><span t-field="l.valid_values" /></td>
+                            <td name="success"><span t-field="l.success" /></td>
+                        </tr>
+                      </t>
+                    </tbody>
+                </table>
+                <div class="oe_structure" />
+            </div>
+        </t>
+    </template>
+
+    <template id="report_qcinspection">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.user.lang" />
+                <t
+          t-call="qc_inspection_report.report_qc_inspection_document"
+          t-lang="lang"
+        />
+            </t>
+        </t>
+    </template>
+
+    <record id="report_qc_inspection" model="ir.actions.report">
+        <field name="name">Inspection</field>
+        <field name="model">qc.inspection</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">qc_inspection_report.report_qcinspection</field>
+        <field name="report_file">qc_inspection_report.report_qcinspection</field>
+        <field
+      name="print_report_name"
+    >'Quality control for inspection: %s' % (object.name)</field>
+        <field name="binding_model_id" ref="quality_control_oca.model_qc_inspection" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_ref_calculate
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-28 08:10+0000\n"
+"PO-Revision-Date: 2024-11-28 08:10+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_ref_calculate
+#: model:ir.model,name:mrp_bom_ref_calculate.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: mrp_bom_ref_calculate
+#: model:ir.model.fields,field_description:mrp_bom_ref_calculate.field_mrp_production__bom_ref
+#: model_terms:ir.ui.view,arch_db:mrp_bom_ref_calculate.view_mrp_production_filter
+msgid "BoM Reference"
+msgstr "Referencia LdM"
+
+#. module: mrp_bom_ref_calculate
+#: model:ir.model,name:mrp_bom_ref_calculate.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_bom_ref_calculate
+#: model:ir.model.fields,field_description:mrp_bom_ref_calculate.field_mrp_bom__ref_note
+msgid "Ref. Note"
+msgstr "Ref. Nota"
+
+#. module: mrp_bom_ref_calculate
+#: model:ir.model.fields,field_description:mrp_bom_ref_calculate.field_mrp_bom__code
+msgid "Reference"
+msgstr "Referencia"

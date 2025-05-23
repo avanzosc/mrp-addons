@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="qc_inspection_type_tree_view" model="ir.ui.view">
+        <field name="name">qc.inspection.type.tree.view</field>
+        <field name="model">qc.inspection.type</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_qc_inspection_type" model="ir.actions.act_window">
+         <field name="name">Inspections types</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="view_mode">tree</field>
+         <field name="res_model">qc.inspection.type</field>
+         <field name="domain">[]</field>
+         <field name="context">{}</field>
+    </record>
+
+    <menuitem
+    id="menu_qc_inspection_type"
+    action="action_qc_inspection_type"
+    name="Inspections types"
+    parent="quality_control_oca.menu_qc_config"
+    sequence="25"
+  />
+</odoo>

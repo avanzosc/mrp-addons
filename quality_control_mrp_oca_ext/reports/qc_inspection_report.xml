@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+    id="report_qc_inspection_document"
+    inherit_id="qc_inspection_report.report_qc_inspection_document"
+    priority="100"
+  >
+        <h2 position="replace">
+            <h2 class="text-center">
+                <span>QUALITY CONTROL TEST IN PRODUCTION</span>
+            </h2>
+        </h2>
+        <th name="success" position="after">
+            <th name="component">
+              <span><strong>Component</strong></span>
+            </th>
+        </th>
+        <td name="success" position="after">
+            <td name="component"><span t-field="l.component" /></td>
+        </td>
+        <tr t-if="o.picking_id" position="after">
+            <tr
+        t-if="o.software"
+        style="border-top-style:hidden;border-bottom-style:hidden;"
+      >
+                <td>
+                    <strong>Programed software</strong>
+                </td>
+                <td><spam>&amp;nbsp;</spam></td>
+                <td>
+                    <span t-field="o.software" />
+                </td>
+            </tr>
+        </tr>
+        <tr name="date" position="before">
+            <tr
+        t-if="o.operator_id"
+        style="border-top-style:hidden;border-bottom-style:hidden;"
+      >
+                <td>
+                    <strong>Operator</strong>
+                </td>
+                <td><spam>&amp;nbsp;</spam></td>
+                <td>
+                    <span t-field="o.operator_id" />
+                </td>
+            </tr>
+        </tr>
+        <table name="first_block" position="after">
+
+            <div
+        t-if="o.production_id and o.print_production_information"
+        class="row mt32 mb32"
+        id="informations"
+      >
+                <t t-foreach="o.extended_quality_control_ids" t-as="l">
+                    <div class="col-3">
+                        <strong>Verification type</strong>
+                        <p
+              t-if="l.verification_type_id"
+              t-field="l.verification_type_id"
+            />
+                    </div>
+                    <div class="col-3 text-center">
+                        <strong>Type of failure</strong>
+                        <p t-if="l.packaging_id" t-field="l.packaging_id" />
+                    </div>
+                    <div class="col-3 text-center">
+                        <strong>Lot</strong>
+                        <p t-if="l.lot_id" t-field="l.lot_id.name" />
+                    </div>
+                    <div class="col-3 text-center">
+                        <strong>Quantity produced</strong>
+                        <p t-field="l.quantity_produced" />
+                    </div>
+                    <br />
+                    <div class="col-12">
+                        <table
+              class="table table-condensed"
+              style="margin-bottom: 0px;"
+            >
+                            <thead>
+                                <tr>
+                                    <th class="text-left">
+                                      <span><strong>Operator</strong></span>
+                                    </th>
+                                    <th class="text-right">
+                                      <span><strong>Date</strong></span>
+                                    </th>
+                                    <th class="text-right">
+                                      <span><strong>Start hour</strong></span>
+                                    </th>
+                                    <th class="text-right">
+                                      <span><strong>Final hour</strong></span>
+                                    </th>
+                                    <th class="text-right">
+                                      <span><strong>Total time</strong></span>
+                                    </th>
+                                    <th class="text-left">
+                                      <span><strong>Cause</strong></span>
+                                    </th>
+                                    <th class="text-left">
+                                      <span><strong>Solution</strong></span>
+                                    </th>
+                                    <th class="text-right">
+                                      <span><strong>Quantity</strong></span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <t t-foreach="l.operators_lines_ids" t-as="l2">
+                                <tr>
+                                    <td class="text-left">
+                                        <span
+                        t-if="l2.operator_id"
+                        t-field="l2.operator_id"
+                      />
+                                    </td>
+                                    <td class="text-right"><span
+                        t-field="l2.control_date"
+                      /></td>
+                                    <td class="text-right"><span
+                        t-field="l2.start_hour"
+                      /></td>
+                                    <td class="text-right"><span
+                        t-field="l2.final_hour"
+                      /></td>
+                                    <td class="text-right"><span
+                        t-field="l2.total_time"
+                      /></td>
+                                    <td class="text-left"><span
+                        t-field="l2.cause"
+                      /></td>
+                                    <td class="text-left">
+                                        <span
+                        t-if="l2.solution_id"
+                        t-field="l2.solution_id"
+                      />
+                                    </td>
+                                    <td class="text-right"><span
+                        t-field="l2.quantity"
+                      /></td>
+                                </tr>
+                              </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </div>
+        </table>
+    </template>
+</odoo>

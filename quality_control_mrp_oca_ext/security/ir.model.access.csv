@@ -1,0 +1,15 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_extended_quality_control_manager","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control","mrp.group_mrp_manager",1,1,1,1
+"access_extended_quality_control_user","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control","mrp.group_mrp_user",1,1,1,1
+"access_extended_quality_control_line_manager","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_line","mrp.group_mrp_manager",1,1,1,1
+"access_extended_quality_control_line_user","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_line","mrp.group_mrp_user",1,1,1,1
+"access_extended_quality_control_verification_type_manager","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_verification_type","mrp.group_mrp_manager",1,1,1,1
+"access_extended_quality_control_verification_type_user","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_verification_type","mrp.group_mrp_user",1,0,0,0
+"access_extended_quality_control_packaging_manager","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_packaging","mrp.group_mrp_manager",1,1,1,1
+"access_extended_quality_control_packaging_user","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_packaging","mrp.group_mrp_user",1,0,0,0
+"access_extended_quality_control_component_manager","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_component","mrp.group_mrp_manager",1,1,1,1
+"access_extended_quality_control_component_user","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_component","mrp.group_mrp_user",1,0,0,0
+"access_extended_quality_control_solution_manager","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_solution","mrp.group_mrp_manager",1,1,1,1
+"access_extended_quality_control_solution_user","extended_quality_control","quality_control_mrp_oca_ext.model_extended_quality_control_solution","mrp.group_mrp_user",1,0,0,0
+"access_qc_inspection_type_manager","qc_inspection_type","quality_control_mrp_oca_ext.model_qc_inspection_type","mrp.group_mrp_manager",1,1,1,1
+"access_qc_inspection_type_user","qc_inspection_type","quality_control_mrp_oca_ext.model_qc_inspection_type","mrp.group_mrp_user",1,0,0,0

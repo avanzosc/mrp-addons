@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_tree_receipt_picking" model="ir.ui.view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree_receipt_picking" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="qc_inspection_type_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="location_dest_id" position="after">
+                <field name="qc_inspection_type_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_move_tree" model="ir.ui.view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_picking_move_tree" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="qc_inspection_type_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_search" model="ir.ui.view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_search" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="qc_inspection_type_id" />
+            </field>
+            <filter name="by_product" position="after">
+                <filter
+          string="Inspection type"
+          name="by_inspection_type"
+          icon="terp-accessories-archiver"
+          domain="[]"
+          context="{'group_by':'qc_inspection_type_id'}"
+        />
+            </filter>
+        </field>
+    </record>
+ </odoo>

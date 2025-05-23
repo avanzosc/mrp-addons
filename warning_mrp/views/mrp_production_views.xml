@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <h1 position="after">
+                <field name="mrp_production_warn" invisible="1" />
+                <separator
+          string="Warning !!!!!"
+          attrs="{'invisible': [('mrp_production_warn', '!=', 'warning')]}"
+          readonly="1"
+        />
+                <field
+          name="mrp_production_warn_msg"
+          attrs="{'invisible': [('mrp_production_warn', '!=', 'warning')]}"
+          readonly="1"
+        />
+            </h1>
+        </field>
+    </record>
+</odoo>

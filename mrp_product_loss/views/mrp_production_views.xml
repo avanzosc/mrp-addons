@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+             <xpath
+        expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']"
+        position="before"
+      >
+                <field name="to_consume_before_loss_qty" readonly="1" />
+                <field name="product_loss_qty" readonly="1" />
+             </xpath>
+        </field>
+    </record>
+</odoo>

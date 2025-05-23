@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_routing_workcenter_import_view_tree" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter.import</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="state == 'done'" decoration-bf="state == 'pass'">
+                <field name="name" />
+                <field name="file_date" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_import_view_form" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+            name="action_import_file"
+            string="Import"
+            type="object"
+            states="draft,2validate,pass,error"
+          />
+                    <button
+            name="action_validate"
+            string="Validate"
+            type="object"
+            states="2validate,error,pass"
+          />
+                    <button
+            name="action_process"
+            string="Process"
+            type="object"
+            states="error,pass"
+          />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+              string="Import Lines"
+              type="object"
+              name="button_open_import_line"
+              attrs="{'invisible':[('import_line_ids', '=', [])]}"
+              class="oe_stat_button"
+              icon="fa-bars"
+            />
+                        <button
+              type="object"
+              name="button_open_boms"
+              string="BoMs"
+              attrs="{'invisible':[('bom_count', '=', 0)]}"
+              class="oe_stat_button"
+              icon="fa-folder-open"
+            >
+                            <field name="bom_count" />
+                        </button>
+                        <button
+              type="object"
+              name="button_open_operations"
+              string="Operations"
+              attrs="{'invisible':[('operation_count', '=', 0)]}"
+              class="oe_stat_button"
+              icon="fa-folder-open"
+            >
+                            <field name="operation_count" />
+                        </button>
+                    </div>
+                    <group>
+                        <group string="Import Data">
+                            <field name="filename" />
+                            <field name="data" filename="filename" />
+                            <field name="file_date" />
+                        </group>
+                        <group string="Rounting Workcenter Information">
+                            <field
+                name="company_id"
+                groups="base.group_multi_company"
+                options="{'no_create': True}"
+              />
+                            <field name="product_found_by_code" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Imported Lines">
+                            <field name="import_line_ids" />
+                        </page>
+                        <page
+              string="Error Log"
+              attrs="{'invisible':[('log_info','=','')]}"
+            >
+                            <field name="log_info" />
+                        </page>
+                        <page
+              string="Help"
+              attrs="{'invisible': [('state', '=', 'done')]}"
+            >
+                                <div name="help" style="margin-top: 4px;">
+                                    <h3>Help with Excel column names</h3>
+                                    <p
+                >You must use this column names in order to fill the table:</p>
+                                    <ul>
+                                        <li><code>BoM Ref</code>: this will fill <b
+                    >BoM Reference</b></li>
+                                        <li><code>Operation</code>: this will fill <b
+                    >Operation Name</b></li>
+                                        <li><code>Workcenter</code>: this will fill <b
+                    >Workcenter</b></li>
+                                        <li><code>Product Code</code>: this will fill <b
+                    >Product Code</b></li>
+                                        <li><code>Product Name</code>: this will fill <b
+                    >Product Name</b></li>
+                                    </ul>
+                                </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_import_view_search" model="ir.ui.view">
+        <field name="model">mrp.routing.workcenter.import</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="file_date" />
+                <filter
+          name="pending"
+          string="Pending"
+          domain="[('state', '!=', 'done')]"
+        />
+                <filter
+          name="finished"
+          string="Done"
+          domain="[('state', '=', 'done')]"
+        />
+                <filter
+          name="errored"
+          string="Error"
+          domain="[('state', '=', 'error')]"
+        />
+                <group expand="0" string="Group By">
+                    <filter
+            string="Status"
+            name="state_group"
+            domain="[]"
+            context="{'group_by':'state'}"
+          />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_import_action" model="ir.actions.act_window">
+        <field name="name">Import Routing Workcenter Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.routing.workcenter.import</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+    id="mrp_routing_workcenter_import_menu"
+    action="mrp_routing_workcenter_import_action"
+    parent="base_import_wizard.base_import_menu"
+    sequence="10"
+  />
+
+    <menuitem
+    id="mrp_bom_routing_workcenter_import_menu_action"
+    action="mrp_routing_workcenter_import_action"
+    parent="mrp_routing_workcenter_import_menu"
+    sequence="10"
+  />
+
+    <menuitem
+    id="mrp_routing_workcenter_import_menu"
+    name="BoM Operation Import"
+    parent="mrp.menu_mrp_configuration"
+    groups="mrp.group_mrp_manager"
+    sequence="120"
+  />
+
+</odoo>

@@ -1,0 +1,476 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* quality_control_mrp_oca_ext
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-04 12:20+0000\n"
+"PO-Revision-Date: 2024-09-04 12:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "&amp;nbsp;"
+msgstr "&amp;nbsp;"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_line_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.mrp_production_form_view
+msgid "&gt;"
+msgstr "&gt;"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Cause</strong></span>"
+msgstr "<span><strong>Causa</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Component</strong></span>"
+msgstr "<span><strong>Componente</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Date</strong></span>"
+msgstr "<span><strong>Fecha</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Final hour</strong></span>"
+msgstr "<span><strong>Hora fin</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Operator</strong></span>"
+msgstr "<span><strong>Operador</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Quantity</strong></span>"
+msgstr "<span><strong>Cantidad</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Solution</strong></span>"
+msgstr "<span><strong>Solución</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Start hour</strong></span>"
+msgstr "<span><strong>Hora inicio</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span><strong>Total time</strong></span>"
+msgstr "<span><strong>Tiempo total</strong></span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<span>QUALITY CONTROL TEST IN PRODUCTION</span>"
+msgstr "<span>TEST CONTROL CALIDAD EN PRODUCCIÓN</span>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<strong>Lot</strong>"
+msgstr "<strong>Lote</strong>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<strong>Operator</strong>"
+msgstr "<strong>Operador</strong>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<strong>Programed software</strong>"
+msgstr "<strong>Software programado</strong>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<strong>Quantity produced</strong>"
+msgstr "<strong>Cantidad producida</strong>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<strong>Type of failure</strong>"
+msgstr "<strong>Typo de fallo</strong>"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.report_qc_inspection_document
+msgid "<strong>Verification type</strong>"
+msgstr "<strong>Tipo verificación</strong>"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__cause
+msgid "Cause detected"
+msgstr "Causa detectada"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__component_id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_line__component
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_test_question__component
+msgid "Component"
+msgstr "Componente"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.actions.act_window,name:quality_control_mrp_oca_ext.action_extended_quality_control_component_view
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.extended_quality_control_component_option_view
+msgid "Components"
+msgstr "Componentes"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_extended_quality_control_component
+msgid "Components for production control"
+msgstr "Componentes para control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__create_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component__create_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__create_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging__create_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution__create_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type__create_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__create_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component__create_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__create_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging__create_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution__create_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type__create_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__control_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component__name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging__name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution__name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type__name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__display_name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component__display_name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__display_name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging__display_name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution__display_name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type__display_name
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type__display_name
+msgid "Display Name"
+msgstr "Mostrar nombre"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__packaging_id
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_search_view
+msgid "Failure type"
+msgstr "Tipo fallo"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.actions.act_window,name:quality_control_mrp_oca_ext.action_extended_quality_control_packaging_view
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.extended_quality_control_packaging_option_view
+msgid "Failure types"
+msgstr "Tipos fallos"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__final_hour
+msgid "Final hour"
+msgstr "Hora final"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component__id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging__id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution__id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type__id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type__id
+msgid "ID"
+msgstr "ID"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_product_product__qc_inspection_type_id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_product_template__qc_inspection_type_id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_stock_move__qc_inspection_type_id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_stock_reservation__qc_inspection_type_id
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.product_template_search_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.view_move_search
+msgid "Inspection type"
+msgstr "Tipo inspección"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.actions.act_window,name:quality_control_mrp_oca_ext.action_qc_inspection_type
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_qc_inspection_type
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.menu_qc_inspection_type
+msgid "Inspections types"
+msgstr "Tipo inspecciones"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control____last_update
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component____last_update
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line____last_update
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging____last_update
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution____last_update
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type____last_update
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__write_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component__write_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__write_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging__write_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution__write_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type__write_uid
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__write_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_component__write_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__write_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_packaging__write_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_solution__write_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_verification_type__write_date
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection_type__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__mrp_production_id
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_search_view
+msgid "Manufacturing order"
+msgstr "Orden de fabricación"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__verification_type_id
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_search_view
+msgid "Operation"
+msgstr "Operación"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.actions.act_window,name:quality_control_mrp_oca_ext.action_extended_quality_control_verif_type_view
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.extended_quality_control_verif_type_option_view
+msgid "Operations"
+msgstr "Operaciones"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__operator_id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection__operator_id
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.qc_inspection_search_view
+msgid "Operator"
+msgstr "Operador"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__operators_lines_ids
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.qc_inspection_form_view
+msgid "Operators lines"
+msgstr "Líneas de operadores"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_extended_quality_control_packaging
+msgid "Packagings for production control"
+msgstr ""
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection__print_production_information
+msgid "Print production data"
+msgstr "Imprimir datos producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_product_template
+msgid "Product"
+msgstr "Producto"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_test__product_category_ids
+msgid "Product categories"
+msgstr "Categorías producto"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__mrp_product_id
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_search_view
+msgid "Product to produce"
+msgstr "Producto a producir"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.qc_production_control_menu_parent
+msgid "Production Control"
+msgstr "Control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.actions.act_window,name:quality_control_mrp_oca_ext.action_extended_quality_control_view
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_extended_quality_control
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__extended_quality_control_id
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_mrp_production__extended_quality_control_ids
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection__extended_quality_control_ids
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.extended_quality_control_option_view
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.extended_quality_control_option_view2
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_line_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.qc_inspection_form_view
+msgid "Production control"
+msgstr "Control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_extended_quality_control_line
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_line_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.qc_inspection_form_view
+msgid "Production control lines"
+msgstr "Líneas de control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_test__product_ids
+msgid "Products"
+msgstr "Productos"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.qc_test_form_view
+msgid "Products for production control"
+msgstr "Productos para control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_qc_inspection
+msgid "Quality control inspection"
+msgstr "Inspección del control de calidad"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_qc_inspection_line
+msgid "Quality control inspection line"
+msgstr "Línea de inspección de control de calidad"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_qc_test_question
+msgid "Quality control question"
+msgstr "Pregunta del control de calidad"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_qc_test
+msgid "Quality control test"
+msgstr "Test del control de calidad"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__quantity
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_search_view
+msgid "Search production control"
+msgstr "Buscar control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_component_search_view
+msgid "Search production control components"
+msgstr "Buscar componentes control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_verification_type_search_view
+msgid "Search production control operations"
+msgstr "Buscar operaciones control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_solution_search_view
+msgid "Search production control solutions"
+msgstr "Buscar soluciones control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.extended_quality_control_packaging_search_view
+msgid "Search production failure types"
+msgstr "Buscar tipos de fallo producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_inspection__software
+msgid "Software"
+msgstr "Software"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__solution_id
+msgid "Solution"
+msgstr "Solución"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.actions.act_window,name:quality_control_mrp_oca_ext.action_extended_quality_control_solution_view
+#: model:ir.ui.menu,name:quality_control_mrp_oca_ext.extended_quality_control_solution_option_view
+msgid "Solutions"
+msgstr "Soluciones"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_extended_quality_control_solution
+msgid "Solutions for production control"
+msgstr "Soluciones para control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__start_hour
+msgid "Start hour"
+msgstr "Hora inicio"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_qc_test__test_for_manufacturing_orders
+msgid "Test for manufacturing orders"
+msgstr "Prueba para órdenes de fabricación"
+
+#. module: quality_control_mrp_oca_ext
+#: model_terms:ir.ui.view,arch_db:quality_control_mrp_oca_ext.qc_test_form_view
+msgid "Test lines"
+msgstr "Líneas test"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control_line__total_time
+msgid "Total time"
+msgstr "Tiempo total"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model,name:quality_control_mrp_oca_ext.model_extended_quality_control_verification_type
+msgid "Verification types for production control"
+msgstr "Tipos verificación para control producción"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__lot_id
+msgid "lot"
+msgstr "Lote"
+
+#. module: quality_control_mrp_oca_ext
+#: model:ir.model.fields,field_description:quality_control_mrp_oca_ext.field_extended_quality_control__quantity_produced
+msgid "quantity produced"
+msgstr "Cantidad producida"

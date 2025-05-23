@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
+        <field name="name">mrp.bom.line.import.form.inherit</field>
+        <field name="model">mrp.bom.line.import</field>
+        <field
+      name="inherit_id"
+      ref="mrp_bom_import.mrp_bom_line_component_import_view_tree"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="layer" optional="show" />
+                <field name="designator" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

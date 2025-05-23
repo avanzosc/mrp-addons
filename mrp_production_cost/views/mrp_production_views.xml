@@ -20,6 +20,19 @@
           optional="hide"
         />
             </xpath>
+            <notebook position="before">
+                <group name="estimated_cost_info" col="6">
+                    <group colspan="2">
+                        <field name="cost_manufacturing_estimated" readonly="1" />
+                    </group>
+                    <group colspan="2">
+                        <field name="cost_manufacturing_real" readonly="1" />
+                    </group>
+                    <group colspan="2">
+                        <field name="price_unit_cost" readonly="1" />
+                    </group>
+                </group>
+            </notebook>
         </field>
     </record>
 
@@ -50,6 +63,7 @@
         />
                 <field name="cost_manufacturing_estimated" sum="Estimated Total Cost" />
                 <field name="cost_manufacturing_real" sum="Real Total Cost" />
+                <field name="price_unit_cost" readonly="1" />
             </field>
         </field>
     </record>

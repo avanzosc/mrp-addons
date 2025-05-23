@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 import ast
 
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.models import expression
 from odoo.tools.safe_eval import safe_eval
 
@@ -17,6 +17,37 @@ class MrpProduction(models.Model):
     workorder_count = fields.Integer(
         string="# Work Orders", compute="_compute_workorder_count"
     )
+    move_line_ids = fields.One2many(
+        string="Move Lines",
+        comodel_name="stock.move.line",
+        inverse_name="production_id",
+        domain=lambda self: [
+            ("location_dest_id", "in", self.production_location_id.ids)
+        ],
+    )
+    finished_move_line_ids = fields.One2many(
+        compute=False,
+        inverse_name="production_id",
+        domain=lambda self: [
+            ("location_id", "in", self.production_location_id.ids),
+            ("location_dest_id", "in", self.location_dest_id.ids),
+        ],
+    )
+
+    @api.depends("move_raw_ids", "state", "move_raw_ids.product_uom_qty")
+    def _compute_unreserve_visible(self):
+        result = super()._compute_unreserve_visible()
+        for production in self:
+            production.reserve_visible = any(
+                [
+                    x.state in ("confirmed", "partially_available")
+                    for x in production.move_raw_ids
+                ]
+            )
+            production.unreserve_visible = any(
+                [x.state == "assigned" for x in production.move_raw_ids]
+            )
+        return result
 
     def action_view_workorder(self):
         self.ensure_one()

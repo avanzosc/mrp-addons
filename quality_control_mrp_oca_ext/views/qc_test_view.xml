@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="qc_test_form_view" model="ir.ui.view">
+        <field name="model">qc.test</field>
+        <field name="inherit_id" ref="quality_control_oca.qc_test_form_view" />
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <field name="category" position="before">
+                <field name="test_for_manufacturing_orders" />
+            </field>
+            <field name="category" position="after">
+                <field
+          name="product_category_ids"
+          widget="many2many_tags"
+          attrs="{'invisible': [('test_for_manufacturing_orders', '=', False)]}"
+        />
+            </field>
+            <field name="test_lines" position="replace">
+                <notebook>
+                    <page string="Test lines">
+                        <field name="test_lines" nolabel="1">
+                            <tree>
+                                <field name="sequence" widget="handle" />
+                                <field name="name" optional="show" />
+                                <field name="type" optional="show" />
+                                <field name="min_value" optional="show" />
+                                <field name="max_value" optional="show" />
+                                <field name="uom_id" optional="show" />
+                                <field name="ql_values" optional="show" />
+                                <field name="component" optional="show" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page
+            string="Products for production control"
+            attrs="{'invisible': [('test_for_manufacturing_orders', '=', False)]}"
+          >
+                        <field name="product_ids" nolabel="1">
+                            <tree>
+                                <field name="default_code" />
+                                <field name="name" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </field>
+    </record>
+ </odoo>

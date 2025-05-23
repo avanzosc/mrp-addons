@@ -27,26 +27,6 @@ msgstr ""
 #. module: mrp_production_historical
 #. odoo-python
 #: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
-#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
-#, python-format
-msgid ""
-"%(text)s\n"
-"* Replaced the designator: %(old_desig)s, by the new designator: %(new_desig)s"
-msgstr ""
-
-#. module: mrp_production_historical
-#. odoo-python
-#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
-#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
-#, python-format
-msgid ""
-"%(text)s\n"
-"* Replaced the layer: %(old_layer)s, by the new layer: %(new_layer)s"
-msgstr ""
-
-#. module: mrp_production_historical
-#. odoo-python
-#: code:addons/mrp_production_historical/models/mrp_bom_line.py:0
 #, python-format
 msgid ""
 "%(text)s\n"

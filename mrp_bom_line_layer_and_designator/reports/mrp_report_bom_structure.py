@@ -36,7 +36,10 @@ class BomStructureReport(models.AbstractModel):
         for line in res["components"]:
             bom_line = line_ids.filtered(
                 lambda ln: ln.product_id.display_name == line["name"]
+                and ln.product_qty == line["quantity"]
             )
+            if len(bom_line) > 1:
+                bom_line = self._find_untreated(bom_line, res)
             line.update(
                 {
                     "layer": bom_line.layer or "",
@@ -84,7 +87,10 @@ class BomStructureReport(models.AbstractModel):
         for line in res["lines"]:
             line_id = line_ids.filtered(
                 lambda ln: ln.product_id.display_name == line["name"]
+                and ln.product_qty == line["quantity"]
             )
+            if len(line_id) > 1:
+                line_id = self._find_untreated(line_id, res)
             line.update(
                 {
                     "layer": line_id.layer or "",
@@ -92,3 +98,19 @@ class BomStructureReport(models.AbstractModel):
                 }
             )
         return res
+
+    def _find_untreated(self, bom_lines, res):
+        for bom_line in bom_lines:
+            bom_line_treated = self.env["mrp.bom.line"]
+            for line in res["components"]:
+                if (
+                    line["name"] == bom_line.product_id.display_name
+                    and line["quantity"] == bom_line.product_qty
+                    and "layer" in line
+                    and bom_line.layer == line.get("layer")
+                    and "designator" in line
+                    and bom_line.designator == line.get("designator")
+                ):
+                    bom_line_treated += bom_line
+            if not bom_line_treated:
+                return bom_line

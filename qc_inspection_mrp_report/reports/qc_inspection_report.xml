@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+    id="report_qc_inspection_document"
+    inherit_id="qc_inspection_report.report_qc_inspection_document"
+  >
+        <tr t-if="o.product_id" position="after">
+            <tr
+        t-if="o.production_id"
+        style="border-top-style:hidden;border-bottom-style:hidden;"
+      >
+                <td>
+                    <strong>Production</strong>
+                </td>
+                <td><spam>&amp;nbsp;</spam></td>
+                <td>
+                    <span t-field="o.production_id" />
+                </td>
+            </tr>
+        </tr>
+    </template>
+</odoo>

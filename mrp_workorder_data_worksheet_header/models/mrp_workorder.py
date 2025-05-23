@@ -85,12 +85,13 @@ class MrpWorkorder(models.Model):
                 ),
             }
         )
-        action = self.env.ref("pdf_previewer.binary_container_action")
-        action_dict = action and action.read()[0] or {}
-        action_dict.update(
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "pdf_previewer.binary_container_action"
+        )
+        action.update(
             {
                 "name": _("Worksheets"),
                 "res_id": wizard.id,
             }
         )
-        return action_dict
+        return action

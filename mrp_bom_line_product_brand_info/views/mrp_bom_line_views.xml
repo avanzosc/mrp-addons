@@ -5,7 +5,6 @@
         <field name="inherit_id" ref="mrp.mrp_bom_line_view_form" />
         <field name="arch" type="xml">
             <field name="operation_id" position="after">
-                <field name="manufacturer_codes" readonly="1" />
                 <field name="markings" readonly="1" />
             </field>
         </field>

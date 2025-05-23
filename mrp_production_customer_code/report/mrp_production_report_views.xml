@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+    id="custom_mrp_report_mrporder_inherit"
+    inherit_id="mrp.report_mrporder"
+    priority="100"
+  >
+        <xpath expr="//div[@t-if='o.origin']/.." position="inside">
+            <div class="col-3" t-if="o.product_customer_code">
+                <strong>Customer code:</strong>
+                <br />
+                <span t-field="o.product_customer_code" />
+            </div>
+        </xpath>
+    </template>
+</odoo>

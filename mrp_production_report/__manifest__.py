@@ -9,7 +9,8 @@
     "license": "AGPL-3",
     "summary": "BoM notes",
     "depends": [
-        "mrp",
+        "mrp_workorder_sequence",
+        "mrp_qr_code",
     ],
     "data": ["report/mrp_production_report.xml"],
     "installable": True,

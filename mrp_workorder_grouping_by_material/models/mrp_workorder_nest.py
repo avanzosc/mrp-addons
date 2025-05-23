@@ -294,28 +294,31 @@ class MrpWorkorderNest(models.Model):
                 "binary_field": binary,
             }
         )
-        action = self.env.ref("pdf_previewer.binary_container_action")
-        action_dict = action and action.read()[0] or {}
-        action_dict.update(
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "pdf_previewer.binary_container_action"
+        )
+        action.update(
             {
                 "name": _("Worksheets"),
                 "res_id": wizard.id,
             }
         )
-        return action_dict
+        return action
 
     def show_nested_lines(self):
-        action = self.env.ref(
+        action = self.env["ir.actions.actions"]._for_xml_id(
             "mrp_workorder_grouping_by_material.mrp_workorder_nest_line_action"
         )
-        action_dict = action and action.read()[0] or {}
         domain = expression.AND(
-            [[("nest_id", "in", self.ids)], safe_eval(action.domain or "[]")]
+            [
+                [("nest_id", "in", self.ids)],
+                safe_eval(action.get("domain") or "[]"),
+            ]
         )
-        action_dict.update(
+        action.update(
             {
                 "domain": domain,
                 "limit": 10,
             }
         )
-        return action_dict
+        return action

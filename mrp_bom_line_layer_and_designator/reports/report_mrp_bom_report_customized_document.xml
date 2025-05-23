@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+    id="report_mrp_bom_customized_document_inherit"
+    inherit_id="mrp_bom_report.report_mrp_bom_customized_document"
+  >
+        <xpath expr="//table/thead/tr" position="inside">
+            <th class="text-start">Layer</th>
+            <th class="text-start">Designator</th>
+        </xpath>
+        <xpath expr="//table/tbody//tr" position="inside">
+            <td class="text-start">
+                <span t-esc="bom_line_id['layer'] or ''" />
+            </td>
+            <td class="text-start">
+                <span t-esc="bom_line_id['designator'] or ''" />
+            </td>
+        </xpath>
+    </template>
+</odoo>

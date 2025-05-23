@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_usability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-19 06:14+0000\n"
+"PO-Revision-Date: 2024-12-19 06:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_usability
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__workorder_count
+msgid "# Work Orders"
+msgstr ""
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Block"
+msgstr ""
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Done"
+msgstr ""
+
+#. module: mrp_usability
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__finished_move_line_ids
+msgid "Finished Product"
+msgstr "Producte acabat"
+
+#. module: mrp_usability
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__move_line_ids
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+msgid "Move Lines"
+msgstr ""
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Pause"
+msgstr ""
+
+#. module: mrp_usability
+#: model:ir.model,name:mrp_usability.model_mrp_production
+msgid "Production Order"
+msgstr "Ordre de producció"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Start"
+msgstr ""
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+msgid "Total Reserved"
+msgstr ""
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Unblock"
+msgstr ""
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+msgid "Work Orders"
+msgstr ""
