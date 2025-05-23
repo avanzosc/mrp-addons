@@ -44,7 +44,7 @@
           string="Update Data"
           type="object"
           name="action_compute_mo_data"
-          attrs="{'invisible': '[('production_ids', '=', [])]}"
+          attrs="{'invisible': [('production_ids', '=', [])]}"
         />
             </xpath>
         </field>
