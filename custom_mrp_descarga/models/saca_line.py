@@ -162,10 +162,10 @@ class SacaLine(models.Model):
             )
             line.asphyxiated_percentage = (
                 sum(asphyxiated.mapped("qty_done")) / line.download_unit
-            )
+            ) * 100.0
             line.seizured_percentage = (
                 sum(seizured.mapped("qty_done")) / line.download_unit
-            )
+            ) * 100.0
             line.second_percentage = sum(
                 line.mapped("production_ids.second_performance")
             )
