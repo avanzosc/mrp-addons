@@ -161,10 +161,10 @@ class SacaLine(models.Model):
                 lambda l: l.product_id.default_code == "9020"
             )
             line.asphyxiated_percentage = (
-                sum(asphyxiated.mapped("qty_done")) / line.download_unit
+                sum(asphyxiated.mapped("unit")) / line.download_unit
             ) * 100.0
             line.seizured_percentage = (
-                sum(seizured.mapped("qty_done")) / line.download_unit
+                sum(seizured.mapped("unit")) / line.download_unit
             ) * 100.0
             line.second_percentage = sum(
                 line.mapped("production_ids.second_performance")

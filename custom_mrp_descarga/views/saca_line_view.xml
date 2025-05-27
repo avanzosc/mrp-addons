@@ -49,4 +49,18 @@
             </xpath>
         </field>
     </record>
+
+    <record id="action_saca_line_update_quality" model="ir.actions.server">
+        <field name="name">Update Quality Data</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="custom_saca.model_saca_line" />
+        <field name="binding_model_id" ref="custom_saca.model_saca_line" />
+        <field name="state">code</field>
+        <field name="code">
+for record in records:
+    if record.production_ids:
+        record.action_compute_mo_data()
+        </field>
+    </record>
+
 </odoo>
