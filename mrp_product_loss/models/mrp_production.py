@@ -20,3 +20,27 @@ class MrpProduction(models.Model):
                     }
                 )
         return result
+
+    def write(self, vals):
+        if (
+            len(self) == 1
+            and isinstance(vals, dict)
+            and "qty_producing" in vals
+            and vals.get("qty_producing", 0) > 0
+            and "move_raw_ids" in vals
+            and vals.get("move_raw_ids", [])
+        ):
+            for raw in vals.get("move_raw_ids"):
+                if (
+                    len(raw) == 3
+                    and isinstance(raw[0], int)
+                    and raw[0] == 1
+                    and isinstance(raw[1], int)
+                    and isinstance(raw[2], dict)
+                ):
+                    move = self.env["stock.move"].browse(raw[1])
+                    if move.bom_line_id and move.product_id.product_loss_qty:
+                        raw[2]["to_consume_before_loss_qty"] = (
+                            move.bom_line_id.product_qty * vals.get("qty_producing")
+                        )
+        return super().write(vals)
