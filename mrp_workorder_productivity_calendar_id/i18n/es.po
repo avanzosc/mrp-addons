@@ -1,0 +1,31 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workorder_productivity_calendar_id
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-23 07:43+0000\n"
+"PO-Revision-Date: 2025-05-23 07:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workorder_productivity_calendar_id
+#: model:ir.model.fields,field_description:mrp_workorder_productivity_calendar_id.field_mrp_workcenter_productivity__calendar_id
+msgid "Work Schedule"
+msgstr "Horario de trabajo"
+
+#. module: mrp_workorder_productivity_calendar_id
+#: model:ir.model.fields,help:mrp_workorder_productivity_calendar_id.field_mrp_workcenter_productivity__calendar_id
+msgid "Work schedule of the employee at the time of this record."
+msgstr "Horario de trabajo del empleado en el momento de este registro."
+
+#. module: mrp_workorder_productivity_calendar_id
+#: model:ir.model,name:mrp_workorder_productivity_calendar_id.model_mrp_workcenter_productivity
+msgid "Workcenter Productivity Log"
+msgstr "Registro de productividad del centro de trabajo"
