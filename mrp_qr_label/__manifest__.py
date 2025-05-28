@@ -9,10 +9,13 @@
     "license": "AGPL-3",
     "depends": ["mrp", "stock_product_qr_label"],
     "data": [
+        "security/ir.model.access.csv",
+        "wizard/production_product_label_wizard_view.xml",
         "report/mrp_finished_product_qr_label.xml",
         "report/mrp_product_to_consume_qr_label.xml",
         "report/mrp_consumed_product_qr_label.xml",
         "report/mrp_production_reports.xml",
+        "report/production_product_label_wizard_report.xml",
     ],
     "installable": True,
 }
