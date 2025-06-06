@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_mrp_workorder_tree_no_editable" model="ir.ui.view">
+        <field name="name">mrp.workorder.tree.no_editable</field>
+        <field name="model">mrp.workorder</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false">
+                <field name="name" />
+                <field name="workcenter_id" />
+                <field name="production_id" />
+                <field name="product_id" optional='show' />
+                <field name="qty_remaining" optional='show' />
+                <field name="qty_produced" optional='show' />
+                <field name="finished_lot_id" optional='show' />
+                <field name="date_planned_start" optional='show' />
+                <field name="date_planned_finished" optional='show' />
+                <field name="date_start" optional='show' />
+                <field name="date_finished" optional='show' />
+                <field name="duration_expected " optional='show' />
+                <field name="duration" optional='show' />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_mrp_workorder_tree_no_editable" model="ir.actions.act_window">
+	    <field name="name">Work Orders - No Editable</field>
+	    <field name="res_model">mrp.workorder</field>
+	    <field name="view_mode">tree,form</field> <!-- agregamos form -->
+	    <field name="view_id" ref="view_mrp_workorder_tree_no_editable" />
+	    <field
+      name="views"
+      eval="[(ref('mrp.mrp_production_workorder_form_view_inherit'), 'form'), (ref('view_mrp_workorder_tree_no_editable'), 'tree')]"
+    />
+	</record>
+
+
+    <menuitem
+    id="mrp_menu_mrp_work_orders_no_editable"
+    name="Work Orders - No Editable"
+    parent="mrp.menu_mrp_manufacturing"
+    action="action_mrp_workorder_tree_no_editable"
+    sequence="15"
+  />
+</odoo>
