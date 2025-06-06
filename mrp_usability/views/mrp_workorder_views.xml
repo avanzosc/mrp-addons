@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <record id="mrp.mrp_workorder_mrp_production_form" model="ir.actions.act_window">
+        <field name="target">current</field>
+    </record>
+
     <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
@@ -43,12 +47,9 @@
           attrs="{'invisible': ['|', ('production_state', 'in', ('draft', 'done')), ('working_state', '!=', 'blocked')]}"
         />
             </header>
-            <xpath expr="//form/sheet/group" position="after">
-                <group>
-                    <field name="production_id" />
-                    <field name="workcenter_id" />
-                </group>
-            </xpath>
+            <field name="production_id" position="after">
+                <field name="workcenter_id" />
+            </field>
         </field>
     </record>
 
