@@ -10,20 +10,32 @@ class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
     performance = fields.Float(
-        string="Performance", compute="_compute_performance", store=True
+        string="R2%",
+        compute="_compute_performance",
+        store=True,
+        group_operator="avg",
     )
     sequence = fields.Integer(
-        string="Sequence", compute="_compute_sequence", store=True
+        string="Sequence",
+        compute="_compute_sequence",
+        store=True,
     )
     quartering = fields.Boolean(
-        string="Quartering", related="production_id.quartering", store=True
+        string="Quartering",
+        related="production_id.quartering",
+        store=True,
     )
-    saca_date = fields.Date(string="Saca Date", related="saca_line_id.date", store=True)
+    saca_date = fields.Date(
+        string="Saca Date",
+        related="saca_line_id.date",
+        store=True,
+    )
     qty_done = fields.Float(
         digits="Weight Decimal Precision",
     )
     average_price = fields.Float(
-        string="Average Price", compute="_compute_average_price"
+        string="Average Price",
+        compute="_compute_average_price",
     )
 
     @api.depends("lot_id", "lot_id.average_price")

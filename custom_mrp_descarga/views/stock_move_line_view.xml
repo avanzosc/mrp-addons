@@ -22,7 +22,7 @@
                 <field
           name="performance"
           optional="show"
-          sum="Total Performance"
+          avg="Total Performance"
           attrs="{'readonly': [('state', '=', 'done')]}"
         />
                 <field
@@ -77,7 +77,7 @@
         />
             </field>
             <field name="qty_done" position="after">
-                <field name="performance" sum="Total Performance" optional="hide" />
+                <field name="performance" avg="Total Performance" optional="hide" />
             </field>
         </field>
     </record>
@@ -181,7 +181,7 @@
                 <field name="product_uom_id" optional="show" />
                 <field name="unit" optional="show" />
                 <field name="weight" optional="show" />
-                <field name="performance" optional="show" />
+                <field name="performance" avg="Total Performance" optional="show" />
                 <field
           name="percentage"
           optional="hide"
@@ -215,7 +215,7 @@
                 <field name="weight" optional="show" />
                 <field name="qty_done" />
                 <field name="average_weight" optional="hide" />
-                <field name="performance" optional="show" />
+                <field name="performance" avg="Total Performance" optional="show" />
                 <field name="standard_price" />
                 <field name="amount" />
                 <field name="operation_id" optional="show" />
