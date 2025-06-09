@@ -600,7 +600,7 @@
                             <field
                 name="performance"
                 attrs="{'column_invisible': [('parent.quartering', '=', False)]}"
-                sum="Total Performance"
+                avg="Total Performance"
               />
                             <field name="base_price" optional="show" />
                             <field name="applied_price" optional="show" />
