@@ -10,7 +10,7 @@ class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
     performance = fields.Float(
-        string="R2%",
+        string="Performance %",
         compute="_compute_performance",
         store=True,
         group_operator="avg",
