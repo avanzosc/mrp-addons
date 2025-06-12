@@ -4,6 +4,7 @@
     "name": "MRP Workorder Permission",
     "version": "16.0.1.0.0",
     "author": "Avanzosc",
+    "summary": "Adds an inventory posting button and finished moves tab to work orders.",
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing/Manufacturing",
     "depends": [
@@ -12,6 +13,7 @@
     "data": [
         "data/mrp_workorder_permission.xml",
         "views/mrp_workorder_views.xml",
+        "views/mrp_workcenter_view.xml",
     ],
     "license": "AGPL-3",
     "installable": True,
