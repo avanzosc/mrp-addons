@@ -1,14 +1,14 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   :alt: License: AGPL-3
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+    :alt: License: AGPL-3
 
-========================
-Mrp bom component change
-========================
+==========================
+Mrp bom prit product image
+==========================
 
-* In Manufacturing/Products new menu "Mass component change in BoMs" for 
-  allows to change massively one component by another on a list of BoMs.
-
+* In "Bill of Material" new field "Print Product Image".
+* In "Bill of Material Line" new field "Product Image".
+* "BoM Overwiew" report modified for print product image.
 
 Bug Tracker
 ===========

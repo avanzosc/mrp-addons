@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+    id="report_mrp_bom_customized_document"
+    inherit_id="mrp_bom_report.report_mrp_bom_customized_document"
+  >
+        <xpath expr="//thead//th[1]" position="before">
+            <th t-if="doc.print_product_image" name="product-image">Image</th>
+        </xpath>
+        <xpath expr="//span[@id='product_name']/.." position="before">
+            <td t-if="doc.print_product_image" name="product-image">
+                <img
+          t-if="bom_line_id.product_image"
+          t-att-src="image_data_uri(bom_line_id.product_image)"
+          style="max-height: 2cm; max-width: 4cm;"
+        />
+            </td>
+        </xpath>
+    </template>
+</odoo>
