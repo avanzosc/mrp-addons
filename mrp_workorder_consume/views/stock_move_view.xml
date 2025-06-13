@@ -1,0 +1,85 @@
+<odoo>
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="editable">bottom</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="workorder_id" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
+                <attribute name="required">1</attribute>
+                <attribute
+          name="context"
+        >{'default_detailed_type': 'product'}</attribute>
+                <attribute name="attrs">{'readonly': ['|', '|',
+                    ('move_lines_count', '&gt;', 0), ('state', '=', 'cancel'),
+                    '&amp;', ('state', '!=', 'draft'), ('additional', '=',
+                    False) ]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_uom']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute
+          name="options"
+        >{'no_open': True, 'no_create': True}</attribute>
+                <attribute name="groups">uom.group_uom</attribute>
+                <attribute name="string">Unit</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="forecast_availability" optional="hide" readonly='1' />
+                <field name="product_uom_category_id" invisible="1" />
+                <field name="move_lines_count" invisible="1" />
+                <field name="additional" invisible="1" />
+                <field name="quantity_done" optional="hide" />
+                <field name="lot_ids" optional="hide" readonly='1' />
+            </xpath>
+            <xpath expr="//field[@name='state']" position="after">
+                <button
+          name="action_show_details"
+          type="object"
+          icon="fa-list"
+          title="Show Details"
+          context="{'default_finished_move_id': id}"
+        />
+            </xpath>
+            <xpath expr="//field[@name='location_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="options">{'no_create': True}</attribute>
+                <attribute name="string">From</attribute>
+                <attribute
+          name="decoration-muted"
+        >location_usage not in ('internal','transit')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='reference']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='location_dest_id']" position="attributes">
+                <attribute name="optional">show</attribute>
+                <attribute name="groups" />
+                <attribute name="options">{'no_create': True}</attribute>
+                <attribute name="string">To</attribute>
+                <attribute
+          name="decoration-muted"
+        >location_usage not in ('internal','transit')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_packaging_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="groups">product.group_stock_packaging</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="groups" />
+                <attribute name="optional">hide</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

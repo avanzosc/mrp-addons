@@ -7,12 +7,15 @@
     "category": "Hidden",
     "license": "AGPL-3",
     "author": "AvanzOSC",
+    "summary": "Adds a inventory posting button and finished moves tab to work orders.",
     "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
         "mrp",
     ],
     "data": [
         "views/mrp_workorder_views.xml",
+        "views/mrp_production_view.xml",
+        "views/stock_move_view.xml",
     ],
     "installable": True,
 }

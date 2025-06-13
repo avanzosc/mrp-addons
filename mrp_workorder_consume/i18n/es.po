@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-11 08:30+0000\n"
-"PO-Revision-Date: 2023-09-11 08:30+0000\n"
+"POT-Creation-Date: 2025-06-26 10:12+0000\n"
+"PO-Revision-Date: 2025-06-26 10:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,15 +21,41 @@ msgid "Allowed to Post Inventory"
 msgstr "Permitido confirmar inventario"
 
 #. module: mrp_workorder_consume
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
+msgid "Finished Moves"
+msgstr "Movimientos terminados"
+
+#. module: mrp_workorder_consume
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.view_move_tree
+msgid "From"
+msgstr "Desde"
+
+#. module: mrp_workorder_consume
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_form
 #: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.mrp_workorder_view_tree
 msgid "Post Inventory"
-msgstr "Confirmar Inventario"
+msgstr "Confirmar inventario"
+
+#. module: mrp_workorder_consume
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.view_move_tree
+msgid "Show Details"
+msgstr "Mostrar detalles"
 
 #. module: mrp_workorder_consume
 #: model:ir.model.fields,help:mrp_workorder_consume.field_mrp_workorder__post_visible
 msgid "Technical field to check when we can post"
 msgstr "Campo técnico para consultar cuando podemos confirmar inventario"
+
+#. module: mrp_workorder_consume
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.view_move_tree
+msgid "To"
+msgstr "A"
+
+#. module: mrp_workorder_consume
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_consume.view_move_tree
+msgid "Unit"
+msgstr "UdM"
 
 #. module: mrp_workorder_consume
 #: model:ir.model,name:mrp_workorder_consume.model_mrp_workorder

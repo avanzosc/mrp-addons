@@ -16,6 +16,15 @@
             <sheet position="inside">
                 <field name="post_visible" invisible="True" />
             </sheet>
+            <xpath expr="//notebook" position="inside">
+                <page string="Finished Moves" name="finished_moves">
+                    <field
+            name="move_finished_ids"
+            context="{'tree_view_ref': 'stock.view_move_tree'}"
+          >
+                    </field>
+                </page>
+            </xpath>
         </field>
     </record>
 
@@ -30,13 +39,13 @@
                 <field name="post_visible" invisible="1" />
                 <button
           name="post_inventory"
+          title="Post Inventory"
           type="object"
-          string="Post Inventory"
+          icon="fa-upload"
           attrs="{'invisible': [('post_visible', '=', False)]}"
           groups="base.group_no_one"
         />
             </button>
         </field>
     </record>
-
 </odoo>
