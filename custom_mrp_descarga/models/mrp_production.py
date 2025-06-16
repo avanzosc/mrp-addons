@@ -235,6 +235,7 @@ class MrpProduction(models.Model):
     second_performance = fields.Float(
         compute="_compute_second_performance",
         store=True,
+        group_operator="avg",
     )
 
     @api.depends("total_duration", "total_unit")

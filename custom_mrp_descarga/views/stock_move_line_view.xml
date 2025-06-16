@@ -22,7 +22,7 @@
                 <field
           name="performance"
           optional="show"
-          avg="Total Performance"
+          sum="Total Performance"
           attrs="{'readonly': [('state', '=', 'done')]}"
         />
                 <field

@@ -721,7 +721,12 @@
                 <field name="expected_birth" optional="show" />
                 <field name="birth_difference" optional="show" />
                 <field name="difference_rate" optional="show" />
-                <field name="second_performance" optional="hide" />
+                <field
+          name="second_performance"
+          string="2nd Perf. %"
+          optional="hide"
+          avg="Total 2nd Performance"
+        />
                 <field name="purchase_unit_price" optional="show" />
             </field>
             <field name="product_uom_id" position="after">
@@ -759,7 +764,12 @@
                 <field name="purchase_unit_price" optional="show" />
                 <field name="asphyxiation_units" optional="show" />
                 <field name="seized_units" optional="show" />
-                <field name="second_performance" optional="hide" />
+                <field
+          name="second_performance"
+          string="2nd Perf. %"
+          optional="hide"
+          avg="Total 2nd Performance"
+        />
                 <field name="purchase_price" optional="show" />
                 <field name="cost" optional="show" />
                 <field name="entry_total_amount" optional="show" />
