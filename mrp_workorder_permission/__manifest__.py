@@ -4,7 +4,7 @@
     "name": "MRP Workorder Permission",
     "version": "16.0.1.0.0",
     "author": "Avanzosc",
-    "summary": "Adds an inventory posting button and finished moves tab to work orders.",
+    "summary": "Assigns default users to workcenters and restricts work order visibility based on user roles.",
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing/Manufacturing",
     "depends": [
