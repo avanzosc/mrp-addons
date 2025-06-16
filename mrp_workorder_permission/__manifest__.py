@@ -4,7 +4,7 @@
     "name": "MRP Workorder Permission",
     "version": "16.0.1.0.0",
     "author": "Avanzosc",
-    "summary": "Assigns default users to workcenters and restricts work order visibility based on user roles.",
+    "summary": "Sets default users for workcenters and controls work order visibility.",
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing/Manufacturing",
     "depends": [
