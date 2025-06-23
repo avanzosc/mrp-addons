@@ -3,15 +3,14 @@
 
 {
     "name": "MRP BoM Import",
-    "version": "14.0.1.0.0",
-    "category": "Manufacturing/Manufacturing",
+    "version": "14.0.2.0.0",
+    "category": "Hidden/Tools",
     "author": "AvanzOSC",
     "license": "AGPL-3",
     "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
-        "base",
         "mrp",
-        "product",
+        "base_import_wizard",
     ],
     "data": [
         "security/ir.model.access.csv",
