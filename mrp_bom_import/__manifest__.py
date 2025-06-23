@@ -18,7 +18,6 @@
         "views/mrp_bom_import_view.xml",
         "views/mrp_bom_import_line_view.xml",
         "views/mrp_bom_line_view.xml",
-        "views/product_view.xml",
     ],
     "installable": True,
 }
