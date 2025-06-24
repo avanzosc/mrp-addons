@@ -11,22 +11,6 @@ class MrpProduction(models.Model):
         related="bom_id.is_deconstruction",
         store=True,
     )
-    move_line_ids = fields.One2many(
-        string="Move Lines",
-        comodel_name="stock.move.line",
-        inverse_name="production_id",
-        domain=lambda self: [
-            ("location_dest_id", "in", self.production_location_id.ids)
-        ],
-    )
-    finished_move_line_ids = fields.One2many(
-        compute=False,
-        inverse_name="production_id",
-        domain=lambda self: [
-            ("location_id", "in", self.production_location_id.ids),
-            ("location_dest_id", "in", self.location_dest_id.ids),
-        ],
-    )
 
     @api.depends("picking_type_id", "bom_id", "bom_id.is_deconstruction")
     def _compute_locations(self):
