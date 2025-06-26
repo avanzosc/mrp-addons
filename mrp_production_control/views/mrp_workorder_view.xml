@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+	    <field name="model">mrp.workorder</field>
+	    <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+	    <field name="arch" type="xml">
+	        <xpath expr="//notebook" position="inside">
+	            <page string="Production Control">
+	                <field
+            name="production_control_ids"
+            domain="[('workorder_id', '=', id)]"
+            context="{'default_workorder_id': id, 'default_manufacturing_order_id': production_id}"
+          >
+	                    <tree editable="bottom">
+	                        <field name="create_date" />
+	                        <field
+                name="manufacturing_order_id"
+                optional='show'
+                readonly='1'
+              />
+	                        <field
+                name="workorder_id"
+                optional='show'
+                domain="[('production_id', '=', manufacturing_order_id)]"
+                readonly='1'
+              />
+	                        <field name="operator_id" />
+	                        <field name="pallet_number" optional='show' />
+	                        <field
+                name="controlled_pieces"
+                widget="integer"
+                sum="Cumulative Controlled Pieces"
+              />
+	                        <field
+                name="defective_pieces"
+                sum="Cumulative Defective Pieces"
+              />
+	                        <field name="defect_description" />
+	                        <field name="action_taken" />
+	                    </tree>
+	                </field>
+	            </page>
+	        </xpath>
+	    </field>
+	</record>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_control_tree_view" model="ir.ui.view">
+	    <field name="model">mrp.production.control</field>
+	    <field name="arch" type="xml">
+	        <tree editable="bottom">
+	        	<field name="create_date" readonly="1" />
+	        	<field name="manufacturing_order_id" widget="many2one" optional="show" />
+	     		<field
+          name="workorder_id"
+          widget="many2one"
+          optional="show"
+          domain="[('production_id', '=', manufacturing_order_id)]"
+          options="{'no_create': True}"
+        />
+	            <field name="operator_id" />
+	            <field name="pallet_number" optional='show' />
+	            <field
+          name="defective_pieces"
+          widget="integer"
+          sum="Cumulative Defective Pieces"
+        />
+	            <field name="defect_description" />
+	            <field name="action_taken" />
+	        </tree>
+	    </field>
+	</record>
+
+	<record id="mrp_production_control_search_view" model="ir.ui.view">
+		<field name="model">mrp.production.control</field>
+		<field name="arch" type="xml">
+		    <search string="Search Production Control">
+		        <field name="manufacturing_order_id" string="Manufacturing Order" />
+		        <field name="workorder_id" string="Work Order" />
+		        <group expand="0" string="Group By">
+		            <filter
+            string="Manufacturing Order"
+            name="by_manufacturing_order"
+            domain="[]"
+            context="{'group_by': 'manufacturing_order_id'}"
+          />
+		            <filter
+            string="Work Order"
+            name="by_workorder"
+            domain="[]"
+            context="{'group_by': 'workorder_id'}"
+          />
+		        </group>
+		    </search>
+		</field>
+	</record>
+
+	<record id="action_production_control_records" model="ir.actions.act_window">
+        <field name="res_model">mrp.production.control</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="mrp_production_control_tree_view" />
+    </record>
+
+    <menuitem
+    id="menu_production_control"
+    name="Production Control"
+    parent="mrp.menu_mrp_manufacturing"
+    action="action_production_control_records"
+    sequence="95"
+  />
+</odoo>

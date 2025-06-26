@@ -1,0 +1,147 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_control
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-05 13:43+0000\n"
+"PO-Revision-Date: 2025-06-05 13:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
+msgid "&gt;"
+msgstr ""
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__action_taken
+msgid "Action Taken"
+msgstr "Acción"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production__production_min_controlled
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__controlled_pieces
+msgid "Controlled Pieces"
+msgstr "Piezas Controladas"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_workorder_form_view_inherit
+msgid "Cumulative Controlled Pieces"
+msgstr "Total Piezas Controladas"
+
+#. module: mrp_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_workorder_form_view_inherit
+msgid "Cumulative Defective Pieces"
+msgstr "Total Piezas Defectuosas"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__create_date
+msgid "Date/Time"
+msgstr "Fecha/Hora"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__defect_description
+msgid "Defect Description"
+msgstr "Descripción Defecto"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__defective_pieces
+msgid "Defective Pieces"
+msgstr "Defectuosas"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: mrp_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control____last_update
+msgid "Last Modified on"
+msgstr "Modificado última vez"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado última vez por"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__write_date
+msgid "Last Updated on"
+msgstr "Actualizado última vez"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Manufacturing Order"
+msgstr "Orden de Fabricación"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__operator_id
+msgid "Operator"
+msgstr "Operario"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__pallet_number
+msgid "Pallet Number"
+msgstr "Número de Palet"
+
+#. module: mrp_production_control
+#: model:ir.actions.act_window,name:mrp_production_control.action_production_control_records
+#: model:ir.ui.menu,name:mrp_production_control.menu_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_workorder_form_view_inherit
+msgid "Production Control"
+msgstr "Control de Producción"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production__production_control_ids
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_workorder__production_control_ids
+msgid "Production Control Lines"
+msgstr "Líneas de Control de Producción"
+
+#. module: mrp_production_control
+#: model:ir.model,name:mrp_production_control.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de Producción"
+
+#. module: mrp_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Search Production Control"
+msgstr "Buscar Control de Producción"
+
+#. module: mrp_production_control
+#: model:ir.model,name:mrp_production_control.model_mrp_workorder
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__workorder_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Work Order"
+msgstr "Orden de Trabajo"
+
+#. module: mrp_production_control
+#: model:ir.model,name:mrp_production_control.model_mrp_production_control
+msgid "mrp.production.control"
+msgstr ""

@@ -1,1 +1,1 @@
-from . import mrp_workorder
+from . import mrp_workorder, mrp_workcenter

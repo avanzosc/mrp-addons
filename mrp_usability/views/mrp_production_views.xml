@@ -33,20 +33,25 @@
             <page name="components" position="before">
                 <page name="move_lines" string="Move Lines">
                     <field
-            name="move_line_ids"
-            context="{'production_id': active_id, 'default_company_id': company_id}"
+            name="raw_move_line_ids"
+            context="{'default_production_id': id, 'default_company_id': company_id}"
             attrs="{'readonly': [('state', 'in', ('draft', 'cancel'))]}"
           >
                         <tree
-              name="mrp_move_lines"
               editable="bottom"
               decoration-muted="state == 'cancel'"
-              default_order="location_id"
-              limit="300"
+              default_order="location_id asc, location_dest_id asc, production_id asc, id"
+              create="false"
             >
                             <field name="production_id" invisible="1" />
                             <field name="move_id" invisible="1" />
                             <field name="tracking" invisible="1" />
+                            <field name="product_id" invisible="1" />
+                            <field name="package_level_id" invisible="1" />
+                            <field name="location_id" invisible="1" />
+                            <field name="location_dest_id" invisible="1" />
+                            <field name="package_id" invisible="1" />
+                            <field name="result_package_id" invisible="1" />
                             <field
                 name="product_id"
                 context="{'default_type': 'product'}"
@@ -61,7 +66,12 @@
                 attrs="{'readonly': [('tracking', 'not in', ('lot', 'serial'))]}"
                 context="{'default_product_id': product_id, 'default_company_id': company_id}"
               />
-                            <field name="location_id" optional="hide" force_save="1" />
+                            <field
+                name="location_id"
+                optional="show"
+                options="{'no_create': True}"
+                force_save="1"
+              />
                             <field
                 name="location_dest_id"
                 optional="hide"
@@ -69,6 +79,7 @@
               />
                             <field
                 name="package_id"
+                domain="[('location_id','=',location_id)]"
                 groups="stock.group_tracking_lot"
                 optional="hide"
               />
@@ -78,23 +89,30 @@
                 optional="hide"
               />
                             <field name="product_uom_category_id" invisible="1" />
-                            <field name="qty_done" />
+                            <field name="reserved_uom_qty" readonly="1" />
                             <field
-                name="reserved_uom_qty"
-                optional="hide"
-                readonly="1"
-                sum="Total Reserved"
+                name="qty_done"
+                string="Consumed"
+                widget="mrp_consumed"
               />
                             <field
                 name="product_uom_id"
-                optional="hide"
                 options="{'no_create': True}"
                 groups="uom.group_uom"
                 readonly="1"
                 force_save="1"
               />
                             <field name="company_id" invisible="1" force_save="1" />
-                            <field name="state" optional="hide" />
+                            <field
+                name="state"
+                widget="badge"
+                optional="hide"
+                decoration-danger="state=='cancel'"
+                decoration-info="state== 'assigned'"
+                decoration-muted="state == 'draft'"
+                decoration-success="state == 'done'"
+                decoration-warning="state not in ('draft','cancel','done','assigned')"
+              />
                         </tree>
                     </field>
                 </page>

@@ -6,22 +6,26 @@
         <field name="arch" type="xml">
             <xpath
         expr="//field[@name='move_raw_ids']//tree//button[@name='action_show_details']"
-        position="after"
+        position="before"
       >
                 <field name="mrp_unreserve_visible" invisible="1" />
                 <button
           name="button_assign"
-          string="Check availability"
+          title="Check availability"
           type="object"
+          icon="fa-check"
           attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
+          class="link-success"
         />
                 <button
           name="button_unreserve"
           type="object"
-          string="Unreserve"
+          title="Unreserve"
+          icon="fa-remove"
           attrs="{'invisible':[('mrp_unreserve_visible','=',False)]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
+          class="link-danger"
         />
             </xpath>
         </field>

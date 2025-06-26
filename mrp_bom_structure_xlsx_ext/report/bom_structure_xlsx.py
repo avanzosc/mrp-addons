@@ -34,8 +34,8 @@ class BomStructureXlsx(models.AbstractModel):
         sheet.write_row(1, 0, sheet_title, title_style)
         return workbook
 
-    def print_bom_children(self, ch, sheet, row, level):
-        row = super().print_bom_children(ch, sheet, row, level)
+    def print_bom_children(self, ch, sheet, origin_row, level):
+        row = super().print_bom_children(ch, sheet, origin_row, level)
         extra_data = [
             ch.layer if ch.layer else "",
             ch.designator if ch.designator else "",
@@ -54,5 +54,5 @@ class BomStructureXlsx(models.AbstractModel):
         ]
         col_start = 7
         for idx, data in enumerate(extra_data):
-            sheet.write(row - 1, col_start + idx, data)
+            sheet.write(origin_row, col_start + idx, data)
         return row
