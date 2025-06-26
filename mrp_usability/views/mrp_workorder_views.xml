@@ -50,6 +50,82 @@
             <field name="production_id" position="after">
                 <field name="workcenter_id" />
             </field>
+
+
+            <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/tree"
+        position="attributes"
+      >
+                <attribute name="editable">bottom</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+            <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='product_id']"
+        position="after"
+      >
+                <field name="company_id" invisible="1" />
+                <field
+          name="location_id"
+          readonly="1"
+          force_save="1"
+          groups="stock.group_stock_multi_locations"
+          optional="show"
+        />
+                <field
+          name="product_uom_qty"
+          widget="mrp_should_consume"
+          force_save="1"
+          string="To Consume"
+          width="1"
+        />
+                <field
+          name="product_uom"
+          options="{'no_open': True, 'no_create': True}"
+          groups="uom.group_uom"
+        />
+                <field name="forecast_availability" string="Reserved" />
+            </xpath>
+            <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='quantity_done']"
+        position="after"
+      >
+                <field
+          name="lot_ids"
+          widget="many2many_tags"
+          optional="hide"
+          readonly="1"
+          string="Lot/Serial Numbers"
+          help="Displays the consumed Lot/Serial Numbers."
+          groups="stock.group_production_lot"
+          options="'no_create': True"
+          context="{'default_company_id': company_id, 'default_product_id': product_id}"
+          domain="[('product_id','=',product_id)]"
+        />
+            </xpath>
+            <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='product_qty_available']"
+        position="attributes"
+      >
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='product_qty']"
+        position="attributes"
+      >
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='product_virtual_available']"
+        position="attributes"
+      >
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/tree/field[@name='reserved_availability']"
+        position="attributes"
+      >
+                <attribute name="optional">hide</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -75,4 +151,24 @@
             </field>
         </field>
     </record>
+
+    <record id="mrp_workorder_view_tree" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_produced']" position="attributes">
+                <attribute name="attrs">{'optional_show': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='qty_remaining']" position="after">
+                <field name="qty_producing" optional="show" />
+                <field name="qty_production" optional="show" />
+                <field name="qty_reported_from_previous_wo" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+
 </odoo>

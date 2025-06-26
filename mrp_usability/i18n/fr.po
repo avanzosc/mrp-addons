@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-19 06:15+0000\n"
-"PO-Revision-Date: 2024-12-19 06:15+0000\n"
+"POT-Creation-Date: 2025-06-26 10:12+0000\n"
+"PO-Revision-Date: 2025-06-26 10:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,55 +18,75 @@ msgstr ""
 #. module: mrp_usability
 #: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__workorder_count
 msgid "# Work Orders"
-msgstr ""
+msgstr "# Ordres de travail"
 
 #. module: mrp_usability
 #: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
 msgid "Block"
-msgstr ""
+msgstr "Bloquer"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Displays the consumed Lot/Serial Numbers."
+msgstr "Affiche les lots/numéros de série consommés."
 
 #. module: mrp_usability
 #: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
 msgid "Done"
-msgstr ""
+msgstr "Terminé"
 
 #. module: mrp_usability
-#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__finished_move_line_ids
-msgid "Finished Product"
-msgstr "Produit fini"
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Lot/Serial Numbers"
+msgstr "Lots/Numéros de série"
 
 #. module: mrp_usability
-#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__move_line_ids
 #: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
 msgid "Move Lines"
-msgstr ""
+msgstr "Lignes de mouvement"
 
 #. module: mrp_usability
 #: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #. module: mrp_usability
 #: model:ir.model,name:mrp_usability.model_mrp_production
 msgid "Production Order"
-msgstr "Ordre de production"
+msgstr "Ordre de fabrication"
+
+#. module: mrp_usability
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__raw_move_line_ids
+msgid "Raw Product"
+msgstr "Produit brut"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "Reserved"
+msgstr "Réservé"
 
 #. module: mrp_usability
 #: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
 msgid "Start"
-msgstr ""
+msgstr "Démarrer"
 
 #. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
-msgid "Total Reserved"
-msgstr ""
+#: model:ir.model,name:mrp_usability.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+msgid "To Consume"
+msgstr "À consommer"
 
 #. module: mrp_usability
 #: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
 msgid "Unblock"
-msgstr ""
+msgstr "Débloquer"
 
 #. module: mrp_usability
 #: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
 msgid "Work Orders"
-msgstr ""
+msgstr "Ordres de travail"
+

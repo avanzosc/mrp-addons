@@ -1,0 +1,74 @@
+<odoo>
+    <record id="view_move_line_tree_detailed" model="ir.ui.view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree_detailed" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="editable">bottom</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='picking_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='picking_partner_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='package_id']" position="after">
+                <field name="tracking" invisible="1" />
+                <field name="product_uom_category_id" invisible="1" />
+                <field
+          name="result_package_id"
+          optional="show"
+          groups="stock.group_tracking_lot"
+        />
+                <field name="reserved_uom_qty" optional="show" readonly="1" />
+            </xpath>
+
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="context">{'default_type': 'product'}</attribute>
+                <attribute name="required">1</attribute>
+                <attribute name="attrs">{'readonly': ['|', ('id', '!=', False),
+                    ('state', 'in', ('cancel'))]}</attribute>
+                <attribute name="options">{'no_create': True}</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='lot_id']" position="attributes">
+                <attribute name="groups">stock.group_production_lot</attribute>
+                <attribute name="context">{'default_product_id': product_id}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='package_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="groups">stock.group_tracking_lot</attribute>
+                <attribute name="domain">[('location_id','=',location_id)]</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='product_uom_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+                <attribute name="groups">uom.group_uom</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="groups" />
+                <attribute name="force_save">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='location_id']" position="attributes">
+                <attribute name="groups" />
+                <attribute name="force_save">1</attribute>
+                <attribute name="options">{'no_create': True}</attribute>
+                <attribute name="optional">show</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='location_dest_id']" position="attributes">
+                <attribute name="groups" />
+                <attribute name="force_save">1</attribute>
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

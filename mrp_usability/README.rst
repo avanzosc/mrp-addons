@@ -14,6 +14,10 @@ Manufacturing Usability
 * Show "Unreserve" button, only if there is a reserved component.
 * Show "Check Availabitiy", only if some component is not reserved, or partially
   reserved.
+* Improves the `action_show_details` behavior on stock moves to load customized forms and context for raw and finished products.
+* Enhances the tree view of components inside work orders with additional relevant fields
+* Makes the work order tree view more informative by displaying additional quantity-related fields like:
+* Adds `product_id` field in work order search views to enhance filtering options.
 
 Bug Tracker
 ===========
@@ -33,4 +37,5 @@ Contributors
 
 * Berezi Amubieta <bereziamubieta@avanzosc.es>
 * Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
+* Lucía Echeverría <luciaecheverria@avanzosc.es>
 * Ana Juaristi <anajuaristi@avanzosc.es>
