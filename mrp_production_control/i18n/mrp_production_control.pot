@@ -6,19 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-05 13:43+0000\n"
-"PO-Revision-Date: 2025-06-05 13:43+0000\n"
+"POT-Creation-Date: 2025-06-30 07:17+0000\n"
+"PO-Revision-Date: 2025-06-30 07:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: mrp_production_control
-#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
-msgid "&gt;"
-msgstr ""
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__action_taken
@@ -111,8 +106,8 @@ msgstr ""
 
 #. module: mrp_production_control
 #: model:ir.actions.act_window,name:mrp_production_control.action_production_control_records
+#: model:ir.model,name:mrp_production_control.model_mrp_production_control
 #: model:ir.ui.menu,name:mrp_production_control.menu_production_control
-#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_workorder_form_view_inherit
 msgid "Production Control"
@@ -139,9 +134,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__workorder_id
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
 msgid "Work Order"
-msgstr ""
-
-#. module: mrp_production_control
-#: model:ir.model,name:mrp_production_control.model_mrp_production_control
-msgid "mrp.production.control"
 msgstr ""

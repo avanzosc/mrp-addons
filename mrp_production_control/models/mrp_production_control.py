@@ -5,10 +5,13 @@ from odoo import api, fields, models
 
 class ProductionControl(models.Model):
     _name = "mrp.production.control"
+    _description = "Production Control"
 
     create_date = fields.Datetime(string="Date/Time", readonly=True)
     operator_id = fields.Many2one(
-        "res.users", string="Operator", default=lambda self: self.env.uid
+        comodel_name="res.users",
+        string="Operator",
+        default=lambda self: self.env.uid,
     )
     pallet_number = fields.Integer()
     controlled_pieces = fields.Integer()
@@ -16,9 +19,13 @@ class ProductionControl(models.Model):
     defect_description = fields.Char(size=200)
     action_taken = fields.Char(size=200)
     manufacturing_order_id = fields.Many2one(
-        "mrp.production", string="Manufacturing Order", domain=[]
+        comodel_name="mrp.production",
+        string="Manufacturing Order",
     )
-    workorder_id = fields.Many2one("mrp.workorder", string="Work Order", domain=[])
+    workorder_id = fields.Many2one(
+        comodel_name="mrp.workorder",
+        string="Work Order",
+    )
 
     @api.onchange("manufacturing_order_id")
     def _onchange_manufacturing_order_id(self):
@@ -33,12 +40,14 @@ class ProductionControl(models.Model):
         if self.workorder_id:
             self.manufacturing_order_id = self.workorder_id.production_id
 
-    @api.model
-    def create(self, vals):
-        if vals.get("workorder_id"):
-            workorder = self.env["mrp.workorder"].browse(vals["workorder_id"])
-            vals["manufacturing_order_id"] = workorder.production_id.id
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        workorder_obj = self.env["mrp.workorder"]
+        for vals in vals_list:
+            if vals.get("workorder_id") and not vals.get("manufacturing_order_id"):
+                workorder = workorder_obj.browse(vals["workorder_id"])
+                vals["manufacturing_order_id"] = workorder.production_id.id
+        return super().create(vals_list)
 
     def write(self, vals):
         res = super().write(vals)
