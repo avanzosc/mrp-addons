@@ -1,0 +1,17 @@
+<odoo>
+    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Finished Moves">
+                    <field
+            name="move_finished_ids"
+            context="{'tree_view_ref': 'stock.view_move_tree'}"
+            domain="{'workorder_id', '=', id}"
+          />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

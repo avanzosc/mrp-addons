@@ -1,0 +1,29 @@
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Finished Moves">
+                    <field
+            name="move_finished_ids"
+            context="{'tree_view_ref': 'stock.view_move_tree'}"
+            domain="{'default_manufacturing_order_id': id}"
+          />
+                </page>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+          class="oe_stat_button"
+          name="action_show_finished_move_lines"
+          type="object"
+          icon="fa-check"
+        >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Finished Moves</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
