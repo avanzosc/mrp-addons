@@ -801,6 +801,7 @@
                 <field name="entry_total_amount" optional="show" />
                 <field name="output_total_amount" optional="show" />
                 <field name="dif_total_amount" optional="show" />
+                <field name="speed_consume_unit" optional="show" />
                 <field name="average_cost" optional="show" />
                 <field
           name="state"
