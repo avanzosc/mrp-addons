@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="report_mrp_production_summary_xlsx" model="ir.actions.report">
-        <field name="name">Resumen de mantanza XLSX</field>
+        <field name="name">Resumen de matanza XLSX</field>
         <field name="model">mrp.production</field>
         <field name="report_type">xlsx</field>
         <field name="report_name">mrp_production_summary_xlsx</field>
