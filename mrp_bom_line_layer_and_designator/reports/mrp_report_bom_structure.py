@@ -93,8 +93,8 @@ class BomStructureReport(models.AbstractModel):
                 line_id = self._find_untreated(line_id, res)
             line.update(
                 {
-                    "layer": line_id.layer or "",
-                    "designator": line_id.designator or "",
+                    "layer": line_id and line_id.layer or "",
+                    "designator": line_id and line_id.designator or "",
                 }
             )
         return res
