@@ -17,6 +17,8 @@ class SacaLine(models.Model):
         string="Count Production", compute="_compute_count_production"
     )
 
+    recalc_date = fields.Datetime(string="Last Quality Recalc", copy=False, store=True)
+
     def _compute_count_production(self):
         for line in self:
             line.count_production = len(line.production_ids)
@@ -152,7 +154,9 @@ class SacaLine(models.Model):
 
     def action_compute_mo_data(self):
         self.ensure_one()
+        now = fields.Datetime.now()
         for line in self:
+            line.recalc_date = now
             move_lines = line.mapped("production_ids.move_line_ids")
             asphyxiated = move_lines.filtered(
                 lambda l: l.product_id.default_code == "8650"
@@ -160,12 +164,16 @@ class SacaLine(models.Model):
             seizured = move_lines.filtered(
                 lambda l: l.product_id.default_code == "9020"
             )
-            line.asphyxiated_percentage = (
-                sum(asphyxiated.mapped("unit")) / line.download_unit
-            ) * 100.0
-            line.seizured_percentage = (
-                sum(seizured.mapped("unit")) / line.download_unit
-            ) * 100.0
+            if line.download_unit:
+                line.asphyxiated_percentage = (
+                    sum(asphyxiated.mapped("unit")) / line.download_unit
+                ) * 100.0
+                line.seizured_percentage = (
+                    sum(seizured.mapped("unit")) / line.download_unit
+                ) * 100.0
+            else:
+                line.asphyxiated_percentage = 0.0
+                line.seizured_percentage = 0.0
             line.second_percentage = sum(
                 line.mapped("production_ids.second_performance")
             )
