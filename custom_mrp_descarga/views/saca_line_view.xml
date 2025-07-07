@@ -4,6 +4,9 @@
         <field name="model">saca.line</field>
         <field name="inherit_id" ref="custom_descarga.saca_line_form_view" />
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="recalc_date" readonly="1" />
+            </xpath>
             <div name="button_box" position="inside">
                 <button
           class="oe_stat_button"
@@ -62,5 +65,27 @@ for record in records:
         record.action_compute_mo_data()
         </field>
     </record>
+
+    <record id="saca_line_tree_view" model="ir.ui.view">
+        <field name="model">saca.line</field>
+        <field name="inherit_id" ref="custom_saca.saca_line_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="recalc_date" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="saca_line_quality_tree_view" model="ir.ui.view">
+        <field name="model">saca.line</field>
+        <field name="inherit_id" ref="custom_descarga.saca_line_quality_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="recalc_date" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+
 
 </odoo>
