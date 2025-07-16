@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <page name="miscellaneous" position="before">
+                <page string="Images" name="images">
+                    <group colspan="4">
+                        <group colspan="2">
+                            <field
+                name="photo1"
+                widget="image"
+                nolabel="1"
+                style="width: 200px; height: 200px;"
+              />
+                            <field
+                name="photo2"
+                widget="image"
+                nolabel="1"
+                style="width: 200px; height: 200px;"
+              />
+                        </group>
+                        <group colspan="2">
+                            <field
+                name="photo3"
+                widget="image"
+                nolabel="1"
+                style="width: 200px; height: 200px;"
+              />
+                            <field
+                name="photo4"
+                widget="image"
+                nolabel="1"
+                style="width: 200px; height: 200px;"
+              />
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+        <t t-call="mrp.report_mrp_production_components" position="after">
+            <div class="row">
+                <div t-if="o.photo1" class="col-6">
+                    <img
+            t-att-src="image_data_uri(o.photo1)"
+            style="max-height: 45px;"
+            alt="Logo"
+          />
+                </div>
+                <div t-if="o.photo2" class="col-6">
+                    <img
+            t-att-src="image_data_uri(o.photo2)"
+            style="max-height: 45px;"
+            alt="Logo"
+          />
+                </div>
+            </div>
+            <t t-if="((o.photo1 or o.photo2) and (o.photo3 or o.photo4))">
+                <br />
+            </t>
+            <div class="row">
+                <div t-if="o.photo3" class="col-6">
+                    <img
+            t-att-src="image_data_uri(o.photo3)"
+            style="max-height: 45px;"
+            alt="Logo"
+          />
+                </div>
+                <div t-if="o.photo4" class="col-6">
+                    <img
+            t-att-src="image_data_uri(o.photo4)"
+            style="max-height: 45px;"
+            alt="Logo"
+          />
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
