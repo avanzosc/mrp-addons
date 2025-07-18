@@ -8,3 +8,4 @@ class ProductCategory(models.Model):
     _inherit = "product.category"
 
     second_category = fields.Boolean(default=False)
+    is_bone_in_breast = fields.Boolean(string="Bone-in Breast")
