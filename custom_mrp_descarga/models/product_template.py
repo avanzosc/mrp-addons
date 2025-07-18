@@ -7,3 +7,4 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     download_product = fields.Boolean(string="Download Product", default=False)
+    is_broken_breast = fields.Boolean(string="Broken Breast")
