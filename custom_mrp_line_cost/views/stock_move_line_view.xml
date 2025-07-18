@@ -27,7 +27,7 @@
         <field name="name">stock.move.line.tree.view</field>
         <field name="model">stock.move.line</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <tree editable="top">
                 <field
           name="production_id"
           force_save="1"
