@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-30 07:17+0000\n"
-"PO-Revision-Date: 2025-06-30 07:17+0000\n"
+"POT-Creation-Date: 2025-07-28 10:36+0000\n"
+"PO-Revision-Date: 2025-07-28 10:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -89,6 +89,12 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_lot_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Lot of product to produce"
+msgstr ""
+
+#. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_id
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
 msgid "Manufacturing Order"
@@ -102,6 +108,12 @@ msgstr ""
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__pallet_number
 msgid "Pallet Number"
+msgstr ""
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Product to produce"
 msgstr ""
 
 #. module: mrp_production_control
@@ -122,7 +134,7 @@ msgstr ""
 #. module: mrp_production_control
 #: model:ir.model,name:mrp_production_control.model_mrp_production
 msgid "Production Order"
-msgstr ""
+msgstr "Ordre de fabrication"
 
 #. module: mrp_production_control
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
@@ -134,17 +146,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__workorder_id
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
 msgid "Work Order"
-msgstr ""
-
-#. module: mrp_production_control
-#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
-msgid "Product to produce"
-msgstr ""
-
-#. module: mrp_production_control
-#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_lot_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
-msgid "Lot of product to produce"
-msgstr ""
-
+msgstr "Ordre de travail"
