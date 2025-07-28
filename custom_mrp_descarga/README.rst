@@ -6,7 +6,7 @@
 Custom Descarga
 ===============
 
-Glue module to link descarga with MRP.
+Glue module to link descarga with MRP .
 
 Bug Tracker
 ===========
