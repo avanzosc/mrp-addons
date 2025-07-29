@@ -102,3 +102,8 @@ class AccountAnalyticLine(models.Model):
         related="mrp_production_id.state",
         store=True,
     )
+
+    unit_amount = fields.Float(
+        string='Quantity',
+        group_operator='avg',  
+    )
