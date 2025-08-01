@@ -3,14 +3,36 @@
     :alt: License: AGPL-3
 
 ================
-MRP product loss
+MRP Product Loss
 ================
 
-* In product new field "Loss in products to be consumed".
-* In the components of the BOMs, show the product loss.
-* When a manufacturing order is confirmed, the quantity to be consumed will be
-  the quantity to be consumed given to us by the system, plus the loss defined
-  in the product.
+This module extends the **Manufacturing (MRP)** and **Inventory** applications to manage and track product loss quantities during the production process.  
+
+Key Features
+============
+
+- **Product Loss Quantity**  
+  Each product template can be configured with a default *loss quantity* to be consumed during manufacturing.
+
+- **BOM Line Integration**  
+  The Bill of Materials (BoM) lines display and inherit the product’s configured loss quantity.
+
+- **Stock Moves Extension**  
+  - New fields:
+    - `to_consume_before_loss_qty`: Quantity to consume before loss adjustment.
+    - `product_loss_qty`: Computed loss quantity per move.
+  - Automatic calculation of loss quantity during move creation and production updates.
+
+- **Production Order (MRP)**  
+  - Automatically computes and assigns loss quantities to raw material moves.  
+  - Adjusts `to_consume_before_loss_qty` and `product_loss_qty` dynamically when producing quantities change.  
+  - Extends `_get_move_raw_values` to include additional consumption with loss.
+
+- **User Interface Enhancements**
+  - **BoM Form**: Adds `Loss Quantity` in BoM lines.  
+  - **Manufacturing Orders**: Displays `To Consume Before Loss Quantity` and `Loss Quantity` in raw material moves.  
+  - **Products**: Adds `Loss in products to be consumed` in the product form and list views.  
+  - **Stock Moves**: Displays additional fields (`to_consume_before_loss_qty`, `product_loss_qty`).
 
 Bug Tracker
 ===========
