@@ -338,10 +338,9 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
             total_matanza_minutes / orders_with_matanza if orders_with_matanza else 0.0
         )
         total_seconds = int(average_matanza_speed * 60)
-        hours = total_seconds // 3600
-        minutes = (total_seconds % 3600) // 60
-        seconds = total_seconds % 60
-        hhmm = f"{minutes:02d}:{seconds:02d}"
+        hours = (total_seconds % 3600) // 60
+        mins = total_seconds % 60
+        hhmm = f"{hours:02d}:{mins:02d}"
         n += 1
         m = 0
         worksheet.set_column(0, 0, 40) 
