@@ -76,13 +76,13 @@ for record in records:
         </field>
     </record>
 
-    
+
     <record id="saca_line_quality_tree_view" model="ir.ui.view">
         <field name="model">saca.line</field>
         <field name="inherit_id" ref="custom_descarga.saca_line_quality_tree_view" />
         <field name="arch" type="xml">
            <xpath expr="//tree" position="inside">
-              <field name="recalc_date" optional="hide" />
+               <field name="recalc_date" optional="hide" />
             </xpath>
         </field>
     </record>
