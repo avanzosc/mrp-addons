@@ -1,7 +1,6 @@
 # Copyright 2023 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, models
-import math
 
 
 class ReportMrpProductionsummaryXlsx(models.AbstractModel):
@@ -329,7 +328,7 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                 lambda line: line.task_id.name == "Matanza"
             )
             if matanza_line:
-                minutes = sum(matanza_line.mapped("unit_amount")) 
+                minutes = sum(matanza_line.mapped("unit_amount"))
                 if minutes > 0:
                     total_matanza_minutes += minutes
                     orders_with_matanza += 1
@@ -339,12 +338,11 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         )
         total_minutes = int(average_matanza_speed * 60)
         hours = (total_minutes % 3600) // 60
-        mins = total_minutes % 60
-        hhmm = f"{hours:02d}:{mins:02d}"
+        minutes = total_minutes % 60
+        hhmm = f"{hours:02d}:{minutes:02d}"
         n += 1
         m = 0
-        worksheet.set_column(0, 0, 40) 
+        worksheet.set_column(0, 0, 40)
         worksheet.write(n, m, "Velocidad media matanza", result_int_format)
         m += 1
-        worksheet.write(n, m, hhmm,result_int_format)
-
+        worksheet.write(n, m, hhmm, result_int_format)

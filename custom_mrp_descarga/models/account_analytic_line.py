@@ -104,6 +104,6 @@ class AccountAnalyticLine(models.Model):
     )
 
     unit_amount = fields.Float(
-        string='Quantity',
-        group_operator='avg',  
+        string="Quantity",
+        group_operator="avg",
     )

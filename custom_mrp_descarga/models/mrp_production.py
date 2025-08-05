@@ -238,21 +238,14 @@ class MrpProduction(models.Model):
         group_operator="avg",
     )
     breast_total = fields.Float(
-        string="Total Breast",
-        compute="_compute_breast_data",
-        store=True
+        string="Total Breast", compute="_compute_breast_data", store=True
     )
     broken_breast = fields.Float(
-        string="Broken Breast",
-        compute="_compute_breast_data",
-        store=True
+        string="Broken Breast", compute="_compute_breast_data", store=True
     )
     broken_breast_percent = fields.Float(
-        string="% Broken Breast",
-        compute="_compute_breast_data",
-        store=True
+        string="% Broken Breast", compute="_compute_breast_data", store=True
     )
-
 
     @api.depends("total_duration", "total_unit")
     def _compute_speed_consume_unit(self):
@@ -729,12 +722,15 @@ class MrpProduction(models.Model):
         productions = self.env["mrp.production"].search([])
         productions.action_recalculate_production_cost()
 
-    @api.depends("move_line_ids",'finished_move_line_ids.qty_done', 
-                 'finished_move_line_ids.product_id',
-                 "finished_move_line_ids.product_id.categ_id",
-                 "finished_move_line_ids.product_id.categ_id.is_bone_in_breast",
-                 "finished_move_line_ids.product_id.product_tmpl_id",
-                 "finished_move_line_ids.product_id.product_tmpl_id.is_broken_breast")
+    @api.depends(
+        "move_line_ids",
+        "finished_move_line_ids.qty_done",
+        "finished_move_line_ids.product_id",
+        "finished_move_line_ids.product_id.categ_id",
+        "finished_move_line_ids.product_id.categ_id.is_bone_in_breast",
+        "finished_move_line_ids.product_id.product_tmpl_id",
+        "finished_move_line_ids.product_id.product_tmpl_id.is_broken_breast",
+    )
     def _compute_breast_data(self):
         for record in self:
             total = 0.0
@@ -748,5 +744,3 @@ class MrpProduction(models.Model):
             record.breast_total = total
             record.broken_breast = broken
             record.broken_breast_percent = (broken / total) * 100 if total else 0.0
-
-    
