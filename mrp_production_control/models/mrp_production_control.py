@@ -26,6 +26,20 @@ class ProductionControl(models.Model):
         comodel_name="mrp.workorder",
         string="Work Order",
     )
+    manufacturing_order_product_id = fields.Many2one(
+        string="Product to produce",
+        comodel_name="product.product",
+        related="manufacturing_order_id.product_id",
+        store=True,
+        copy=False,
+    )
+    manufacturing_order_product_lot_id = fields.Many2one(
+        string="Lot of product to produce",
+        comodel_name="stock.lot",
+        related="manufacturing_order_id.lot_producing_id",
+        store=True,
+        copy=False,
+    )
 
     @api.onchange("manufacturing_order_id")
     def _onchange_manufacturing_order_id(self):
