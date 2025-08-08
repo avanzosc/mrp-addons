@@ -6,6 +6,8 @@
 	        <tree editable="bottom">
 	        	<field name="create_date" readonly="1" />
 	        	<field name="manufacturing_order_id" widget="many2one" optional="show" />
+	        	<field name="manufacturing_order_product_id" optional="show" readonly="1" />
+	        	<field name="manufacturing_order_product_lot_id" optional="show" readonly="1" />
 	     		<field
           name="workorder_id"
           widget="many2one"
@@ -32,6 +34,8 @@
 		    <search string="Search Production Control">
 		        <field name="manufacturing_order_id" string="Manufacturing Order" />
 		        <field name="workorder_id" string="Work Order" />
+                <field name="manufacturing_order_product_id" />
+                <field name="manufacturing_order_product_lot_id" />
 		        <group expand="0" string="Group By">
 		            <filter
             string="Manufacturing Order"
@@ -44,6 +48,20 @@
             name="by_workorder"
             domain="[]"
             context="{'group_by': 'workorder_id'}"
+          />
+                    <filter
+            string="Product to produce"
+            name="by_manufacturing_order_product"
+            domain="[]"
+            context="{'group_by': 'manufacturing_order_product_id'}"
+          />
+
+
+                    <filter
+            string="Lot of product to produce"
+            name="by_manufacturing_order_product_lot"
+            domain="[]"
+            context="{'group_by': 'manufacturing_order_product_lot_id'}"
           />
 		        </group>
 		    </search>
