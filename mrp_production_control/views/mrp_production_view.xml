@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="mrp_production_form_view" model="ir.ui.view">
+	    <field name="model">mrp.production</field>
+	    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+	    <field name="arch" type="xml">
+	        <xpath expr="//notebook" position="inside">
+	            <page string="Production Control">
+	                <field
+            name="production_control_ids"
+            domain="{'default_manufacturing_order_id': id}"
+          >
+	                    <tree editable="bottom">
+	                        <field name="create_date" />
+	                        <field
+                name="manufacturing_order_id"
+                optional='show'
+                readonly='1'
+              />
+	                        <field
+                name="workorder_id"
+                optional='show'
+                domain="[('production_id', '=', manufacturing_order_id)]"
+                options="{'no_create': True}"
+              />
+	                        <field name="operator_id" />
+	                        <field name="pallet_number" optional='show' />
+	                        <field name="controlled_pieces" widget="integer" />
+	                        <field
+                name="defective_pieces"
+                widget="integer"
+                sum="Cumulative Defective Pieces"
+              />
+	                        <field name="defect_description" />
+	                        <field name="action_taken" />
+	                    </tree>
+	                </field>
+	                <group>
+	                	<field name="production_min_controlled" />
+	                </group>
+	            </page>
+	        </xpath>
+	    </field>
+	</record>
+</odoo>

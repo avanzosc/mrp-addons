@@ -31,18 +31,42 @@
                 <field name="mrp_unreserve_visible" invisible="1" />
                 <button
           name="button_assign"
-          string="Check availability"
+          title="Check availability"
           type="object"
+          icon="fa-check"
           attrs="{'invisible': [('state', 'not in', ('confirmed', 'waiting', 'partially_available'))]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
+          class="link-success"
         />
                 <button
           name="button_unreserve"
           type="object"
-          string="Unreserve"
+          title="Unreserve"
+          icon="fa-remove"
           attrs="{'invisible':[('mrp_unreserve_visible','=',False)]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
+          class="link-danger"
         />
+                <field name="show_details_visible" invisible="1" />
+                <field name="has_tracking" invisible="1" />
+                <button
+          name="action_show_details"
+          type="object"
+          title="Show Details"
+          icon="fa-list"
+          context="{'default_product_uom_qty': 0}"
+          attrs="{'invisible': ['|', ('show_details_visible', '=', False), ('has_tracking', '=','none')]}"
+        />
+                <button
+          class="o_optional_button btn btn-light"
+          name="action_show_details"
+          type="object"
+          title="Show Details"
+          icon="fa-list"
+          context="{'default_product_uom_qty': 0}"
+          attrs="{'invisible': ['|', ('has_tracking', '!=','none'), ('show_details_visible', '=', False)]}"
+        />
+
             </xpath>
         </field>
     </record>
@@ -59,17 +83,21 @@
                 <field name="show_check_availability" invisible="1" />
                 <button
           name="action_assign"
-          string="Check availability"
+          title="Check availability"
           type="object"
+          icon="fa-check"
           attrs="{'invisible':[('show_check_availability','=',False)]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
+          class="link-success"
         />
                 <button
           name="button_unreserve"
           type="object"
-          string="Unreserve"
+          title="Unreserve"
+          icon="fa-remove"
           attrs="{'invisible':[('unreserve_visible','=',False)]}"
           groups="mrp_stock_usability.group_mrp_stock_usability"
+          class="link-danger"
         />
             </button>
         </field>

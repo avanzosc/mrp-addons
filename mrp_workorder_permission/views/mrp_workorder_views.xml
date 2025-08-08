@@ -5,7 +5,6 @@
         <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view" />
         <field name="arch" type="xml">
             <field name="date_planned_start" position="before">
-                <field name="product_id" optional="show" />
                 <field name="production_state" optional="show" />
             </field>
             <field name="date_finished" position="after">
@@ -37,5 +36,15 @@
             </field>
         </field>
     </record>
+
+    <record id="mrp_workcenter_view" model="ir.ui.view">
+    	<field name="model">mrp.workcenter</field>
+	    <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+	    <field name="arch" type="xml">
+	      <xpath expr="//field[@name='name']" position="after">
+	        <field name="default_user_id" />
+	      </xpath>
+	    </field>
+	</record>
 
 </odoo>
