@@ -238,13 +238,19 @@ class MrpProduction(models.Model):
         group_operator="avg",
     )
     breast_total = fields.Float(
-        string="Total Breast", compute="_compute_breast_data", store=True
+        string="Total Breast",
+        compute="_compute_breast_data",
+        store=True,
     )
     broken_breast = fields.Float(
-        string="Broken Breast", compute="_compute_breast_data", store=True
+        string="Broken Breast",
+        compute="_compute_breast_data",
+        store=True,
     )
     broken_breast_percent = fields.Float(
-        string="% Broken Breast", compute="_compute_breast_data", store=True
+        string="% Broken Breast",
+        compute="_compute_breast_data",
+        store=True,
     )
 
     @api.depends("total_duration", "total_unit")
@@ -733,14 +739,14 @@ class MrpProduction(models.Model):
     )
     def _compute_breast_data(self):
         for record in self:
-            total = 0.0
-            broken = 0.0
-            for line in record.finished_move_line_ids:
-                product = line.product_id
-                if product.categ_id.is_bone_in_breast:
-                    total += line.qty_done
-                    if product.product_tmpl_id.is_broken_breast:
-                        broken += line.qty_done
+            bone_in_moves = record.finished_move_line_ids.filtered(
+                lambda m: m.product_id.categ_id.is_bone_in_breast
+            )
+            broken_breast_moves = record.finished_move_line_ids.filtered(
+                lambda m: m.product_id.product_tmpl_id.is_broken_breast
+            )
+            total = sum(bone_in_moves.mapped("qty_done"))
+            broken = sum(broken_breast_moves.mapped("qty_done"))
             record.breast_total = total
             record.broken_breast = broken
             record.broken_breast_percent = (broken / total) * 100 if total else 0.0
