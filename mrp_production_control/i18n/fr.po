@@ -147,3 +147,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
 msgid "Work Order"
 msgstr "Ordre de travail"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manual_date
+msgid "Manual Date"
+msgstr ""
+

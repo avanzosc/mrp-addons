@@ -148,3 +148,8 @@ msgstr ""
 msgid "Lot of product to produce"
 msgstr ""
 
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manual_date
+msgid "Manual Date"
+msgstr ""
+
