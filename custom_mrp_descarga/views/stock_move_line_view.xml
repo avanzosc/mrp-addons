@@ -68,8 +68,12 @@
       ref="custom_mrp_line_cost.production_finished_move_line_ids_tree_view"
     />
         <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="default_order">sequence desc</attribute>
+                <attribute name="decoration-danger">qty_done == 0</attribute>
+            </tree>
             <field name="product_id" position="before">
-                <field name="sequence" string="" />
+                <field name="sequence" string=" " />
                 <field
           name="reader"
           attrs="{'readonly': ('state', 'in', ('done', 'cancel'))}"
