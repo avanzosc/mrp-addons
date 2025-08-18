@@ -99,7 +99,7 @@
         <field name="name">stock.move.line.tree.view</field>
         <field name="model">stock.move.line</field>
         <field name="arch" type="xml">
-            <tree editable="bottom" limit="300">
+            <tree editable="top" limit="300">
                 <field name="state" invisible="1" />
                 <field name="production_id" optional="hide" />
                 <field name="move_id" invisible="1" />
