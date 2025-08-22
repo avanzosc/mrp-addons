@@ -8,12 +8,7 @@
     "license": "AGPL-3",
     "author": "AvanzOSC",
     "website": "https://github.com/avanzosc/mrp-addons",
-    "depends": [
-        "mrp"
-    ],
-    "data": [
-        "views/mrp_workorder_view.xml"
-    ],
+    "depends": ["mrp"],
+    "data": ["views/mrp_workorder_view.xml"],
     "installable": True,
 }
-
