@@ -1,0 +1,21 @@
+<odoo>
+    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="mo_components_availability_state" invisible="1"
+                    options='{"lazy": true}' />
+                <field name="mo_reservation_state" invisible="1"
+                    decoration-danger="mo_reservation_state == 'confirmed'"
+                    decoration-success="mo_reservation_state == 'assigned'" />
+                <field name="mo_components_availability" options='{"lazy": true}'
+                    attrs="{'invisible': [('production_state', 'not in', ['confirmed', 'progress'])]}"
+                    optional="show"
+                    decoration-success="mo_reservation_state == 'assigned' or mo_components_availability_state == 'available'"
+                    decoration-warning="mo_reservation_state != 'assigned' and mo_components_availability_state in ('expected', 'available')"
+                    decoration-danger="mo_reservation_state != 'assigned' and mo_components_availability_state == 'late'" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
