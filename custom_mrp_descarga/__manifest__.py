@@ -44,6 +44,7 @@
         "views/account_analytic_line_view.xml",
         "views/product_customerinfo_view.xml",
         "views/product_category_views.xml",
+        "views/mrp_bom_category_views.xml",
         "report/mrp_production_summary_xlsx.xml",
         "report/mrp_production_quartering_summary_xlsx.xml",
         "report/sale_report_view.xml",
