@@ -31,6 +31,13 @@
           context="{'default_finished_move_id': id}"
         />
             </xpath>
+            <xpath expr="//field[@name='product_uom_qty']" position="before">
+                <field
+          name="quantity_done"
+          readonly="1"
+          attrs="{'invisible': [('workorder_id', '=', False)]}"
+        />
+            </xpath>
         </field>
     </record>
 
