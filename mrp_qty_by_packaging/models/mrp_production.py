@@ -18,9 +18,14 @@ class MrpProduction(models.Model):
 
     @api.onchange("product_packaging_id")
     def _onchange_product_packaging_id(self):
-        if self.product_packaging_id:
-            self.product_packaging_qty = 1
-            self.product_qty = self.product_packaging_id.qty
+        if (
+            self.product_packaging_id
+            and self.product_qty > 0
+            and self.product_packaging_id.qty > 0
+        ):
+            self.product_packaging_qty = (
+                self.product_qty / self.product_packaging_id.qty
+            )
         else:
             self.product_packaging_qty = 0
             self.product_qty = 1
@@ -43,3 +48,24 @@ class MrpProduction(models.Model):
                 packaging_uom_qty / self.product_packaging_id.qty,
                 precision_rounding=packaging_uom.rounding,
             )
+
+    def write(self, vals):
+        res = super().write(vals)
+        for production in self:
+            if (
+                "product_packaging_qty" in vals
+                and production.state == "confirmed"
+                and production.product_packaging_id
+            ):
+                new_qty = (
+                    production.product_packaging_qty
+                    * production.product_packaging_id.qty
+                )
+                wizard = self.env["change.production.qty"].create(
+                    {
+                        "mo_id": production.id,
+                        "product_qty": new_qty,
+                    }
+                )
+                wizard.change_prod_qty()
+        return res
