@@ -1,4 +1,4 @@
-from odoo import models
+from odoo import api, models
 
 
 class StockMove(models.Model):
@@ -11,3 +11,9 @@ class StockMove(models.Model):
         action["context"] = action.get("context", {})
 
         return action
+
+    @api.onchange("quantity_done")
+    def _on_change_quantity_done(self):
+        for move in self:
+            if move.production_id.qty_producing == 0.0:
+                move.production_id.qty_producing = move.quantity_done
