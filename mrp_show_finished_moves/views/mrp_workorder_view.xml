@@ -12,6 +12,24 @@
           />
                 </page>
             </xpath>
+            <xpath expr="//field[@name='production_id']" position="after">
+                <field name="qty_producing" readonly="1" />
+                <field name="qty_produced" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_remaining']" position="before">
+                <field name="qty_producing" readonly="1" />
+                <field name="qty_produced" readonly="1" />
+            </xpath>
         </field>
     </record>
 </odoo>
