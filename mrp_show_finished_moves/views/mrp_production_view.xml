@@ -23,6 +23,16 @@
                         <span class="o_stat_text">Finished Moves</span>
                     </div>
                 </button>
+                <button
+          class="oe_stat_button"
+          name="action_show_finished_move_lines_result_packages"
+          type="object"
+          icon="fa-archive"
+        >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Result Packages</span>
+                    </div>
+                </button>
             </xpath>
             <xpath
         expr="//div[@class='d-flex flex-row align-items-start']"
