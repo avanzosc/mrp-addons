@@ -13,8 +13,11 @@ This module extends the Manufacturing (MRP) functionality to improve the visibil
 - **New Finished Moves Tab**
   - Adds a **"Finished Moves"** tab in both the MO and WO forms to display finished stock moves and move lines.
 
-- **Stat Button on Manufacturing Orders**
-  - Adds a stat button to MOs that opens a dedicated tree view with all related finished move lines.
+- **Shortcuts**
+  - Adds a shortcut button to MOs that opens a dedicated tree view with all related finished move lines.
+  - Adds a shortcut button to MOs that opens a dedicated tree view with all related finished move lines' result packages.
+  - Adds a shortcut button to WOs that opens a dedicated tree view with all related finished move lines' result packages.
+  - Adds a shortcut button to Finished Moves that opens a dedicated tree view with all related finished move lines' packages.
 
 - **Finished Move Lines Menu**
   - Provides a new menu entry under *Manufacturing* to access all finished move lines directly.
