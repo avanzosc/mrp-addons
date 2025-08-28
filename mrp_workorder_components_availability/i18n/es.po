@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workorder_components_availability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-22 07:56+0000\n"
+"PO-Revision-Date: 2025-08-22 07:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workorder_components_availability
+#: model:ir.model.fields,field_description:mrp_workorder_components_availability.field_mrp_workorder__mo_components_availability_state
+msgid "MO Components Availability State"
+msgstr "OF Estado disponibilidad del componente"
+
+#. module: mrp_workorder_components_availability
+#: model:ir.model.fields,help:mrp_workorder_components_availability.field_mrp_workorder__mo_components_availability
+msgid ""
+"Latest component availability status for parent MO. If green, then the MO's "
+"readiness status is ready, as per BOM configuration."
+msgstr ""
+"Estado más reciente de disponibilidad de componentes para la orden de fabricación "
+"padre. Si está en verde, el estado de preparación de la orden está listo, según "
+"la configuración de la LdM."
+
+#. module: mrp_workorder_components_availability
+#: model:ir.model.fields,field_description:mrp_workorder_components_availability.field_mrp_workorder__mo_components_availability
+msgid "MO Component Status"
+msgstr "OF Disponibilidad del componente"
+
+#. module: mrp_workorder_components_availability
+#: model:ir.model.fields,field_description:mrp_workorder_components_availability.field_mrp_workorder__mo_reservation_state
+msgid "MO Readiness"
+msgstr "OF Preparación"
+
+#. module: mrp_workorder_components_availability
+#: model:ir.model.fields,help:mrp_workorder_components_availability.field_mrp_workorder__mo_reservation_state
+msgid ""
+"Manufacturing readiness for parent MO, as per bill of material configuration:\n"
+"            * Ready: The material is available to start the production.\n"
+"            * Waiting: The material is not available to start the production.\n"
+msgstr ""
+"Preparación para la fabricación de la OF padre, según la configuración de la LdM:\n"
+"            * Listo: El material está disponible para iniciar la producción.\n"
+"            * En espera: El material no está disponible para iniciar la producción.\n"
+#. module: mrp_workorder_components_availability
+#: model:ir.model,name:mrp_workorder_components_availability.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
