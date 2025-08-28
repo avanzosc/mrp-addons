@@ -12,7 +12,8 @@
             context="{'default_workorder_id': id, 'default_manufacturing_order_id': production_id}"
           >
 	                    <tree editable="bottom">
-	                        <field name="create_date" />
+	                        <field name="create_date" optional="hide" />
+                            <field name="manual_date" optional="show" />
 	                        <field
                 name="manufacturing_order_id"
                 optional='show'

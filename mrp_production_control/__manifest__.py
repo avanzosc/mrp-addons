@@ -3,7 +3,7 @@
 {
     "name": "MRP Production Control",
     "summary": "Production control tracking for Work Orders and Manufacturing Orders.",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.1.0",
     "license": "AGPL-3",
     "depends": ["mrp"],
     "author": "AvanzOSC",

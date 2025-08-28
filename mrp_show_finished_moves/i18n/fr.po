@@ -18,74 +18,74 @@ msgstr ""
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
 msgid "<span class=\"o_stat_text\">Finished Moves</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Mouvements terminés</span>"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: mrp_show_finished_moves
 #: model:ir.actions.act_window,name:mrp_show_finished_moves.action_finished_move_lines
 #: model:ir.ui.menu,name:mrp_show_finished_moves.menu_finished_move_lines
 msgid "Finished Move Lines"
-msgstr ""
+msgstr "Lignes de mouvements terminés"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "Finished Moves"
-msgstr ""
+msgstr "Mouvements terminés"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
 msgid "Inconsistency Warning"
-msgstr ""
+msgstr "Avertissement d'incohérence"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
 msgid "Inconsistency in Quants Warning"
-msgstr ""
+msgstr "Avertissement d'incohérence dans les quantités"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__no_label
 msgid "No Label"
-msgstr ""
+msgstr "Étiquette Non"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
 msgid "No, Continue Editing"
-msgstr ""
+msgstr "Non, continuer l'édition"
 
 #. module: mrp_show_finished_moves
 #. odoo-python
@@ -93,7 +93,7 @@ msgstr ""
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
 #, python-format
 msgid "No, review data first"
-msgstr ""
+msgstr "Non, vérifier les données d'abord"
 
 #. module: mrp_show_finished_moves
 #. odoo-python
@@ -112,43 +112,53 @@ msgid ""
 "   'Quantity Produced' to match 'Quantity Done'.\n"
 "3. Continue marking the Manufacturing Order as done."
 msgstr ""
+"Un écart entre la quantité en production et la quantité réalisée a été détecté :\n"
+"\n"
+"• L'ordre de fabrication indique %(planned)s unités en production.\n"
+"• Les mouvements terminés de l'ordre de fabrication indiquent %(actual)s unités\n"
+"  produites.\n"
+"\n"
+"Si vous choisissez 'Oui', le système :\n"
+"1. Réglera la 'Quantité en production' pour correspondre à la 'Quantité réalisée'.\n"
+"2. Mettra à jour toutes les OT liées ('Quantité en production' et 'Quantité produite') pour correspondre à la 'Quantité réalisée'.\n"
+"3. Continuera à marquer l'ordre de fabrication comme terminé."
 
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Mouvements d'article (Ligne de mouvement de stock)"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__production_id
 msgid "Production"
-msgstr ""
+msgstr "Production"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
 msgid "Production Order"
-msgstr ""
+msgstr "Ordre de fabrication"
 
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
 #, python-format
 msgid "Quantity Discrepancy Warning"
-msgstr ""
+msgstr "Avertissement d'écart de quantité"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_move_tree
 msgid "Show Details"
-msgstr ""
+msgstr "Afficher les détails"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Mouvement de stock"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__warning_message
 msgid "Warning Message"
-msgstr ""
+msgstr "Message d'avertissement"
 
 #. module: mrp_show_finished_moves
 #. odoo-python
@@ -167,16 +177,26 @@ msgid ""
 "   'Quantity Produced' to match 'Quantity Done'.\n"
 "3. Continue marking the Manufacturing Order as done."
 msgstr ""
+"Un écart entre les quantités des ordres de travail et de l'ordre de fabrication a été détecté :\n"
+"\n"
+"• Les ordres de travail indiquent %(wo_qty)s unités produites.\n"
+"• Les mouvements terminés de l'ordre de fabrication indiquent %(mo_qty)s unités\n"
+"  produites.\n"
+"\n"
+"Si vous choisissez 'Oui', le système :\n"
+"1. Réglera la 'Quantité en production' pour correspondre à la 'Quantité réalisée'.\n"
+"2. Mettra à jour tous les ordres de travail liés ('Quantité en production' et 'Quantité produite') pour correspondre à la 'Quantité réalisée'.\n"
+"3. Continuera à marquer l'ordre de fabrication comme terminé."
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__yes_label
 msgid "Yes Label"
-msgstr ""
+msgstr "Étiquette Oui"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
 msgid "Yes, Correct the Discrepancies"
-msgstr ""
+msgstr "Oui, corriger les écarts"
 
 #. module: mrp_show_finished_moves
 #. odoo-python
@@ -184,4 +204,5 @@ msgstr ""
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
 #, python-format
 msgid "Yes, adjust quantities and proceed"
-msgstr ""
+msgstr "Oui, ajuster les quantités et continuer"
+

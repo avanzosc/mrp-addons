@@ -40,6 +40,7 @@ class ProductionControl(models.Model):
         store=True,
         copy=False,
     )
+    manual_date = fields.Datetime()
 
     @api.onchange("manufacturing_order_id")
     def _onchange_manufacturing_order_id(self):
@@ -61,6 +62,7 @@ class ProductionControl(models.Model):
             if vals.get("workorder_id") and not vals.get("manufacturing_order_id"):
                 workorder = workorder_obj.browse(vals["workorder_id"])
                 vals["manufacturing_order_id"] = workorder.production_id.id
+            vals["manual_date"] = fields.Datetime.now()
         return super().create(vals_list)
 
     def write(self, vals):

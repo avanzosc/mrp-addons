@@ -4,7 +4,8 @@
 	    <field name="model">mrp.production.control</field>
 	    <field name="arch" type="xml">
 	        <tree editable="bottom">
-	        	<field name="create_date" readonly="1" />
+	        	<field name="create_date" readonly="1" optional="hide" />
+	        	<field name="manual_date" optional="show" />
 	        	<field name="manufacturing_order_id" widget="many2one" optional="show" />
 	        	<field name="manufacturing_order_product_id" optional="show" readonly="1" />
 	        	<field name="manufacturing_order_product_lot_id" optional="show" readonly="1" />

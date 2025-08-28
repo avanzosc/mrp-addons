@@ -14,6 +14,7 @@
         "views/mrp_workorder_view.xml",
         "views/stock_move_views.xml",
         "views/stock_move_line_views.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
     "application": False,
