@@ -18,12 +18,18 @@
         />
 	            <field name="operator_id" />
 	            <field name="pallet_number" optional='show' />
+                <field
+          name="controlled_pieces"
+          widget="integer"
+          sum="Cumulative Controled Pieces"
+        />
 	            <field
           name="defective_pieces"
           widget="integer"
           sum="Cumulative Defective Pieces"
         />
-	            <field name="defect_description" />
+                <field name="percentage_defective" />
+                <field name="defect_description" />
 	            <field name="action_taken" />
 	        </tree>
 	    </field>

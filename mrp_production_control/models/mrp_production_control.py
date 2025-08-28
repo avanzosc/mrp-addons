@@ -41,6 +41,19 @@ class ProductionControl(models.Model):
         copy=False,
     )
     manual_date = fields.Datetime()
+    percentage_defective = fields.Float(
+        compute="_compute_percentage_defective", store=True, copy=False
+    )
+
+    @api.depends("controlled_pieces", "defective_pieces")
+    def _compute_percentage_defective(self):
+        for control in self:
+            if control.controlled_pieces > 0:
+                control.percentage_defective = round(
+                    (control.defective_pieces / control.controlled_pieces) * 100, 2
+                )
+            else:
+                control.percentage_defective = 0
 
     @api.onchange("manufacturing_order_id")
     def _onchange_manufacturing_order_id(self):
