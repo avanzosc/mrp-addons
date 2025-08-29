@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-22 07:55+0000\n"
-"PO-Revision-Date: 2025-08-22 07:55+0000\n"
+"POT-Creation-Date: 2025-08-29 08:41+0000\n"
+"PO-Revision-Date: 2025-08-29 08:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,22 +16,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_workorder_components_availability
-#: model:ir.model.fields,field_description:mrp_workorder_components_availability.field_mrp_workorder__mo_components_availability_state
-msgid "MO Components Availability State"
-msgstr "OF Estat disponibilitat components"
-
-#. module: mrp_workorder_components_availability
 #: model:ir.model.fields,help:mrp_workorder_components_availability.field_mrp_workorder__mo_components_availability
 msgid ""
 "Latest component availability status for parent MO. If green, then the MO's "
 "readiness status is ready, as per BOM configuration."
 msgstr ""
-"Estat més recent de disponibilitat dels components per a l'ordre de fabricació pare. "
-"Si és verd, l'ordre està llesta segons la configuració de la llista de materials."
+"Estat més recent de disponibilitat dels components per a l'ordre de "
+"fabricació pare. Si és verd, l'ordre està llesta segons la configuració de "
+"la llista de materials."
+
 #. module: mrp_workorder_components_availability
 #: model:ir.model.fields,field_description:mrp_workorder_components_availability.field_mrp_workorder__mo_components_availability
 msgid "MO Component Status"
 msgstr "OF Estat dels components"
+
+#. module: mrp_workorder_components_availability
+#: model:ir.model.fields,field_description:mrp_workorder_components_availability.field_mrp_workorder__mo_components_availability_state
+msgid "MO Components Availability State"
+msgstr "OF Estat disponibilitat components"
 
 #. module: mrp_workorder_components_availability
 #: model:ir.model.fields,field_description:mrp_workorder_components_availability.field_mrp_workorder__mo_reservation_state
@@ -45,10 +47,10 @@ msgid ""
 "            * Ready: The material is available to start the production.\n"
 "            * Waiting: The material is not available to start the production.\n"
 msgstr ""
-"Preparació per a la fabricació de l'ordre de fabricació pare, segons la configuració "
-"de la llista de materials:\n"
+"Preparació per a la fabricació de l'ordre de fabricació pare, segons la configuració de la llista de materials:\n"
 "            * Llesta: El material està disponible per iniciar la producció.\n"
 "            * En espera: El material no està disponible per iniciar la producció.\n"
+
 #. module: mrp_workorder_components_availability
 #: model:ir.model,name:mrp_workorder_components_availability.model_mrp_workorder
 msgid "Work Order"
