@@ -465,6 +465,7 @@
                 <field
           name="average_weight"
           attrs="{'column_invisible':[('parent.quartering', '=', False)]}"
+          optional="show"
         />
             </field>
             <field name="brut" position="attributes">
@@ -482,11 +483,11 @@
           name="attrs"
         >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
             </field>
-            <field name="weight" position="attributes">
-                <attribute
-          name="attrs"
-        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>
-            </field>
+<!--            <field name="weight" position="attributes">-->
+<!--                <attribute-->
+<!--          name="attrs"-->
+<!--        >{'column_invisible':['|', ('parent.paasa', '=', False), ('parent.saca_line_id', '=', False)]}</attribute>-->
+<!--            </field>-->
             <field name="percentage" position="attributes">
                 <attribute
           name="attrs"
