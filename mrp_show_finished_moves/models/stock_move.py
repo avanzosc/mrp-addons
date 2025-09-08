@@ -32,7 +32,7 @@ class StockMove(models.Model):
         "state",
     )
     def _compute_display_assign_serial(self):
-        super()._compute_display_assign_serial()
+        res = super()._compute_display_assign_serial()
         for move in self:
             if (
                 not move.raw_material_production_id
@@ -41,3 +41,4 @@ class StockMove(models.Model):
                 and move.production_id.product_id == move.product_id
             ):
                 move.display_assign_serial = True
+        return res
