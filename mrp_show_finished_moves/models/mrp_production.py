@@ -69,7 +69,8 @@ class MrpProduction(models.Model):
                         return self._launch_qty_warning(
                             production,
                             _(
-                                "Work Order vs Manufacturing Order quantity mismatch detected:\n\n"
+                                "Work Order vs Manufacturing Order "
+                                "quantity mismatch detected:\n\n"
                                 "• Work Orders report %(wo_qty)s units produced.\n"
                                 "• Manufacturing Order finished moves report %(mo_qty)s units\n"
                                 "  produced.\n\n"

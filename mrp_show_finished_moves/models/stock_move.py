@@ -9,10 +9,14 @@ class StockMove(models.Model):
         action = super().action_show_details()
         action["target"] = "current"
         action["context"] = action.get("context", {})
-        
-        if self.production_id and not self.raw_material_production_id and self.product_id.tracking != 'none':
+
+        if (
+            self.production_id
+            and not self.raw_material_production_id
+            and self.product_id.tracking != "none"
+        ):
             action["context"]["show_lot_name_instead_lot_id"] = True
-        
+
         return action
 
     @api.onchange("quantity_done")
@@ -20,17 +24,20 @@ class StockMove(models.Model):
         for move in self:
             if move.production_id.qty_producing == 0.0:
                 move.production_id.qty_producing = move.quantity_done
-                
-    @api.depends('has_tracking', 'picking_type_id.use_create_lots', 'picking_type_id.use_existing_lots', 'state')
+
+    @api.depends(
+        "has_tracking",
+        "picking_type_id.use_create_lots",
+        "picking_type_id.use_existing_lots",
+        "state",
+    )
     def _compute_display_assign_serial(self):
-        super(StockMove, self)._compute_display_assign_serial()
+        super()._compute_display_assign_serial()
         for move in self:
             if (
-                not move.raw_material_production_id 
-                and move.product_id.tracking == 'serial'
-                and move.production_id and move.production_id.product_id == move.product_id
+                not move.raw_material_production_id
+                and move.product_id.tracking == "serial"
+                and move.production_id
+                and move.production_id.product_id == move.product_id
             ):
                 move.display_assign_serial = True
-
-
-

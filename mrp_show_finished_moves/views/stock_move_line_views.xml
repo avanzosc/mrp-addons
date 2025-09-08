@@ -16,7 +16,7 @@
     action="action_finished_move_lines"
     sequence="50"
   />
- 
+
   <record id="view_stock_move_line_operation_tree" model="ir.ui.view">
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree" />
