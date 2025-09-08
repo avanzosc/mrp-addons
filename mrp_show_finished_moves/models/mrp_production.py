@@ -63,28 +63,29 @@ class MrpProduction(models.Model):
                         yes_label=_("Yes, adjust quantities and proceed"),
                         no_label=_("No, review data first"),
                     )
-                qty_produced_wo = finished_move.workorder_id.qty_produced
-                if qty_produced_wo != quantity_done and quantity_done != 0:
-                    return self._launch_qty_warning(
-                        production,
-                        _(
-                            "Work Order vs Manufacturing Order quantity mismatch detected:\n\n"
-                            "• Work Orders report %(wo_qty)s units produced.\n"
-                            "• Manufacturing Order finished moves report %(mo_qty)s units\n"
-                            "  produced.\n\n"
-                            "If you choose 'Yes', the system will:\n"
-                            "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
-                            "2. Update all related Work Orders' 'Quantity Producing' and\n"
-                            "   'Quantity Produced' to match 'Quantity Done'.\n"
-                            "3. Continue marking the Manufacturing Order as done."
+                if finished_move.workorder_id:
+                    qty_produced_wo = finished_move.workorder_id.qty_produced
+                    if qty_produced_wo != quantity_done and quantity_done != 0:
+                        return self._launch_qty_warning(
+                            production,
+                            _(
+                                "Work Order vs Manufacturing Order quantity mismatch detected:\n\n"
+                                "• Work Orders report %(wo_qty)s units produced.\n"
+                                "• Manufacturing Order finished moves report %(mo_qty)s units\n"
+                                "  produced.\n\n"
+                                "If you choose 'Yes', the system will:\n"
+                                "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
+                                "2. Update all related Work Orders' 'Quantity Producing' and\n"
+                                "   'Quantity Produced' to match 'Quantity Done'.\n"
+                                "3. Continue marking the Manufacturing Order as done."
+                            )
+                            % {
+                                "wo_qty": qty_produced_wo,
+                                "mo_qty": quantity_done,
+                            },
+                            yes_label=_("Yes, adjust quantities and proceed"),
+                            no_label=_("No, review data first"),
                         )
-                        % {
-                            "wo_qty": qty_produced_wo,
-                            "mo_qty": quantity_done,
-                        },
-                        yes_label=_("Yes, adjust quantities and proceed"),
-                        no_label=_("No, review data first"),
-                    )
         return super().button_mark_done()
 
     def _launch_qty_warning(self, production, message, yes_label, no_label):
