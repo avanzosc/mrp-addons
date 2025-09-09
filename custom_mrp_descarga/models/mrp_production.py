@@ -186,13 +186,22 @@ class MrpProduction(models.Model):
         store=True,
     )
     asphyxiation_units = fields.Integer(
-        string="Asphyxiated", compute="_compute_asphyxiation_units", store=True
+        string="Asphyxiated",
+        compute="_compute_asphyxiation_units",
+        store=True,
+        group_operator="avg",
     )
     seized_units = fields.Integer(
-        string="Seized", compute="_compute_seized_units", store=True
+        string="Seized",
+        compute="_compute_seized_units",
+        store=True,
+        group_operator="avg",
     )
     rto_percentage = fields.Float(
-        string="Rto. %", compute="_compute_rto_percentage", store=True
+        string="Rto. %",
+        compute="_compute_rto_percentage",
+        store=True,
+        group_operator="avg",
     )
     bom_category_id = fields.Many2one(
         string="Category", related="bom_id.category_id", store=True

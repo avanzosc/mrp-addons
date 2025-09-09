@@ -789,6 +789,20 @@
         </field>
     </record>
 
+    <record id="mrp_production_classified_pivot_view" model="ir.ui.view">
+        <field name="name">mrp.production.pivot</field>
+        <field name="model">mrp.production</field>
+        <field name="arch" type="xml">
+            <pivot string="Clasificado">
+                <field name="name" />
+                <field name="rto_percentage" type="measure" />
+                <field name="rto_canal" type="measure" />
+                <field name="asphyxiation_units" type="measure" />
+                <field name="seized_units" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
     <record id="mrp_production_quartering_tree_view" model="ir.ui.view">
         <field name="name">mrp.production.tree</field>
         <field name="model">mrp.production</field>
@@ -840,11 +854,19 @@
         <field name="name">Clasificado</field>
         <field name="res_model">mrp.production</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="mrp_production_classified_tree_view" />
+        <field name="view_mode">tree,form,pivot</field>
         <field name="search_view_id" ref="view_mrp_production_filter_lot" />
         <field name="domain">[('saca_line_id', '!=', False)]</field>
         <field name="context">{"search_default_todo": 1}</field>
+        <field
+      name="view_ids"
+      eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('mrp_production_classified_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': False}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('mrp_production_classified_pivot_view')}),
+        ]"
+    />
     </record>
 
     <menuitem
