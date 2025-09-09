@@ -20,7 +20,10 @@ class MrpProduction(models.Model):
         digits="Killing Cost Decimal Precision",
     )
     rto_canal = fields.Float(
-        string="Rto. Canal", compute="_compute_rto_canal", store=True
+        string="Rto. Canal",
+        compute="_compute_rto_canal",
+        store=True,
+        group_operator="avg",
     )
     canal_cost = fields.Float(
         string="Canal Cost",
