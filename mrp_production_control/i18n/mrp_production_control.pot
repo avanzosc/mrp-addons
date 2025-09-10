@@ -153,3 +153,8 @@ msgstr ""
 msgid "Manual Date"
 msgstr ""
 
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__percentage_defective
+msgid "Percentage Defective"
+msgstr ""
+
