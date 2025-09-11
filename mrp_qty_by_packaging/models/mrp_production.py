@@ -1,7 +1,7 @@
 # Copyright 2023 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from odoo import api, fields, models
-from odoo.tools import float_round
+from odoo.tools import float_is_zero, float_round
 
 
 class MrpProduction(models.Model):
@@ -18,9 +18,14 @@ class MrpProduction(models.Model):
 
     @api.onchange("product_packaging_id")
     def _onchange_product_packaging_id(self):
-        if self.product_packaging_id:
-            self.product_packaging_qty = 1
-            self.product_qty = self.product_packaging_id.qty
+        if (
+            self.product_packaging_id
+            and self.product_qty > 0
+            and self.product_packaging_id.qty > 0
+        ):
+            self.product_packaging_qty = (
+                self.product_qty / self.product_packaging_id.qty
+            )
         else:
             self.product_packaging_qty = 0
             self.product_qty = 1
@@ -43,3 +48,28 @@ class MrpProduction(models.Model):
                 packaging_uom_qty / self.product_packaging_id.qty,
                 precision_rounding=packaging_uom.rounding,
             )
+
+    def write(self, vals):
+        res = super().write(vals)
+        for production in self:
+            if (
+                "product_packaging_qty" in vals
+                and production.state == "confirmed"
+                and production.product_packaging_id
+            ):
+                expected_qty = (
+                    production.product_packaging_qty
+                    * production.product_packaging_id.qty
+                )
+                if not float_is_zero(
+                    expected_qty - production.product_qty,
+                    precision_rounding=production.product_uom_id.rounding,
+                ):
+                    wizard = self.env["change.production.qty"].create(
+                        {
+                            "mo_id": production.id,
+                            "product_qty": expected_qty,
+                        }
+                    )
+                    wizard.change_prod_qty()
+        return res

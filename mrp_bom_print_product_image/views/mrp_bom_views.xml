@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_bom_form_view" model="ir.ui.view">
+      <field name="model">mrp.bom</field>
+      <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='product_qty']/.." position="after">
+              <label for="print_product_image" string="Print Product Image" />
+              <div class="o_row">
+                  <field name="print_product_image" />
+              </div>
+          </xpath>
+          <xpath
+        expr="//field[@name='bom_line_ids']/tree/field[@name='product_id']"
+        position="before"
+      >
+              <field
+          name="product_image"
+          widget="image"
+          class="oe_avatar"
+          readonly="1"
+          optional="show"
+        />
+          </xpath>
+      </field>
+    </record>
+
+    <record id="mrp_bom_tree_view" model="ir.ui.view">
+      <field name="model">mrp.bom</field>
+      <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+      <field name="arch" type="xml">
+          <field name="company_id" position="before">
+              <field name="print_product_image" optional="show" />
+          </field>
+      </field>
+    </record>
+
+    <record id="view_mrp_bom_filter" model="ir.ui.view">
+      <field name="model">mrp.bom</field>
+      <field name="inherit_id" ref="mrp.view_mrp_bom_filter" />
+      <field name="arch" type="xml">
+          <filter name="inactive" position="before">
+              <filter
+          string="Print Product Image"
+          name="print-product-image"
+          domain="[('print_product_image', '=', True)]"
+        />
+              <filter
+          string="Not Print Product Image"
+          name="notprint-product-image"
+          domain="[('print_product_image', '=', False)]"
+        />
+              <separator />
+          </filter>
+          <filter name="default_unit_of_measure" position="after">
+              <filter
+          string="Print Product Image"
+          name="by_print_product_image"
+          domain="[]"
+          context="{'group_by' : 'print_product_image'}"
+        />
+          </filter>
+      </field>
+    </record>
+</odoo>

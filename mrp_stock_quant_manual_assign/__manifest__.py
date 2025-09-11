@@ -8,9 +8,12 @@
     "author": "AvanzOSC,",
     "license": "AGPL-3",
     "depends": ["mrp", "stock_quant_manual_assign"],
+    "exclude": [
+        "mrp_production_quant_manual_assign",
+    ],
     "data": [
         "views/mrp_production_views.xml",
     ],
     "installable": True,
-    "auto_install": True,
+    "auto_install": False,
 }

@@ -17,22 +17,23 @@ class MrpProduction(models.Model):
     workorder_count = fields.Integer(
         string="# Work Orders", compute="_compute_workorder_count"
     )
-    move_line_ids = fields.One2many(
-        string="Move Lines",
+    raw_move_line_ids = fields.One2many(
         comodel_name="stock.move.line",
-        inverse_name="production_id",
-        domain=lambda self: [
-            ("location_dest_id", "in", self.production_location_id.ids)
-        ],
+        compute="_compute_raw_lines",
+        inverse="_inverse_raw_lines",
+        string="Raw Product",
     )
-    finished_move_line_ids = fields.One2many(
-        compute=False,
-        inverse_name="production_id",
-        domain=lambda self: [
-            ("location_id", "in", self.production_location_id.ids),
-            ("location_dest_id", "in", self.location_dest_id.ids),
-        ],
-    )
+
+    def _inverse_raw_lines(self):
+        """Little hack to make sure that when you change something on these objects,
+        it gets saved"""
+
+    @api.depends("move_raw_ids.move_line_ids")
+    def _compute_raw_lines(self):
+        for production in self:
+            production.raw_move_line_ids = production.move_raw_ids.mapped(
+                "move_line_ids"
+            )
 
     @api.depends("move_raw_ids", "state", "move_raw_ids.product_uom_qty")
     def _compute_unreserve_visible(self):

@@ -22,10 +22,6 @@
                 t-if="not doc.product_id"
                 t-field="doc.product_tmpl_id.default_code"
               />
-                            <span
-                t-if="doc.product_id"
-                t-field="doc.product_id.prefix_code"
-              />
                             <t t-if="doc.code">
                                 <br />
                                 <strong>BoM Ref.:</strong>

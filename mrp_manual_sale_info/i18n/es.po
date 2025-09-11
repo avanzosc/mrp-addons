@@ -1,0 +1,90 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_manual_sale_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-27 16:27+0000\n"
+"PO-Revision-Date: 2022-01-27 16:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_production__manual_commitment_date
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_workorder__manual_commitment_date
+msgid "Commitment Date"
+msgstr "Fecha de compromiso"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_production__manual_partner_id
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_workorder__manual_partner_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_production__manual_client_order_ref
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_workorder__manual_client_order_ref
+msgid "Customer Reference"
+msgstr "Referencia cliente"
+
+#. module: mrp_manual_sale_info
+#: code:addons/mrp_manual_sale_info/models/mrp_production.py:0
+#, python-format
+msgid "Customer must be same as customer from Sale Order!"
+msgstr "¡El cliente debe ser el mismo que el cliente del pedido!"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_workorder__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_production__id
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_workorder__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_workorder____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mrp_manual_sale_info
+#: model_terms:ir.ui.view,arch_db:mrp_manual_sale_info.mrp_workorder_view_form
+msgid "Manual Sale Information"
+msgstr "Información de venta (manual)"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model,name:mrp_manual_sale_info.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_production__manual_sale_id
+#: model:ir.model.fields,field_description:mrp_manual_sale_info.field_mrp_workorder__manual_sale_id
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: mrp_manual_sale_info
+#: model:ir.model.fields,help:mrp_manual_sale_info.field_mrp_production__manual_commitment_date
+#: model:ir.model.fields,help:mrp_manual_sale_info.field_mrp_workorder__manual_commitment_date
+msgid ""
+"This is the delivery date promised to the customer. If set, the delivery "
+"order will be scheduled based on this date rather than product lead times."
+msgstr ""
+"Ésta es la fecha de entrega prometida al cliente. Si se establece, la orden "
+"de entrega se programará en función de esta fecha en lugar de los plazos de "
+"entrega del producto."
+
+#. module: mrp_manual_sale_info
+#: model:ir.model,name:mrp_manual_sale_info.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"

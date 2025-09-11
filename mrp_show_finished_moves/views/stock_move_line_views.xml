@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_finished_move_lines" model="ir.actions.act_window">
+        <field name="name">Finished Move Lines</field>
+        <field name="res_model">stock.move.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">
+            [('move_id.production_id', '!=', False)]
+        </field>
+    </record>
+
+    <menuitem
+    id="menu_finished_move_lines"
+    name="Finished Move Lines"
+    parent="mrp.menu_mrp_manufacturing"
+    action="action_finished_move_lines"
+    sequence="50"
+  />
+</odoo>

@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_structure_xlsx_ext
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-17 08:53+0000\n"
+"PO-Revision-Date: 2025-03-17 08:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "BOM Name"
+msgstr "Nombre Ldm"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "BOM Structure"
+msgstr "Estructura LdM"
+
+#. module: mrp_bom_structure_xlsx_ext
+#: model:ir.model,name:mrp_bom_structure_xlsx_ext.model_report_mrp_bom_structure_xlsx_bom_structure_xlsx
+msgid "BOM Structure XLSX Report"
+msgstr "Informe XLSX de estructura de la LdM"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Cost Price"
+msgstr "Precio coste"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Designator"
+msgstr "Designador"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Forecast Quantity"
+msgstr "Cantidad pronosticada"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Last Purchase Currency"
+msgstr "Divisa de la última compra"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Last Purchase Price"
+msgstr "Último precio de compra"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Last Purchase Quantity"
+msgstr "Última cantidad de compra"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Layer"
+msgstr "Capa"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Level"
+msgstr "Nivel"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Manual Standard Cost"
+msgstr "Cost estándard manual"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Manufacturer code"
+msgstr "Marcas"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Product Name"
+msgstr "Nombre producto"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Product Reference"
+msgstr "Ref. Producto"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: mrp_bom_structure_xlsx_ext
+#. odoo-python
+#: code:addons/mrp_bom_structure_xlsx_ext/report/bom_structure_xlsx.py:0
+#, python-format
+msgid "Unit of Measure"
+msgstr "Unidad de medida"

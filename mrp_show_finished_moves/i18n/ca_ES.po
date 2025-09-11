@@ -1,0 +1,230 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_show_finished_moves
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-28 08:50+0000\n"
+"PO-Revision-Date: 2025-08-28 08:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+msgid "<span class=\"o_stat_text\">Finished Moves</span>"
+msgstr "<span class=\"o_stat_text\">Moviments finalitzats</span>"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_stock_move_operations_finished
+msgid "<span class=\"o_stat_text\">Packages</span>"
+msgstr "<span class=\"o_stat_text\">Paquets</span>"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
+msgid "<span class=\"o_stat_text\">Result Packages</span>"
+msgstr "<span class=\"o_stat_text\">Paquets de destinació</span>"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__create_date
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__display_name
+msgid "Display Name"
+msgstr "Nom mostrat"
+
+#. module: mrp_show_finished_moves
+#: model:ir.actions.act_window,name:mrp_show_finished_moves.action_finished_move_lines
+#: model:ir.ui.menu,name:mrp_show_finished_moves.menu_finished_move_lines
+msgid "Finished Move Lines"
+msgstr "Línies de moviments finalitzats"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
+msgid "Finished Moves"
+msgstr "Moviments finalitzats"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
+msgid "Inconsistency Warning"
+msgstr "Avís d'inconsistència"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
+msgid "Inconsistency in Quants Warning"
+msgstr "Avís d'inconsistència en quantitats"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning____last_update
+msgid "Last Modified on"
+msgstr "Última modificació el"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__write_uid
+msgid "Last Updated by"
+msgstr "Última actualització per"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__write_date
+msgid "Last Updated on"
+msgstr "Última actualització el"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__no_label
+msgid "No Label"
+msgstr "Etiqueta No"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
+msgid "No, Continue Editing"
+msgstr "No, continuar editant"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid "No, review data first"
+msgstr "No, revisar dades primer"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid ""
+"Producing vs Done quantity mismatch detected:\n"
+"\n"
+"• Manufacturing Order reports %(planned)s units producing.\n"
+"• Manufacturing Order finished moves report %(actual)s units\n"
+"  produced.\n"
+"\n"
+"If you choose 'Yes', the system will:\n"
+"1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
+"2. Update all related WOs' 'Quantity Producing' and\n"
+"   'Quantity Produced' to match 'Quantity Done'.\n"
+"3. Continue marking the Manufacturing Order as done."
+msgstr ""
+"S'ha detectat una discrepància entre la quantitat en producció i la quantitat realitzada:\n"
+"\n"
+"• L'ordre de producció indica %(planned)s unitats en producció.\n"
+"• Els moviments finalitzats de l'ordre de producció indiquen %(actual)s unitats\n"
+"  produïdes.\n"
+"\n"
+"Si tries 'Sí', el sistema:\n"
+"1. Ajustarà la 'Quantitat en producció' perquè coincideixi amb la 'Quantitat realitzada'.\n"
+"2. Actualitzarà totes les OT relacionades ('Quantitat en producció' i 'Quantitat produïda') perquè coincideixin amb la 'Quantitat realitzada'.\n"
+"3. Continuarà marcant l'ordre de producció com a finalitzada."
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Moviment del producte (línia de moviment d'estoc)"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__production_id
+msgid "Production"
+msgstr "Producció"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
+msgid "Production Order"
+msgstr "Ordre de producció"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid "Quantity Discrepancy Warning"
+msgstr "Avís de discrepància de quantitats"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_move_tree
+msgid "Show Details"
+msgstr "Mostrar detalls"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_stock_move
+msgid "Stock Move"
+msgstr "Moviment d'estoc"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__warning_message
+msgid "Warning Message"
+msgstr "Missatge d'avís"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_mrp_workorder
+msgid "Work Order"
+msgstr "Ordre de treball"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid ""
+"Work Order vs Manufacturing Order quantity mismatch detected:\n"
+"\n"
+"• Work Orders report %(wo_qty)s units produced.\n"
+"• Manufacturing Order finished moves report %(mo_qty)s units\n"
+"  produced.\n"
+"\n"
+"If you choose 'Yes', the system will:\n"
+"1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
+"2. Update all related Work Orders' 'Quantity Producing' and\n"
+"   'Quantity Produced' to match 'Quantity Done'.\n"
+"3. Continue marking the Manufacturing Order as done."
+msgstr ""
+"S'ha detectat una discrepància entre les quantitats de les ordres de treball i l'ordre de producció:\n"
+"\n"
+"• Les ordres de treball indiquen %(wo_qty)s unitats produïdes.\n"
+"• Els moviments finalitzats de l'ordre de producció indiquen %(mo_qty)s unitats\n"
+"  produïdes.\n"
+"\n"
+"Si tries 'Sí', el sistema:\n"
+"1. Ajustarà la 'Quantitat en producció' perquè coincideixi amb la 'Quantitat realitzada'.\n"
+"2. Actualitzarà totes les ordres de treball relacionades ('Quantitat en producció' i 'Quantitat produïda') perquè coincideixin amb la 'Quantitat realitzada'.\n"
+"3. Continuarà marcant l'ordre de producció com a finalitzada."
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__yes_label
+msgid "Yes Label"
+msgstr "Etiqueta Sí"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
+msgid "Yes, Correct the Discrepancies"
+msgstr "Sí, corregir les discrepàncies"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid "Yes, adjust quantities and proceed"
+msgstr "Sí, ajustar quantitats i continuar"

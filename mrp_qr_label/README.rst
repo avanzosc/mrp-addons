@@ -8,6 +8,7 @@ Mrp QR label
 
 * In Manufacturing Order new reports: "Finished Product QR Label", and
   "Products to consume QR Label".
+* In Manufacturing Order new action: "Print Product Labels".
 
 Bug Tracker
 ===========

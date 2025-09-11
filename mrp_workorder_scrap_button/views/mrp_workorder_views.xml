@@ -24,6 +24,7 @@
             <button name="action_open_wizard" position="before">
                 <button
           name="button_scrap"
+          title="Scrap"
           type="object"
           attrs="{'invisible': [('state', 'in', ('cancel', 'done'))]}"
           help="Scrap"
