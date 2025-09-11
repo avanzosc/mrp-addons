@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button
+          name="emptying_lots_in_location"
+          attrs="{'invisible': [('state', '!=', 'done')]}"
+          string="Empty Lots in Location"
+          type="object"
+        />
+            </header>
+            <div name="button_box" position="inside">
+                <button
+          class="oe_stat_button"
+          type="object"
+          name="action_view_emptying_picking"
+        >
+                    <field
+            string="Emtying Pickings"
+            name="count_emptying_pickings"
+            widget="statinfo"
+          />
+                </button>
+            </div>
+            <xpath
+        expr="//page[@name='miscellaneous']//field[@name='origin']"
+        position="before"
+      >
+                <field
+          name="emptying_type_id"
+          domain="[('emptying_type', '=', True)]"
+        />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
