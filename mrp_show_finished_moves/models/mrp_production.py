@@ -76,28 +76,30 @@ class MrpProduction(models.Model):
                         yes_label=_("Yes, adjust quantities and proceed"),
                         no_label=_("No, review data first"),
                     )
-                qty_produced_wo = finished_move.workorder_id.qty_produced
-                if qty_produced_wo != quantity_done and quantity_done != 0:
-                    return self._launch_qty_warning(
-                        production,
-                        _(
-                            "Work Order vs Manufacturing Order quantity mismatch detected:\n\n"
-                            "• Work Orders report %(wo_qty)s units produced.\n"
-                            "• Manufacturing Order finished moves report %(mo_qty)s units\n"
-                            "  produced.\n\n"
-                            "If you choose 'Yes', the system will:\n"
-                            "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
-                            "2. Update all related Work Orders' 'Quantity Producing' and\n"
-                            "   'Quantity Produced' to match 'Quantity Done'.\n"
-                            "3. Continue marking the Manufacturing Order as done."
+                if finished_move.workorder_id:
+                    qty_produced_wo = finished_move.workorder_id.qty_produced
+                    if qty_produced_wo != quantity_done and quantity_done != 0:
+                        return self._launch_qty_warning(
+                            production,
+                            _(
+                                "Work Order vs Manufacturing Order quantity "
+                                "mismatch detected:\n\n"
+                                "• Work Orders report %(wo_qty)s units produced.\n"
+                                "• Manufacturing Order finished moves report %(mo_qty)s units\n"
+                                "  produced.\n\n"
+                                "If you choose 'Yes', the system will:\n"
+                                "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
+                                "2. Update all related Work Orders' 'Quantity Producing' and\n"
+                                "   'Quantity Produced' to match 'Quantity Done'.\n"
+                                "3. Continue marking the Manufacturing Order as done."
+                            )
+                            % {
+                                "wo_qty": qty_produced_wo,
+                                "mo_qty": quantity_done,
+                            },
+                            yes_label=_("Yes, adjust quantities and proceed"),
+                            no_label=_("No, review data first"),
                         )
-                        % {
-                            "wo_qty": qty_produced_wo,
-                            "mo_qty": quantity_done,
-                        },
-                        yes_label=_("Yes, adjust quantities and proceed"),
-                        no_label=_("No, review data first"),
-                    )
         return super().button_mark_done()
 
     def _launch_qty_warning(self, production, message, yes_label, no_label):
@@ -128,6 +130,40 @@ class MrpProduction(models.Model):
                 for wo in production.workorder_ids:
                     wo.qty_producing = quantity_done
                     wo.qty_produced = quantity_done
+
+    def write(self, vals):
+        res = super().write(vals)
+        if "lot_producing_id" in vals:
+            for production in self:
+                new_name = (
+                    production.lot_producing_id.name
+                    if production.lot_producing_id
+                    else False
+                )
+                for move in production.move_finished_ids:
+                    if (
+                        move.product_id == production.product_id
+                        and not move.raw_material_production_id
+                        and move.product_id.tracking == "lot"
+                    ):
+                        ml_cmds = []
+                        for ml in move.move_line_ids:
+                            if ml.id:
+                                ml_cmds.append((1, ml.id, {"lot_name": new_name}))
+                            else:
+                                ml_cmds.append(
+                                    (
+                                        0,
+                                        0,
+                                        {
+                                            "product_id": ml.product_id.id,
+                                            "qty_done": ml.qty_done,
+                                            "lot_name": new_name,
+                                        },
+                                    )
+                                )
+                        move.move_line_ids = ml_cmds
+        return res
 
 
 class MrpProductionQtyWarning(models.TransientModel):
