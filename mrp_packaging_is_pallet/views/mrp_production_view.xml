@@ -1,0 +1,18 @@
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_qty_by_packaging.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_packaging_id']" position="attributes">
+                <attribute
+          name="domain"
+        >[('sales', '=', True), ('product_id','=',product_id), ('is_pallet', '=', True)]</attribute>
+            </xpath>
+            <xpath expr="//field[@name='packaging_id']" position="attributes">
+                <attribute
+          name="domain"
+        >[('product_id','=',product_id),('is_pallet','=',False)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
