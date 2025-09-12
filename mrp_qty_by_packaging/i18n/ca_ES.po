@@ -18,30 +18,30 @@ msgstr ""
 #. module: mrp_qty_by_packaging
 #: model:ir.model,name:mrp_qty_by_packaging.model_change_production_qty
 msgid "Change Production Qty"
-msgstr ""
+msgstr "Canvia la quantitat de producció"
 
 #. module: mrp_qty_by_packaging
 #: model:ir.model.fields,field_description:mrp_qty_by_packaging.field_mrp_production__product_packaging_id
 #: model_terms:ir.ui.view,arch_db:mrp_qty_by_packaging.view_mrp_production_filter
 msgid "Packaging"
-msgstr ""
+msgstr "Embalatge"
 
 #. module: mrp_qty_by_packaging
 #: model:ir.model.fields,field_description:mrp_qty_by_packaging.field_mrp_production__product_packaging_qty
 msgid "Packaging Quantity"
-msgstr ""
+msgstr "Quantitat per embalatge"
 
 #. module: mrp_qty_by_packaging
 #: model:ir.model.fields,field_description:mrp_qty_by_packaging.field_mrp_production__packaging_id
 msgid "Product Packaging"
-msgstr ""
+msgstr "Embalatge del producte"
 
 #. module: mrp_qty_by_packaging
 #: model:ir.model,name:mrp_qty_by_packaging.model_mrp_production
 msgid "Production Order"
-msgstr ""
+msgstr "Ordre de producció"
 
 #. module: mrp_qty_by_packaging
 #: model:ir.model,name:mrp_qty_by_packaging.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regla d'estoc"
