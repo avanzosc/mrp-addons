@@ -105,9 +105,7 @@ class MrpBomImport(models.Model):
     @api.depends("filename", "file_date")
     def _compute_import_name(self):
         for file_import in self:
-            file_import.name = "{} - {}".format(
-                file_import.filename, file_import.file_date
-            )
+            file_import.name = f"{file_import.filename} - {file_import.file_date}"
 
     @api.depends(
         "bom_line_import_ids",
@@ -196,7 +194,7 @@ class MrpBomImport(models.Model):
                 keys = [c.value for c in sheet.row(0)]
                 for counter in range(1, sheet.nrows):
                     row_values = sheet.row_values(counter, 0, end_colx=sheet.ncols)
-                    values = dict(zip(keys, row_values))
+                    values = dict(zip(keys, row_values, strict=False))
                     line_data = self._get_line_values(values)
                     if line_data:
                         bom_import_line_obj.create(line_data)
@@ -423,7 +421,7 @@ class MrpBomLineImport(models.Model):
             ):
                 state = "2validate"
                 same_parent = line.bom_import_id.bom_line_import_ids.filtered(
-                    lambda c: c.bom_product_id == line.bom_product_id
+                    lambda c, line=line: c.bom_product_id == line.bom_product_id
                 )
                 if any([state.state == "error" for state in same_parent]):
                     log_info = _(
