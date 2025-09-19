@@ -3,12 +3,12 @@
     <record id="mrp_bom_import_view_tree" model="ir.ui.view">
         <field name="model">mrp.bom.import</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="state=='error'">
+            <list decoration-danger="state=='error'">
                 <field name="filename" />
                 <field name="data" filename="filename" />
                 <field name="file_date" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -22,13 +22,13 @@
             name="action_validate_lines"
             string="Validate"
             type="object"
-            states="2validate,error,pass"
+            modifiers="2validate,error,pass"
           />
                 <button
             name="action_process_lines"
             string="Process"
             type="object"
-            states="pass,2validate,error"
+            modifiers="pass,2validate,error"
           />
                 <field name="state" widget="statusbar" />
             </header>
@@ -45,7 +45,7 @@
               class="oe_stat_button"
               type="object"
               name="action_bom_import_boms"
-              attrs="{'invisible': [('bom_count', '=', 0)]}"
+              modifiers="{'invisible': [('bom_count', '=', 0)]}"
               icon="fa-flask"
             >
                          <div class="o_field_widget o_stat_info">
@@ -64,7 +64,7 @@
               class="oe_stat_button"
               type="object"
               name="action_bom_import_bom_lines"
-              attrs="{'invisible': [('bom_count', '=', 0)]}"
+              modifiers="{'invisible': [('bom_count', '=', 0)]}"
               icon="fa-flask"
               string="BoM Lines"
             >
@@ -84,7 +84,7 @@
                     <page string="Lines">
                         <field name="bom_line_import_ids" />
                     </page>
-                    <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
+                    <page string="Log" modifiers="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
                     </page>
                     <page string="Help" name="help_page">
@@ -120,7 +120,7 @@
     <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
         <field name="model">mrp.bom.line.import</field>
         <field name="arch" type="xml">
-            <tree
+            <list
         decoration-success="state=='pass'"
         decoration-danger="state=='error'"
         decoration-muted="state=='done'"
@@ -142,7 +142,7 @@
                 <field name="bom_line_id" optional="hide" />
                 <field name="log_info" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -150,7 +150,7 @@
         <field name="name">MRP BoM Import</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">mrp.bom.import</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="view_id" ref="mrp_bom_import_view_tree" />
     </record>
 
