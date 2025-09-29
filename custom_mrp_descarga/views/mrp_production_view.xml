@@ -763,6 +763,7 @@
                 <field name="product_uom_id" optional="show" />
                 <field name="rto_percentage" optional="show" />
                 <field name="rto_canal" optional="show" />
+                <field name="channel_temperature" optional="show" />
                 <field name="purchase_unit_price" optional="show" />
                 <field name="asphyxiation_units" optional="show" />
                 <field name="seized_units" optional="show" />

@@ -320,7 +320,7 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         m += 1
         worksheet.write(n, m, "", result_int_format)
 
-        total_matanza_minutes = 0.0
+        total_matanza_speed = 0.0
         orders_with_matanza = 0
 
         for production_order in objects:
@@ -328,21 +328,17 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                 lambda line: line.task_id.name == "Matanza"
             )
             if matanza_line:
-                minutes = sum(matanza_line.mapped("unit_amount"))
-                if minutes > 0:
-                    total_matanza_minutes += minutes
+                speed_sum = sum(matanza_line.mapped("speed"))
+                if speed_sum > 0:
+                    total_matanza_speed += speed_sum
                     orders_with_matanza += 1
 
         average_matanza_speed = (
-            total_matanza_minutes / orders_with_matanza if orders_with_matanza else 0.0
+            total_matanza_speed / orders_with_matanza if orders_with_matanza else 0.0
         )
-        total_minutes = int(average_matanza_speed * 60)
-        hours = (total_minutes % 3600) // 60
-        minutes = total_minutes % 60
-        hhmm = f"{hours:02d}:{minutes:02d}"
         n += 1
         m = 0
         worksheet.set_column(0, 0, 40)
         worksheet.write(n, m, "Velocidad media matanza", result_int_format)
         m += 1
-        worksheet.write(n, m, hhmm, result_int_format)
+        worksheet.write(n, m, average_matanza_speed, result_int_format)
