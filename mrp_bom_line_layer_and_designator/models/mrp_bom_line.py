@@ -8,3 +8,9 @@ class MrpBomLine(models.Model):
 
     layer = fields.Char()
     designator = fields.Char()
+
+    def get_datas_to_print_bom(self):
+        result = super().get_datas_to_print_bom()
+        result["layer"] = self.layer or ""
+        result["designator"] = self.designator or ""
+        return result
