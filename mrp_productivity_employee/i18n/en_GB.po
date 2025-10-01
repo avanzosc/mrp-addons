@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_productivity_employee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-16 06:22+0000\n"
+"PO-Revision-Date: 2025-10-16 06:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__action_type
+msgid "Action Type"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__allowed_employee_ids
+msgid "Allowed employees"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.wiz_update_workcenter_productivity_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model,name:mrp_productivity_employee.model_hr_department
+msgid "Department"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_mrp_workcenter_productivity__employee_id
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__employee_id
+msgid "Employee"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields.selection,name:mrp_productivity_employee.selection__wiz_update_workcenter_productivity__action_type__finish
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.wiz_update_workcenter_productivity_form_view
+msgid "Finish"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#. odoo-python
+#: code:addons/mrp_productivity_employee/models/mrp_workorder.py:0
+#, python-format
+msgid "Finish Workorder"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_mrp_workcenter__is_external
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.view_mrp_workcenter_search
+msgid "Is External"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.view_department_filter
+msgid "It is a Production Depart."
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.view_department_filter
+msgid "It is not a Production Depart."
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.view_mrp_workcenter_search
+msgid "It is not external"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__loss_id
+msgid "Loss Reason"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields.selection,name:mrp_productivity_employee.selection__wiz_update_workcenter_productivity__action_type__pause
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.wiz_update_workcenter_productivity_form_view
+msgid "Pause"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#. odoo-python
+#: code:addons/mrp_productivity_employee/models/mrp_workorder.py:0
+#, python-format
+msgid "Pause Workorder"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_hr_department__production_department
+msgid "Production Depart."
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model,name:mrp_productivity_employee.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model.fields.selection,name:mrp_productivity_employee.selection__wiz_update_workcenter_productivity__action_type__start
+#: model_terms:ir.ui.view,arch_db:mrp_productivity_employee.wiz_update_workcenter_productivity_form_view
+msgid "Start"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#. odoo-python
+#: code:addons/mrp_productivity_employee/models/mrp_workorder.py:0
+#, python-format
+msgid "Start Workorder"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#. odoo-python
+#: code:addons/mrp_productivity_employee/wizard/wiz_update_workcenter_productivity.py:0
+#, python-format
+msgid ""
+"The work order %(workorder_name)s, is already stopped or finished for the "
+"employee %(employe_name)s"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model,name:mrp_productivity_employee.model_wiz_update_workcenter_productivity
+msgid "Wizard for update workcenter productivity"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model,name:mrp_productivity_employee.model_mrp_workcenter
+msgid "Work Center"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model,name:mrp_productivity_employee.model_mrp_workorder
+#: model:ir.model.fields,field_description:mrp_productivity_employee.field_wiz_update_workcenter_productivity__workorder_id
+msgid "Work Order"
+msgstr ""
+
+#. module: mrp_productivity_employee
+#: model:ir.model,name:mrp_productivity_employee.model_mrp_workcenter_productivity
+msgid "Workcenter Productivity Log"
+msgstr ""
