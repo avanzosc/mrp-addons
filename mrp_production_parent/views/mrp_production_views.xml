@@ -10,6 +10,17 @@
         </field>
     </record>
 
+    <record id="mrp_production_form_view2" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_sale_info.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="sale_id" position="after">
+                <field name="sale_line_id" readonly="1" />
+                <field name="sale_line_product_id" readonly="1" />
+            </field>
+        </field>
+    </record>
+
     <record id="mrp_production_tree_view" model="ir.ui.view">
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
@@ -26,6 +37,7 @@
         <field name="arch" type="xml">
             <field name="origin" position="after">
                 <field name="sale_id" />
+                <field name="sale_line_product_id" />
                 <field name="mrp_production_parent_id" />
             </field>
             <filter name="status" position="after">
@@ -34,6 +46,12 @@
           name="groupsaleorder"
           domain="[]"
           context="{'group_by': 'sale_id'}"
+        />
+                <filter
+          string="Sale Line Product"
+          name="groupsalelineproduct"
+          domain="[]"
+          context="{'group_by': 'sale_line_product_id'}"
         />
                 <filter
           string="Production Parent"

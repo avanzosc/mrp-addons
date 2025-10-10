@@ -11,6 +11,7 @@
     "data": [
         "views/mrp_production_views.xml",
         "views/sale_order_views.xml",
+        "report/report_mrporder.xml",
     ],
     "installable": True,
     "pre_init_hook": "pre_init_hook",
