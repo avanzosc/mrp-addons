@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_mrp_workorder_form_inherit_subcontract" model="ir.ui.view">
+        <field name="name">mrp.workorder.form.inherit.subcontract</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="service_product_id" />
+                <field name="service_product_supplier_id" />
+                <field name="service_supplier_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_workorder_tree_inherit_purchase" model="ir.ui.view">
+    <field name="name">mrp.workorder.tree.inherit.purchase</field>
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='date_planned_start']" position="after">
+            <field
+          name="purchase_id"
+          widget="many2one"
+          options="{'no_create': True}"
+          string="Purchase Order"
+        />
+        </xpath>
+    </field>
+</record>
+
+</odoo>
