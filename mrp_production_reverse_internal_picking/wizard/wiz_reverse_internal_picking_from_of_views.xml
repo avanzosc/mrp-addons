@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id=">wiz_reverse_internal_picking_from_of_view" model="ir.ui.view">
+        <field name="name">wiz.reverse.internal.picking.from.of.view</field>
+        <field name="model">wiz.reverse.internal.picking.from.of</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="picking_id" readonly="1" />
+                </group>
+                <footer>
+                    <button
+            string="Return"
+            name="button_return"
+            type="object"
+            default_focus="1"
+            class="btn-primary"
+          />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
