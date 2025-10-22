@@ -40,6 +40,7 @@ class WizUpdateWorkcenterProductivity(models.TransientModel):
                 ("department_id.production_department", "=", True),
             ]
             employees = self.env["hr.employee"].search(cond)
+            result["loss_id"] = self.env.ref("mrp.block_reason7").id
         result["allowed_employee_ids"] = [(6, 0, employees.ids)]
         return result
 
