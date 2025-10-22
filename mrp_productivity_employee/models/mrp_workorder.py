@@ -5,6 +5,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, models
+from odoo.osv import expression
 
 
 class MrpWorkorder(models.Model):
@@ -136,3 +137,23 @@ class MrpWorkorder(models.Model):
             if self.date_planned_finished and self.date_planned_finished < start_date:
                 vals["date_planned_finished"] = start_date
             return self.with_context(bypass_duration_calculation=True).write(vals)
+
+    def _domain_mrp_workcenter_productivity(self, doall):
+        if "default_employee_id" not in self.env.context:
+            return super()._domain_mrp_workcenter_productivity(doall)
+        else:
+            domain = [("workorder_id", "in", self.ids), ("date_end", "=", False)]
+            if not doall:
+                domain = expression.AND(
+                    [
+                        domain,
+                        [
+                            (
+                                "employee_id",
+                                "=",
+                                self.env.context.get("default_employee_id").id,
+                            )
+                        ],
+                    ]
+                )
+            return domain
