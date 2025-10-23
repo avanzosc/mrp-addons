@@ -7,7 +7,7 @@
     "license": "AGPL-3",
     "author": "https://github.com/avanzosc/sale-addons",
     "website": "https://github.com/avanzosc/mrp-addons",
-    "depends": ["mrp"],
+    "depends": ["mrp", "mrp_workorder_sequence"],
     "data": [
         "views/mrp_workorder_views.xml",
     ],
