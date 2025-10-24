@@ -1,7 +1,7 @@
 # Copyright 2023 Alfredo de la Fuente - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from odoo import api, fields, models
-from odoo.tools.float_utils import float_compare, float_is_zero
+from odoo.tools.float_utils import float_is_zero
 
 
 class MrpProduction(models.Model):
@@ -14,7 +14,7 @@ class MrpProduction(models.Model):
         string="Show clear Qty Button", compute="_compute_show_qty_button"
     )
 
-    @api.depends("move_raw_ids.reserved_availability", "move_raw_ids.quantity_done")
+    @api.depends("move_raw_ids.should_consume_qty", "move_raw_ids.quantity_done")
     def _compute_show_qty_button(self):
         for mrp in self:
             show_set_qty_button = False
@@ -22,70 +22,69 @@ class MrpProduction(models.Model):
             moves = mrp.move_raw_ids.filtered(lambda x: x.state == "assigned")
             for move in moves:
                 if (
-                    move.forecast_availability > 0
+                    move.should_consume_qty > 0
                     and move.quantity_done == 0
                     and float_is_zero(
                         move.quantity_done, precision_rounding=move.product_uom.rounding
                     )
                     and not float_is_zero(
-                        move.reserved_availability,
+                        move.should_consume_qty,
                         precision_rounding=move.product_uom.rounding,
                     )
                 ):
                     show_set_qty_button = True
                 if (
-                    move.forecast_availability > 0
+                    move.should_consume_qty > 0
                     and move.quantity_done > 0
                     and not float_is_zero(
                         move.quantity_done, precision_rounding=move.product_uom.rounding
                     )
-                    and float_compare(
-                        move.quantity_done,
-                        move.reserved_availability,
+                    and not float_is_zero(
+                        move.should_consume_qty,
                         precision_rounding=move.product_uom.rounding,
                     )
-                    == 0
                 ):
                     show_clear_qty_button = True
             mrp.show_set_qty_button = show_set_qty_button
             mrp.show_clear_qty_button = show_clear_qty_button
 
-    def action_set_quantities_to_reservation(self):
-        my_moves = self.env["stock.move"]
+    def action_set_quantities_to_should_consume(self):
         moves = self.move_raw_ids.filtered(lambda x: x.state == "assigned")
         for move in moves:
             if (
-                move.forecast_availability > 0
+                move.should_consume_qty > 0
                 and move.quantity_done == 0
                 and float_is_zero(
                     move.quantity_done, precision_rounding=move.product_uom.rounding
                 )
                 and not float_is_zero(
-                    move.reserved_availability,
+                    move.should_consume_qty,
                     precision_rounding=move.product_uom.rounding,
                 )
             ):
-                my_moves += move
-        if my_moves:
-            my_moves._set_quantities_to_reservation()
+                move.quantity_done = move.should_consume_qty
 
     def action_clear_quantities_to_zero(self):
         my_moves = self.env["stock.move"]
         moves = self.move_raw_ids.filtered(lambda x: x.state == "assigned")
         for move in moves:
             if (
-                move.forecast_availability > 0
+                move.should_consume_qty > 0
                 and move.quantity_done > 0
                 and not float_is_zero(
                     move.quantity_done, precision_rounding=move.product_uom.rounding
                 )
-                and float_compare(
-                    move.quantity_done,
-                    move.reserved_availability,
+                and not float_is_zero(
+                    move.should_consume_qty,
                     precision_rounding=move.product_uom.rounding,
                 )
-                == 0
             ):
                 my_moves += move
         if my_moves:
             my_moves._clear_quantities_to_zero()
+
+    def action_assign(self):
+        res = super().action_assign()
+        self.action_clear_quantities_to_zero()
+        self.action_set_quantities_to_should_consume()
+        return res
