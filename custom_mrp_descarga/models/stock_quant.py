@@ -21,3 +21,9 @@ class StockQuant(models.Model):
     is_medicine = fields.Boolean(
         string="Medicine", related="location_id.is_medicine", store=True
     )
+
+    def _get_inventory_cost(self):
+        if self.lot_id and self.lot_id.average_price:
+            return self.lot_id.average_price
+        else:
+            return self.product_id.standard_price or 0.0
