@@ -14,6 +14,9 @@
                     <field name="product_packaging_qty" />
                 </div>
             </div>
+            <field name="bom_id" position="after">
+                <field name="packaging_id" />
+            </field>
         </field>
     </record>
 
