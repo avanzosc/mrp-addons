@@ -82,4 +82,17 @@ class MrpWorkorder(models.Model):
                 }
             )
 
+            for charge in wo.service_product_id.subcontracting_charge_ids:
+                qty_to_use = charge.compute_charge_qty(wo.production_id)
+
+                PurchaseOrderLine.create(
+                    {
+                        "order_id": purchase_order.id,
+                        "product_id": charge.product_id.product_variant_id.id,
+                        "product_qty": qty_to_use,
+                        "name": f"{charge.product_id.name} ({wo.name})",
+                        "workorder_id": wo.id,
+                    }
+                )
+
             wo.purchase_id = purchase_order.id
