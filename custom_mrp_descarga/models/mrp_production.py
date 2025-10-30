@@ -148,7 +148,9 @@ class MrpProduction(models.Model):
             ("demanding", "Demanding"),
         ],
     )
-    channel_temperature = fields.Float(string="Channel Temperature")
+    channel_temperature = fields.Float(
+        string="Channel Temperature", group_operator="avg"
+    )
     waiting_time = fields.Float(string="Waiting Time")
     clasified_ids = fields.One2many(
         string="Classified",
