@@ -72,6 +72,20 @@ class MrpWorkorder(models.Model):
                 }
             )
 
+            product_variant = wo.service_product_id.product_variant_id
+
+            uom = wo.service_product_id.uom_po_id or wo.service_product_id.uom_id
+
+            qty = wo.production_id.product_qty
+
+            seller = product_variant._select_seller(
+                partner_id=wo.service_supplier_id,
+                quantity=qty,
+                date=purchase_order.date_order.date(),
+                uom_id=uom,
+            )
+            price_unit = seller.price if seller else 0.0
+
             PurchaseOrderLine.create(
                 {
                     "order_id": purchase_order.id,
@@ -79,6 +93,8 @@ class MrpWorkorder(models.Model):
                     "product_qty": wo.production_id.product_qty,
                     "name": f"{wo.production_id.name} - {wo.sequence or ''} - {wo.name}",
                     "workorder_id": wo.id,
+                    "product_uom": uom.id,
+                    "price_unit": price_unit,
                 }
             )
 
