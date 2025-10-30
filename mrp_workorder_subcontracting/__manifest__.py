@@ -9,11 +9,13 @@
     "license": "AGPL-3",
     "depends": ["mrp", "product"],
     "data": [
+        "security/ir.model.access.csv",
         "views/mrp_routing_workcenter_view.xml",
         "views/product_template_views.xml",
         "views/mrp_workorder_views.xml",
         "views/purchase_order_views.xml",
         "views/mrp_workcenter_views.xml",
+        "views/product_subcontracting_charge_views.xml",
     ],
     "installable": True,
     "application": False,
