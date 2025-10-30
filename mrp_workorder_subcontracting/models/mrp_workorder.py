@@ -44,9 +44,31 @@ class MrpWorkorder(models.Model):
                 wo.create_subcontract_purchase()
         return res
 
+    def _get_price(self, product, partner, qty, date_order, uom):
+        seller = product._select_seller(
+            partner_id=partner,
+            quantity=qty,
+            date=date_order.date(),
+            uom_id=uom,
+        )
+        return seller.price if seller else 0.0
+
+    def _create_purchase_line(self, purchase_order, wo, product, qty, price_unit, uom):
+        PurchaseOrderLine = self.env["purchase.order.line"]
+        PurchaseOrderLine.create(
+            {
+                "order_id": purchase_order.id,
+                "product_id": product.id,
+                "product_qty": qty,
+                "name": f"{wo.production_id.name} - {wo.sequence or ''} - {wo.name}",
+                "workorder_id": wo.id,
+                "product_uom": uom.id,
+                "price_unit": price_unit,
+            }
+        )
+
     def create_subcontract_purchase(self):
         PurchaseOrder = self.env["purchase.order"]
-        PurchaseOrderLine = self.env["purchase.order.line"]
         for wo in self:
             existing_po = PurchaseOrder.search(
                 [
@@ -73,42 +95,39 @@ class MrpWorkorder(models.Model):
             )
 
             product_variant = wo.service_product_id.product_variant_id
-
+            qty = wo.production_id.product_qty
             uom = wo.service_product_id.uom_po_id or wo.service_product_id.uom_id
 
-            qty = wo.production_id.product_qty
-
-            seller = product_variant._select_seller(
-                partner_id=wo.service_supplier_id,
-                quantity=qty,
-                date=purchase_order.date_order.date(),
-                uom_id=uom,
+            price_unit = self._get_price(
+                product_variant,
+                wo.service_supplier_id,
+                qty,
+                purchase_order.date_order,
+                uom,
             )
-            price_unit = seller.price if seller else 0.0
-
-            PurchaseOrderLine.create(
-                {
-                    "order_id": purchase_order.id,
-                    "product_id": wo.service_product_id.product_variant_id.id,
-                    "product_qty": wo.production_id.product_qty,
-                    "name": f"{wo.production_id.name} - {wo.sequence or ''} - {wo.name}",
-                    "workorder_id": wo.id,
-                    "product_uom": uom.id,
-                    "price_unit": price_unit,
-                }
+            self._create_purchase_line(
+                purchase_order, wo, product_variant, qty, price_unit, uom
             )
 
             for charge in wo.service_product_id.subcontracting_charge_ids:
-                qty_to_use = charge.compute_charge_qty(wo.production_id)
 
-                PurchaseOrderLine.create(
-                    {
-                        "order_id": purchase_order.id,
-                        "product_id": charge.product_id.product_variant_id.id,
-                        "product_qty": qty_to_use,
-                        "name": f"{charge.product_id.name} ({wo.name})",
-                        "workorder_id": wo.id,
-                    }
+                qty_charge = charge.compute_charge_qty(wo.production_id)
+                product_variant_charge = charge.product_id.product_variant_id
+
+                price_unit_charge = self._get_price(
+                    product_variant_charge,
+                    wo.service_supplier_id,
+                    qty_charge,
+                    purchase_order.date_order,
+                    uom,
+                )
+                self._create_purchase_line(
+                    purchase_order,
+                    wo,
+                    charge.product_id.product_variant_id,
+                    qty_charge,
+                    price_unit_charge,
+                    uom,
                 )
 
             wo.purchase_id = purchase_order.id
