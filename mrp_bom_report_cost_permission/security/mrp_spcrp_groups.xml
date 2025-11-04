@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="show_mrp_costs" model="res.groups">
+        <field name="name">Show product and BoM cost in printed report</field>
+        <field name="users" eval="[(4, ref('base.default_user'))]" />
+    </record>
+</odoo>
