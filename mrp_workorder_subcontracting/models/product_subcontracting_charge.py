@@ -24,10 +24,6 @@ class ProductSubcontractingCharge(models.Model):
     )
 
     @api.model
-    def compute_charge_qty(self, production):
-        self.ensure_one()
-        qty = 0.0
-
-        if self.quantity_calculation == "standard":
-            qty = production.qty_producing
+    def compute_qty(self, production, type_charge=None):
+        qty = production.product_qty
         return qty
