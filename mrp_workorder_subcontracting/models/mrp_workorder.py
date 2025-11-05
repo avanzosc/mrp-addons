@@ -44,7 +44,8 @@ class MrpWorkorder(models.Model):
                 wo.create_subcontract_purchase()
         return res
 
-    def _get_price(self, product, partner, qty, date_order, uom):
+    def _get_price(self, product, partner, qty, date_order):
+        uom = product.uom_po_id or product.uom_id
         seller = product._select_seller(
             partner_id=partner,
             quantity=qty,
@@ -53,9 +54,21 @@ class MrpWorkorder(models.Model):
         )
         return seller.price if seller else 0.0
 
-    def _create_purchase_line(self, purchase_order, wo, product, qty, price_unit, uom):
-        PurchaseOrderLine = self.env["purchase.order.line"]
-        PurchaseOrderLine.create(
+    def _create_purchase_line(self, purchase_order, wo, product, type_charge=None):
+
+        qty = self.env["product.subcontracting.charge"].compute_qty(
+            wo.production_id, type_charge=type_charge
+        )
+
+        price_unit = self._get_price(
+            product,
+            wo.service_supplier_id,
+            qty,
+            purchase_order.date_order,
+        )
+
+        uom = product.uom_po_id or product.uom_id
+        self.env["purchase.order.line"].create(
             {
                 "order_id": purchase_order.id,
                 "product_id": product.id,
@@ -78,6 +91,7 @@ class MrpWorkorder(models.Model):
                 ],
                 limit=1,
             )
+
             if existing_po:
                 wo.purchase_id = existing_po.id
                 continue
@@ -95,39 +109,17 @@ class MrpWorkorder(models.Model):
             )
 
             product_variant = wo.service_product_id.product_variant_id
-            qty = wo.production_id.product_qty
-            uom = wo.service_product_id.uom_po_id or wo.service_product_id.uom_id
 
-            price_unit = self._get_price(
-                product_variant,
-                wo.service_supplier_id,
-                qty,
-                purchase_order.date_order,
-                uom,
-            )
             self._create_purchase_line(
-                purchase_order, wo, product_variant, qty, price_unit, uom
+                purchase_order, wo, product_variant, type_charge="standard"
             )
 
             for charge in wo.service_product_id.subcontracting_charge_ids:
 
-                qty_charge = charge.compute_charge_qty(wo.production_id)
                 product_variant_charge = charge.product_id.product_variant_id
-
-                price_unit_charge = self._get_price(
-                    product_variant_charge,
-                    wo.service_supplier_id,
-                    qty_charge,
-                    purchase_order.date_order,
-                    uom,
-                )
+                type_charge = charge.quantity_calculation
                 self._create_purchase_line(
-                    purchase_order,
-                    wo,
-                    charge.product_id.product_variant_id,
-                    qty_charge,
-                    price_unit_charge,
-                    uom,
+                    purchase_order, wo, product_variant_charge, type_charge=type_charge
                 )
 
             wo.purchase_id = purchase_order.id
