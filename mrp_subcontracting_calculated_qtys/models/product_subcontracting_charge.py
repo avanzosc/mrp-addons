@@ -9,7 +9,6 @@ class ProductSubcontractingCharge(models.Model):
 
     @api.model
     def compute_charge_qty(self, production):
-
         self.ensure_one()
         qty = 0.0
 
