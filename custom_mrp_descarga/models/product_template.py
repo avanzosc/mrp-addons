@@ -8,3 +8,6 @@ class ProductTemplate(models.Model):
 
     download_product = fields.Boolean(string="Download Product", default=False)
     is_broken_breast = fields.Boolean(string="Broken Breast")
+    is_broken_breast_calculation = fields.Boolean(
+        string="Broken Breast % Calc", default=False
+    )

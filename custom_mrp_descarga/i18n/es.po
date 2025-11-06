@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-25 08:14+0000\n"
-"PO-Revision-Date: 2025-08-25 08:14+0000\n"
+"POT-Creation-Date: 2025-11-06 14:51+0000\n"
+"PO-Revision-Date: 2025-11-06 14:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -157,6 +157,12 @@ msgid "Broken Breast"
 msgstr "Pechuga rota"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_product__is_broken_breast_calculation
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__is_broken_breast_calculation
+msgid "Broken Breast % Calc"
+msgstr "Calc. % Pechuga Rota"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__bom_category_id
 msgid "Category"
 msgstr "Categoría"
@@ -173,6 +179,7 @@ msgstr "Producción de pollito"
 
 #. module: custom_mrp_descarga
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_production
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_classified_pivot_view
 msgid "Clasificado"
 msgstr ""
 
@@ -230,6 +237,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__count_production
 msgid "Count Production"
 msgstr "Contador OF"
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.actions.act_window,help:custom_mrp_descarga.action_classified_production
+msgid "Crear nuevos orden de producción"
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_product_customerinfo
@@ -891,7 +903,7 @@ msgstr "Cantidad para producir"
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_stock_quant
 msgid "Quants"
-msgstr "Cantidades"
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__quartering

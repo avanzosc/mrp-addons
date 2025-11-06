@@ -747,16 +747,17 @@ class MrpProduction(models.Model):
         "finished_move_line_ids.product_id.categ_id.is_bone_in_breast",
         "finished_move_line_ids.product_id.product_tmpl_id",
         "finished_move_line_ids.product_id.product_tmpl_id.is_broken_breast",
+        "finished_move_line_ids.product_id.product_tmpl_id.is_broken_breast_calculation",
     )
     def _compute_breast_data(self):
         for record in self:
-            bone_in_moves = record.finished_move_line_ids.filtered(
-                lambda m: m.product_id.categ_id.is_bone_in_breast
+            broken_breast_calculation_moves = record.finished_move_line_ids.filtered(
+                lambda m: m.product_id.product_tmpl_id.is_broken_breast_calculation
             )
             broken_breast_moves = record.finished_move_line_ids.filtered(
                 lambda m: m.product_id.product_tmpl_id.is_broken_breast
             )
-            total = sum(bone_in_moves.mapped("qty_done"))
+            total = sum(broken_breast_calculation_moves.mapped("qty_done"))
             broken = sum(broken_breast_moves.mapped("qty_done"))
             record.breast_total = total
             record.broken_breast = broken

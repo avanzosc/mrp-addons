@@ -8,6 +8,7 @@
             <group name="group_general" position="inside">
                 <field name="download_product" />
                 <field name="is_broken_breast" widget="boolean_toggle" />
+                <field name="is_broken_breast_calculation" widget="boolean_toggle" />
             </group>
         </field>
     </record>
