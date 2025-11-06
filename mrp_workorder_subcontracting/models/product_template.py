@@ -7,3 +7,9 @@ class ProductProduct(models.Model):
     subcon_operations = fields.Boolean(
         string="suncontracting in operations",
     )
+
+    subcontracting_charge_ids = fields.One2many(
+        "product.subcontracting.charge",
+        "parent_product_id",
+        string="Additional charges",
+    )
