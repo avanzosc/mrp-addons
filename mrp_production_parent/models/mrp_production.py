@@ -42,6 +42,7 @@ class MrpProduction(models.Model):
             if procurement_group.sale_id:
                 sale_line = procurement_group.sale_id.order_line.filtered(
                     lambda x: x.product_id == production.product_id
+                    and x.product_uom_qty == production.product_qty
                 )
                 if sale_line:
                     sale_line_id = sale_line.id
