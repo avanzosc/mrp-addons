@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field
+      name="inherit_id"
+      ref="mrp.mrp_production_workorder_tree_editable_view"
+    />
+        <field name="arch" type="xml">
+            <button name="button_finish" position="attributes">
+                <attribute
+          name="groups"
+        >mrp_workorder_group_block_done.group_mrp_workoder_done</attribute>
+            </button>
+            <xpath
+        expr="//button[@name='%(mrp.act_mrp_block_workcenter_wo)d']"
+        position="attributes"
+      >
+                <attribute
+          name="groups"
+        >mrp_workorder_group_block_done.group_mrp_workorder_block</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+        <field name="model">mrp.workorder</field>
+        <field
+      name="inherit_id"
+      ref="mrp_usability.mrp_production_workorder_form_view_inherit"
+    />
+        <field name="arch" type="xml">
+            <button name="button_finish" position="attributes">
+                <attribute
+          name="groups"
+        >mrp_workorder_group_block_done.group_mrp_workoder_done</attribute>
+            </button>
+            <xpath
+        expr="//button[@name='%(mrp.act_mrp_block_workcenter_wo)d']"
+        position="attributes"
+      >
+                <attribute
+          name="groups"
+        >mrp_workorder_group_block_done.group_mrp_workorder_block</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
