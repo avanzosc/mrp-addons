@@ -43,8 +43,8 @@ def force_compute_sale_order(env):
         production_parent = env["mrp.production"].search(cond, limit=1)
         if production_parent:
             vals = {"mrp_production_parent_id": production_parent.id}
-            if production_parent.sale_id:
-                vals["sale_id"] = production_parent.sale_id
+            if production_parent.sale_line_id:
+                vals["sale_line_id"] = production_parent.sale_line_id
                 if production_parent.sale_id.commitment_date:
                     vals["commitment_date"] = production_parent.sale_id.commitment_date
             production.write(vals)

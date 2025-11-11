@@ -4,6 +4,18 @@
     id="report_mrp_bom_customized_document_inherit"
     inherit_id="mrp_bom_report.report_mrp_bom_customized_document"
   >
+        <t t-set="product_qty" position="after">
+            <t t-set="layer" t-value="line['layer'] or ''" />
+            <t t-set="designator" t-value="line['designator'] or ''" />
+        </t>
+        <t
+      t-if="bom_line_id.product_id.default_code == code and bom_line_id.product_qty == product_qty"
+      position="attributes"
+    >
+            <attribute
+        name="t-if"
+      >bom_line_id.product_id.default_code == code and bom_line_id.product_qty == product_qty and bom_line_id.layer == layer and bom_line_id.designator == designator</attribute>
+        </t>
         <xpath expr="//table/thead/tr" position="inside">
             <th class="text-start">Layer</th>
             <th class="text-start">Designator</th>

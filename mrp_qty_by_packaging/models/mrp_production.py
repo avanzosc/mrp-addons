@@ -16,6 +16,12 @@ class MrpProduction(models.Model):
     )
     product_packaging_qty = fields.Float(string="Packaging Quantity", copy=False)
 
+    packaging_id = fields.Many2one(
+        comodel_name="product.packaging",
+        string="Product Packaging",
+        domain="[('product_id','=',product_id)]",
+    )
+
     @api.onchange("product_packaging_id")
     def _onchange_product_packaging_id(self):
         if (

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+    id="view_mrp_routing_workcenter_form_inherit_subcontract"
+    model="ir.ui.view"
+  >
+      <field name="name">mrp.routing.workcenter.form.subcontract</field>
+      <field name="model">mrp.routing.workcenter</field>
+      <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
+      <field name="arch" type="xml">
+         <xpath
+        expr="//field[@name='bom_product_template_attribute_value_ids']"
+        position="after"
+      >
+            <field name="workcenter_is_external" invisible="1" />
+            <field
+          name="service_product_id"
+          attrs="{'invisible': [('workcenter_is_external', '=', False)]}"
+          domain="[('detailed_type', '=', 'service'), ('subcon_operations', '=', True)]"
+        />
+            <field
+          name="service_product_supplier_id"
+          domain="[('product_tmpl_id', '=', service_product_id)]"
+          attrs="{'required': [('workcenter_is_external', '=', True)]}"
+        />
+            <field name="service_supplier_id" readonly="1" />
+         </xpath>
+      </field>
+    </record>
+    <record
+    id="view_mrp_routing_workcenter_tree_inherit_is_external"
+    model="ir.ui.view"
+  >
+            <field name="name">mrp.routing.workcenter.tree.inherit.is.external</field>
+            <field name="model">mrp.routing.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='workcenter_id']" position="after">
+                    <field name="workcenter_is_external" />
+                </xpath>
+
+            </field>
+   </record>
+</odoo>

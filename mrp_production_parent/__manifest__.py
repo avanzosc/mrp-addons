@@ -7,10 +7,11 @@
     "website": "https://github.com/avanzosc/mrp-addons",
     "author": "AvanzOSC",
     "license": "AGPL-3",
-    "depends": ["mrp_sale_info"],
+    "depends": ["mrp", "mrp_sale_info"],
     "data": [
         "views/mrp_production_views.xml",
         "views/sale_order_views.xml",
+        "report/report_mrporder.xml",
     ],
     "installable": True,
     "pre_init_hook": "pre_init_hook",

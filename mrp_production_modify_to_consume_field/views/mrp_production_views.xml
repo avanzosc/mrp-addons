@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']"
+        position="before"
+      >
+                <field name="readonly_to_consume" invisible="1" />
+            </xpath>
+            <xpath
+        expr="//field[@name='move_raw_ids']/tree/field[@name='product_uom_qty']"
+        position="attributes"
+      >
+                <attribute
+          name="attrs"
+        >{'readonly': ['|', ('readonly_to_consume', '=', True),
+                                         '&amp;', ('parent.state', '!=', 'draft'),
+                                         '|',
+                                        '&amp;',
+                                            ('parent.state', 'not in', ('confirmed', 'progress', 'to_close')),
+                                            ('parent.is_planned', '!=', True),
+                                        '&amp;',
+                                            ('state', '!=', 'draft'),
+                                            ('parent.is_locked', '=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_form_view2" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp_usability.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//field[@name='raw_move_line_ids']/tree/field[@name='qty_done']"
+        position="before"
+      >
+                <field name="readonly_to_consume" invisible="1" />
+            </xpath>
+            <xpath
+        expr="//field[@name='raw_move_line_ids']/tree/field[@name='qty_done']"
+        position="attributes"
+      >
+                <attribute
+          name="attrs"
+        >{'readonly': [('readonly_to_consume', '=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -10,7 +10,7 @@
             </field>
             <button name="action_confirm" position="after">
                 <button
-          name="action_set_quantities_to_reservation"
+          name="action_set_quantities_to_should_consume"
           attrs="{'invisible': [('show_set_qty_button', '=', False)]}"
           string="Set quantities"
           type="object"

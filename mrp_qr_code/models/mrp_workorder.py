@@ -11,8 +11,10 @@ class MrpWorkorder(models.Model):
 
     def _create_qr_code(self, integer_to_convert):
         if integer_to_convert:
-            sequence_str = str(integer_to_convert)
-
+            sequence_str = "%(production_name)s-%(sequence)s" % {
+                "production_name": self.production_id.name,
+                "sequence": str(integer_to_convert),
+            }
             qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_L,

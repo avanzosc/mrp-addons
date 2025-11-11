@@ -1,0 +1,158 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workorder_subcontracting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-29 08:49+0000\n"
+"PO-Revision-Date: 2025-10-29 08:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__product_id
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_subcontracting.view_product_template_subcontracting_charge_form
+msgid "Additional charge"
+msgstr "Cargo complementario"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_product__subcontracting_charge_ids
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_template__subcontracting_charge_ids
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_subcontracting.view_product_template_subcontracting_charge_form
+msgid "Additional charges"
+msgstr "Cargos complementarios"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__quantity_calculation
+msgid "Calculation type"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_routing_workcenter__workcenter_is_external
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_workcenter__is_external
+msgid "External"
+msgstr "Es externo"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_purchase_order__production_id
+msgid "Manufacturing Order"
+msgstr "Orden de fabricación"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model,name:mrp_workorder_subcontracting.model_product_template
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_workorder__service_product_supplier_id
+msgid "Product Supplier"
+msgstr "Producto proveedor"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_routing_workcenter__service_product_id
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_workorder__service_product_id
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__parent_product_id
+msgid "Product service"
+msgstr "Producto servicio"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model,name:mrp_workorder_subcontracting.model_purchase_order
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_workorder__purchase_id
+#: model_terms:ir.ui.view,arch_db:mrp_workorder_subcontracting.view_mrp_workorder_tree_inherit_purchase
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model,name:mrp_workorder_subcontracting.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea orden de compra"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields.selection,name:mrp_workorder_subcontracting.selection__product_subcontracting_charge__quantity_calculation__standard
+msgid "Standard"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model,name:mrp_workorder_subcontracting.model_product_subcontracting_charge
+msgid "Subcontracting Charge"
+msgstr ""
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_routing_workcenter__service_supplier_id
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_workorder__service_supplier_id
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model,name:mrp_workorder_subcontracting.model_mrp_workcenter
+msgid "Work Center"
+msgstr "Centro de trabajo"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model,name:mrp_workorder_subcontracting.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Utilización del centro de trabajo"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model,name:mrp_workorder_subcontracting.model_mrp_workorder
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_purchase_order__workorder_id
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_purchase_order_line__workorder_id
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_routing_workcenter__service_product_supplier_id
+msgid "product Supplier"
+msgstr "Producto proveedor"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_product__subcon_operations
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_template__subcon_operations
+msgid "suncontracting in operations"
+msgstr "Operación de subcontratación"
+
+#. module: mrp_workorder_subcontracting
+#: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_purchase_order__subcon_purchase
+msgid "suncontracting purchase"
+msgstr "Pedido de subcontratación"
