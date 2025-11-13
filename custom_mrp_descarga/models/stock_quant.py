@@ -27,3 +27,27 @@ class StockQuant(models.Model):
             return self.lot_id.average_price
         else:
             return self.product_id.standard_price or 0.0
+
+    def _get_inventory_move_values(self, qty, location_id, location_dest_id, out=False):
+        vals = super()._get_inventory_move_values(
+            qty, location_id, location_dest_id, out=out
+        )
+        cost = self._get_inventory_cost()
+        move_lines = vals.get("move_line_ids", [])
+        move_qty_done = 0.0
+        for _, _, move_line_vals in move_lines:
+            qty_done = abs(move_line_vals.get("qty_done", 0.0))
+            move_line_vals.update(
+                {
+                    "standard_price": cost,
+                    "amount": cost * qty_done,
+                }
+            )
+            move_qty_done += qty_done
+        vals.update(
+            {
+                "standard_price": cost,
+                "amount": cost * move_qty_done,
+            }
+        )
+        return vals
