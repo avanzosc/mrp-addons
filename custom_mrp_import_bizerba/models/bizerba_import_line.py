@@ -66,6 +66,11 @@ class BizerbaImportLine(models.Model):
         states={"done": [("readonly", True)]},
         copy=False,
     )
+    line_unit_container = fields.Integer(
+        string="Unit Container",
+        states={"done": [("readonly", True)]},
+        copy=False,
+    )
 
     def _action_validate(self):
         update_values = super()._action_validate()
@@ -105,14 +110,17 @@ class BizerbaImportLine(models.Model):
                 move_line[:1].write(
                     {
                         "container": len(same_product_lines),
-                        "qty_done": sum(same_product_lines.mapped("line_product_qty")),
+                        "qty_done": sum(
+                            line.line_product_qty * line.line_unit_container
+                            for line in same_product_lines
+                        ),
                         "product_uom_id": self.line_uom_id.id,
+                        "unit_container": self.line_unit_container,
+                        "unit": sum(same_product_lines.mapped("line_unit_container")),
                     }
                 )
                 for line in same_product_lines:
                     line.write({"action": "nothing", "state": "done"})
-                move_line[:1].onchange_container()
-                move_line[:1].onchange_unit()
             else:
                 log_info = _("Error: There is no entry line with this product.")
             state = "error" if log_info else "done"
