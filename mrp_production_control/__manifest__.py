@@ -13,6 +13,8 @@
         "views/mrp_production_control_views.xml",
         "views/mrp_workorder_view.xml",
         "views/mrp_production_view.xml",
+        "views/product_template_view.xml",
+        "views/qc_inspection_type_view.xml",
         "security/ir.model.access.csv",
     ],
     "installable": True,
