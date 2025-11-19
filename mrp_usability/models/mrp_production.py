@@ -44,9 +44,7 @@ class MrpProduction(models.Model):
     def action_view_workorder(self):
         """Abre las órdenes de trabajo desde el botón superior."""
         self.ensure_one()
-        action = self.env["ir.actions.act_window"]._for_xml_id(
-            "mrp.mrp_workorder_todo"
-        )
+        action = self.env["ir.actions.act_window"]._for_xml_id("mrp.mrp_workorder_todo")
         domain = expression.AND(
             [
                 [("id", "in", self.workorder_ids.ids)],
