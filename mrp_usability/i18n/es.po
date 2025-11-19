@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-19 06:15+0000\n"
-"PO-Revision-Date: 2024-12-19 06:15+0000\n"
+"POT-Creation-Date: 2025-11-11 15:38+0000\n"
+"PO-Revision-Date: 2025-11-11 15:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,57 +16,60 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mrp_usability
-#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__workorder_count
-msgid "# Work Orders"
-msgstr "# Órdenes de Trabajo"
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__move_line_count
+msgid "# Move Lines"
+msgstr ""
 
 #. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__workorder_count
+msgid "# Work Orders"
+msgstr ""
+
+#. module: mrp_usability
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit_unique
 msgid "Block"
 msgstr "Bloquear"
 
 #. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit_unique
 msgid "Done"
 msgstr "Hecho"
 
 #. module: mrp_usability
-#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__finished_move_line_ids
-msgid "Finished Product"
-msgstr "Producto terminado"
+#: model:ir.model.fields,help:mrp_usability.field_mrp_production__move_line_ids
+msgid "Líneas de movimiento asociadas a esta orden de fabricación."
+msgstr "Líneas de movimiento asociadas a esta orden de fabricación."
 
 #. module: mrp_usability
+#: model:ir.model,name:mrp_usability.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Orden de fabricación"
+
+#. module: mrp_usability
+#: model:ir.actions.act_window,name:mrp_usability.action_mrp_move_lines
 #: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__move_line_ids
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view_inherit_move_lines
+#: model_terms:ir.ui.view,arch_db:mrp_usability.view_stock_move_line_tree_mrp
 msgid "Move Lines"
-msgstr "Operaciones detalladas"
+msgstr "Ordenes detalladas"
 
 #. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit_unique
 msgid "Pause"
 msgstr "Detener"
 
 #. module: mrp_usability
-#: model:ir.model,name:mrp_usability.model_mrp_production
-msgid "Production Order"
-msgstr "Orden de producción"
-
-#. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit_unique
 msgid "Start"
-msgstr "Iniciar"
+msgstr "Empezar"
 
 #. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
-msgid "Total Reserved"
-msgstr ""
-
-#. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_workorder_form_view_inherit_unique
 msgid "Unblock"
 msgstr "Desbloquear"
 
 #. module: mrp_usability
-#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view
+#: model:ir.model.fields,field_description:mrp_usability.field_mrp_production__workorder_ids
+#: model_terms:ir.ui.view,arch_db:mrp_usability.mrp_production_form_view_inherit_move_lines
 msgid "Work Orders"
-msgstr "Órdenes de Trabajo"
+msgstr "Órdenes de trabajo"
