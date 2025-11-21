@@ -8,6 +8,7 @@ class ProductSubcontractingCharge(models.Model):
         selection_add=[
             ("feeders", "Feeders"),
             ("caras_a_montar", "Caras a montar"),
+            ("tarifa_fija", "Tarifa_fija"),
         ],
     )
 
@@ -39,5 +40,7 @@ class ProductSubcontractingCharge(models.Model):
                 if any(line.layer == "BOT" for line in production.bom_id.bom_line_ids)
                 else 1
             )
+        elif type_charge == "tarifa_fija":
+            qty = 1
 
         return qty
