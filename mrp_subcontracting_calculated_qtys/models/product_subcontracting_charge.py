@@ -25,7 +25,14 @@ class ProductSubcontractingCharge(models.Model):
         if type_charge == "standard":
             qty = qty_production * bom_components
         elif type_charge == "feeders":
-            qty = bom_components
+            bom_top_lines = len(
+                [
+                    line
+                    for line in production.bom_id.bom_line_ids
+                    if line.layer in ("TOP", "BOT")
+                ]
+            )
+            qty = bom_top_lines
         elif type_charge == "caras_a_montar":
             qty = (
                 2
