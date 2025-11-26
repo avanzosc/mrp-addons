@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-30 07:17+0000\n"
-"PO-Revision-Date: 2025-06-30 07:17+0000\n"
+"POT-Creation-Date: 2025-11-19 10:20+0000\n"
+"PO-Revision-Date: 2025-11-19 10:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,30 +18,42 @@ msgstr ""
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__action_taken
 msgid "Action Taken"
-msgstr "Acción"
+msgstr "Acción realizada"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production__production_min_controlled
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__controlled_pieces
 msgid "Controlled Pieces"
-msgstr "Piezas Controladas"
+msgstr "Piezas controladas"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__create_uid
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mrp_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_tree_view
+msgid "Cumulative Controled Pieces"
+msgstr "Piezas controladas acumuladas"
+
+#. module: mrp_production_control
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_workorder_form_view_inherit
 msgid "Cumulative Controlled Pieces"
-msgstr "Total Piezas Controladas"
+msgstr "Piezas controladas acumuladas"
 
 #. module: mrp_production_control
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_tree_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_workorder_form_view_inherit
 msgid "Cumulative Defective Pieces"
-msgstr "Total Piezas Defectuosas"
+msgstr "Piezas defectuosas acumuladas"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__create_date
@@ -51,17 +63,23 @@ msgstr "Fecha/Hora"
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__defect_description
 msgid "Defect Description"
-msgstr "Descripción Defecto"
+msgstr "Descripción del defecto"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__defective_pieces
 msgid "Defective Pieces"
-msgstr "Defectuosas"
+msgstr "Piezas defectuosas"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type__name
+msgid "Description"
+msgstr "Descripción"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__display_name
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type__display_name
 msgid "Display Name"
-msgstr "Mostrar Nombre"
+msgstr "Nombre mostrado"
 
 #. module: mrp_production_control
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
@@ -70,29 +88,58 @@ msgstr "Agrupar por"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__id
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_product_product__qc_inspection_type_id
+#: model:ir.model.fields,field_description:mrp_production_control.field_product_template__qc_inspection_type_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.product_template_search_view
+msgid "Inspection type"
+msgstr "Tipo de inspección"
+
+#. module: mrp_production_control
+#: model:ir.actions.act_window,name:mrp_production_control.action_qc_inspection_type
+#: model:ir.model,name:mrp_production_control.model_qc_inspection_type
+#: model:ir.ui.menu,name:mrp_production_control.menu_qc_inspection_type
+msgid "Inspections types"
+msgstr "Tipos de inspecciones"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control____last_update
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type____last_update
 msgid "Last Modified on"
-msgstr "Modificado última vez"
+msgstr "Última modificación el"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__write_uid
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type__write_uid
 msgid "Last Updated by"
-msgstr "Actualizado última vez por"
+msgstr "Actualizado por"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__write_date
+#: model:ir.model.fields,field_description:mrp_production_control.field_qc_inspection_type__write_date
 msgid "Last Updated on"
-msgstr "Actualizado última vez"
+msgstr "Actualizado el"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_lot_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Lot of product to produce"
+msgstr "Lote del producto a fabricar"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manual_date
+msgid "Manual Date"
+msgstr "Fecha manual"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_id
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
 msgid "Manufacturing Order"
-msgstr "Orden de Fabricación"
+msgstr "Orden de fabricación"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__operator_id
@@ -102,7 +149,23 @@ msgstr "Operario"
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__pallet_number
 msgid "Pallet Number"
-msgstr "Número de Palet"
+msgstr "Número de palet"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__percentage_defective
+msgid "Percentage Defective"
+msgstr "Porcentaje de defectos"
+
+#. module: mrp_production_control
+#: model:ir.model,name:mrp_production_control.model_product_template
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_production_control
+#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_id
+#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
+msgid "Product to produce"
+msgstr "Producto a fabricar"
 
 #. module: mrp_production_control
 #: model:ir.actions.act_window,name:mrp_production_control.action_production_control_records
@@ -111,13 +174,13 @@ msgstr "Número de Palet"
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_workorder_form_view_inherit
 msgid "Production Control"
-msgstr "Control de Producción"
+msgstr "Control de producción"
 
 #. module: mrp_production_control
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production__production_control_ids
 #: model:ir.model.fields,field_description:mrp_production_control.field_mrp_workorder__production_control_ids
 msgid "Production Control Lines"
-msgstr "Líneas de Control de Producción"
+msgstr "Líneas de control de producción"
 
 #. module: mrp_production_control
 #: model:ir.model,name:mrp_production_control.model_mrp_production
@@ -127,7 +190,7 @@ msgstr "Orden de producción"
 #. module: mrp_production_control
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
 msgid "Search Production Control"
-msgstr "Buscar Control de Producción"
+msgstr "Buscar control de producción"
 
 #. module: mrp_production_control
 #: model:ir.model,name:mrp_production_control.model_mrp_workorder
@@ -135,26 +198,3 @@ msgstr "Buscar Control de Producción"
 #: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
 msgid "Work Order"
 msgstr "Orden de trabajo"
-
-#. module: mrp_production_control
-#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
-msgid "Product to produce"
-msgstr "Producto a producir"
-
-#. module: mrp_production_control
-#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manufacturing_order_product_lot_id
-#: model_terms:ir.ui.view,arch_db:mrp_production_control.mrp_production_control_search_view
-msgid "Lot of product to produce"
-msgstr "Lote del producto a producir"
-
-#. module: mrp_production_control
-#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__manual_date
-msgid "Manual Date"
-msgstr "Fecha manual"
-
-#. module: mrp_production_control
-#: model:ir.model.fields,field_description:mrp_production_control.field_mrp_production_control__percentage_defective
-msgid "Percentage Defective"
-msgstr "Porcentaje defectuosas"
-
