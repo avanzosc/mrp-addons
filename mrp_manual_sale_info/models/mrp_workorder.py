@@ -16,7 +16,7 @@ class MrpWorkorder(models.Model):
     )
     manual_partner_id = fields.Many2one(
         comodel_name="res.partner",
-        related="manual_sale_id.partner_id",
+        related="production_id.manual_partner_id",
         string="Customer",
         readonly=True,
         store=True,
