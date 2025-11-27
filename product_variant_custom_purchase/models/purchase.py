@@ -36,7 +36,7 @@ class PurchaseOrder(models.Model):
                     'custom_value_ids': custom_value_ids,
                 })
                 line.product_version_id = product_version
-        return super().button_approve()
+        return super().button_approve(force=force)
 
 
 class PurchaseOrderLine(models.Model):
