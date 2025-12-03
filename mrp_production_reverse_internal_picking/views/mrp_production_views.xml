@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <button
+        attrs="{'invisible': ['|', '|', ('id', '=', False), ('state', 'in', ('done', 'cancel')), ('confirm_cancel', '=', True)]}"
+        position="attributes"
+      >
+                <attribute
+          name="name"
+        >action_cancel_reverse_internal_pickings</attribute>
+            </button>
+            <button
+        attrs="{'invisible': ['|', '|', ('id', '=', False), ('state', 'in', ('done', 'cancel')), ('confirm_cancel', '=', False)]}"
+        position="attributes"
+      >
+                <attribute
+          name="name"
+        >action_cancel_reverse_internal_pickings</attribute>
+            </button>
+        </field>
+    </record>
+</odoo>
