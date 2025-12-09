@@ -13,6 +13,6 @@
         "stock_quant_package_partner",
     ],
     "excludes": [],
-    "data": [],
+    "data": ["views/stock_move_line_views.xml"],
     "installable": True,
 }
