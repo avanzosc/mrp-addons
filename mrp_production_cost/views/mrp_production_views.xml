@@ -5,7 +5,7 @@
     <field name="inherit_id" ref="mrp.mrp_production_form_view" />
     <field name="arch" type="xml">
       <xpath
-        expr="//field[@name='move_raw_ids']/tree/field[@name='quantity_done']"
+        expr="//field[@name='move_raw_ids']/list/field[@name='quantity']"
         position="after"
       >
         <field name="price_unit" optional="hide" />
@@ -36,7 +36,7 @@
     <field name="model">mrp.production</field>
     <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
     <field name="arch" type="xml">
-      <field name="production_real_duration" position="after">
+      <field name="duration" position="after">
         <field
           name="cost_material_to_consume"
           sum="Estimated Material Cost"

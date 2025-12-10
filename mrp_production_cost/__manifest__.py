@@ -6,7 +6,7 @@
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing/Manufacturing",
     "license": "AGPL-3",
-    "version": "16.0.1.1.0",
+    "version": "18.0.1.0.0",
     "depends": [
         "product",
         "mrp",
