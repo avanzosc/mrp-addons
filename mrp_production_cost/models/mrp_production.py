@@ -125,9 +125,9 @@ class MrpProduction(models.Model):
         if cost and self.qty_producing:
             price_unit_cost = cost / self.qty_producing
         if self.lot_producing_id:
-            self.lot_producing_id.with_context(from_production=True).purchase_price = (
-                price_unit_cost
-            )
+            self.lot_producing_id.with_context(
+                from_production=True
+            ).purchase_price = price_unit_cost
 
     def _catch_cost_to_update_finished_move_cost_and_lot(self):
         cost = self.cost_material_consumed + self.cost_workorder_real
