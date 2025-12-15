@@ -1,20 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id=">wiz_reverse_internal_picking_from_of_view" model="ir.ui.view">
+    <record id="wiz_reverse_internal_picking_from_of_view" model="ir.ui.view">
         <field name="name">wiz.reverse.internal.picking.from.of.view</field>
         <field name="model">wiz.reverse.internal.picking.from.of</field>
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="picking_id" readonly="1" />
+                    <group colspan="2">
+                        <field name="more_than_one_production" invisible="1" />
+                        <field name="production_id" readonly="1" />
+                    </group>
+                    <group
+            colspan="2"
+            attrs="{'invisible': [('more_than_one_production','=',False)]}"
+          >
+                        <field
+              name="other_productions"
+              widget="many2many_tags"
+              readonly="1"
+            />
+                    </group>
                 </group>
+                <notebook>
+                    <page
+            name="reverse-automatically"
+            string="Select Internal pickings that will be automatically reversed"
+            attrs="{'invisible': [('more_than_one_production','=',True)]}"
+          >
+                        <field name="wizard_lines_auto" nolabel="1">
+                            <tree
+                nolabel="1"
+                editable="bottom"
+                create="false"
+                edit="true"
+                delete="false"
+              >
+                                <field name="wizard_id" invisible="1" />
+                                <field name="to_cancel" />
+                                <field name="picking_id" readonly="1" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page
+            name="not-reverse-automatically"
+            string="Internal pickings that you must process manually to reverse them manually"
+            attrs="{'invisible': [('more_than_one_production','=',False)]}"
+          >
+                        <field name="wizard_lines_manual" nolabel="1">
+                            <tree
+                nolabel="1"
+                editable="bottom"
+                create="false"
+                edit="false"
+                delete="false"
+              >
+                                <field name="wizard_id" invisible="1" />
+                                <field name="picking_id" readonly="1" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
                 <footer>
                     <button
-            string="Return"
+            string="Cancel production and reverse internal pickings automatically"
             name="button_return"
             type="object"
             default_focus="1"
             class="btn-primary"
+            attrs="{'invisible': [('more_than_one_production','=',True)]}"
+          />
+                    <button
+            string="Cancel production and reverse internal pickings manually"
+            name="button_return"
+            type="object"
+            default_focus="1"
+            class="btn-primary"
+            attrs="{'invisible': [('more_than_one_production','=',False)]}"
           />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>

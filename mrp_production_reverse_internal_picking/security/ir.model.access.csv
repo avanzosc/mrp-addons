@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_wiz_reverse_internal_picking_from_of,wiz.reverse.internal.picking.from.of,model_wiz_reverse_internal_picking_from_of,stock.group_stock_user,1,1,1,1
+access_wiz_reverse_internal_picking_from_of_line_auto,wiz.reverse.internal.picking.from.of.line.auto,model_wiz_reverse_internal_picking_from_of_line_auto,stock.group_stock_user,1,1,1,1
+access_wiz_reverse_internal_picking_from_of_line_manual,wiz.reverse.internal.picking.from.of.line.manual,model_wiz_reverse_internal_picking_from_of_line_manual,stock.group_stock_user,1,1,1,1
