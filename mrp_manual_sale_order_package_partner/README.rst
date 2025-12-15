@@ -9,7 +9,7 @@ MRP Manual Sale Order Package Partner
 
 
 Automatically assign the `manual_partner_id` of the Manufacturing Order to a package
-when a move line belonging to a move from a Manufacturing Order is marked as done,
+when a move line belonging to a move from a Manufacturing Order is created,
 if the package does not already have a partner.
 
 Bug Tracker
