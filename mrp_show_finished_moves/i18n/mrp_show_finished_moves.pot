@@ -53,6 +53,11 @@ msgid "Finished Move Lines"
 msgstr ""
 
 #. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
+msgid "Last Manufactured Lot"
+msgstr ""
+
+#. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "Finished Moves"

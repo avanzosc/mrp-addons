@@ -39,6 +39,12 @@
         position="after"
       >
                     <field name="qty_produced" readonly="1" />
+                    <field
+          name="last_manufactured_lot"
+          readonly="1"
+          attrs="{'invisible': [('product_tracking', '!=', 'serial')]}"
+        />
+
             </xpath>
         </field>
     </record>
