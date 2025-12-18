@@ -22,7 +22,7 @@ class MrpProduction(models.Model):
                     ("lot_id", "!=", False),
                     ("state", "=", "done"),
                 ],
-                order="date desc",
+                order="id desc",
                 limit=1,
             )
 
@@ -97,6 +97,28 @@ class MrpProduction(models.Model):
             qty_produced = sum(done_moves.mapped("quantity_done"))
             production.qty_produced = qty_produced
         return True
+
+    def _split_productions(
+        self, amounts=False, cancel_remaining_qty=False, set_consumed_qty=False
+    ):
+        productions = super()._split_productions(
+            amounts=amounts,
+            cancel_remaining_qty=cancel_remaining_qty,
+            set_consumed_qty=set_consumed_qty,
+        )
+        for production in productions.filtered(
+            lambda b: b.product_id.tracking == "serial"
+        ):
+            production.qty_producing = production.product_qty
+        return productions
+
+    def _set_qty_producing(self):
+        if self.product_id.tracking and self.product_id.tracking == "serial":
+            return super(
+                MrpProduction, self.with_context(qty_twith_serial=self.qty_producing)
+            )._set_qty_producing()
+        else:
+            return super()._set_qty_producing()
 
     def button_mark_done(self):
         for production in self:

@@ -23,19 +23,21 @@
             </xpath>
             <xpath expr="//field[@name='state']" position="after">
                 <field name="product_uom_category_id" invisible='1' />
-                <button
-          name="action_show_details"
-          type="object"
-          icon="fa-list"
-          title="Show Details"
-          context="{'default_finished_move_id': id}"
-        />
             </xpath>
             <xpath expr="//field[@name='product_uom_qty']" position="before">
                 <field
           name="quantity_done"
           readonly="1"
           attrs="{'invisible': [('workorder_id', '=', False)]}"
+        />
+            </xpath>
+            <xpath expr="//field[@name='date']" position="before">
+                <button
+          name="action_show_details"
+          type="object"
+          icon="fa-list"
+          title="Show Details"
+          context="{'default_finished_move_id': id}"
         />
             </xpath>
         </field>

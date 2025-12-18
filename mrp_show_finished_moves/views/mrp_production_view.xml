@@ -38,13 +38,25 @@
         expr="//div[@class='d-flex flex-row align-items-start']"
         position="after"
       >
-                    <field name="qty_produced" readonly="1" />
-                    <field
+                        <field name="qty_produced" readonly="1" />
+                        <field
           name="last_manufactured_lot"
           readonly="1"
           attrs="{'invisible': [('product_tracking', '!=', 'serial')]}"
         />
-
+            </xpath>
+            <xpath expr="//label[@for='lot_producing_id']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', '=', 'draft'), ('product_tracking', '!=', 'lot')]}
+                </attribute>
+            </xpath>
+            <xpath
+        expr="//field[@name='lot_producing_id']/ancestor::div[contains(@class, 'o_row')]"
+        position="attributes"
+      >
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', '=', 'draft'), ('product_tracking', '!=', 'lot')]}
+                </attribute>
             </xpath>
         </field>
     </record>
