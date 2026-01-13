@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <record id="action_workcenter_productivity_pivot_ot" model="ir.actions.act_window">
+    <field name="res_model">mrp.workcenter.productivity</field>
+    <field name="view_mode">tree,pivot</field>
+    <field name="search_view_id" ref="view_workcenter_productivity_search_ot" />
+  </record>
+
+  <record
+    id="action_workcenter_productivity_pivot_ot_tree"
+    model="ir.actions.act_window.view"
+  >
+    <field name="act_window_id" ref="action_workcenter_productivity_pivot_ot" />
+    <field name="sequence" eval="1" />
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="view_workcenter_productivity_tree_ot" />
+  </record>
+
+  <record
+    id="action_workcenter_productivity_pivot_ot_pivot"
+    model="ir.actions.act_window.view"
+  >
+    <field name="act_window_id" ref="action_workcenter_productivity_pivot_ot" />
+    <field name="sequence" eval="2" />
+    <field name="view_mode">pivot</field>
+    <field name="view_id" ref="view_workcenter_productivity_pivot_ot" />
+  </record>
+
+  <menuitem
+    id="menu_mrp_workcenter_productivity_pivot_ot"
+    name="OT tracings"
+    parent="mrp.menu_mrp_root"
+    action="action_workcenter_productivity_pivot_ot"
+    sequence="50"
+  />
+
+</odoo>

@@ -1,0 +1,114 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workcenter_productivity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-13 13:46+0000\n"
+"PO-Revision-Date: 2026-01-13 13:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__date
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Date"
+msgstr "Fecha"
+
+#. module: mrp_workcenter_productivity
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__production_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Manufacturing Order"
+msgstr "Orden de fabricación"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.ui.menu,name:mrp_workcenter_productivity.menu_mrp_workcenter_productivity_pivot_ot
+msgid "OT tracings"
+msgstr "Seguimientos OT"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__operator_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Operator"
+msgstr "Operario"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__plates_done
+msgid "Plates Produced"
+msgstr "Placas fabricadas"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__procurement_group_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Procurement Group"
+msgstr "Grupo"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__product_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.actions.act_window,name:mrp_workcenter_productivity.action_workcenter_productivity_pivot_ot
+msgid "Seguimientos OT"
+msgstr "Seguimientos OT"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__calendar_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Shift (Calendar)"
+msgstr "Turno"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__speed
+msgid "Speed (plates/h)"
+msgstr "Velocidad media"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,help:mrp_workcenter_productivity.field_mrp_workcenter_productivity__plates_done
+msgid "The number of products already handled by this work order"
+msgstr "La cantidad de productos ya manejados por esta orden de trabajo"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity.field_mrp_workcenter_productivity__time_hours
+msgid "Time (h)"
+msgstr "Tiempo"
+
+#. module: mrp_workcenter_productivity
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Time Type"
+msgstr "Tipo de hora"
+
+#. module: mrp_workcenter_productivity
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Work Center"
+msgstr "Centro de trabajo"
+
+#. module: mrp_workcenter_productivity
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: mrp_workcenter_productivity
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_pivot_ot
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_search_ot
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity.view_workcenter_productivity_tree_ot
+msgid "Work Order Time Tracking"
+msgstr "Seguimiento del tiempo de la orden de trabajo"
+
+#. module: mrp_workcenter_productivity
+#: model:ir.model,name:mrp_workcenter_productivity.model_mrp_workcenter_productivity
+msgid "Workcenter Productivity Log"
+msgstr "Registro de productividad del centro de trabajo"
