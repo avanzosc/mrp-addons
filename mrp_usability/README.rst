@@ -6,14 +6,12 @@
 Manufacturing Usability
 =======================
 
-* The buttons that are in the tree view of the work order, put them also in the
-  form view.
-* Link from Production to Work Orders.
-* In manufacturing order form new tab "Move Lines", and new field "Finished Move
-  lines".
-* Show "Unreserve" button, only if there is a reserved component.
-* Show "Check Availabitiy", only if some component is not reserved, or partially
-  reserved.
+* **Work Order Buttons in Form View**: Adds Start, Pause, Done, Block, and Unblock buttons to the Work Order form view.
+* **Link from Manufacturing Order to Work Orders**: Adds a stat button in the Manufacturing Order form to associated Work Orders.
+* **New “Move Lines” Tab**: Introduces a dedicated tab in the Manufacturing Order form to display raw material move lines.
+* **Improved Button Visibility**:
+  * The “Check Availability” button is now only visible if there are components in a confirmed or partially available state.
+  * The “Unreserve” button is only shown when at least one component is fully reserved (assigned).
 
 Bug Tracker
 ===========
