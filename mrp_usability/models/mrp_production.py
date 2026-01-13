@@ -19,7 +19,7 @@ class MrpProduction(models.Model):
         inverse="_inverse_raw_lines",
         string="Raw Product",
     )
-    
+
     def _compute_workorder_count(self):
         for production in self:
             production.workorder_count = len(production.workorder_ids)
