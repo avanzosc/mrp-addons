@@ -54,7 +54,14 @@ class MrpProduction(models.Model):
                     moves_to_update = production.move_finished_ids.filtered(
                         lambda m: m.product_id == production.product_id
                     )
-                    moves_to_update.write({"next_serial": next_serial})
+                    moves_to_update.write(
+                        {
+                            "next_serial": next_serial,
+                            "next_serial_count": production.product_qty,
+                        }
+                    )
+                    moves_to_update.action_clear_lines_show_details()
+                    moves_to_update.action_assign_serial_show_details()
 
     def action_show_finished_move_lines(self):
         self.ensure_one()
@@ -206,7 +213,10 @@ class MrpProduction(models.Model):
     @api.model
     def create(self, vals):
         production = super().create(vals)
-        if production.last_manufactured_lot:
+        if (
+            production.last_manufactured_lot
+            and production.product_id.tracking == "serial"
+        ):
             production._update_move_next_serial()
         return production
 
@@ -242,7 +252,10 @@ class MrpProduction(models.Model):
                                     )
                                 )
                         move.move_line_ids = ml_cmds
-                if "last_manufactured_lot" in vals:
+                if (
+                    "last_manufactured_lot" in vals
+                    and production.product_id.tracking == "serial"
+                ):
                     production._update_move_next_serial()
         return res
 
