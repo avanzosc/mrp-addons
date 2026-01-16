@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_production_produced_lots_form">
+        <field name="name">mrp.production.produced.lots.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <button name="action_see_move_scrap"
+                    position="after">
+                <button class="oe_stat_button" name="button_open_lots" type="object" string="Produced Lots" icon="fa-arrows-v"/>
+            </button>
+        </field>
+    </record>
+</odoo>
