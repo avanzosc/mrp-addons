@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="action_workcenter_productivity_ot" model="ir.actions.act_window">
+        <field name="name">Work Order Time Tracking</field>
+        <field name="res_model">mrp.workcenter.productivity</field>
+
+        <field name="view_mode">pivot,tree</field>
+        <field
+      name="views"
+      eval="[
+            (ref('view_mrp_workcenter_productivity_ot_pivot'), 'pivot'),
+            (ref('view_mrp_workcenter_productivity_ot_tree'), 'tree')
+        ]"
+    />
+
+        <field name="search_view_id" ref="view_mrp_workcenter_productivity_ot_search" />
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No productivity records yet.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+    id="menu_mrp_workcenter_productivity_ot_root"
+    name="Work Order Time Tracking"
+    parent="mrp.menu_mrp_root"
+    action="action_workcenter_productivity_ot"
+    sequence="80"
+  />
+</odoo>

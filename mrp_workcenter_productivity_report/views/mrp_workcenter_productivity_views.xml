@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_mrp_workcenter_productivity_ot_tree" model="ir.ui.view">
+        <field name="name">mrp.workcenter.productivity.ot.tree</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="arch" type="xml">
+            <tree default_order="date_start desc">
+
+                <field name="date_start" string="Start Date" />
+                <field name="workcenter_id" string="Work Center" />
+                <field name="calendar_id" string="Shift (Calendar)" optional="show" />
+                <field name="loss_id" string="Hour Type" optional="show" />
+
+                <field name="workorder_id" string="Work Order" optional="show" />
+                <field name="employee_id" string="Employee" optional="show" />
+
+                <field name="product_id" string="Product" optional="show" />
+                <field
+          name="production_id"
+          string="Manufacturing Order"
+          optional="show"
+        />
+                <field
+          name="procurement_group_id"
+          string="Procurement Group"
+          optional="show"
+        />
+
+                <field name="duration_hours" sum="Time (hours)" />
+                <field name="plates_done" sum="Plates fabricated" />
+                <field name="speed" avg="Average speed" />
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mrp_workcenter_productivity_ot_pivot" model="ir.ui.view">
+        <field name="name">mrp.workcenter.productivity.ot.pivot</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="arch" type="xml">
+            <pivot string="Work Order Time Tracking" disable_linking="1">
+
+                <field name="duration_hours" type="measure" />
+                <field name="plates_done" type="measure" />
+                <field name="speed" type="measure" operator="avg" />
+
+                <field name="date_start" type="col" interval="day" />
+
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_mrp_workcenter_productivity_ot_search" model="ir.ui.view">
+        <field name="name">mrp.workcenter.productivity.ot.search</field>
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="arch" type="xml">
+            <search string="Work Order Time Tracking">
+
+                <field name="workcenter_id" string="Work Center" />
+                <field name="calendar_id" string="Shift (Calendar)" />
+                <field name="loss_id" string="Hour Type" />
+                <field name="employee_id" string="Employee" />
+                <field name="product_id" string="Product" />
+                <field name="production_id" string="Manufacturing Order" />
+                <field name="procurement_group_id" string="Procurement Group" />
+                <field name="workorder_id" string="Work Order" />
+                <field name="date_start" string="Date" />
+
+                <group expand="0" string="Group By">
+                    <filter
+            string="Work Center"
+            name="group_workcenter"
+            context="{'group_by':'workcenter_id'}"
+          />
+                    <filter
+            string="Shift (Calendar)"
+            name="group_calendar"
+            context="{'group_by':'calendar_id'}"
+          />
+                    <filter
+            string="Hour Type"
+            name="group_loss"
+            context="{'group_by':'loss_id'}"
+          />
+                    <filter
+            string="Employee"
+            name="group_employee"
+            context="{'group_by':'employee_id'}"
+          />
+                    <filter
+            string="Product"
+            name="group_product"
+            context="{'group_by':'product_id'}"
+          />
+                    <filter
+            string="Manufacturing Order"
+            name="group_production"
+            context="{'group_by':'production_id'}"
+          />
+                    <filter
+            string="Procurement Group"
+            name="group_proc_group"
+            context="{'group_by':'procurement_group_id'}"
+          />
+                    <filter
+            string="Work Order"
+            name="group_workorder"
+            context="{'group_by':'workorder_id'}"
+          />
+                    <filter
+            string="Date"
+            name="group_date"
+            context="{'group_by':'date_start:day'}"
+          />
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+</odoo>
