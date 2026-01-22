@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_tree_buttons_outside" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="state" invisible="1" />
+                <field name="unreserve_visible" invisible="1" />
+            </xpath>
+
+            <xpath expr="//tree" position="inside">
+
+                <button
+          name="action_confirm"
+          type="object"
+          string="Confirm"
+          class="oe_highlight"
+          attrs="{'invisible': [('state','!=','draft')]}"
+        />
+
+                <button
+          name="button_plan"
+          type="object"
+          string="Plan"
+          attrs="{'invisible': [('state','!=','confirmed')]}"
+        />
+
+                <button
+          name="button_mark_done"
+          type="object"
+          string="Mark as Done"
+          class="oe_highlight"
+          attrs="{'invisible': [('state','not in', ('confirmed','progress','to_close'))]}"
+        />
+
+                <button
+          name="button_unreserve"
+          type="object"
+          string="Unreserve"
+          class="btn-secondary"
+          attrs="{'invisible': [('unreserve_visible','=',False)]}"
+        />
+
+                <button
+          name="action_cancel"
+          type="object"
+          string="Cancel"
+          class="btn-secondary"
+          attrs="{'invisible': [('state','in',('done','cancel'))]}"
+        />
+
+            </xpath>
+
+            <xpath
+        expr="//tree/header/button[@name='do_unreserve']"
+        position="attributes"
+      >
+                <attribute name="string">Unreserve</attribute>
+                <attribute name="class">btn-secondary</attribute>
+                <attribute
+          name="attrs"
+        >{'invisible': ['|', ('unreserve_visible','=',False), ('state','in',('done','cancel'))]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
