@@ -46,6 +46,7 @@ class MrpProduction(models.Model):
 
     def _update_move_next_serial(self):
         for production in self:
+            production._compute_last_manufactured_lot()
             if production.last_manufactured_lot:
                 next_serial = self._increment_serial_number(
                     production.last_manufactured_lot
@@ -54,14 +55,16 @@ class MrpProduction(models.Model):
                     moves_to_update = production.move_finished_ids.filtered(
                         lambda m: m.product_id == production.product_id
                     )
-                    moves_to_update.write(
-                        {
-                            "next_serial": next_serial,
-                            "next_serial_count": production.product_qty,
-                        }
-                    )
-                    moves_to_update.action_clear_lines_show_details()
-                    moves_to_update.action_assign_serial_show_details()
+                    for move in moves_to_update:
+                        move.write(
+                            {
+                                "next_serial": next_serial,
+                                "next_serial_count": production.product_qty,
+                            }
+                        )
+                        move.action_clear_lines_show_details()
+                        move.action_assign_serial_show_details()
+                        production.qty_producing = move.quantity_done
 
     def action_show_finished_move_lines(self):
         self.ensure_one()
@@ -179,7 +182,24 @@ class MrpProduction(models.Model):
                             yes_label=_("Yes, adjust quantities and proceed"),
                             no_label=_("No, review data first"),
                         )
-        return super().button_mark_done()
+        res = super().button_mark_done()
+
+        for production in self:
+            partials = self.env["mrp.production"].search(
+                [
+                    ("procurement_group_id", "=", production.procurement_group_id.id),
+                    ("id", "!=", production.id),
+                    ("state", "!=", "done"),
+                ]
+            )
+            for partial in partials:
+                partial._compute_last_manufactured_lot()
+                if (
+                    partial.last_manufactured_lot
+                    and partial.product_id.tracking == "serial"
+                ):
+                    partial._update_move_next_serial()
+        return res
 
     def _launch_qty_warning(self, production, message, yes_label, no_label):
         """Launches the generic quantity warning wizard with context-specific text."""
@@ -210,15 +230,15 @@ class MrpProduction(models.Model):
                     wo.qty_producing = quantity_done
                     wo.qty_produced = quantity_done
 
-    @api.model
-    def create(self, vals):
-        production = super().create(vals)
-        if (
-            production.last_manufactured_lot
-            and production.product_id.tracking == "serial"
-        ):
-            production._update_move_next_serial()
-        return production
+    def action_confirm(self):
+        res = super().action_confirm()
+        for production in self:
+            if (
+                production.last_manufactured_lot
+                and production.product_id.tracking == "serial"
+            ):
+                production._update_move_next_serial()
+        return res
 
     def write(self, vals):
         res = super().write(vals)
@@ -252,11 +272,6 @@ class MrpProduction(models.Model):
                                     )
                                 )
                         move.move_line_ids = ml_cmds
-                if (
-                    "last_manufactured_lot" in vals
-                    and production.product_id.tracking == "serial"
-                ):
-                    production._update_move_next_serial()
         return res
 
 

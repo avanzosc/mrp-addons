@@ -51,6 +51,32 @@ This module extends the Manufacturing (MRP) functionality to improve the visibil
 - **Enhanced Finished Move Form**
   - Replaces reserved availability with **product quantity** for better tracking.
   - Improves integration with immediate transfers.
+  
+  - **Serial Number Automation**
+  - Computes the **last manufactured lot/serial** for the product and stores it in a new field `last_manufactured_lot`.
+  - Automatically calculates the **next serial number** by incrementing the last manufactured one.
+  - Propagates the next serial number to finished moves (`next_serial`, `next_serial_count`).
+  - Automatically triggers serial assignment and line generation for serial‑tracked products.
+
+- **Improved Behavior for Serial‑Tracked Products**
+  - Ensures `qty_producing` is always aligned with `product_qty` when splitting serial‑tracked MOs.
+  - Adjusts unit‑of‑measure conversions to respect the serial quantity through context (`qty_twith_serial`).
+
+- **Automatic Lot Name Propagation**
+  - When the MO’s `lot_producing_id` changes, all related finished move lines automatically update their `lot_name`.
+  - New move lines created for lot‑tracked products inherit the MO’s lot name.
+
+- **Move Line Enhancements**
+  - Automatically clears `reserved_uom_qty` for finished move lines to avoid misleading reservations.
+  - Ensures lot names are assigned when appropriate during move line creation.
+
+- **Improved Move Details Behavior**
+  - The “Show Details” action opens in the **current window** instead of a popup.
+  - For finished moves of tracked products, the form displays **lot name instead of lot ID** for clarity.
+
+- **Package Visibility Improvements**
+  - Adds actions to show **origin packages**, **result packages**, or both, directly from the move.
+
 
 Bug Tracker
 ===========
