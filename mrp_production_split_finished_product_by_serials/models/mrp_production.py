@@ -20,6 +20,10 @@ class MrpProduction(models.Model):
         copy=False,
     )
 
+    has_finished_move_lines = fields.Boolean(
+        compute="_compute_has_finished_move_lines", store=False
+    )
+
     @api.onchange("lot_producing_id")
     def _onchange_lot_producing(self):
         res = super()._onchange_lot_producing()
@@ -77,6 +81,7 @@ class MrpProduction(models.Model):
             self.product_tracking == "serial"
             and self.state not in ("done", "cancel")
             and not self.serial_lot_name
+            and not self.has_finished_move_lines
         ):
             if "from_product_lot_sequence" not in self.env.context or (
                 "from_product_lot_sequence" in self.env.context
@@ -95,6 +100,12 @@ class MrpProduction(models.Model):
         return new_lot_name
 
     def action_generate_serial(self):
+        if self.has_finished_move_lines:
+            self.serial_lot_name = False
+            return super(
+                MrpProduction,
+                self.with_context(qty_twith_serial=self.qty_producing),
+            ).action_generate_serial()
         if (
             "from_product_lot_sequence" in self.env.context
             and "from_button_mark_done" in self.env.context
@@ -137,6 +148,9 @@ class MrpProduction(models.Model):
 
     def button_mark_done(self):
         if self.product_tracking == "serial":
+            if self.has_finished_move_lines:
+                self.serial_lot_name = False
+                return super().button_mark_done()
             if not self.lot_producing_id:
                 if (
                     "from_product_lot_sequence" not in self.env.context
@@ -171,6 +185,8 @@ class MrpProduction(models.Model):
 
     def create_lot_for_tracking_serial(self):
         self.ensure_one()
+        if self.has_finished_move_lines:
+            return
         moves = self.move_finished_ids.filtered(
             lambda x: x.product_id == self.product_id
         )
@@ -254,3 +270,10 @@ class MrpProduction(models.Model):
                 "company_id": self.company_id.id,
             }
         return super()._prepare_stock_lot_values()
+
+    @api.depends("move_finished_ids.move_line_ids")
+    def _compute_has_finished_move_lines(self):
+        for production in self:
+            production.has_finished_move_lines = any(
+                production.move_finished_ids.mapped("move_line_ids")
+            )

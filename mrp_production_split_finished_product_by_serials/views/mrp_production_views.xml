@@ -23,9 +23,10 @@
                     </div>
                     <field name="initial_product_qty" class="oe_inline text-left" />
                 </div>
+                <field name="has_finished_move_lines" invisible="1" />
                 <field
           name="serial_lot_name"
-          attrs="{'invisible': [ ('product_tracking', '!=', 'serial')], 'readonly': [('state', 'in', ('done', 'cancel'))]}"
+          attrs="{ 'invisible': [ '|', ('product_tracking', '!=', 'serial'), '&amp;', ('product_tracking', '=', 'serial'), '&amp;', ('state', 'not in', ('done','cancel')), ('has_finished_move_lines', '=', True) ], 'readonly': [('state', 'in', ('done', 'cancel'))] }"
         />
             </label>
 
