@@ -55,3 +55,25 @@ class StockMove(models.Model):
             "res_model": "stock.quant.package",
             "domain": [("id", "in", all_packages.ids)],
         }
+
+    def write(self, vals):
+        res = super().write(vals)
+        for move in self:
+            if (
+                move.product_id.tracking == "serial"
+                and "next_serial_count" in vals
+                and move.product_id == move.production_id.product_id
+                and move.state not in ["done", "cancel"]
+            ):
+                production = move.production_id
+                production._compute_last_manufactured_lot()
+                if production.last_manufactured_lot:
+                    next_serial = production._increment_serial_number(
+                        production.last_manufactured_lot
+                    )
+                    move.next_serial = next_serial
+                    move.action_clear_lines_show_details()
+                    move.action_assign_serial_show_details()
+                if production.qty_producing != move.quantity_done:
+                    production.qty_producing = move.quantity_done
+        return res
