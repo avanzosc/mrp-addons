@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_mrp_production_employee_assign_tree" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" create="false">
+                <field name="name" />
+                <field name="product_id" />
+                <field name="company_id" invisible="1" />
+                <field name="product_qty" />
+                <field name="date_planned_start" />
+                <field name="state" />
+                <field
+          name="employee_ids"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+        />
+                <button
+          name="action_open_production_form"
+          type="object"
+          string="Open"
+          class="oe_highlight"
+        />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mrp_production_employee_assign" model="ir.actions.act_window">
+        <field name="res_model">mrp.production</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_mrp_production_employee_assign_tree" />
+        <field name="domain">[('state','in',('confirmed','progress'))]</field>
+    </record>
+
+    <record id="view_mrp_production_form_employee_assign" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//group[@name='group_extra_info']/field[@name='user_id']"
+        position="after"
+      >
+                <field
+          name="employee_ids"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem
+    id="menu_mrp_production_employee_assign"
+    name="Assign employees"
+    parent="mrp.menu_mrp_manufacturing"
+    action="action_mrp_production_employee_assign"
+    sequence="60"
+  />
+
+</odoo>
