@@ -14,7 +14,7 @@
     >
             <attribute
         name="t-if"
-      >bom_line_id.product_id.default_code == code and bom_line_id.product_qty == product_qty and bom_line_id.designator == designator and (bom_line_id.layer == layer or (not bom_line_id.layer and not layer))</attribute>
+      >bom_line_id.product_id.default_code == code and bom_line_id.product_qty == product_qty and (bom_line_id.designator == designator or (not bom_line_id.designator and not designator)) and (bom_line_id.layer == layer or (not bom_line_id.layer and not layer))</attribute>
         </t>
         <xpath expr="//table/thead/tr" position="inside">
             <th class="text-start">Layer</th>
