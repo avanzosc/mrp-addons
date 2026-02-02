@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_mrp_production_employee_assign_tree" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <tree editable="bottom" create="false">
+                <field name="name" readonly="1" />
+                <field name="product_id" readonly="1" />
+                <field name="company_id" invisible="1" />
+                <field name="product_qty" readonly="1" />
+                <field name="date_planned_start" readonly="1" />
+                <field name="state" readonly="1" />
+                <field
+          name="employee_ids"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+        />
+                <button
+          name="action_open_production_form"
+          type="object"
+          icon="fa-external-link"
+        />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_employee_assign_form" model="ir.ui.view">
+        <field name="name">mrp.production.employee.assign.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_extra_info']" position="inside">
+                <field
+          name="employee_ids"
+          string="Empleados"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_employee_assign_tree_main" model="ir.ui.view">
+        <field name="name">mrp.production.tree.employee.assign.main</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field
+          name="employee_ids"
+          string="Empleados"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+          optional="show"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_mrp_production_employee_assign" model="ir.actions.act_window">
+        <field name="res_model">mrp.production</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_mrp_production_employee_assign_tree" />
+        <field name="search_view_id" ref="mrp.view_mrp_production_filter" />
+        <field
+      name="context"
+    >{'search_default_todo': True, 'default_company_id': allowed_company_ids[0]}</field>
+        <field name="domain">[('picking_type_id.active', '=', True)]</field>
+    </record>
+
+    <menuitem
+    id="menu_mrp_production_employee_assign"
+    name="Assign employees"
+    parent="mrp.menu_mrp_manufacturing"
+    action="action_mrp_production_employee_assign"
+    sequence="60"
+  />
+
+</odoo>
