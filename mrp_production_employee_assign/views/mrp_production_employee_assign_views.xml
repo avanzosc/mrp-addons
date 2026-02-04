@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_extra_info']" position="inside">
+                <field
+          name="employee_ids"
+          string="Employees"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field
+          name="employee_ids"
+          string="Employees"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+          optional="show"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_tree_editable" model="ir.ui.view">
+        <field name="name">mrp.production.tree</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="mode">primary</field>
+        <field name="model">mrp.production</field>
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="editable">bottom</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_planned_start']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='bom_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_qty']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="product_uom_category_id" invisible="1" />
+            </xpath>
+            <xpath expr="//tree" position="inside">
+                <button
+          name="action_open_production_form"
+          type="object"
+          icon="fa-external-link"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_mrp_production_tree_editable" model="ir.actions.act_window">
+        <field name="name">Manufacturing Orders (Editable)</field>
+        <field name="res_model">mrp.production</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_mrp_production_tree_editable" />
+        <field name="search_view_id" ref="mrp.view_mrp_production_filter" />
+        <field
+      name="context"
+    >{'search_default_todo': True, 'default_company_id': allowed_company_ids[0]}</field>
+        <field name="domain">[('picking_type_id.active', '=', True)]</field>
+    </record>
+
+    <menuitem
+    id="menu_mrp_production_tree_editable"
+    name="Manufacturing Orders (Editable)"
+    parent="mrp.menu_mrp_manufacturing"
+    action="action_mrp_production_tree_editable"
+    sequence="15"
+  />
+
+    <delete id="view_mrp_production_employee_assign_tree" model="ir.ui.view" />
+    <delete id="action_mrp_production_employee_assign" model="ir.actions.act_window" />
+    <delete id="menu_mrp_production_employee_assign" model="ir.ui.menu" />
+
+</odoo>
