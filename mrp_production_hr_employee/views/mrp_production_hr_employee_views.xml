@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_extra_info']" position="inside">
+            <group string="Employees">
+                <field
+            name="employee_ids"
+            widget="many2many_tags"
+            options="{'no_create': True}"
+          />
+            </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field
+          name="employee_ids"
+          string="Employees"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+          optional="show"
+        />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_production_tree_editable" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" eval="False" />
+        <field name="mode">primary</field>
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <tree
+        default_order="priority desc, date_planned_start desc"
+        multi_edit="1"
+        sample="1"
+        editable="bottom"
+      >
+                <header>
+                    <button name="button_plan" type="object" string="Plan" />
+                    <button name="do_unreserve" type="object" string="Unreserve" />
+                </header>
+                <field name="priority" optional="show" widget="priority" nolabel="1" />
+                <field name="message_needaction" invisible="1" />
+                <field name="name" decoration-bf="1" />
+                <field
+          name="date_planned_start"
+          readonly="0"
+          optional="show"
+          widget="remaining_days"
+        />
+                <field
+          name="date_deadline"
+          widget="remaining_days"
+          attrs="{'invisible': [('state', 'in', ['done', 'cancel'])]}"
+          optional="hide"
+        />
+                <field name="product_id" readonly="0" optional="show" />
+                <field name="product_uom_category_id" invisible="1" />
+                <field
+          name="product_uom_id"
+          string="Unit of Measure"
+          options="{'no_open':True,'no_create':True}"
+          groups="uom.group_uom"
+          optional="show"
+        />
+                <field name="lot_producing_id" optional="hide" />
+                <field name="bom_id" readonly="0" optional="hide" />
+                <field name="origin" optional="show" />
+                <field name="user_id" optional="hide" widget="many2one_avatar_user" />
+                <field name="reservation_state" optional="show" />
+                <field
+          name="product_qty"
+          sum="Total Qty"
+          string="Quantity"
+          readonly="0"
+          optional="show"
+        />
+                <field
+          name="company_id"
+          readonly="0"
+          groups="base.group_multi_company"
+          optional="show"
+        />
+                <field
+          name="state"
+          optional="show"
+          widget="badge"
+          decoration-success="state == 'done'"
+          decoration-info="state not in ('done', 'cancel')"
+        />
+                <field
+          name="employee_ids"
+          string="Employees"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+          optional="show"
+        />
+                <field
+          name="activity_exception_decoration"
+          widget="activity_exception"
+          invisible="1"
+        />
+                <field name="delay_alert_date" invisible="1" />
+                <field
+          string=" "
+          name="json_popover"
+          widget="stock_rescheduling_popover"
+          invisible="1"
+        />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mrp_production_tree_editable" model="ir.actions.act_window">
+        <field name="res_model">mrp.production</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_mrp_production_tree_editable" />
+        <field name="search_view_id" ref="mrp.view_mrp_production_filter" />
+        <field
+      name="context"
+    >{'search_default_todo': True, 'default_company_id': allowed_company_ids[0]}</field>
+        <field name="domain">[('picking_type_id.active', '=', True)]</field>
+    </record>
+
+    <menuitem
+    id="menu_mrp_production_tree_editable"
+    name="Manufacturing Orders (Editable)"
+    parent="mrp.menu_mrp_manufacturing"
+    action="action_mrp_production_tree_editable"
+    sequence="15"
+  />
+
+</odoo>
