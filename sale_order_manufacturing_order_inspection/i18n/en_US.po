@@ -1,0 +1,139 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_order_manufacturing_order_inspection
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-10 09:55+0000\n"
+"PO-Revision-Date: 2026-02-10 09:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.actions.server,name:sale_order_manufacturing_order_inspection.action_from_of_create_inspection
+msgid "Create Inspection"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test__display_name
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label__display_name
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger__display_name
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_line__display_name
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_template_line__display_name
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_sale_order__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_mrp_production__id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test__id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label__id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger__id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_line__id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_template_line__id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_sale_order__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test____last_update
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label____last_update
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger____last_update
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_line____last_update
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_template_line____last_update
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_sale_order____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model_terms:ir.ui.view,arch_db:sale_order_manufacturing_order_inspection.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:sale_order_manufacturing_order_inspection.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:sale_order_manufacturing_order_inspection.view_mrp_production_filter
+msgid "Personalization"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model,name:sale_order_manufacturing_order_inspection.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.actions.act_window,name:sale_order_manufacturing_order_inspection.qc_test_label_action
+#: model:ir.ui.menu,name:sale_order_manufacturing_order_inspection.menu_qc_test_label
+msgid "Quality Control Test Labels"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model,name:sale_order_manufacturing_order_inspection.model_qc_trigger_product_line
+msgid "Quality Control Trigger Product Line"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model,name:sale_order_manufacturing_order_inspection.model_qc_trigger_product_template_line
+msgid "Quality Control Trigger Product Template Line"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model,name:sale_order_manufacturing_order_inspection.model_qc_test
+msgid "Quality control test"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model,name:sale_order_manufacturing_order_inspection.model_qc_trigger
+msgid "Quality control trigger"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model,name:sale_order_manufacturing_order_inspection.model_qc_test_label
+msgid "Quanlity Control Test Labels"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model,name:sale_order_manufacturing_order_inspection.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_mrp_production__service_product_id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_line__service_product_id
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_trigger_product_template_line__service_product_id
+msgid "Service Product"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test__qc_test_label_ids
+msgid "Test Labels"
+msgstr ""
+
+#. module: sale_order_manufacturing_order_inspection
+#: model:ir.model.fields,field_description:sale_order_manufacturing_order_inspection.field_qc_test_label__name
+msgid "name"
+msgstr ""
