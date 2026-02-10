@@ -47,6 +47,11 @@ msgstr "Marcar como hecho"
 
 #. module: mrp_production_show_button_unreserve
 #: model_terms:ir.ui.view,arch_db:mrp_production_show_button_unreserve.mrp_production_tree_buttons_outside
+msgid "Check availability"
+msgstr "Comprobar disponibilidad"
+
+#. module: mrp_production_show_button_unreserve
+#: model_terms:ir.ui.view,arch_db:mrp_production_show_button_unreserve.mrp_production_tree_buttons_outside
 msgid "Plan"
 msgstr ""
 
