@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_bom_form_inherit_category" model="ir.ui.view">
+        <field name="name">mrp.bom.form.category</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_qty']" position="before">
+                <field name="categ_id" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_bom_tree_inherit_category" model="ir.ui.view">
+        <field name="name">mrp.bom.tree.category</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="categ_id" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
