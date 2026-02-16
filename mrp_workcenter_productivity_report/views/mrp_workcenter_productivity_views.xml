@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="oee_tree_view" model="ir.ui.view">
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="inherit_id" ref="mrp.oee_tree_view" />
+        <field name="arch" type="xml">
+            <field name="workcenter_id" position="after">
+                <field name="workorder_id" optional="show" />
+                <field name="production_id" optional="show" />
+                <field name="product_id" optional="show" />
+                <field name="procurement_group_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="oee_search_view" model="ir.ui.view">
+        <field name="model">mrp.workcenter.productivity</field>
+        <field name="inherit_id" ref="mrp.oee_search_view" />
+        <field name="arch" type="xml">
+            <field name="loss_id" position="after">
+                <field name="user_id" />
+                <field name="workorder_id" />
+                <field name="production_id" />
+                <field name="product_id" />
+                <field name="procurement_group_id" />
+            </field>
+            <filter name="loss_group" position="after">
+                <filter
+          string="Operario"
+          name="group_operator"
+          context="{'group_by': 'user_id'}"
+        />
+                <filter
+          string="Work Order"
+          name="group_workorder"
+          context="{'group_by': 'workorder_id'}"
+        />
+                <filter
+          string="Manufacturing Order"
+          name="group_production"
+          context="{'group_by': 'production_id'}"
+        />
+                <filter
+          string="Product"
+          name="group_product"
+          context="{'group_by': 'product_id'}"
+        />
+                <filter
+          string="Procurement Group"
+          name="group_procurement_group"
+          context="{'group_by': 'procurement_group_id'}"
+        />
+            </filter>
+        </field>
+    </record>
+
+</odoo>

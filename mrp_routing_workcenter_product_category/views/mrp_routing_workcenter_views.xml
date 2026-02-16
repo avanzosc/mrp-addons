@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_routing_workcenter_form_inherit_category" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.form.category</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='workcenter_id']" position="before">
+                <field name="categ_id" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+    <record id="mrp_routing_workcenter_tree_inherit_category" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.tree.category</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='workcenter_id']" position="before">
+                <field name="categ_id" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -24,7 +24,6 @@
                 <page
           string="Manual Sale Information"
           name="manual_sale_info"
-          groups="mrp.group_mrp_manager"
           attrs="{'invisible': [('manual_sale_id','=',False),('manual_partner_id','=',False)]}"
         >
                     <group>

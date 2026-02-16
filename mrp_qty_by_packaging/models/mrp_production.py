@@ -12,7 +12,7 @@ class MrpProduction(models.Model):
         comodel_name="product.packaging",
         domain="[('sales', '=', True), ('product_id','=',product_id)]",
         check_company=True,
-        copy=False,
+        copy=True,
     )
     product_packaging_qty = fields.Float(string="Packaging Quantity", copy=False)
 

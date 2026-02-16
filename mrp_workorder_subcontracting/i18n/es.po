@@ -31,7 +31,7 @@ msgstr "Cargos complementarios"
 #. module: mrp_workorder_subcontracting
 #: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__quantity_calculation
 msgid "Calculation type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: mrp_workorder_subcontracting
 #: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_product_subcontracting_charge__create_uid
@@ -111,12 +111,12 @@ msgstr "Línea orden de compra"
 #. module: mrp_workorder_subcontracting
 #: model:ir.model.fields.selection,name:mrp_workorder_subcontracting.selection__product_subcontracting_charge__quantity_calculation__standard
 msgid "Standard"
-msgstr ""
+msgstr "Standar"
 
 #. module: mrp_workorder_subcontracting
 #: model:ir.model,name:mrp_workorder_subcontracting.model_product_subcontracting_charge
 msgid "Subcontracting Charge"
-msgstr ""
+msgstr "Cargo complementario"
 
 #. module: mrp_workorder_subcontracting
 #: model:ir.model.fields,field_description:mrp_workorder_subcontracting.field_mrp_routing_workcenter__service_supplier_id

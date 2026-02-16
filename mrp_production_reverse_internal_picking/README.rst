@@ -6,8 +6,12 @@
 Mrp production reverse internal picking
 =======================================
 
-* When canceling an MO, if there is a internal picking in "Done" state, create
-  a return picking.
+* When a production order that is not related to others is cancelled, and that
+  production order has internal pickings, a wizard will be displayed to
+  automatically revert the internal pickings.
+* When a production order that is related to others is cancelled, and that
+  production order has internal delivery notes, a wizard will be displayed to
+  warn that these internal pickings notes must be manually reversed.                                         
 
 Bug Tracker
 ===========

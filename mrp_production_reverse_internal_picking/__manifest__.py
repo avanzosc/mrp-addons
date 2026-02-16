@@ -10,6 +10,7 @@
     "depends": ["mrp", "stock"],
     "data": [
         "security/ir.model.access.csv",
+        "views/mrp_production_views.xml",
         "wizard/wiz_reverse_internal_picking_from_of_views.xml",
     ],
     "installable": True,

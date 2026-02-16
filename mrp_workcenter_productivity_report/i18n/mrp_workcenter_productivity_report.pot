@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workcenter_productivity_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 13:22+0000\n"
+"PO-Revision-Date: 2026-02-03 13:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity_report.field_mrp_workcenter_productivity__speed
+msgid "Average speed"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity_report.field_mrp_workcenter_productivity__employee_id
+msgid "Employee"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity_report.oee_search_view
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity_report.field_mrp_workcenter_productivity__plates_done
+msgid "Plates fabricated"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity_report.field_mrp_workcenter_productivity__procurement_group_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity_report.oee_search_view
+msgid "Procurement Group"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity_report.field_mrp_workcenter_productivity__product_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity_report.oee_search_view
+msgid "Product"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity_report.field_mrp_workcenter_productivity__calendar_id
+msgid "Shift"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model.fields,field_description:mrp_workcenter_productivity_report.field_mrp_workcenter_productivity__duration_hours
+msgid "Time (hours)"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_productivity_report.oee_search_view
+msgid "Work Order"
+msgstr ""
+
+#. module: mrp_workcenter_productivity_report
+#: model:ir.model,name:mrp_workcenter_productivity_report.model_mrp_workcenter_productivity
+msgid "Workcenter Productivity Log"
+msgstr ""

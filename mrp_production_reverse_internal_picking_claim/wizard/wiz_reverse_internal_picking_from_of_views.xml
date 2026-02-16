@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id=">wiz_reverse_internal_picking_from_of_view" model="ir.ui.view">
+        <field name="model">wiz.reverse.internal.picking.from.of</field>
+        <field
+      name="inherit_id"
+      ref="mrp_production_reverse_internal_picking.wiz_reverse_internal_picking_from_of_view"
+    />
+        <field name="arch" type="xml">
+            <xpath
+        expr="//field[@name='wizard_lines_auto']//field[@name='picking_id']"
+        position="after"
+      >
+                <field name="claim_id" required="True" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

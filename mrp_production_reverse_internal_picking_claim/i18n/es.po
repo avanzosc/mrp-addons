@@ -1,0 +1,54 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_production_reverse_internal_picking_claim
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-15 12:46+0000\n"
+"PO-Revision-Date: 2025-12-15 12:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_production_reverse_internal_picking_claim
+#: model:ir.model.fields,field_description:mrp_production_reverse_internal_picking_claim.field_wiz_reverse_internal_picking_from_of_line_auto__claim_id
+msgid "Claim"
+msgstr "Reclamación"
+
+#. module: mrp_production_reverse_internal_picking_claim
+#: model:ir.model,name:mrp_production_reverse_internal_picking_claim.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: mrp_production_reverse_internal_picking_claim
+#. odoo-python
+#: code:addons/mrp_production_reverse_internal_picking_claim/models/mrp_production.py:0
+#, python-format
+msgid "Reverse Internal Picking From OF"
+msgstr "Revertir albarán interno desde OF"
+
+#. module: mrp_production_reverse_internal_picking_claim
+#: model:ir.model,name:mrp_production_reverse_internal_picking_claim.model_wiz_reverse_internal_picking_from_of
+msgid "Wizard For Reverse Intenal Picking From OF"
+msgstr "Asistente para revertir albarán interno desde OF"
+
+#. module: mrp_production_reverse_internal_picking_claim
+#: model:ir.model,name:mrp_production_reverse_internal_picking_claim.model_wiz_reverse_internal_picking_from_of_line_auto
+msgid "Wizard For Reverse Intenal Picking From OF Line"
+msgstr "Asistente línea para revertir albaranes internos desde OF"
+
+#. module: mrp_production_reverse_internal_picking_claim
+#. odoo-python
+#: code:addons/mrp_production_reverse_internal_picking_claim/wizard/wiz_reverse_internal_picking_from_of.py:0
+#, python-format
+msgid ""
+"You must define a claim for these pickings: %(picking_names)s,  in order to "
+"be able to reverse them."
+msgstr ""
+"Debe definir una reclamación a estos albaranes: %(picking_names)s,  para poder "
+"revertirlos."
