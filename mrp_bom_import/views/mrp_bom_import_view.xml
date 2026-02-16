@@ -3,9 +3,8 @@
     <record id="mrp_bom_import_view_tree" model="ir.ui.view">
         <field name="model">mrp.bom.import</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="state=='error'">
-                <field name="filename" />
-                <field name="data" filename="filename" />
+            <tree decoration-muted="state == 'done'" decoration-bf="state == 'pass'">
+                <field name="name" />
                 <field name="file_date" />
                 <field name="state" />
             </tree>
@@ -18,7 +17,7 @@
             <form string="BoM Import">
             <header>
                 <button
-            name="action_import_bom"
+            name="action_import_file"
             string="Import"
             type="object"
             class="oe_read_only"
@@ -41,10 +40,11 @@
             </header>
             <sheet>
                 <div class="oe_button_box" name="button_box">
-                        <button
-              string="Component Import Lines"
+                    <button
+              string="Import Lines"
               type="object"
-              name="button_open_bom_component_import_line"
+              name="button_open_import_line"
+              attrs="{'invisible':[('import_line_ids', '=', [])]}"
               class="oe_stat_button"
               icon="fa-bars"
             />
@@ -89,7 +89,7 @@
                 </group>
                 <notebook>
                     <page string="Lines">
-                        <field name="bom_line_import_ids" />
+                        <field name="import_line_ids" />
                     </page>
                     <page string="Log" attrs="{'invisible': [('log_info','=','')]}">
                         <field name="log_info" />
@@ -130,34 +130,35 @@
         </field>
     </record>
 
-    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">
-        <field name="model">mrp.bom.line.import</field>
-        <field name="arch" type="xml">
-            <tree
-        decoration-success="state=='pass'"
-        decoration-danger="state=='error'"
-        decoration-muted="state=='done'"
-        decoration-info="state=='2validate'"
-        decoration-warning="parent_product_bom_count>0 and state!='done'"
-        editable="bottom"
-      >
-                <field name="product_ref" />
-                <field name="product_name" />
-                <field name="product_id" optional="hide" />
-                <field name="quantity" />
-                <field name="bom_code" />
-                <field name="bom_name" />
-                <field name="bom_product_id" optional="hide" />
-                <field name="parent_qty" />
-                <field name="bom_ref" />
-                <field name="parent_product_bom_count" optional="show" />
-                <field name="bom_id" optional="hide" />
-                <field name="bom_line_id" optional="hide" />
-                <field name="log_info" />
-                <field name="state" />
-            </tree>
-        </field>
-    </record>
+<!--    <record id="mrp_bom_line_component_import_view_tree" model="ir.ui.view">-->
+<!--        <field name="model">mrp.bom.line.import</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree-->
+<!--        string="BoM Import"-->
+<!--        decoration-success="state=='pass'"-->
+<!--        decoration-danger="state=='error'"-->
+<!--        decoration-muted="state=='done'"-->
+<!--        decoration-info="state=='2validate'"-->
+<!--        decoration-warning="parent_product_bom_count>0 and state!='done'"-->
+<!--        editable="bottom"-->
+<!--      >-->
+<!--                <field name="product_ref" />-->
+<!--                <field name="product_name" />-->
+<!--                <field name="product_id" optional="hide" />-->
+<!--                <field name="quantity" />-->
+<!--                <field name="bom_code" />-->
+<!--                <field name="bom_name" />-->
+<!--                <field name="bom_product_id" optional="hide" />-->
+<!--                <field name="parent_qty" />-->
+<!--                <field name="bom_ref" />-->
+<!--                <field name="parent_product_bom_count" optional="show" />-->
+<!--                <field name="bom_id" optional="hide" />-->
+<!--                <field name="bom_line_id" optional="hide" />-->
+<!--                <field name="log_info" />-->
+<!--                <field name="state" />-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="mrp_bom_import_act" model="ir.actions.act_window">
         <field name="name">MRP BoM Import</field>

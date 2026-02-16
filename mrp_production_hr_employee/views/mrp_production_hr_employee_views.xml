@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_extra_info']" position="inside">
+            <field
+          name="employee_ids"
+          widget="many2many_tags"
+          string="Employees"
+          options="{'no_create': True}"
+        />
+        </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+             <xpath expr="//tree" position="attributes">
+                <attribute name="editable">bottom</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="product_uom_category_id" invisible="1" />
+                <field
+          name="employee_ids"
+          string="Employees"
+          widget="many2many_tags"
+          options="{'no_create': True}"
+          optional="show"
+        />
+            </xpath>
+            <xpath expr="//field[@name='name']" position="before">
+                <button
+          name="action_open_wizard"
+          type="object"
+          icon="fa-external-link"
+          string="Open MO"
+          class="oe_edit_only"
+        />
+                   </xpath>
+        </field>
+    </record>
+</odoo>

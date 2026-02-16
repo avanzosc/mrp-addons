@@ -2,13 +2,13 @@
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
-====================================
-Mrp production show button unreserve
-====================================
+==============================
+MRP Production HR Employee
+==============================
 
-* Show the "Unreserve" button in manufacturing order, if the MO is not in the
-  "done" and "canceled" status, and the components already have some
-  "Detailed Operation", that is, they have availability.
+Assign employees to manufacturing orders and show them in the list view.
+Includes a dedicated editable manufacturing orders list that mirrors the
+standard tree view.
 
 Bug Tracker
 ===========
@@ -26,5 +26,5 @@ Credits
 Contributors
 ------------
 
+* Eñaut Alberdi <enautavanzosc@gmail.com>
 * Ana Juaristi <anajuaristi@avanzosc.es>
-* Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
