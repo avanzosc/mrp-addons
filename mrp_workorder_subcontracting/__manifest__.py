@@ -7,7 +7,7 @@
     "website": "https://github.com/avanzosc/mrp-addons",
     "category": "Manufacturing/Manufacturing",
     "license": "AGPL-3",
-    "depends": ["mrp", "product"],
+    "depends": ["mrp", "product", "sale", "purchase_sale_inter_company"],
     "data": [
         "security/ir.model.access.csv",
         "views/mrp_routing_workcenter_view.xml",
@@ -16,6 +16,7 @@
         "views/purchase_order_views.xml",
         "views/mrp_workcenter_views.xml",
         "views/product_subcontracting_charge_views.xml",
+        "views/sale_order_views.xml",
     ],
     "installable": True,
     "application": False,

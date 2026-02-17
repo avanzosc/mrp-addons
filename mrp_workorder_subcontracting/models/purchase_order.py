@@ -15,3 +15,15 @@ class PurchaseOrder(models.Model):
         store=True,
         readonly=True,
     )
+
+    bom_id = fields.Many2one("mrp.bom", string="Lista de materiales")
+
+    def _inter_company_create_sale_order(self, dest_company):
+        self.ensure_one()
+
+        sale_order = super()._inter_company_create_sale_order(dest_company)
+
+        if self.bom_id and sale_order:
+            sale_order.write({"bom_id": self.bom_id.id})
+
+        return sale_order

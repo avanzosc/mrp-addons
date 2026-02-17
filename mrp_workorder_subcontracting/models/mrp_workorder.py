@@ -105,6 +105,9 @@ class MrpWorkorder(models.Model):
                     "subcon_purchase": True,
                     "date_order": fields.Datetime.now(),
                     "workorder_id": wo.id,
+                    "bom_id": (
+                        wo.production_id.bom_id.id if wo.production_id.bom_id else False
+                    ),
                 }
             )
 
