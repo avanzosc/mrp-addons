@@ -110,10 +110,7 @@ class BizerbaImportLine(models.Model):
                 move_line[:1].write(
                     {
                         "container": len(same_product_lines),
-                        "qty_done": sum(
-                            line.line_product_qty * line.line_unit_container
-                            for line in same_product_lines
-                        ),
+                        "qty_done": sum(same_product_lines.mapped("line_product_qty")),
                         "product_uom_id": self.line_uom_id.id,
                         "unit_container": self.line_unit_container,
                         "unit": sum(same_product_lines.mapped("line_unit_container")),
