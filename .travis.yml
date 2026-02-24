@@ -11,9 +11,6 @@ addons:
     packages:
       - expect-dev # provides unbuffer utility
       - python-lxml # because pip installation is slow
-      - antiword # document module
-      - cups
-      - libcups2-dev
 
 env:
   global:
