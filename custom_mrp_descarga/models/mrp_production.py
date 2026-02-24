@@ -263,6 +263,45 @@ class MrpProduction(models.Model):
         compute="_compute_breast_data",
         store=True,
     )
+    cutout = fields.Float(
+        string="Cutout",
+        compute="_compute_cutout",
+        store=True,
+    )
+
+    @api.depends(
+        "move_line_ids.qty_done",
+        "finished_move_line_ids.qty_done",
+        "move_line_ids.product_id.categ_id.second_category",
+    )
+    def _compute_cutout(self):
+        if not self.ids:
+            return
+        StockMoveLine = self.env["stock.move.line"]
+        cutout_data = StockMoveLine.read_group(
+            domain=[
+                ("production_id", "in", self.ids),
+                ("product_id.default_code", "=", "2214"),
+            ],
+            fields=["qty_done", "production_id"],
+            groupby=["production_id"],
+        )
+        cutout_map = {
+            data["production_id"][0]: data["qty_done"] for data in cutout_data
+        }
+        entry_data = StockMoveLine.read_group(
+            domain=[
+                ("production_id", "in", self.ids),
+                ("product_id.categ_id.second_category", "=", True),
+            ],
+            fields=["qty_done", "production_id"],
+            groupby=["production_id"],
+        )
+        entry_map = {data["production_id"][0]: data["qty_done"] for data in entry_data}
+        for production in self:
+            out_qty = cutout_map.get(production.id, 0.0)
+            entry_qty = entry_map.get(production.id, 0.0)
+            production.cutout = out_qty * 100 / entry_qty if entry_qty else 0.0
 
     @api.depends("total_duration", "total_unit")
     def _compute_speed_consume_unit(self):

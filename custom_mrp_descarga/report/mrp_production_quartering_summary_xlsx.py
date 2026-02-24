@@ -90,7 +90,7 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
         table_detail_right_num.set_num_format("#,##0.00")
         worksheet = workbook.add_worksheet("Resumen de despiece")
         worksheet.write(0, 0, _("Resumen de despiece"), result_int_format)
-        for i in range(0, 13):
+        for i in range(0, 14):
             worksheet.set_column(0, i, 15)
         n = 2
         m = 0
@@ -121,7 +121,9 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
         worksheet.write(n, m, _("Peso medio"), table_header)
         m += 1
         worksheet.write(n, m, _("%"), table_header)
-        for m in range(m + 1, 13):
+        m += 1
+        worksheet.write(n, m, _("Rto. Pechuga"), table_header)
+        for m in range(m + 1, 14):
             worksheet.write(n, m, "", table_header)
         entry_movelines = objects.mapped("move_line_ids")
         categories = []
@@ -348,6 +350,7 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                 categ_brut = sum(categ_lines.mapped("brut"))
                 categ_pallet_weight = 0
                 categ_container_weight = 0
+                categ_rto_breast = 0
                 for line in categ_lines:
                     if (
                         line.move_id
@@ -446,6 +449,24 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                             / sum(entry_movelines.mapped("qty_done")),
                             two_decimal_format,
                         )
+                        m += 1
+                        if (
+                            product.product_id.product_family_id.display_name
+                            == "PECHUGA"
+                        ):
+                            rto_breast = 0
+                            total_entry = sum(entry_movelines.mapped("qty_done"))
+                            total_breast_bone = sum(
+                                out_movelines.filtered(
+                                    lambda x: x.product_family_id.display_name
+                                    == "PECHUGA CON HUESO"
+                                ).mapped("qty_done")
+                            )
+                            denominator = total_entry - total_breast_bone / 0.46
+                            if denominator != 0:
+                                rto_breast = product_qty_done * 100 / denominator
+                            worksheet.write(n, m, rto_breast, two_decimal_format)
+                            categ_rto_breast += rto_breast
                 n += 1
                 m = 0
                 worksheet.write(
@@ -476,6 +497,9 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
                     categ_qty_done * 100 / sum(entry_movelines.mapped("qty_done")),
                     result_two_decimal,
                 )
+                m += 1
+                if line.product_family_id.display_name == "PECHUGA":
+                    worksheet.write(n, m, categ_rto_breast, result_two_decimal)
                 n += 1
         m = 1
         worksheet.write(n, m, "TOTAL", result_int_format)
