@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_mrp_routing_workcenter_tree_inherit_bom_status" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.tree.bom.status</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bom_id']" position="after">
+                <field name="mrp_operation_bom_status" />
+            </xpath>
+        </field>
+    </record>
+
+    <record
+    id="view_mrp_routing_workcenter_search_inherit_bom_status"
+    model="ir.ui.view"
+  >
+        <field name="name">mrp.routing.workcenter.search.bom.status</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_filter" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//filter[@name='inactive']" position="after">
+
+                <filter
+          string="BOM draft"
+          name="filter_bom_draft"
+          domain="[('mrp_operation_bom_status','=','draft')]"
+        />
+
+                <filter
+          string="BOM active"
+          name="filter_bom_active"
+          domain="[('mrp_operation_bom_status','=','active')]"
+        />
+
+                <filter
+          string="BOM historical"
+          name="filter_bom_historical"
+          domain="[('mrp_operation_bom_status','=','historical')]"
+        />
+
+            </xpath>
+
+            <xpath expr="//search/group" position="inside">
+
+                <filter
+          string="BOM status"
+          name="group_by_bom_status"
+          context="{'group_by': 'mrp_operation_bom_status'}"
+        />
+
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_mrp_routing_workcenter_form_inherit_bom_status" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.form.bom.status</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bom_id']" position="after">
+                <field name="mrp_operation_bom_status" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
