@@ -34,6 +34,14 @@ class MrpWorkorder(models.Model):
         readonly=True,
     )
 
+    bom_id = fields.Many2one(
+        "mrp.bom",
+        string="Lista de Materiales",
+        related="production_id.bom_id",
+        store=True,
+        readonly=True,
+    )
+
     def button_start(self):
         res = super().button_start()
         subcontract_lines = self.filtered(
