@@ -39,7 +39,7 @@ class MrpWorkorder(models.Model):
             "from_wizard_button_pending" in self.env.context
             or self.workcenter_id.is_external
         ):
-            return super().button_pending()
+            return super(MrpWorkorder, self.sudo()).button_pending()
         else:
             return {
                 "type": "ir.actions.act_window",
@@ -64,7 +64,7 @@ class MrpWorkorder(models.Model):
         ):
             return super().button_finish()
         elif self.workcenter_id.is_external:
-            return super().button_finish()
+            return super(MrpWorkorder, self.sudo()).button_finish()
         else:
             return {
                 "type": "ir.actions.act_window",
