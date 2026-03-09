@@ -338,7 +338,22 @@ class ReportMrpProductionQuarteringSummaryXlsx(models.AbstractModel):
         products = []
         total_out_pallet_weight = 0
         total_out_container_weight = 0
-        out_movelines = objects.mapped("finished_move_line_ids")
+        family_order = [
+            "PECHUGA",
+            "PECHUGA CON HUESO",
+            "MUSLOS",
+            "TRASEROS",
+            "ALAS",
+            "PIELES DESPIECE",
+            "HUESOS DESPIECE",
+            "CUELLOS DESPIECE",
+            "MERMAS",
+        ]
+        out_movelines = objects.mapped("finished_move_line_ids").sorted(
+            key=lambda line: family_order.index(line.product_family_id.name)
+            if line.product_family_id.name in family_order
+            else 999
+        )
         for line in out_movelines:
             if line.product_family_id not in categories:
                 categories.append(line.product_family_id)
