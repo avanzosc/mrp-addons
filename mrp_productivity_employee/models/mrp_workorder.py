@@ -14,9 +14,9 @@ class MrpWorkorder(models.Model):
     def button_start(self):
         self.ensure_one()
         if self.workcenter_id.is_external:
-            return super().button_start()
+            return super(MrpWorkorder, self.sudo()).button_start()
         elif "from_wizard_button_start" in self.env.context:
-            return self.button_start_customized()
+            return super(MrpWorkorder, self.sudo()).button_start()
         else:
             return {
                 "type": "ir.actions.act_window",
@@ -62,7 +62,7 @@ class MrpWorkorder(models.Model):
             "from_button_mark_done" in self.env.context
             or "from_wizard_button_finish" in self.env.context
         ):
-            return super().button_finish()
+            return super(MrpWorkorder, self.sudo()).button_finish()
         elif self.workcenter_id.is_external:
             return super(MrpWorkorder, self.sudo()).button_finish()
         else:
