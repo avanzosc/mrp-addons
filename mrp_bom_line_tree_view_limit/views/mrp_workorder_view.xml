@@ -4,9 +4,9 @@
     <field name="model">mrp.workorder</field>
     <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
     <field name="arch" type="xml">
-      <tree position="attributes">
+      <list position="attributes">
         <attribute name="limit">100</attribute>
-      </tree>
+      </list>
     </field>
   </record>
 </odoo>

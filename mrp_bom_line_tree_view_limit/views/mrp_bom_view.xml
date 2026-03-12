@@ -4,7 +4,7 @@
     <field name="model">mrp.bom</field>
     <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
     <field name="arch" type="xml">
-      <xpath expr="//field[@name='bom_line_ids']/tree" position="attributes">
+      <xpath expr="//field[@name='bom_line_ids']/list" position="attributes">
         <attribute name="limit">100</attribute>
       </xpath>
     </field>
