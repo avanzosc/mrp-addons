@@ -36,13 +36,13 @@ class StockRule(models.Model):
             if sale:
                 origin = sale.name
                 if sale.origin:
-                    origin = "{} // {}".format(origin, sale.origin)
+                    origin = f"{origin} // {sale.origin}"
                 if sale.client_order_ref:
-                    origin = "{} // {}".format(origin, sale.client_order_ref)
+                    origin = f"{origin} // {sale.client_order_ref}"
                 if sale.origin:
                     cond = [("name", "=", sale.origin)]
                     sale_origin = sale_obj.sudo().search(cond, limit=1)
                     if sale_origin:
-                        origin = "{} - {}".format(sale_origin.partner_id.name, origin)
+                        origin = f"{sale_origin.partner_id.name} - {origin}"
                 mo_values["origin"] = origin
         return mo_values
