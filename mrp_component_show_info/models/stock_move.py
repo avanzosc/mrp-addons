@@ -14,7 +14,7 @@ class StockMove(models.Model):
         "move_line_ids",
         "move_line_ids.lot_id",
         "move_line_ids.lot_id.name",
-        "move_line_ids.qty_done",
+        "move_line_ids.quantity",
     )
     def _compute_production_lot_info(self):
         for move in self:
@@ -23,6 +23,6 @@ class StockMove(models.Model):
                 production_info = []
                 for move_line in move.move_line_ids:
                     name = move_line.lot_id.name or "N/A"
-                    qty = move_line.reserved_uom_qty or move_line.qty_done
+                    qty = move_line.quantity
                     production_info.append(f"{name} ({qty})")
                 move.production_lot_info = ", ".join(production_info)
