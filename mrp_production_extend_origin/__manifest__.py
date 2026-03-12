@@ -2,7 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Mrp Production Extend Origin",
-    "version": "14.0.1.1.0",
+    "summary": "Adds sale order name, client reference and partner to MO origin field.",
+    "version": "18.0.1.1.0",
     "category": "MRP",
     "license": "AGPL-3",
     "author": "AvanzOSC",

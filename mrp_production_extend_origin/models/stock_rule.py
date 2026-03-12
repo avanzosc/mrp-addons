@@ -18,7 +18,7 @@ class StockRule(models.Model):
         values,
         bom,
     ):
-        mo_values = super(StockRule, self)._prepare_mo_vals(
+        mo_values = super()._prepare_mo_vals(
             product_id,
             product_qty,
             product_uom,
