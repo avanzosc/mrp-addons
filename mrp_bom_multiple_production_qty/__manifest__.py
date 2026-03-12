@@ -4,7 +4,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 {
     "name": "MRP Bom Multiple Production Qty",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Manufacturing",
     "author": "Guadaltech Soluciones Tecnológicas S.L., AvanzOSC",
     "website": "https://github.com/avanzosc/mrp-addons",
