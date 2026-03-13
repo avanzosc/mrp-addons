@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="sale_order_form_mrp" model="ir.ui.view">
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale_mrp.sale_order_form_mrp" />
-        <field name="arch" type="xml">
-            <button name="action_view_mrp_production" position="before">
-                <button
+  <record id="sale_order_form_mrp" model="ir.ui.view">
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale_mrp.sale_order_form_mrp" />
+    <field name="arch" type="xml">
+      <button name="action_view_mrp_production" position="before">
+        <button
           class="oe_stat_button"
           name="action_view_all_mrp_productions"
           type="object"
@@ -13,14 +13,14 @@
           attrs="{'invisible': [('count_all_sale_productions', '=', 0)]}"
           groups="mrp.group_mrp_user"
         >
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_value"><field
-                name="count_all_sale_productions"
-              /></span>
-                        <span class="o_stat_text">All Manufacturings</span>
-                    </div>
-                </button>
-            </button>
-        </field>
-    </record>
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_value">
+              <field name="count_all_sale_productions" />
+            </span>
+            <span class="o_stat_text">All Manufacturings</span>
+          </div>
+        </button>
+      </button>
+    </field>
+  </record>
 </odoo>

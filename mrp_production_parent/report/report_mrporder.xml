@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="report_mrporder" inherit_id="mrp.report_mrporder">
-        <div t-if="o.workorder_ids" position="before">
+  <template id="report_mrporder" inherit_id="mrp.report_mrporder">
+    <div t-if="o.workorder_ids" position="before">
             <![CDATA[ ]]>
             <div class="row mt32 mb32" t-if="o.sale_line_product_id">
-                <div class="col-12">
-                    <strong>Final Product:</strong><br />
-                    <span t-field="o.sale_line_product_id" />
-                </div>
-            </div>
+        <div class="col-12">
+          <strong>Final Product:</strong>
+          <br />
+          <span t-field="o.sale_line_product_id" />
         </div>
-    </template>
+      </div>
+        </div>
+  </template>
 </odoo>
