@@ -3,22 +3,17 @@
 
 import logging
 
-try:
-    from openupgradelib import openupgrade
-except Exception:
-    from odoo.tools import sql as openupgrade
-
-from odoo import SUPERUSER_ID, api
+from odoo.tools.sql import column_exists
 
 _logger = logging.getLogger(__name__)
 
 
-def pre_init_hook(cr):
+def pre_init_hook(env):
     _logger.info(
         "Pre-creating column mrp_production_parent_id for table mrp_production"
     )
-    if not openupgrade.column_exists(cr, "mrp_production", "mrp_production_parent_id"):
-        cr.execute(
+    if not column_exists(env.cr, "mrp_production", "mrp_production_parent_id"):
+        env.cr.execute(
             """
             ALTER TABLE mrp_production
             ADD COLUMN mrp_production_parent_id float;
@@ -28,16 +23,10 @@ def pre_init_hook(cr):
         )
 
 
-def post_init_hook(cr, registry):
-    with api.Environment.manage():
-        env = api.Environment(cr, SUPERUSER_ID, {})
-        force_compute_sale_order(env)
-
-
-def force_compute_sale_order(env):
+def post_init_hook(env):
     cond = [("origin", "!=", False)]
     productions = env["mrp.production"].search(cond, order="id asc")
-    _logger.info("Force-compute Production Parent on %s productions" % len(productions))
+    _logger.info("Force-compute Production Parent on %s productions", len(productions))
     for production in productions:
         cond = [("name", "=", production.origin)]
         production_parent = env["mrp.production"].search(cond, limit=1)

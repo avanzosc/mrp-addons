@@ -4,7 +4,7 @@
     <field name="model">mrp.production</field>
     <field name="inherit_id" ref="mrp.mrp_production_form_view" />
     <field name="arch" type="xml">
-      <label for="date_planned_start" position="before">
+      <label for="date_start" position="before">
         <field name="mrp_production_parent_id" readonly="1" />
       </label>
     </field>

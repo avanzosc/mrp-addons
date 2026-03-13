@@ -10,7 +10,7 @@
           name="action_view_all_mrp_productions"
           type="object"
           icon="fa-wrench"
-          attrs="{'invisible': [('count_all_sale_productions', '=', 0)]}"
+          invisible="count_all_sale_productions == 0"
           groups="mrp.group_mrp_user"
         >
           <div class="o_field_widget o_stat_info">

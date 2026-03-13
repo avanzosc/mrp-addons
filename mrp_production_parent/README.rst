@@ -6,7 +6,7 @@
 Mrp production parent
 =====================
 
-* In production new field "Production Parent.
+* In production new field "Production Parent".
 
 Bug Tracker
 ===========

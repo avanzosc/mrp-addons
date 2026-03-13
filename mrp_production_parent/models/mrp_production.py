@@ -29,20 +29,19 @@ class MrpProduction(models.Model):
     )
 
     @api.depends(
-        "source_procurement_group_id",
-        "source_procurement_group_id.sale_id",
+        "procurement_group_id",
+        "procurement_group_id.sale_id",
         "mrp_production_parent_id",
-        "mrp_production_parent_id.source_procurement_group_id",
-        "mrp_production_parent_id.source_procurement_group_id.sale_id",
+        "mrp_production_parent_id.sale_line_id",
     )
     def _compute_sale_line_id(self):
         for production in self:
             sale_line_id = self.env["sale.order.line"]
-            procurement_group = production.source_procurement_group_id
+            procurement_group = production.procurement_group_id
             if procurement_group.sale_id:
                 sale_line = procurement_group.sale_id.order_line.filtered(
-                    lambda x: x.product_id == production.product_id
-                    and x.product_uom_qty == production.product_qty
+                    lambda x, prod=production: x.product_id == prod.product_id
+                    and x.product_uom_qty == prod.product_qty
                 )
                 if sale_line:
                     sale_line_id = sale_line.id
