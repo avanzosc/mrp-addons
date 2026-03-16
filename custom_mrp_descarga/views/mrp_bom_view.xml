@@ -18,21 +18,6 @@
             <page name="by_products" position="attributes">
                 <attribute name="string">Outputs</attribute>
             </page>
-            <field name="coefficient" position="attributes">
-                <attribute
-          name="attrs"
-        >{'column_invisible': [('parent.quartering', '=', True)]}</attribute>
-            </field>
-            <field name="expense_kg" position="attributes">
-                <attribute
-          name="attrs"
-        >{'column_invisible': [('parent.quartering', '=', True)]}</attribute>
-            </field>
-            <field name="cost" position="attributes">
-                <attribute
-          name="attrs"
-        >{'column_invisible': [('parent.quartering', '=', True)]}</attribute>
-            </field>
         </field>
     </record>
 
