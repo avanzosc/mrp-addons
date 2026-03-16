@@ -10,7 +10,11 @@
     "license": "AGPL-3",
     "author": "AvanzOSC",
     "website": "https://github.com/avanzosc/mrp-addons",
-    "depends": [],
-    "data": [],
+    "depends": [
+        "mrp",
+    ],
+    "data": [
+        "views/mrp_production_tree_buttons_view.xml",
+    ],
     "installable": True,
 }

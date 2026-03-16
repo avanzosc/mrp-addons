@@ -376,6 +376,7 @@
                 <field name="total_duration" invisible="1" />
                 <field name="speed_consume_qty" />
                 <field name="speed_consume_unit" />
+                <field name="cutout" />
             </field>
             <field name="production_date" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -838,6 +839,7 @@
                 <field name="dif_total_amount" optional="show" />
                 <field name="speed_consume_unit" optional="show" />
                 <field name="average_cost" optional="show" />
+                <field name="cutout" optional="show" />
                 <field
           name="state"
           optional="show"

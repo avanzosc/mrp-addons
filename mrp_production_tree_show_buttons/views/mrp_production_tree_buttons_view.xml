@@ -7,6 +7,8 @@
             <xpath expr="//tree" position="inside">
                 <field name="state" invisible="1" />
                 <field name="unreserve_visible" invisible="1" />
+                <field name="reserve_visible" invisible="1" />
+
             </xpath>
 
             <xpath expr="//tree" position="inside">
@@ -48,6 +50,13 @@
           string="Cancel"
           class="btn-secondary"
           attrs="{'invisible': [('state','in',('done','cancel'))]}"
+        />
+
+          <button
+          name="action_assign"
+          type="object"
+          string="Check availability"
+          attrs="{'invisible': ['|', ('state', 'in', ('draft', 'done', 'cancel')), ('reserve_visible', '=', False)]}"
         />
 
             </xpath>

@@ -2,13 +2,12 @@
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
-====================================
-Mrp production show button unreserve
-====================================
+======================
+Repair Sale Allow Fees
+======================
 
-* Show the "Unreserve" button in manufacturing order, if the MO is not in the
-  "done" and "canceled" status, and the components already have some
-  "Detailed Operation", that is, they have availability.
+* Allow repairs to be confirmed even if they only have fees.
+* When creating the sales order from repairs, also adds the fees.
 
 Bug Tracker
 ===========
@@ -26,5 +25,5 @@ Credits
 Contributors
 ------------
 
+* Berezi Amubieta <bereziamubieta@avanzosc.es>
 * Ana Juaristi <anajuaristi@avanzosc.es>
-* Alfredo de la Fuente <alfredodelafuente@avanzosc.es>

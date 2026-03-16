@@ -56,6 +56,7 @@
                             <field name="production_id" invisible="1" />
                             <field name="line_product_code" readonly="1" />
                             <field name="line_product_qty" readonly="1" />
+                            <field name="line_unit_container" readonly="1" />
                             <field name="line_uom" readonly="1" />
                             <field name="line_uom_id" optional="show" readonly="1" />
                             <field name="line_chicken_code" readonly="1" />
