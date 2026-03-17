@@ -18,6 +18,29 @@
             <page name="by_products" position="attributes">
                 <attribute name="string">Outputs</attribute>
             </page>
+                        <xpath
+        expr="//form/sheet/notebook/page[@name='components']/field[@name='bom_line_ids']/tree/field[@name='product_qty']"
+        position="after"
+      >
+                <field
+          name="coefficient"
+          optional="show"
+          attrs="{'column_invisible': [('parent.is_deconstruction', '=', False)]}"
+        />
+                <field
+          name="expense_kg"
+          optional="show"
+          attrs="{'column_invisible': [('parent.is_deconstruction', '=', False)]}"
+        />
+                <field name="currency_id" invisible="1" />
+                <field
+          name="cost"
+          optional="show"
+          widget='monetary'
+          options="{'currency_field': 'currency_id'}"
+          attrs="{'column_invisible': [('parent.is_deconstruction', '=', False)]}"
+        />
+            </xpath>
         </field>
     </record>
 
