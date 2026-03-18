@@ -8,9 +8,10 @@ from odoo.tools.float_utils import float_compare
 class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
 
-    show_final_lots = fields.Boolean(
-        string="Show Final Lots", compute="_compute_show_lots"
+    use_create_components_lots = fields.Boolean(
+        related="production_id.use_create_components_lots"
     )
+    show_final_lots = fields.Boolean(compute="_compute_show_lots")
     unreserve_visible = fields.Boolean(
         string="Allowed to Unreserve Inventory",
         compute="_compute_unreserve_visible",
@@ -35,9 +36,10 @@ class MrpWorkorder(models.Model):
             )
             order.unreserve_visible = (
                 any([m.mrp_unreserve_visible for m in pending_raw_moves])
-                and order.date_planned_start
+                and order.date_start
             )
 
+    @api.depends("state", "date_start", "move_raw_ids.state", "move_raw_ids.product_uom_qty")
     def _compute_show_check_availability(self):
         """According to `workorder.show_check_availability`, the
         "check availability" button will be displayed in the form view of a
@@ -57,7 +59,7 @@ class MrpWorkorder(models.Model):
                     )
                     for move in workorder.move_raw_ids
                 )
-                and workorder.date_planned_start
+                and workorder.date_start
             )
 
     def action_assign(self):

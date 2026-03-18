@@ -16,15 +16,18 @@ class StockMove(models.Model):
     @api.depends(
         "raw_material_production_id",
         "raw_material_production_id.state",
-        "quantity_done",
+        "picked",
+        "move_line_ids",
     )
     def _compute_unreserve_visible(self):
         for move in self:
             raw_production = move.raw_material_production_id
             already_reserved = (
-                raw_production.state not in ("done", "cancel") and move.move_line_ids
+                bool(raw_production)
+                and raw_production.state not in ("done", "cancel")
+                and bool(move.move_line_ids)
             )
-            move.mrp_unreserve_visible = not move.quantity_done > 0 and already_reserved
+            move.mrp_unreserve_visible = already_reserved and not move.picked
 
     def button_assign(self):
         self.ensure_one()
