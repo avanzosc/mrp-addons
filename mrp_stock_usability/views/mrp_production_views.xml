@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="mrp_production_view_form" model="ir.ui.view">
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page[@name='components']/field[@name='move_raw_ids']/list/field[@name='group_id']" position="after">
-                <field
-                    name="mrp_unreserve_visible"
-                    column_invisible="True"
-                    groups="mrp_stock_usability.group_mrp_stock_usability"
-                />
-                <button
-                    name="button_assign"
-                    string="Check availability"
-                    type="object"
-                    class="btn btn-link"
-                    invisible="state not in ('confirmed', 'waiting', 'partially_available')"
-                    groups="mrp_stock_usability.group_mrp_stock_usability"
-                />
-                <button
-                    name="button_unreserve"
-                    string="Unreserve"
-                    type="object"
-                    class="btn btn-link"
-                    invisible="not mrp_unreserve_visible"
-                    groups="mrp_stock_usability.group_mrp_stock_usability"
-                />
-            </xpath>
-        </field>
-    </record>
+  <record id="mrp_production_view_form" model="ir.ui.view">
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//page[@name='components']/field[@name='move_raw_ids']/list/field[@name='group_id']"
+        position="after"
+      >
+        <field
+          name="mrp_unreserve_visible"
+          column_invisible="True"
+          groups="mrp_stock_usability.group_mrp_stock_usability"
+        />
+        <button
+          name="button_assign"
+          string="Check availability"
+          type="object"
+          class="btn btn-link"
+          invisible="state not in ('confirmed', 'waiting', 'partially_available')"
+          groups="mrp_stock_usability.group_mrp_stock_usability"
+        />
+        <button
+          name="button_unreserve"
+          string="Unreserve"
+          type="object"
+          class="btn btn-link"
+          invisible="not mrp_unreserve_visible"
+          groups="mrp_stock_usability.group_mrp_stock_usability"
+        />
+      </xpath>
+    </field>
+  </record>
 </odoo>

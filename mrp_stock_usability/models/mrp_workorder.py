@@ -39,7 +39,9 @@ class MrpWorkorder(models.Model):
                 and order.date_start
             )
 
-    @api.depends("state", "date_start", "move_raw_ids.state", "move_raw_ids.product_uom_qty")
+    @api.depends(
+        "state", "date_start", "move_raw_ids.state", "move_raw_ids.product_uom_qty"
+    )
     def _compute_show_check_availability(self):
         """According to `workorder.show_check_availability`, the
         "check availability" button will be displayed in the form view of a
