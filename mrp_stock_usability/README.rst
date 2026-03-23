@@ -12,6 +12,39 @@ This module enables checking availability and unreserving in work orders,
 buttons will be shown with a group. You can allow only for a group of users
 or for all users.
 
+Features
+========
+
+* Adds `Check availability` and `Unreserve` actions on component lines in
+  Manufacturing Orders.
+* Extends Work Orders with:
+
+  * `show_final_lots`
+  * `unreserve_visible`
+  * `show_check_availability`
+* Provides Work Order actions to reserve/unreserve component moves directly.
+* In Work Orders, button visibility for `Check availability` and `Unreserve`
+  is computed with a single logic and both buttons are mutually exclusive.
+
+Configuration
+=============
+
+Go to Manufacturing settings and enable **Stock Usability in Manufacturing**.
+You can assign it only to selected users or make it available to all internal
+users.
+
+Usage
+=====
+
+* Open a Manufacturing Order and use the component line buttons:
+
+  * `Check availability` to reserve components.
+  * `Unreserve` to remove reservations.
+* Open a Work Order and use:
+
+  * Header buttons (`Check availability` / `Unreserve`).
+  * Component line buttons (`Check availability` / `Unreserve`).
+
 **Table of contents**
 
 .. contents::
@@ -40,3 +73,4 @@ Contributors
 
 * Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
 * Ana Juaristi <anajuaristi@avanzosc.es>
+* Eñaut Alberdi <enautavanzosc@gmail.com>

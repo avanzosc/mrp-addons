@@ -6,14 +6,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-18 12:13+0000\n"
-"PO-Revision-Date: 2026-03-18 12:13+0000\n"
+"POT-Creation-Date: 2026-03-23 10:32+0000\n"
+"PO-Revision-Date: 2026-03-23 10:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.res_config_settings_view_form
+msgid ""
+"Allow checking availability and unreserving components from manufacturing "
+"work orders."
+msgstr ""
+"Permite comprobar la disponibilidad y anular la reserva de componentes "
+"desde las órdenes de trabajo de fabricación."
+
+#. module: mrp_stock_usability
+#: model:ir.model.fields,help:mrp_stock_usability.field_mrp_workorder__use_create_components_lots
+msgid "Allow to create new lot/serial numbers for the components"
+msgstr "Permite crear nuevos lotes/números de serie para componentes"
 
 #. module: mrp_stock_usability
 #: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__unreserve_visible
@@ -36,7 +50,7 @@ msgstr "Componentes"
 #. module: mrp_stock_usability
 #: model:ir.model,name:mrp_stock_usability.model_res_config_settings
 msgid "Config Settings"
-msgstr "Opciones de configuración"
+msgstr "Ajustes de configuración"
 
 #. module: mrp_stock_usability
 #: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
@@ -44,25 +58,9 @@ msgid "Consumed"
 msgstr "Consumido"
 
 #. module: mrp_stock_usability
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__display_name
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
-
-#. module: mrp_stock_usability
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__id
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings__id
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move__id
-msgid "ID"
-msgstr ""
-
-#. module: mrp_stock_usability
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder____last_update
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings____last_update
-#: model:ir.model.fields,field_description:mrp_stock_usability.field_stock_move____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
+#: model:ir.model.fields,field_description:mrp_stock_usability.field_mrp_workorder__use_create_components_lots
+msgid "Create New Lots/Serial Numbers for Components"
+msgstr "Crear nuevos lotes/números de serie para componentes"
 
 #. module: mrp_stock_usability
 #: model:res.groups,name:mrp_stock_usability.group_mrp_stock_usability
@@ -85,12 +83,18 @@ msgid "Show Final Lots"
 msgstr "Mostrar lotes finales"
 
 #. module: mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.mrp_workorder_view_form
+msgid "Show details"
+msgstr "Mostrar detalles"
+
+#. module: mrp_stock_usability
 #: model:ir.model,name:mrp_stock_usability.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de existencias"
+msgstr "Movimiento de stock"
 
 #. module: mrp_stock_usability
 #: model:ir.model.fields,field_description:mrp_stock_usability.field_res_config_settings__group_mrp_stock_usability
+#: model_terms:ir.ui.view,arch_db:mrp_stock_usability.res_config_settings_view_form
 msgid "Stock Usability in Manufacturing"
 msgstr "Usabilidad de inventario en Fabricación"
 

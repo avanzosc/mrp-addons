@@ -114,7 +114,7 @@
                 title="Show details"
                 context="{'default_product_uom_qty': 0}"
                 invisible="not show_details_visible"
-                options="{'warn': true}"
+                options="{&quot;warn&quot;: true}"
               />
             </list>
           </field>

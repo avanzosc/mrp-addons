@@ -1,4 +1,5 @@
 # Copyright 2021 Oihane Crucelaegui - AvanzOSC
+# Copyright 2026 Eñaut Alberdi - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -14,11 +15,11 @@ class MrpWorkorder(models.Model):
     show_final_lots = fields.Boolean(compute="_compute_show_lots")
     unreserve_visible = fields.Boolean(
         string="Allowed to Unreserve Inventory",
-        compute="_compute_unreserve_visible",
+        compute="_compute_stock_buttons_visibility",
         help="Technical field to check when we can unreserve",
     )
     show_check_availability = fields.Boolean(
-        compute="_compute_show_check_availability",
+        compute="_compute_stock_buttons_visibility",
         help="Technical field used to compute whether the check availability "
         "button should be shown.",
     )
@@ -28,41 +29,45 @@ class MrpWorkorder(models.Model):
         for order in self:
             order.show_final_lots = order.product_id.tracking != "none"
 
-    @api.depends("move_raw_ids", "move_raw_ids.mrp_unreserve_visible")
-    def _compute_unreserve_visible(self):
-        for order in self:
-            pending_raw_moves = order.move_raw_ids.filtered(
-                lambda m: m.state not in ("done", "cancel")
-            )
-            order.unreserve_visible = (
-                any([m.mrp_unreserve_visible for m in pending_raw_moves])
-                and order.date_start
+    @api.depends(
+        "state",
+        "date_start",
+        "move_raw_ids.state",
+        "move_raw_ids.product_uom_qty",
+        "move_raw_ids.mrp_unreserve_visible",
+    )
+    def _compute_stock_buttons_visibility(self):
+        """Compute both stock action buttons as mutually exclusive."""
+        for workorder in self:
+            workorder.unreserve_visible = False
+            workorder.show_check_availability = False
+
+            if workorder.state in ("done", "cancel") or not workorder.date_start:
+                continue
+
+            pending_raw_moves = workorder.move_raw_ids.filtered(
+                lambda move: move.state not in ("done", "cancel")
             )
 
-    @api.depends(
-        "state", "date_start", "move_raw_ids.state", "move_raw_ids.product_uom_qty"
-    )
-    def _compute_show_check_availability(self):
-        """According to `workorder.show_check_availability`, the
-        "check availability" button will be displayed in the form view of a
-        work order.
-        """
-        for workorder in self:
-            if workorder.state in ("done", "cancel"):
+            can_unreserve = any(
+                move.mrp_unreserve_visible for move in pending_raw_moves
+            )
+            if can_unreserve:
+                workorder.unreserve_visible = True
                 workorder.show_check_availability = False
                 continue
-            workorder.show_check_availability = (
-                any(
-                    move.state in ("waiting", "confirmed", "partially_available")
-                    and float_compare(
-                        move.product_uom_qty,
-                        0,
-                        precision_rounding=move.product_uom.rounding,
-                    )
-                    for move in workorder.move_raw_ids
+
+            can_check_availability = any(
+                move.state in ("waiting", "confirmed", "partially_available")
+                and float_compare(
+                    move.product_uom_qty,
+                    0,
+                    precision_rounding=move.product_uom.rounding,
                 )
-                and workorder.date_start
+                for move in pending_raw_moves
             )
+            if can_check_availability:
+                workorder.show_check_availability = True
 
     def action_assign(self):
         for order in self:
