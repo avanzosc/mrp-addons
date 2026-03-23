@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="report_mrp_bom_inh_report_group" inherit_id="mrp.report_mrp_bom">
-        <xpath expr="//thead/tr/th[@t-if=&quot;data['show_costs']&quot;]" position="attributes">
-            <attribute name="groups">mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
-        </xpath>
-        <xpath expr="//tbody/tr[1]/td[@t-if=&quot;data['show_costs']&quot;]" position="attributes">
-            <attribute name="groups">mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
-        </xpath>
-        <xpath expr="//tfoot/tr[@t-if=&quot;data['show_costs']&quot;]" position="attributes">
-            <attribute name="groups">mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
-        </xpath>
-        <xpath expr="//tfoot/t[@t-if=&quot;data['show_costs'] and data['byproducts']&quot;]" position="attributes">
-            <attribute name="groups">mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
-        </xpath>
-    </template>
+  <template id="report_mrp_bom_inh_report_group" inherit_id="mrp.report_mrp_bom">
+    <xpath
+      expr="//thead/tr/th[@t-if=&quot;data['show_costs']&quot;]"
+      position="attributes"
+    >
+      <attribute
+        name="groups"
+      >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
+    </xpath>
+    <xpath
+      expr="//tbody/tr[1]/td[@t-if=&quot;data['show_costs']&quot;]"
+      position="attributes"
+    >
+      <attribute
+        name="groups"
+      >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
+    </xpath>
+    <xpath
+      expr="//tfoot/tr[@t-if=&quot;data['show_costs']&quot;]"
+      position="attributes"
+    >
+      <attribute
+        name="groups"
+      >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
+    </xpath>
+    <xpath
+      expr="//tfoot/t[@t-if=&quot;data['show_costs'] and data['byproducts']&quot;]"
+      position="attributes"
+    >
+      <attribute
+        name="groups"
+      >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
+    </xpath>
+  </template>
 
-    <template
+  <template
     id="report_mrp_bom_pdf_line_inh_report_group"
     inherit_id="mrp.report_mrp_bom_pdf_line"
   >
-        <xpath expr="//td[@t-if=&quot;data['show_costs']&quot;]" position="attributes">
-            <attribute name="groups">mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
-        </xpath>
-    </template>
+    <xpath expr="//td[@t-if=&quot;data['show_costs']&quot;]" position="attributes">
+      <attribute
+        name="groups"
+      >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
+    </xpath>
+  </template>
 </odoo>
