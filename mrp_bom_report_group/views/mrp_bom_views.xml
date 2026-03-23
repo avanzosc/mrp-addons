@@ -4,7 +4,7 @@
         <field name="model">mrp.bom</field>
         <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//sheet/div/button[2]" position="attributes">
+            <xpath expr="//div[@name='button_box']/button[@name='%(mrp.action_report_mrp_bom)d']" position="attributes">
                 <attribute name="string">Structure</attribute>
             </xpath>
         </field>
