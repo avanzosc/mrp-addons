@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="report_mrporder_lineal" inherit_id="mrp.report_mrp_production_components">
-        <xpath expr="//thead/tr/th[1]" position="after">
-            <th>Lineal</th>
-        </xpath>
-        <xpath expr="//tbody/tr/td[1]" position="after">
-            <td>
-                <span t-field="raw_line.lineal_id" />
-            </td>
-        </xpath>
-    </template>
+  <template
+    id="report_mrporder_lineal"
+    inherit_id="mrp.report_mrp_production_components"
+  >
+    <xpath expr="//thead/tr/th[1]" position="after">
+      <th>Lineal</th>
+    </xpath>
+    <xpath expr="//tbody/tr/td[1]" position="after">
+      <td>
+        <span t-field="raw_line.lineal_id" />
+      </td>
+    </xpath>
+  </template>
 </odoo>
