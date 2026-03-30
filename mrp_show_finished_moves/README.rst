@@ -6,51 +6,105 @@
 MRP Show Finished Moves
 =======================
 
-This module extends the Manufacturing (MRP) functionality to improve the visibility and editability of finished stock moves and move lines within Manufacturing Orders (MOs) and Work Orders (WOs).
+This module improves the visibility of finished moves within Manufacturing
+Orders (MOs) and Work Orders (WOs). It adds smart buttons, dedicated tabs,
+and enhanced serial/lot tracking to give operators full traceability over
+what has been produced.
 
-**Features**
+Features
+========
 
-- **New Finished Moves Tab**
-  - Adds a **"Finished Moves"** tab in both the MO and WO forms to display finished stock moves and move lines.
+Manufacturing Orders
+--------------------
 
-- **Shortcuts**
-  - Adds a shortcut button to MOs that opens a dedicated tree view with all related finished move lines.
-  - Adds a shortcut button to MOs that opens a dedicated tree view with all related finished move lines' result packages.
-  - Adds a shortcut button to WOs that opens a dedicated tree view with all related finished move lines' result packages.
-  - Adds a shortcut button to Finished Moves that opens a dedicated tree view with all related finished move lines' packages.
+* **Finished Moves smart button** — opens the list of finished move lines
+  linked to the MO and all its related backorders (grouped by procurement
+  group).
+* **Result Packages smart button** — opens the list of destination packages
+  produced by the MO.
+* **Finished Moves tab** — a dedicated page inside the MO form showing
+  ``move_finished_ids`` inline.
+* **Produced / Producing columns** in the MO list view for at-a-glance
+  progress tracking.
+* **Last Manufactured Lot** computed field (visible for serial-tracked
+  products) that shows the most recently produced serial number for the
+  product, used as the seed for auto-generation.
+* **Quantity Discrepancy Warning wizard** — when marking an MO as done,
+  if the *Quantity Producing* reported by the MO or any Work Order does not
+  match the actual quantity recorded in the finished moves, a dialog is
+  shown. The user can choose to automatically align all quantities before
+  closing, or go back to review the data.
 
-- **Finished Move Lines Menu**
-  - Provides a new menu entry under *Manufacturing* to access all finished move lines directly.
+Work Orders
+-----------
 
-- **Automatic Lot Assignment**
-  - When creating finished move lines, the system automatically assigns the **production lot** (if available and required by the product’s tracking).
+* **Finished Move Lines smart button** — opens finished move lines scoped
+  to the WO's production group.
+* **Result Packages smart button** — opens destination packages for the WO.
 
-- **Editable Stock Moves Tree**
-  - Makes stock moves editable from the tree view.
-  - Hides less relevant fields (e.g., `date`, `company_id`, `reference`).
-  - Adds useful optional fields (`lot_ids`, `workorder_id`).
-  - Introduces a **"Show Details"** button that opens move details in the current window.
+Serial / Lot Auto-Generation
+-----------------------------
 
-- **Quantity Consistency Checks**
-  - On marking an MO as done:
-    - Compares MOs **Quantity Producing** vs **MO Finished Moves Quantity Done**.
-    - Compares **Work Order Produced Quantity** vs **MO Finished Moves Quantity Done**.
-  - If mismatches are detected, a **warning wizard** is shown with the option to:
-    1. Adjust `qty_producing` and `qty_produced` in both MO and WOs to match `quantity_done`.
-    2. Or stop and review data before proceeding.
+* On **confirmation** of a serial-tracked MO, serial numbers are
+  auto-generated for the finished move lines starting from the next
+  incremented serial after the last manufactured lot.
+* Whenever **qty_producing** or **lot_producing_id** changes on an MO
+  (serial or lot tracking), the finished move lines are automatically
+  regenerated:
 
-- **Wizard for Discrepancies**
-  - A dedicated transient model **`mrp.production.qty.warning`** warns about inconsistencies.
-  - Provides **customizable Yes/No actions**:
-    - **Yes**: corrects discrepancies and proceeds with marking MO as done.
-    - **No**: cancels and allows user to review data.
+  * *Serial products*: one move line per unit, serials incremented
+    sequentially.
+  * *Lot products*: a single move line with the current lot and the new
+    quantity.
 
-- **Synchronization of Quantities**
-  - Updates `qty_producing` and `qty_produced` across MO and WOs whenever the user accepts corrections.
+* When the quantity on a finished stock move is edited directly (e.g. from
+  the Finished Moves tab), ``qty_producing`` on the MO is kept in sync
+  automatically, and serial/lot lines are regenerated accordingly.
+* On **split** (backorder creation), each new MO gets its own serials
+  auto-generated from the last manufactured lot.
+* After **marking an MO as done**, backorder MOs refresh their
+  ``last_manufactured_lot`` and regenerate their serial lines accordingly.
 
-- **Enhanced Finished Move Form**
-  - Replaces reserved availability with **product quantity** for better tracking.
-  - Improves integration with immediate transfers.
+Stock Move Improvements
+------------------------
+
+* **action_show_details** opens inline (``target: current``) instead of in
+  a dialog, and pre-populates the *Generate Serials* dialog with the next
+  serial number and the planned quantity via context keys
+  ``mo_next_serial`` and ``mo_product_qty``.
+* ``display_assign_serial`` is forced to ``True`` for finished moves of
+  serial-tracked products so the assign-serial widget is always available.
+* Raw consumption moves are **auto-picked** when their quantity reaches the
+  expected consumption amount, avoiding manual confirmation steps.
+* Reservation (``action_assign``) is scoped to the qty_producing / product_qty
+  ratio so only the stock needed for the current production run is reserved.
+
+JavaScript Enhancement
+-----------------------
+
+* The ``generate_serials`` view widget is patched so that when opening the
+  serial generation dialog from an MO context, the *Next Serial* and
+  *Count* fields are pre-filled with ``mo_next_serial`` and
+  ``mo_product_qty`` and *Keep existing lines* is unchecked.
+
+Usage
+=====
+
+#. Open any Manufacturing Order in the **Manufacturing** app.
+#. Use the **Finished Moves** or **Result Packages** smart buttons in the
+   top-right button box to inspect produced items and packages.
+#. Switch to the **Finished Moves** tab in the MO form to view or edit
+   finished stock moves directly.
+#. When producing serial-tracked items, serial numbers are generated
+   automatically. You can also trigger generation manually via the
+   **Generate Serials** button on the finished move detail view.
+#. When clicking **Mark as Done**, if a quantity mismatch is detected a
+   warning dialog will appear. Choose **Yes, adjust quantities and proceed**
+   to let the system align all quantities automatically, or **No, review
+   data first** to go back and correct manually.
+#. On Work Orders, use the same **Finished Move Lines** and **Result
+   Packages** smart buttons to inspect production output at the operation
+   level.
 
 Bug Tracker
 ===========
