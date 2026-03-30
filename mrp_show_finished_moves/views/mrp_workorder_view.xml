@@ -1,47 +1,55 @@
 <odoo>
-    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
-        <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
-        <field name="arch" type="xml">
-            <xpath expr="//notebook" position="inside">
-                <page string="Finished Moves">
-                    <field
-            name="move_finished_ids"
-            context="{'tree_view_ref': 'stock.view_move_tree'}"
-            domain="{'workorder_id', '=', id}"
-          />
-                </page>
-            </xpath>
-            <xpath expr="//field[@name='production_id']" position="after">
-                <field name="qty_producing" readonly="1" />
-                <field name="qty_produced" readonly="1" />
-            </xpath>
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button
+  <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button
+          class="oe_stat_button"
+          name="action_show_finished_move_lines"
+          type="object"
+          icon="fa-check"
+        >
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Finished Moves</span>
+          </div>
+        </button>
+        <button
           class="oe_stat_button"
           name="action_show_finished_move_lines_result_packages"
           type="object"
           icon="fa-archive"
         >
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_text">Result Packages</span>
-                    </div>
-                </button>
-            </xpath>
-        </field>
-    </record>
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Result Packages</span>
+          </div>
+        </button>
+      </xpath>
 
-    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
-        <field name="model">mrp.workorder</field>
-        <field
-      name="inherit_id"
-      ref="mrp.mrp_production_workorder_tree_editable_view"
-    />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='qty_remaining']" position="before">
-                <field name="qty_producing" readonly="1" />
-                <field name="qty_produced" readonly="1" />
-            </xpath>
-        </field>
-    </record>
+      <xpath expr="//field[@name='production_id']" position="after">
+        <field name="qty_producing" string="Producing" readonly="1" />
+        <field name="qty_produced" string="Produced" readonly="1" />
+      </xpath>
+
+      <xpath expr="//notebook" position="inside">
+        <page string="Finished Moves">
+          <field
+            name="move_finished_ids"
+            context="{'list_view_ref': 'stock.view_move_tree'}"
+          />
+        </page>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='qty_remaining']" position="before">
+        <field name="qty_producing" string="Producing" readonly="1" />
+        <field name="qty_produced" string="Produced" readonly="1" />
+      </xpath>
+    </field>
+  </record>
 </odoo>

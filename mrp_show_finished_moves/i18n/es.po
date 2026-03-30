@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 08:51+0000\n"
-"PO-Revision-Date: 2025-08-28 08:51+0000\n"
+"POT-Creation-Date: 2026-05-21 09:00+0000\n"
+"PO-Revision-Date: 2026-05-21 09:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,19 +17,24 @@ msgstr ""
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "<span class=\"o_stat_text\">Finished Moves</span>"
 msgstr "<span class=\"o_stat_text\">Movimientos terminados</span>"
-
-#. module: mrp_show_finished_moves
-#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_stock_move_operations_finished
-msgid "<span class=\"o_stat_text\">Packages</span>"
-msgstr "<span class=\"o_stat_text\">Paquetes</span>"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "<span class=\"o_stat_text\">Result Packages</span>"
 msgstr "<span class=\"o_stat_text\">Paquetes de destino</span>"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+msgid ""
+"Changing the lot will reassign it on all finished move lines that do not "
+"have a manually set different lot. Continue?"
+msgstr ""
+"Cambiar el lote lo reasignará en todas las líneas de movimiento terminado "
+"que no tengan un lote diferente establecido manualmente. ¿Continuar?"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__create_uid
@@ -47,15 +52,13 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_workorder.py:0
 #: model:ir.actions.act_window,name:mrp_show_finished_moves.action_finished_move_lines
 #: model:ir.ui.menu,name:mrp_show_finished_moves.menu_finished_move_lines
 msgid "Finished Move Lines"
 msgstr "Líneas de movimientos terminados"
-
-#. module: mrp_show_finished_moves
-#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
-msgid "Last Manufactured Lot"
-msgstr "Último lote fabricado"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
@@ -69,19 +72,9 @@ msgid "ID"
 msgstr ""
 
 #. module: mrp_show_finished_moves
-#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
-msgid "Inconsistency Warning"
-msgstr "Advertencia de inconsistencia"
-
-#. module: mrp_show_finished_moves
-#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
-msgid "Inconsistency in Quants Warning"
-msgstr "Advertencia de inconsistencia en cantidades"
-
-#. module: mrp_show_finished_moves
-#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
+msgid "Last Manufactured Lot"
+msgstr "Último lote fabricado"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__write_uid
@@ -92,6 +85,11 @@ msgstr "Última actualización por"
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__write_date
 msgid "Last Updated on"
 msgstr "Última actualización el"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Orden de fabricación"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__no_label
@@ -106,46 +104,47 @@ msgstr "No, continuar editando"
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid "No, review data first"
 msgstr "No, revisar datos primero"
 
 #. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_tree_editable_view
+msgid "Produced"
+msgstr "Producido"
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_tree_editable_view
+msgid "Producing"
+msgstr "En producción"
+
+#. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid ""
 "Producing vs Done quantity mismatch detected:\n"
 "\n"
 "• Manufacturing Order reports %(planned)s units producing.\n"
-"• Manufacturing Order finished moves report %(actual)s units\n"
-"  produced.\n"
+"• Manufacturing Order finished moves report %(actual)s units produced.\n"
 "\n"
 "If you choose 'Yes', the system will:\n"
 "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
-"2. Update all related WOs' 'Quantity Producing' and\n"
-"   'Quantity Produced' to match 'Quantity Done'.\n"
+"2. Update all related WOs' 'Quantity Producing' and 'Quantity Produced'.\n"
 "3. Continue marking the Manufacturing Order as done."
 msgstr ""
-"Se ha detectado una discrepancia entre la cantidad en producción y la cantidad realizada:\n"
+"Se ha detectado una discrepancia entre la cantidad en producción y la cantidad terminada:\n"
 "\n"
-"• La Orden de Fabricación reporta %(planned)s unidades en producción.\n"
-"• Los movimientos terminados de la Orden de Fabricación reportan %(actual)s unidades\n"
-"  producidas.\n"
+"• La orden de fabricación indica %(planned)s unidades en producción.\n"
+"• Los movimientos terminados indican %(actual)s unidades producidas.\n"
 "\n"
-"Si eliges 'Sí', el sistema:\n"
-"1. Ajustará 'Cantidad en Producción' para que coincida con 'Cantidad Realizada'.\n"
-"2. Actualizará todas las OT relacionadas ('Cantidad en Producción' y 'Cantidad Producida') para que coincidan con 'Cantidad Realizada'.\n"
-"3. Continuará marcando la Orden de Fabricación como terminada."
-
-#. module: mrp_show_finished_moves
-#: model:ir.model,name:mrp_show_finished_moves.model_stock_move_line
-msgid "Product Moves (Stock Move Line)"
-msgstr "Movimientos de producto (Movimiento de stock)"
+"Si selecciona 'Sí', el sistema:\n"
+"1. Ajustará la 'Cantidad en producción' para que coincida con la 'Cantidad terminada'.\n"
+"2. Actualizará la 'Cantidad en producción' y la 'Cantidad producida' de todas las órdenes de trabajo relacionadas.\n"
+"3. Continuará marcando la orden de fabricación como finalizada."
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__production_id
@@ -153,17 +152,25 @@ msgid "Production"
 msgstr "Producción"
 
 #. module: mrp_show_finished_moves
-#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
-msgid "Production Order"
-msgstr "Orden de producción"
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+msgid "Production Lot Change"
+msgstr "Cambio de lote de producción"
 
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
+#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
 msgid "Quantity Discrepancy Warning"
-msgstr "Advertencia de discrepancia de cantidades"
+msgstr "Advertencia de inconsistencia en cantidades"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_workorder.py:0
+msgid "Result Packages"
+msgstr "Paquetes de destino"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_move_tree
@@ -173,7 +180,21 @@ msgstr "Mostrar detalles"
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de existencias"
+msgstr "Movimiento de stock"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+msgid ""
+"This change will reassign the lot on all finished product move lines that do not already have a manually set different lot and are not in done or cancelled state.\n"
+"\n"
+"Save the manufacturing order to confirm, or discard to cancel."
+msgstr ""
+"Este cambio reasignará el lote en todas las líneas de movimiento de producto "
+"terminado que no tengan ya un lote diferente establecido manualmente y que no "
+"estén en estado hecho o cancelado.\n"
+"\n"
+"Guarde la orden de fabricación para confirmar, o descarte para cancelar."
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__warning_message
@@ -188,31 +209,26 @@ msgstr "Orden de trabajo"
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid ""
 "Work Order vs Manufacturing Order quantity mismatch detected:\n"
 "\n"
 "• Work Orders report %(wo_qty)s units produced.\n"
-"• Manufacturing Order finished moves report %(mo_qty)s units\n"
-"  produced.\n"
+"• Manufacturing Order finished moves report %(mo_qty)s units produced.\n"
 "\n"
 "If you choose 'Yes', the system will:\n"
 "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
-"2. Update all related Work Orders' 'Quantity Producing' and\n"
-"   'Quantity Produced' to match 'Quantity Done'.\n"
+"2. Update all related Work Orders' 'Quantity Producing' and 'Quantity Produced'.\n"
 "3. Continue marking the Manufacturing Order as done."
 msgstr ""
-"Se ha detectado una discrepancia entre la cantidad producida en las Órdenes de Trabajo y la Orden de Fabricación:\n"
+"Se ha detectado una discrepancia entre las cantidades de las órdenes de trabajo y la orden de fabricación:\n"
 "\n"
-"• Las Órdenes de Trabajo reportan %(wo_qty)s unidades producidas.\n"
-"• Los movimientos terminados de la Orden de Fabricación reportan %(mo_qty)s unidades\n"
-"  producidas.\n"
+"• Las órdenes de trabajo indican %(wo_qty)s unidades producidas.\n"
+"• Los movimientos terminados de la orden de fabricación indican %(mo_qty)s unidades producidas.\n"
 "\n"
-"Si eliges 'Sí', el sistema:\n"
-"1. Ajustará 'Cantidad en Producción' para que coincida con 'Cantidad Realizada'.\n"
-"2. Actualizará todas las Órdenes de Trabajo relacionadas ('Cantidad en Producción' y 'Cantidad Producida') para que coincidan con 'Cantidad Realizada'.\n"
-"3. Continuará marcando la Orden de Fabricación como terminada."
+"Si selecciona 'Sí', el sistema:\n"
+"1. Ajustará la 'Cantidad en producción' para que coincida con la 'Cantidad terminada'.\n"
+"2. Actualizará la 'Cantidad en producción' y la 'Cantidad producida' de todas las órdenes de trabajo relacionadas.\n"
+"3. Continuará marcando la orden de fabricación como finalizada."
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__yes_label
@@ -227,9 +243,5 @@ msgstr "Sí, corregir las discrepancias"
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid "Yes, adjust quantities and proceed"
 msgstr "Sí, ajustar cantidades y continuar"

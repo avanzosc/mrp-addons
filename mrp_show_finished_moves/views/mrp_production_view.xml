@@ -1,100 +1,83 @@
 <odoo>
-    <record id="mrp_production_form_view" model="ir.ui.view">
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
-        <field name="arch" type="xml">
-            <xpath expr="//notebook" position="inside">
-                <page string="Finished Moves">
-                    <field
-            name="move_finished_ids"
-            context="{'tree_view_ref': 'stock.view_move_tree'}"
-            domain="{'default_manufacturing_order_id': id}"
-          />
-                </page>
-            </xpath>
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button
+  <record id="mrp_production_form_view" model="ir.ui.view">
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button
           class="oe_stat_button"
           name="action_show_finished_move_lines"
           type="object"
           icon="fa-check"
         >
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_text">Finished Moves</span>
-                    </div>
-                </button>
-                <button
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Finished Moves</span>
+          </div>
+        </button>
+        <button
           class="oe_stat_button"
           name="action_show_finished_move_lines_result_packages"
           type="object"
           icon="fa-archive"
         >
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_text">Result Packages</span>
-                    </div>
-                </button>
-            </xpath>
-            <xpath
-        expr="//div[@class='d-flex flex-row align-items-start']"
-        position="after"
-      >
-                        <field name="qty_produced" readonly="1" />
-                        <field
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Result Packages</span>
+          </div>
+        </button>
+      </xpath>
+
+      <xpath expr="//label[@for='bom_id']" position="before">
+        <field name="qty_produced" string="Produced" readonly="1" />
+        <field
           name="last_manufactured_lot"
           readonly="1"
-          attrs="{'invisible': [('product_tracking', '!=', 'serial')]}"
+          invisible="product_tracking != 'serial'"
         />
-            </xpath>
-            <xpath expr="//label[@for='lot_producing_id']" position="attributes">
-                <attribute name="attrs">
-                    {'invisible': ['|', ('state', '=', 'draft'), ('product_tracking', '!=', 'lot')]}
-                </attribute>
-            </xpath>
-            <xpath
+      </xpath>
+
+      <xpath expr="//button[@name='action_generate_serial']" position="attributes">
+        <attribute
+          name="confirm"
+        >Changing the lot will reassign it on all finished move lines that do not have a manually set different lot. Continue?</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='lot_producing_id']" position="attributes">
+        <attribute name="readonly">state in ('done', 'cancel')</attribute>
+      </xpath>
+
+      <xpath expr="//label[@for='lot_producing_id']" position="attributes">
+        <attribute
+          name="invisible"
+        >state == 'draft' or product_tracking != 'lot'</attribute>
+      </xpath>
+      <xpath
         expr="//field[@name='lot_producing_id']/ancestor::div[contains(@class, 'o_row')]"
         position="attributes"
       >
-                <attribute name="attrs">
-                    {'invisible': ['|', ('state', '=', 'draft'), ('product_tracking', '!=', 'lot')]}
-                </attribute>
-            </xpath>
-        </field>
-    </record>
+        <attribute
+          name="invisible"
+        >state == 'draft' or product_tracking != 'lot'</attribute>
+      </xpath>
 
-    <record id="mrp_production_tree_view" model="ir.ui.view">
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='product_qty']" position="after">
-                <field name="qty_producing" readonly="1" />
-                <field name="qty_produced" readonly="1" />
-            </xpath>
-        </field>
-    </record>
+      <page name="miscellaneous" position="after">
+        <page string="Finished Moves">
+          <field
+            name="move_finished_ids"
+            context="{'list_view_ref': 'stock.view_move_tree'}"
+          />
+        </page>
+      </page>
+    </field>
+  </record>
 
-    <record id="view_mrp_production_qty_warning_form" model="ir.ui.view">
-        <field name="model">mrp.production.qty.warning</field>
-        <field name="arch" type="xml">
-            <form string="Inconsistency Warning">
-                <group>
-                    <label string="" for="warning_message" />
-                    <field name="warning_message" nolabel="1" readonly="1" />
-                </group>
-                <footer>
-                    <button
-            name="action_yes"
-            type="object"
-            string="Yes, Correct the Discrepancies"
-            class="btn-primary"
-          />
-                    <button
-            name="action_no"
-            type="object"
-            string="No, Continue Editing"
-            class="btn-secondary"
-          />
-                </footer>
-            </form>
-        </field>
-    </record>
+  <record id="mrp_production_tree_view" model="ir.ui.view">
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='product_qty']" position="after">
+        <field name="qty_producing" string="Producing" readonly="1" />
+        <field name="qty_produced" string="Produced" readonly="1" />
+      </xpath>
+    </field>
+  </record>
 </odoo>
