@@ -104,12 +104,15 @@ class StockMove(models.Model):
             and production.product_id == product
             and self.state != "done"
         ):
-            ctx.update({
-                "mo_next_serial": production._increment_serial_number(
-                    production.last_manufactured_lot
-                ) or "",
-                "mo_product_qty": int(production.product_qty),
-            })
+            ctx.update(
+                {
+                    "mo_next_serial": production._increment_serial_number(
+                        production.last_manufactured_lot
+                    )
+                    or "",
+                    "mo_product_qty": int(production.product_qty),
+                }
+            )
 
         return action
 

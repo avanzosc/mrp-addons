@@ -28,7 +28,9 @@ class MrpProduction(models.Model):
                 order="id desc",
                 limit=1,
             )
-            production.last_manufactured_lot = last_line.lot_id.name if last_line else False
+            production.last_manufactured_lot = (
+                last_line.lot_id.name if last_line else False
+            )
 
     def write(self, vals):
         res = super().write(vals)
@@ -47,10 +49,14 @@ class MrpProduction(models.Model):
         active = self.filtered(lambda p: p.state in ACTIVE_STATES)
 
         for production in active.filtered(lambda p: p.product_id.tracking == "serial"):
-            production.with_context(skip_qty_producing_sync=True)._auto_generate_finished_serials()
+            production.with_context(
+                skip_qty_producing_sync=True
+            )._auto_generate_finished_serials()
 
         for production in active.filtered(lambda p: p.product_id.tracking == "lot"):
-            production.with_context(skip_qty_producing_sync=True)._auto_regenerate_lot_finished_line()
+            production.with_context(
+                skip_qty_producing_sync=True
+            )._auto_regenerate_lot_finished_line()
 
         return res
 
@@ -130,7 +136,10 @@ class MrpProduction(models.Model):
             )
             for backorder in backorders:
                 backorder._compute_last_manufactured_lot()
-                if backorder.last_manufactured_lot and backorder.product_id.tracking == "serial":
+                if (
+                    backorder.last_manufactured_lot
+                    and backorder.product_id.tracking == "serial"
+                ):
                     backorder._auto_generate_finished_serials()
 
         return res
@@ -150,8 +159,12 @@ class MrpProduction(models.Model):
 
         if other_productions:
             for production in other_productions:
-                production.move_raw_ids.filtered(self._is_wo_auto_picked).write({"picked": False})
-            super(MrpProduction, other_productions)._set_qty_producing(pick_manual_consumption_moves)
+                production.move_raw_ids.filtered(self._is_wo_auto_picked).write(
+                    {"picked": False}
+                )
+            super(MrpProduction, other_productions)._set_qty_producing(
+                pick_manual_consumption_moves
+            )
 
         for production in serial_productions:
             is_waiting = (
@@ -167,17 +180,23 @@ class MrpProduction(models.Model):
             moves = production.move_raw_ids.filtered(
                 lambda m: not is_waiting or m.product_id.tracking == "none"
             ) | production.move_finished_ids.filtered(
-                lambda m: m.product_id != production.product_id or m.product_id.tracking == "serial"
+                lambda m: m.product_id != production.product_id
+                or m.product_id.tracking == "serial"
             )
 
             for move in moves:
-                if move.manual_consumption and move.picked and not self._is_wo_auto_picked(move):
+                if (
+                    move.manual_consumption
+                    and move.picked
+                    and not self._is_wo_auto_picked(move)
+                ):
                     continue
                 if move.sudo()._should_bypass_set_qty_producing():
                     continue
 
                 new_qty = float_round(
-                    (production.qty_producing - production.qty_produced) * move.unit_factor,
+                    (production.qty_producing - production.qty_produced)
+                    * move.unit_factor,
                     precision_rounding=move.product_uom.rounding,
                 )
                 move._set_quantity_done(new_qty)
@@ -193,7 +212,9 @@ class MrpProduction(models.Model):
                 ):
                     move.picked = True
 
-    def _split_productions(self, amounts=False, cancel_remaining_qty=False, set_consumed_qty=False):
+    def _split_productions(
+        self, amounts=False, cancel_remaining_qty=False, set_consumed_qty=False
+    ):
         all_productions = super()._split_productions(
             amounts=amounts,
             cancel_remaining_qty=cancel_remaining_qty,
@@ -224,7 +245,11 @@ class MrpProduction(models.Model):
                 continue
 
             for move in raw_moves:
-                if move.manual_consumption and move.picked and not self._is_wo_auto_picked(move):
+                if (
+                    move.manual_consumption
+                    and move.picked
+                    and not self._is_wo_auto_picked(move)
+                ):
                     continue
 
                 move.move_line_ids.write({"picked": False})
@@ -235,7 +260,14 @@ class MrpProduction(models.Model):
                     move.product_uom_qty * qty_producing / product_qty,
                     precision_rounding=move.product_uom.rounding,
                 )
-                if float_compare(qty_for_producing, 0, precision_rounding=move.product_uom.rounding) > 0:
+                if (
+                    float_compare(
+                        qty_for_producing,
+                        0,
+                        precision_rounding=move.product_uom.rounding,
+                    )
+                    > 0
+                ):
                     move._action_assign(force_qty=qty_for_producing)
         return True
 
@@ -298,7 +330,9 @@ class MrpProduction(models.Model):
         if not move_line_vals:
             return
 
-        MoveLines = self.env["stock.move.line"].with_context(skip_qty_producing_sync=True)
+        MoveLines = self.env["stock.move.line"].with_context(
+            skip_qty_producing_sync=True
+        )
         finished_move.with_context(skip_qty_producing_sync=True).move_line_ids.unlink()
 
         for vals in move_line_vals:
@@ -322,16 +356,18 @@ class MrpProduction(models.Model):
 
         finished_move.with_context(skip_qty_producing_sync=True).move_line_ids.unlink()
 
-        self.env["stock.move.line"].with_context(skip_qty_producing_sync=True).create({
-            "move_id": finished_move.id,
-            "product_id": finished_move.product_id.id,
-            "product_uom_id": finished_move.product_uom.id,
-            "location_id": finished_move.location_id.id,
-            "location_dest_id": finished_move.location_dest_id.id,
-            "company_id": finished_move.company_id.id,
-            "quantity": qty,
-            "lot_name": self_ctx.lot_producing_id.name or "",
-        })
+        self.env["stock.move.line"].with_context(skip_qty_producing_sync=True).create(
+            {
+                "move_id": finished_move.id,
+                "product_id": finished_move.product_id.id,
+                "product_uom_id": finished_move.product_uom.id,
+                "location_id": finished_move.location_id.id,
+                "location_dest_id": finished_move.location_dest_id.id,
+                "company_id": finished_move.company_id.id,
+                "quantity": qty,
+                "lot_name": self_ctx.lot_producing_id.name or "",
+            }
+        )
 
     @staticmethod
     def _increment_serial_number(serial):

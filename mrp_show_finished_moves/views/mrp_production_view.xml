@@ -1,55 +1,73 @@
 <odoo>
-    <record id="mrp_production_form_view" model="ir.ui.view">
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
-        <field name="arch" type="xml">
+  <record id="mrp_production_form_view" model="ir.ui.view">
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button
+          class="oe_stat_button"
+          name="action_show_finished_move_lines"
+          type="object"
+          icon="fa-check"
+        >
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Finished Moves</span>
+          </div>
+        </button>
+        <button
+          class="oe_stat_button"
+          name="action_show_finished_move_lines_result_packages"
+          type="object"
+          icon="fa-archive"
+        >
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Result Packages</span>
+          </div>
+        </button>
+      </xpath>
 
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button class="oe_stat_button" name="action_show_finished_move_lines"
-                        type="object" icon="fa-check">
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_text">Finished Moves</span>
-                    </div>
-                </button>
-                <button class="oe_stat_button" name="action_show_finished_move_lines_result_packages"
-                        type="object" icon="fa-archive">
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_text">Result Packages</span>
-                    </div>
-                </button>
-            </xpath>
+      <xpath expr="//label[@for='bom_id']" position="before">
+        <field name="qty_produced" string="Produced" readonly="1" />
+        <field
+          name="last_manufactured_lot"
+          readonly="1"
+          invisible="product_tracking != 'serial'"
+        />
+      </xpath>
 
-            <xpath expr="//label[@for='bom_id']" position="before">
-                <field name="qty_produced" string="Produced" readonly="1"/>
-                <field name="last_manufactured_lot" readonly="1"
-                       invisible="product_tracking != 'serial'"/>
-            </xpath>
+      <xpath expr="//label[@for='lot_producing_id']" position="attributes">
+        <attribute
+          name="invisible"
+        >state == 'draft' or product_tracking != 'lot'</attribute>
+      </xpath>
+      <xpath
+        expr="//field[@name='lot_producing_id']/ancestor::div[contains(@class, 'o_row')]"
+        position="attributes"
+      >
+        <attribute
+          name="invisible"
+        >state == 'draft' or product_tracking != 'lot'</attribute>
+      </xpath>
 
-            <xpath expr="//label[@for='lot_producing_id']" position="attributes">
-                <attribute name="invisible">state == 'draft' or product_tracking != 'lot'</attribute>
-            </xpath>
-            <xpath expr="//field[@name='lot_producing_id']/ancestor::div[contains(@class, 'o_row')]" position="attributes">
-                <attribute name="invisible">state == 'draft' or product_tracking != 'lot'</attribute>
-            </xpath>
+      <page name="miscellaneous" position="after">
+        <page string="Finished Moves">
+          <field
+            name="move_finished_ids"
+            context="{'list_view_ref': 'stock.view_move_tree'}"
+          />
+        </page>
+      </page>
+    </field>
+  </record>
 
-            <page name="miscellaneous" position="after">
-                <page string="Finished Moves">
-                    <field name="move_finished_ids"
-                           context="{'list_view_ref': 'stock.view_move_tree'}"/>
-                </page>
-            </page>
-
-        </field>
-    </record>
-
-    <record id="mrp_production_tree_view" model="ir.ui.view">
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='product_qty']" position="after">
-                <field name="qty_producing" string="Producing" readonly="1"/>
-                <field name="qty_produced"  string="Produced"  readonly="1"/>
-            </xpath>
-        </field>
-    </record>
+  <record id="mrp_production_tree_view" model="ir.ui.view">
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='product_qty']" position="after">
+        <field name="qty_producing" string="Producing" readonly="1" />
+        <field name="qty_produced" string="Produced" readonly="1" />
+      </xpath>
+    </field>
+  </record>
 </odoo>
