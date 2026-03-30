@@ -17,22 +17,11 @@
         name="groups"
       >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
     </xpath>
-    <xpath
-      expr="//tfoot/tr[@t-if=&quot;data['show_costs']&quot;]"
-      position="attributes"
-    >
+    <tfoot position="attributes">
       <attribute
         name="groups"
       >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
-    </xpath>
-    <xpath
-      expr="//tfoot/t[@t-if=&quot;data['show_costs'] and data['byproducts']&quot;]"
-      position="attributes"
-    >
-      <attribute
-        name="groups"
-      >mrp_bom_report_group.group_mrp_bom_report_group_see_cost</attribute>
-    </xpath>
+    </tfoot>
   </template>
 
   <template
