@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 08:51+0000\n"
-"PO-Revision-Date: 2025-08-28 08:51+0000\n"
+"POT-Creation-Date: 2026-05-21 09:01+0000\n"
+"PO-Revision-Date: 2026-05-21 09:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,18 +17,21 @@ msgstr ""
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "<span class=\"o_stat_text\">Finished Moves</span>"
-msgstr ""
-
-#. module: mrp_show_finished_moves
-#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_stock_move_operations_finished
-msgid "<span class=\"o_stat_text\">Packages</span>"
 msgstr ""
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "<span class=\"o_stat_text\">Result Packages</span>"
+msgstr ""
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+msgid ""
+"Changing the lot will reassign it on all finished move lines that do not "
+"have a manually set different lot. Continue?"
 msgstr ""
 
 #. module: mrp_show_finished_moves
@@ -47,6 +50,9 @@ msgid "Display Name"
 msgstr ""
 
 #. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_workorder.py:0
 #: model:ir.actions.act_window,name:mrp_show_finished_moves.action_finished_move_lines
 #: model:ir.ui.menu,name:mrp_show_finished_moves.menu_finished_move_lines
 msgid "Finished Move Lines"
@@ -64,18 +70,8 @@ msgid "ID"
 msgstr ""
 
 #. module: mrp_show_finished_moves
-#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
-msgid "Inconsistency Warning"
-msgstr ""
-
-#. module: mrp_show_finished_moves
-#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
-msgid "Inconsistency in Quants Warning"
-msgstr ""
-
-#. module: mrp_show_finished_moves
-#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning____last_update
-msgid "Last Modified on"
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
+msgid "Last Manufactured Lot"
 msgstr ""
 
 #. module: mrp_show_finished_moves
@@ -86,6 +82,11 @@ msgstr ""
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
+msgid "Manufacturing Order"
 msgstr ""
 
 #. module: mrp_show_finished_moves
@@ -101,35 +102,37 @@ msgstr ""
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid "No, review data first"
+msgstr ""
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_tree_editable_view
+msgid "Produced"
+msgstr ""
+
+#. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_tree_view
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_tree_editable_view
+msgid "Producing"
 msgstr ""
 
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid ""
 "Producing vs Done quantity mismatch detected:\n"
 "\n"
 "• Manufacturing Order reports %(planned)s units producing.\n"
-"• Manufacturing Order finished moves report %(actual)s units\n"
-"  produced.\n"
+"• Manufacturing Order finished moves report %(actual)s units produced.\n"
 "\n"
 "If you choose 'Yes', the system will:\n"
 "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
-"2. Update all related WOs' 'Quantity Producing' and\n"
-"   'Quantity Produced' to match 'Quantity Done'.\n"
+"2. Update all related WOs' 'Quantity Producing' and 'Quantity Produced'.\n"
 "3. Continue marking the Manufacturing Order as done."
-msgstr ""
-
-#. module: mrp_show_finished_moves
-#: model:ir.model,name:mrp_show_finished_moves.model_stock_move_line
-msgid "Product Moves (Stock Move Line)"
 msgstr ""
 
 #. module: mrp_show_finished_moves
@@ -138,16 +141,24 @@ msgid "Production"
 msgstr ""
 
 #. module: mrp_show_finished_moves
-#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
-msgid "Production Order"
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+msgid "Production Lot Change"
 msgstr ""
 
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
+#: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.view_mrp_production_qty_warning_form
 msgid "Quantity Discrepancy Warning"
+msgstr ""
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#: code:addons/mrp_show_finished_moves/models/mrp_workorder.py:0
+msgid "Result Packages"
 msgstr ""
 
 #. module: mrp_show_finished_moves
@@ -158,6 +169,15 @@ msgstr ""
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_stock_move
 msgid "Stock Move"
+msgstr ""
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+msgid ""
+"This change will reassign the lot on all finished product move lines that do not already have a manually set different lot and are not in done or cancelled state.\n"
+"\n"
+"Save the manufacturing order to confirm, or discard to cancel."
 msgstr ""
 
 #. module: mrp_show_finished_moves
@@ -173,19 +193,15 @@ msgstr ""
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid ""
 "Work Order vs Manufacturing Order quantity mismatch detected:\n"
 "\n"
 "• Work Orders report %(wo_qty)s units produced.\n"
-"• Manufacturing Order finished moves report %(mo_qty)s units\n"
-"  produced.\n"
+"• Manufacturing Order finished moves report %(mo_qty)s units produced.\n"
 "\n"
 "If you choose 'Yes', the system will:\n"
 "1. Set 'Quantity Producing' to match 'Quantity Done'.\n"
-"2. Update all related Work Orders' 'Quantity Producing' and\n"
-"   'Quantity Produced' to match 'Quantity Done'.\n"
+"2. Update all related Work Orders' 'Quantity Producing' and 'Quantity Produced'.\n"
 "3. Continue marking the Manufacturing Order as done."
 msgstr ""
 
@@ -202,9 +218,5 @@ msgstr ""
 #. module: mrp_show_finished_moves
 #. odoo-python
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
-#, python-format
 msgid "Yes, adjust quantities and proceed"
 msgstr ""
