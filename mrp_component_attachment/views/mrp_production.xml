@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="mrp_production_form_view" model="ir.ui.view">
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//field[@name='move_raw_ids']/list/field[@name='product_id']"
+        position="after"
+      >
+        <button name="action_see_attachments" type="object" icon="fa-files-o" />
+      </xpath>
+      <xpath
+        expr="//field[@name='move_finished_ids']/list/field[@name='product_id']"
+        position="after"
+      >
+        <button name="action_see_attachments" type="object" icon="fa-files-o" />
+      </xpath>
+    </field>
+  </record>
+</odoo>
