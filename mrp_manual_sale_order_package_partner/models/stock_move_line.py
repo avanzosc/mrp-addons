@@ -19,14 +19,15 @@ class StockMoveLine(models.Model):
         return mls
 
     def _action_done(self):
+        pending = [
+            (ml.result_package_id, ml.move_id.production_id.manual_partner_id)
+            for ml in self
+            if ml.result_package_id
+            and ml.move_id.production_id
+            and not ml.result_package_id.partner_id
+        ]
         res = super()._action_done()
-        for ml in self:
-            if (
-                ml.result_package_id
-                and ml.move_id.production_id
-                and not ml.result_package_id.partner_id
-            ):
-                ml.result_package_id.partner_id = (
-                    ml.move_id.production_id.manual_partner_id
-                )
+        for package, partner in pending:
+            if not package.partner_id:
+                package.partner_id = partner
         return res
