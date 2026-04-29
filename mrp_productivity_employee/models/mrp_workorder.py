@@ -13,9 +13,7 @@ class MrpWorkorder(models.Model):
 
     def button_start(self):
         self.ensure_one()
-        if self.workcenter_id.is_external:
-            return super(MrpWorkorder, self.sudo()).button_start()
-        elif "from_wizard_button_start" in self.env.context:
+        if "from_wizard_button_start" in self.env.context:
             return super(MrpWorkorder, self.sudo()).button_start()
         else:
             return {
@@ -35,10 +33,7 @@ class MrpWorkorder(models.Model):
             }
 
     def button_pending(self):
-        if (
-            "from_wizard_button_pending" in self.env.context
-            or self.workcenter_id.is_external
-        ):
+        if "from_wizard_button_pending" in self.env.context:
             return super(MrpWorkorder, self.sudo()).button_pending()
         else:
             return {
@@ -63,8 +58,6 @@ class MrpWorkorder(models.Model):
             or "from_wizard_button_finish" in self.env.context
         ):
             return super(MrpWorkorder, self.sudo()).button_finish()
-        elif self.workcenter_id.is_external:
-            return super(MrpWorkorder, self.sudo()).button_finish()
         else:
             return {
                 "type": "ir.actions.act_window",
@@ -84,10 +77,10 @@ class MrpWorkorder(models.Model):
 
     def _prepare_timeline_vals(self, duration, date_start, date_end=False):
         values = super()._prepare_timeline_vals(duration, date_start, date_end=date_end)
-        if "default_employee_id" in self.env.context:
-            values["employee_id"] = self.env.context.get("default_employee_id")
-        if "default_loss_id" in self.env.context:
-            values["loss_id"] = self.env.context.get("default_loss_id")
+        if self.env.context.get("employee_id_ctx", False):
+            values["employee_id"] = self.env.context.get("employee_id_ctx")
+        if self.env.context.get("loss_id_ctx", False):
+            values["loss_id"] = self.env.context.get("loss_id_ctx")
         return values
 
     def button_start_customized(self):

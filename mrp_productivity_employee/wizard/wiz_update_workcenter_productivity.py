@@ -47,8 +47,8 @@ class WizUpdateWorkcenterProductivity(models.TransientModel):
     def button_start(self):
         self.workorder_id.with_context(
             from_wizard_button_start=True,
-            default_employee_id=self.employee_id.id,
-            default_loss_id=self.loss_id.id,
+            employee_id_ctx=self.employee_id.id,
+            loss_id_ctx=self.loss_id.id,
         ).button_start()
 
     def button_finish(self):

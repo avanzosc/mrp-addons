@@ -6,6 +6,12 @@
         <field name="arch" type="xml">
             <xpath
         expr="//field[@name='time_ids']/tree/field[@name='user_id']"
+  <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//field[@name='time_ids']/list/field[@name='user_id']"
         position="after"
       >
                 <field name="employee_id" optional="show" />
@@ -68,4 +74,32 @@
             </button>
         </field>
     </record>
+    <field name="arch" type="xml">
+      <button name="button_start" position="attributes">
+        <attribute name="invisible">state == 'done'</attribute>
+      </button>
+      <button name="button_finish" position="attributes">
+        <attribute name="invisible">state == 'done'</attribute>
+      </button>
+      <button name="button_pending" position="attributes">
+        <attribute name="invisible">state == 'done'</attribute>
+      </button>
+    </field>
+  </record>
+
+  <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+    <field name="arch" type="xml">
+      <button name="button_start" position="attributes">
+        <attribute name="invisible">state == 'done'</attribute>
+      </button>
+      <button name="button_finish" position="attributes">
+        <attribute name="invisible">state == 'done'</attribute>
+      </button>
+      <button name="button_pending" position="attributes">
+        <attribute name="invisible">state == 'done'</attribute>
+      </button>
+    </field>
+  </record>
 </odoo>

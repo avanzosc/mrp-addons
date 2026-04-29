@@ -8,10 +8,9 @@ MRP productivity employee
 
 * In "Department" new field "Production Depart".
 * In "Workcenter Productivity" new field "Employee".
-* In "Workcenter" new field "Is External".
-* When a work order is started, stopped, or ended, and the work center of the
-  work order is not "external", call a wizard to enter the employee. Only
-  employees whose department is marked as "Production Depart." can be selected.
+* When a work order is started, stopped, or ended, call a wizard to enter the
+  employee. Only employees whose department is marked as "Production Depart."
+  can be selected.
 
 Bug Tracker
 ===========
