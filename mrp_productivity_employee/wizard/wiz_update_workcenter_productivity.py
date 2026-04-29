@@ -33,13 +33,17 @@ class WizUpdateWorkcenterProductivity(models.TransientModel):
         imputations = workorder.time_ids.filtered(
             lambda x: x.employee_id and x.date_start and not x.date_end
         )
+        imputation_employees = imputations.mapped("employee_id")
         employees = imputations.mapped("employee_id")
         if result.get("action_type") == "start":
-            cond = [
-                ("id", "not in", employees.ids),
-                ("department_id.production_department", "=", True),
-            ]
-            employees = self.env["hr.employee"].search(cond)
+            if workorder.workcenter_id.employee_ids:
+                employees = workorder.workcenter_id.employee_ids - imputation_employees
+            else:
+                cond = [
+                    ("id", "not in", employees.ids),
+                    ("department_id.production_department", "=", True),
+                ]
+                employees = self.env["hr.employee"].search(cond)
             result["loss_id"] = self.env.ref("mrp.block_reason7").id
         result["allowed_employee_ids"] = [(6, 0, employees.ids)]
         return result
@@ -47,8 +51,8 @@ class WizUpdateWorkcenterProductivity(models.TransientModel):
     def button_start(self):
         self.workorder_id.with_context(
             from_wizard_button_start=True,
-            default_employee_id=self.employee_id.id,
-            default_loss_id=self.loss_id.id,
+            employee_id_ctx=self.employee_id.id,
+            loss_id_ctx=self.loss_id.id,
         ).button_start()
 
     def button_finish(self):

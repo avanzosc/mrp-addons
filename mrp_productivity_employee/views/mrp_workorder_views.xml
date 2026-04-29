@@ -5,7 +5,7 @@
     <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
     <field name="arch" type="xml">
       <xpath
-        expr="//field[@name='time_ids']/tree/field[@name='user_id']"
+        expr="//field[@name='time_ids']/list/field[@name='user_id']"
         position="after"
       >
         <field name="employee_id" optional="show" />
@@ -27,13 +27,13 @@
     />
     <field name="arch" type="xml">
       <button name="button_start" position="attributes">
-        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+        <attribute name="invisible">state == 'done'</attribute>
       </button>
       <button name="button_finish" position="attributes">
-        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+        <attribute name="invisible">state == 'done'</attribute>
       </button>
       <button name="button_pending" position="attributes">
-        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+        <attribute name="invisible">state == 'done'</attribute>
       </button>
     </field>
   </record>
@@ -43,13 +43,13 @@
     <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
     <field name="arch" type="xml">
       <button name="button_start" position="attributes">
-        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+        <attribute name="invisible">state == 'done'</attribute>
       </button>
       <button name="button_finish" position="attributes">
-        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+        <attribute name="invisible">state == 'done'</attribute>
       </button>
       <button name="button_pending" position="attributes">
-        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+        <attribute name="invisible">state == 'done'</attribute>
       </button>
     </field>
   </record>

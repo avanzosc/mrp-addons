@@ -17,7 +17,8 @@
           />
           <field
             name="loss_id"
-            attrs="{'invisible': [('action_type', '!=', 'start')], 'required': [('action_type', '=', 'start')]}"
+            invisible="action_type != 'start'"
+            required="action_type == 'start'"
           />
         </group>
         <footer>
@@ -27,7 +28,7 @@
             type="object"
             default_focus="1"
             class="btn-primary"
-            attrs="{'invisible': [('action_type', '!=', 'start')]}"
+            invisible="action_type != 'start'"
           />
           <button
             string="Finish"
@@ -35,7 +36,7 @@
             type="object"
             default_focus="1"
             class="btn-primary"
-            attrs="{'invisible': [('action_type', '!=', 'finish')]}"
+            invisible="action_type != 'finish'"
           />
           <button
             string="Pause"
@@ -43,7 +44,7 @@
             type="object"
             default_focus="1"
             class="btn-primary"
-            attrs="{'invisible': [('action_type', '!=', 'pause')]}"
+            invisible="action_type != 'pause'"
           />
           <button string="Cancel" class="btn-secondary" special="cancel" />
         </footer>

@@ -4,20 +4,17 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, models
+from odoo import _, fields, models
+from odoo.exceptions import UserError
 from odoo.osv import expression
 
 
 class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
 
-    def button_start(self):
+    def button_start(self, raise_on_invalid_state=False):
         self.ensure_one()
-        if self.workcenter_id.is_external:
-            return super(MrpWorkorder, self.sudo()).button_start()
-        elif "from_wizard_button_start" in self.env.context:
-            return super(MrpWorkorder, self.sudo()).button_start()
-        else:
+        if "from_wizard_button_start" not in self.env.context:
             return {
                 "type": "ir.actions.act_window",
                 "name": _("Start Workorder"),
@@ -33,12 +30,60 @@ class MrpWorkorder(models.Model):
                     default_action_type="start",
                 ),
             }
+        if any(wo.working_state == "blocked" for wo in self):
+            raise UserError(
+                _("Please unblock the work center to start the work order.")
+            )
+        for wo in self:
+            if wo.state in ("done", "cancel"):
+                if raise_on_invalid_state:
+                    continue
+                raise UserError(
+                    _("You cannot start a work order that is already done or cancelled")
+                )
+            if wo.product_tracking == "serial" and wo.qty_producing == 0:
+                wo.qty_producing = 1.0
+            elif wo.qty_producing == 0:
+                wo.qty_producing = wo.qty_remaining
+
+            if wo._should_start_timer():
+                self.env["mrp.workcenter.productivity"].create(
+                    wo._prepare_timeline_vals(wo.duration, fields.Datetime.now())
+                )
+            if wo.production_id.state != "progress":
+                wo.production_id.write({"date_start": fields.Datetime.now()})
+            if wo.state == "progress":
+                continue
+            date_start = fields.Datetime.now()
+            vals = {
+                "state": "progress",
+                "date_start": date_start,
+            }
+            if not wo.leave_id:
+                leave = self.env["resource.calendar.leaves"].create(
+                    {
+                        "name": wo.display_name,
+                        "calendar_id": wo.workcenter_id.resource_calendar_id.id,
+                        "date_from": date_start,
+                        "date_to": date_start
+                        + relativedelta(minutes=wo.duration_expected),
+                        "resource_id": wo.workcenter_id.resource_id.id,
+                        "time_type": "other",
+                    }
+                )
+                vals["date_finished"] = leave.date_to
+                vals["leave_id"] = leave.id
+                wo.write(vals)
+            else:
+                if not wo.date_start or wo.date_start > date_start:
+                    vals["date_start"] = date_start
+                    vals["date_finished"] = wo._calculate_date_finished(date_start)
+                if wo.date_finished and wo.date_finished < date_start:
+                    vals["date_finished"] = date_start
+                wo.with_context(bypass_duration_calculation=True).write(vals)
 
     def button_pending(self):
-        if (
-            "from_wizard_button_pending" in self.env.context
-            or self.workcenter_id.is_external
-        ):
+        if "from_wizard_button_pending" in self.env.context:
             return super(MrpWorkorder, self.sudo()).button_pending()
         else:
             return {
@@ -63,8 +108,6 @@ class MrpWorkorder(models.Model):
             or "from_wizard_button_finish" in self.env.context
         ):
             return super(MrpWorkorder, self.sudo()).button_finish()
-        elif self.workcenter_id.is_external:
-            return super(MrpWorkorder, self.sudo()).button_finish()
         else:
             return {
                 "type": "ir.actions.act_window",
@@ -84,10 +127,10 @@ class MrpWorkorder(models.Model):
 
     def _prepare_timeline_vals(self, duration, date_start, date_end=False):
         values = super()._prepare_timeline_vals(duration, date_start, date_end=date_end)
-        if "default_employee_id" in self.env.context:
-            values["employee_id"] = self.env.context.get("default_employee_id")
-        if "default_loss_id" in self.env.context:
-            values["loss_id"] = self.env.context.get("default_loss_id")
+        if self.env.context.get("employee_id_ctx", False):
+            values["employee_id"] = self.env.context.get("employee_id_ctx")
+        if self.env.context.get("loss_id_ctx", False):
+            values["loss_id"] = self.env.context.get("loss_id_ctx")
         return values
 
     def button_start_customized(self):

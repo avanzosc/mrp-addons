@@ -1,43 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+  <record id="mrp_workcenter_view" model="ir.ui.view">
+    <field name="model">mrp.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+    <field name="arch" type="xml">
+      <page name="capacity" position="after">
+        <page string="Employees" name="employees">
+          <field name="employee_ids">
+            <list string="Employees" js_class="hr_employee_list">
+              <field name="name" />
+              <field name="department_id" />
+              <field name="job_id" />
+            </list>
+          </field>
+        </page>
+      </page>
+    </field>
+  </record>
+
   <record id="mrp_workcenter_tree_view" model="ir.ui.view">
     <field name="model">mrp.workcenter</field>
     <field name="inherit_id" ref="mrp.mrp_workcenter_tree_view" />
     <field name="arch" type="xml">
       <field name="alternative_workcenter_ids" position="after">
-        <field name="is_external" optional="show" />
+        <field name="employee_ids" widget="many2many_tags" optional="show" />
       </field>
-    </field>
-  </record>
-
-  <record id="mrp_workcenter_view" model="ir.ui.view">
-    <field name="model">mrp.workcenter</field>
-    <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
-    <field name="arch" type="xml">
-      <field name="alternative_workcenter_ids" position="after">
-        <field name="is_external" />
-      </field>
-    </field>
-  </record>
-
-  <record id="view_mrp_workcenter_search" model="ir.ui.view">
-    <field name="model">mrp.workcenter</field>
-    <field name="inherit_id" ref="mrp.view_mrp_workcenter_search" />
-    <field name="arch" type="xml">
-      <filter name="archived" position="before">
-        <separator />
-        <filter
-          string="Is External"
-          name="is-external"
-          domain="[('is_external','=',True)]"
-        />
-        <filter
-          string="It is not external"
-          name="not-external"
-          domain="[('is_external','=',False)]"
-        />
-        <separator />
-      </filter>
     </field>
   </record>
 </odoo>
