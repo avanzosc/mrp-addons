@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="wiz_update_workcenter_productivity_form_view" model="ir.ui.view">
-        <field name="name">wiz.update.workcenter.productivity.form.view</field>
-        <field name="model">wiz.update.workcenter.productivity</field>
-        <field name="arch" type="xml">
-            <form>
-                <group>
-                    <field name="workorder_id" invisible="1" />
-                    <field name="action_type" invisible="1" />
-                    <field name="allowed_employee_ids" invisible="1" />
-                    <field
+  <record id="wiz_update_workcenter_productivity_form_view" model="ir.ui.view">
+    <field name="name">wiz.update.workcenter.productivity.form.view</field>
+    <field name="model">wiz.update.workcenter.productivity</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <field name="workorder_id" invisible="1" />
+          <field name="action_type" invisible="1" />
+          <field name="allowed_employee_ids" invisible="1" />
+          <field
             name="employee_id"
             required="1"
             domain="[('id', 'in', allowed_employee_ids)]"
             options="{'no_create': True}"
           />
-                    <field
+          <field
             name="loss_id"
             attrs="{'invisible': [('action_type', '!=', 'start')], 'required': [('action_type', '=', 'start')]}"
           />
-                </group>
-                <footer>
-                    <button
+        </group>
+        <footer>
+          <button
             string="Start"
             name="button_start"
             type="object"
@@ -29,7 +29,7 @@
             class="btn-primary"
             attrs="{'invisible': [('action_type', '!=', 'start')]}"
           />
-                    <button
+          <button
             string="Finish"
             name="button_finish"
             type="object"
@@ -37,7 +37,7 @@
             class="btn-primary"
             attrs="{'invisible': [('action_type', '!=', 'finish')]}"
           />
-                    <button
+          <button
             string="Pause"
             name="button_finish"
             type="object"
@@ -45,9 +45,9 @@
             class="btn-primary"
             attrs="{'invisible': [('action_type', '!=', 'pause')]}"
           />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                </footer>
-            </form>
-        </field>
-    </record>
+          <button string="Cancel" class="btn-secondary" special="cancel" />
+        </footer>
+      </form>
+    </field>
+  </record>
 </odoo>

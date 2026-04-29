@@ -1,71 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
-        <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
-        <field name="arch" type="xml">
-            <xpath
+  <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+    <field name="arch" type="xml">
+      <xpath
         expr="//field[@name='time_ids']/tree/field[@name='user_id']"
         position="after"
       >
-                <field name="employee_id" optional="show" />
-            </xpath>
-            <xpath
+        <field name="employee_id" optional="show" />
+      </xpath>
+      <xpath
         expr="//field[@name='time_ids']/form//field[@name='user_id']"
         position="after"
       >
-                <field name="employee_id" />
-            </xpath>
-        </field>
-    </record>
+        <field name="employee_id" />
+      </xpath>
+    </field>
+  </record>
 
-    <record id="mrp_production_workorder_form_view_inherit2" model="ir.ui.view">
-        <field name="model">mrp.workorder</field>
-        <field
+  <record id="mrp_production_workorder_form_view_inherit2" model="ir.ui.view">
+    <field name="model">mrp.workorder</field>
+    <field
       name="inherit_id"
       ref="mrp_usability.mrp_production_workorder_form_view_inherit"
     />
-        <field name="arch" type="xml">
-            <button name="button_start" position="attributes">
-                <attribute
-          name="attrs"
-        >{'invisible': [('state', '=', 'done')]}</attribute>
-            </button>
-            <button name="button_finish" position="attributes">
-                <attribute
-          name="attrs"
-        >{'invisible': [('state', '=', 'done')]}</attribute>
-            </button>
-            <button name="button_pending" position="attributes">
-                <attribute
-          name="attrs"
-        >{'invisible': [('state', '=', 'done')]}</attribute>
-            </button>
-        </field>
-    </record>
+    <field name="arch" type="xml">
+      <button name="button_start" position="attributes">
+        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+      </button>
+      <button name="button_finish" position="attributes">
+        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+      </button>
+      <button name="button_pending" position="attributes">
+        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+      </button>
+    </field>
+  </record>
 
-    <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
-        <field name="model">mrp.workorder</field>
-        <field
-      name="inherit_id"
-      ref="mrp.mrp_production_workorder_tree_editable_view"
-    />
-        <field name="arch" type="xml">
-            <button name="button_start" position="attributes">
-                <attribute
-          name="attrs"
-        >{'invisible': [('state', '=', 'done')]}</attribute>
-            </button>
-            <button name="button_finish" position="attributes">
-                <attribute
-          name="attrs"
-        >{'invisible': [('state', '=', 'done')]}</attribute>
-            </button>
-            <button name="button_pending" position="attributes">
-                <attribute
-          name="attrs"
-        >{'invisible': [('state', '=', 'done')]}</attribute>
-            </button>
-        </field>
-    </record>
+  <record id="mrp_production_workorder_tree_editable_view" model="ir.ui.view">
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+    <field name="arch" type="xml">
+      <button name="button_start" position="attributes">
+        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+      </button>
+      <button name="button_finish" position="attributes">
+        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+      </button>
+      <button name="button_pending" position="attributes">
+        <attribute name="attrs">{'invisible': [('state', '=', 'done')]}</attribute>
+      </button>
+    </field>
+  </record>
 </odoo>
