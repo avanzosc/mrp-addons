@@ -20,7 +20,7 @@ class StockMoveLine(models.Model):
 
     def _action_done(self):
         res = super()._action_done()
-        for ml in self:
+        for ml in self.exists():
             if (
                 ml.result_package_id
                 and ml.move_id.production_id
