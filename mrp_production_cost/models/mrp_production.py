@@ -119,8 +119,8 @@ class MrpProduction(models.Model):
         cost = self._catch_cost_to_update_finished_move_cost_and_lot()
         if cost and self.move_finished_ids:
             for move in self.move_finished_ids:
-                if move.quantity_done > 0:
-                    move.price_unit_cost = cost / move.quantity_done
+                if move.quantity > 0:
+                    move.price_unit_cost = cost / move.quantity
         price_unit_cost = 0
         if cost and self.qty_producing:
             price_unit_cost = cost / self.qty_producing

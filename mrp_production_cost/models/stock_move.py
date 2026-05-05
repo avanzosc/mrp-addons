@@ -19,12 +19,12 @@ class StockMove(models.Model):
         compute="_compute_material_cost_consumed",
     )
 
-    @api.depends("price_unit", "product_uom_qty")
+    @api.depends("price_unit_cost", "product_uom_qty")
     def _compute_material_cost_to_consume(self):
         for move in self:
-            move.material_cost_to_consume = move.price_unit * move.product_uom_qty
+            move.material_cost_to_consume = move.price_unit_cost * move.product_uom_qty
 
-    @api.depends("price_unit", "quantity")
+    @api.depends("price_unit_cost", "quantity")
     def _compute_material_cost_consumed(self):
         for move in self:
-            move.material_cost_consumed = move.price_unit * move.quantity
+            move.material_cost_consumed = move.price_unit_cost * move.quantity

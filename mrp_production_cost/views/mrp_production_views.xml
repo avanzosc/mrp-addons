@@ -8,7 +8,7 @@
         expr="//field[@name='move_raw_ids']/list/field[@name='quantity']"
         position="after"
       >
-        <field name="price_unit" optional="hide" />
+        <field name="price_unit_cost" optional="hide" />
         <field
           name="material_cost_to_consume"
           sum="Estimated Total Cost"
