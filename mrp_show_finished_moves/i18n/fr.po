@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 08:51+0000\n"
-"PO-Revision-Date: 2025-08-28 08:51+0000\n"
+"POT-Creation-Date: 2026-05-07 07:51+0000\n"
+"PO-Revision-Date: 2026-05-07 07:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,15 @@ msgid "<span class=\"o_stat_text\">Result Packages</span>"
 msgstr "<span class=\"o_stat_text\">Colis de destination</span>"
 
 #. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+msgid ""
+"Changing the lot will reassign it on all finished move lines that do not "
+"have a manually set different lot. Continue?"
+msgstr ""
+"La modification du lot réassignera le lot sur toutes les lignes de "
+"mouvements terminés qui n'ont pas de lot différent défini manuellement. Continuer ?"
+
+#. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__create_uid
 msgid "Created by"
 msgstr "Créé par"
@@ -53,11 +62,6 @@ msgid "Finished Move Lines"
 msgstr "Lignes de mouvements terminés"
 
 #. module: mrp_show_finished_moves
-#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
-msgid "Last Manufactured Lot"
-msgstr "Dernier lot fabriqué"
-
-#. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "Finished Moves"
@@ -77,6 +81,11 @@ msgstr "Avertissement d'incohérence"
 #: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
 msgid "Inconsistency in Quants Warning"
 msgstr "Avertissement d'incohérence dans les quantités"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
+msgid "Last Manufactured Lot"
+msgstr "Dernier lot fabriqué"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning____last_update
@@ -145,17 +154,29 @@ msgstr ""
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr "Mouvements d'article (Ligne de mouvement de stock)"
+msgstr "Mouvements de produit (Ligne de mouvement de stock)"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_uom_uom
+msgid "Product Unit of Measure"
+msgstr "Unité de mesure du produit"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__production_id
 msgid "Production"
-msgstr ""
+msgstr "Production"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid "Production Lot Change"
+msgstr "Changement de lot de production"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
 msgid "Production Order"
-msgstr "Ordre de fabrication"
+msgstr "Ordre de production"
 
 #. module: mrp_show_finished_moves
 #. odoo-python
@@ -174,6 +195,21 @@ msgstr "Afficher les détails"
 #: model:ir.model,name:mrp_show_finished_moves.model_stock_move
 msgid "Stock Move"
 msgstr "Mouvement de stock"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid ""
+"This change will reassign the lot on all finished product move lines that do not already have a manually set different lot and are not in done or cancelled state.\n"
+"\n"
+"Save the manufacturing order to confirm, or discard to cancel."
+msgstr ""
+"Ce changement réassignera le lot sur toutes les lignes de mouvements du "
+"produit fini qui n'ont pas déjà un lot différent défini manuellement et ne "
+"sont pas dans l'état terminé ou annulé.\n"
+"\n"
+"Enregistrez l'ordre de fabrication pour confirmer, ou ignorez pour annuler."
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__warning_message
