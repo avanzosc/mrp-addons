@@ -5,10 +5,10 @@
     <field name="model">purchase.order</field>
     <field name="inherit_id" ref="purchase.purchase_order_form" />
     <field name="arch" type="xml">
-        <xpath expr="//field[@name='partner_ref']" position="after">
-            <field name="subcon_purchase" />
-            <field name="workorder_id" invisible="not subcon_purchase" />
-        </xpath>
+      <xpath expr="//field[@name='partner_ref']" position="after">
+        <field name="subcon_purchase" />
+        <field name="workorder_id" invisible="not subcon_purchase" />
+      </xpath>
     </field>
   </record>
 </odoo>

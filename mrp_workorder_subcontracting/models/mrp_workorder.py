@@ -63,7 +63,6 @@ class MrpWorkorder(models.Model):
         return seller.price if seller else 0.0
 
     def _create_purchase_line(self, purchase_order, wo, product, type_charge=None):
-
         qty = self.env["product.subcontracting.charge"].compute_qty(
             wo.production_id, type_charge=type_charge
         )
@@ -109,7 +108,9 @@ class MrpWorkorder(models.Model):
             ).create(
                 {
                     "partner_id": wo.service_supplier_id.id,
-                    "origin": f"{wo.production_id.name} - {wo.sequence or ''} - {wo.name}",
+                    "origin": (
+                        f"{wo.production_id.name}" f" - {wo.sequence or ''} - {wo.name}"
+                    ),
                     "subcon_purchase": True,
                     "date_order": fields.Datetime.now(),
                     "workorder_id": wo.id,
@@ -126,7 +127,6 @@ class MrpWorkorder(models.Model):
             )
 
             for charge in wo.service_product_id.subcontracting_charge_ids:
-
                 product_variant_charge = charge.product_id.product_variant_id
                 type_charge = charge.quantity_calculation
                 self._create_purchase_line(
