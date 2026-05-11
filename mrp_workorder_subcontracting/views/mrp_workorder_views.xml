@@ -7,12 +7,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='production_id']" position="after">
               <field name="bom_id" string="Lista de Materiales" />
-            </xpath>
-
-            <xpath expr="//field[@name='user_id']" position="after">
-                <field name="service_product_id" />
-                <field name="service_product_supplier_id" />
-                <field name="service_supplier_id" />
+              <field name="service_product_id" />
+              <field name="service_product_supplier_id" />
+              <field name="service_supplier_id" />
             </xpath>
         </field>
     </record>
@@ -25,7 +22,7 @@
         <xpath expr="//field[@name='product_id']" position="after">
             <field name="bom_id" string="Lista de Materiales" />
         </xpath>
-        <xpath expr="//field[@name='date_planned_start']" position="after">
+        <xpath expr="//field[@name='date_start']" position="after">
             <field
           name="purchase_id"
           widget="many2one"

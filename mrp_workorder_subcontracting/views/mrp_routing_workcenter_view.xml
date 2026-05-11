@@ -15,13 +15,13 @@
             <field name="workcenter_is_external" invisible="1" />
             <field
           name="service_product_id"
-          attrs="{'invisible': [('workcenter_is_external', '=', False)]}"
-          domain="[('detailed_type', '=', 'service'), ('subcon_operations', '=', True)]"
+          invisible="not workcenter_is_external"
+          domain="[('type', '=', 'service'), ('subcon_operations', '=', True)]"
         />
             <field
           name="service_product_supplier_id"
           domain="[('product_tmpl_id', '=', service_product_id)]"
-          attrs="{'required': [('workcenter_is_external', '=', True)]}"
+          required="workcenter_is_external"
         />
             <field name="service_supplier_id" readonly="1" />
          </xpath>
