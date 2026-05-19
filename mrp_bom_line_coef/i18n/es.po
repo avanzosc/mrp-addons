@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 13:39+0000\n"
-"PO-Revision-Date: 2022-08-04 13:39+0000\n"
+"POT-Creation-Date: 2026-05-19 09:09+0000\n"
+"PO-Revision-Date: 2026-05-19 09:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 #. module: mrp_bom_line_coef
 #: model:ir.model,name:mrp_bom_line_coef.model_mrp_bom_line
 msgid "Bill of Material Line"
-msgstr "Línea de Lista de Materiales"
+msgstr "Línea de lista de materiales"
 
 #. module: mrp_bom_line_coef
 #: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__coefficient
@@ -31,24 +31,9 @@ msgid "Currency"
 msgstr "Moneda"
 
 #. module: mrp_bom_line_coef
-#: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
-
-#. module: mrp_bom_line_coef
 #: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__cost
 msgid "Fixed Cost"
 msgstr "Coste fijo"
-
-#. module: mrp_bom_line_coef
-#: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__id
-msgid "ID"
-msgstr ""
-
-#. module: mrp_bom_line_coef
-#: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
 
 #. module: mrp_bom_line_coef
 #: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__expense_kg

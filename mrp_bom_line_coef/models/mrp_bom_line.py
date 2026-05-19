@@ -7,8 +7,7 @@ class MrpBomLine(models.Model):
     _inherit = "mrp.bom.line"
 
     coefficient = fields.Float(
-        string="Coefficient",
-        digits="Coef Decimal Precision",
+        digits=(16, 4),
     )
     expense_kg = fields.Boolean(
         string="Production Cost",
@@ -16,15 +15,15 @@ class MrpBomLine(models.Model):
     )
     cost = fields.Float(
         string="Fixed Cost",
-        digits="Coef Decimal Precision",
+        digits=(16, 4),
     )
     currency_id = fields.Many2one(
         string="Currency",
         comodel_name="res.currency",
-        default=lambda self: self.env.company.currency_id.id,
+        default=lambda self: self.env.company.currency_id,
     )
 
     @api.onchange("product_id")
-    def onchange_cost(self):
+    def _onchange_cost(self):
         if self.product_id:
             self.cost = self.product_id.standard_price
