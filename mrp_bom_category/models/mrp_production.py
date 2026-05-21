@@ -7,11 +7,13 @@ from odoo import api, models
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
-    @api.model
-    def create(self, values):
-        if "bom_id" in values:
-            bom = self.env["mrp.bom"].search([("id", "=", values["bom_id"])], limit=1)
-            if bom and bom.category_id and bom.category_id.sequence_id:
+    @api.model_create_multi
+    def create(self, vals_list):
+        for values in vals_list:
+            bom_id = values.get("bom_id")
+            if not bom_id:
+                continue
+            bom = self.env["mrp.bom"].browse(bom_id)
+            if bom.exists() and bom.category_id.sequence_id:
                 values["name"] = bom.category_id.sequence_id.next_by_id()
-        production = super(MrpProduction, self).create(values)
-        return production
+        return super().create(vals_list)

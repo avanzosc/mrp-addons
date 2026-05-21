@@ -10,7 +10,6 @@ class MrpBomCategory(models.Model):
     _description = "MRP BoM Category"
 
     name = fields.Char(
-        string="Name",
         required=True,
     )
     sequence_id = fields.Many2one(
