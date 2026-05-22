@@ -6,9 +6,7 @@ from odoo import fields, models
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
-    production_date = fields.Datetime(
-        string="Production Date",
-    )
+    production_date = fields.Datetime()
 
     def button_mark_done(self):
         result = super().button_mark_done()
@@ -21,9 +19,7 @@ class MrpProduction(models.Model):
                         ("raw_material_production_id", "=", production.id),
                     ]
                 )
-                for move in moves:
-                    move.date = production.production_date
-                    for line in move.move_line_ids:
-                        line.date = production.production_date
-                production.date_finished = production.production_date
+                moves.write({"date": production.production_date})
+                moves.move_line_ids.write({"date": production.production_date})
+                production.write({"date_finished": production.production_date})
         return result
