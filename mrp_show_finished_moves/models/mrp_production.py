@@ -244,8 +244,39 @@ class MrpProduction(models.Model):
                 production._update_move_next_serial(production.product_qty)
         return res
 
+    @api.onchange("lot_producing_id")
+    def _onchange_lot_producing_id_warning(self):
+        # Only warn when setting/changing to a real lot, not when clearing.
+        if (
+            self._origin.id
+            and self.lot_producing_id
+            and self._origin.lot_producing_id != self.lot_producing_id
+        ):
+            return {
+                "warning": {
+                    "title": _("Production Lot Change"),
+                    "message": _(
+                        "This change will reassign the lot on all finished product move "
+                        "lines that do not already have a manually set different lot and "
+                        "are not in done or cancelled state.\n\n"
+                        "Save the manufacturing order to confirm, or discard to cancel."
+                    ),
+                }
+            }
+
     def write(self, vals):
+        old_lot_names = {}
+        if "lot_producing_id" in vals:
+            for production in self:
+                if production.product_id.tracking == "lot":
+                    old_lot_names[production.id] = (
+                        production.lot_producing_id.name
+                        if production.lot_producing_id
+                        else False
+                    )
+
         res = super().write(vals)
+
         for production in self:
             if "lot_producing_id" in vals:
                 new_name = (
@@ -253,29 +284,26 @@ class MrpProduction(models.Model):
                     if production.lot_producing_id
                     else False
                 )
+                old_name = old_lot_names.get(production.id)
                 for move in production.move_finished_ids:
                     if (
                         move.product_id == production.product_id
                         and not move.raw_material_production_id
                         and move.product_id.tracking == "lot"
                     ):
-                        ml_cmds = []
-                        for ml in move.move_line_ids:
-                            if ml.id:
-                                ml_cmds.append((1, ml.id, {"lot_name": new_name}))
-                            else:
-                                ml_cmds.append(
-                                    (
-                                        0,
-                                        0,
-                                        {
-                                            "product_id": ml.product_id.id,
-                                            "qty_done": ml.qty_done,
-                                            "lot_name": new_name,
-                                        },
-                                    )
-                                )
-                        move.move_line_ids = ml_cmds
+                        active = move.move_line_ids.filtered(
+                            lambda ml: ml.state not in ("done", "cancel")
+                        )
+                        auto = active.filtered(
+                            lambda ml, oldn=old_name: not ml.lot_name
+                            or ml.lot_name == oldn
+                        )
+                        if auto:
+                            auto.write({"lot_name": new_name or False, "lot_id": False})
+                        if new_name:
+                            manual = active - auto
+                            manual.filtered("lot_id").write({"lot_id": False})
+
             if "qty_producing" in vals and production.product_id.tracking == "serial":
                 production._update_move_next_serial(production.qty_producing)
         return res

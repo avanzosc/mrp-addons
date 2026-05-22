@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 08:50+0000\n"
-"PO-Revision-Date: 2025-08-28 08:50+0000\n"
+"POT-Creation-Date: 2026-05-07 07:50+0000\n"
+"PO-Revision-Date: 2026-05-07 07:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,15 @@ msgid "<span class=\"o_stat_text\">Result Packages</span>"
 msgstr "<span class=\"o_stat_text\">Paquets de destinació</span>"
 
 #. module: mrp_show_finished_moves
+#: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
+msgid ""
+"Changing the lot will reassign it on all finished move lines that do not "
+"have a manually set different lot. Continue?"
+msgstr ""
+"El canvi del lot reassignarà el lot a totes les línies de moviment "
+"finalitzades que no tinguin un lot diferent assignat manualment. Voleu continuar?"
+
+#. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__create_uid
 msgid "Created by"
 msgstr "Creat per"
@@ -53,11 +62,6 @@ msgid "Finished Move Lines"
 msgstr "Línies de moviments finalitzats"
 
 #. module: mrp_show_finished_moves
-#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
-msgid "Last Manufactured Lot"
-msgstr "Últim lot fabricat"
-
-#. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_workorder_form_view_inherit
 msgid "Finished Moves"
@@ -77,6 +81,11 @@ msgstr "Avís d'inconsistència"
 #: model:ir.model,name:mrp_show_finished_moves.model_mrp_production_qty_warning
 msgid "Inconsistency in Quants Warning"
 msgstr "Avís d'inconsistència en quantitats"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
+msgid "Last Manufactured Lot"
+msgstr "Últim lot fabricat"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning____last_update
@@ -148,9 +157,21 @@ msgid "Product Moves (Stock Move Line)"
 msgstr "Moviment del producte (línia de moviment d'estoc)"
 
 #. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_uom_uom
+msgid "Product Unit of Measure"
+msgstr "Unitat de mesura del producte"
+
+#. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__production_id
 msgid "Production"
 msgstr "Producció"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid "Production Lot Change"
+msgstr "Canvi de lot de producció"
 
 #. module: mrp_show_finished_moves
 #: model:ir.model,name:mrp_show_finished_moves.model_mrp_production
@@ -174,6 +195,21 @@ msgstr "Mostrar detalls"
 #: model:ir.model,name:mrp_show_finished_moves.model_stock_move
 msgid "Stock Move"
 msgstr "Moviment d'estoc"
+
+#. module: mrp_show_finished_moves
+#. odoo-python
+#: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
+#, python-format
+msgid ""
+"This change will reassign the lot on all finished product move lines that do not already have a manually set different lot and are not in done or cancelled state.\n"
+"\n"
+"Save the manufacturing order to confirm, or discard to cancel."
+msgstr ""
+"Aquest canvi reassignarà el lot a totes les línies de moviment del producte "
+"finalitzades que no tinguin un lot diferent assignat manualment i no "
+"estiguin en estat finalitzat o cancel·lat.\n"
+"\n"
+"Deseu l'ordre de producció per confirmar o descarteu per cancel·lar."
 
 #. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__warning_message

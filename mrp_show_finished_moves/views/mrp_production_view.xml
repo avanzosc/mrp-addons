@@ -58,6 +58,19 @@
                     {'invisible': ['|', ('state', '=', 'draft'), ('product_tracking', '!=', 'lot')]}
                 </attribute>
             </xpath>
+            <xpath expr="//field[@name='lot_producing_id']" position="attributes">
+                <attribute
+          name="attrs"
+        >{'invisible': [('product_tracking', 'in', ('none', False))], 'readonly': [('state', 'in', ['done', 'cancel'])]}</attribute>
+            </xpath>
+            <xpath
+        expr="//button[@name='action_generate_serial']"
+        position="attributes"
+      >
+                <attribute
+          name="confirm"
+        >Changing the lot will reassign it on all finished move lines that do not have a manually set different lot. Continue?</attribute>
+            </xpath>
         </field>
     </record>
 
