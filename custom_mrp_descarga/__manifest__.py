@@ -3,7 +3,7 @@
 
 {
     "name": "Custom MRP Descarga",
-    "version": "14.0.1.1.0",
+    "version": "18.0.1.0.0",
     "category": "MRP",
     "license": "AGPL-3",
     "author": "AvanzOSC",
@@ -25,7 +25,7 @@
         "product_expiry",
         "stock_move_line_product_lot_reader",
         "product_multi_company_usability",
-        "product_supplierinfo_for_customer",
+        "product_customerinfo",
     ],
     "data": [
         "data/quartering_product.xml",
@@ -51,5 +51,4 @@
     ],
     "installable": True,
     "auto_install": True,
-    "pre_init_hook": "pre_init_hook",
 }

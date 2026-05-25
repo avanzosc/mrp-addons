@@ -1,5 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# pylint: disable=attribute-string-redundant
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -30,19 +31,21 @@ class SacaLine(models.Model):
             line.production_ids = [(6, 0, production.ids)]
 
     def action_view_production(self):
+        self.ensure_one()
+        production = self.production_ids[:1]
         context = self.env.context.copy()
         context.update(
             {
                 "default_saca_line_id": False,
-                "production_id": self.production_ids[0].id,
+                "production_id": production.id or False,
                 "active_model": "mrp.production",
-                "active_id": self.production_ids[0].id,
-                "active_ids": self.production_ids[0].ids,
+                "active_id": production.id or False,
+                "active_ids": production.ids,
             }
         )
         return {
             "name": _("Production"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "mrp.production",
             "domain": [("id", "in", self.production_ids.ids)],
             "search_view_id": self.env.ref("mrp.view_mrp_production_filter").id,
@@ -51,7 +54,7 @@ class SacaLine(models.Model):
         }
 
     def action_next_stage(self):
-        super(SacaLine, self).action_next_stage()
+        result = super().action_next_stage()
         stage_clasificado = self.env.ref("custom_descarga.stage_clasificado")
         project = self.env.ref("custom_saca_timesheet.project_saca")
         if self.company_id != self.env.company:
@@ -79,22 +82,21 @@ class SacaLine(models.Model):
                 )
                 for comp_onchange in new_production._onchange_methods["company_id"]:
                     comp_onchange(new_production)
+                new_production._compute_picking_type_id()
+                new_production._compute_locations()
+                new_production._compute_production_location()
                 vals = new_production._convert_to_write(new_production._cache)
                 production = self.env["mrp.production"].create(vals)
-                production.onchange_product_id()
                 production._onchange_product_qty()
                 production._onchange_bom_id()
-                production._onchange_move_raw()
+                production._compute_production_location()
+                production._compute_locations()
+                production._compute_move_raw_ids()
                 production._check_is_deconstruction()
-                production._onchange_location()
-                production._onchange_location_dest()
-                production._onchange_date_planned_start()
-                production._onchange_move_finished_product()
-                production._onchange_move_finished()
+                production._compute_move_finished_ids()
                 production._onchange_lot_producing()
-                production._onchange_workorder_ids()
-                production._check_production_lines()
-                production._create_update_move_finished()
+                if production.bom_id:
+                    production._compute_workorder_ids()
                 for analytic in self.timesheet_ids:
                     if not analytic.mrp_production_id:
                         analytic.mrp_production_id = production.id
@@ -126,10 +128,11 @@ class SacaLine(models.Model):
                     for clas in line.clasified_ids:
                         clas.employee_id = False
                         clas.user_id = False
+        return result
 
     @api.depends("stage_id", "production_ids")
     def _compute_stage(self):
-        super(SacaLine, self)._compute_stage()
+        result = super()._compute_stage()
         for line in self:
             matanza = self.env.ref("custom_descarga.stage_matanza")
             clasificado = self.env.ref("custom_descarga.stage_clasificado")
@@ -144,9 +147,10 @@ class SacaLine(models.Model):
                         "is_classified": False,
                     }
                 )
+        return result
 
     def write(self, values):
-        result = super(SacaLine, self).write(values)
+        result = super().write(values)
         if "gross_origin" in (values) or "tara_origin" in (values) and self.net_origin:
             for line in self.production_ids:
                 line.product_qty = self.net_origin
@@ -159,10 +163,10 @@ class SacaLine(models.Model):
             line.recalc_date = now
             move_lines = line.mapped("production_ids.move_line_ids")
             asphyxiated = move_lines.filtered(
-                lambda l: l.product_id.default_code == "8650"
+                lambda move_line: move_line.product_id.default_code == "8650"
             )
             seizured = move_lines.filtered(
-                lambda l: l.product_id.default_code == "9020"
+                lambda move_line: move_line.product_id.default_code == "9020"
             )
             if line.download_unit:
                 line.asphyxiated_percentage = (

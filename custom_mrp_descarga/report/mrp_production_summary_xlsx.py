@@ -113,8 +113,8 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         worksheet.write(n, m, _("Importe"), table_header)
         m += 1
         worksheet.write(n, m, _("% vivo"), table_header)
-        for m in range(m + 1, 10):
-            worksheet.write(n, m, "", table_header)
+        for col in range(m + 1, 10):
+            worksheet.write(n, col, "", table_header)
         movelines = objects.mapped("move_line_ids")
         categories = []
         products = []
@@ -123,42 +123,44 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         for line in movelines:
             if line.product_category_id not in categories:
                 categories.append(line.product_category_id)
+                category = line.product_category_id
                 categ_lines = movelines.filtered(
-                    lambda c: c.product_category_id == line.product_category_id
+                    lambda c, category=category: c.product_category_id == category
                 )
                 categ_container = sum(categ_lines.mapped("container"))
                 categ_unit = sum(categ_lines.mapped("unit"))
-                categ_qty_done = sum(categ_lines.mapped("qty_done"))
+                categ_quantity = sum(categ_lines.mapped("quantity"))
                 categ_average_weight = (
-                    (categ_qty_done / categ_unit) if categ_unit else 0
+                    (categ_quantity / categ_unit) if categ_unit else 0
                 )
                 categ_amount = sum(categ_lines.mapped("amount"))
                 categt_applied_price = round(
-                    (categ_amount / categ_qty_done) if categ_qty_done != 0 else 0, 3
+                    (categ_amount / categ_quantity) if categ_quantity != 0 else 0, 3
                 )
                 for product in categ_lines:
                     if product.product_id not in products:
                         n += 1
                         m = 0
                         products.append(product.product_id)
+                        product_id = product.product_id
                         product_lines = categ_lines.filtered(
-                            lambda c: c.product_id == product.product_id
+                            lambda c, product_id=product_id: c.product_id == product_id
                         )
                         product_container = sum(product_lines.mapped("container"))
                         product_unit = sum(product_lines.mapped("unit"))
-                        product_qty_done = sum(product_lines.mapped("qty_done"))
+                        product_quantity = sum(product_lines.mapped("quantity"))
                         product_percentage = (
-                            (product_qty_done * 100 / categ_qty_done)
-                            if categ_qty_done
+                            (product_quantity * 100 / categ_quantity)
+                            if categ_quantity
                             else 0
                         )
                         product_average_weight = (
-                            (product_qty_done / product_unit) if product_unit else 0
+                            (product_quantity / product_unit) if product_unit else 0
                         )
                         product_amount = sum(product_lines.mapped("amount"))
                         product_applied_price = (
-                            (product_amount / product_qty_done)
-                            if product_qty_done
+                            (product_amount / product_quantity)
+                            if product_quantity
                             else 0
                         )
                         worksheet.write(
@@ -173,7 +175,7 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                         m += 1
                         worksheet.write(n, m, product_unit)
                         m += 1
-                        worksheet.write(n, m, product_qty_done)
+                        worksheet.write(n, m, product_quantity)
                         m += 1
                         worksheet.write(
                             n, m, product_average_weight, three_decimal_format
@@ -190,7 +192,7 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                         worksheet.write(
                             n,
                             m,
-                            round(product_qty_done / origin_qty * 100, 2),
+                            round(product_quantity / origin_qty * 100, 2),
                             two_decimal_format,
                         )
                 n += 1
@@ -205,7 +207,7 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                 m += 1
                 worksheet.write(n, m, categ_unit, result_int_format)
                 m += 1
-                worksheet.write(n, m, categ_qty_done, result_two_decimal)
+                worksheet.write(n, m, categ_quantity, result_two_decimal)
                 m += 1
                 worksheet.write(n, m, categ_average_weight, result_three_decimal)
                 m += 1
@@ -214,9 +216,9 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
                 worksheet.write(n, m, categ_amount, result_two_decimal)
                 m += 1
                 worksheet.write(
-                    n, m, categ_qty_done / origin_qty * 100, result_two_decimal
+                    n, m, categ_quantity / origin_qty * 100, result_two_decimal
                 )
-                sum_live_percentage += categ_qty_done / origin_qty * 100
+                sum_live_percentage += categ_quantity / origin_qty * 100
         different_date_planned = objects.mapped("saca_date")
         different_date_planned = list({d for d in different_date_planned})
         n += 1
@@ -233,18 +235,18 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         total_unit = sum(movelines.mapped("unit"))
         worksheet.write(n, m, total_unit, result_int_format)
         m += 1
-        total_qty_done = sum(movelines.mapped("qty_done"))
-        worksheet.write(n, m, total_qty_done, result_two_decimal)
+        total_quantity = sum(movelines.mapped("quantity"))
+        worksheet.write(n, m, total_quantity, result_two_decimal)
         m += 1
-        worksheet.write(n, m, total_qty_done / total_unit, result_three_decimal)
+        worksheet.write(n, m, total_quantity / total_unit, result_three_decimal)
         m += 1
         total_amount = sum(movelines.mapped("amount"))
-        total_average_price = total_amount / total_qty_done
+        total_average_price = total_amount / total_quantity
         worksheet.write(n, m, total_average_price, result_three_decimal)
         m += 1
         worksheet.write(n, m, total_amount, result_two_decimal)
         m += 1
-        worksheet.write(n, m, total_qty_done / origin_qty * 100, result_two_decimal)
+        worksheet.write(n, m, total_quantity / origin_qty * 100, result_two_decimal)
         n += 1
         m = 0
         worksheet.write(n, m, "Datos de granja", result_int_format)
@@ -310,9 +312,9 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         m += 1
         worksheet.write(n, m, total_unit / days, result_two_decimal)
         m += 1
-        worksheet.write(n, m, total_qty_done / days, result_two_decimal)
+        worksheet.write(n, m, total_quantity / days, result_two_decimal)
         m += 1
-        worksheet.write(n, m, total_qty_done / total_unit / days, result_three_decimal)
+        worksheet.write(n, m, total_quantity / total_unit / days, result_three_decimal)
         m += 1
         worksheet.write(n, m, total_average_price / days, result_three_decimal)
         m += 1

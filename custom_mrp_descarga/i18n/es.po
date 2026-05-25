@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-25 08:14+0000\n"
-"PO-Revision-Date: 2025-08-25 08:14+0000\n"
+"POT-Creation-Date: 2026-05-25 13:34+0000\n"
+"PO-Revision-Date: 2026-05-25 13:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,9 +33,8 @@ msgid "% Broken Breast"
 msgstr "% Pechuga rota"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "% vivo"
 msgstr ""
 
@@ -63,7 +62,7 @@ msgstr "Analítica"
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_account_analytic_line
 msgid "Analytic Line"
-msgstr "Línea Analítica"
+msgstr "Línea analítica"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__asphyxiation_units
@@ -77,8 +76,8 @@ msgid "Assign Serials"
 msgstr "Asignar Lotes"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_lot__average_price
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__average_price
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__average_price
 msgid "Average Price"
 msgstr "Precio medio"
 
@@ -103,11 +102,12 @@ msgstr "Lista de materiales"
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,help:custom_mrp_descarga.field_mrp_production__bom_id
 msgid ""
-"Bill of Materials allow you to define the list of required components to "
-"make a finished product."
+"Bills of Materials, also called recipes, are used to autocomplete components"
+" and work order instructions."
 msgstr ""
-"La lista de materiales le permite definir la lista de componentes necesarios"
-" para hacer un producto terminado."
+"Las listas de materiales, también conocidas como recetas de producción, se "
+"utilizan para autocompletar los componentes y las instrucciones de las "
+"órdenes de trabajo."
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_rate
@@ -157,6 +157,12 @@ msgid "Broken Breast"
 msgstr "Pechuga rota"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_product__is_broken_breast_calculation
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__is_broken_breast_calculation
+msgid "Broken Breast % Calc"
+msgstr "Calc. % Pechuga Rota"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__bom_category_id
 msgid "Category"
 msgstr "Categoría"
@@ -173,6 +179,7 @@ msgstr "Producción de pollito"
 
 #. module: custom_mrp_descarga
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_production
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_classified_pivot_view
 msgid "Clasificado"
 msgstr ""
 
@@ -208,7 +215,6 @@ msgstr "Clasificado"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__cost
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__cost
 msgid "Cost"
 msgstr "Coste"
 
@@ -218,11 +224,9 @@ msgid "Cost Calculation Date"
 msgstr "Fecha cálculo de coste"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Coste"
 msgstr ""
 
@@ -237,11 +241,14 @@ msgid "Customer Pricelist"
 msgstr "Tarifa de cliente"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__cutout
+msgid "Cutout"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Código"
 msgstr ""
 
@@ -251,9 +258,8 @@ msgid "Deconstruction"
 msgstr "Deconstrucción"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Definición"
 msgstr ""
 
@@ -282,7 +288,6 @@ msgstr "Órden de descarga"
 #. module: custom_mrp_descarga
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_production
 #: model:ir.ui.menu,name:custom_mrp_descarga.quartering_menu
-#: model:product.product,name:custom_mrp_descarga.quartering_product
 #: model:product.template,name:custom_mrp_descarga.quartering_product_product_template
 msgid "Despiece"
 msgstr ""
@@ -303,9 +308,8 @@ msgid "Dif. Total Amount"
 msgstr "Dif. Importe total"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Diferencia"
 msgstr ""
 
@@ -322,37 +326,10 @@ msgid "Difference %"
 msgstr "% diferencia"
 
 #. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom_category__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__display_name
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
-
-#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__no_produce_product
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__no_produce_product
 msgid "Don't produce the header product"
 msgstr "No producir producto de cabecera"
-
-#. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__qty_done
-msgid "Done"
-msgstr "Hecho"
 
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_view_search
@@ -377,9 +354,8 @@ msgid "Emtying Hatchers"
 msgstr "Vaciar nacedoras"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Entradas"
 msgstr ""
 
@@ -389,11 +365,9 @@ msgid "Entry Total Amount"
 msgstr "Importe total entradas"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Envases"
 msgstr ""
 
@@ -440,10 +414,9 @@ msgid "Guide Number"
 msgstr "Número de guía"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
-#, python-format
 msgid "Hatcheries"
 msgstr "Nacedoras"
 
@@ -453,33 +426,9 @@ msgid "Hen Units"
 msgstr "Galllinas"
 
 #. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom_category__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot__id
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__id
-msgid "ID"
-msgstr "Identificador"
-
-#. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Importe"
 msgstr ""
 
@@ -515,72 +464,34 @@ msgid "Integration"
 msgstr "Integración"
 
 #. module: custom_mrp_descarga
-#: model:ir.model,name:custom_mrp_descarga.model_stock_inventory_line
-msgid "Inventory Line"
-msgstr "Línea inventario"
-
-#. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "KG bruto"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "KG envases"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "KG neto"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "KG palets"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "KGs"
 msgstr ""
-
-#. module: custom_mrp_descarga
-#: model:product.product,weight_uom_name:custom_mrp_descarga.quartering_product
-#: model:product.template,weight_uom_name:custom_mrp_descarga.quartering_product_product_template
-msgid "Kg"
-msgstr ""
-
-#. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom_category____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_quartering_summary_xlsx____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_report_mrp_production_summary_xlsx____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_inventory_line____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_production_lot____last_update
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
 
 #. module: custom_mrp_descarga
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
@@ -621,9 +532,9 @@ msgid "Lot Cost"
 msgstr "Coste lote"
 
 #. module: custom_mrp_descarga
-#: model:ir.model,name:custom_mrp_descarga.model_stock_production_lot
+#: model:ir.model,name:custom_mrp_descarga.model_stock_lot
 msgid "Lot/Serial"
-msgstr "Lote/Nº de serie"
+msgstr "Lote/serie "
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__lot_producing_id
@@ -657,6 +568,11 @@ msgid "MRP Production Summary Report"
 msgstr "Informe de resumen OFs"
 
 #. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Orden de fabricación"
+
+#. module: custom_mrp_descarga
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_other_bom
 #: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_bom
 #: model:ir.ui.menu,name:custom_mrp_descarga.menu_other_bom
@@ -670,9 +586,8 @@ msgid "Medicine"
 msgstr "Medicina"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Merma"
 msgstr ""
 
@@ -687,10 +602,9 @@ msgid "Mother Location"
 msgstr "Ubicación madre"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_production_lot_form
-#, python-format
 msgid "Move Lines"
 msgstr "Operaciones detalladas"
 
@@ -701,18 +615,16 @@ msgid "No Duplicate Lines"
 msgstr "No duplicar líneas"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
-#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
-#, python-format
 msgid "No lot has been put on."
-msgstr "No se ha puesto lote"
+msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/mrp_production.py:0
-#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
-#, python-format
 msgid "No mother has been put on."
-msgstr "No se ha puesto madre"
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__normal
@@ -752,9 +664,8 @@ msgid "PAASA"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Palets"
 msgstr ""
 
@@ -764,18 +675,11 @@ msgid "Performance %"
 msgstr "Rto%"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Peso medio"
 msgstr ""
-
-#. module: custom_mrp_descarga
-#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__price_unit
-msgid "Price Unit"
-msgstr "Precio unitario"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__speed_consume_qty
@@ -788,6 +692,7 @@ msgid "Produced Qty"
 msgstr "Cantidad producida"
 
 #. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_product_template
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_id
 msgid "Product"
 msgstr "Producto"
@@ -806,12 +711,7 @@ msgstr "Movimientos de producto"
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr "Movimientos de Producto (Stock Move Line)"
-
-#. module: custom_mrp_descarga
-#: model:ir.model,name:custom_mrp_descarga.model_product_template
-msgid "Product Template"
-msgstr ""
+msgstr "Movimientos de producto (línea de movimiento de stock)"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_uom_id
@@ -819,26 +719,23 @@ msgid "Product Unit of Measure"
 msgstr "UdM de producto"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
 msgid "Product not in entries of the BoM: %(product)s"
-msgstr "El producto no se encuentra en las entradas de la LdM: %(product)s"
+msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
 msgid "Product not in outputs of the BoM: %(product)s"
-msgstr "El producto no se encuentra en las salidas de la LdM: %(product)s"
+msgstr ""
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__production_id
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__production_ids
-#, python-format
 msgid "Production"
 msgstr "Producción"
 
@@ -848,7 +745,6 @@ msgid "Production Date"
 msgstr "Fecha de producción"
 
 #. module: custom_mrp_descarga
-#: model:ir.model,name:custom_mrp_descarga.model_mrp_production
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__mrp_production_id
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
 msgid "Production Order"
@@ -860,9 +756,8 @@ msgid "Production Orders"
 msgstr "Órdenes de producción"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Producto"
 msgstr ""
 
@@ -880,18 +775,19 @@ msgstr "Precio unitario"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__unit_amount
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__quantity
 msgid "Quantity"
 msgstr "Cantidad"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__product_qty
 msgid "Quantity To Produce"
-msgstr "Cantidad para producir"
+msgstr "Cantidad a producir"
 
 #. module: custom_mrp_descarga
 #: model:ir.model,name:custom_mrp_descarga.model_stock_quant
 msgid "Quants"
-msgstr "Cantidades"
+msgstr "Cuantos"
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__quartering
@@ -914,15 +810,11 @@ msgstr "Recalcular costes"
 
 #. module: custom_mrp_descarga
 #: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_recalculate_cost_in_production_orders_ir_actions_server
-#: model:ir.cron,cron_name:custom_mrp_descarga.ir_cron_recalculate_cost_in_production_orders
-#: model:ir.cron,name:custom_mrp_descarga.ir_cron_recalculate_cost_in_production_orders
 msgid "Recalculate cost in production orders"
 msgstr "Recalcular costes en órdenes de producción"
 
 #. module: custom_mrp_descarga
 #: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost_ir_actions_server
-#: model:ir.cron,cron_name:custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost
-#: model:ir.cron,name:custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost
 msgid "Recalculate lot_average_cost"
 msgstr ""
 
@@ -949,9 +841,8 @@ msgid "Reproductor"
 msgstr "Reproductora"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Resumen de despiece"
 msgstr ""
 
@@ -961,9 +852,8 @@ msgid "Resumen de despiece XLSX"
 msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Resumen de matanza"
 msgstr ""
 
@@ -979,6 +869,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
 msgid "Rto. %"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Rto. Pechuga"
 msgstr ""
 
 #. module: custom_mrp_descarga
@@ -1002,10 +898,9 @@ msgid "Saca Line"
 msgstr "Línea de saca"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/report/sale_report.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/sale_report.py:0
 #: model:ir.actions.server,name:custom_mrp_descarga.action_sale_report
-#, python-format
 msgid "Sale Report"
 msgstr "Informe ventas"
 
@@ -1020,9 +915,8 @@ msgid "Sales Order Line"
 msgstr "Línea de pedido de venta"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Salidas"
 msgstr ""
 
@@ -1078,25 +972,22 @@ msgid "Task Name"
 msgstr "Nombre de tarea"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/saca_line.py:0
-#: code:addons/custom_mrp_descarga/models/saca_line.py:0
-#, python-format
 msgid "The company of the saca and your company is not the same."
-msgstr "La compañía de la saca no es la misma"
+msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
 msgid "The outgoing lot must match the incoming one."
-msgstr "El lote saliente debe coincidir con alguno de la entrada."
+msgstr ""
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
-#, python-format
 msgid "The product of the lot does not match with the product of the line."
-msgstr "El producto del lote no coincide con el producto de la línea."
+msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__timesheet_ids
@@ -1158,9 +1049,8 @@ msgid "Total Duration"
 msgstr "Duración total"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Total Entradas"
 msgstr ""
 
@@ -1211,9 +1101,8 @@ msgid "Total Quantity"
 msgstr "Cantidad total"
 
 #. module: custom_mrp_descarga
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
-#, python-format
 msgid "Total Salidas"
 msgstr ""
 
@@ -1228,11 +1117,9 @@ msgid "Total amount"
 msgstr "Importe total"
 
 #. module: custom_mrp_descarga
-#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#. odoo-python
 #: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
 #: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
-#, python-format
 msgid "Unidades"
 msgstr ""
 
@@ -1242,9 +1129,12 @@ msgid "Unit Difference"
 msgstr "Diferencia de unidades"
 
 #. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__price_unit
+msgid "Unit Price"
+msgstr "Precio unitario"
+
+#. module: custom_mrp_descarga
 #: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__total_unit
-#: model:product.product,uom_name:custom_mrp_descarga.quartering_product
-#: model:product.template,uom_name:custom_mrp_descarga.quartering_product_product_template
 msgid "Units"
 msgstr "Unidades"
 
@@ -1282,8 +1172,6 @@ msgstr "Tiempo de espera"
 
 #. module: custom_mrp_descarga
 #: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_weekly_quality_recalculation_ir_actions_server
-#: model:ir.cron,cron_name:custom_mrp_descarga.ir_cron_weekly_quality_recalculation
-#: model:ir.cron,name:custom_mrp_descarga.ir_cron_weekly_quality_recalculation
 msgid "Weekly Quality Recalculation"
 msgstr "Recálculo de calidad semanal"
 
@@ -1301,12 +1189,6 @@ msgstr "Costes de centros de producción"
 #: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
 msgid "Yesterday"
 msgstr "Ayer"
-
-#. module: custom_mrp_descarga
-#: model:product.product,volume_uom_name:custom_mrp_descarga.quartering_product
-#: model:product.template,volume_uom_name:custom_mrp_descarga.quartering_product_product_template
-msgid "m³"
-msgstr ""
 
 #. module: custom_mrp_descarga
 #: model:ir.ui.menu,name:custom_mrp_descarga.menu_production_classified

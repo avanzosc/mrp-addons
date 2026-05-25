@@ -1,10 +1,11 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# pylint: disable=attribute-string-redundant
 from odoo import _, api, fields, models
 
 
 class StockProductionLot(models.Model):
-    _inherit = "stock.production.lot"
+    _inherit = "stock.lot"
 
     average_price = fields.Float(
         string="Average Price",
@@ -13,7 +14,7 @@ class StockProductionLot(models.Model):
     )
 
     @api.depends(
-        "move_line_ids.amount", "move_line_ids.qty_done", "move_line_ids.state"
+        "move_line_ids.amount", "move_line_ids.quantity", "move_line_ids.state"
     )
     def _compute_average_price(self):
         for line in self:
@@ -25,9 +26,9 @@ class StockProductionLot(models.Model):
             )
             if clasified:
                 amount_total = sum(clasified.mapped("amount"))
-                qty_done = sum(clasified.mapped("qty_done"))
-                if qty_done != 0:
-                    average_price = amount_total / qty_done
+                quantity = sum(clasified.mapped("quantity"))
+                if quantity != 0:
+                    average_price = amount_total / quantity
             line.average_price = average_price
 
     def action_view_move_lines(self):
@@ -35,7 +36,7 @@ class StockProductionLot(models.Model):
         context.update({"default_lot_id": self.id})
         return {
             "name": _("Move Lines"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "stock.move.line",
             "domain": [
                 ("product_id", "=", self.product_id.id),

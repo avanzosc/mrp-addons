@@ -13,7 +13,7 @@ class StockMove(models.Model):
         "production_id",
     )
     def _compute_saca_line_id(self):
-        super(StockMove, self)._compute_saca_line_id()
+        result = super()._compute_saca_line_id()
         for move in self:
             saca_line = False
             if move.purchase_line_id:
@@ -25,3 +25,4 @@ class StockMove(models.Model):
             elif move.raw_material_production_id:
                 saca_line = move.raw_material_production_id.saca_line_id.id
             move.saca_line_id = saca_line
+        return result

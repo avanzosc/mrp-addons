@@ -25,6 +25,7 @@ class AccountAnalyticLine(models.Model):
         store=True,
     )
     breeding_id = fields.Many2one(
+        string="Production Breeding",
         comodel_name="stock.picking.batch",
         related="mrp_production_id.breeding_id",
         store=True,
@@ -40,12 +41,13 @@ class AccountAnalyticLine(models.Model):
         store=True,
     )
     production_product_id = fields.Many2one(
+        string="Production Product",
         comodel_name="product.product",
         related="mrp_production_id.product_id",
         store=True,
     )
     lot_producing_id = fields.Many2one(
-        comodel_name="stock.production.lot",
+        comodel_name="stock.lot",
         related="mrp_production_id.lot_producing_id",
         store=True,
     )
@@ -105,5 +107,5 @@ class AccountAnalyticLine(models.Model):
 
     unit_amount = fields.Float(
         string="Quantity",
-        group_operator="avg",
+        aggregator="avg",
     )

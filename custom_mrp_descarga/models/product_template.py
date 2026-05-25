@@ -1,5 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# pylint: disable=attribute-string-redundant
 from odoo import fields, models
 
 
@@ -8,3 +9,6 @@ class ProductTemplate(models.Model):
 
     download_product = fields.Boolean(string="Download Product", default=False)
     is_broken_breast = fields.Boolean(string="Broken Breast")
+    is_broken_breast_calculation = fields.Boolean(
+        string="Broken Breast % Calc", default=False
+    )

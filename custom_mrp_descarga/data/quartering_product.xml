@@ -1,5 +1,5 @@
 <odoo noupdate="1">
-    <record id="quartering_product" model="product.product">
-        <field name="name">Despiece</field>
-    </record>
+  <record id="quartering_product" model="product.product">
+    <field name="name">Despiece</field>
+  </record>
 </odoo>

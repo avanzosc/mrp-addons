@@ -1,5 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# pylint: disable=attribute-string-redundant
 
 
 from odoo import _, api, fields, models
@@ -13,7 +14,7 @@ class StockMoveLine(models.Model):
         string="Performance %",
         compute="_compute_performance",
         store=True,
-        group_operator="sum",
+        aggregator="sum",
     )
     sequence = fields.Integer(
         string="Sequence",
@@ -30,7 +31,7 @@ class StockMoveLine(models.Model):
         related="saca_line_id.date",
         store=True,
     )
-    qty_done = fields.Float(
+    quantity = fields.Float(
         digits="Weight Decimal Precision",
     )
     average_price = fields.Float(
@@ -82,12 +83,12 @@ class StockMoveLine(models.Model):
                         sequence = ids.index(line.id) + 1
             line.sequence = sequence
 
-    @api.depends("production_id.consume_qty", "qty_done")
+    @api.depends("production_id.consume_qty", "quantity")
     def _compute_performance(self):
         for line in self:
             performance = 0
             if line.production_id and line.production_id.consume_qty != 0:
-                performance = (line.qty_done * 100) / line.production_id.consume_qty
+                performance = (line.quantity * 100) / line.production_id.consume_qty
             line.performance = performance
 
     def check_product_in_bom(self, product, production):
@@ -121,9 +122,10 @@ class StockMoveLine(models.Model):
 
     @api.onchange("unit")
     def onchange_unit(self):
-        super(StockMoveLine, self).onchange_unit()
+        result = super().onchange_unit()
         if self.unit:
             self.download_unit = self.unit
+        return result
 
     @api.onchange(
         "product_id",
@@ -161,7 +163,7 @@ class StockMoveLine(models.Model):
 
     @api.onchange("lot_id")
     def _onchange_lot_id(self):
-        result = super(StockMoveLine, self)._onchange_lot_id()
+        result = super()._onchange_lot_id()
         if (
             self.production_id
             and (self.production_id.bring_cost_from_lots)
@@ -193,7 +195,7 @@ class StockMoveLine(models.Model):
     @api.onchange("product_id", "product_uom_id", "lot_id")
     def _onchange_product_id(self):
         res = super()._onchange_product_id()
-        if self.move_id.inventory_id and self.lot_id:
+        if self.move_id.is_inventory and self.lot_id:
             self.standard_price = self.lot_id.average_price
         return res
 
@@ -211,18 +213,19 @@ class StockMoveLine(models.Model):
                 )
             )
 
-    @api.model
-    def create(self, values):
-        if "qty_done" in values:
-            move = self.env["stock.move"].browse(values.get("move_id"))
-            if move.state == "cancel" and values.get("qty_done") != 0:
-                move.state = "done"
-                for line in move.move_line_ids:
-                    line.state = "done"
-        return super(StockMoveLine, self).create(values)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for values in vals_list:
+            if "quantity" in values:
+                move = self.env["stock.move"].browse(values.get("move_id"))
+                if move.state == "cancel" and values.get("quantity") != 0:
+                    move.state = "done"
+                    for line in move.move_line_ids:
+                        line.state = "done"
+        return super().create(vals_list)
 
     def write(self, values):
-        result = super(StockMoveLine, self).write(values)
+        result = super().write(values)
         for line in self:
             if not line.location_id:
                 values.update(
@@ -231,9 +234,9 @@ class StockMoveLine(models.Model):
                         "location_dest_id": line.move_id.location_dest_id.id,
                     }
                 )
-        if "qty_done" in values:
+        if "quantity" in values:
             for line in self:
-                if line.move_id.state == "cancel" and values.get("qty_done") != 0:
+                if line.move_id.state == "cancel" and values.get("quantity") != 0:
                     line.move_id.state = "done"
                     line.state = "done"
         return result

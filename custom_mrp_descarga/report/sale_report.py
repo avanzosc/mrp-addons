@@ -6,12 +6,12 @@ from odoo import _, fields, models
 class SaleReport(models.Model):
     _inherit = "sale.report"
 
-    lot_average_price = fields.Float(readonly=True, group_operator="avg")
+    lot_average_price = fields.Float(readonly=True, aggregator="avg")
     lot_id = fields.Many2one(
-        comodel_name="stock.production.lot",
+        comodel_name="stock.lot",
         readonly=True,
     )
-    price_unit = fields.Float(readonly=True, group_operator="avg")
+    price_unit = fields.Float(readonly=True, aggregator="avg")
     lot_cost = fields.Float(
         readonly=True,
     )
@@ -36,33 +36,23 @@ class SaleReport(models.Model):
             "context": context,
         }
 
-    def _group_by_sale(self, groupby=""):
-        res = super()._group_by_sale(groupby)
-        res += """, l.lot_id"""
-        res += """, l.price_unit"""
-        res += """, l.lot_average_price"""
-        res += """, l.surplus"""
+    def _group_by_sale(self):
+        res = super()._group_by_sale()
+        res += """,
+            l.lot_id,
+            l.lot_average_price,
+            l.surplus,
+            s.commitment_date"""
         return res
 
-    def _select_additional_fields(self, fields):
-        fields["lot_id"] = ", l.lot_id as lot_id"
-        fields["price_unit"] = ", l.price_unit as price_unit"
-        fields["lot_average_price"] = ", l.lot_average_price as lot_average_price"
-        fields["surplus"] = ", l.surplus as surplus"
-        fields["commitment_date"] = ", s.commitment_date as commitment_date"
-        return super()._select_additional_fields(fields)
-
-    def _query(self, with_clause="", fields=None, groupby="", from_clause=""):
-        if not fields:
-            fields = {}
-        fields["lot_cost"] = ", sum(l.lot_cost / u.factor * u2.factor) as " "lot_cost"
+    def _select_additional_fields(self):
+        fields = super()._select_additional_fields()
+        fields["lot_id"] = "l.lot_id"
+        fields["lot_average_price"] = "l.lot_average_price"
+        fields["surplus"] = "l.surplus"
+        fields["commitment_date"] = "s.commitment_date"
+        fields["lot_cost"] = "SUM(l.lot_cost / u.factor * u2.factor)"
         fields["difference"] = (
-            ", sum(l.price_subtotal - l.lot_cost / u.factor * u2.factor) as "
-            "difference"
+            "SUM(l.price_subtotal - l.lot_cost / u.factor * u2.factor)"
         )
-        return super(SaleReport, self)._query(
-            with_clause=with_clause,
-            fields=fields,
-            groupby=groupby,
-            from_clause=from_clause,
-        )
+        return fields

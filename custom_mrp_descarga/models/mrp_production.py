@@ -1,5 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# pylint: disable=attribute-string-redundant
 from datetime import datetime, timedelta
 
 from dateutil import rrule
@@ -72,7 +73,7 @@ class MrpProduction(models.Model):
         string="Expected %", compute="_compute_expected_birth", store=True
     )
     birth_difference = fields.Float(
-        string="Difference", compute="_compute_birth_difference", store=True
+        string="Birth Difference", compute="_compute_birth_difference", store=True
     )
     difference_rate = fields.Float(
         string="Difference %", compute="_compute_difference_rate", store=True
@@ -120,7 +121,7 @@ class MrpProduction(models.Model):
         string="Produced Qty", compute="_compute_produced_qty", store=True
     )
     qty_difference = fields.Float(
-        string="Difference", compute="_compute_qty_difference", store=True
+        string="Quantity Difference", compute="_compute_qty_difference", store=True
     )
     quartering = fields.Boolean(string="Quartering")
     no_duplicate_lines = fields.Boolean(
@@ -148,9 +149,7 @@ class MrpProduction(models.Model):
             ("demanding", "Demanding"),
         ],
     )
-    channel_temperature = fields.Float(
-        string="Channel Temperature", group_operator="avg"
-    )
+    channel_temperature = fields.Float(string="Channel Temperature", aggregator="avg")
     waiting_time = fields.Float(string="Waiting Time")
     clasified_ids = fields.One2many(
         string="Classified",
@@ -158,7 +157,7 @@ class MrpProduction(models.Model):
         inverse_name="production_id",
     )
     farm_warehouse_id = fields.Many2one(
-        string="Farm",
+        string="Farm Warehouse",
         comodel_name="stock.warehouse",
         related="saca_line_id.farm_warehouse_id",
         store=True,
@@ -191,22 +190,22 @@ class MrpProduction(models.Model):
         string="Asphyxiated",
         compute="_compute_asphyxiation_units",
         store=True,
-        group_operator="avg",
+        aggregator="avg",
     )
     seized_units = fields.Integer(
         string="Seized",
         compute="_compute_seized_units",
         store=True,
-        group_operator="avg",
+        aggregator="avg",
     )
     rto_percentage = fields.Float(
         string="Rto. %",
         compute="_compute_rto_percentage",
         store=True,
-        group_operator="avg",
+        aggregator="avg",
     )
     bom_category_id = fields.Many2one(
-        string="Category", related="bom_id.category_id", store=True
+        string="BOM Category", related="bom_id.category_id", store=True
     )
     no_produce_product = fields.Boolean(
         string="Don't produce the header product",
@@ -246,7 +245,7 @@ class MrpProduction(models.Model):
     second_performance = fields.Float(
         compute="_compute_second_performance",
         store=True,
-        group_operator="avg",
+        aggregator="avg",
     )
     breast_total = fields.Float(
         string="Total Breast",
@@ -263,6 +262,45 @@ class MrpProduction(models.Model):
         compute="_compute_breast_data",
         store=True,
     )
+    cutout = fields.Float(
+        string="Cutout",
+        compute="_compute_cutout",
+        store=True,
+    )
+
+    @api.depends(
+        "move_line_ids.quantity",
+        "finished_move_line_ids.quantity",
+        "move_line_ids.product_id.categ_id.second_category",
+    )
+    def _compute_cutout(self):
+        if not self.ids:
+            return
+        StockMoveLine = self.env["stock.move.line"]
+        cutout_data = StockMoveLine.read_group(
+            domain=[
+                ("production_id", "in", self.ids),
+                ("product_id.default_code", "=", "2214"),
+            ],
+            fields=["quantity", "production_id"],
+            groupby=["production_id"],
+        )
+        cutout_map = {
+            data["production_id"][0]: data["quantity"] for data in cutout_data
+        }
+        entry_data = StockMoveLine.read_group(
+            domain=[
+                ("production_id", "in", self.ids),
+                ("product_id.categ_id.second_category", "=", True),
+            ],
+            fields=["quantity", "production_id"],
+            groupby=["production_id"],
+        )
+        entry_map = {data["production_id"][0]: data["quantity"] for data in entry_data}
+        for production in self:
+            out_qty = cutout_map.get(production.id, 0.0)
+            entry_qty = entry_map.get(production.id, 0.0)
+            production.cutout = out_qty * 100 / entry_qty if entry_qty else 0.0
 
     @api.depends("total_duration", "total_unit")
     def _compute_speed_consume_unit(self):
@@ -346,7 +384,7 @@ class MrpProduction(models.Model):
             production.qty_difference = production.consume_qty - production.produced_qty
 
     @api.depends(
-        "finished_move_line_ids.qty_done",
+        "finished_move_line_ids.quantity",
         "finished_move_line_ids.product_id",
         "finished_move_line_ids.product_id.sum_in_production",
     )
@@ -357,17 +395,17 @@ class MrpProduction(models.Model):
                 produced_qty = sum(
                     production.finished_move_line_ids.filtered(
                         lambda c: c.product_id.sum_in_production
-                    ).mapped("qty_done")
+                    ).mapped("quantity")
                 )
             production.produced_qty = produced_qty
 
-    @api.depends("move_line_ids.qty_done", "origin_qty")
+    @api.depends("move_line_ids.quantity", "origin_qty")
     def _compute_gross_yield(self):
         for line in self:
             gross_yield = 0
             if line.origin_qty != 0:
                 gross_yield = (
-                    sum(line.move_line_ids.mapped("qty_done")) / line.origin_qty
+                    sum(line.move_line_ids.mapped("quantity")) / line.origin_qty
                 )
             line.gross_yield = gross_yield
 
@@ -430,11 +468,11 @@ class MrpProduction(models.Model):
         for line in self:
             expected_birth = 0
             if line.production_date:
+                production_date = line.production_date.date()
                 rate = line.batch_id.birth_rate_ids.filtered(
-                    lambda c: c.birth_start_date
-                    and c.birth_start_date <= (line.production_date.date())
-                    and (c.birth_start_date + timedelta(days=7))
-                    > (line.production_date.date())
+                    lambda c, production_date=production_date: c.birth_start_date
+                    and c.birth_start_date <= production_date
+                    and (c.birth_start_date + timedelta(days=7)) > production_date
                 )
                 if rate:
                     line.expected_rate = rate[0].percentage_birth
@@ -491,7 +529,7 @@ class MrpProduction(models.Model):
     def _compute_second_performance(self):
         for production in self:
             move_lines = production.mapped("move_line_ids").filtered(
-                lambda l: l.product_id.categ_id.second_category
+                lambda move_line: move_line.product_id.categ_id.second_category
             )
             production.second_performance = (
                 sum(move_lines.mapped("percentage")) if move_lines else 0.0
@@ -499,7 +537,8 @@ class MrpProduction(models.Model):
 
     @api.onchange("picking_type_id")
     def onchange_picking_type(self):
-        result = super(MrpProduction, self).onchange_picking_type()
+        super_onchange = getattr(super(), "onchange_picking_type", None)
+        result = super_onchange() if super_onchange else {}
         product = self.env["product.product"].search(
             [("one_day_chicken", "=", True)], limit=1
         )
@@ -523,13 +562,16 @@ class MrpProduction(models.Model):
 
     @api.onchange("product_qty", "product_uom_id")
     def _onchange_product_qty(self):
-        super(MrpProduction, self)._onchange_product_qty()
+        super_onchange = getattr(super(), "_onchange_product_qty", None)
+        result = super_onchange() if super_onchange else {}
         if self.product_qty:
             self.qty_producing = self.product_qty
+        return result
 
     @api.onchange("bom_id")
     def _onchange_bom_id(self):
-        result = super(MrpProduction, self)._onchange_bom_id()
+        super_onchange = getattr(super(), "_onchange_bom_id", None)
+        result = super_onchange() if super_onchange else {}
         if self.saca_line_id and self.origin_qty:
             self.product_qty = self.origin_qty
         if self.bom_id:
@@ -538,8 +580,10 @@ class MrpProduction(models.Model):
 
     @api.onchange("product_id")
     def _onchange_product_id(self):
+        result = super()._onchange_product_id()
         if self.product_id:
             self.product_uom_id = self.product_id.uom_id.id
+        return result
 
     def action_emptying_hatchers(self):
         for production in self:
@@ -552,13 +596,19 @@ class MrpProduction(models.Model):
                 if (quant.available_quantity > 0) and (
                     quant.lot_id.batch_id == production.batch_id
                 ):
+                    quant_product = quant.product_id
+                    quant_location = quant.location_id
+                    quant_lot = quant.lot_id
                     line = production.move_line_ids.filtered(
-                        lambda c: c.product_id == quant.product_id
-                        and (c.location_id == quant.location_id)
-                        and (c.lot_id == quant.lot_id)
+                        lambda c,
+                        product=quant_product,
+                        location=quant_location,
+                        lot=quant_lot: c.product_id == product
+                        and c.location_id == location
+                        and c.lot_id == lot
                     )
                     if line:
-                        line.qty_done += quant.available_quantity
+                        line.quantity += quant.available_quantity
                     if not line:
                         self.env["stock.move.line"].create(
                             {
@@ -568,7 +618,7 @@ class MrpProduction(models.Model):
                                     production.production_location_id.id
                                 ),
                                 "product_uom_id": quant.product_id.uom_id.id,
-                                "qty_done": quant.available_quantity,
+                                "quantity": quant.available_quantity,
                                 "lot_id": quant.lot_id.id,
                                 "batch_id": production.batch_id.id,
                                 "standard_price": quant.product_id.standard_price,
@@ -577,7 +627,8 @@ class MrpProduction(models.Model):
                                 "company_id": production.company_id.id,
                                 "production_id": production.id,
                                 "move_id": production.move_raw_ids.filtered(
-                                    lambda c: c.product_id == quant.product_id
+                                    lambda c, product=quant_product: c.product_id
+                                    == product
                                 ).id,
                             }
                         )
@@ -587,7 +638,7 @@ class MrpProduction(models.Model):
         context.update({"search_default_locationgroup": 1})
         return {
             "name": _("Hatcheries"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "stock.quant",
             "domain": [("id", "in", self.reproductor_quant_ids.ids)],
             "type": "ir.actions.act_window",
@@ -595,22 +646,23 @@ class MrpProduction(models.Model):
         }
 
     def action_confirm(self):
-        super(MrpProduction, self).action_confirm()
+        result = super().action_confirm()
         for production in self:
             production.action_assign_serials()
+        return result
 
     def button_mark_done(self):
         if self.move_finished_ids:
             self.move_finished_ids._do_unreserve()
-        result = super(MrpProduction, self).button_mark_done()
+        result = super().button_mark_done()
         if (
             result is not True
             and "res_model" in result
             and result["res_model"] == "mrp.consumption.warning"
             and self.no_duplicate_lines
         ):
-            entry_qty = sum(self.move_line_ids.mapped("qty_done"))
-            out_qty = sum(self.finished_move_line_ids.mapped("qty_done"))
+            entry_qty = sum(self.move_line_ids.mapped("quantity"))
+            out_qty = sum(self.finished_move_line_ids.mapped("quantity"))
             for move in self.move_raw_ids:
                 move.product_uom_qty = entry_qty
             for move in self.move_byproduct_ids:
@@ -631,8 +683,9 @@ class MrpProduction(models.Model):
     def action_delete_producing_line(self):
         for line in self:
             if line.no_produce_product:
+                product = line.product_id
                 for move in line.move_finished_ids.filtered(
-                    lambda c: c.product_id == (line.product_id)
+                    lambda c, product=product: c.product_id == product
                 ):
                     move.do_cancel_done()
                     move.state = "cancel"
@@ -640,8 +693,9 @@ class MrpProduction(models.Model):
     def action_generate_serial(self):
         self.ensure_one()
         date = self.production_date.date()
+        result = None
         if not self.lot_producing_id:
-            super(MrpProduction, self).action_generate_serial()
+            result = super().action_generate_serial()
             if self.batch_id:
                 self.lot_producing_id.name = "{}{}{}".format(
                     self.batch_id.name, date.strftime("%d%m"), (date.strftime("%Y")[2:])
@@ -651,6 +705,7 @@ class MrpProduction(models.Model):
                 self.batch_id.name, date.strftime("%d%m"), (date.strftime("%Y")[2:])
             )
         self.lot_producing_id.batch_id = self.batch_id.id
+        return result
 
     def action_assign_serials(self):
         for production in self:
@@ -658,7 +713,7 @@ class MrpProduction(models.Model):
                 for line in production.move_line_ids:
                     if line.product_id.tracking != "none" and not (line.lot_id):
                         lot = (
-                            self.env["stock.production.lot"]
+                            self.env["stock.lot"]
                             .search(
                                 [
                                     ("name", "=", production.lot_producing_id.name),
@@ -670,7 +725,7 @@ class MrpProduction(models.Model):
                         )
                         if not lot:
                             lot = (
-                                self.env[("stock.production.lot")]
+                                self.env["stock.lot"]
                                 .action_create_lot(
                                     line.product_id,
                                     production.lot_producing_id.name,
@@ -682,7 +737,7 @@ class MrpProduction(models.Model):
 
     def action_delete_moves_with_qty_zero(self):
         self.ensure_one()
-        lines = self.move_line_ids.filtered(lambda c: c.qty_done == 0)
+        lines = self.move_line_ids.filtered(lambda c: c.quantity == 0)
         for line in lines:
             line.unlink()
 
@@ -698,7 +753,7 @@ class MrpProduction(models.Model):
     def read_group(
         self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True
     ):
-        result = super(MrpProduction, self).read_group(
+        result = super().read_group(
             domain,
             fields,
             groupby,
@@ -741,23 +796,24 @@ class MrpProduction(models.Model):
 
     @api.depends(
         "move_line_ids",
-        "finished_move_line_ids.qty_done",
+        "finished_move_line_ids.quantity",
         "finished_move_line_ids.product_id",
         "finished_move_line_ids.product_id.categ_id",
         "finished_move_line_ids.product_id.categ_id.is_bone_in_breast",
         "finished_move_line_ids.product_id.product_tmpl_id",
         "finished_move_line_ids.product_id.product_tmpl_id.is_broken_breast",
+        "finished_move_line_ids.product_id.product_tmpl_id.is_broken_breast_calculation",
     )
     def _compute_breast_data(self):
         for record in self:
-            bone_in_moves = record.finished_move_line_ids.filtered(
-                lambda m: m.product_id.categ_id.is_bone_in_breast
+            broken_breast_calculation_moves = record.finished_move_line_ids.filtered(
+                lambda m: m.product_id.product_tmpl_id.is_broken_breast_calculation
             )
             broken_breast_moves = record.finished_move_line_ids.filtered(
                 lambda m: m.product_id.product_tmpl_id.is_broken_breast
             )
-            total = sum(bone_in_moves.mapped("qty_done"))
-            broken = sum(broken_breast_moves.mapped("qty_done"))
+            total = sum(broken_breast_calculation_moves.mapped("quantity"))
+            broken = sum(broken_breast_moves.mapped("quantity"))
             record.breast_total = total
             record.broken_breast = broken
             record.broken_breast_percent = (broken / total) * 100 if total else 0.0

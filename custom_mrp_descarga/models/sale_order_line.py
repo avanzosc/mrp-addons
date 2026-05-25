@@ -17,7 +17,7 @@ class SaleOrderLine(models.Model):
                 SELECT
                     lot_id,
                     SUM(amount) AS total_amount,
-                    SUM(qty_done) AS total_qty
+                    SUM(quantity) AS total_qty
                 FROM
                     stock_move_line
                 WHERE
