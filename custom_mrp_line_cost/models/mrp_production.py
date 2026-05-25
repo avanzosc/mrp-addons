@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
 
+KILLING_COST_DIGITS = (16, 3)
+
 
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
@@ -9,36 +11,32 @@ class MrpProduction(models.Model):
     origin_qty = fields.Float(string="Origin Kg")
     dest_qty = fields.Float(string="Dest Kg")
     purchase_price = fields.Float(string="Purchase Amount")
-    purchase_unit_price = fields.Float(string="Purchase Unit Price")
-    price_difference = fields.Float(
-        string="Price Difference",
-    )
+    purchase_unit_price = fields.Float()
+    price_difference = fields.Float()
     canal_weight = fields.Float(
         string="Canal Average Weight",
         compute="_compute_canal_weight",
         store=True,
-        digits="Killing Cost Decimal Precision",
+        digits=KILLING_COST_DIGITS,
     )
     rto_canal = fields.Float(
         string="Rto. Canal",
         compute="_compute_rto_canal",
         store=True,
-        group_operator="avg",
+        aggregator="avg",
     )
     canal_cost = fields.Float(
-        string="Canal Cost",
-        digits="Killing Cost Decimal Precision",
+        digits=KILLING_COST_DIGITS,
         compute="_compute_canal_cost",
         store=True,
     )
     currency_id = fields.Many2one(
-        string="Currency",
         comodel_name="res.currency",
         default=lambda self: self.env.company.currency_id.id,
     )
     month_cost = fields.Float(
         string="Expense/kg",
-        digits="Killing Cost Decimal Precision",
+        digits=KILLING_COST_DIGITS,
         compute="_compute_month_cost",
         store=True,
     )
@@ -58,13 +56,11 @@ class MrpProduction(models.Model):
         compute="_compute_picking_to_do_ids",
     )
     pallet_id = fields.Many2one(
-        string="Pallet",
         comodel_name="product.product",
         related="bom_id.pallet_id",
         store=True,
     )
     packaging_id = fields.Many2one(
-        string="Packaging",
         comodel_name="product.product",
         related="bom_id.packaging_id",
         store=True,
@@ -72,12 +68,10 @@ class MrpProduction(models.Model):
     average_cost = fields.Float(
         string="Averga Cost", compute="_compute_average_cost", store=True
     )
-    cost = fields.Float(string="Cost", compute="_compute_cost", store=True)
-    entry_total_amount = fields.Float(
-        string="Entry Total Amount", compute="_compute_entry_total_amount", store=True
-    )
+    cost = fields.Float(compute="_compute_cost", store=True)
+    entry_total_amount = fields.Float(compute="_compute_entry_total_amount", store=True)
     output_total_amount = fields.Float(
-        string="Output Total Amount", compute="_compute_output_total_amount", store=True
+        compute="_compute_output_total_amount", store=True
     )
     consume_qty = fields.Float(
         string="Consumed Qty", compute="_compute_consume_qty", store=True
@@ -99,7 +93,7 @@ class MrpProduction(models.Model):
             production.dif_total_amount = dif_total_amount
 
     @api.depends(
-        "move_line_ids.qty_done",
+        "move_line_ids.quantity",
         "move_line_ids.product_id",
         "move_line_ids.product_id.sum_in_production",
     )
@@ -108,7 +102,7 @@ class MrpProduction(models.Model):
             production.consume_qty = sum(
                 production.move_line_ids.filtered(
                     lambda c: c.product_id.sum_in_production
-                ).mapped("qty_done")
+                ).mapped("quantity")
             )
 
     @api.depends("purchase_price", "month_cost", "origin_qty")
@@ -136,34 +130,24 @@ class MrpProduction(models.Model):
                 )
             production.output_total_amount = output_total_amount
 
-    @api.depends("move_line_ids.qty_done", "move_line_ids.amount")
+    @api.depends("move_line_ids.quantity", "move_line_ids.amount")
     def _compute_average_cost(self):
         for line in self:
             average_cost = 0
-            if (
-                sum(
-                    line.move_line_ids.filtered(
-                        lambda c: c.location_id == line.location_src_id
-                    ).mapped("qty_done")
-                )
-                != 0
-            ):
-                average_cost = sum(
-                    line.move_line_ids.filtered(
-                        lambda c: c.location_id == (line.location_src_id)
-                    ).mapped("amount")
-                ) / sum(
-                    line.move_line_ids.filtered(
-                        lambda c: c.location_id == (line.location_src_id)
-                    ).mapped("qty_done")
-                )
+            location_src = line.location_src_id
+            source_lines = line.move_line_ids.filtered(
+                lambda c, location_src=location_src: c.location_id == location_src
+            )
+            source_qty = sum(source_lines.mapped("quantity"))
+            if source_qty != 0:
+                average_cost = sum(source_lines.mapped("amount")) / source_qty
             line.average_cost = average_cost
 
     def _compute_move_to_do_ids(self):
         for production in self:
             domain = [
                 ("state", "not in", ("done", "cancel")),
-                ("date", ">=", production.date_planned_start),
+                ("date", ">=", production.date_start),
                 ("picking_code", "=", "outgoing"),
             ]
             production.move_to_do_ids = self.env["stock.move"].search(domain)
@@ -172,7 +156,7 @@ class MrpProduction(models.Model):
         for production in self:
             domain = [
                 ("state", "not in", ("done", "cancel")),
-                ("date", ">=", production.date_planned_start),
+                ("date", ">=", production.date_start),
                 ("picking_code", "=", "outgoing"),
             ]
             production.move_line_to_do_ids = self.env["stock.move.line"].search(domain)
@@ -181,7 +165,7 @@ class MrpProduction(models.Model):
         for production in self:
             domain = [
                 ("state", "not in", ("done", "cancel")),
-                ("scheduled_date", ">=", production.date_planned_start),
+                ("scheduled_date", ">=", production.date_start),
                 ("picking_type_code", "=", "outgoing"),
             ]
             production.picking_to_do_ids = self.env["stock.picking"].search(domain)
@@ -201,14 +185,14 @@ class MrpProduction(models.Model):
         "workorder_ids.workcenter_id.cost_ids.october",
         "workorder_ids.workcenter_id.cost_ids.november",
         "workorder_ids.workcenter_id.cost_ids.december",
-        "date_planned_start",
+        "date_start",
     )
     def _compute_month_cost(self):
         for line in self:
             month_cost = 0
             if line.month_cost:
                 month_cost = line.month_cost
-            date = line.date_planned_start
+            date = line.date_start
             lock_date = line.company_id.fiscalyear_lock_date
             if date and line.workorder_ids and lock_date and date.date() >= lock_date:
                 month = date.month
@@ -239,12 +223,12 @@ class MrpProduction(models.Model):
             line.month_cost = month_cost
 
     def button_mark_done(self):
-        result = super(MrpProduction, self).button_mark_done()
+        result = super().button_mark_done()
         if "default_mrp_consumption_warning_line_ids" in self.env.context:
             self.button_calculate_costs()
         return result
 
-    def button_calculate_costs(self):
+    def button_calculate_costs(self):  # noqa: C901
         for production in self:
             qty = []
             lots = []
@@ -253,16 +237,18 @@ class MrpProduction(models.Model):
                 for line in production.move_line_ids:
                     line.onchange_applied_price()
                     if not line.move_id:
+                        product = line.product_id
                         line.move_id = production.move_raw_ids.filtered(
-                            lambda c: c.product_id == line.product_id
+                            lambda c, product=product: c.product_id == product
                         )[:1].id
                     if line.lot_id and line.lot_id not in lots:
+                        lot = line.lot_id
                         lots.append(line.lot_id)
                         qty.append(
                             sum(
                                 production.move_line_ids.filtered(
-                                    lambda c: c.lot_id == line.lot_id
-                                ).mapped("qty_done")
+                                    lambda c, lot=lot: c.lot_id == lot
+                                ).mapped("quantity")
                             )
                         )
                 if qty:
@@ -271,7 +257,7 @@ class MrpProduction(models.Model):
                     max_qty = qty[i]
                     if max_lot and max_qty:
                         lot_lines = production.move_line_ids.filtered(
-                            lambda c: c.lot_id == max_lot
+                            lambda c, max_lot=max_lot: c.lot_id == max_lot
                         )
                         amount = (
                             production.cost - production.entry_total_amount
@@ -289,7 +275,7 @@ class MrpProduction(models.Model):
                 for line in production.finished_move_line_ids:
                     line.applied_price = line.base_price
                     line.standard_price = line.applied_price
-                    line.amount = line.standard_price * line.qty_done
+                    line.amount = line.standard_price * line.quantity
                 dif = (
                     (production.average_cost + production.month_cost)
                     * production.consume_qty
@@ -297,12 +283,14 @@ class MrpProduction(models.Model):
                 if dif != 0:
                     for line in production.finished_move_line_ids:
                         if line.product_id and line.product_id not in products:
+                            product = line.product_id
                             products.append(line.product_id)
                             qty.append(
                                 sum(
                                     production.finished_move_line_ids.filtered(
-                                        lambda c: c.product_id == line.product_id
-                                    ).mapped("qty_done")
+                                        lambda c, product=product: c.product_id
+                                        == product
+                                    ).mapped("quantity")
                                 )
                             )
                     i = qty.index(max(qty))
@@ -311,7 +299,8 @@ class MrpProduction(models.Model):
                         max_qty = qty[i]
                         if max_product and max_qty:
                             product_lines = production.finished_move_line_ids.filtered(
-                                lambda c: c.product_id == max_product
+                                lambda c, max_product=max_product: c.product_id
+                                == max_product
                             )
                             amount = dif + sum(product_lines.mapped("amount"))
                             price = amount / max_qty
@@ -319,12 +308,12 @@ class MrpProduction(models.Model):
                                 max_line.applied_price = price
                                 max_line.onchange_applied_price()
 
-    @api.depends("move_line_ids.canal", "move_line_ids.qty_done")
+    @api.depends("move_line_ids.canal", "move_line_ids.quantity")
     def _compute_canal_weight(self):
         for line in self:
             canal_weight = 0
             canal_lines = line.move_line_ids.filtered(lambda c: c.canal is True)
-            canal_weight = sum(canal_lines.mapped("qty_done"))
+            canal_weight = sum(canal_lines.mapped("quantity"))
             canal_unit = sum(canal_lines.mapped("unit"))
             if canal_unit != 0:
                 canal_weight = canal_weight / canal_unit
@@ -340,7 +329,7 @@ class MrpProduction(models.Model):
             line.rto_canal = rto_canal
 
     @api.depends(
-        "move_line_ids.canal", "move_line_ids.qty_done", "move_line_ids.amount"
+        "move_line_ids.canal", "move_line_ids.quantity", "move_line_ids.amount"
     )
     def _compute_canal_cost(self):
         for line in self:
@@ -349,7 +338,7 @@ class MrpProduction(models.Model):
                 canal_lines = line.move_line_ids.filtered(lambda c: c.canal is True)
                 if canal_lines and sum(canal_lines.mapped("weight")) != 0:
                     canal_cost = sum(canal_lines.mapped("amount")) / sum(
-                        canal_lines.mapped("qty_done")
+                        canal_lines.mapped("quantity")
                     )
             line.canal_cost = canal_cost
 
@@ -357,7 +346,7 @@ class MrpProduction(models.Model):
         context = self.env.context.copy()
         return {
             "name": _("Moves To Do"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "stock.move",
             "domain": [("id", "in", self.move_to_do_ids.ids)],
             "type": "ir.actions.act_window",
@@ -368,7 +357,7 @@ class MrpProduction(models.Model):
         context = self.env.context.copy()
         return {
             "name": _("Move Lines To Do"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "stock.move.line",
             "domain": [("id", "in", self.move_line_to_do_ids.ids)],
             "type": "ir.actions.act_window",
@@ -379,7 +368,7 @@ class MrpProduction(models.Model):
         context = self.env.context.copy()
         return {
             "name": _("Pickings To Do"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "stock.picking",
             "domain": [("id", "in", self.picking_to_do_ids.ids)],
             "type": "ir.actions.act_window",
@@ -399,7 +388,7 @@ class MrpProduction(models.Model):
         )
         return {
             "name": _("Outputs"),
-            "view_mode": "tree",
+            "view_mode": "list",
             "view_id": self.env.ref(
                 "custom_mrp_line_cost.production_finished_move_line_ids_tree_view"
             ).id,
@@ -419,11 +408,12 @@ class MrpProduction(models.Model):
                 "location_dest_id": self.production_location_id.id,
                 "company_id": self.company_id.id,
                 "default_company_id": self.company_id.id,
+                "is_deconstruction": self.is_deconstruction,
             }
         )
         return {
             "name": _("Entries"),
-            "view_mode": "tree",
+            "view_mode": "list",
             "view_id": self.env.ref(
                 "custom_mrp_line_cost.production_move_line_ids_tree_view"
             ).id,

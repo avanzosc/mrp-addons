@@ -1,170 +1,158 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_move_line_tree" model="ir.ui.view">
-        <field name="model">stock.move.line</field>
-        <field name="inherit_id" ref="stock.view_move_line_tree" />
-        <field name="arch" type="xml">
-            <field name="product_uom_id" position="after">
-                <field
+  <record id="view_move_line_tree" model="ir.ui.view">
+    <field name="model">stock.move.line</field>
+    <field name="inherit_id" ref="stock.view_move_line_tree" />
+    <field name="arch" type="xml">
+      <field name="product_uom_id" position="after">
+        <field
           name="applied_price"
           optional="show"
-          attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+          readonly="state in ['done', 'cancel'] or is_locked"
         />
-            </field>
-            <field name="qty_done" position="after">
-                <field
+      </field>
+      <field name="quantity" position="after">
+        <field
           name="clean_qty"
           optional="hide"
           sum="Total Clean"
-          attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+          readonly="state in ['done', 'cancel'] or is_locked"
         />
-                <field name="clean_performance" optional="hide" />
-            </field>
-        </field>
-    </record>
+        <field name="clean_performance" optional="hide" />
+      </field>
+    </field>
+  </record>
 
-    <record model="ir.ui.view" id="production_move_line_ids_tree_view">
-        <field name="name">stock.move.line.tree.view</field>
-        <field name="model">stock.move.line</field>
-        <field name="arch" type="xml">
-            <tree editable="top">
-                <field
-          name="production_id"
-          force_save="1"
-          required="1"
-          optional="hide"
-        />
-                <field name="move_id" force_save="1" invisible="1" />
-                <field name="tracking" invisible="1" />
-                <field
+  <record model="ir.ui.view" id="production_move_line_ids_tree_view">
+    <field name="name">stock.move.line.tree.view</field>
+    <field name="model">stock.move.line</field>
+    <field name="arch" type="xml">
+      <list editable="top">
+        <field name="production_id" force_save="1" required="1" optional="hide" />
+        <field name="move_id" force_save="1" invisible="1" />
+        <field name="tracking" invisible="1" />
+        <field
           name="product_id"
           context="{'default_type': 'product'}"
           required="1"
-          attrs="{'readonly': ['|', ('id', '!=', False), ('state', 'in', ('cancel'))]}"
+          readonly="id or state == 'cancel'"
           options="{'no_create': True}"
           force_save="1"
         />
-                <field
+        <field
           name="lot_id"
           groups="stock.group_production_lot"
-          attrs="{'readonly': [('tracking', 'not in', ('lot', 'serial'))]}"
+          readonly="tracking not in ['lot', 'serial']"
           context="{'default_product_id': product_id, 'default_company_id': company_id}"
           domain="[('product_id', '=', product_id), '|', ('company_id', '=', company_id), ('company_id', '=', False)]"
           options="{'no_create': True}"
         />
-                <field name="location_id" optional="hide" force_save="1" />
-                <field name="location_dest_id" optional="hide" force_save="1" />
-                <field
-          name="package_id"
-          groups="stock.group_tracking_lot"
-          optional="hide"
-        />
-                <field
+        <field name="location_id" optional="hide" force_save="1" />
+        <field name="location_dest_id" optional="hide" force_save="1" />
+        <field name="package_id" groups="stock.group_tracking_lot" optional="hide" />
+        <field
           name="result_package_id"
           groups="stock.group_tracking_lot"
           optional="hide"
         />
-                <field name="product_uom_category_id" invisible="1" />
-                <field name="qty_done" />
-                <field name="clean_qty" optional="hide" sum="Total Clean" />
-                <field name="clean_performance" optional="hide" />
-                <field
-          name="product_uom_qty"
+        <field name="product_uom_category_id" invisible="1" />
+        <field name="quantity" />
+        <field name="clean_qty" optional="hide" sum="Total Clean" />
+        <field name="clean_performance" optional="hide" />
+        <field
+          name="quantity_product_uom"
           optional="hide"
           readonly="1"
-          attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
+          column_invisible="context.get('is_deconstruction', False)"
           sum="Total Reserved"
         />
-                <field
+        <field
           name="product_uom_id"
           optional="hide"
           options="{'no_create': True}"
           groups="uom.group_uom"
           readonly="1"
           force_save="1"
-          attrs="{'column_invisible':[('parent.is_deconstruction', '=', True)]}"
+          column_invisible="context.get('is_deconstruction', False)"
         />
-                <field
+        <field
           name="company_id"
           groups="base.group_multi_company"
           force_save="1"
           optional="hide"
         />
-                <field name="state" optional="hide" />
-            </tree>
-        </field>
-    </record>
+        <field name="state" optional="hide" />
+      </list>
+    </field>
+  </record>
 
-    <record model="ir.ui.view" id="production_finished_move_line_ids_tree_view">
-        <field name="name">stock.move.line.tree.view</field>
-        <field name="model">stock.move.line</field>
-        <field name="arch" type="xml">
-            <tree editable="top" limit="300">
-                <field name="state" invisible="1" />
-                <field name="production_id" optional="hide" />
-                <field name="move_id" invisible="1" />
-                <field
+  <record model="ir.ui.view" id="production_finished_move_line_ids_tree_view">
+    <field name="name">stock.move.line.tree.view</field>
+    <field name="model">stock.move.line</field>
+    <field name="arch" type="xml">
+      <list editable="top" limit="300">
+        <field name="state" invisible="1" />
+        <field name="production_id" optional="hide" />
+        <field name="move_id" invisible="1" />
+        <field
           name="company_id"
           groups="base.group_multi_company"
           force_save="1"
           optional="hide"
         />
-                <field
+        <field
           name="product_id"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          readonly="state in ['cancel', 'done']"
           options="{'no_create': True}"
           required="1"
         />
-                <field
+        <field
           name="product_uom_id"
           optional="hide"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          readonly="state in ['cancel', 'done']"
         />
-                <field name="product_uom_category_id" invisible="1" />
-                <field
+        <field name="product_uom_category_id" invisible="1" />
+        <field
           name="lot_id"
           domain="[('product_id', '=', product_id), ('company_id', '=', company_id)]"
           context="{'default_product_id': product_id, 'default_company_id': company_id}"
         />
-                <field name="expense_kg" optional="hide" />
-                <field
+        <field name="expense_kg" optional="hide" />
+        <field
           name="pallet_id"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          readonly="state in ['cancel', 'done']"
           optional="show"
         />
-                <field
+        <field
           name="pallet"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          readonly="state in ['cancel', 'done']"
           sum="Total Pallet"
         />
-                <field name="is_locked" invisible="1" />
-                <field
+        <field name="is_locked" invisible="1" />
+        <field
           name="container"
-          attrs="{'readonly': [('state', '=', 'cancel'), ('is_locked', '=', True)]}"
+          readonly="state == 'cancel' or is_locked"
           sum="Total Container"
         />
-                <field
-          name="brut"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
-        />
-                <field
+        <field name="brut" readonly="state in ['cancel', 'done']" />
+        <field
           name="location_id"
           optional="hide"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          readonly="state in ['cancel', 'done']"
         />
-                <field
+        <field
           name="location_dest_id"
           optional="hide"
-          attrs="{'readonly': [('state', 'in', ('cancel', 'done'))]}"
+          readonly="state in ['cancel', 'done']"
         />
-                <field name="qty_done" sum="Total Done" />
-                <field name="clean_qty" optional="hide" sum="Total Clean" />
-                <field name="clean_performance" optional="hide" />
-                <field name="base_price" optional="show" />
-                <field name="applied_price" optional="show" />
-                <field name="standard_price" optional="show" />
-                <field name="amount" optional="show" sum="Amount" />
-            </tree>
-        </field>
-    </record>
+        <field name="quantity" sum="Total Done" />
+        <field name="clean_qty" optional="hide" sum="Total Clean" />
+        <field name="clean_performance" optional="hide" />
+        <field name="base_price" optional="show" />
+        <field name="applied_price" optional="show" />
+        <field name="standard_price" optional="show" />
+        <field name="amount" optional="show" sum="Amount" />
+      </list>
+    </field>
+  </record>
 </odoo>

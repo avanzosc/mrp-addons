@@ -6,6 +6,6 @@ from odoo import fields, models
 class MrpBomByproduct(models.Model):
     _inherit = "mrp.bom.byproduct"
 
-    coefficient = fields.Float(string="Coefficient")
+    coefficient = fields.Float()
     expense_kg = fields.Boolean(string="Production Cost", default=False)
     cost = fields.Float(string="Fixed Price")

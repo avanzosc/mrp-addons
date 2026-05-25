@@ -6,7 +6,7 @@ from odoo import fields, models
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    canal = fields.Boolean(string="Canal", default=False)
+    canal = fields.Boolean(default=False)
     unit_container = fields.Integer(string="Unit/Container")
     palet = fields.Boolean(string="Is Palet", default=False)
     sum_in_production = fields.Boolean(string="Sum in Production Qty", default=True)

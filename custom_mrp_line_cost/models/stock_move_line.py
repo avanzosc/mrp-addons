@@ -3,6 +3,9 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+KILLING_COST_DIGITS = (16, 3)
+MRP_PRICE_DIGITS = (16, 5)
+
 
 class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
@@ -25,41 +28,35 @@ class StockMoveLine(models.Model):
         return result
 
     container = fields.Integer(string="Containers", default=_default_container)
-    unit = fields.Integer(string="Unit")
+    unit = fields.Integer()
     product_unit_container = fields.Integer(
         string="Product Unit/Container", related="product_id.unit_container", store=True
     )
     unit_container = fields.Float(string="Unit/Container")
     weight = fields.Float(
-        string="Weight",
         compute="_compute_weight",
         store=True,
-        digits="Killing Cost Decimal Precision",
+        digits=KILLING_COST_DIGITS,
     )
     percentage = fields.Float(
         string="%",
         compute="_compute_percentage",
         store=True,
-        digits="MRP Price Decimal Precision",
+        digits=MRP_PRICE_DIGITS,
     )
     base_price = fields.Float(
-        string="Base Price",
-        digits="MRP Price Decimal Precision",
+        digits=MRP_PRICE_DIGITS,
         compute="_compute_base_price",
         store=True,
     )
-    applied_price = fields.Float(
-        string="Applied Price", digits="MRP Price Decimal Precision"
-    )
+    applied_price = fields.Float(digits=MRP_PRICE_DIGITS)
     expense_kg = fields.Boolean(
         string="Cost/Kgm", compute="_compute_expense_kg", store=True
     )
-    canal = fields.Boolean(string="Canal", related="product_id.canal", store=True)
-    brut = fields.Float(string="Brut")
+    canal = fields.Boolean(related="product_id.canal", store=True)
+    brut = fields.Float()
     pallet = fields.Integer(string="Pallet Qty")
-    month_cost = fields.Float(
-        string="Month Cost", compute="_compute_month_cost", store=True
-    )
+    month_cost = fields.Float(compute="_compute_month_cost", store=True)
     operation_id = fields.Many2one(
         string="Operation",
         comodel_name="mrp.routing.workcenter",
@@ -67,7 +64,6 @@ class StockMoveLine(models.Model):
         store=True,
     )
     pallet_id = fields.Many2one(
-        string="Pallet",
         comodel_name="product.product",
         default=_default_pallet_id,
         domain="[('palet', '=', True)]",
@@ -75,15 +71,13 @@ class StockMoveLine(models.Model):
     clean_qty = fields.Float(
         string="Clean",
     )
-    clean_performance = fields.Float(
-        string="Clean Performance", compute="_compute_clean_performance", store=True
-    )
+    clean_performance = fields.Float(compute="_compute_clean_performance", store=True)
 
     @api.depends(
         "production_id",
         "production_id.move_line_ids",
         "production_id.move_line_ids.clean_qty",
-        "qty_done",
+        "quantity",
     )
     def _compute_clean_performance(self):
         for line in self:
@@ -92,14 +86,14 @@ class StockMoveLine(models.Model):
                 line.production_id
                 and sum(line.production_id.move_line_ids.mapped("clean_qty")) != 0
             ):
-                clean_performance = line.qty_done / sum(
+                clean_performance = line.quantity / sum(
                     line.production_id.move_line_ids.mapped("clean_qty")
                 )
             line.clean_performance = clean_performance
 
     @api.depends(
         "production_id",
-        "production_id.date_planned_start",
+        "production_id.date_start",
         "move_id",
         "move_id.bom_line_id",
         "move_id.bom_line_id.operation_id",
@@ -123,7 +117,7 @@ class StockMoveLine(models.Model):
             month_cost = 0
             if line.month_cost:
                 month_cost = line.month_cost
-            date = line.production_id.date_planned_start
+            date = line.production_id.date_start
             lock_date = line.company_id.fiscalyear_lock_date
             if (
                 date
@@ -134,54 +128,22 @@ class StockMoveLine(models.Model):
                 and date.date() >= lock_date
             ):
                 month = date.month
-                if month == 1:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.january
-                    )
-                if month == 2:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.february
-                    )
-                if month == 3:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.march
-                    )
-                if month == 4:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.april
-                    )
-                if month == 5:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.may
-                    )
-                if month == 6:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.june
-                    )
-                if month == 7:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.july
-                    )
-                if month == 8:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.august
-                    )
-                if month == 9:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.september
-                    )
-                if month == 10:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.october
-                    )
-                if month == 11:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.november
-                    )
-                if month == 12:
-                    month_cost = (
-                        line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids.december
-                    )
+                cost_ids = line.move_id.byproduct_id.operation_id.workcenter_id.cost_ids
+                monthly_costs = {
+                    1: cost_ids.january,
+                    2: cost_ids.february,
+                    3: cost_ids.march,
+                    4: cost_ids.april,
+                    5: cost_ids.may,
+                    6: cost_ids.june,
+                    7: cost_ids.july,
+                    8: cost_ids.august,
+                    9: cost_ids.september,
+                    10: cost_ids.october,
+                    11: cost_ids.november,
+                    12: cost_ids.december,
+                }
+                month_cost = monthly_costs.get(month, month_cost)
             line.month_cost = month_cost
 
     @api.depends(
@@ -213,7 +175,7 @@ class StockMoveLine(models.Model):
     def _compute_base_price(self):
         for line in self:
             cost = 0
-            if line.production_id and not line.production_id.date_planned_start:
+            if line.production_id and not line.production_id.date_start:
                 raise ValidationError(_("You must introduce the planned date."))
             else:
                 if (
@@ -230,17 +192,18 @@ class StockMoveLine(models.Model):
                 elif line.production_id and line.move_id.byproduct_id:
                     cost = line.move_id.byproduct_id.cost
                     if line.expense_kg:
+                        lot_name = line.lot_id.name
                         entry_same_lots = line.production_id.move_line_ids.filtered(
-                            lambda c: c.lot_id.name == line.lot_id.name
+                            lambda c, lot_name=lot_name: c.lot_id.name == lot_name
                         )
                         if (
                             not entry_same_lots
-                            or sum(entry_same_lots.mapped("qty_done")) == 0
+                            or sum(entry_same_lots.mapped("quantity")) == 0
                         ):
                             cost = 0
                         else:
                             entry_cost = sum(entry_same_lots.mapped("amount")) / sum(
-                                entry_same_lots.mapped("qty_done")
+                                entry_same_lots.mapped("quantity")
                             )
                             cost = (line.month_cost + entry_cost) * (
                                 line.move_id.byproduct_id.coefficient
@@ -251,26 +214,26 @@ class StockMoveLine(models.Model):
             if not line.standard_price:
                 line.standard_price = cost
 
-    @api.depends("unit", "qty_done")
+    @api.depends("unit", "quantity")
     def _compute_weight(self):
         for line in self:
             weight = 0
             if line.unit != 0:
-                weight = line.qty_done / line.unit
+                weight = line.quantity / line.unit
             line.weight = weight
 
-    @api.depends("qty_done", "production_id.origin_qty")
+    @api.depends("quantity", "production_id.origin_qty")
     def _compute_percentage(self):
         for line in self:
             percentage = 0
             if line.production_id.origin_qty != 0:
-                percentage = line.qty_done * 100 / line.production_id.origin_qty
+                percentage = line.quantity * 100 / line.production_id.origin_qty
             line.percentage = percentage
 
     @api.onchange("brut", "pallet", "container", "pallet_id")
     def onchange_brut(self):
         if self.brut:
-            self.qty_done = (
+            self.quantity = (
                 self.brut
                 - (self.pallet * self.pallet_id.weight)
                 - (self.container * self.production_id.packaging_id.weight)
@@ -287,7 +250,7 @@ class StockMoveLine(models.Model):
         if self.unit and self.container != 0:
             self.unit_container = self.unit / self.container
         if self.unit and self.product_id and self.product_id.asphyxiated:
-            self.qty_done = self.unit * self.production_id.average_weight
+            self.quantity = self.unit * self.production_id.average_weight
 
     @api.onchange("base_price")
     def onchange_base_price(self):
