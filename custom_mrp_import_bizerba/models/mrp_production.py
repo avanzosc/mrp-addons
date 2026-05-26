@@ -1,5 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+import re
 from datetime import datetime, timedelta
 
 import pymssql
@@ -54,7 +55,7 @@ class MrpProduction(models.Model):
         if (
             not self.clasified_date
             or not self.clasified_time_start
-            and not self.clasified_time_stop
+            or not self.clasified_time_stop
         ):
             raise ValidationError(
                 _("This classification does not have a start/end " + "time or date.")
@@ -72,11 +73,11 @@ class MrpProduction(models.Model):
         time_stop = self.clasified_time_stop
         time_stop = "{:02.0f}:{:02.0f}".format(*divmod(time_stop * 60, 60))
         time_stop = datetime.strptime(time_stop, "%H:%M").time()
-        start_date = "{} {}".format(date, time_start)
+        start_date = f"{date} {time_start}"
         start_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
         if time_start > time_stop:
             date = date + timedelta(days=1)
-        stop_date = "{} {}".format(date, time_stop)
+        stop_date = f"{date} {time_stop}"
         stop_date = datetime.strptime(stop_date, "%Y-%m-%d %H:%M:%S")
         try:
             conn = pymssql.connect(
@@ -115,6 +116,10 @@ class MrpProduction(models.Model):
                     timezone = pytz.timezone(self._context.get("tz") or "UTC")
                     line_date = timezone.localize(line_date).astimezone(pytz.UTC)
                     line_date = line_date.replace(tzinfo=None)
+                    line_unit_container = 0
+                    match = re.search(r"(?:[Xx]\s*)?(\d+)$", row[6].strip())
+                    if match:
+                        line_unit_container = int(match.group(1))
                     line_data = {
                         "import_id": self.id,
                         "production_id": self.id,
@@ -124,6 +129,7 @@ class MrpProduction(models.Model):
                         "line_uom": line_uom,
                         "line_chicken_code": line_chicken_code,
                         "line_date": line_date,
+                        "line_unit_container": line_unit_container,
                         "log_info": log_info,
                     }
                     self.import_line_ids = [(0, 0, line_data)]
@@ -133,5 +139,7 @@ class MrpProduction(models.Model):
                 self.production_id.action_confirm()
             if self.import_line_ids:
                 self.action_validate()
-        except Exception:
-            raise ValidationError(_("The connection could not be established."))
+        except Exception as error:
+            raise ValidationError(
+                _("The connection could not be established.")
+            ) from error

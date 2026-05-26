@@ -36,7 +36,7 @@ class StockMoveLine(models.Model):
 
     def reader_customerinfo(self, reader):
         self.ensure_one()
-        if not self.picking_id and not self.picking_id.partner_id:
+        if not self.picking_id or not self.picking_id.partner_id:
             message = _("The picking has no partner.")
             raise ValidationError(message)
         if reader:
@@ -57,7 +57,8 @@ class StockMoveLine(models.Model):
             raise ValidationError(message)
         if len(product_customerinfo) > 1:
             message = _(
-                "More than one product found for product code %(code)s and partner %(partner)s"
+                "More than one product found for product code %(code)s "
+                "and partner %(partner)s"
             ) % {"code": product_code, "partner": self.picking_id.partner_id.name}
             raise ValidationError(message)
         if product_customerinfo:
@@ -85,7 +86,7 @@ class StockMoveLine(models.Model):
             qty_done = float(qty_done)
             if product_customerinfo.final_partner_price:
                 qty_done = qty_done / product_customerinfo.final_partner_price
-            self.write({"qty_done": qty_done})
+            self.write({"quantity": qty_done})
 
     def reader_44_15(self, reader):
         self.ensure_one()
@@ -113,14 +114,16 @@ class StockMoveLine(models.Model):
                 )
                 if not product:
                     message = _(
-                        "Product not found, reader information for product code: %(reader)s"
+                        "Product not found, reader information for product "
+                        "code: %(reader)s"
                     ) % {
                         "reader": product_code,
                     }
                     raise ValidationError(message)
             if self.product_id and self.product_id != product:
                 message = _(
-                    "The product of the reader, %(reader)s, is not the same of the line."
+                    "The product of the reader, %(reader)s, "
+                    "is not the same of the line."
                 ) % {
                     "reader": product.display_name,
                 }
@@ -169,7 +172,7 @@ class StockMoveLine(models.Model):
                 )
             self.write(
                 {
-                    "qty_done": qty_done,
+                    "quantity": qty_done,
                     "lot_id": lot.id,
                 }
             )
@@ -205,7 +208,8 @@ class StockMoveLine(models.Model):
                 )
                 if not product:
                     message = _(
-                        "Product not found, reader information for product code: %(reader)s"
+                        "Product not found, reader information for product "
+                        "code: %(reader)s"
                     ) % {
                         "reader": product_code,
                     }
@@ -217,7 +221,8 @@ class StockMoveLine(models.Model):
                 raise ValidationError(message)
             if self.product_id and self.product_id != product:
                 message = _(
-                    "The product of the reader, %(reader)s, is not the same of the line."
+                    "The product of the reader, %(reader)s, "
+                    "is not the same of the line."
                 ) % {
                     "reader": product.display_name,
                 }
@@ -242,6 +247,7 @@ class StockMoveLine(models.Model):
                 qty_done = reader[20:23]
                 qty_done_decimal = reader[23:26]
             qty_done = qty_done + "." + qty_done_decimal
+            qty_done = float(qty_done)
             container = int(reader[28:36])
             lot_name = reader[38:46]
             lot_domain = [
@@ -254,5 +260,5 @@ class StockMoveLine(models.Model):
                 lot = self.env["stock.production.lot"].action_create_lot(
                     product, lot_name, self.company_id
                 )
-            vals = {"container": container, "qty_done": qty_done, "lot_id": lot.id}
+            vals = {"container": container, "quantity": qty_done, "lot_id": lot.id}
             self.write(vals)

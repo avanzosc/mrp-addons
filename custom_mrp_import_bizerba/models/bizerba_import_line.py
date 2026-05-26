@@ -1,6 +1,6 @@
 # Copyright 2022 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class BizerbaImportLine(models.Model):
@@ -13,59 +13,54 @@ class BizerbaImportLine(models.Model):
         comodel_name="mrp.production",
     )
     action = fields.Selection(
-        string="Action",
-        selection=[
-            ("create", "Create"),
-            ("nothing", "Nothing"),
-        ],
-        default="nothing",
-        states={"done": [("readonly", True)]},
-        copy=False,
-        required=True,
+        selection_add=[("create", "Create")],
+        ondelete={"create": "set default"},
     )
     line_product_code = fields.Char(
         string="Product Code",
-        states={"done": [("readonly", True)]},
         copy=False,
     )
     line_product_qty = fields.Float(
         string="Product Qty",
-        states={"done": [("readonly", True)]},
         copy=False,
-        digits="Bizerba Product Qty Decimal Precision",
+        digits=(32, 15),
     )
     line_uom = fields.Char(
         string="UoM",
-        states={"done": [("readonly", True)]},
         copy=False,
     )
     line_chicken_code = fields.Char(
         string="Chicken Code",
-        states={"done": [("readonly", True)]},
         copy=False,
     )
     line_date = fields.Datetime(
         string="Date",
-        states={"done": [("readonly", True)]},
         copy=False,
     )
     line_product_id = fields.Many2one(
         string="Product",
         comodel_name="product.product",
-        states={"done": [("readonly", True)]},
         copy=False,
     )
     line_uom_id = fields.Many2one(
         string="UoM",
         comodel_name="uom.uom",
-        states={"done": [("readonly", True)]},
         copy=False,
     )
     line_lot = fields.Char(
         string="Lot",
-        states={"done": [("readonly", True)]},
         copy=False,
     )
+    line_unit_container = fields.Integer(
+        string="Unit Container",
+        copy=False,
+    )
+
+    @api.model
+    def _valid_field_parameter(self, field, name):
+        if name == "states":
+            return True
+        return super()._valid_field_parameter(field, name)
 
     def _action_validate(self):
         update_values = super()._action_validate()
@@ -105,14 +100,14 @@ class BizerbaImportLine(models.Model):
                 move_line[:1].write(
                     {
                         "container": len(same_product_lines),
-                        "qty_done": sum(same_product_lines.mapped("line_product_qty")),
+                        "quantity": sum(same_product_lines.mapped("line_product_qty")),
                         "product_uom_id": self.line_uom_id.id,
+                        "unit_container": self.line_unit_container,
+                        "unit": sum(same_product_lines.mapped("line_unit_container")),
                     }
                 )
                 for line in same_product_lines:
                     line.write({"action": "nothing", "state": "done"})
-                move_line[:1].onchange_container()
-                move_line[:1].onchange_unit()
             else:
                 log_info = _("Error: There is no entry line with this product.")
             state = "error" if log_info else "done"

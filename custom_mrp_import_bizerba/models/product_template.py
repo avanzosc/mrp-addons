@@ -7,4 +7,4 @@ from odoo import fields, models
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    bizerba_code = fields.Char(string="Bizerba Code")
+    bizerba_code = fields.Char()

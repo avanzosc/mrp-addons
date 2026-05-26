@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-23 09:35+0000\n"
-"PO-Revision-Date: 2023-01-23 09:35+0000\n"
+"POT-Creation-Date: 2026-05-26 11:25+0000\n"
+"PO-Revision-Date: 2026-05-26 11:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -99,8 +99,6 @@ msgstr ""
 
 #. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__display_name
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__display_name
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_template__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -120,32 +118,32 @@ msgid "Error Log"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
-#, python-format
 msgid "Error: More than one UoM with name {} found."
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
-#, python-format
 msgid "Error: More than one product with Bizerba code {} found."
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
-#, python-format
 msgid "Error: No UoM found."
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
-#, python-format
 msgid "Error: No product found."
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/bizerba_import_line.py:0
-#, python-format
 msgid "Error: There is no entry line with this product."
 msgstr ""
 
@@ -170,11 +168,6 @@ msgid "Followers"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
-
-#. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
@@ -190,9 +183,12 @@ msgid "Group By"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__id
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__id
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_template__id
 msgid "ID"
 msgstr ""
 
@@ -208,7 +204,6 @@ msgstr ""
 
 #. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_needaction
-#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -249,13 +244,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line____last_update
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production____last_update
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_product_template____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -282,8 +270,8 @@ msgid "Lot"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_main_attachment_id
-msgid "Main Attachment"
+#: model:ir.model,name:custom_mrp_import_bizerba.model_mrp_production
+msgid "Manufacturing Order"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
@@ -297,8 +285,27 @@ msgid "Messages"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid ""
+"More than one product found for product code %(code)s and partner "
+"%(partner)s"
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid "More than one product found with code: %(reader)s."
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__my_activity_date_deadline
 msgid "My Activity Deadline"
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
@@ -317,8 +324,9 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model.fields.selection,name:custom_mrp_import_bizerba.selection__bizerba_import_line__action__nothing
-msgid "Nothing"
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid "No product found for product code %(code)s and partner %(partner)s"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
@@ -333,17 +341,12 @@ msgstr ""
 
 #. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
-
-#. module: custom_mrp_import_bizerba
-#: model:ir.model.fields,help:custom_mrp_import_bizerba.field_mrp_production__message_unread_counter
-msgid "Number of unread messages"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
@@ -358,6 +361,7 @@ msgid "Processed"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#: model:ir.model,name:custom_mrp_import_bizerba.model_product_template
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_product_id
 #: model_terms:ir.ui.view,arch_db:custom_mrp_import_bizerba.bizerba_import_line_view_search
 msgid "Product"
@@ -369,13 +373,19 @@ msgid "Product Code"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#: model:ir.model,name:custom_mrp_import_bizerba.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_product_qty
 msgid "Product Qty"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model,name:custom_mrp_import_bizerba.model_product_template
-msgid "Product Template (Multi-Company)"
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid "Product not found, reader information for product code: %(reader)s"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
@@ -384,8 +394,8 @@ msgid "Production"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model,name:custom_mrp_import_bizerba.model_mrp_production
-msgid "Production Order"
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__rating_ids
+msgid "Ratings"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
@@ -401,6 +411,11 @@ msgstr ""
 #. module: custom_mrp_import_bizerba
 #: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_has_sms_error
 msgid "SMS Delivery error"
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__split_size
+msgid "Split Size"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
@@ -424,20 +439,40 @@ msgid ""
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/mrp_production.py:0
-#, python-format
 msgid "The connection could not be established."
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid "The picking has no partner."
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid ""
+"The product of the line %(product)s is not the same as the product found "
+"%(product_found)s"
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid "The product of the reader, %(reader)s, is not the same of the line."
+msgstr ""
+
+#. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/mrp_production.py:0
-#, python-format
 msgid "This classification does not have a start/end time or date."
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
+#. odoo-python
 #: code:addons/custom_mrp_import_bizerba/models/mrp_production.py:0
-#, python-format
 msgid "This classification does not have the lot."
 msgstr ""
 
@@ -457,13 +492,14 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_unread
-msgid "Unread Messages"
+#. odoo-python
+#: code:addons/custom_mrp_import_bizerba/models/stock_move_line.py:0
+msgid "Unidentified barcode format : %(reader)s"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
-#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_mrp_production__message_unread_counter
-msgid "Unread Messages Counter"
+#: model:ir.model.fields,field_description:custom_mrp_import_bizerba.field_bizerba_import_line__line_unit_container
+msgid "Unit Container"
 msgstr ""
 
 #. module: custom_mrp_import_bizerba
