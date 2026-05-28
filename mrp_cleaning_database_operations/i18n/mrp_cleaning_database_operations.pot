@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-28 14:26+0000\n"
-"PO-Revision-Date: 2024-11-28 14:26+0000\n"
+"POT-Creation-Date: 2026-10-02 11:51+0000\n"
+"PO-Revision-Date: 2026-10-02 11:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,8 +21,21 @@ msgid "Cleaning Database Operations"
 msgstr ""
 
 #. module: mrp_cleaning_database_operations
+#. odoo-python
+#: code:addons/mrp_cleaning_database_operations/wizards/cleaning_database_warning_wizard.py:0
+msgid "Cleaning Database record not found."
+msgstr ""
+
+#. module: mrp_cleaning_database_operations
 #: model_terms:ir.ui.view,arch_db:mrp_cleaning_database_operations.cleaning_database_form_view
 msgid "Cleaning MRP Operations"
+msgstr ""
+
+#. module: mrp_cleaning_database_operations
+#: model_terms:ir.ui.view,arch_db:mrp_cleaning_database_operations.cleaning_database_form_view
+msgid ""
+"Deletes MRP Work Orders first and\n"
+"                        Manufacturing Orders afterwards."
 msgstr ""
 
 #. module: mrp_cleaning_database_operations
@@ -32,7 +45,7 @@ msgstr ""
 
 #. module: mrp_cleaning_database_operations
 #: model_terms:ir.ui.view,arch_db:mrp_cleaning_database_operations.cleaning_database_form_view
-msgid "Manufacturing: MRP Workorder, MRP Production."
+msgid "Manufacturing Operations"
 msgstr ""
 
 #. module: mrp_cleaning_database_operations
@@ -43,4 +56,15 @@ msgstr ""
 #. module: mrp_cleaning_database_operations
 #: model:ir.model,name:mrp_cleaning_database_operations.model_cleaning_database_warning_wizard
 msgid "Wizard for warning when cleaning database operations"
+msgstr ""
+
+#. module: mrp_cleaning_database_operations
+#. odoo-python
+#: code:addons/mrp_cleaning_database_operations/wizards/cleaning_database_warning_wizard.py:0
+msgid ""
+"You are about to delete manufacturing operations for the selected companies.\n"
+"\n"
+"MRP Work Orders will be deleted first, followed by Manufacturing Orders.\n"
+"\n"
+"This operation is irreversible."
 msgstr ""
