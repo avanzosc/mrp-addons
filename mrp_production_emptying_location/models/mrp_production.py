@@ -1,4 +1,4 @@
-# Copyright 2023 Berezi Amubieta - AvanzOSC
+# Copyright 2025 Berezi Amubieta - AvanzOSC
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import models
 
@@ -30,13 +30,10 @@ class MrpProduction(models.Model):
                                 {
                                     "product_id": quant.product_id.id,
                                     "product_uom_id": quant.product_id.uom_id.id,
-                                    "qty_done": quant.available_quantity,
+                                    "quantity": quant.available_quantity,
                                     "location_id": quant.location_id.id,
                                     "location_dest_id": self.production_location_id.id,
-                                    "standard_price": quant.product_id.standard_price,
                                     "company_id": self.company_id.id,
-                                    "amount": quant.available_quantity
-                                    * quant.product_id.standard_price,
                                     "lot_id": quant.lot_id.id,
                                     "production_id": self.id,
                                 },
@@ -45,5 +42,5 @@ class MrpProduction(models.Model):
                     }
                 )
             self.action_confirm()
-            self.product_qty = sum(self.move_line_ids.mapped("qty_done"))
-            self.qty_producing = sum(self.move_line_ids.mapped("qty_done"))
+            self.product_qty = sum(self.move_line_ids.mapped("quantity"))
+            self.qty_producing = sum(self.move_line_ids.mapped("quantity"))
