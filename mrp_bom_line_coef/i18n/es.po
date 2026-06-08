@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_line_coef
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 09:09+0000\n"
+"PO-Revision-Date: 2026-05-19 09:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_line_coef
+#: model:ir.model,name:mrp_bom_line_coef.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Línea de lista de materiales"
+
+#. module: mrp_bom_line_coef
+#: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__coefficient
+msgid "Coefficient"
+msgstr "Coeficiente"
+
+#. module: mrp_bom_line_coef
+#: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: mrp_bom_line_coef
+#: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__cost
+msgid "Fixed Cost"
+msgstr "Coste fijo"
+
+#. module: mrp_bom_line_coef
+#: model:ir.model.fields,field_description:mrp_bom_line_coef.field_mrp_bom_line__expense_kg
+msgid "Production Cost"
+msgstr "Coste de producción"
