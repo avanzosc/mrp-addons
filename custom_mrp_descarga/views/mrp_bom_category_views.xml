@@ -5,6 +5,7 @@
         <field name="arch" type="xml">
             <field name="sequence_id" position="after">
                 <field name="is_quartering" />
+                <field name="bring_components_on_confirm" />
             </field>
         </field>
     </record>
@@ -15,6 +16,7 @@
         <field name="arch" type="xml">
             <field name="sequence_id" position="after">
                 <field name="is_quartering" />
+                <field name="bring_components_on_confirm" />
             </field>
         </field>
     </record>
