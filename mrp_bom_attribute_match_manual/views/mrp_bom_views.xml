@@ -9,6 +9,14 @@
         <attribute name="readonly">0</attribute>
         <attribute name="options">{'no_create': True}</attribute>
       </field>
+      <field name="match_on_attribute_ids" position="after">
+        <field name="component_attribute_ids" column_invisible="1" />
+        <field
+          name="component_match_attribute_id"
+          domain="[('id', 'in', component_attribute_ids)]"
+          options="{'no_create': True}"
+        />
+      </field>
     </field>
   </record>
 </odoo>
