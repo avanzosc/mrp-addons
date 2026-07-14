@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="mrp_bom_form_view" model="ir.ui.view">
+    <field name="name">mrp.bom.form.attribute.match.manual</field>
+    <field name="model">mrp.bom</field>
+    <field name="inherit_id" ref="mrp_bom_attribute_match.mrp_bom_form_view" />
+    <field name="arch" type="xml">
+      <field name="match_on_attribute_ids" position="attributes">
+        <attribute name="readonly">0</attribute>
+        <attribute name="options">{'no_create': True}</attribute>
+      </field>
+    </field>
+  </record>
+</odoo>
