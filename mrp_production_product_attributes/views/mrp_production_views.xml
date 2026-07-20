@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="mrp_production_form_view" model="ir.ui.view">
+    <field name="name">mrp.production.form.product.attributes</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+    <field name="arch" type="xml">
+      <page name="miscellaneous" position="after">
+        <page
+          name="product_attributes"
+          string="Manufacturing Product Attributes"
+          groups="product.group_product_variant"
+        >
+          <field name="product_variant_attributes" readonly="1">
+            <list create="0" delete="0" edit="0">
+              <field name="product_tmpl_id" />
+              <field name="attribute_id" />
+              <field name="name" />
+              <field name="html_color" />
+              <field name="price_extra" />
+            </list>
+          </field>
+        </page>
+      </page>
+    </field>
+  </record>
+</odoo>
