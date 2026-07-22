@@ -12,18 +12,18 @@ class StockScrap(models.Model):
     def override_mrp_assign_lot_do_scrap(self):
         self._check_company()
         for scrap in self:
-            # == BEGIN override change
             scrap.name = (
                 scrap.production_id.name[3:]
                 if scrap.production_id
                 else self.env["ir.sequence"].next_by_code("stock.scrap") or _("New")
             )
-            # == END override change
             move = self.env["stock.move"].create(scrap._prepare_move_values())
             # master: replace context by cancel_backorder
             move.with_context(is_scrap=True)._action_done()
-            scrap.write({"move_id": move.id, "state": "done"})
+            scrap.write({"state": "done"})
             scrap.date_done = fields.Datetime.now()
+            if scrap.should_replenish:
+                scrap.do_replenish()
         return True
 
 
