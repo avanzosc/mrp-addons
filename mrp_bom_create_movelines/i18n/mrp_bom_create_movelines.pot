@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_create_movelines
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-27 08:29+0000\n"
+"PO-Revision-Date: 2026-07-27 08:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_create_movelines
+#: model:ir.model.fields,field_description:mrp_bom_create_movelines.field_mrp_bom_category__bring_components_on_confirm
+msgid "Bring Components on Confirm"
+msgstr ""
+
+#. module: mrp_bom_create_movelines
+#: model:ir.model.fields,field_description:mrp_bom_create_movelines.field_mrp_bom_category__display_name
+#: model:ir.model.fields,field_description:mrp_bom_create_movelines.field_mrp_production__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mrp_bom_create_movelines
+#: model:ir.model.fields,field_description:mrp_bom_create_movelines.field_mrp_bom_category__id
+#: model:ir.model.fields,field_description:mrp_bom_create_movelines.field_mrp_production__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_bom_create_movelines
+#: model:ir.model.fields,field_description:mrp_bom_create_movelines.field_mrp_bom_category____last_update
+#: model:ir.model.fields,field_description:mrp_bom_create_movelines.field_mrp_production____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mrp_bom_create_movelines
+#: model:ir.model,name:mrp_bom_create_movelines.model_mrp_bom_category
+msgid "MRP BoM Category"
+msgstr ""
+
+#. module: mrp_bom_create_movelines
+#: model:ir.model,name:mrp_bom_create_movelines.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: mrp_bom_create_movelines
+#: model:ir.model.fields,help:mrp_bom_create_movelines.field_mrp_bom_category__bring_components_on_confirm
+msgid ""
+"When confirming a production order with this category, automatically create "
+"input lines for all storable BOM components without requiring lot "
+"reservation."
+msgstr ""
