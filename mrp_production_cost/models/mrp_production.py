@@ -12,12 +12,14 @@ class MrpProduction(models.Model):
         copy=False,
         store=True,
         compute="_compute_cost_material_to_consume",
+        default=0.0,
     )
     cost_material_consumed = fields.Float(
         string="Real Material Cost",
         copy=False,
         store=True,
         compute="_compute_cost_material_consumed",
+        default=0.0,
     )
     # Workorder costs
     cost_workorder_estimated = fields.Float(
@@ -25,12 +27,14 @@ class MrpProduction(models.Model):
         copy=False,
         store=True,
         compute="_compute_cost_workorder_estimated",
+        default=0.0,
     )
     cost_workorder_real = fields.Float(
         string="Real Work Cost",
         copy=False,
         store=True,
         compute="_compute_cost_workorder_real",
+        default=0.0,
     )
     # Manufacturing costs
     cost_manufacturing_estimated = fields.Float(
@@ -38,12 +42,14 @@ class MrpProduction(models.Model):
         copy=False,
         store=True,
         compute="_compute_cost_manufacturing_estimated",
+        default=0.0,
     )
     cost_manufacturing_real = fields.Float(
         string="Real Manufacturing Cost",
         copy=False,
         store=True,
         compute="_compute_cost_manufacturing_real",
+        default=0.0,
     )
     price_unit_cost = fields.Float(
         string="Cost Unit Price",
@@ -51,6 +57,7 @@ class MrpProduction(models.Model):
         copy=False,
         store=True,
         compute="_compute_price_unit_cost",
+        default=0.0,
     )
 
     @api.depends("move_raw_ids", "move_raw_ids.material_cost_to_consume")
@@ -98,12 +105,13 @@ class MrpProduction(models.Model):
 
     @api.depends("cost_manufacturing_real", "qty_producing")
     def _compute_price_unit_cost(self):
-        for production in self.filtered(
-            lambda x: x.cost_manufacturing_real and x.qty_producing
-        ):
-            production.price_unit_cost = (
-                production.cost_manufacturing_real / production.qty_producing
-            )
+        for production in self:
+            price_unit_cost = 0.0
+            if production.qty_producing:
+                price_unit_cost = (
+                    production.cost_manufacturing_real / production.qty_producing
+                )
+            production.price_unit_cost = price_unit_cost
 
     def _post_inventory(self, cancel_backorder=False):
         return super()._post_inventory(cancel_backorder=cancel_backorder)
