@@ -1,0 +1,955 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_laser_cut
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-05 07:36+0000\n"
+"PO-Revision-Date: 2026-08-05 07:36+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish (Spain)\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser_tiempos__estado__activa
+msgid "Active"
+msgstr "Activa"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__actual_consumed_quantity
+msgid "Actual Consumed Quantity"
+msgstr "Cantidad consumida real"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__actual_time
+msgid "Actual Time"
+msgstr "Tiempo real"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__actual_waste
+msgid "Actual Waste"
+msgstr "Desperdicio real"
+
+#. module: mrp_laser_cut
+#. odoo-python
+#: code:addons/mrp_laser_cut/models/stock_warehouse_orderpoint.py:0
+msgid "All the selected lines must have a laser material."
+msgstr "Todas las líneas seleccionadas deben tener un material láser."
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Are you sure you want to cancel this laser cutting order?"
+msgstr "¿Seguro que quieres cancelar esta orden de corte láser?"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de archivos adjuntos"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__bom_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_stock_move__lista_olaser_id
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.res_config_settings_view_form_laser
+msgid "Bill of Materials"
+msgstr "Lista de materiales"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__bom_id
+msgid ""
+"Bill of Materials of the generic product used to create the manufacturing "
+"order."
+msgstr ""
+"Lista de materiales del producto genérico utilizado para crear la orden de "
+"fabricación."
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.res_config_settings_view_form_laser
+msgid ""
+"Bill of Materials of the generic product, used by default on new laser "
+"cutting orders"
+msgstr ""
+"Lista de materiales del producto genérico, usada por defecto en las nuevas "
+"órdenes de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_res_company__laser_bom_id
+#: model:ir.model.fields,help:mrp_laser_cut.field_res_config_settings__laser_bom_id
+msgid ""
+"Bill of Materials of the laser cutting generic product, used by default on "
+"new laser cutting orders."
+msgstr ""
+"Lista de materiales del producto genérico de corte láser, usada por defecto "
+"en las nuevas órdenes de corte láser."
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser__state__cancel
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser_tiempos__estado__cancelada
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_product_product__is_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_product_template__is_laser_cut
+msgid ""
+"Check this on finished products replenished by laser cutting, so they show "
+"up in the dedicated laser cut replenishment view."
+msgstr ""
+"Marca esto en los productos terminados que se reponen mediante corte láser, "
+"para que aparezcan en la vista de reposición de corte láser."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser_tiempos__estado__cerrada
+msgid "Closed"
+msgstr "Cerrada"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_mrp_bom__laser_material_id
+msgid ""
+"Component of this Bill of Materials whose operation is performed on a laser "
+"work center."
+msgstr ""
+"Componente de esta lista de materiales cuya operación se realiza en un "
+"centro de trabajo láser."
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser__state__confirmado
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.stock_warehouse_orderpoint_view_list_laser
+msgid "Create Laser Cutting Order"
+msgstr "Crear orden de corte láser"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Create Manufacturing Order"
+msgstr "Crear orden de fabricación"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Created By"
+msgstr "Creado por"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__create_uid
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__create_uid
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__create_uid
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__create_date
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__create_date
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__create_date
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__state
+msgid ""
+"Derived from the state of the manufacturing order and its backorders: Draft "
+"> Confirmed > In Progress > Done > Cancelled, checked in that order of "
+"priority."
+msgstr ""
+"Derivado del estado de la orden de fabricación y de sus backorders: "
+"Borrador > Confirmado > En proceso > Terminado > Cancelado, comprobado en "
+"ese orden de prioridad."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__display_name
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__display_name
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__display_name
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__listas_ids
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Distribution"
+msgstr "Distribución"
+
+#. module: mrp_laser_cut
+#: model:ir.actions.act_window,name:mrp_laser_cut.action_order_olaser_lista
+#: model:ir.ui.menu,name:mrp_laser_cut.menu_order_olaser_lista
+msgid "Distribution Lines"
+msgstr "Líneas de distribución"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser__state__done
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_search
+msgid "Done"
+msgstr "Terminado"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser__state__draft
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_search
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__plano
+msgid "Drawing Number"
+msgstr "Número de plano"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__tiempo
+msgid "Duration (HH:MM)"
+msgstr "Duración (HH:MM)"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__salida
+msgid "End"
+msgstr "Fin"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__estimated_waste
+msgid "Estimated Waste"
+msgstr "Desperdicio estimado"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__unit_time
+msgid "Estimated time, in minutes, to cut one sheet."
+msgstr "Tiempo estimado, en minutos, para cortar una lámina."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__lista_olaser_ids
+msgid "Finished Product Moves"
+msgstr "Movimientos de producto terminado"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__peso_gas
+msgid "Gas Weight"
+msgstr "Peso del gas"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.res_config_settings_view_form_laser
+msgid "Generic Product"
+msgstr "Producto genérico"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__scrap_product_id
+msgid ""
+"Generic scrap/offcut product consumed instead of the raw material when this "
+"order uses scrap."
+msgstr ""
+"Producto genérico de retal/recorte consumido en lugar de la materia prima "
+"cuando esta orden usa retal."
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.res_config_settings_view_form_laser
+msgid ""
+"Generic, consumable product used as the product to manufacture on every "
+"manufacturing order generated from a laser cutting order"
+msgstr ""
+"Producto genérico consumible utilizado como producto a fabricar en cada "
+"orden de fabricación generada desde una orden de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_res_company__laser_generic_product_id
+#: model:ir.model.fields,help:mrp_laser_cut.field_res_config_settings__laser_generic_product_id
+msgid ""
+"Generic, consumable product used as the product to manufacture on every "
+"manufacturing order generated from a laser cutting order."
+msgstr ""
+"Producto genérico consumible utilizado como producto a fabricar en cada "
+"orden de fabricación generada desde una orden de corte láser."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_res_company__laser_scrap_product_id
+#: model:ir.model.fields,help:mrp_laser_cut.field_res_config_settings__laser_scrap_product_id
+msgid ""
+"Generic, consumable product used by default as the consumed material on "
+"laser cutting orders flagged as using scrap/offcut material."
+msgstr ""
+"Producto genérico consumible utilizado por defecto como material consumido "
+"en las órdenes de corte láser marcadas como que usan material de retal/"
+"recorte."
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.res_config_settings_view_form_laser
+msgid ""
+"Generic, consumable product used by default when a laser cutting order is "
+"flagged as using scrap/offcut material"
+msgstr ""
+"Producto genérico consumible utilizado por defecto cuando una orden de "
+"corte láser se marca como que usa material de retal/recorte"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_lista_view_search
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_search
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.stock_reorder_report_search_laser
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__has_message
+msgid "Has Message"
+msgstr "Tiene mensaje"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_stock_move__olaser_retal_control
+msgid "Has Scrap Control"
+msgstr "Tiene control de retal"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__cantidad_chapa
+msgid "How many units of this product are produced from one sheet."
+msgstr "Cuántas unidades de este producto se producen a partir de una lámina."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__message_has_error
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__es_retal
+msgid "If checked, the scrap product is consumed instead of the raw material."
+msgstr ""
+"Si está marcado, se consume el producto de retal en lugar de la materia "
+"prima."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser__state__proceso
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_search
+msgid "In Progress"
+msgstr "En proceso"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser_tiempos__estado__interrumpida
+msgid "Interrupted"
+msgstr "Interrumpida"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_mrp_workcenter__is_laser
+msgid "Is Laser"
+msgstr "Es láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_product_product__is_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_product_template__is_laser_cut
+msgid "Is Laser Cut"
+msgstr "Es corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__es_retal
+msgid "Is Scrap"
+msgstr "Es un retal"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__cantidad_consumo
+msgid "Kg per BOM Unit"
+msgstr "Kg por unidad de LdM"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__cantidad_consumo_total
+msgid "Kg per BOM Unit * Units per Sheet."
+msgstr "Kg por unidad de LdM * Unidades por lámina."
+
+#. module: mrp_laser_cut
+#: model:ir.ui.menu,name:mrp_laser_cut.menu_mrp_laser_cut_root
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.res_config_settings_view_form_laser
+msgid "Laser Cutting"
+msgstr "Corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_res_company__laser_bom_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_res_config_settings__laser_bom_id
+msgid "Laser Cutting Bill of Materials"
+msgstr "Lista de materiales de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_res_company__laser_generic_product_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_res_config_settings__laser_generic_product_id
+msgid "Laser Cutting Generic Product"
+msgstr "Producto genérico de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_order_olaser
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_mrp_production__laser_order_id
+msgid "Laser Cutting Order"
+msgstr "Orden de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_order_olaser_lista
+msgid "Laser Cutting Order Distribution Line"
+msgstr "Línea de distribución de orden de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_order_olaser_rechazo
+msgid "Laser Cutting Order Rejects"
+msgstr "Rechazos de orden de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_order_olaser_tiempos
+msgid "Laser Cutting Order Times"
+msgstr "Tiempos de orden de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.actions.act_window,name:mrp_laser_cut.action_order_olaser
+#: model:ir.ui.menu,name:mrp_laser_cut.menu_order_olaser
+msgid "Laser Cutting Orders"
+msgstr "Órdenes de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.actions.act_window,name:mrp_laser_cut.action_stock_warehouse_orderpoint_laser
+#: model:ir.actions.server,name:mrp_laser_cut.ir_actions_server_open_laser_orderpoints
+#: model:ir.ui.menu,name:mrp_laser_cut.menu_laser_orderpoint_replenish
+msgid "Laser Cutting Replenishment"
+msgstr "Reposición de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_res_company__laser_scrap_product_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_res_config_settings__laser_scrap_product_id
+msgid "Laser Cutting Scrap Product"
+msgstr "Producto de retal de corte láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_mrp_bom__laser_material_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_product_product__laser_material_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_product_template__laser_material_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_stock_warehouse_orderpoint__laser_material_id
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.stock_reorder_report_search_laser
+msgid "Laser Material"
+msgstr "Material láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__olaser_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__olaser_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__laser_tiempos_id
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_lista_view_search
+msgid "Laser Order"
+msgstr "Orden láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_stock_move__olaser_id
+msgid "Laser Order (Raw Material)"
+msgstr "Orden láser (materia prima)"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_stock_move__olaser_linea_id
+msgid "Laser Order Line"
+msgstr "Línea de orden láser"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_mrp_production__laser_order_id
+msgid "Laser cutting order that generated this manufacturing order."
+msgstr "Orden de corte láser que generó esta orden de fabricación."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__write_uid
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__write_uid
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__write_uid
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__write_date
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__write_date
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__write_date
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__lista_olaser_ids
+msgid ""
+"Legacy field from the workflow prior to native manufacturing orders: "
+"finished product moves for historical orders. New orders access these "
+"through the manufacturing order instead."
+msgstr ""
+"Campo histórico del flujo anterior a las órdenes de fabricación nativas: "
+"movimientos de producto terminado de órdenes históricas. Las órdenes "
+"nuevas acceden a esto a través de la orden de fabricación."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__olaser_ids
+msgid ""
+"Legacy field from the workflow prior to native manufacturing orders: raw "
+"material consumption moves for historical orders. New orders access these "
+"through the manufacturing order instead."
+msgstr ""
+"Campo histórico del flujo anterior a las órdenes de fabricación nativas: "
+"movimientos de consumo de materia prima de órdenes históricas. Las órdenes "
+"nuevas acceden a esto a través de la orden de fabricación."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__cantidad_chapa_termi
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__peso_gas
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__peso_gas_total
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__tiempo_total
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__tiempo_ud
+msgid ""
+"Legacy field from the workflow prior to native manufacturing orders; not "
+"used by new orders."
+msgstr ""
+"Campo histórico del flujo anterior a las órdenes de fabricación nativas; no "
+"se utiliza en las órdenes nuevas."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__cantidad_consumo_total
+msgid "Line Weight (kg)"
+msgstr "Peso de línea (kg)"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_mrp_production
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__production_id
+msgid "Manufacturing Order"
+msgstr "Producción"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__production_count
+msgid "Manufacturing Order Count"
+msgstr "Número de órdenes de fabricación"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Manufacturing Orders"
+msgstr "Órdenes de fabricación"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_stock_warehouse_orderpoint__material_unit_weight
+msgid "Material Unit Weight"
+msgstr "Peso unitario del material"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega del mensaje"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regla de inventario mínimo"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Moves"
+msgstr "Movimientos"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__cantidad
+msgid ""
+"Number of sheets. Manually set until a manufacturing order exists; from then"
+" on, it is kept in sync with the total quantity to produce across the whole "
+"manufacturing order chain (initial order and backorders), so it always "
+"reflects what is actually being produced."
+msgstr ""
+"Número de láminas. Se establece manualmente hasta que existe una orden de "
+"fabricación; a partir de ahí se mantiene sincronizado con la cantidad total "
+"a producir de toda la cadena de órdenes de fabricación (la inicial y sus "
+"backorders), de forma que siempre refleja lo que realmente se está "
+"produciendo."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields.selection,name:mrp_laser_cut.selection__order_olaser_tiempos__estado__pendiente
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__procesado
+msgid "Processed"
+msgstr "Procesado"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__terminado
+msgid "Produced Quantity"
+msgstr "Cantidad terminada"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_product_template
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__product_id
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__product_id
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_lista_view_search
+msgid "Product"
+msgstr "Producto"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_stock_warehouse_orderpoint__product_unit_weight
+msgid "Product Unit Weight"
+msgstr "Peso unitario del producto"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__cantidad
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__estimated_waste
+msgid ""
+"Quantity * (Unit Weight - sum of the line weight of all the distribution "
+"lines)."
+msgstr ""
+"Cantidad * (Peso unitario - suma del peso de línea de todas las líneas de "
+"distribución)."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__cantidad_consumo
+msgid ""
+"Quantity of raw material needed to produce one unit of this product, "
+"according to its own Bill of Materials."
+msgstr ""
+"Cantidad de materia prima necesaria para producir una unidad de este "
+"producto, según su propia lista de materiales."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser_lista__cantidad_chapa_total
+msgid "Quantity of the laser cutting order * Units per Sheet."
+msgstr "Cantidad de la orden de corte láser * Unidades por lámina."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__rating_ids
+msgid "Ratings"
+msgstr "Valoraciones"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__product_id
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_search
+msgid "Raw Material"
+msgstr "Materia prima"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__olaser_ids
+msgid "Raw Material Moves"
+msgstr "Movimientos de materia prima"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_product_product__laser_material_id
+#: model:ir.model.fields,help:mrp_laser_cut.field_product_template__laser_material_id
+#: model:ir.model.fields,help:mrp_laser_cut.field_stock_warehouse_orderpoint__laser_material_id
+msgid ""
+"Raw sheet material this product is cut from, according to its Bill of "
+"Materials."
+msgstr ""
+"Material de lámina en bruto del que se corta este producto, según su lista "
+"de materiales."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__actual_time
+msgid ""
+"Real duration of the work orders of all the manufacturing orders related to "
+"this laser cutting order (initial order and backorders)."
+msgstr ""
+"Duración real de las órdenes de trabajo de todas las órdenes de fabricación "
+"relacionadas con esta orden de corte láser (la inicial y sus backorders)."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_rechazo__cantidad
+msgid "Rejected Quantity"
+msgstr "Cantidad rechazada"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__rechazos_ids
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Rejects"
+msgstr "Rechazos"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__comunicado
+msgid "Reported Quantity"
+msgstr "Cantidad comunicada"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__cantidad_chapa_termi
+msgid "Reported Units"
+msgstr "Unidades comunicadas"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de entrega del SMS"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__scrap_product_id
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.res_config_settings_view_form_laser
+msgid "Scrap Product"
+msgstr "Producto de retal"
+
+#. module: mrp_laser_cut
+#. odoo-python
+#: code:addons/mrp_laser_cut/models/stock_warehouse_orderpoint.py:0
+msgid "Select at least one line."
+msgstr "Selecciona al menos una línea."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__entrada
+msgid "Start"
+msgstr "Inicio"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__state
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_tiempos__estado
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_search
+msgid "Status"
+msgstr "Estado"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__terminado
+msgid ""
+"Sum of the quantity produced across all the manufacturing orders related to "
+"this laser cutting order."
+msgstr ""
+"Suma de la cantidad producida en todas las órdenes de fabricación "
+"relacionadas con esta orden de corte láser."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__total_consumed_quantity
+msgid ""
+"Sum of the raw material quantity consumed across all the manufacturing "
+"orders related to this laser cutting order."
+msgstr ""
+"Suma de la cantidad de materia prima consumida en todas las órdenes de "
+"fabricación relacionadas con esta orden de corte láser."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__actual_consumed_quantity
+msgid ""
+"Sum of the weight of all the byproducts actually produced across all the "
+"manufacturing orders related to this laser cutting order."
+msgstr ""
+"Suma del peso de todos los subproductos realmente producidos en todas las "
+"órdenes de fabricación relacionadas con esta orden de corte láser."
+
+#. module: mrp_laser_cut
+#: model:ir.model.constraint,message:mrp_laser_cut.constraint_order_olaser_order_olaser_unique_code
+msgid "The order number must be unique!"
+msgstr "¡El número de orden debe ser único!"
+
+#. module: mrp_laser_cut
+#. odoo-python
+#: code:addons/mrp_laser_cut/models/order_olaser.py:0
+msgid "This order already has a manufacturing order."
+msgstr "Esta orden ya tiene una orden de fabricación."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__unit_time
+msgid "Time per Sheet"
+msgstr "Tiempo por lámina"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__total_time
+msgid ""
+"Time per Sheet * Quantity. Set as the expected duration of the work order "
+"created on the manufacturing order."
+msgstr ""
+"Tiempo por lámina * Cantidad. Se establece como la duración prevista de la "
+"orden de trabajo creada en la orden de fabricación."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__tiempo_ud
+msgid "Time per Unit"
+msgstr "Tiempo por unidad"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__laser_tiempos_ids
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Times"
+msgstr "Tiempos"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__total_consumed_quantity
+msgid "Total Consumed Quantity"
+msgstr "Cantidad consumida total"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__actual_waste
+msgid "Total Consumed Quantity - Actual Consumed Quantity."
+msgstr "Cantidad consumida total - Cantidad consumida real."
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__peso_gas_total
+msgid "Total Gas Weight"
+msgstr "Peso total del gas"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__cantidad_chapa_total
+msgid "Total Quantity"
+msgstr "Cantidad total"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__total_time
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__tiempo_total
+msgid "Total Time"
+msgstr "Tiempo total"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__peso_mp
+msgid "Unit Weight (kg)"
+msgstr "Peso Kgs"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser_lista__cantidad_chapa
+msgid "Units per Sheet"
+msgstr "Unidades por lámina"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicación del sitio web"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,help:mrp_laser_cut.field_order_olaser__peso_mp
+msgid "Weight of one raw material sheet."
+msgstr "Peso de una lámina de materia prima."
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_mrp_workcenter
+msgid "Work Center"
+msgstr "Centro de producción"
+
+#. module: mrp_laser_cut
+#: model:ir.model,name:mrp_laser_cut.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: mrp_laser_cut
+#: model:ir.model.fields,field_description:mrp_laser_cut.field_order_olaser__workorder_count
+msgid "Work Order Count"
+msgstr "Número de órdenes de trabajo"
+
+#. module: mrp_laser_cut
+#: model_terms:ir.ui.view,arch_db:mrp_laser_cut.order_olaser_view_form
+msgid "Work Orders"
+msgstr "Órdenes de trabajo"
+
+#. module: mrp_laser_cut
+#. odoo-python
+#: code:addons/mrp_laser_cut/models/order_olaser.py:0
+msgid ""
+"You cannot cancel a laser cutting order that already has completed stock "
+"moves; cancel the manufacturing order directly instead."
+msgstr ""
+"No puedes cancelar una orden de corte láser que ya tiene movimientos de "
+"stock completados; cancela directamente la orden de fabricación."
+
+#. module: mrp_laser_cut
+#. odoo-python
+#: code:addons/mrp_laser_cut/models/order_olaser.py:0
+msgid ""
+"You cannot delete a laser cutting order that has a manufacturing order."
+msgstr ""
+"No puedes eliminar una orden de corte láser que tiene una orden de "
+"fabricación."
+
+#. module: mrp_laser_cut
+#. odoo-python
+#: code:addons/mrp_laser_cut/models/order_olaser.py:0
+msgid ""
+"You need at least one distribution line to create a manufacturing order."
+msgstr ""
+"Necesitas al menos una línea de distribución para crear una orden de "
+"fabricación."

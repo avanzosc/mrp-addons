@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="mrp_workcenter_view_form_laser" model="ir.ui.view">
+    <field name="name">mrp.workcenter.form.laser</field>
+    <field name="model">mrp.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+    <field name="arch" type="xml">
+      <field name="code" position="after">
+        <field name="is_laser" />
+      </field>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_order_olaser,order.olaser,model_order_olaser,mrp.group_mrp_user,1,1,1,1
+access_order_olaser_lista,order.olaser.lista,model_order_olaser_lista,mrp.group_mrp_user,1,1,1,1
+access_order_olaser_tiempos,order.olaser.tiempos,model_order_olaser_tiempos,mrp.group_mrp_user,1,1,1,1
+access_order_olaser_rechazo,order.olaser.rechazo,model_order_olaser_rechazo,mrp.group_mrp_user,1,1,1,1

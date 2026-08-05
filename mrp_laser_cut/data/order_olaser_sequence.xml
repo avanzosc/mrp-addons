@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+  <record id="seq_order_olaser" model="ir.sequence">
+    <field name="name">Laser Cutting Order</field>
+    <field name="code">order.olaser</field>
+    <field name="prefix">OL%(y)s</field>
+    <field name="padding" eval="4" />
+  </record>
+</odoo>
