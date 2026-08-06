@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="mrp_routing_workcenter_tree_view" model="ir.ui.view">
+    <field name="model">mrp.routing.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//list" position="attributes">
+        <attribute name="editable">bottom</attribute>
+      </xpath>
+      <field name="time_cycle" position="attributes">
+        <attribute name="string">Duration (hours)</attribute>
+      </field>
+      <field name="time_cycle" position="after">
+        <field name="hour_cost" optional="show" />
+        <field
+          name="cost_op_without_overhead"
+          optional="show"
+          sum="Total Cost Op Without Overhead"
+        />
+        <field name="overhead" optional="show" />
+        <field
+          name="cost_op_with_overhead"
+          optional="show"
+          sum="Total Cost Op With Overhead"
+        />
+      </field>
+    </field>
+  </record>
+
+  <record id="mrp_routing_workcenter_form_view" model="ir.ui.view">
+    <field name="model">mrp.routing.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='time_cycle_manual']/.." position="replace">
+        <div invisible="time_mode == 'auto' and workorder_count != 0">
+                    <field
+          name="time_cycle_manual"
+          widget="float_time"
+          class="oe_inline"
+        /> hours
+                </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>
