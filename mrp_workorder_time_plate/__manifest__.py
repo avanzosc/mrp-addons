@@ -12,6 +12,7 @@
     ],
     "data": [
         "views/mrp_workorder_view.xml",
+        "views/mrp_workcenter_productivity_view.xml",
     ],
     "installable": True,
 }

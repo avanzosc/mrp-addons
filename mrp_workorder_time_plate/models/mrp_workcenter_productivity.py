@@ -16,6 +16,7 @@ class MrpWorkcenterProductivity(models.Model):
     speed_average = fields.Float(
         compute="_compute_speed_average",
         store=True,
+        group_operator="avg",
     )
 
     @api.depends("initial_plate", "final_plate")

@@ -1,0 +1,11 @@
+<odoo>
+     <record model="ir.ui.view" id="oee_pivot_view">
+         <field name="model">mrp.workcenter.productivity</field>
+         <field name="inherit_id" ref="mrp.oee_pivot_view" />
+         <field name="arch" type="xml">
+            <field name="duration" position="after">
+                <field name="speed_average" type="measure" string="Average Speed" />
+            </field>
+         </field>
+     </record>
+</odoo>
