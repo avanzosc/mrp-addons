@@ -9,6 +9,7 @@
             </xpath>
             <xpath expr="//field[@name='date']" position="attributes">
                 <attribute name="optional">hide</attribute>
+                <attribute name="groups" />
             </xpath>
             <xpath expr="//field[@name='company_id']" position="attributes">
                 <attribute name="optional">hide</attribute>
