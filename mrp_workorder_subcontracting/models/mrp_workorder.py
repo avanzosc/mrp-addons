@@ -93,18 +93,14 @@ class MrpWorkorder(models.Model):
         for wo in self:
             existing_po = PurchaseOrder.search(
                 [
-                    ("workorder_id", "=", wo.id),
+                    ("production_id", "=", wo.production_id.id),
                     ("partner_id", "=", wo.service_supplier_id.id),
                     ("state", "not in", ["cancel"]),
                 ],
                 limit=1,
             )
 
-            if existing_po:
-                wo.purchase_id = existing_po.id
-                continue
-
-            purchase_order = PurchaseOrder.with_context(
+            purchase_order = existing_po or PurchaseOrder.with_context(
                 mail_create_nosubscribe=True
             ).create(
                 {
