@@ -4,21 +4,19 @@
 {
     "name": "MRP BoM Import",
     "version": "18.0.1.0.0",
-    "category": "Manufacturing/Manufacturing",
+    "category": "Hidden/Tools",
     "author": "AvanzOSC",
     "license": "AGPL-3",
     "website": "https://github.com/avanzosc/mrp-addons",
     "depends": [
-        "base",
+        "base_import_wizard",
         "mrp",
-        "product",
+        "mrp_bom_component_menu",
     ],
     "data": [
         "security/ir.model.access.csv",
         "views/mrp_bom_import_view.xml",
         "views/mrp_bom_import_line_view.xml",
-        "views/mrp_bom_line_view.xml",
-        "views/product_view.xml",
     ],
     "installable": True,
 }
