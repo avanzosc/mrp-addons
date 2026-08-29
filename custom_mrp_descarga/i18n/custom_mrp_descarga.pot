@@ -1,0 +1,1193 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* custom_mrp_descarga
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-25 13:34+0000\n"
+"PO-Revision-Date: 2026-05-25 13:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,help:custom_mrp_descarga.field_account_analytic_line__production_state
+msgid ""
+" * Draft: The MO is not confirmed yet.\n"
+" * Confirmed: The MO is confirmed, the stock rules and the reordering of the components are trigerred.\n"
+" * In Progress: The production has started (on the MO or on the WO).\n"
+" * To Close: The production is done, the MO has to be closed.\n"
+" * Done: The MO is closed, the stock moves are posted. \n"
+" * Cancelled: The MO has been cancelled, can't be confirmed anymore."
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__broken_breast_percent
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_quartering_tree_view
+msgid "% Broken Breast"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "% vivo"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "2nd Perf. %"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Amount"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Amount Duration"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_analytic
+msgid "Analytic"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_account_analytic_line
+msgid "Analytic Line"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__asphyxiation_units
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__asphyxiation_units
+msgid "Asphyxiated"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Assign Serials"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_lot__average_price
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__average_price
+msgid "Average Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__average_weight
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__average_weight
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Average Weight"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Batch"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_mrp_bom
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__bom_id
+msgid "Bill of Material"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,help:custom_mrp_descarga.field_mrp_production__bom_id
+msgid ""
+"Bills of Materials, also called recipes, are used to autocomplete components"
+" and work order instructions."
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_rate
+msgid "Birth %"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Birth Date"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_week
+msgid "Birth Week"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "BoM Category"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category__is_bone_in_breast
+msgid "Bone-in Breast"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__breeding_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__breeding_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Breeding"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__bring_cost_from_lots
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__bring_cost_from_lots
+msgid "Bring Costs From Lots"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__broken_breast
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_product__is_broken_breast
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__is_broken_breast
+msgid "Broken Breast"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_product__is_broken_breast_calculation
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__is_broken_breast_calculation
+msgid "Broken Breast % Calc"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__bom_category_id
+msgid "Category"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__channel_temperature
+msgid "Channel Temperature"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__chick_production
+msgid "Chick Production"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_production
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_classified_pivot_view
+msgid "Clasificado"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasification
+msgid "Clasification"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_date
+msgid "Clasified Date"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_time_start
+msgid "Clasified Time Start"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_time_stop
+msgid "Clasified Time Stop"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Classification"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__clasified_ids
+msgid "Classified"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__cost
+msgid "Cost"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__production_cost_date
+msgid "Cost Calculation Date"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Coste"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__count_production
+msgid "Count Production"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_product_customerinfo
+msgid "Customer Pricelist"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__cutout
+msgid "Cutout"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Código"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
+msgid "Deconstruction"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Definición"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Delete Moves With Qty Zero"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__commitment_date
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_order_product_search
+msgid "Delivery Date"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__demanding
+msgid "Demanding"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__descarga_order
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__descarga_order
+msgid "Descarga Order"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_production
+#: model:ir.ui.menu,name:custom_mrp_descarga.quartering_menu
+#: model:product.template,name:custom_mrp_descarga.quartering_product_product_template
+msgid "Despiece"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_quartering_production
+msgid "Despieces"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__dest_qty
+msgid "Dest Kg"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__dif_total_amount
+msgid "Dif. Total Amount"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Diferencia"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__birth_difference
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__qty_difference
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__difference
+msgid "Difference"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__difference_rate
+msgid "Difference %"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__no_produce_product
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__no_produce_product
+msgid "Don't produce the header product"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_view_search
+msgid "Done bigger than 0"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_product__download_product
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_template__download_product
+msgid "Download Product"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__download_unit
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__download_unit
+msgid "Download Unit"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Emtying Hatchers"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Entradas"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__entry_total_amount
+msgid "Entry Total Amount"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Envases"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__expected_rate
+msgid "Expected %"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__expected_birth
+msgid "Expected Births"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__farm_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__farm_warehouse_id
+msgid "Farm"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_feed_flour
+msgid "Feed/Flour"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__filter_only_entry_lots
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__filter_only_entry_lots
+msgid "Filter Only Entry Lots"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_customerinfo__final_partner_price
+msgid "Final Partner Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__gross_yield
+msgid "Gross Yield"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__guide_number
+msgid "Guide Number"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Hatcheries"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__hen_unit
+msgid "Hen Units"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Importe"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_incubator
+msgid "Incubator"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_production_analytic
+msgid "Informe analítico"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Input Products"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__speed_consume_unit
+msgid "Input Unit/Hour"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_bom_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Inputs"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_integration
+msgid "Integration"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "KG bruto"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "KG envases"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "KG neto"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "KG palets"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "KGs"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Last Month"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__recalc_date
+msgid "Last Quality Recalc"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Last Week"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Last Year"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__lot_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Lot"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__lot_average_price
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__lot_average_price
+msgid "Lot Average Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_order_line__lot_cost
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__lot_cost
+msgid "Lot Cost"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_stock_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__lot_producing_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
+msgid "Lot/Serial Number"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_move_lines
+msgid "Líneas de despiece"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_quartering_move_lines
+msgid "Líneas de despieces"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_mrp_bom_category
+msgid "MRP BoM Category"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_report_mrp_production_quartering_summary_xlsx
+msgid "MRP Production Quartering Summary Report"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_report_mrp_production_summary_xlsx
+msgid "MRP Production Summary Report"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_other_bom
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_quartering_bom
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_other_bom
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_quartering_bom
+msgid "Material List"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_medicine
+msgid "Medicine"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Merma"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__batch_id
+msgid "Mother"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__batch_location_id
+msgid "Mother Location"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/stock_production_lot.py:0
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_production_lot_form
+msgid "Move Lines"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__no_duplicate_lines
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__no_duplicate_lines
+msgid "No Duplicate Lines"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+msgid "No lot has been put on."
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/mrp_production.py:0
+msgid "No mother has been put on."
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__normal
+msgid "Normal"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.sale_report_menu
+msgid "Online Sales"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Order"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__origin_qty
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__origin_qty
+msgid "Origin Qty"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Output Products"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_bom_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Outputs"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__paasa
+msgid "PAASA"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Palets"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__performance
+msgid "Performance %"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Peso medio"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__speed_consume_qty
+msgid "Produced Kg/Hour"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__produced_qty
+msgid "Produced Qty"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_product_template
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_id
+msgid "Product"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.act_window,name:custom_mrp_descarga.action_classified_move_line
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_move_line_classified
+msgid "Product Movements"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_product_uom_id
+msgid "Product Unit of Measure"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+msgid "Product not in entries of the BoM: %(product)s"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+msgid "Product not in outputs of the BoM: %(product)s"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/saca_line.py:0
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_project_task__production_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_saca_line__production_ids
+msgid "Production"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__production_date
+msgid "Production Date"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__mrp_production_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
+msgid "Production Order"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
+msgid "Production Orders"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Producto"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__purchase_price
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_price
+msgid "Purchase Amount"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__purchase_unit_price
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__purchase_unit_price
+msgid "Purchase Unit Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__unit_amount
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__product_qty
+msgid "Quantity To Produce"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__quartering
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom_category__is_quartering
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__quartering
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__quartering
+msgid "Quartering"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__real_average_weight
+msgid "Real Average Weight"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_bom__recalculate_cost
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__recalculate_cost
+msgid "Recalculate Costs"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_recalculate_cost_in_production_orders_ir_actions_server
+msgid "Recalculate cost in production orders"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_recalculate_lot_avergae_cost_ir_actions_server
+msgid "Recalculate lot_average_cost"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_view_search
+msgid "Reference"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields.selection,name:custom_mrp_descarga.selection__mrp_production__clasification__relaxed
+msgid "Relaxed"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__remolque_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__remolque_id
+msgid "Remolque"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__reproductor_quant_ids
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_quant__is_reproductor
+msgid "Reproductor"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Resumen de despiece"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.report,name:custom_mrp_descarga.report_mrp_quartering_summary_xlsx
+msgid "Resumen de despiece XLSX"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Resumen de matanza"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.report,name:custom_mrp_descarga.report_mrp_production_summary_xlsx
+msgid "Resumen de matanza XLSX"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__rto_percentage
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__rto_percentage
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
+msgid "Rto. %"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Rto. Pechuga"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_id
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Saca"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_date
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__saca_date
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_view_search
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Saca Date"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_saca_line
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__saca_line_id
+msgid "Saca Line"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/sale_report.py:0
+#: model:ir.actions.server,name:custom_mrp_descarga.action_sale_report
+msgid "Sale Report"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_sale_report
+msgid "Sales Analysis Report"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Salidas"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_product_category__second_category
+msgid "Second Category"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__second_performance
+msgid "Second Performance"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__seized_units
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__seized_units
+msgid "Seized"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_stock_move_line__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__staff
+msgid "Staff"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__production_state
+msgid "State"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Sum Total Unit"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__surplus
+msgid "Surplus"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_project_task
+msgid "Task"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_account_analytic_line_filter
+msgid "Task Name"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/saca_line.py:0
+msgid "The company of the saca and your company is not the same."
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+msgid "The outgoing lot must match the incoming one."
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/models/stock_move_line.py:0
+msgid "The product of the lot does not match with the product of the line."
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__timesheet_ids
+msgid "Timesheet"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__task_name
+msgid "Title"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Today"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__tolvasa
+msgid "Tolvasa"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Total 2nd Performance"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__breast_total
+msgid "Total Breast"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Total Consumed"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
+msgid "Total Container"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
+msgid "Total Containers"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Total Done"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__total_duration
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__total_duration
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_workorder_tree_editable_view
+msgid "Total Duration"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Total Entradas"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+msgid "Total Pallet"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
+msgid "Total Pallets"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
+msgid "Total Percentage"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_finished_move_line_ids_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_classified_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.stock_move_line_quartering_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_move_line_tree
+msgid "Total Performance"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.mrp_production_tree_view
+msgid "Total Produced"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_stock_quant_tree
+msgid "Total Qty"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_stock_quant_tree
+msgid "Total Qty Available"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
+msgid "Total Quantity"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+msgid "Total Salidas"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
+msgid "Total Units"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.production_move_line_ids_tree_view
+msgid "Total amount"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#. odoo-python
+#: code:addons/custom_mrp_descarga/report/mrp_production_quartering_summary_xlsx.py:0
+#: code:addons/custom_mrp_descarga/report/mrp_production_summary_xlsx.py:0
+msgid "Unidades"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__unit_difference
+msgid "Unit Difference"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_sale_report__price_unit
+msgid "Unit Price"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__total_unit
+msgid "Units"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__unload_date
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__unload_date
+msgid "Unload Date"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.saca_line_form_view
+msgid "Update Data"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.server,name:custom_mrp_descarga.action_saca_line_update_quality
+msgid "Update Quality Data"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_account_analytic_line__vehicle_id
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__vehicle_id
+msgid "Vehicle"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_workorder__waiting_duration
+msgid "Waiting"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model.fields,field_description:custom_mrp_descarga.field_mrp_production__waiting_time
+msgid "Waiting Time"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.actions.server,name:custom_mrp_descarga.ir_cron_weekly_quality_recalculation_ir_actions_server
+msgid "Weekly Quality Recalculation"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.model,name:custom_mrp_descarga.model_mrp_workorder
+msgid "Work Order"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_view_workcenter_cost_despiece
+msgid "Workcenter Cost"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model_terms:ir.ui.view,arch_db:custom_mrp_descarga.view_mrp_production_filter
+msgid "Yesterday"
+msgstr ""
+
+#. module: custom_mrp_descarga
+#: model:ir.ui.menu,name:custom_mrp_descarga.menu_production_classified
+msgid "Órdenes de producción"
+msgstr ""
