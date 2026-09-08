@@ -11,12 +11,14 @@ class StockMove(models.Model):
         store=True,
         copy=False,
         compute="_compute_material_cost_to_consume",
+        default=0.0,
     )
     material_cost_consumed = fields.Float(
         string="Real Cost",
         store=True,
         copy=False,
         compute="_compute_material_cost_consumed",
+        default=0.0,
     )
 
     @api.depends("price_unit_cost", "product_uom_qty")

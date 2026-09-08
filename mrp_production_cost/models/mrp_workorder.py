@@ -11,12 +11,14 @@ class MrpWorkorder(models.Model):
         copy=False,
         store=True,
         compute="_compute_workorder_cost_estimated",
+        default=0.0,
     )
     workorder_cost_real = fields.Float(
         string="Real Cost",
         copy=False,
         store=True,
         compute="_compute_workorder_cost_real",
+        default=0.0,
     )
 
     @api.depends("duration_expected", "costs_hour")
