@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="stock_warehouse_orderpoint_view_list_laser" model="ir.ui.view">
+    <field name="name">stock.warehouse.orderpoint.list.laser</field>
+    <field name="model">stock.warehouse.orderpoint</field>
+    <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree_editable" />
+    <field name="arch" type="xml">
+      <field name="qty_to_order" position="after">
+        <field name="laser_material_id" />
+        <field name="material_unit_weight" />
+        <field name="product_unit_weight" />
+      </field>
+      <xpath expr="//list" position="inside">
+        <header>
+          <button
+            name="action_create_laser_order"
+            type="object"
+            string="Create Laser Cutting Order"
+            class="oe_highlight"
+          />
+        </header>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="stock_reorder_report_search_laser" model="ir.ui.view">
+    <field name="name">stock.reorder.report.search.laser</field>
+    <field name="model">stock.warehouse.orderpoint</field>
+    <field name="inherit_id" ref="stock.stock_reorder_report_search" />
+    <field name="arch" type="xml">
+      <field name="product_id" position="after">
+        <field name="laser_material_id" />
+      </field>
+      <xpath expr="//search" position="inside">
+        <group expand="0" string="Group By">
+          <filter
+            string="Laser Material"
+            name="group_laser_material"
+            context="{'group_by': 'laser_material_id'}"
+          />
+        </group>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="action_stock_warehouse_orderpoint_laser" model="ir.actions.act_window">
+    <field name="name">Laser Cutting Replenishment</field>
+    <field name="res_model">stock.warehouse.orderpoint</field>
+    <field name="view_mode">list,form</field>
+    <field name="view_id" ref="stock_warehouse_orderpoint_view_list_laser" />
+    <field name="search_view_id" ref="stock_reorder_report_search_laser" />
+    <field name="domain">[('product_id.is_laser_cut', '=', True)]</field>
+  </record>
+
+  <record id="ir_actions_server_open_laser_orderpoints" model="ir.actions.server">
+    <field name="name">Laser Cutting Replenishment</field>
+    <field name="model_id" ref="stock.model_stock_warehouse_orderpoint" />
+    <field name="state">code</field>
+    <field name="code">action = model.action_open_laser_orderpoints()</field>
+  </record>
+
+  <menuitem
+    id="menu_laser_orderpoint_replenish"
+    name="Laser Cutting Replenishment"
+    action="ir_actions_server_open_laser_orderpoints"
+    parent="stock.menu_stock_procurement"
+    groups="stock.group_stock_manager"
+    sequence="20"
+  />
+</odoo>

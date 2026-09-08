@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="order_olaser_view_list" model="ir.ui.view">
+    <field name="name">order.olaser.list</field>
+    <field name="model">order.olaser</field>
+    <field name="arch" type="xml">
+      <list default_order="id desc">
+        <field name="name" />
+        <field name="product_id" />
+        <field name="cantidad" />
+        <field name="terminado" />
+        <field name="date" />
+        <field name="state" />
+        <field name="production_id" />
+      </list>
+    </field>
+  </record>
+
+  <record id="order_olaser_view_form" model="ir.ui.view">
+    <field name="name">order.olaser.form</field>
+    <field name="model">order.olaser</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button
+            name="action_create_production"
+            string="Create Manufacturing Order"
+            type="object"
+            class="oe_highlight"
+            invisible="not listas_ids or (production_id and state != 'cancel')"
+          />
+          <button
+            name="action_cancel"
+            string="Cancel"
+            type="object"
+            confirm="Are you sure you want to cancel this laser cutting order?"
+            invisible="not production_id or terminado or state in ('cancel', 'done')"
+          />
+          <field
+            name="state"
+            widget="statusbar"
+            statusbar_visible="draft,confirmado,proceso,done"
+          />
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button
+              name="action_view_productions"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-industry"
+              invisible="not production_id"
+            >
+              <field
+                name="production_count"
+                widget="statinfo"
+                string="Manufacturing Orders"
+              />
+            </button>
+            <button
+              name="action_view_workorders"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-wrench"
+              invisible="not production_id"
+            >
+              <field name="workorder_count" widget="statinfo" string="Work Orders" />
+            </button>
+            <button
+              name="action_view_move_lines"
+              type="object"
+              string="Moves"
+              class="oe_stat_button"
+              icon="fa-arrows-v"
+              invisible="not production_id and not olaser_ids and not lista_olaser_ids"
+            />
+          </div>
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+          </div>
+          <group>
+            <group>
+              <field name="date" readonly="production_id" />
+              <field name="product_id" readonly="production_id" />
+              <field name="bom_id" readonly="production_id" />
+              <field name="create_uid" string="Created By" readonly="1" />
+              <field name="unit_time" readonly="production_id" />
+              <field name="total_time" readonly="1" />
+              <field name="actual_time" readonly="1" />
+            </group>
+            <group>
+              <field name="cantidad" readonly="production_id" />
+              <field name="terminado" readonly="1" />
+              <field name="total_consumed_quantity" readonly="1" />
+              <field name="actual_consumed_quantity" readonly="1" />
+              <field name="estimated_waste" readonly="1" />
+              <field name="actual_waste" readonly="1" />
+              <field name="peso_mp" readonly="production_id" />
+              <field name="es_retal" readonly="production_id" />
+              <field
+                name="scrap_product_id"
+                invisible="not es_retal"
+                readonly="production_id"
+              />
+            </group>
+          </group>
+          <notebook>
+            <page string="Distribution">
+              <field name="listas_ids" readonly="production_id">
+                <list editable="bottom">
+                  <field name="product_id" />
+                  <field name="cantidad_consumo" />
+                  <field name="cantidad_chapa" />
+                  <field name="cantidad_consumo_total" />
+                  <field name="cantidad_chapa_total" />
+                  <field name="plano" />
+                </list>
+              </field>
+            </page>
+            <page string="Times" invisible="not laser_tiempos_ids">
+              <field name="laser_tiempos_ids">
+                <list>
+                  <field name="employee_id" />
+                  <field name="entrada" />
+                  <field name="salida" />
+                  <field name="tiempo" />
+                  <field name="estado" />
+                </list>
+              </field>
+            </page>
+            <page string="Rejects" invisible="not rechazos_ids">
+              <field name="rechazos_ids">
+                <list>
+                  <field name="product_id" />
+                  <field name="cantidad" />
+                  <field name="procesado" />
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter>
+          <field name="message_follower_ids" widget="mail_followers" />
+          <field name="message_ids" widget="mail_thread" />
+        </chatter>
+      </form>
+    </field>
+  </record>
+
+  <record id="order_olaser_view_search" model="ir.ui.view">
+    <field name="name">order.olaser.search</field>
+    <field name="model">order.olaser</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" />
+        <field name="product_id" />
+        <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
+        <filter
+          string="In Progress"
+          name="in_progress"
+          domain="[('state','=','proceso')]"
+        />
+        <filter string="Done" name="done" domain="[('state','=','done')]" />
+        <group expand="0" string="Group By">
+          <filter string="Status" name="group_state" context="{'group_by':'state'}" />
+          <filter
+            string="Raw Material"
+            name="group_material"
+            context="{'group_by':'product_id'}"
+          />
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="action_order_olaser" model="ir.actions.act_window">
+    <field name="name">Laser Cutting Orders</field>
+    <field name="res_model">order.olaser</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="order_olaser_lista_view_list" model="ir.ui.view">
+    <field name="name">order.olaser.lista.list</field>
+    <field name="model">order.olaser.lista</field>
+    <field name="arch" type="xml">
+      <list default_order="id desc">
+        <field name="olaser_id" />
+        <field name="product_id" />
+        <field name="cantidad_consumo" />
+        <field name="cantidad_chapa" />
+        <field name="cantidad_consumo_total" />
+        <field name="cantidad_chapa_total" />
+        <field name="plano" />
+      </list>
+    </field>
+  </record>
+
+  <record id="order_olaser_lista_view_search" model="ir.ui.view">
+    <field name="name">order.olaser.lista.search</field>
+    <field name="model">order.olaser.lista</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="olaser_id" />
+        <field name="product_id" />
+        <field name="plano" />
+        <group expand="0" string="Group By">
+          <filter
+            string="Laser Order"
+            name="group_olaser"
+            context="{'group_by':'olaser_id'}"
+          />
+          <filter
+            string="Product"
+            name="group_product"
+            context="{'group_by':'product_id'}"
+          />
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="action_order_olaser_lista" model="ir.actions.act_window">
+    <field name="name">Distribution Lines</field>
+    <field name="res_model">order.olaser.lista</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <menuitem
+    id="menu_mrp_laser_cut_root"
+    name="Laser Cutting"
+    parent="mrp.menu_mrp_root"
+    sequence="12"
+  />
+  <menuitem
+    id="menu_order_olaser"
+    name="Laser Cutting Orders"
+    action="action_order_olaser"
+    parent="menu_mrp_laser_cut_root"
+    sequence="10"
+  />
+  <menuitem
+    id="menu_order_olaser_lista"
+    name="Distribution Lines"
+    action="action_order_olaser_lista"
+    parent="menu_mrp_laser_cut_root"
+    sequence="20"
+  />
+</odoo>

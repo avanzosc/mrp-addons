@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="res_config_settings_view_form_laser" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit.mrp.laser.cut</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="mrp.res_config_settings_view_form" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//block[@name='process_operations_setting_container']"
+        position="after"
+      >
+        <block title="Laser Cutting" name="laser_cutting_setting_container">
+          <setting
+            id="laser_generic_product"
+            string="Generic Product"
+            help="Generic, consumable product used as the product to manufacture on every manufacturing order generated from a laser cutting order"
+          >
+            <field name="laser_generic_product_id" />
+          </setting>
+          <setting
+            id="laser_bom"
+            string="Bill of Materials"
+            help="Bill of Materials of the generic product, used by default on new laser cutting orders"
+          >
+            <field name="laser_bom_id" />
+          </setting>
+          <setting
+            id="laser_scrap_product"
+            string="Scrap Product"
+            help="Generic, consumable product used by default when a laser cutting order is flagged as using scrap/offcut material"
+          >
+            <field name="laser_scrap_product_id" />
+          </setting>
+        </block>
+      </xpath>
+    </field>
+  </record>
+</odoo>
