@@ -1,0 +1,38 @@
+<odoo>
+  <record id="view_move_tree" model="ir.ui.view">
+    <field name="model">stock.move</field>
+    <field name="inherit_id" ref="stock.view_move_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="//list" position="attributes">
+        <attribute name="editable">bottom</attribute>
+        <attribute name="create">true</attribute>
+      </xpath>
+
+      <field name="date" position="attributes">
+        <attribute name="optional">hide</attribute>
+      </field>
+      <field name="reference" position="attributes">
+        <attribute name="optional">hide</attribute>
+      </field>
+      <field name="company_id" position="attributes">
+        <attribute name="optional">hide</attribute>
+        <attribute name="groups" />
+      </field>
+
+      <field name="product_id" position="after">
+        <field name="lot_ids" optional="show" widget="many2many_tags" />
+        <field name="workorder_id" optional="hide" />
+      </field>
+
+      <xpath expr="//field[@name='date']" position="before">
+        <button
+          name="action_show_details"
+          type="object"
+          icon="fa-list"
+          title="Show Details"
+          context="{'default_finished_move_id': id}"
+        />
+      </xpath>
+    </field>
+  </record>
+</odoo>
