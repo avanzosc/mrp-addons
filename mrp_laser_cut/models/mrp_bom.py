@@ -1,5 +1,5 @@
 # Copyright 2026 Lucía Echeverría - AvanzOSC
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models
 
 
@@ -8,10 +8,11 @@ class MrpBom(models.Model):
 
     laser_material_id = fields.Many2one(
         comodel_name="product.product",
+        string="Raw Material",
         compute="_compute_laser_material_id",
         store=True,
-        help="Component of this Bill of Materials whose operation is "
-        "performed on a laser work center.",
+        help="Component of this Bill of Materials whose operation runs on a "
+        "laser work center, i.e. the raw material this product is cut from.",
     )
 
     @api.depends(
