@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="workcenter_fiber_laser" model="mrp.workcenter">
+    <field name="name">Fiber Laser Cutter</field>
+    <field name="code">LASER-01</field>
+    <field name="is_laser" eval="True" />
+    <field name="time_start">5</field>
+    <field name="time_stop">5</field>
+  </record>
+
+  <record id="workcenter_press_brake" model="mrp.workcenter">
+    <field name="name">Press Brake</field>
+    <field name="code">BRAKE-01</field>
+    <field name="time_start">3</field>
+    <field name="time_stop">3</field>
+  </record>
+
+  <record id="product_laser_run" model="product.product">
+    <field name="name">Laser Cutting Run</field>
+    <field name="default_code">LASER-RUN</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/LASER-RUN.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="False" />
+    <field name="uom_id" ref="uom.product_uom_unit" />
+    <field name="uom_po_id" ref="uom.product_uom_unit" />
+    <field name="purchase_ok" eval="False" />
+    <field name="sale_ok" eval="False" />
+  </record>
+
+  <record id="bom_laser_run" model="mrp.bom">
+    <field name="product_tmpl_id" ref="product_laser_run_product_template" />
+    <field name="product_qty">1</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit" />
+    <field name="type">normal</field>
+    <field name="code">LASER-RUN</field>
+  </record>
+
+  <record id="operation_laser_run" model="mrp.routing.workcenter">
+    <field name="name">Laser cutting</field>
+    <field name="bom_id" ref="bom_laser_run" />
+    <field name="workcenter_id" ref="workcenter_fiber_laser" />
+    <field name="time_cycle_manual">1</field>
+  </record>
+
+  <function
+    model="res.company"
+    name="write"
+    eval="[[ref('base.main_company')], {'laser_bom_id': ref('bom_laser_run')}]"
+  />
+
+  <record id="product_steel_offcut" model="product.product">
+    <field name="name">Steel Offcut</field>
+    <field name="default_code">RAW-OFFCUT</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/RAW-OFFCUT.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_kgm" />
+    <field name="uom_po_id" ref="uom.product_uom_kgm" />
+    <field name="weight">1</field>
+  </record>
+
+  <function
+    model="res.company"
+    name="write"
+    eval="[[ref('base.main_company')], {'laser_offcut_product_id': ref('product_steel_offcut')}]"
+  />
+
+  <record id="sheet_s235_2mm" model="product.product">
+    <field name="name">Steel Sheet S235JR 2 mm 2000x1000</field>
+    <field name="default_code">RAW-S235-2</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/RAW-S235-2.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_kgm" />
+    <field name="uom_po_id" ref="uom.product_uom_kgm" />
+    <field name="weight">31.40</field>
+  </record>
+
+  <record id="sheet_s235_3mm" model="product.product">
+    <field name="name">Steel Sheet S235JR 3 mm 2000x1000</field>
+    <field name="default_code">RAW-S235-3</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/RAW-S235-3.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_kgm" />
+    <field name="uom_po_id" ref="uom.product_uom_kgm" />
+    <field name="weight">47.10</field>
+  </record>
+
+  <record id="sheet_ss304_2mm" model="product.product">
+    <field name="name">Stainless Steel Sheet AISI 304 2 mm 2000x1000</field>
+    <field name="default_code">RAW-SS304-2</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/RAW-SS304-2.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_kgm" />
+    <field name="uom_po_id" ref="uom.product_uom_kgm" />
+    <field name="weight">31.60</field>
+  </record>
+
+  <record id="sheet_dx51_15mm" model="product.product">
+    <field name="name">Galvanized Steel Sheet DX51D 1.5 mm 2000x1000</field>
+    <field name="default_code">RAW-DX51-15</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/RAW-DX51-15.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_kgm" />
+    <field name="uom_po_id" ref="uom.product_uom_kgm" />
+    <field name="weight">23.55</field>
+  </record>
+
+  <record id="part_mounting_bracket" model="product.product">
+    <field name="name">Mounting Bracket 80x80x40</field>
+    <field name="default_code">LC-BRK-8080</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/LC-BRK-8080.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_unit" />
+    <field name="uom_po_id" ref="uom.product_uom_unit" />
+    <field name="weight">1.70</field>
+    <field name="is_laser_cut" eval="True" />
+  </record>
+
+  <record id="part_reinforcement_rib" model="product.product">
+    <field name="name">Reinforcement Rib 300x60</field>
+    <field name="default_code">LC-RIB-300</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/LC-RIB-300.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_unit" />
+    <field name="uom_po_id" ref="uom.product_uom_unit" />
+    <field name="weight">0.85</field>
+    <field name="is_laser_cut" eval="True" />
+  </record>
+
+  <record id="part_gusset_plate" model="product.product">
+    <field name="name">Gusset Plate 150x150</field>
+    <field name="default_code">LC-GUS-150</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/LC-GUS-150.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_unit" />
+    <field name="uom_po_id" ref="uom.product_uom_unit" />
+    <field name="weight">0.53</field>
+    <field name="is_laser_cut" eval="True" />
+  </record>
+
+  <record id="part_base_plate" model="product.product">
+    <field name="name">Base Plate 200x200x5</field>
+    <field name="default_code">LC-BAS-200</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/LC-BAS-200.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_unit" />
+    <field name="uom_po_id" ref="uom.product_uom_unit" />
+    <field name="weight">1.57</field>
+    <field name="is_laser_cut" eval="True" />
+  </record>
+
+  <record id="part_cover_panel" model="product.product">
+    <field name="name">Cover Panel 600x400</field>
+    <field name="default_code">LC-COV-600</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/LC-COV-600.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_unit" />
+    <field name="uom_po_id" ref="uom.product_uom_unit" />
+    <field name="weight">2.80</field>
+    <field name="is_laser_cut" eval="True" />
+  </record>
+
+  <record id="part_enclosure_side" model="product.product">
+    <field name="name">Enclosure Side Panel 800x600</field>
+    <field name="default_code">LC-ENC-800</field>
+    <field
+      name="image_1920"
+      type="base64"
+      file="mrp_laser_cut/static/src/img/LC-ENC-800.jpg"
+    />
+    <field name="type">consu</field>
+    <field name="is_storable" eval="True" />
+    <field name="uom_id" ref="uom.product_uom_unit" />
+    <field name="uom_po_id" ref="uom.product_uom_unit" />
+    <field name="weight">7.60</field>
+    <field name="is_laser_cut" eval="True" />
+  </record>
+
+  <record id="bom_part_mounting_bracket" model="mrp.bom">
+    <field name="product_tmpl_id" ref="part_mounting_bracket_product_template" />
+    <field name="product_qty">1</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit" />
+    <field name="type">normal</field>
+    <field name="code">LC-BRK-8080</field>
+  </record>
+  <record id="operation_part_mounting_bracket" model="mrp.routing.workcenter">
+    <field name="name">Laser cutting</field>
+    <field name="bom_id" ref="bom_part_mounting_bracket" />
+    <field name="workcenter_id" ref="workcenter_fiber_laser" />
+    <field name="time_cycle_manual">1</field>
+  </record>
+  <record id="bom_line_part_mounting_bracket" model="mrp.bom.line">
+    <field name="bom_id" ref="bom_part_mounting_bracket" />
+    <field name="product_id" ref="sheet_s235_2mm" />
+    <field name="product_qty">1.90</field>
+    <field name="product_uom_id" ref="uom.product_uom_kgm" />
+    <field name="operation_id" ref="operation_part_mounting_bracket" />
+  </record>
+
+  <record id="bom_part_reinforcement_rib" model="mrp.bom">
+    <field name="product_tmpl_id" ref="part_reinforcement_rib_product_template" />
+    <field name="product_qty">1</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit" />
+    <field name="type">normal</field>
+    <field name="code">LC-RIB-300</field>
+  </record>
+  <record id="operation_part_reinforcement_rib" model="mrp.routing.workcenter">
+    <field name="name">Laser cutting</field>
+    <field name="bom_id" ref="bom_part_reinforcement_rib" />
+    <field name="workcenter_id" ref="workcenter_fiber_laser" />
+    <field name="time_cycle_manual">1</field>
+  </record>
+  <record id="bom_line_part_reinforcement_rib" model="mrp.bom.line">
+    <field name="bom_id" ref="bom_part_reinforcement_rib" />
+    <field name="product_id" ref="sheet_s235_2mm" />
+    <field name="product_qty">0.95</field>
+    <field name="product_uom_id" ref="uom.product_uom_kgm" />
+    <field name="operation_id" ref="operation_part_reinforcement_rib" />
+  </record>
+
+  <record id="bom_part_gusset_plate" model="mrp.bom">
+    <field name="product_tmpl_id" ref="part_gusset_plate_product_template" />
+    <field name="product_qty">1</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit" />
+    <field name="type">normal</field>
+    <field name="code">LC-GUS-150</field>
+  </record>
+  <record id="operation_part_gusset_plate" model="mrp.routing.workcenter">
+    <field name="name">Laser cutting</field>
+    <field name="bom_id" ref="bom_part_gusset_plate" />
+    <field name="workcenter_id" ref="workcenter_fiber_laser" />
+    <field name="time_cycle_manual">1</field>
+  </record>
+  <record id="bom_line_part_gusset_plate" model="mrp.bom.line">
+    <field name="bom_id" ref="bom_part_gusset_plate" />
+    <field name="product_id" ref="sheet_s235_3mm" />
+    <field name="product_qty">0.60</field>
+    <field name="product_uom_id" ref="uom.product_uom_kgm" />
+    <field name="operation_id" ref="operation_part_gusset_plate" />
+  </record>
+
+  <record id="bom_part_base_plate" model="mrp.bom">
+    <field name="product_tmpl_id" ref="part_base_plate_product_template" />
+    <field name="product_qty">1</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit" />
+    <field name="type">normal</field>
+    <field name="code">LC-BAS-200</field>
+  </record>
+  <record id="operation_part_base_plate" model="mrp.routing.workcenter">
+    <field name="name">Laser cutting</field>
+    <field name="bom_id" ref="bom_part_base_plate" />
+    <field name="workcenter_id" ref="workcenter_fiber_laser" />
+    <field name="time_cycle_manual">1</field>
+  </record>
+  <record id="bom_line_part_base_plate" model="mrp.bom.line">
+    <field name="bom_id" ref="bom_part_base_plate" />
+    <field name="product_id" ref="sheet_s235_3mm" />
+    <field name="product_qty">1.75</field>
+    <field name="product_uom_id" ref="uom.product_uom_kgm" />
+    <field name="operation_id" ref="operation_part_base_plate" />
+  </record>
+
+  <record id="bom_part_cover_panel" model="mrp.bom">
+    <field name="product_tmpl_id" ref="part_cover_panel_product_template" />
+    <field name="product_qty">1</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit" />
+    <field name="type">normal</field>
+    <field name="code">LC-COV-600</field>
+  </record>
+  <record id="operation_part_cover_panel" model="mrp.routing.workcenter">
+    <field name="name">Laser cutting</field>
+    <field name="bom_id" ref="bom_part_cover_panel" />
+    <field name="workcenter_id" ref="workcenter_fiber_laser" />
+    <field name="time_cycle_manual">1</field>
+  </record>
+  <record id="bom_line_part_cover_panel" model="mrp.bom.line">
+    <field name="bom_id" ref="bom_part_cover_panel" />
+    <field name="product_id" ref="sheet_dx51_15mm" />
+    <field name="product_qty">3.10</field>
+    <field name="product_uom_id" ref="uom.product_uom_kgm" />
+    <field name="operation_id" ref="operation_part_cover_panel" />
+  </record>
+
+  <record id="bom_part_enclosure_side" model="mrp.bom">
+    <field name="product_tmpl_id" ref="part_enclosure_side_product_template" />
+    <field name="product_qty">1</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit" />
+    <field name="type">normal</field>
+    <field name="code">LC-ENC-800</field>
+  </record>
+  <record id="operation_part_enclosure_side" model="mrp.routing.workcenter">
+    <field name="name">Laser cutting</field>
+    <field name="bom_id" ref="bom_part_enclosure_side" />
+    <field name="workcenter_id" ref="workcenter_fiber_laser" />
+    <field name="time_cycle_manual">1</field>
+  </record>
+  <record id="bom_line_part_enclosure_side" model="mrp.bom.line">
+    <field name="bom_id" ref="bom_part_enclosure_side" />
+    <field name="product_id" ref="sheet_ss304_2mm" />
+    <field name="product_qty">8.20</field>
+    <field name="product_uom_id" ref="uom.product_uom_kgm" />
+    <field name="operation_id" ref="operation_part_enclosure_side" />
+  </record>
+
+  <record id="laser_order_s235_2mm" model="mrp.laser.cut.order">
+    <field name="raw_material_id" ref="sheet_s235_2mm" />
+    <field name="bom_id" ref="bom_laser_run" />
+    <field name="material_qty">8</field>
+    <field name="time_per_unit">4.5</field>
+  </record>
+  <record id="laser_order_s235_2mm_line_bracket" model="mrp.laser.cut.order.line">
+    <field name="order_id" ref="laser_order_s235_2mm" />
+    <field name="product_id" ref="part_mounting_bracket" />
+    <field name="output_per_unit">8</field>
+    <field name="drawing_ref">DRW-BRK-0080</field>
+  </record>
+  <record id="laser_order_s235_2mm_line_rib" model="mrp.laser.cut.order.line">
+    <field name="order_id" ref="laser_order_s235_2mm" />
+    <field name="product_id" ref="part_reinforcement_rib" />
+    <field name="output_per_unit">12</field>
+    <field name="drawing_ref">DRW-RIB-0300</field>
+  </record>
+
+  <record id="orderpoint_part_mounting_bracket" model="stock.warehouse.orderpoint">
+    <field name="product_id" ref="part_mounting_bracket" />
+    <field name="warehouse_id" ref="stock.warehouse0" />
+    <field name="location_id" ref="stock.stock_location_stock" />
+    <field name="trigger">manual</field>
+    <field name="product_min_qty">200</field>
+    <field name="product_max_qty">200</field>
+  </record>
+  <record id="orderpoint_part_reinforcement_rib" model="stock.warehouse.orderpoint">
+    <field name="product_id" ref="part_reinforcement_rib" />
+    <field name="warehouse_id" ref="stock.warehouse0" />
+    <field name="location_id" ref="stock.stock_location_stock" />
+    <field name="trigger">manual</field>
+    <field name="product_min_qty">300</field>
+    <field name="product_max_qty">300</field>
+  </record>
+  <record id="orderpoint_part_gusset_plate" model="stock.warehouse.orderpoint">
+    <field name="product_id" ref="part_gusset_plate" />
+    <field name="warehouse_id" ref="stock.warehouse0" />
+    <field name="location_id" ref="stock.stock_location_stock" />
+    <field name="trigger">manual</field>
+    <field name="product_min_qty">150</field>
+    <field name="product_max_qty">150</field>
+  </record>
+  <record id="orderpoint_part_base_plate" model="stock.warehouse.orderpoint">
+    <field name="product_id" ref="part_base_plate" />
+    <field name="warehouse_id" ref="stock.warehouse0" />
+    <field name="location_id" ref="stock.stock_location_stock" />
+    <field name="trigger">manual</field>
+    <field name="product_min_qty">120</field>
+    <field name="product_max_qty">120</field>
+  </record>
+  <record id="orderpoint_part_cover_panel" model="stock.warehouse.orderpoint">
+    <field name="product_id" ref="part_cover_panel" />
+    <field name="warehouse_id" ref="stock.warehouse0" />
+    <field name="location_id" ref="stock.stock_location_stock" />
+    <field name="trigger">manual</field>
+    <field name="product_min_qty">90</field>
+    <field name="product_max_qty">90</field>
+  </record>
+  <record id="orderpoint_part_enclosure_side" model="stock.warehouse.orderpoint">
+    <field name="product_id" ref="part_enclosure_side" />
+    <field name="warehouse_id" ref="stock.warehouse0" />
+    <field name="location_id" ref="stock.stock_location_stock" />
+    <field name="trigger">manual</field>
+    <field name="product_min_qty">40</field>
+    <field name="product_max_qty">40</field>
+  </record>
+</odoo>

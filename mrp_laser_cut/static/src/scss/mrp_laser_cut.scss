@@ -1,0 +1,9 @@
+.o_laser_unit > .o_field_widget.o_field_float,
+.o_laser_unit > .o_field_widget.o_field_integer {
+  width: max-content !important;
+  max-width: 12ch !important;
+}
+
+.o_laser_unit > .o_field_widget input {
+  max-width: 12ch;
+}

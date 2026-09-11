@@ -6,89 +6,127 @@
 MRP Laser Cut
 =============
 
-Manages laser cutting orders: a single raw material sheet is cut into
-several different finished products in one manufacturing order, using
-Odoo's native byproduct mechanism.
+Laser cutting consumes one unit of raw material (a sheet, a plate, a bar,
+a coil section...) and cuts several different finished products out of it
+in a single run. This module models that operation on top of Odoo
+manufacturing.
 
-Key Features
-============
+A **laser cutting order** describes:
 
-- A laser cutting order describes one raw material sheet and how it is
-  distributed into finished products: one distribution line per finished
-  product, with how many units come from one sheet and how much raw
-  material each one consumes.
-- Creating the manufacturing order from a laser cutting order
-  automatically sets up the raw material consumption and one byproduct
-  per distribution line.
-- The laser cutting order stays linked to its manufacturing order (and
-  any backorders created from it): quantity, produced quantity,
-  consumption, waste and timing fields update automatically as
-  production progresses.
-- Replenishment integration: select products needing to be reordered and
-  create a laser cutting order (grouped by raw material) pre-filled with
-  the required distribution, directly from the Replenishment screen.
+* the raw material and how many units of it are processed,
+* a **distribution**: one line per finished product, with how much raw
+  material each product consumes and how many come out of one raw
+  material unit,
 
-Usage
-=====
+and generates a regular manufacturing order that consumes the raw
+material and produces every finished product as a byproduct.
 
-1. Create a laser cutting order: set the raw material, its unit weight,
-   the Bill of Materials to use, and the quantity of sheets.
-2. Add one distribution line per finished product to be cut from the
-   sheet, with the units produced per sheet and the drawing number.
-3. Click **Create Manufacturing Order**. This generates the linked
-   manufacturing order with a raw material consumption line and one
-   byproduct line per distribution line.
-4. Track progress from the laser cutting order: the smart buttons open
-   the related manufacturing order(s), work orders and stock moves.
-   Produced quantity, consumption, waste and time fields update
-   automatically as the manufacturing order is processed, including
-   partial production and backorders.
-5. Use **Cancel** to cancel a laser cutting order that has not produced
-   anything yet.
-6. To generate laser cutting orders from replenishment needs, go to
-   Inventory > Operations > Replenishment, select one or more lines for
-   products flagged "Is Laser Cut", and click **Create Laser Cutting
-   Order**.
+Features
+========
+
+* **Laser cutting order** (``mrp.laser.cut.order``): raw material,
+  quantity of raw material units, and the distribution of finished
+  products cut from it.
+* **Distribution line** (``mrp.laser.cut.order.line``), one per product:
+
+  * *Consumption*: raw material one unit of the product consumes, taken
+    from the raw material line of the product's Bill of Materials
+    (editable, to account for the cutting loss).
+  * *Output*: how many units of the product are cut from one raw material
+    unit, entered by hand from the nesting layout.
+  * *Line consumption* = Consumption x Output.
+  * *Total* = order Quantity x Output: the quantity of the product
+    produced.
+
+* **Manufacturing order generation**: one button creates the
+  manufacturing order from a configurable generic Bill of Materials,
+  registers the raw material consumption and one byproduct move per
+  distribution line, sets the expected work order duration, and links
+  order and production together.
+* **Planned figures**: before confirming, the order shows the raw
+  material it plans to consume, the part of it the products carry away,
+  and the estimated waste (the difference). A negative estimated waste
+  means the distribution claims more raw material than one unit provides
+  and the quantities need fixing.
+* **Actual figures**: the order tracks - live, across the initial
+  manufacturing order and any backorder - the raw material really
+  consumed, the part attributable to the products actually produced
+  (weighted by the Bill of Materials consumption, so it matches the
+  planned figure), the real waste, and the real cutting time. These
+  figures are read from the stock moves of the manufacturing order chain,
+  plus any stock move linked straight to the order, so an order recorded
+  without a manufacturing order (an imported historical order, for
+  instance) still reports what it consumed and produced. A **Stock Moves**
+  button opens those moves.
+* **Offcut material**: an order can be flagged to consume a generic
+  offcut (remnant) product instead of a full unit of raw material.
+* **Replenishment integration**: a dedicated replenishment screen for the
+  laser-cut products; selecting the ones to restock creates draft laser
+  cutting orders, grouped by raw material, sized so the estimated waste
+  stays non-negative, ready for the operator to adjust to the real
+  layout.
 
 Configuration
 =============
 
-This module does not create any of the following records. They must be
-created by hand before the first laser cutting order can generate a
-manufacturing order:
+#. In *Manufacturing > Configuration > Settings > Laser Cutting*, set:
 
-1. **A work center flagged "Is Laser"**
-   (Manufacturing > Configuration > Work Centers): open or create the work
-   center where laser cutting is done and check "Is Laser".
+   * **Bill of Materials**: the generic Bill of Materials used to create
+     the manufacturing orders. Its product is the item those orders
+     manufacture (the number of raw material units processed).
+   * **Offcut Product**: the generic product proposed as consumed
+     material on orders flagged to use offcut material.
 
-2. **A generic, consumable product** to act as the "product to
-   manufacture" on every manufacturing order generated by a laser cutting
-   order (it does not represent real stock, e.g. "Laser Cutting Service").
-   Product Type: Consumable.
+#. On the work center used for laser cutting, tick **Laser Work Center**.
 
-3. **A Bill of Materials for that generic product**
-   (Manufacturing > Products > Bills of Materials), with one operation
-   using the work center from step 1. This is what gives the generated
-   manufacturing orders their work order. Select this Bill of Materials in
-   the "Bill of Materials" field of every laser cutting order.
+#. On each Bill of Materials that cuts a product from a raw material, add
+   the raw material as a component whose operation runs on that work
+   center. Its **Raw Material** is then detected automatically. The Bill
+   of Materials produces one unit of the product; the quantity of its raw
+   material component line is the raw material one unit of the product
+   consumes.
 
-4. **A generic "scrap" consumable product** (e.g. "Scrap Material"),
-   selected on a laser cutting order's "Scrap Product" field when "Is
-   Scrap" is checked — it is consumed instead of the raw material for
-   that order.
+#. On each finished product, tick **Laser Cut Product** so it shows up in
+   the replenishment screen and can be added to a laser cutting order.
 
-Once the generic product, its Bill of Materials, and the scrap product
-exist, set them as defaults in Settings > Manufacturing > Laser Cutting,
-so every new laser cutting order gets them pre-filled instead of having to
-pick them by hand each time.
+Usage
+=====
 
-Additionally, on the product form:
+Create an order manually
+------------------------
 
-- Products cut from a sheet must have "Is Laser Cut" checked (Inventory
-  tab) to be selectable on distribution lines and to show up in the
-  laser cutting Replenishment screen.
-- "Laser Material" is computed automatically from the Bill of Materials
-  component whose operation uses a work center flagged "Is Laser".
+#. Open *Manufacturing > Laser Cutting > Laser Cutting Orders* and create
+   a record.
+#. Set the **Raw Material**, the **Bill of Materials** and the
+   **Quantity** (number of raw material units to process). The **Unit
+   Weight** defaults to the weight of the raw material product and follows
+   it until a manufacturing order exists; it can be overridden.
+#. Add one **Distribution** line per finished product: pick the product
+   (its **Consumption** is seeded from the Bill of Materials) and enter
+   the **Output** (units per raw material unit) from the cutting layout.
+#. Check the estimated waste. Click **Create Manufacturing Order**. The
+   order becomes read-only and follows its production from then on.
+
+Create orders from replenishment
+--------------------------------
+
+#. Open *Inventory > Operations > Replenishment > Laser Cutting
+   Replenishment*. Only laser-cut products are listed.
+#. Select the lines to restock and click **Create Laser Cutting Order**.
+   One draft order is created per raw material. It is seeded with the
+   quantity of raw material and the output per unit that cover the demand
+   while keeping the estimated waste non-negative.
+#. Adjust it to reality: set the real output per unit and quantity from
+   the cutting layout, and split the order if several layouts are needed.
+   One laser cutting order represents one layout.
+
+Units of measure
+================
+
+Every quantity is handled either as a weight or as a piece count, so the
+raw material and the finished products must be measured by weight or in
+units (units, dozens, ...). Creating a manufacturing order from an order
+whose products use any other category (area, length, volume) is blocked.
 
 Bug Tracker
 ===========
@@ -109,3 +147,9 @@ Contributors
 * Lucía Echeverría <luciaecheverria@avanzosc.es>
 
 Do not contact contributors directly about support or help with technical issues.
+
+License
+-------
+
+This module is licensed under the AGPL-3.0 or later. See the ``LICENSE``
+file for the full license text.

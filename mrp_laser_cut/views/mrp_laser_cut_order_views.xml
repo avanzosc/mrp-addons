@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="mrp_laser_cut_order_view_list" model="ir.ui.view">
+    <field name="name">mrp.laser.cut.order.list</field>
+    <field name="model">mrp.laser.cut.order</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name" />
+        <field name="raw_material_id" />
+        <field name="material_qty" />
+        <field name="produced_qty" />
+        <field name="date" />
+        <field
+          name="state"
+          widget="badge"
+          decoration-info="state == 'draft'"
+          decoration-warning="state == 'in_progress'"
+          decoration-success="state == 'done'"
+          decoration-muted="state == 'cancelled'"
+        />
+        <field name="production_id" />
+      </list>
+    </field>
+  </record>
+
+  <record id="mrp_laser_cut_order_view_form" model="ir.ui.view">
+    <field name="name">mrp.laser.cut.order.form</field>
+    <field name="model">mrp.laser.cut.order</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button
+            name="action_create_production"
+            string="Create Manufacturing Order"
+            type="object"
+            class="oe_highlight"
+            invisible="not line_ids or production_id"
+          />
+          <button
+            name="action_cancel"
+            string="Cancel"
+            type="object"
+            confirm="Are you sure you want to cancel this laser cutting order?"
+            invisible="not production_id or produced_qty or state in ('cancelled', 'done')"
+          />
+          <field
+            name="state"
+            widget="statusbar"
+            statusbar_visible="draft,confirmed,in_progress,done"
+          />
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button
+              name="action_view_productions"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-industry"
+              invisible="not production_id"
+            >
+              <field
+                name="production_count"
+                widget="statinfo"
+                string="Manufacturing Orders"
+              />
+            </button>
+            <button
+              name="action_view_workorders"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-wrench"
+              invisible="not production_id"
+            >
+              <field name="workorder_count" widget="statinfo" string="Work Orders" />
+            </button>
+            <button
+              name="action_view_lines"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-list"
+              invisible="not line_ids"
+            >
+              <field name="line_count" widget="statinfo" string="Distribution Lines" />
+            </button>
+            <button
+              name="action_view_moves"
+              type="object"
+              class="oe_stat_button"
+              icon="fa-exchange"
+              invisible="not move_count"
+            >
+              <field name="move_count" widget="statinfo" string="Stock Moves" />
+            </button>
+          </div>
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+          </div>
+          <group col="3">
+            <group string="Raw Material">
+              <field name="date" readonly="production_id" />
+              <field name="raw_material_id" readonly="production_id" />
+              <label for="material_unit_weight" />
+              <div class="o_row o_laser_unit">
+                <field
+                  name="material_unit_weight"
+                  readonly="production_id"
+                  class="oe_inline"
+                />
+                <field name="weight_uom_name" />
+              </div>
+              <field name="use_offcut" readonly="production_id" />
+              <field
+                name="offcut_product_id"
+                invisible="not use_offcut"
+                readonly="production_id"
+              />
+              <field name="bom_id" readonly="production_id" />
+              <field name="create_uid" string="Created By" readonly="1" />
+            </group>
+            <group string="Planned">
+              <label for="material_qty" />
+              <div class="o_row o_laser_unit">
+                <field name="material_qty" readonly="production_id" class="oe_inline" />
+                <field name="product_uom_name" />
+              </div>
+              <label for="planned_material_weight" />
+              <div class="o_row o_laser_unit">
+                <field name="planned_material_weight" readonly="1" class="oe_inline" />
+                <field name="weight_uom_name" />
+              </div>
+              <label for="planned_output_material" />
+              <div class="o_row o_laser_unit">
+                <field name="planned_output_material" readonly="1" class="oe_inline" />
+                <field name="weight_uom_name" />
+              </div>
+              <label for="estimated_waste" />
+              <div class="o_row o_laser_unit">
+                <field name="estimated_waste" readonly="1" class="oe_inline" />
+                <field name="weight_uom_name" />
+              </div>
+              <field
+                name="time_per_unit"
+                readonly="production_id"
+                widget="float_time"
+              />
+              <field name="planned_time" readonly="1" widget="float_time" />
+            </group>
+            <group
+              string="Actual"
+              invisible="state == 'draft' and not production_id and not move_count"
+            >
+              <label for="produced_qty" />
+              <div class="o_row o_laser_unit">
+                <field name="produced_qty" readonly="1" class="oe_inline" />
+                <field name="product_uom_name" />
+              </div>
+              <label for="consumed_material_weight" />
+              <div class="o_row o_laser_unit">
+                <field name="consumed_material_weight" readonly="1" class="oe_inline" />
+                <field name="weight_uom_name" />
+              </div>
+              <label for="actual_output_material" />
+              <div class="o_row o_laser_unit">
+                <field name="actual_output_material" readonly="1" class="oe_inline" />
+                <field name="weight_uom_name" />
+              </div>
+              <label for="actual_waste" />
+              <div class="o_row o_laser_unit">
+                <field name="actual_waste" readonly="1" class="oe_inline" />
+                <field name="weight_uom_name" />
+              </div>
+              <field name="actual_time" readonly="1" widget="float_time" />
+            </group>
+          </group>
+          <notebook>
+            <page string="Distribution" name="distribution">
+              <field name="line_ids" readonly="production_id">
+                <list editable="bottom">
+                  <field name="product_id" widget="many2one" />
+                  <field name="unit_consumption" sum="Consumption" />
+                  <field name="output_per_unit" sum="Output" />
+                  <field name="line_consumption" sum="Line Consumption" />
+                  <field name="output_qty" sum="Total Output" />
+                  <field name="drawing_ref" />
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter />
+      </form>
+    </field>
+  </record>
+
+  <record id="mrp_laser_cut_order_view_search" model="ir.ui.view">
+    <field name="name">mrp.laser.cut.order.search</field>
+    <field name="model">mrp.laser.cut.order</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" />
+        <field name="raw_material_id" />
+        <field name="production_id" />
+        <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]" />
+        <filter
+          string="In Progress"
+          name="in_progress"
+          domain="[('state', '=', 'in_progress')]"
+        />
+        <filter string="Done" name="done" domain="[('state', '=', 'done')]" />
+        <group expand="0" string="Group By">
+          <filter string="Status" name="group_state" context="{'group_by': 'state'}" />
+          <filter
+            string="Raw Material"
+            name="group_raw_material"
+            context="{'group_by': 'raw_material_id'}"
+          />
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="mrp_laser_cut_order_action" model="ir.actions.act_window">
+    <field name="name">Laser Cutting Orders</field>
+    <field name="res_model">mrp.laser.cut.order</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="mrp_laser_cut_order_line_view_list" model="ir.ui.view">
+    <field name="name">mrp.laser.cut.order.line.list</field>
+    <field name="model">mrp.laser.cut.order.line</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="order_id" />
+        <field name="product_id" />
+        <field name="unit_consumption" sum="Consumption" />
+        <field name="output_per_unit" sum="Output" />
+        <field name="line_consumption" sum="Line Consumption" />
+        <field name="output_qty" sum="Total Output" />
+        <field name="drawing_ref" />
+      </list>
+    </field>
+  </record>
+
+  <record id="mrp_laser_cut_order_line_view_form" model="ir.ui.view">
+    <field name="name">mrp.laser.cut.order.line.form</field>
+    <field name="model">mrp.laser.cut.order.line</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="order_id" />
+            <field name="product_id" />
+            <field name="drawing_ref" />
+          </group>
+          <group>
+            <field name="unit_consumption" />
+            <field name="output_per_unit" />
+            <field name="line_consumption" />
+            <field name="output_qty" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="mrp_laser_cut_order_line_view_search" model="ir.ui.view">
+    <field name="name">mrp.laser.cut.order.line.search</field>
+    <field name="model">mrp.laser.cut.order.line</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="order_id" />
+        <field name="product_id" />
+        <field name="drawing_ref" />
+        <group expand="0" string="Group By">
+          <filter
+            string="Laser Cutting Order"
+            name="group_order"
+            context="{'group_by': 'order_id'}"
+          />
+          <filter
+            string="Product"
+            name="group_product"
+            context="{'group_by': 'product_id'}"
+          />
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="mrp_laser_cut_order_line_action" model="ir.actions.act_window">
+    <field name="name">Distribution Lines</field>
+    <field name="res_model">mrp.laser.cut.order.line</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <menuitem
+    id="menu_mrp_laser_cut_root"
+    name="Laser Cutting"
+    parent="mrp.menu_mrp_root"
+    sequence="12"
+  />
+  <menuitem
+    id="menu_mrp_laser_cut_order"
+    name="Laser Cutting Orders"
+    action="mrp_laser_cut_order_action"
+    parent="menu_mrp_laser_cut_root"
+    sequence="10"
+  />
+  <menuitem
+    id="menu_mrp_laser_cut_order_line"
+    name="Distribution Lines"
+    action="mrp_laser_cut_order_line_action"
+    parent="menu_mrp_laser_cut_root"
+    sequence="20"
+  />
+</odoo>
