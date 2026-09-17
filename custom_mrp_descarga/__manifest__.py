@@ -26,6 +26,7 @@
         "stock_move_line_product_lot_reader",
         "product_multi_company_usability",
         "product_supplierinfo_for_customer",
+        "stock_quant_valuation",
     ],
     "data": [
         "data/quartering_product.xml",
