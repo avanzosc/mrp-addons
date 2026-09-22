@@ -19,4 +19,6 @@
         "views/mrp_workorder_views.xml",
     ],
     "installable": True,
+    "pre_init_hook": "_pre_init_mrp_production_cost",
+    "post_init_hook": "_post_init_mrp_production_cost",
 }

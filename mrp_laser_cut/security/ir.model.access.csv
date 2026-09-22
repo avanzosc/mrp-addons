@@ -1,5 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_order_olaser,order.olaser,model_order_olaser,mrp.group_mrp_user,1,1,1,1
-access_order_olaser_lista,order.olaser.lista,model_order_olaser_lista,mrp.group_mrp_user,1,1,1,1
-access_order_olaser_tiempos,order.olaser.tiempos,model_order_olaser_tiempos,mrp.group_mrp_user,1,1,1,1
-access_order_olaser_rechazo,order.olaser.rechazo,model_order_olaser_rechazo,mrp.group_mrp_user,1,1,1,1
+access_mrp_laser_cut_order_user,mrp.laser.cut.order user,model_mrp_laser_cut_order,mrp.group_mrp_user,1,1,1,1
+access_mrp_laser_cut_order_line_user,mrp.laser.cut.order.line user,model_mrp_laser_cut_order_line,mrp.group_mrp_user,1,1,1,1
