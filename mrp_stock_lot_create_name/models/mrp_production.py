@@ -67,5 +67,7 @@ class MrpProduction(models.Model):
                 )
                 if not moves_with_qty:
                     production._set_qty_producing()
+                else:
+                    moves_with_qty.filtered(lambda m: not m.picked).picked = True
             production._set_personalized_lot_producing()
         return super().button_mark_done()
