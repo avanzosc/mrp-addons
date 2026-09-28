@@ -12,9 +12,10 @@
       <field name="match_on_attribute_ids" position="after">
         <field name="component_attribute_ids" column_invisible="1" />
         <field
-          name="component_match_attribute_id"
+          name="component_match_attribute_ids"
           domain="[('id', 'in', component_attribute_ids)]"
           options="{'no_create': True}"
+          widget="many2many_tags"
         />
       </field>
     </field>
