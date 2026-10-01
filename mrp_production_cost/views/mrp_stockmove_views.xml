@@ -9,8 +9,14 @@
           name="material_cost_to_consume"
           sum="Estimated Total Cost"
           optional="hide"
+          groups="product_cost_security.group_product_cost"
         />
-        <field name="material_cost_consumed" sum="Real Total Cost" optional="hide" />
+        <field
+          name="material_cost_consumed"
+          sum="Real Total Cost"
+          optional="hide"
+          groups="product_cost_security.group_product_cost"
+        />
       </xpath>
     </field>
   </record>

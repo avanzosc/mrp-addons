@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+  <t
+    t-name="product_cost_security.BomOverviewTable"
+    t-inherit="mrp.BomOverviewTable"
+    t-inherit-mode="extension"
+  >
+    <!-- BoM Cost -->
+    <xpath
+      expr="//th[@title='This is the cost based on the BoM of the product. It is computed by summing the costs of the components and operations needed to build the product.']"
+      position="attributes"
+    >
+      <attribute name="t-if">
+                showCosts &amp;&amp; data.show_costs
+      </attribute>
+    </xpath>
+
+    <!-- Product Cost -->
+    <xpath
+      expr="//th[@title='This is the cost defined on the product.']"
+      position="attributes"
+    >
+      <attribute name="t-if">
+                showCosts &amp;&amp; data.show_costs
+      </attribute>
+    </xpath>
+
+    <!-- Footer de costes -->
+    <xpath expr="//tfoot[@t-if='showCosts']" position="attributes">
+      <attribute name="t-if">
+                showCosts &amp;&amp; data.show_costs
+      </attribute>
+    </xpath>
+
+    <!-- Línea principal -->
+    <xpath expr="//BomOverviewLine" position="attributes">
+      <attribute name="showOptions">
+                { ...props.showOptions, costs: props.showOptions.costs &amp;&amp; data.show_costs }
+      </attribute>
+    </xpath>
+
+    <!-- Componentes y sub-BoMs -->
+    <xpath expr="//BomOverviewComponentsBlock" position="attributes">
+      <attribute name="showOptions">
+                { ...props.showOptions, costs: props.showOptions.costs &amp;&amp; data.show_costs }
+      </attribute>
+    </xpath>
+  </t>
+
+</templates>
