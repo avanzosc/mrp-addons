@@ -5,13 +5,23 @@
     <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
     <field name="arch" type="xml">
       <xpath expr="//field[@name='duration']" position="after">
-        <field name="costs_hour" optional="hide" />
+        <field
+          name="costs_hour"
+          optional="hide"
+          groups="product_cost_security.group_product_cost"
+        />
         <field
           name="workorder_cost_estimated"
           sum="Estimated Total Cost"
           optional="hide"
+          groups="product_cost_security.group_product_cost"
         />
-        <field name="workorder_cost_real" sum="Real Total Cost" optional="hide" />
+        <field
+          name="workorder_cost_real"
+          sum="Real Total Cost"
+          optional="hide"
+          groups="product_cost_security.group_product_cost"
+        />
       </xpath>
     </field>
   </record>
