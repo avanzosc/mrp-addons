@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_cleaning_database_operations
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-02 11:52+0000\n"
+"PO-Revision-Date: 2026-10-02 11:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_cleaning_database_operations
+#: model:ir.model,name:mrp_cleaning_database_operations.model_cleaning_database
+msgid "Cleaning Database Operations"
+msgstr "Limpieza de operaciones en base de datos"
+
+#. module: mrp_cleaning_database_operations
+#. odoo-python
+#: code:addons/mrp_cleaning_database_operations/wizards/cleaning_database_warning_wizard.py:0
+msgid "Cleaning Database record not found."
+msgstr "No se ha encontrado el registro de la base de datos de limpieza."
+
+#. module: mrp_cleaning_database_operations
+#: model_terms:ir.ui.view,arch_db:mrp_cleaning_database_operations.cleaning_database_form_view
+msgid "Cleaning MRP Operations"
+msgstr "Limpieza de operaciones de fabricación"
+
+#. module: mrp_cleaning_database_operations
+#: model_terms:ir.ui.view,arch_db:mrp_cleaning_database_operations.cleaning_database_form_view
+msgid ""
+"Deletes MRP Work Orders first and\n"
+"                        Manufacturing Orders afterwards."
+msgstr ""
+"Elimina primero las MRP Work Orders y\n"
+"                        luego las Manufacturing Orders."
+#. module: mrp_cleaning_database_operations
+#: model:ir.model.fields.selection,name:mrp_cleaning_database_operations.selection__cleaning_database_warning_wizard__object_to_delete__mrp
+msgid "MRP"
+msgstr ""
+
+#. module: mrp_cleaning_database_operations
+#: model_terms:ir.ui.view,arch_db:mrp_cleaning_database_operations.cleaning_database_form_view
+msgid "Manufacturing Operations"
+msgstr "Operaciones de fabricación"
+
+#. module: mrp_cleaning_database_operations
+#: model:ir.model.fields,field_description:mrp_cleaning_database_operations.field_cleaning_database_warning_wizard__object_to_delete
+msgid "Object To Delete"
+msgstr "Objeto a borrar"
+
+#. module: mrp_cleaning_database_operations
+#: model:ir.model,name:mrp_cleaning_database_operations.model_cleaning_database_warning_wizard
+msgid "Wizard for warning when cleaning database operations"
+msgstr "Asistente para alertar al limpiar las operaciones de la base de datos"
+
+#. module: mrp_cleaning_database_operations
+#. odoo-python
+#: code:addons/mrp_cleaning_database_operations/wizards/cleaning_database_warning_wizard.py:0
+msgid ""
+"You are about to delete manufacturing operations for the selected companies.\n"
+"\n"
+"MRP Work Orders will be deleted first, followed by Manufacturing Orders.\n"
+"\n"
+"This operation is irreversible."
+msgstr ""
+"Estás a punto de eliminar las operaciones de fabricación de las empresas seleccionadas.\n"
+"\n"
+"Primero se eliminarán las MRP Work Orders y, a continuación, las Manufacturing Orders.\n"
+"\n"
+"Esta operación es irreversible."
