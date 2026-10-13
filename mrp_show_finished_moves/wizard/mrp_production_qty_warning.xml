@@ -1,0 +1,26 @@
+<odoo>
+  <record id="view_mrp_production_qty_warning_form" model="ir.ui.view">
+    <field name="model">mrp.production.qty.warning</field>
+    <field name="arch" type="xml">
+      <form string="Quantity Discrepancy Warning">
+        <group>
+          <field name="warning_message" nolabel="1" readonly="1" />
+        </group>
+        <footer>
+          <button
+            name="action_yes"
+            type="object"
+            string="Yes, Correct the Discrepancies"
+            class="btn-primary"
+          />
+          <button
+            name="action_no"
+            type="object"
+            string="No, Continue Editing"
+            class="btn-secondary"
+          />
+        </footer>
+      </form>
+    </field>
+  </record>
+</odoo>
