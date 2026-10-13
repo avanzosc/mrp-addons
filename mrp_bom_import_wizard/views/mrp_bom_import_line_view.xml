@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="bom_import_line_view_search" model="ir.ui.view">
+    <field name="model">mrp.bom.import.line</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="product_id" />
+        <field name="bom_product_id" />
+        <filter name="pending" string="Pending" domain="[('state', '!=', 'done')]" />
+        <filter name="finished" string="Done" domain="[('state', '=', 'done')]" />
+        <filter name="errored" string="Error" domain="[('state', '=', 'error')]" />
+        <group expand="0" string="Group By">
+          <filter
+            string="Status"
+            name="state_group"
+            domain="[]"
+            context="{'group_by':'state'}"
+          />
+          <filter
+            string="Log Info"
+            name="log_info_group"
+            domain="[]"
+            context="{'group_by':'log_info'}"
+          />
+          <separator />
+          <filter
+            string="BoM Product"
+            name="bom_product"
+            domain="[]"
+            context="{'group_by':'bom_product_id'}"
+          />
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="mrp_bom_import_line_view_tree" model="ir.ui.view">
+    <field name="model">mrp.bom.import.line</field>
+    <field name="arch" type="xml">
+      <list
+        decoration-success="state=='pass'"
+        decoration-danger="state=='error'"
+        decoration-muted="state=='done'"
+        decoration-info="state=='2validate'"
+        decoration-warning="parent_product_bom_count>0 and state!='done'"
+        editable="bottom"
+      >
+        <field name="product_ref" readonly="state == 'done'" />
+        <field name="product_name" readonly="state == 'done'" />
+        <field name="product_id" readonly="state == 'done'" optional="hide" />
+        <field name="quantity" readonly="state == 'done'" />
+        <field name="bom_code" readonly="state == 'done'" />
+        <field name="bom_name" readonly="state == 'done'" />
+        <field name="bom_product_id" readonly="state == 'done'" optional="hide" />
+        <field name="parent_qty" readonly="state == 'done'" />
+        <field name="bom_ref" readonly="state == 'done'" />
+        <field
+          name="parent_product_bom_count"
+          readonly="state == 'done'"
+          optional="show"
+        />
+        <field name="bom_id" readonly="state == 'done'" optional="hide" />
+        <field name="bom_line_id" readonly="state == 'done'" optional="hide" />
+        <field name="state" optional="show" />
+        <field name="log_info" readonly="state == 'done'" optional="hide" />
+        <button
+          name="button_validate"
+          type="object"
+          title="Validate"
+          icon="fa-search"
+          invisible="state == 'done'"
+        />
+      </list>
+    </field>
+  </record>
+</odoo>
