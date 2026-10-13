@@ -9,11 +9,11 @@ MRP BoM Attribute Match Manual
 This module makes the ``Match on Attributes`` field editable on BoM component
 lines provided by ``mrp_bom_attribute_match``.
 
-It also adds a ``Component Match Attribute`` field to map a parent product
-attribute to a different component attribute. For example, a skateboard can use
-``M2`` as the parent attribute while the component template uses ``Color``.
-When manufacturing a variant with ``M2 = Red``, the module searches for the
-component variant with ``Color = Red``.
+It also adds a ``Component Match Attributes`` field to map parent product
+attributes to different component attributes. For example, a skateboard can use
+``M2`` as the parent attribute while the component template uses ``Color`` or
+``Size``. When manufacturing a variant with ``M2 = Red``, the module searches
+for a component variant with a selected component attribute value named ``Red``.
 
 Bug Tracker
 ===========
