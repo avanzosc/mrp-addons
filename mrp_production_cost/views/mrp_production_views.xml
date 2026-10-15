@@ -8,24 +8,46 @@
         expr="//field[@name='move_raw_ids']/list/field[@name='quantity']"
         position="after"
       >
-        <field name="price_unit_cost" optional="hide" />
+        <field
+          name="price_unit_cost"
+          optional="hide"
+          groups="product_cost_security.group_product_cost"
+        />
         <field
           name="material_cost_to_consume"
           sum="Estimated Total Cost"
           optional="hide"
+          groups="product_cost_security.group_product_cost"
         />
-        <field name="material_cost_consumed" sum="Real Total Cost" optional="hide" />
+        <field
+          name="material_cost_consumed"
+          sum="Real Total Cost"
+          optional="hide"
+          groups="product_cost_security.group_product_cost"
+        />
       </xpath>
       <notebook position="before">
         <group name="estimated_cost_info" col="6">
           <group colspan="2">
-            <field name="cost_manufacturing_estimated" readonly="1" />
+            <field
+              name="cost_manufacturing_estimated"
+              readonly="1"
+              groups="product_cost_security.group_product_cost"
+            />
           </group>
           <group colspan="2">
-            <field name="cost_manufacturing_real" readonly="1" />
+            <field
+              name="cost_manufacturing_real"
+              readonly="1"
+              groups="product_cost_security.group_product_cost"
+            />
           </group>
           <group colspan="2">
-            <field name="price_unit_cost" readonly="1" />
+            <field
+              name="price_unit_cost"
+              readonly="1"
+              groups="product_cost_security.group_product_cost"
+            />
           </group>
         </group>
       </notebook>
@@ -41,17 +63,41 @@
           name="cost_material_to_consume"
           sum="Estimated Material Cost"
           optional="hide"
+          groups="product_cost_security.group_product_cost"
         />
-        <field name="cost_material_consumed" sum="Real Material Cost" optional="hide" />
+        <field
+          name="cost_material_consumed"
+          sum="Real Material Cost"
+          optional="hide"
+          groups="product_cost_security.group_product_cost"
+        />
         <field
           name="cost_workorder_estimated"
           sum="Estimated Work Cost"
           optional="hide"
+          groups="product_cost_security.group_product_cost"
         />
-        <field name="cost_workorder_real" sum="Real Work Cost" optional="hide" />
-        <field name="cost_manufacturing_estimated" sum="Estimated Total Cost" />
-        <field name="cost_manufacturing_real" sum="Real Total Cost" />
-        <field name="price_unit_cost" readonly="1" />
+        <field
+          name="cost_workorder_real"
+          sum="Real Work Cost"
+          optional="hide"
+          groups="product_cost_security.group_product_cost"
+        />
+        <field
+          name="cost_manufacturing_estimated"
+          sum="Estimated Total Cost"
+          groups="product_cost_security.group_product_cost"
+        />
+        <field
+          name="cost_manufacturing_real"
+          sum="Real Total Cost"
+          groups="product_cost_security.group_product_cost"
+        />
+        <field
+          name="price_unit_cost"
+          readonly="1"
+          groups="product_cost_security.group_product_cost"
+        />
       </field>
     </field>
   </record>

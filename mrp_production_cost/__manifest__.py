@@ -12,12 +12,18 @@
         "mrp",
         "stock",
         "stock_move_cost",
+        "product_cost_security_read_permission",
     ],
     "data": [
         "views/mrp_production_views.xml",
         "views/mrp_stockmove_views.xml",
         "views/mrp_workorder_views.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "mrp_production_cost/static/src/js/mrp_bom_overview.esm.js",
+        ],
+    },
     "installable": True,
     "pre_init_hook": "_pre_init_mrp_production_cost",
     "post_init_hook": "_post_init_mrp_production_cost",
