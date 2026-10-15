@@ -7,12 +7,12 @@
             <xpath expr="//field[@name='company_id']" position="after">
                 <field
           name="material_cost_to_consume"
-          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          groups="product_cost_security.group_product_cost"
           optional="show"
         />
                 <field
           name="material_cost_consumed"
-          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          groups="product_cost_security.group_product_cost"
           optional="show"
         />
             </xpath>

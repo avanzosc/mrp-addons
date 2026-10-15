@@ -10,17 +10,17 @@
             <xpath expr="//field[@name='duration']" position="after">
                 <field
           name="machine_hour_cost"
-          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          groups="product_cost_security.group_product_cost"
           optional="show"
         />
                 <field
           name="workorder_cost_estimated"
-          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          groups="product_cost_security.group_product_cost"
           optional="show"
         />
                 <field
           name="workorder_cost_real"
-          groups="mrp_bom_report_group.group_mrp_bom_report_group_see_cost"
+          groups="product_cost_security.group_product_cost"
           optional="show"
         />
             </xpath>

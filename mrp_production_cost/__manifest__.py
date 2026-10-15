@@ -7,11 +7,15 @@
     "category": "MRP",
     "license": "AGPL-3",
     "version": "14.0.1.1.0",
-    "depends": ["product", "mrp", "stock", "mrp_bom_report_group"],
+    "depends": ["product", "mrp", "stock", "stock_move_cost", "product_cost_security"],
     "data": [
         "views/mrp_production_views.xml",
         "views/mrp_stockmove_views.xml",
         "views/mrp_workorder_views.xml",
+        "report/mrp_bom_report.xml",
     ],
     "installable": True,
+    "auto_install": True,
+    "pre_init_hook": "_pre_init_mrp_production_cost",
+    "post_init_hook": "_post_init_mrp_production_cost",
 }
