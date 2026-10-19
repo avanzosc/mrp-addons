@@ -16,19 +16,25 @@ class MrpProduction(models.Model):
         compute_sudo=True,
     )
     configurator_currency_id = fields.Many2one(
-        related="configurator_pricelist_id.currency_id"
+        comodel_name="res.currency",
+        compute="_compute_configurator_pricelist_id",
+        compute_sudo=True,
     )
 
     @api.depends("company_id")
     def _compute_configurator_pricelist_id(self):
-        Pricelist = self.env["product.pricelist"]
+        pricelist_obj = self.env["product.pricelist"]
         for production in self:
-            production.configurator_pricelist_id = Pricelist.search(
-                [
-                    "|",
-                    ("company_id", "=", False),
-                    ("company_id", "=", production.company_id.id),
-                ],
-                order="company_id desc, id",
-                limit=1,
+            configurator_pricelist = pricelist_obj.search(
+                [("company_id", "=", production.company_id.id)], limit=1
+            )
+            if not configurator_pricelist:
+                configurator_pricelist = pricelist_obj.search(
+                    [("company_id", "=", False)], limit=1
+                )
+            production.update(
+                {
+                    "configurator_pricelist_id": configurator_pricelist.id,
+                    "configurator_currency_id": configurator_pricelist.currency_id.id,
+                }
             )
