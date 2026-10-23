@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="mrp_workorder_form_section" model="ir.ui.view">
+    <field name="name">mrp.workorder.form.section</field>
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//sheet/group/group/field[@name='workcenter_id']"
+        position="attributes"
+      >
+        <attribute name="string">Centro de producción</attribute>
+      </xpath>
+      <xpath expr="//sheet/group/group/field[@name='workcenter_id']" position="after">
+        <field name="section_id" readonly="1" />
+      </xpath>
+    </field>
+  </record>
+</odoo>
