@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- Operaciones: formulario -->
+  <record id="mrp_routing_workcenter_form_section" model="ir.ui.view">
+    <field name="name">mrp.routing.workcenter.form.section</field>
+    <field name="model">mrp.routing.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//group[@name='description']/field[@name='workcenter_id']"
+        position="after"
+      >
+        <field name="section_id" readonly="1" />
+      </xpath>
+    </field>
+  </record>
+
+  <!-- Operaciones: lista general y lista incrustada en listas de materiales -->
+  <record id="mrp_routing_workcenter_list_section" model="ir.ui.view">
+    <field name="name">mrp.routing.workcenter.list.section</field>
+    <field name="model">mrp.routing.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//list/field[@name='workcenter_id']" position="after">
+        <field name="section_id" readonly="1" optional="show" />
+      </xpath>
+    </field>
+  </record>
+
+  <!-- Búsquedas y agrupaciones -->
+  <record id="mrp_routing_workcenter_search_section" model="ir.ui.view">
+    <field name="name">mrp.routing.workcenter.search.section</field>
+    <field name="model">mrp.routing.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_routing_workcenter_filter" />
+    <field name="arch" type="xml">
+      <xpath expr="//search/field[@name='workcenter_id']" position="after">
+        <field name="section_id" />
+      </xpath>
+      <xpath expr="//filter[@name='workcenter']" position="after">
+        <filter
+          name="group_by_section"
+          string="Sección"
+          context="{'group_by': 'section_id'}"
+        />
+      </xpath>
+    </field>
+  </record>
+</odoo>

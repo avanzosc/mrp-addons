@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_workcenter_section
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-23 09:50+0000\n"
+"PO-Revision-Date: 2026-10-23 09:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_workcenter_section
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_section.mrp_workorder_form_section
+msgid "Centro de producción"
+msgstr ""
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__workcenter_id
+msgid "Centro de producción original"
+msgstr ""
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__create_uid
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter_section__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__create_date
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter_section__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__display_name
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter_section__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__id
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter_section__id
+msgid "ID"
+msgstr ""
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__write_uid
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter_section__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__write_date
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter_section__write_date
+msgid "Last Updated on"
+msgstr "Actualizado el"
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_capacidad_tarea__name
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter_section__name
+msgid "Nombre"
+msgstr ""
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workcenter__section_id
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workorder__section_id
+#: model_terms:ir.ui.view,arch_db:mrp_workcenter_section.mrp_workcenter_search_section
+msgid "Sección"
+msgstr ""
+
+#. module: mrp_workcenter_section
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workorder__tarea_id
+msgid "Tarea"
+msgstr ""
+
+#. module: mrp_workcenter_section
+#: model:ir.model,name:mrp_workcenter_section.model_mrp_capacidad_tarea
+msgid "Tarea de capacidad de producción"
+msgstr ""
+
+#. module: mrp_workcenter_section
+#: model:ir.model,name:mrp_workcenter_section.model_mrp_workcenter
+#: model:ir.model.fields,field_description:mrp_workcenter_section.field_mrp_workorder__workcenter_id
+msgid "Work Center"
+msgstr "Centro de trabajo"
+
+#. module: mrp_workcenter_section
+#: model:ir.model,name:mrp_workcenter_section.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: mrp_workcenter_section
+#: model:ir.model,name:mrp_workcenter_section.model_mrp_workcenter_section
+msgid "Workcenter Section"
+msgstr "Sección del centro de trabajo"
