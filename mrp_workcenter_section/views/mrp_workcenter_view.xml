@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="mrp_workcenter_form_section" model="ir.ui.view">
+    <field name="name">mrp.workcenter.form.section</field>
+    <field name="model">mrp.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//sheet/group/group/field[@name='name']" position="after">
+        <field name="section_id" />
+      </xpath>
+    </field>
+  </record>
+
+  <record id="mrp_workcenter_list_section" model="ir.ui.view">
+    <field name="name">mrp.workcenter.list.section</field>
+    <field name="model">mrp.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_workcenter_tree_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//list/field[@name='name']" position="after">
+        <field name="section_id" optional="show" />
+      </xpath>
+    </field>
+  </record>
+
+  <record id="mrp_workcenter_search_section" model="ir.ui.view">
+    <field name="name">mrp.workcenter.search.section</field>
+    <field name="model">mrp.workcenter</field>
+    <field name="inherit_id" ref="mrp.view_mrp_workcenter_search" />
+    <field name="arch" type="xml">
+      <xpath expr="//search/field[@name='name']" position="after">
+        <field name="section_id" />
+      </xpath>
+      <xpath expr="//search/group" position="inside">
+        <filter
+          name="group_by_section"
+          string="Sección"
+          context="{'group_by': 'section_id'}"
+        />
+      </xpath>
+    </field>
+  </record>
+</odoo>
