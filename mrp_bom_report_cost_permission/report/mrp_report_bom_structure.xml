@@ -107,6 +107,8 @@
               />
             </tr>
             <t t-call="mrp.report_mrp_bom_pdf_line" />
+          </tbody>
+          <tfoot>
             <tr
               t-if="data['show_costs']"
               groups="mrp_bom_report_cost_permission.show_mrp_costs"
@@ -175,7 +177,7 @@
                 />
               </tr>
             </t>
-          </tbody>
+          </tfoot>
         </table>
       </div>
       <div t-else="" class="d-flex align-items-center justify-content-center h-50">
