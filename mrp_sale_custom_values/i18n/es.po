@@ -1,0 +1,17 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_sale_custom_values
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+
+#. module: mrp_sale_custom_values
+#: model:ir.model.fields,field_description:mrp_sale_custom_values.field_mrp_production__sale_custom_description
+#: model_terms:ir.ui.view,arch_db:mrp_sale_custom_values.mrp_production_view_form
+msgid "Custom Description"
+msgstr "Descripción personalizada"
