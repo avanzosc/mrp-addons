@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="mrp_production_view_form" model="ir.ui.view">
+    <field name="name">mrp.production.form.sale.custom.values</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+    <field name="arch" type="xml">
+      <field name="product_description_variants" position="after">
+        <field
+          name="sale_custom_description"
+          widget="html"
+          readonly="1"
+          invisible="not sale_custom_description"
+        />
+      </field>
+      <field name="product_description_variants" position="attributes">
+        <attribute name="invisible">
+                    not product_description_variants or sale_custom_description
+                </attribute>
+      </field>
+    </field>
+  </record>
+</odoo>
