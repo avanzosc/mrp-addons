@@ -15,6 +15,9 @@ attributes to different component attributes. For example, a skateboard can use
 ``Size``. When manufacturing a variant with ``M2 = Red``, the module searches
 for a component variant with a selected component attribute value named ``Red``.
 
+The module also allows component templates to contain attributes that are not
+present on the manufactured product, as those attributes can be mapped manually.
+
 Bug Tracker
 ===========
 
