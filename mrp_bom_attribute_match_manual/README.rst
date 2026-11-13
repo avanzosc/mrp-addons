@@ -18,6 +18,10 @@ for a component variant with a selected component attribute value named ``Red``.
 The module also allows component templates to contain attributes that are not
 present on the manufactured product, as those attributes can be mapped manually.
 
+Manufacturing order component lines show the source BoM block. Components from
+an exploded kit display that kit, while direct dynamic components display their
+configured component template.
+
 Bug Tracker
 ===========
 
