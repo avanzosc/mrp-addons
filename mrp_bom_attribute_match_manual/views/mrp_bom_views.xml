@@ -12,11 +12,26 @@
       <field name="match_on_attribute_ids" position="after">
         <field name="component_attribute_ids" column_invisible="1" />
         <field
-          name="component_match_attribute_id"
+          name="component_match_attribute_ids"
           domain="[('id', 'in', component_attribute_ids)]"
           options="{'no_create': True}"
+          widget="many2many_tags"
         />
       </field>
+    </field>
+  </record>
+
+  <record id="mrp_production_form_view" model="ir.ui.view">
+    <field name="name">mrp.production.form.component.block</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//field[@name='move_raw_ids']/list/field[@name='product_id']"
+        position="after"
+      >
+        <field name="bom_block_product_tmpl_id" optional="show" readonly="1" />
+      </xpath>
     </field>
   </record>
 </odoo>

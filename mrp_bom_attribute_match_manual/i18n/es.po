@@ -1,0 +1,16 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_attribute_match_manual
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+
+#. module: mrp_bom_attribute_match_manual
+#: model:ir.model.fields,field_description:mrp_bom_attribute_match_manual.field_stock_move__bom_block_product_tmpl_id
+msgid "Block"
+msgstr "Bloque"
