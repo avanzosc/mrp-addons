@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-==============================
-mrp bom report cost permission
-==============================
+========================================
+Manufacturing BoM report cost permission
+========================================
 
 * New group "Show product and BoM cost in printed report".
 

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wiz_update_workcenter_productivity,wiz.update.workcenter.productivity,model_wiz_update_workcenter_productivity,mrp.group_mrp_user,1,1,1,1

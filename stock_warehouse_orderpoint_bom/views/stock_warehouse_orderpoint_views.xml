@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record
+    id="view_warehouse_orderpoint_tree_editable_inherited_purchase"
+    model="ir.ui.view"
+  >
+    <field name="model">stock.warehouse.orderpoint</field>
+    <field
+      name="inherit_id"
+      ref="mrp.view_warehouse_orderpoint_tree_editable_inherited_purchase"
+    />
+    <field name="arch" type="xml">
+      <field name="bom_id" position="attributes">
+        <attribute name="optional">show</attribute>
+      </field>
+    </field>
+  </record>
+
+  <record id="action_recalculate_bom_id" model="ir.actions.server">
+    <field name="name">Recalculate BoM</field>
+    <field name="model_id" ref="purchase_stock.model_stock_warehouse_orderpoint" />
+    <field
+      name="binding_model_id"
+      ref="purchase_stock.model_stock_warehouse_orderpoint"
+    />
+    <field name="binding_view_types">list</field>
+    <field name="state">code</field>
+    <field name="code">
+        if records:
+            records.get_default_bom()
+        </field>
+  </record>
+</odoo>

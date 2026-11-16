@@ -27,7 +27,11 @@
         <field name="workorder_id" optional="show" />
       </xpath>
       <page name="components" position="before">
-        <page name="move_lines" string="Move Lines">
+        <page
+          name="move_lines"
+          string="Move Lines"
+          groups="mrp_usability.group_mrp_detailed_operations_visible"
+        >
           <field
             name="raw_move_line_ids"
             context="{'default_production_id': id, 'default_company_id': company_id}"

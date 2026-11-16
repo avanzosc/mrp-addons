@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="mrp_routing_workcenter_filter" model="ir.ui.view">
+    <field name="name">mrp.routing.workcenter.filter</field>
+    <field name="model">mrp.routing.workcenter</field>
+    <field name="inherit_id" ref="mrp.mrp_routing_workcenter_filter" />
+    <field name="arch" type="xml">
+      <filter name="workcenter" position="after">
+        <filter
+          name="product_category"
+          string="Product Category"
+          context="{'group_by': 'product_categ_id'}"
+        />
+      </filter>
+    </field>
+  </record>
+</odoo>

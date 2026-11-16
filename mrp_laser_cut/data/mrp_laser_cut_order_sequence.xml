@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+  <record id="seq_mrp_laser_cut_order" model="ir.sequence">
+    <field name="name">Laser Cutting Order</field>
+    <field name="code">mrp.laser.cut.order</field>
+    <field name="prefix">LCO%(y)s</field>
+    <field name="padding" eval="4" />
+    <field name="company_id" eval="False" />
+  </record>
+</odoo>

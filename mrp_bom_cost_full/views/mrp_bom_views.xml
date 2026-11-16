@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="mrp_bom_form_view" model="ir.ui.view">
+    <field name="model">mrp.bom</field>
+    <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//field[@name='bom_line_ids']/list/field[@name='product_qty']"
+        position="after"
+      >
+        <field name="material_cost" />
+        <field
+          name="cost_without_overhead"
+          optional="show"
+          sum="Mat cost without overhead"
+        />
+        <field name="overhead" optional="show" />
+        <field
+          name="cost_with_overhead"
+          optional="show"
+          sum="Mat cost without overhead"
+        />
+      </xpath>
+      <xpath expr="//field[@name='product_qty']/.." position="after">
+        <label for="overhead" string="Overhead" />
+        <div class="o_row">
+          <field name="overhead" />
+        </div>
+      </xpath>
+      <field name="bom_line_ids" position="attributes">
+        <attribute name="context">
+              {'default_parent_product_tmpl_id': product_tmpl_id,
+               'default_product_id': False, 'default_bom_id': id,
+               'default_overhead': overhead
+              }
+          </attribute>
+      </field>
+      <field name="operation_ids" position="attributes">
+        <attribute name="context">
+              {'bom_id_invisible': True,
+               'default_bom_id': id,
+               'list_view_ref': 'mrp.mrp_routing_workcenter_bom_tree_view',
+               'default_overhead': overhead
+              }
+          </attribute>
+      </field>
+      <notebook position="before">
+        <group name="total-costs">
+          <group>
+            <field name="total_cost_without_overhead" />
+          </group>
+          <group>
+            <field name="total_cost_with_overhead" />
+          </group>
+        </group>
+      </notebook>
+    </field>
+  </record>
+
+  <record id="mrp_bom_tree_view" model="ir.ui.view">
+    <field name="model">mrp.bom</field>
+    <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+    <field name="arch" type="xml">
+      <field name="type" position="after">
+        <field
+          name="total_cost_without_overhead"
+          optional="show"
+          sum="Total Cost Without Overhead"
+        />
+        <field
+          name="total_cost_with_overhead"
+          optional="show"
+          sum="Total Cost Without Overhead"
+        />
+      </field>
+    </field>
+  </record>
+</odoo>

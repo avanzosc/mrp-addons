@@ -1,0 +1,491 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* custom_mrp_line_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-25 13:29+0000\n"
+"PO-Revision-Date: 2026-05-25 13:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Amount"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__applied_price
+msgid "Applied Price"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__april
+msgid "April"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__august
+msgid "August"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Average Weight Canal"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__average_cost
+msgid "Averga Cost"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__base_price
+msgid "Base Price"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model,name:custom_mrp_line_cost.model_mrp_bom
+msgid "Bill of Material"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model,name:custom_mrp_line_cost.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__brut
+msgid "Brut"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model,name:custom_mrp_line_cost.model_mrp_bom_byproduct
+msgid "Byproduct"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_product__canal
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_template__canal
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__canal
+msgid "Canal"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__canal_weight
+msgid "Canal Average Weight"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__canal_cost
+msgid "Canal Cost"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__clean_qty
+msgid "Clean"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__clean_performance
+msgid "Clean Performance"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom_byproduct__coefficient
+msgid "Coefficient"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__consume_qty
+msgid "Consumed Qty"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__container
+msgid "Containers"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__cost
+msgid "Cost"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__expense_kg
+msgid "Cost/Kgm"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_workcenter_view
+msgid "Costs"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__december
+msgid "December"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__dest_qty
+msgid "Dest Kg"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__dif_total_amount
+msgid "Dif. Total Amount"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#. odoo-python
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Entries"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__entry_total_amount
+msgid "Entry Total Amount"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__month_cost
+msgid "Expense/kg"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__february
+msgid "February"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom_line__cost
+msgid "Fixed Cost"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom_byproduct__cost
+msgid "Fixed Price"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__id
+msgid "ID"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_product__palet
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_template__palet
+msgid "Is Palet"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__january
+msgid "January"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__july
+msgid "July"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__june
+msgid "June"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model,name:custom_mrp_line_cost.model_mrp_production
+msgid "Manufacturing Order"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__march
+msgid "March"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__may
+msgid "May"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__month_cost
+msgid "Month Cost"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#. odoo-python
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__move_line_to_do_ids
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Move Lines To Do"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#. odoo-python
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__move_to_do_ids
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Moves To Do"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__november
+msgid "November"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__october
+msgid "October"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__operation_id
+msgid "Operation"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__origin_qty
+msgid "Origin Qty"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__output_total_amount
+msgid "Output Total Amount"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#. odoo-python
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Outputs"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom__packaging_id
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__packaging_id
+msgid "Packaging"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom__pallet_id
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__pallet_id
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet_id
+msgid "Pallet"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__pallet
+msgid "Pallet Qty"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#. odoo-python
+#: code:addons/custom_mrp_line_cost/models/mrp_production.py:0
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__picking_to_do_ids
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Pickings To Do"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__price_difference
+msgid "Price Difference"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model,name:custom_mrp_line_cost.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model,name:custom_mrp_line_cost.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__product_unit_container
+msgid "Product Unit/Container"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_bom_byproduct__expense_kg
+msgid "Production Cost"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__purchase_price
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Purchase Amount"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__purchase_unit_price
+msgid "Purchase Unit Price"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Recalculate Costs"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Rto. %"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_production__rto_canal
+msgid "Rto. Canal"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__september
+msgid "September"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_product__sum_in_production
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_template__sum_in_production
+msgid "Sum in Production Qty"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_move_line_ids_tree_view
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.view_move_line_tree
+msgid "Total Clean"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Total Container"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Total Containers"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Total Done"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_finished_move_line_ids_tree_view
+msgid "Total Pallet"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Total Pallets"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Total Percentage"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Total Quantity"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.production_move_line_ids_tree_view
+msgid "Total Reserved"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Total Units"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model_terms:ir.ui.view,arch_db:custom_mrp_line_cost.mrp_production_form_view
+msgid "Total amount"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__unit
+msgid "Unit"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_product__unit_container
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_product_template__unit_container
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__unit_container
+msgid "Unit/Container"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_stock_move_line__weight
+msgid "Weight"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model,name:custom_mrp_line_cost.model_mrp_workcenter
+msgid "Work Center"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_killing_cost__workcenter_id
+msgid "Workcenter"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.actions.act_window,name:custom_mrp_line_cost.action_workcenter_cost_view
+#: model:ir.model,name:custom_mrp_line_cost.model_killing_cost
+#: model:ir.ui.menu,name:custom_mrp_line_cost.menu_view_workcenter_cost
+#: model:ir.ui.menu,name:custom_mrp_line_cost.menu_view_workcenter_cost_clasificado
+msgid "Workcenter Cost"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#: model:ir.model.fields,field_description:custom_mrp_line_cost.field_mrp_workcenter__cost_ids
+msgid "Workcenter Costs"
+msgstr ""
+
+#. module: custom_mrp_line_cost
+#. odoo-python
+#: code:addons/custom_mrp_line_cost/models/stock_move_line.py:0
+msgid "You must introduce the planned date."
+msgstr ""

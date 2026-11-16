@@ -1,0 +1,16 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#  * mrp_production_product_attributes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: mrp_production_product_attributes
+#: model_terms:ir.ui.view,arch_db:mrp_production_product_attributes.mrp_production_form_view
+msgid "Manufacturing Product Attributes"
+msgstr "Características producto OF"

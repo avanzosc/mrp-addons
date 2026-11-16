@@ -10,6 +10,7 @@
         "mrp",
     ],
     "data": [
+        "security/mrp_usability_groups.xml",
         "views/mrp_workorder_views.xml",
         "views/mrp_production_views.xml",
     ],

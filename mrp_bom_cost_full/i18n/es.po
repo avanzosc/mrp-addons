@@ -1,0 +1,139 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_cost_full
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-06 04:59+0000\n"
+"PO-Revision-Date: 2026-08-06 04:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model,name:mrp_bom_cost_full.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model,name:mrp_bom_cost_full.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Línea de lista de materiales"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model,name:mrp_bom_cost_full.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_routing_workcenter__cost_op_with_overhead
+msgid "Cost Op With Overhead"
+msgstr "Coste OP Con Overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_routing_workcenter__cost_op_without_overhead
+msgid "Cost Op Without Overhead"
+msgstr "Coste OP Sin Overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_bom_line__cost_with_overhead
+msgid "Cost With Overhead"
+msgstr ""
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_bom_line__cost_without_overhead
+msgid "Cost Without Overhead"
+msgstr "Coste sin verhead"
+
+#. module: mrp_bom_cost_full
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.res_config_settings_view_form
+msgid "Default overhead for BoMs."
+msgstr "Overhead por defecto para LdMs"
+
+#. module: mrp_bom_cost_full
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.mrp_routing_workcenter_tree_view
+msgid "Duration (hours)"
+msgstr "Duración (horas)"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_routing_workcenter__hour_cost
+msgid "Hour Cost"
+msgstr "Coste hora"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_routing_workcenter__time_cycle_manual
+msgid "Manual Duration"
+msgstr "Duración manual "
+
+#. module: mrp_bom_cost_full
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.mrp_bom_form_view
+msgid "Mat cost without overhead"
+msgstr "Coste Mat. Sin overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_bom_line__material_cost
+msgid "Material Cost"
+msgstr "Coste material"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_res_config_settings__mrp_bom_overhead
+msgid "Mrp BoM Overhead"
+msgstr "Mrp LdM Overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_bom__overhead
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.mrp_bom_form_view
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.res_config_settings_view_form
+msgid "Overhead"
+msgstr "Overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_bom_line__overhead
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_routing_workcenter__overhead
+msgid "Overhead %"
+msgstr "% Overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,help:mrp_bom_cost_full.field_mrp_routing_workcenter__time_cycle_manual
+msgid ""
+"Time in minutes:- In manual mode, time used- In automatic mode, supposed "
+"first time when there aren't any work orders yet"
+msgstr ""
+"Tiempo en minutos:- En el modo manual, tiempo utilizado- en el modo "
+"automático, primer tiempo supuesto cuando no hay órdenes de trabajo aún"
+
+#. module: mrp_bom_cost_full
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.mrp_routing_workcenter_tree_view
+msgid "Total Cost Op With Overhead"
+msgstr "Total Coste Op Con overhead"
+
+#. module: mrp_bom_cost_full
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.mrp_routing_workcenter_tree_view
+msgid "Total Cost Op Without Overhead"
+msgstr "Total Coste OP Sin overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_bom__total_cost_with_overhead
+msgid "Total Cost With Overhead"
+msgstr "Total coste con overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model.fields,field_description:mrp_bom_cost_full.field_mrp_bom__total_cost_without_overhead
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.mrp_bom_tree_view
+msgid "Total Cost Without Overhead"
+msgstr "Total coste sin overhead"
+
+#. module: mrp_bom_cost_full
+#: model:ir.model,name:mrp_bom_cost_full.model_mrp_routing_workcenter
+msgid "Work Center Usage"
+msgstr "Utilización del centro de trabajo"
+
+#. module: mrp_bom_cost_full
+#: model_terms:ir.ui.view,arch_db:mrp_bom_cost_full.mrp_routing_workcenter_form_view
+msgid "hours"
+msgstr "horas"

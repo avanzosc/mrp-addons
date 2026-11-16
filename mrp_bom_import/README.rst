@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==================
+==============
 MRP BoM Import
-==================
+==============
 
 Module to import **Bills of Materials (BoM)** from Excel files, improving usability and automation in manufacturing operations.
 
