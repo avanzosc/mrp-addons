@@ -22,6 +22,7 @@
     "assets": {
         "web.assets_backend": [
             "mrp_production_cost/static/src/js/mrp_bom_overview.esm.js",
+            "mrp_production_cost/static/src/js/mrp_mo_overview.esm.js",
         ],
     },
     "installable": True,
