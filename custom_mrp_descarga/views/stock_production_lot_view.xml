@@ -13,9 +13,6 @@
           name="action_view_move_lines"
         />
             </div>
-            <field name="company_id" position="after">
-                <field name="average_price" />
-            </field>
         </field>
     </record>
 </odoo>
