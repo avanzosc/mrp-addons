@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="mrp_workorder_form_view_external_subcontract" model="ir.ui.view">
+    <field name="name">mrp.workorder.form.external.subcontract</field>
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='production_id']" position="after">
+        <field name="bom_id" />
+        <field name="service_product_id" />
+        <field name="service_product_supplier_id" />
+        <field name="service_supplier_id" />
+      </xpath>
+    </field>
+  </record>
+
+  <record id="mrp_workorder_list_view_external_subcontract" model="ir.ui.view">
+    <field name="name">mrp.workorder.list.external.subcontract</field>
+    <field name="model">mrp.workorder</field>
+    <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='product_id']" position="after">
+        <field name="bom_id" optional="hide" />
+      </xpath>
+      <xpath expr="//field[@name='date_start']" position="after">
+        <field name="purchase_id" options="{'no_create': True}" optional="show" />
+      </xpath>
+    </field>
+  </record>
+</odoo>
