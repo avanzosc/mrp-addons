@@ -7,14 +7,9 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     sale_id = fields.Many2one(
-        compute=False, related="sale_line_id.order_id", store=True
-    )
-    sale_line_id = fields.Many2one(
-        string="Sale line",
-        comodel_name="sale.order.line",
-        compute="_compute_sale_line_id",
+        compute=False,
+        related="sale_line_id.order_id",
         store=True,
-        copy=False,
     )
     sale_line_product_id = fields.Many2one(
         string="Sale Line Product",
@@ -27,31 +22,6 @@ class MrpProduction(models.Model):
         string="Production Parent",
         comodel_name="mrp.production",
     )
-
-    @api.depends(
-        "procurement_group_id",
-        "procurement_group_id.sale_id",
-        "mrp_production_parent_id",
-        "mrp_production_parent_id.sale_line_id",
-    )
-    def _compute_sale_line_id(self):
-        for production in self:
-            sale_line_id = self.env["sale.order.line"]
-            procurement_group = production.procurement_group_id
-            if procurement_group.sale_id:
-                sale_line = procurement_group.sale_id.order_line.filtered(
-                    lambda x, prod=production: x.product_id == prod.product_id
-                    and x.product_uom_qty == prod.product_qty
-                )
-                if sale_line:
-                    sale_line_id = sale_line.id
-            else:
-                if (
-                    production.mrp_production_parent_id
-                    and production.mrp_production_parent_id.sale_line_id
-                ):
-                    sale_line_id = production.mrp_production_parent_id.sale_line_id.id
-            production.sale_line_id = sale_line_id
 
     @api.model_create_multi
     def create(self, vals_list):
