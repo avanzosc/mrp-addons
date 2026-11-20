@@ -72,6 +72,21 @@ msgid "ID"
 msgstr ""
 
 #. module: mrp_show_finished_moves
+#: model:ir.model.fields,help:mrp_show_finished_moves.field_mrp_production__multiple_serial_production
+#: model:ir.model.fields,help:mrp_show_finished_moves.field_stock_picking_type__multiple_serial_production
+msgid ""
+"If checked, manufacturing orders of serial-tracked products produce all "
+"their units at once, with one serial number per finished move line. If "
+"unchecked, they work as standard: one serial number at a time, set in the "
+"Lot/Serial Number field of the manufacturing order."
+msgstr ""
+"Si coché, les ordres de fabrication des produits suivis par numéro de "
+"série produisent toutes leurs unités en une fois, avec un numéro de série "
+"par ligne de mouvement fini. Si décoché, ils fonctionnent en standard : un "
+"numéro de série à la fois, indiqué dans le champ Lot/Numéro de série de "
+"l'ordre de fabrication."
+
+#. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__last_manufactured_lot
 msgid "Last Manufactured Lot"
 msgstr "Dernier lot fabriqué"
@@ -92,6 +107,12 @@ msgid "Manufacturing Order"
 msgstr "Ordre de fabrication"
 
 #. module: mrp_show_finished_moves
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production__multiple_serial_production
+#: model:ir.model.fields,field_description:mrp_show_finished_moves.field_stock_picking_type__multiple_serial_production
+msgid "Multiple Serial Production"
+msgstr "Production de plusieurs numéros de série"
+
+#. module: mrp_show_finished_moves
 #: model:ir.model.fields,field_description:mrp_show_finished_moves.field_mrp_production_qty_warning__no_label
 msgid "No Label"
 msgstr "Étiquette Non"
@@ -106,6 +127,11 @@ msgstr "Non, continuer l’édition"
 #: code:addons/mrp_show_finished_moves/models/mrp_production.py:0
 msgid "No, review data first"
 msgstr "Non, vérifier les données d’abord"
+
+#. module: mrp_show_finished_moves
+#: model:ir.model,name:mrp_show_finished_moves.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Type de transfert"
 
 #. module: mrp_show_finished_moves
 #: model_terms:ir.ui.view,arch_db:mrp_show_finished_moves.mrp_production_form_view

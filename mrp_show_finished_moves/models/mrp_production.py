@@ -3,7 +3,7 @@
 import re
 
 from odoo import _, api, fields, models
-from odoo.tools import float_compare, float_round
+from odoo.tools import float_compare, float_is_zero, float_round
 
 ACTIVE_STATES = {"confirmed", "progress", "to_close"}
 
@@ -14,6 +14,16 @@ class MrpProduction(models.Model):
     last_manufactured_lot = fields.Char(
         compute="_compute_last_manufactured_lot",
     )
+    multiple_serial_production = fields.Boolean(
+        related="picking_type_id.multiple_serial_production",
+    )
+
+    def _is_multiple_serial_production(self):
+        self.ensure_one()
+        return bool(
+            self.product_id.tracking == "serial"
+            and self.picking_type_id.multiple_serial_production
+        )
 
     @api.depends("product_id")
     def _compute_last_manufactured_lot(self):
@@ -59,7 +69,7 @@ class MrpProduction(models.Model):
 
         active = self.filtered(lambda p: p.state in ACTIVE_STATES)
 
-        for production in active.filtered(lambda p: p.product_id.tracking == "serial"):
+        for production in active.filtered(lambda p: p._is_multiple_serial_production()):
             production.with_context(
                 skip_qty_producing_sync=True
             )._auto_generate_finished_serials()
@@ -95,7 +105,7 @@ class MrpProduction(models.Model):
 
     def action_confirm(self):
         res = super().action_confirm()
-        for production in self.filtered(lambda p: p.product_id.tracking == "serial"):
+        for production in self.filtered(lambda p: p._is_multiple_serial_production()):
             production.with_context(skip_qty_producing_sync=True).write(
                 {"qty_producing": production.product_qty}
             )
@@ -104,7 +114,7 @@ class MrpProduction(models.Model):
 
     @api.onchange("qty_producing", "lot_producing_id")
     def _onchange_producing(self):
-        if self.product_id.tracking == "serial":
+        if self._is_multiple_serial_production():
             self.sudo()._set_qty_producing(False)
             return
         return super()._onchange_producing()
@@ -191,21 +201,6 @@ class MrpProduction(models.Model):
             if production.qty_produced > production.product_qty:
                 production.product_qty = production.qty_produced
 
-            backorders = self.env["mrp.production"].search(
-                [
-                    ("procurement_group_id", "=", production.procurement_group_id.id),
-                    ("id", "!=", production.id),
-                    ("state", "!=", "done"),
-                ]
-            )
-            for backorder in backorders:
-                backorder._compute_last_manufactured_lot()
-                if (
-                    backorder.last_manufactured_lot
-                    and backorder.product_id.tracking == "serial"
-                ):
-                    backorder._auto_generate_finished_serials()
-
         return res
 
     @staticmethod
@@ -218,7 +213,7 @@ class MrpProduction(models.Model):
         )
 
     def _set_qty_producing(self, pick_manual_consumption_moves=True):
-        serial_productions = self.filtered(lambda p: p.product_id.tracking == "serial")
+        serial_productions = self.filtered(lambda p: p._is_multiple_serial_production())
         other_productions = self - serial_productions
 
         if other_productions:
@@ -280,19 +275,163 @@ class MrpProduction(models.Model):
     def _split_productions(
         self, amounts=False, cancel_remaining_qty=False, set_consumed_qty=False
     ):
-        all_productions = super()._split_productions(
-            amounts=amounts,
-            cancel_remaining_qty=cancel_remaining_qty,
-            set_consumed_qty=set_consumed_qty,
-        )
-        for production in (all_productions - self).filtered(
-            lambda p: p.product_id.tracking == "serial" and p.state in ACTIVE_STATES
-        ):
-            production.with_context(skip_qty_producing_sync=True).write(
-                {"qty_producing": production.product_qty}
+        serial_lines_by_production = {
+            production: production._get_finished_serial_lines()
+            for production in self.filtered(
+                lambda p: p._is_multiple_serial_production()
+                and p.state in ACTIVE_STATES
             )
-            production._auto_generate_finished_serials()
+        }
+        all_productions = (
+            super(
+                MrpProduction,
+                self.with_context(
+                    skip_qty_producing_sync=True, skip_action_assign=True
+                ),
+            )
+            ._split_productions(
+                amounts=amounts,
+                cancel_remaining_qty=cancel_remaining_qty,
+                set_consumed_qty=set_consumed_qty,
+            )
+            .with_env(self.env)
+        )
+        split_groups = {}
+        original = False
+        for production in all_productions:
+            if production in self:
+                original = production
+                split_groups[original] = production
+            elif original:
+                split_groups[original] |= production
+        for original, productions in split_groups.items():
+            if original in serial_lines_by_production:
+                original._distribute_finished_serials(
+                    productions, serial_lines_by_production[original]
+                )
         return all_productions
+
+    def _is_splittable_multiple_serial_production(self):
+        self.ensure_one()
+        return bool(
+            self._is_multiple_serial_production()
+            and self.state in ("progress", "to_close")
+            and self.bom_id
+            and float_is_zero(
+                self.qty_produced, precision_rounding=self.product_uom_id.rounding
+            )
+            and not any(
+                state in ("progress", "done")
+                for state in self.workorder_ids.mapped("state")
+            )
+        )
+
+    def _pre_action_split_merge_hook(self, merge=False, split=False):
+        if split and not merge:
+            splittable = self.filtered(
+                lambda p: p._is_splittable_multiple_serial_production()
+            )
+            return super(MrpProduction, self - splittable)._pre_action_split_merge_hook(
+                merge=merge, split=split
+            )
+        return super()._pre_action_split_merge_hook(merge=merge, split=split)
+
+    def _get_finished_serial_move(self):
+        self.ensure_one()
+        return self.move_finished_ids.filtered(
+            lambda m: m.product_id == self.product_id
+            and m.state not in ("done", "cancel")
+        )[:1]
+
+    def _get_finished_serial_lines(self):
+        self.ensure_one()
+        return [
+            (line.id, line.lot_id.name or line.lot_name)
+            for line in self._get_finished_serial_move().move_line_ids.sorted("id")
+            if line.lot_id or line.lot_name
+        ]
+
+    def _distribute_finished_serials(self, productions, serial_lines):
+        self.ensure_one()
+        MoveLine = self.env["stock.move.line"].with_context(
+            skip_qty_producing_sync=True
+        )
+        pending = list(serial_lines)
+        kept_lines = MoveLine
+        assignments = []
+        for production in productions:
+            finished_move = production._get_finished_serial_move()
+            if not finished_move:
+                continue
+            count = int(production.product_qty)
+            assigned, pending = pending[:count], pending[count:]
+            names_to_create = []
+            for line_id, name in assigned:
+                line = MoveLine.browse(line_id).exists()
+                if line:
+                    if line.move_id != finished_move:
+                        line.move_id = finished_move
+                    kept_lines |= line
+                else:
+                    names_to_create.append(name)
+            assignments.append(
+                (production, finished_move, names_to_create, count - len(assigned))
+            )
+
+        finished_moves = self.env["stock.move"].union(
+            *[assignment[1] for assignment in assignments]
+        )
+        (finished_moves.move_line_ids - kept_lines).with_context(
+            skip_qty_producing_sync=True
+        ).unlink()
+
+        last_serial = (
+            serial_lines[-1][1] if serial_lines else self.last_manufactured_lot
+        )
+        for production, finished_move, names_to_create, missing in assignments:
+            production = production.with_context(skip_qty_producing_sync=True)
+            if names_to_create:
+                production._create_finished_serial_lines(finished_move, names_to_create)
+            first_lot = self._increment_serial_number(last_serial)
+            if missing > 0 and first_lot:
+                lot_names = [
+                    lot["lot_name"]
+                    for lot in self.env["stock.lot"].generate_lot_names(
+                        first_lot, missing
+                    )
+                ]
+                production._create_finished_serial_lines(finished_move, lot_names)
+                last_serial = lot_names[-1]
+            if float_compare(
+                production.qty_producing,
+                production.product_qty,
+                precision_rounding=production.product_uom_id.rounding,
+            ):
+                production.write({"qty_producing": production.product_qty})
+
+    def _create_finished_serial_lines(self, finished_move, lot_names):
+        self.ensure_one()
+        product = finished_move.product_id
+        location_dest = finished_move.location_dest_id._get_putaway_strategy(product, 1)
+        return (
+            self.env["stock.move.line"]
+            .with_context(skip_qty_producing_sync=True)
+            .create(
+                [
+                    {
+                        "move_id": finished_move.id,
+                        "product_id": product.id,
+                        "product_uom_id": product.uom_id.id,
+                        "location_id": finished_move.location_id.id,
+                        "location_dest_id": location_dest.id,
+                        "company_id": finished_move.company_id.id,
+                        "quantity": 1,
+                        "lot_name": lot_name,
+                    }
+                    for lot_name in lot_names
+                ]
+            )
+        )
 
     def action_assign(self):
         for production in self:
@@ -340,7 +479,7 @@ class MrpProduction(models.Model):
         self.ensure_one()
         self.write({"qty_producing": new_qty})
         if not self.env.context.get("skip_serial_regeneration"):
-            if self.product_id.tracking == "serial":
+            if self._is_multiple_serial_production():
                 self._auto_generate_finished_serials()
             elif self.product_id.tracking == "lot":
                 self._auto_regenerate_lot_finished_line()
@@ -353,7 +492,9 @@ class MrpProduction(models.Model):
             if not finished_move:
                 continue
             quantity_done = finished_move.quantity
-            production.qty_producing = quantity_done
+            production.with_context(
+                skip_qty_producing_sync=True
+            ).qty_producing = quantity_done
             production._onchange_producing()
             for wo in production.workorder_ids:
                 wo.qty_producing = quantity_done

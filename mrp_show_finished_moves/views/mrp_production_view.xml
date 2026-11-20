@@ -28,6 +28,7 @@
 
       <xpath expr="//label[@for='bom_id']" position="before">
         <field name="qty_produced" string="Produced" readonly="1" />
+        <field name="multiple_serial_production" invisible="1" />
         <field
           name="last_manufactured_lot"
           readonly="1"
@@ -48,7 +49,7 @@
       <xpath expr="//label[@for='lot_producing_id']" position="attributes">
         <attribute
           name="invisible"
-        >state == 'draft' or product_tracking != 'lot'</attribute>
+        >state == 'draft' or product_tracking in ('none', False) or (product_tracking == 'serial' and multiple_serial_production)</attribute>
       </xpath>
       <xpath
         expr="//field[@name='lot_producing_id']/ancestor::div[contains(@class, 'o_row')]"
@@ -56,7 +57,7 @@
       >
         <attribute
           name="invisible"
-        >state == 'draft' or product_tracking != 'lot'</attribute>
+        >state == 'draft' or product_tracking in ('none', False) or (product_tracking == 'serial' and multiple_serial_production)</attribute>
       </xpath>
 
       <page name="miscellaneous" position="after">
