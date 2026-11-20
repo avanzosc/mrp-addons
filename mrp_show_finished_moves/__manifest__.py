@@ -15,6 +15,7 @@
         "views/mrp_workorder_view.xml",
         "views/stock_move_views.xml",
         "views/stock_move_line_views.xml",
+        "views/stock_picking_type_views.xml",
         "wizard/mrp_production_qty_warning.xml",
     ],
     "assets": {

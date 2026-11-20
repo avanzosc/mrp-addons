@@ -1,0 +1,11 @@
+<odoo>
+  <record id="view_picking_type_form" model="ir.ui.view">
+    <field name="model">stock.picking.type</field>
+    <field name="inherit_id" ref="mrp.view_picking_type_form_inherit_mrp" />
+    <field name="arch" type="xml">
+      <field name="use_create_components_lots" position="after">
+        <field name="multiple_serial_production" />
+      </field>
+    </field>
+  </record>
+</odoo>

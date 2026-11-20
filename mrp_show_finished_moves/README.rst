@@ -14,6 +14,21 @@ what has been produced.
 Features
 ========
 
+Multiple Serial Production
+--------------------------
+
+Manufacturing operation types have a **Multiple Serial Production** option
+(Inventory > Configuration > Operation Types, *Traceability* section),
+checked by default.
+
+* **Checked**: manufacturing orders of serial-tracked products produce all
+  their units at once, with one serial number per finished move line, as
+  described in *Serial / Lot Auto-Generation*.
+* **Unchecked**: manufacturing orders of serial-tracked products work as
+  standard Odoo: one serial number at a time, set in the *Lot/Serial
+  Number* field of the manufacturing order, which is shown again in the
+  form.
+
 Manufacturing Orders
 --------------------
 
@@ -45,6 +60,9 @@ Work Orders
 Serial / Lot Auto-Generation
 -----------------------------
 
+Serial-tracked products follow these rules only when the operation type
+has *Multiple Serial Production* checked.
+
 * On **confirmation** of a serial-tracked MO, serial numbers are
   auto-generated for the finished move lines starting from the next
   incremented serial after the last manufactured lot.
@@ -60,10 +78,15 @@ Serial / Lot Auto-Generation
 * When the quantity on a finished stock move is edited directly (e.g. from
   the Finished Moves tab), ``qty_producing`` on the MO is kept in sync
   automatically, and serial/lot lines are regenerated accordingly.
-* On **split** (backorder creation), each new MO gets its own serials
-  auto-generated from the last manufactured lot.
-* After **marking an MO as done**, backorder MOs refresh their
-  ``last_manufactured_lot`` and regenerate their serial lines accordingly.
+* On **split** (split wizard or backorder creation), the serial numbers
+  already set on the finished move lines of the original MO are
+  distributed in order among the resulting MOs: the original MO keeps the
+  first ones and each new MO takes as many as its quantity. For example,
+  an MO of 5 units with serials SN001 to SN005 split into 5 MOs of one unit
+  gives one serial to each MO, SN001 to SN005. MOs that receive fewer
+  serials than their quantity get the missing ones generated consecutively
+  after the last assigned serial (or after the last manufactured lot when
+  the original MO had none).
 
 Stock Move Improvements
 ------------------------
@@ -77,7 +100,7 @@ Stock Move Improvements
   ``mrp_workorder`` injects ``default_picking_type_id`` in the context.
   Lots are created on validation.
 * ``display_assign_serial`` is forced to ``True`` for finished moves of
-  serial-tracked products so the assign-serial widget is always available.
+  serial-tracked products with *Multiple Serial Production* so the assign-serial widget is always available.
 * Raw consumption moves are **auto-picked** when their quantity reaches the
   expected consumption amount, avoiding manual confirmation steps.
 * Reservation (``action_assign``) is scoped to the qty_producing / product_qty
