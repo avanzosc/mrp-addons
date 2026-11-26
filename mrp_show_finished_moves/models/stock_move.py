@@ -17,15 +17,17 @@ class StockMove(models.Model):
             and move.product_id == production.product_id
             and not move.scrapped
             and production.state in ACTIVE_STATES
+            and (
+                production.product_id.tracking != "serial"
+                or production.multiple_serial_production
+            )
         )
 
     def _is_raw_consumption_move(self):
         self.ensure_one()
-        production = self.raw_material_production_id
         return bool(
-            production
-            and self.state not in ("done", "cancel")
-            and production.state in ACTIVE_STATES
+            self.raw_material_production_id
+            and self.state not in ("draft", "done", "cancel")
         )
 
     def _auto_pick_if_consumed(self):
@@ -97,13 +99,24 @@ class StockMove(models.Model):
         production = self.production_id
         product = self.product_id
 
-        if production and product.tracking != "none" and self.state != "done":
+        if (
+            production
+            and self.state != "done"
+            and (
+                product.tracking == "lot"
+                or (
+                    product.tracking == "serial"
+                    and production.multiple_serial_production
+                )
+            )
+        ):
             ctx["show_lot_name_instead_lot_id"] = True
 
         if (
             production
             and product.tracking == "serial"
             and production.product_id == product
+            and production.multiple_serial_production
             and self.state != "done"
         ):
             ctx.update(
@@ -154,6 +167,7 @@ class StockMove(models.Model):
             lambda m: m.product_id.tracking == "serial"
             and m.production_id
             and m.production_id.product_id == m.product_id
+            and m.production_id.multiple_serial_production
         ):
             move.display_assign_serial = True
         return res
